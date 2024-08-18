@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hammersmith+One&family=Playwrite+ES:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hammersmith+One&family=Playwrite+ES:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+* {
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     padding: 0;
@@ -239,4 +243,219 @@ body::-webkit-scrollbar-thumb{
     font-size: 3vw;
     color: #ffd1d8ae;
     text-shadow: 0px 2px 8px #ff4242, 5px 5px 30px #ff3131;
+}
+
+
+/* lOGIN / CADASTRO */
+.body_cadastro {
+    background-image: url(./img/fundo.png);
+    background-size: cover;
+}
+
+.login-cadastro{
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+.login-cadastro input {
+    background-color: #d9d9d9;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.login-cadastro button {
+    border-radius: 10px;
+    background-image: linear-gradient(#ff3131, #ff914d);
+    color: #FFFFFF;
+    font-size: 15px;
+    width: 140px;
+    height: 35px;
+    transition: transform 80ms ease-in;
+    border: none;
+    margin-top: 30px;
+    cursor: pointer;
+    font-family: "Hammersmith One", sans-serif;
+}
+
+.login-cadastro button:active {
+    transform: scale(0.95);
+}
+
+.sigla {
+    margin-bottom: 60px;
+}
+
+.sigla a {
+    color: white;
+    font-size: 30px;
+    font-family: "Hammersmith One", sans-serif;
+    text-decoration: none;
+}
+
+.painel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.caixinha-branca {
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.formulario-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.formulario-container h1 {
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 25px;
+    margin-bottom: 20px;
+
+}
+
+.login-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.caixinha-branca.direita-ativo .login-container {
+    transform: translateX(100%);
+}
+
+.cadastro-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+
+@keyframes show {
+
+    0%,
+    49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.caixinha-branca.direita-ativo .cadastro-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+.container-animado {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.caixinha-branca.direita-ativo .container-animado {
+    transform: translateX(-100%);
+}
+
+.deslize {
+
+    background-image: linear-gradient(#ff3131, #ff914d);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #FFFFFF;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.caixinha-branca.direita-ativo .deslize {
+    transform: translateX(50%);
+}
+
+.painel-animado {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    color: black;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.painel-animado button {
+    border-radius: 10px;
+    background-color: #292a32;
+    color: #FFFFFF;
+    font-size: 15px;
+    width: 140px;
+    height: 35px;
+    transition: transform 80ms ease-in;
+    font-family: "Hammersmith One", sans-serif;
+    cursor: pointer;
+}
+
+.painel-animado img {
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+.painel-animado h1 {
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.animacao-esquerda {
+    transform: translateX(-20%);
+}
+
+.caixinha-branca.direita-ativo .animacao-esquerda {
+    transform: translateX(0);
+}
+
+.animacao-direita {
+    right: 0;
+    transform: translateX(0);
+}
+
+.caixinha-branca.direita-ativo .animacao-direita {
+    transform: translateX(20%);
 }
