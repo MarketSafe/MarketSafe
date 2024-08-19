@@ -12,6 +12,8 @@
 <body>
   
     <section class="primeira" id="ft">
+        <div class="back-primi">
+        </div>
         <div class="header">
             <a href="index.html"><div class="logo">MKTS</div></a>
             <div class="cel-opts">
@@ -27,9 +29,7 @@
         <div class="content">
             <div class="container">
                 <h1>MARKET SAFE</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem molestias iste nobis laboriosam nemo
-                    ratione animi ullam impedit enim, magni similique omnis dignissimos! Exercitationem doloribus iure,
-                    eligendi dicta quae dolorum!</p>
+                <p>Uma empresa dedicada ao monitoramento de Self-Checkouts, com o propósito unica e exclusivamente de manter a performance e a segurança de seu estabeleciemnto.</p>
                     <div class="butinho">
                         <button>Cadastre-se</button>
                         <button class="logIn">Login</button>
@@ -42,12 +42,12 @@
         </div>
     </section>
     <section class="segunda" id="sec">
-        <div class="lat-bar">
+        <div class="lat-bar" id="latBar">
             <hr>
             <div class="pontinhos">
                 <a href="#ft"><button data-tooltip="Topo"></button></a>
                 <a href="#sec"><button data-tooltip="Valores"></button></a>
-                <a href="#ft"><button data-tooltip="Self-Checkout"></button></a>
+                <a href="#ter"><button data-tooltip="Self-Checkout"></button></a>
                 <a href="#ft"><button data-tooltip="Dashboard"></button></a>
                 <a href="#ft"><button data-tooltip="Responsividade"></button></a>
                 <a href="#ft"><button data-tooltip="Footer"></button></a>
@@ -80,9 +80,42 @@
             </div>
         </div>
     </section>
-    <section class="terceira"></section>
+    <section class="terceira" id="ter">
+        <div class="main-ter">
+        <div class="cont-self">
+            <h1>Self-Checkouts</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, ut cupiditate, inventore dolores neque iste soluta aspernatur eligendi laboriosam quaerat voluptatum error facere! Aliquid veritatis accusamus, numquam vero excepturi eligendi!Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, ut cupiditate, inventore dolores neque iste soluta aspernatur eligendi laboriosam quaerat voluptatum error facere! Aliquid veritatis accusamus, numquam vero excepturi eligendi!
+            </p>
+        </div>
+        <div class="cont-self1">
+            <img src="img/110550_1 (1).png" alt="">
+        </div>
+    </div>
+    </section>
     <section class="quarta"></section>
     <section class="quinta"></section>
     <section class="sexta"></section>
 </body>
 </html>
+<script>
+    function aparecer() {
+        var lat = document.getElementById('latBar');
+        var segundaSecao = document.getElementById('sec');
+        var segundaSecaoTop = segundaSecao.offsetTop; 
+        var primeiraSecao = document.getElementById('ft');
+        var primeiraSecaoBot = primeiraSecao.offsetTop; 
+
+        
+        setTimeout(function() {
+            if (window.scrollY >= segundaSecaoTop) {
+                lat.style.opacity = '1';
+            }else if(window.scrollY >= primeiraSecaoBot){
+                lat.style.opacity = '0';
+            }
+        }, 100);
+    }
+
+    window.addEventListener('scroll', aparecer);
+</script>
+
+
