@@ -10,33 +10,42 @@
 </head>
 
 <body>
-  
+
     <section class="primeira" id="ft">
         <div class="menu-burguer" id="burguer"></div>
         <div class="back-primi">
         </div>
         <div class="header">
-            <a href="index.html"><div class="logo">MKTS</div></a>
+            <a href="index.html">
+                <div class="logo">MKTS</div>
+            </a>
             <div class="cel-opts">
                 <i class='bx bx-menu' onclick="openMenu()"></i>
             </div>
             <div class="opts">
-                <a href="index.html"><li>Inicio</li></a>
-                <a href="#"><li>Sobre</li></a>
-                <a href="#"><li>Suporte</li></a>
+                <a href="index.html">
+                    <li>Inicio</li>
+                </a>
+                <a href="#">
+                    <li>Sobre</li>
+                </a>
+                <a href="#">
+                    <li>Suporte</li>
+                </a>
                 <a href="cadastro_login.html"><button>Iniciar sessão</button></a>
             </div>
         </div>
         <div class="content">
             <div class="container">
                 <h1>MARKET SAFE</h1>
-                <p>Uma empresa dedicada ao monitoramento de Self-Checkouts, com o propósito unica e exclusivamente de manter a performance e a segurança de seu estabeleciemnto.</p>
-                    <div class="butinho">
-                        <button>Cadastre-se</button>
-                        <button class="logIn">Login</button>
-                    </div>
+                <p>Uma empresa dedicada ao monitoramento de Self-Checkouts, com o propósito unica e exclusivamente de
+                    manter a performance e a segurança de seu estabeleciemnto.</p>
+                <div class="butinho">
+                    <button>Cadastre-se</button>
+                    <button class="logIn">Login</button>
+                </div>
             </div>
-           
+
             <div class="container1">
                 <img src="img/Logo Self 2.png" alt="">
             </div>
@@ -83,34 +92,45 @@
     </section>
     <section class="terceira" id="ter">
         <div class="main-ter">
-        <div class="cont-self">
-            <h1>Self-Checkouts</h1>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, ut cupiditate, inventore dolores neque iste soluta aspernatur eligendi laboriosam quaerat voluptatum error facere! Aliquid veritatis accusamus, numquam vero excepturi eligendi!Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, ut cupiditate, inventore dolores neque iste soluta aspernatur eligendi laboriosam quaerat voluptatum error facere! Aliquid veritatis accusamus, numquam vero excepturi eligendi!
-            </p>
+            <div class="cont-self">
+                <h1>Self-Checkouts</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, ut cupiditate, inventore dolores neque
+                    iste soluta aspernatur eligendi laboriosam quaerat voluptatum error facere! Aliquid veritatis
+                    accusamus, numquam vero excepturi eligendi!Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    At, ut cupiditate, inventore dolores neque iste soluta aspernatur eligendi laboriosam quaerat
+                    voluptatum error facere! Aliquid veritatis accusamus, numquam vero excepturi eligendi!
+                </p>
+            </div>
+            <div class="cont-self1">
+                <img src="img/110550_1 (1).png" alt="">
+            </div>
         </div>
-        <div class="cont-self1">
-            <img src="img/110550_1 (1).png" alt="">
-        </div>
-    </div>
     </section>
-    <section class="quarta"></section>
-    <section class="quinta"></section>
+    <section class="quarta">
+        <div class="pagina">
+            <h1> DASHBOARD INTERATIVA</h1>
+            <img src="./img/foto_dash.png" alt="exemplo_dash"><br>
+        </div>
+    </section>
+    <section class="quinta">
+    </section>
     <section class="sexta"></section>
 </body>
+
 </html>
 <script>
     function aparecer() {
         var lat = document.getElementById('latBar');
         var segundaSecao = document.getElementById('sec');
-        var segundaSecaoTop = segundaSecao.offsetTop; 
+        var segundaSecaoTop = segundaSecao.offsetTop;
         var primeiraSecao = document.getElementById('ft');
-        var primeiraSecaoBot = primeiraSecao.offsetTop; 
+        var primeiraSecaoBot = primeiraSecao.offsetTop;
 
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
             if (window.scrollY >= segundaSecaoTop) {
                 lat.style.opacity = '1';
-            }else if(window.scrollY >= primeiraSecaoBot){
+            } else if (window.scrollY >= primeiraSecaoBot) {
                 lat.style.opacity = '0';
             }
         }, 100);
@@ -119,23 +139,21 @@
     window.addEventListener('scroll', aparecer);
 </script>
 <script>
-    function openMenu(){
+    function openMenu() {
         var menu = document.getElementById('burguer');
-        var menuPos = menu.style.right 
+        var menuPos = menu.style.right
 
-        if(menuPos = -300){
+        if (menuPos = -300) {
             menu.style.right = 0;
         }
     }
-    function closeMenu(){
+    function closeMenu() {
 
         var primi = document.getElementById('ft')
         var menu = document.getElementById('burguer');
-        
+
 
 
 
     }
 </script>
-
-
