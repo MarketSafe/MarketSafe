@@ -12,12 +12,13 @@
 <body>
   
     <section class="primeira" id="ft">
+        <div class="menu-burguer" id="burguer"></div>
         <div class="back-primi">
         </div>
         <div class="header">
             <a href="index.html"><div class="logo">MKTS</div></a>
             <div class="cel-opts">
-                <i class='bx bx-menu'></i>
+                <i class='bx bx-menu' onclick="openMenu()"></i>
             </div>
             <div class="opts">
                 <a href="index.html"><li>Inicio</li></a>
@@ -116,6 +117,25 @@
     }
 
     window.addEventListener('scroll', aparecer);
+</script>
+<script>
+    function openMenu(){
+        var menu = document.getElementById('burguer');
+        var menuPos = menu.style.right 
+
+        if(menuPos = -300){
+            menu.style.right = 0;
+        }
+    }
+    function closeMenu(){
+
+        var primi = document.getElementById('ft')
+        var menu = document.getElementById('burguer');
+        
+
+
+
+    }
 </script>
 
 

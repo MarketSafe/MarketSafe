@@ -66,6 +66,7 @@ body::-webkit-scrollbar-thumb{
     cursor: pointer;
 }
 
+
 .opts{
     font-family: "Hammersmith One", sans-serif;
     width: 500px;
@@ -422,6 +423,14 @@ body::-webkit-scrollbar-thumb{
     .terceira{
         background-image: url('img/Back\ 3sec\ -\ cel.png');
     }
+}
+.menu-burguer{
+    width: 300px;
+    height: 100%;
+    background: red;
+    position: absolute;
+    z-index: 1000;
+    right: -300px;
 }
 
 /* lOGIN / CADASTRO */
