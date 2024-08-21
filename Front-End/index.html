@@ -12,7 +12,17 @@
 <body>
 
     <section class="primeira" id="ft">
-        <div class="menu-burguer" id="burguer"></div>
+        <div class="menu-burguer" id="burguer">
+            <div class="clo-esp">
+                <i class='bx bx-menu' onclick="closeMenu()"></i>
+            </div>
+            <div class="esp-list">
+                <li>Inicio</li>
+                <li>Sobre</li>
+                <li>Suporte</li>
+                <li>Inicial Sessão</li>
+            </div>
+        </div>
         <div class="back-primi">
         </div>
         <div class="header">
@@ -149,11 +159,11 @@
     }
     function closeMenu() {
 
-        var primi = document.getElementById('ft')
         var menu = document.getElementById('burguer');
+        var menuPos = menu.style.right
 
-
-
-
+        if (menuPos == '0px') {
+            menu.style.right = '-300px';
+        }
     }
 </script>
