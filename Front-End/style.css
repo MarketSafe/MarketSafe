@@ -1,30 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hammersmith+One&family=Playwrite+ES:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hammersmith+One&family=Playwrite+ES:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 * {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     padding: 0;
     background: #292a32;
     overflow-x: hidden;
 }
-body::-webkit-scrollbar{
+
+body::-webkit-scrollbar {
     width: 10px;
     background: #292a32;
 }
-body::-webkit-scrollbar-thumb{
+
+body::-webkit-scrollbar-thumb {
     background: #ff3131;
     border-radius: 10px;
 }
-.primeira{
+
+.primeira {
     width: 100%;
     height: 100vh;
     overflow: hidden;
     background: linear-gradient(to right, #ff6842, #ff3131, #ff6842);
 }
 
-.back-primi{
+.back-primi {
     width: 100%;
     height: 100%;
     opacity: 0.07;
@@ -32,7 +38,8 @@ body::-webkit-scrollbar-thumb{
     position: absolute;
     background-attachment: fixed;
 }
-.header{
+
+.header {
     width: 100%;
     height: 80px;
     display: flex;
@@ -40,13 +47,16 @@ body::-webkit-scrollbar-thumb{
     position: relative;
     z-index: 100;
 }
-.header a{
+
+.header a {
     text-decoration: none;
 }
-.logo{
+
+.logo {
     width: 200px;
     height: 100%;
-    font-family: "Hammersmith One", sans-serif;;
+    font-family: "Hammersmith One", sans-serif;
+    ;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,17 +64,20 @@ body::-webkit-scrollbar-thumb{
     font-size: 35px;
     cursor: pointer;
 }
+
 @media (max-width: 580px) {
-    .logo{
+    .logo {
         justify-content: start;
         margin-left: 20px;
     }
-    
+
 }
-.cel-opts{
+
+.cel-opts {
     width: 60px;
     height: 100%;
-    font-family: "Hammersmith One", sans-serif;;
+    font-family: "Hammersmith One", sans-serif;
+    ;
     display: none;
     justify-content: center;
     align-items: center;
@@ -74,7 +87,7 @@ body::-webkit-scrollbar-thumb{
 }
 
 
-.opts{
+.opts {
     font-family: "Hammersmith One", sans-serif;
     width: 500px;
     height: 100%;
@@ -82,26 +95,32 @@ body::-webkit-scrollbar-thumb{
     justify-content: space-around;
     align-items: center;
 }
+
 @media (max-width: 580px) {
-    .opts{
+    .opts {
         display: none;
     }
-    .cel-opts{
+
+    .cel-opts {
         display: flex;
     }
 }
-.opts li{
+
+.opts li {
     list-style: none;
     color: #fff;
     cursor: pointer;
-    padding: 10px; border-radius: 10px;
+    padding: 10px;
+    border-radius: 10px;
 }
-.opts li:hover{
+
+.opts li:hover {
     background: #fff;
-   color: #292a32;
-   transition: 0.5s;
+    color: #292a32;
+    transition: 0.5s;
 }
-.opts button{
+
+.opts button {
     width: 150px;
     height: 30px;
     background: transparent;
@@ -110,23 +129,27 @@ body::-webkit-scrollbar-thumb{
     font-size: 16px;
     cursor: pointer;
 }
-.opts button:hover{
+
+.opts button:hover {
     background: #292a32;
     color: #fff;
     transition: 0.5s ease;
 }
-.content{
+
+.content {
     width: 100%;
     height: 91.6%;
     display: flex;
     align-items: center;
 }
-@media (max-width: 580px){
-    .content{
+
+@media (max-width: 580px) {
+    .content {
         flex-direction: column-reverse;
     }
 }
-.container{
+
+.container {
     width: 50%;
     height: 90%;
     display: flex;
@@ -137,23 +160,26 @@ body::-webkit-scrollbar-thumb{
     position: relative;
     z-index: 100;
 }
-.container p{
+
+.container p {
     width: 60%;
     font-family: 'poppins';
     color: #fff;
     text-align: justify;
 }
+
 .container h1 {
     font-family: "Hammersmith One", sans-serif;
     color: #fff;
     font-size: 5vw;
     margin: 0;
-    text-shadow: 
-    3px 3px 6px rgba(0, 0, 0, 0.23), 
-    6px 16px 12px rgba(0, 0, 0, 0.404),
-    9px 9px 15px rgba(0, 0, 0, 0.2);
+    text-shadow:
+        3px 3px 6px rgba(0, 0, 0, 0.23),
+        6px 16px 12px rgba(0, 0, 0, 0.404),
+        9px 9px 15px rgba(0, 0, 0, 0.2);
 }
-.butinho{
+
+.butinho {
     width: 60%;
     height: 70px;
     display: flex;
@@ -162,7 +188,7 @@ body::-webkit-scrollbar-thumb{
 }
 
 
-.butinho button{
+.butinho button {
     width: 180px;
     height: 50px;
     font-size: 18px;
@@ -172,75 +198,91 @@ body::-webkit-scrollbar-thumb{
     border-radius: 25px;
     cursor: pointer;
 }
-@media (max-width: 580px){
-    .butinho button{
+
+@media (max-width: 580px) {
+    .butinho button {
         font-size: 14px;
     }
 }
-.butinho button:hover{
+
+.butinho button:hover {
     background: #ffb718;
     transition: 0.5s;
 }
-.butinho .logIn{
+
+.butinho .logIn {
     width: 100px;
     background: #ffb718;
 }
-.butinho .logIn:hover{
+
+.butinho .logIn:hover {
     background: #292a32;
     transition: 0.5s;
 }
-.container1{
+
+.container1 {
     width: 50%;
     height: 90%;
     align-items: center;
     display: flex;
     justify-content: center;
 }
-.container1 img{
+
+.container1 img {
     animation: float 4.2s ease-in-out infinite;
     width: 80%;
 
 }
+
 @media (max-width: 580px) {
-    .container1{
+    .container1 {
         width: 100%;
     }
-    .container1 img{
+
+    .container1 img {
         position: relative;
         left: 8px;
     }
-    .container{
+
+    .container {
         width: 90%;
     }
-    .container p{
+
+    .container p {
         width: 100%;
         text-align: center;
     }
-    .container h1{
+
+    .container h1 {
         text-align: center;
         width: 100%;
         font-size: 10vw;
     }
 }
+
 @keyframes float {
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-10px);
     }
+
     100% {
         transform: translateY(0);
     }
 }
+
 /* segunda seção */
-.segunda{
+.segunda {
     width: 100%;
     height: 100vh;
     display: flex;
     background-size: cover;
 }
-.lat-bar{
+
+.lat-bar {
     width: 100px;
     height: 100vh;
     top: 0;
@@ -254,11 +296,13 @@ body::-webkit-scrollbar-thumb{
     gap: 50px;
     transition: opacity 0.5s ease;
 }
-.lat-bar hr{
+
+.lat-bar hr {
     transform: rotate(90deg);
     width: 100px;
 }
-.pontinhos{
+
+.pontinhos {
     width: 80%;
     height: 200px;
     display: flex;
@@ -267,7 +311,8 @@ body::-webkit-scrollbar-thumb{
     justify-content: space-around;
     z-index: 100;
 }
-.pontinhos button{
+
+.pontinhos button {
     width: 10px;
     height: 10px;
     transform: scale(0.8);
@@ -275,6 +320,7 @@ body::-webkit-scrollbar-thumb{
     border: none;
     cursor: pointer;
 }
+
 .pontinhos button::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -297,50 +343,58 @@ body::-webkit-scrollbar-thumb{
     opacity: 1;
     transform: translateX(10%) translateY(0);
 }
-.valores{
+
+.valores {
     width: 100%;
     height: 100%;
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: center;
-   font-family:  "Hammersmith One", sans-serif;;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "Hammersmith One", sans-serif;
+    ;
     position: absolute;
     z-index: 1;
     gap: 150px;
 }
-.valores h1{
+
+.valores h1 {
     font-size: 3.5vw;
     color: #ffffffd6;
     letter-spacing: 5px;
     text-shadow: 2px 2px 5px #ff4242, 5px 5px 30px #ff3131;
 }
-.esp-cards{
+
+.esp-cards {
     width: 100%;
     height: 60%;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     justify-content: space-evenly;
 }
-@media (max-width: 580px){
-    .esp-cards{
+
+@media (max-width: 580px) {
+    .esp-cards {
         flex-direction: column;
         align-items: center;
         height: 80%;
         gap: 20px;
     }
-    .valores{
+
+    .valores {
         gap: 10px;
         width: calc(100% - 15px);
         position: absolute;
         right: 0;
     }
-    .valores h1{
+
+    .valores h1 {
         font-size: 50px;
     }
-  
+
 }
-.card{
+
+.card {
     width: 200px;
     height: 240px;
     border-radius: 20px;
@@ -350,19 +404,22 @@ body::-webkit-scrollbar-thumb{
     background: #3a3b47;
     flex-direction: column;
 }
-.card p{
+
+.card p {
     font-size: 55px;
     color: #ffd1d8ae;
     margin: 0;
     text-shadow: 0px 2px 8px #ff4242, 5px 5px 30px #ff3131;
 }
-.card span{
+
+.card span {
     color: #fff;
     font-size: 18px;
     text-shadow: 0px 2px 8px #ffffffa8, 5px 5px 30px #ffffff70;
 }
+
 /* terceira seção */
-.terceira{
+.terceira {
     width: 100%;
     height: 100vh;
     background-size: cover;
@@ -373,13 +430,15 @@ body::-webkit-scrollbar-thumb{
     overflow: hidden;
     align-items: center;
 }
-.main-ter{
+
+.main-ter {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
 }
-.cont-self{
+
+.cont-self {
     width: 45%;
     height: 80%;
     display: flex;
@@ -387,68 +446,79 @@ body::-webkit-scrollbar-thumb{
     flex-direction: column;
     align-items: end;
 }
-.cont-self h1{
+
+.cont-self h1 {
     margin: 0;
     font-family: "Hammersmith One";
     font-size: 5vw;
     text-shadow: 0px 2px 8px #ff4242, 5px 5px 30px #ff3131;
     color: #fee6e6;
 }
-.cont-self p{
+
+.cont-self p {
     width: 80%;
     font-size: 20px;
     text-align: justify;
     font-family: "Hammersmith One";
     color: #fff;
 }
-.cont-self1{
+
+.cont-self1 {
     width: 55%;
     height: 80%;
     display: flex;
     justify-content: end;
 }
-@media (max-width: 580px){
-    .main-ter{
+
+@media (max-width: 580px) {
+    .main-ter {
         flex-direction: column-reverse;
         height: 100%;
     }
-    .cont-self{
+
+    .cont-self {
         width: 100%;
         height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    .cont-self1{
+
+    .cont-self1 {
         display: none;
     }
-    .cont-self1 img{
+
+    .cont-self1 img {
         display: none;
     }
-    .cont-self p{
+
+    .cont-self p {
         padding-left: 20px;
         text-align: center;
     }
-    .cont-self h1{
+
+    .cont-self h1 {
         font-size: 45px;
     }
 }
 
-@media (max-width: 580px){
-    .terceira{
+@media (max-width: 580px) {
+    .terceira {
         background-image: url('img/Back\ 3sec\ -\ cel.png');
     }
 }
-.menu-burguer{
+
+.menu-burguer {
     width: 300px;
     height: 100%;
     background: #3a3b47;
     position: fixed;
     z-index: 1000;
     right: -300px;
-    transition:  right 0.5s ease;
+    transition: right 0.5s ease;
 }
-.clo-esp{
+
+.clo-esp {
     width: 100%;
     height: 7%;
     display: flex;
@@ -457,11 +527,13 @@ body::-webkit-scrollbar-thumb{
     font-size: 35px;
     color: #fff;
 }
-.clo-esp i{
+
+.clo-esp i {
     margin-right: 10px;
     cursor: pointer;
 }
-.esp-list{
+
+.esp-list {
     width: 100%;
     height: 50%;
     display: flex;
@@ -470,7 +542,8 @@ body::-webkit-scrollbar-thumb{
     align-items: center;
     list-style: none;
 }
-.esp-list li{
+
+.esp-list li {
     font-size: 18px;
     font-family: 'Hammersmith One';
     color: #fff;
@@ -478,7 +551,8 @@ body::-webkit-scrollbar-thumb{
     padding: 10px;
     border-radius: 10px;
 }
-.esp-list li:hover{
+
+.esp-list li:hover {
     background: #fff;
     color: #292a32;
     transition: 0.5s;
@@ -486,7 +560,7 @@ body::-webkit-scrollbar-thumb{
 
 /* quarta seção */
 
-.pagina h1{
+.pagina h1 {
     margin: 0;
     padding: 0;
     font-size: 60px;
@@ -494,10 +568,11 @@ body::-webkit-scrollbar-thumb{
     margin-top: 30px;
     color: white;
     text-shadow: 0px 2px 8px #ff4242, 5px 5px 30px #ff3131;
-    font-family:"Hammersmith One", sans-serif;;
+    font-family: "Hammersmith One", sans-serif;
+    ;
 }
 
-.pagina{
+.pagina {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -506,24 +581,164 @@ body::-webkit-scrollbar-thumb{
     height: 100vh;
     background-image: url(./img/fundo_dash.png);
     background-size: cover;
-    background-repeat: no-repeat;;
-    background-position:-15px ;
+    background-repeat: no-repeat;
+    ;
+    background-position: -15px;
 }
 
 
-.pagina img{
-    width:1000px;
+.pagina img {
+    width: 1000px;
     height: 900px;
 }
+
 @media (max-width:580px) {
-    .pagina{
+    .pagina {
         background-image: url(img/Back\ 4sec\ -\ cel.png);
         background-size: cover;
     }
-    .pagina img{
+
+    .pagina img {
         display: none;
     }
 }
+
+/* Quinta Seção */
+.quinta {
+    width: 100%;
+    height: 100vh;
+    background-image: url(./img/quando_quiser_fundo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    ;
+}
+
+.parte_texto .esp-cards {
+    margin-left: 15px;
+
+    height: 40%;
+}
+
+.parte_texto .card {
+    margin-left: 15px;
+    width: 170px;
+
+}
+
+.parte_texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.parte_texto h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 60px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    color: white;
+    text-shadow: 0px 2px 8px #ff4242, 5px 5px 30px #ff3131;
+    font-family: "Hammersmith One", sans-serif;
+}
+
+.parte_texto p {
+    margin-left: 10px;
+    font-size: 20px;
+    color: white;
+    font-family: "Open Sans", sans-serif;
+}
+
+.quando {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+
+}
+
+.imagem_quando img {
+    margin-top: 20px;
+    margin-left: 30px;
+    height: 700px;
+    width: 300px;
+}
+
+/* sexta seção */
+.footer {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.container_footer {
+    /* display: flex; */
+    /* flex-direction: row; */
+    background-image: linear-gradient(#ff3131, #ff914d);
+    height: 300px;
+    width: 100%;
+    border-radius: 20px;
+
+}
+
+.footer_esquerdo {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.segunda_foto {
+    margin-left: 90px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Open Sans", sans-serif;
+    color: #3a3b47;
+}
+
+.segunda_foto img {
+    height: 100px;
+    width: 130px;
+
+}
+
+.secao {
+    margin-left: 630px;
+}
+
+#diferentao {
+    border: 1px solid black;
+    border-radius: 40px;
+    color: black;
+}
+
+.secao .esp-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.divisoria{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+   
+}
+.linha{
+    height: 4px;
+    width: 95%;
+    background-color:#3a3b47;
+    border-radius: 10px;
+}
+.creditos{
+    display: flex;
+    justify-content: end;
+    margin-right: 40px;
+    margin-top: 45px;
+    color: #292a32;
+}
+
+
 
 /* lOGIN / CADASTRO */
 .body_cadastro {
@@ -534,7 +749,7 @@ body::-webkit-scrollbar-thumb{
     height: 100vh;
 }
 
-.login-cadastro{
+.login-cadastro {
     background-color: #FFFFFF;
     display: flex;
     align-items: center;
