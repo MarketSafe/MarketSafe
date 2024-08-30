@@ -14,12 +14,15 @@ while (iniciar != 2):
             maquina = int(input("Qual máquina deseja monitorar? (opções: 1, 2, 3, 4, etc) "))
             componente = str(input("Qual componente deseja monitorar? (opções: cpu, memoria ou disco) "))
             qtdCapturas = int(input(("Quantas capturas deseja fazer? \n ")))
-            componente = str(input("Escolha a métrica (opções: cpu, memoria ou disco) "))
+            metrica = str(input("Escolha a métrica (opções: percentual ou bytes) "))
+            media = str(input("Escolha a média: (media por maquina ou media total)"))
 
             for i in range(qtdCapturas):
                 Disco = (psutil.disk_usage('/').percent)
                 CPU = psutil.cpu_percent()
                 Mem = (psutil.virtual_memory().percent)
+                MemB = (psutil.virtual_memory().used)
+                DiscoB = (psutil.virtual_memory().used)
                 
                 # print(f'Porcentagem de uso da CPU: {CPU}%')
                 # print(f'Porcentagem de uso da Memória: {Mem}%')
@@ -47,9 +50,15 @@ while (iniciar != 2):
                 if (componente == 'cpu'):
                     print(f'Porcentagem de uso da CPU: {CPU}%')
                 elif(componente == 'memoria'):
-                    print(f'Porcentagem de uso da Memória: {Mem}%')
+                    if (metrica == 'porcentagem'):
+                        print(f'Porcentagem de uso da Memória: {Mem}%')
+                    else:
+                        print(f'Porcentagem de uso da Memória: {MemB}')
                 elif(componente == 'disco'):
-                    print(f'Porcentagem de uso do Disco: {Disco}%')
+                    if (metrica == 'porcentagem'):
+                        print(f'Porcentagem de uso da Memória: {Disco}%')
+                    else:
+                        print(f'Porcentagem de uso da Memória: {DiscoB}')
 
                 time.sleep(2)
         else:
