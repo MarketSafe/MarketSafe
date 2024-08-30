@@ -37,61 +37,75 @@ def calcMedidas():
         time.sleep(5)
 
 def client():
+    while True:
+        conexao = pymysql.connect(
+            host='localhost', 
+            user='root',  
+            password='Newyork2006@', 
+            database='desafio'
+        )
+        
+        cursor = conexao.cursor()
 
-    conexao = pymysql.connect(
-                host='localhost', 
-                user='root',  
-                password='Newyork2006@', 
-                database='desafio'
-            )
-            
-    cursor = conexao.cursor()    
+        try:
+            while True:
+                print("\nEscolha uma das máquinas abaixo:")
+                print("1 - Máquina 1")
+                print("2 - Máquina 2")
+                print("3 - Máquina 3")
+                print("4 - Máquina 4")
+                print("5 - Máquina 5")
 
-    print("Escolha uma das máquinas abaixo:")
-    print("1 - Máquina 1")
-    print("2 - Máquina 2")
-    print("3 - Máquina 3")
-    print("4 - Máquina 4")
-    print("5 - Máquina 5")
+                maquina = input("Digite sua escolha (1, 2, 3, 4, 5): ")
 
-    maquina = input("Digite sua escolha (1, 2, 3, 4, 5): ")
+                if maquina not in ["1", "2", "3", "4", "5"]:
+                    print("Opção inválida. Tente novamente.")
+                    continue
 
-    if maquina not in ["1", "2", "3", "4", "5"]:
-        print("Opção inválida. Tente novamente.")
-        return
+                print("\nEscolha uma das opções abaixo:")
+                print("1 - Processador")
+                print("2 - Memória")
+                print("3 - Disco")
 
+                unidade = input("Digite sua escolha (1, 2, 3): ")
+                
+                if unidade == "1":
+                    coluna = "Processador"
+                elif unidade == "2":
+                    coluna = "Memoria"
+                elif unidade == "3":
+                    coluna = "Disco"
+                else:
+                    print("Opção inválida. Tente novamente.")
+                    continue
 
-    print("Escolha uma das opções abaixo:")
-    print("1 - Processador")
-    print("2 - Memória")
-    print("3 - Disco")
+                query = f'''
+                    SELECT {coluna} FROM info WHERE maquina = %s;
+                '''
+                
+                cursor.execute(query, (maquina,))
+                resultados = cursor.fetchall()
 
-    unidade = input("Digite sua escolha (1, 2, 3): ")
-    
-    if unidade == "1":
-        coluna = "Processador"
-    elif unidade == "2":
-        coluna = "Memoria"
-    elif unidade == "3":
-        coluna = "Disco"
-    else:
-        print("Opção inválida. Tente novamente.")
-        return
+                for resultado in resultados:
+                    print(f'{resultado[0]:.2f}%')
+                    time.sleep(5)
+                    
+        except KeyboardInterrupt:
+            print("\nMonitoramento Interrompido!")
+            while True:
+                restart = input("Deseja reiniciar o programa? (s/n): ").lower()
+                if restart == 's':
+                    break 
+                elif restart == 'n':
+                    print("Monitoramento encerrado")
+                    cursor.close()
+                    conexao.close()
+                    return
+                else: 
+                    print("Opção inválida. Por favor digite 's' ou 'n'.")
 
-
-    query = f'''
-        SELECT {coluna} FROM info WHERE maquina = %s;
-    '''
-    
-    cursor.execute(query, (maquina,))
-    resultados = cursor.fetchall()
-
-    for resultado in resultados:
-        print(f'{resultado[0]:.2f}%')
-        time.sleep(5)
-    
-    cursor.close()
-    conexao.close()
+        cursor.close()
+        conexao.close()
 
 thread = threading.Thread(target=calcMedidas)
 thread.daemon = True
