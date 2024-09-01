@@ -118,7 +118,7 @@ try:
 
         con.commit()
 
-        print(Fore.YELLOW + "="*60 + Style.RESET_ALL)
+        
         print(Fore.GREEN + f"Máquina: {maquina}" + Style.RESET_ALL)
         unidade = 'bytes' if componente in ['memoria', 'disco'] and metrica == 'bytes' else '%'
         print(f'{Fore.BLUE}{componente.capitalize()}: {valor} {unidade}{Style.RESET_ALL}')

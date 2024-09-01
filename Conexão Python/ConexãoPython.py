@@ -8,23 +8,23 @@ def calcMedidas():
     
     while True:
         try:
-            disco = psutil.disk_usage('C:\\').percent
-            processador = psutil.cpu_percent()
+            processador = psutil.cpu_percent(interval=2)
             memoria = psutil.virtual_memory().percent
+            memoria_usada = psutil.virtual_memory().used
 
             conexao = pymysql.connect(
                 host='localhost', 
                 user='root',  
-                password='Newyork2006@', 
+                password='231004my', 
                 database='desafio'
             )
             
             cursor = conexao.cursor()
             
             cursor.execute('''
-                INSERT INTO info (Processador, Memoria, Disco, maquina) 
+                INSERT INTO info (Processador, Memoria, MemoriaUsada, maquina) 
                 VALUES (%s, %s, %s, %s)
-            ''', (processador, memoria, disco, maquina))
+            ''', (processador, memoria, memoria_usada, maquina))
             
             conexao.commit()
             cursor.close()
@@ -41,7 +41,7 @@ def client():
         conexao = pymysql.connect(
             host='localhost', 
             user='root',  
-            password='Newyork2006@', 
+            password='231004my', 
             database='desafio'
         )
         
@@ -65,7 +65,7 @@ def client():
                 print("\nEscolha uma das opções abaixo:")
                 print("1 - Processador")
                 print("2 - Memória")
-                print("3 - Disco")
+                print("3 - Memória Usada")
 
                 unidade = input("Digite sua escolha (1, 2, 3): ")
                 
@@ -74,21 +74,34 @@ def client():
                 elif unidade == "2":
                     coluna = "Memoria"
                 elif unidade == "3":
-                    coluna = "Disco"
+                    coluna = "MemoriaUsada"
                 else:
                     print("Opção inválida. Tente novamente.")
                     continue
 
                 query = f'''
-                    SELECT {coluna} FROM info WHERE maquina = %s;
+                    SELECT {coluna} FROM info WHERE maquina = %s ORDER BY idDados DESC LIMIT 1;
                 '''
+
+                print("\n" + "="*40)
+                print("Escolhas do Usuário")
+                print("="*40)
+                print(f"Máquina: {maquina}")
+                print(f"Componente: {coluna}")
+                print("="*40 + "\n")
                 
                 cursor.execute(query, (maquina,))
-                resultados = cursor.fetchall()
+                resultados = cursor.fetchone()
 
                 for resultado in resultados:
-                    print(f'{resultado[0]:.2f}%')
-                    time.sleep(5)
+                    if unidade == "3": 
+                        print("="*60)
+                        print(f'Memória Usada: {resultado} bytes\n')
+                    else:
+                        print("="*60)
+                        print(f'{coluna}: {resultado:.2f}%\n')
+                        
+                time.sleep(5)
                     
         except KeyboardInterrupt:
             print("\nMonitoramento Interrompido!")
