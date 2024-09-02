@@ -2,9 +2,13 @@ import psutil
 import pymysql
 import time
 import threading
+import queue
+
+maquina_escolhida = 1
+dados_fila = queue.Queue()
 
 def calcMedidas():
-    maquina = 1  
+    global maquina_escolhida
     
     while True:
         try:
@@ -24,83 +28,108 @@ def calcMedidas():
             cursor.execute('''
                 INSERT INTO info (Processador, Memoria, MemoriaUsada, maquina) 
                 VALUES (%s, %s, %s, %s)
-            ''', (processador, memoria, memoria_usada, maquina))
+            ''', (processador, memoria, memoria_usada, maquina_escolhida))
             
             conexao.commit()
+           
+            dados_fila.put((processador, memoria, memoria_usada, maquina_escolhida))
+            
             cursor.close()
             conexao.close()
         
         except Exception as e:
             print(f'Erro: {e}')
         
-        maquina = maquina + 1 if maquina < 5 else 1
         time.sleep(5)
 
 def client():
+    global maquina_escolhida
+
     while True:
-        conexao = pymysql.connect(
-            host='localhost', 
-            user='root',  
-            password='231004my', 
-            database='desafio'
-        )
+        print("\nEscolha uma das máquinas abaixo:")
+        print("1 - Máquina 1")
+        print("2 - Máquina 2")
+        print("3 - Máquina 3")
+        print("4 - Máquina 4")
+        print("5 - Máquina 5")
+
+        escolha_maquina = input("Digite sua escolha (1, 2, 3, 4, 5): ")
+
+        if escolha_maquina not in ["1", "2", "3", "4", "5"]:
+            print("Opção inválida. Tente novamente.")
+            continue
+
+        maquina_escolhida = int(escolha_maquina)  
+
+        print("\nEscolha uma das opções abaixo:")
+        print("1 - Processador")
+        print("2 - Memória")
+        print("3 - Memória Usada")
+
+        unidade = input("Digite sua escolha (1, 2, 3): ")
         
-        cursor = conexao.cursor()
+        if unidade == "1":
+            coluna = "Processador"
+        elif unidade == "2":
+            coluna = "Memoria"
+        elif unidade == "3":
+            coluna = "MemoriaUsada"
+        else:
+            print("Opção inválida. Tente novamente.")
+            continue
+
+        print("\nEscolha o tipo de média:")
+        print("1 - Média total")
+        print("2 - Média por máquina")
+
+        tipo_media = input("Digite sua escolha (1 ou 2): ")
+        
+        print("\n" + "="*40)
+        print("Escolhas do Usuário")
+        print("="*40)
+        print(f"Máquina: {maquina_escolhida}")
+        print(f"Componente: {coluna}")
+        print(f"Tipo de Média: {'Média total' if tipo_media == '1' else 'Média por máquina'}")
+        print("="*40 + "\n")
 
         try:
             while True:
-                print("\nEscolha uma das máquinas abaixo:")
-                print("1 - Máquina 1")
-                print("2 - Máquina 2")
-                print("3 - Máquina 3")
-                print("4 - Máquina 4")
-                print("5 - Máquina 5")
-
-                maquina = input("Digite sua escolha (1, 2, 3, 4, 5): ")
-
-                if maquina not in ["1", "2", "3", "4", "5"]:
-                    print("Opção inválida. Tente novamente.")
-                    continue
-
-                print("\nEscolha uma das opções abaixo:")
-                print("1 - Processador")
-                print("2 - Memória")
-                print("3 - Memória Usada")
-
-                unidade = input("Digite sua escolha (1, 2, 3): ")
+                conexao = pymysql.connect(
+                    host='localhost', 
+                    user='root',  
+                    password='231004my', 
+                    database='desafio'
+                )
                 
-                if unidade == "1":
-                    coluna = "Processador"
-                elif unidade == "2":
-                    coluna = "Memoria"
-                elif unidade == "3":
-                    coluna = "MemoriaUsada"
+                cursor = conexao.cursor()
+
+                if tipo_media == "1":
+                    cursor.execute(f"SELECT AVG({coluna}) FROM info")
                 else:
-                    print("Opção inválida. Tente novamente.")
-                    continue
+                    cursor.execute(f"SELECT AVG({coluna}) FROM info WHERE maquina = %s", (maquina_escolhida,))
 
-                query = f'''
-                    SELECT {coluna} FROM info WHERE maquina = %s ORDER BY idDados DESC LIMIT 1;
-                '''
+                media_resultado = cursor.fetchone()[0]
 
-                print("\n" + "="*40)
-                print("Escolhas do Usuário")
-                print("="*40)
-                print(f"Máquina: {maquina}")
-                print(f"Componente: {coluna}")
-                print("="*40 + "\n")
+                processador, memoria, memoria_usada, maquina = dados_fila.get()
                 
-                cursor.execute(query, (maquina,))
-                resultados = cursor.fetchone()
-
-                for resultado in resultados:
-                    if unidade == "3": 
+                if maquina == maquina_escolhida:
+                    if unidade == "1":
                         print("="*60)
-                        print(f'Memória Usada: {resultado} bytes\n')
-                    else:
+                        print(f'Processador: {processador:.2f}%')
+                        print(f'Média do Processador: {media_resultado:.2f}%\n')
+                    elif unidade == "2":
                         print("="*60)
-                        print(f'{coluna}: {resultado:.2f}%\n')
-                        
+                        print(f'Memória: {memoria:.2f}%')
+                        print(f'Média da Memória: {media_resultado:.2f}%\n')
+                    elif unidade == "3":
+                        memoria_usada_gb = memoria_usada / (1024 ** 3)
+                        print("="*60)
+                        print(f'Memória Usada: {memoria_usada_gb:.2f} GB')
+                        print(f'Média da Memória Usada: {media_resultado / (1024 ** 3):.2f} GB\n')
+                
+                cursor.close()
+                conexao.close()
+                
                 time.sleep(5)
                     
         except KeyboardInterrupt:
@@ -111,14 +140,9 @@ def client():
                     break 
                 elif restart == 'n':
                     print("Monitoramento encerrado")
-                    cursor.close()
-                    conexao.close()
                     return
                 else: 
                     print("Opção inválida. Por favor digite 's' ou 'n'.")
-
-        cursor.close()
-        conexao.close()
 
 thread = threading.Thread(target=calcMedidas)
 thread.daemon = True
