@@ -1,6 +1,6 @@
 create database marketsafe;
 use marketsafe;
-drop database marketsafe;
+
 create table funcionario 
 (idfunc int primary key auto_increment,
 nome varchar(45),
@@ -43,4 +43,8 @@ alter table maquina add constraint foreign key fkMaquinaEmpresa (fkempresa) refe
 alter table info add constraint foreign key fkRegistroMaquina (fkmaquina) references maquina (idmaquina);
 
 select * from info;
+truncate table info;
+
 select * from maquina;
+
+
