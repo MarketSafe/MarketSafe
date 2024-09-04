@@ -7,11 +7,12 @@ import socket
 
 hostname = socket.gethostname()
 maquina_escolhida = 1
+sua_maquina = 1
 dados_fila = queue.Queue()
 maquinas = []
 
 def verifyMachine():
-    global maquina_escolhida
+    global sua_maquina
     conexao = pymysql.connect(
                 host='localhost', 
                 user='root',  
@@ -31,11 +32,11 @@ def verifyMachine():
         existe = any(hostname in indice for indice in resultados_mysql)
 
         if existe:
-            maquina_escolhida = resultados_mysql[0][0]
+            sua_maquina = resultados_mysql[0][0]
         else:
             cursor.execute('INSERT INTO maquina (hostname) VALUES (%s)', (hostname))
             conexao.commit()
-            maquina_escolhida = resultados_mysql[-1][0] + 1
+            sua_maquina = resultados_mysql[-1][0] + 1
             print("erro aqui 2")
     
     consulta_maquina = "SELECT idmaquina from maquina;"
@@ -52,6 +53,7 @@ verifyMachine()
 
 def calcMedidas():
     global maquina_escolhida
+    global sua_maquina
     
     while True:
         try:
@@ -71,7 +73,7 @@ def calcMedidas():
             cursor.execute('''
                 INSERT INTO info (Processador, Memoria, MemoriaUsada, fkmaquina) 
                 VALUES (%s, %s, %s, %s)
-            ''', (processador, memoria, memoria_usada, maquina_escolhida))
+            ''', (processador, memoria, memoria_usada, sua_maquina))
             
             conexao.commit()
            
@@ -155,21 +157,24 @@ def client():
                 media_resultado = cursor.fetchone()[0]
 
                 processador, memoria, memoria_usada, maquina = dados_fila.get()
-                
-                if maquina == maquina_escolhida:
-                    if unidade == "1":
-                        print("="*60)
-                        print(f'Processador: {processador:.2f}%')
-                        print(f'Média do Processador: {media_resultado:.2f}%\n')
-                    elif unidade == "2":
-                        print("="*60)
-                        print(f'Memória: {memoria:.2f}%')
-                        print(f'Média da Memória: {media_resultado:.2f}%\n')
-                    elif unidade == "3":
-                        memoria_usada_gb = memoria_usada / (1024 ** 3)
-                        print("="*60)
-                        print(f'Memória Usada: {memoria_usada_gb:.2f} GB')
-                        print(f'Média da Memória Usada: {media_resultado / (1024 ** 3):.2f} GB\n')
+
+                if media_resultado is None:
+                    print("\n\nEssa máquina ainda não foi usada, por favor selecione outra.")
+                else:
+                    if maquina == maquina_escolhida:
+                        if unidade == "1":
+                            print("="*60)
+                            print(f'Processador: {processador:.2f}%')
+                            print(f'Média do Processador: {media_resultado:.2f}%\n')
+                        elif unidade == "2":
+                            print("="*60)
+                            print(f'Memória: {memoria:.2f}%')
+                            print(f'Média da Memória: {media_resultado:.2f}%\n')
+                        elif unidade == "3":
+                            memoria_usada_gb = memoria_usada / (1024 ** 3)
+                            print("="*60)
+                            print(f'Memória Usada: {memoria_usada_gb:.2f} GB')
+                            print(f'Média da Memória Usada: {media_resultado / (1024 ** 3):.2f} GB\n')
                 
                 cursor.close()
                 conexao.close()
