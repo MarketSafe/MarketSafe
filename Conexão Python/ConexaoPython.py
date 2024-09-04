@@ -15,8 +15,8 @@ def verifyMachine():
     global sua_maquina
     conexao = pymysql.connect(
                 host='localhost', 
-                user='root',  
-                password='fama020312', 
+                user='aluno',  
+                password='sptech', 
                 database='marketsafe'
             )
     cursor = conexao.cursor()
@@ -62,11 +62,11 @@ def calcMedidas():
             memoria_usada = psutil.virtual_memory().used
 
             conexao = pymysql.connect(
-                host='localhost', 
-                user='root',  
-                password='fama020312', 
-                database='marketsafe'
-            )
+                    host='localhost', 
+                    user='aluno',  
+                    password='sptech', 
+                    database='marketsafe'
+                )
             
             cursor = conexao.cursor()
             
@@ -142,8 +142,8 @@ def client():
             while True:
                 conexao = pymysql.connect(
                 host='localhost', 
-                user='root',  
-                password='fama020312', 
+                user='aluno',  
+                password='sptech', 
                 database='marketsafe'
             )
                 
