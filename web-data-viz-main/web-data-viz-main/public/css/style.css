@@ -5,6 +5,7 @@
 }
 body {
     margin: 0;
+    font-family: 'poppins';
     padding: 0;
     background: #292a32;
     overflow-x: hidden;
@@ -22,6 +23,17 @@ body::-webkit-scrollbar-thumb{
     height: 100vh;
     overflow: hidden;
     background: linear-gradient(to right, #ff6842, #ff3131, #ff6842);
+}
+.transicao{
+    width: 100%;
+    height: 80px;
+    border-radius: 20px 20px 0px 0px;
+    background: #292a32;
+    position: absolute;
+    z-index: 1000;
+    bottom: -110px;
+
+    transition: bottom 1s ease;
 }
 
 .back-primi{
@@ -159,6 +171,10 @@ body::-webkit-scrollbar-thumb{
     display: flex;
     align-items: center;
     gap: 30px;
+}
+.butinho a{
+    text-decoration: none;
+    color: #fff;
 }
 
 
@@ -527,7 +543,7 @@ body::-webkit-scrollbar-thumb{
 
 /* lOGIN / CADASTRO */
 .body_cadastro {
-    background-image: url(./img/fundo.png);
+    background-image: url(fundo.png);
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
@@ -748,6 +764,7 @@ body::-webkit-scrollbar-thumb{
 .loading-div img {
     height: 10px;
     width: 10px;
+    display: none;
 }
 
 .alerta_erro{
@@ -772,3 +789,195 @@ body::-webkit-scrollbar-thumb{
     font-weight: 500;
     font-size: 20px;
   }
+  .quinta {
+    width: 100%;
+    height: 100vh;
+    background-image: url(MKTS.png);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+
+.parte_texto .esp-cards {
+    margin-left: 15px;
+
+    height: 40%;
+}
+
+.parte_texto .card {
+    margin-left: 15px;
+    width: 170px;
+
+}
+
+.parte_texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.parte_texto h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 60px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    color: white;
+    text-shadow: 0px 2px 8px #ff4242, 5px 5px 30px #ff3131;
+    font-family: "Hammersmith One", sans-serif;
+}
+
+.parte_texto p {
+    margin-left: 10px;
+    font-size: 20px;
+    color: white;
+    font-family: "Open Sans", sans-serif;
+}
+
+.quando {
+   width: 100%;
+   height: 60%;
+    background: #292a32;
+    display: flex;
+    justify-content: center;
+}
+.quando img{
+    transform: scale(1.4);
+    position: relative;
+    z-index: 10;
+}
+.pt1{
+    width: 550px;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+.funci{
+    width: 95%;
+    height: 45%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.num{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: start;
+}
+.c{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: linear-gradient(#ff3131, #ff914d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+}
+.left{
+    position: relative;
+    left: 5%;
+}
+.funci p{
+    width: 80%;
+    color: #fff;
+}
+
+.imagem_quando img {
+    margin-top: 20px;
+    margin-left: 30px;
+    height: 700px;
+    width: 300px;
+}
+
+/* sexta seção */
+.footer {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 50vh;
+    width: 100%;
+}
+
+.container_footer {
+    /* display: flex; */
+    /* flex-direction: row; */
+    background-image: linear-gradient(#ff3131, #ff914d);
+    height: 300px;
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+
+}
+
+.footer_esquerdo {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.segunda_foto {
+    margin-left: 90px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Open Sans", sans-serif;
+    color: #3a3b47;
+}
+
+.segunda_foto img {
+    height: 100px;
+    width: 130px;
+
+}
+
+.secao {
+    margin-left: 630px;
+}
+
+#diferentao {
+    border: 1px solid black;
+    border-radius: 40px;
+    color: black;
+}
+
+.secao .esp-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.divisoria{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+   
+}
+.linha{
+    height: 4px;
+    width: 95%;
+    background-color:#3a3b47;
+    border-radius: 10px;
+}
+.creditos{
+    display: flex;
+    justify-content: end;
+    margin-right: 40px;
+    margin-top: 45px;
+    color: #292a32;
+}
+
+.equip{
+    width: 100%;
+    height: 100vh;
+}
+hr{
+    width: 90%;
+    background: #292a32;
+}
