@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="css/icon.png">
     <title>MarketSafe</title>
 </head>
 
 <body>
 
     <section class="primeira" id="ft">
+        <div class="transicao" id="tr"></div>
         <div class="menu-burguer" id="burguer">
             <div class="clo-esp">
                 <i class='bx bx-menu' onclick="closeMenu()"></i>
@@ -20,7 +22,7 @@
                 <li>Inicio</li>
                 <li>Sobre</li>
                 <li>Suporte</li>
-                <li>Inicial Sessão</li>
+                <li>Iniciar Sessão</li>
             </div>
         </div>
         <div class="back-primi">
@@ -51,8 +53,8 @@
                 <p>Uma empresa dedicada ao monitoramento de Self-Checkouts, com o propósito unica e exclusivamente de
                     manter a performance e a segurança de seu estabeleciemnto.</p>
                 <div class="butinho">
-                    <button>Cadastre-se</button>
-                    <button class="logIn">Login</button>
+                    <button><a href="cadastro_login.html">Cadastre-se</button></a>
+                    <button class="logIn"><a href="cadastro_login.html">Login</a></button>
                 </div>
             </div>
 
@@ -68,9 +70,9 @@
                 <a href="#ft"><button data-tooltip="Topo"></button></a>
                 <a href="#sec"><button data-tooltip="Valores"></button></a>
                 <a href="#ter"><button data-tooltip="Self-Checkout"></button></a>
+                <a href="#quinta"><button data-tooltip="Responsividade"></button></a>
                 <a href="#forth"><button data-tooltip="Dashboard"></button></a>
-                <a href="#ft"><button data-tooltip="Responsividade"></button></a>
-                <a href="#ft"><button data-tooltip="Footer"></button></a>
+                <a href="#sexta"><button data-tooltip="Footer"></button></a>
             </div>
             <hr>
         </div>
@@ -116,15 +118,79 @@
             </div>
         </div>
     </section>
+    <section class="quinta" id="quinta">
+        <div class="quando">
+            <div class="pt1">
+             
+                <div class="funci">
+                    <div class="num">
+                        <div class="c left">1.</div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati dolorem blanditiis fugiat sequi saepe consequatur aliquid necessitatibus dolore, sint, accusamus, aperiam veritatis consequuntur in. </p>
+                </div>
+             
+                <div class="funci">
+                    <div class="num">
+                        <div class="c left">2.</div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati dolorem blanditiis fugiat sequi saepe consequatur aliquid necessitatibus dolore, sint, accusamus, aperiam veritatis consequuntur in. </p>
+                </div>
+            </div>
+            <img src="css/iphoneMKTS.png" alt="">
+            <div class="pt1">
+                
+                <div class="funci">
+                    <div class="num">
+                        <div class="c">3.</div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati dolorem blanditiis fugiat sequi saepe consequatur aliquid necessitatibus dolore, sint, accusamus, aperiam veritatis consequuntur in. </p>
+                </div>
+                <div class="funci">
+                    <div class="num">
+                        <div class="c">4.</div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati dolorem blanditiis fugiat sequi saepe consequatur aliquid necessitatibus dolore, sint, accusamus, aperiam veritatis consequuntur in. </p>
+                </div>
+            </div>
+        </div>
+    </section>  
     <section class="quarta" id="forth">
         <div class="pagina">
             <h1> DASHBOARD INTERATIVA</h1>
             <img src="assets/img/foto_dash.png" alt="exemplo_dash"><br>
         </div>
     </section>
-    <section class="quinta">
+    <section class="equip"></section>
+
+    <section class="sexta" id="sexta">
+        <div class="footer">
+            <div class="container_footer">
+                <div class="footer_esquerdo">
+                    <div class="segunda_foto">
+                        <img src="css/segunda_logo.png" alt="">
+                        <p>Prezando sempre pela segurança dos Self-checkouts</p>
+                    </div>
+                    <div class="secao">
+                            <div class="esp-list">
+                                <li>Inicio</li>
+                                <li>Sobre</li>
+                                <li>Suporte</li>
+                                <li id="diferentao">Inicial Sessão</li>
+                            </div>
+                    </div>
+                </div>
+                <div class="divisoria">
+                   <hr>
+                </div>
+                <div class="creditos">
+                    <div class="final">
+                 <p>©2024 por Equipe de Devs. MarketSafe</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </section>
-    <section class="sexta"></section>
 </body>
 
 </html>
@@ -166,4 +232,17 @@
             menu.style.right = '-300px';
         }
     }
+</script>
+<script>
+    function primeira() {
+        var transicao = document.getElementById('tr');
+
+        if (window.scrollY > 0) {
+            transicao.style.bottom = '0';
+        } else {
+            transicao.style.bottom = '-110px';
+        }
+    }
+
+    window.addEventListener('scroll', primeira);
 </script>
