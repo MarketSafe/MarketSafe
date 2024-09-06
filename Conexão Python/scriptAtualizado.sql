@@ -1,6 +1,7 @@
+drop database if exists marketsafe;
 create database marketsafe;
 use marketsafe;
-
+drop database marketsafe;
 create table funcionario 
 (idfunc int primary key auto_increment,
 nome varchar(45),
@@ -32,19 +33,29 @@ fkempresa int);
 create table info(
 idDados INT AUTO_INCREMENT PRIMARY KEY,
 data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-Processador decimal(5,2),
-Memoria decimal(5,2), 
+Processador float,
+Memoria float, 
 MemoriaUsada bigint,
 fkmaquina int
 );
 
 alter table maquina add constraint foreign key fkMaquinaEmpresa (fkempresa) references empresa (idempresa);
 
+insert into maquina(hostname) values
+	('pao');
+
 alter table info add constraint foreign key fkRegistroMaquina (fkmaquina) references maquina (idmaquina);
+
+drop database marketsafe;
+
+CREATE USER 'usuario'@'%' IDENTIFIED BY 'usuario123';
+GRANT ALL PRIVILEGES ON marketsafe.* TO 'usuario'@'%' with grant option;
+FLUSH PRIVILEGES;
 
 select * from info;
 truncate table info;
 
 select * from maquina;
+
 
 

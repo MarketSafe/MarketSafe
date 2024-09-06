@@ -48,6 +48,7 @@ def verifyMachine():
     conexao.close()
 
 def calcular_media(cursor, componente, metrica, tipo_media):
+    global maquina_opcao
     if componente == 'cpu':
         col_name = 'Processador'
     elif componente == 'memoria':
@@ -61,12 +62,14 @@ def calcular_media(cursor, componente, metrica, tipo_media):
     else:
         query = f"SELECT AVG({col_name}) FROM info WHERE fkmaquina = %s"
 
-    cursor.execute(query, (sua_maquina,) if tipo_media == 'média por máquina' else ())
+    print(maquina_opcao)
+    cursor.execute(query, (maquina_opcao,) if tipo_media == 'média por máquina' else ())
     resultado = cursor.fetchone()[0]
     
     return resultado
 
 def monitorar():
+    global maquina_opcao
     print("\nEscolha uma máquina para monitorar:\n")
     for i, maquina_id in enumerate(maquinas, start=1):
         print(f"{i} - Máquina {maquina_id}")
