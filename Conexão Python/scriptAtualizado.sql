@@ -30,7 +30,7 @@ marca varchar(45),
 hostname varchar(45),
 fkempresa int);
 
-create table info(
+create table registro(
 idDados INT AUTO_INCREMENT PRIMARY KEY,
 data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 Processador float,
@@ -41,10 +41,7 @@ fkmaquina int
 
 alter table maquina add constraint foreign key fkMaquinaEmpresa (fkempresa) references empresa (idempresa);
 
-insert into maquina(hostname) values
-	('pao');
-
-alter table info add constraint foreign key fkRegistroMaquina (fkmaquina) references maquina (idmaquina);
+alter table registro add constraint foreign key fkRegistroMaquina (fkmaquina) references maquina (idmaquina);
 
 drop database marketsafe;
 
@@ -52,8 +49,8 @@ CREATE USER 'usuario'@'%' IDENTIFIED BY 'usuario123';
 GRANT ALL PRIVILEGES ON marketsafe.* TO 'usuario'@'%' with grant option;
 FLUSH PRIVILEGES;
 
-select * from info;
-truncate table info;
+select * from registro;
+truncate table registro;
 
 select * from maquina;
 
