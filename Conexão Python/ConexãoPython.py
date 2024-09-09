@@ -58,11 +58,10 @@ def calcular_media(cursor, componente, metrica, tipo_media):
             col_name = 'MemoriaUsada'
     
     if tipo_media == 'média total':
-        query = f"SELECT AVG({col_name}) FROM info"
+        query = f"SELECT AVG({col_name}) FROM registro"
     else:
-        query = f"SELECT AVG({col_name}) FROM info WHERE fkmaquina = %s"
+        query = f"SELECT AVG({col_name}) FROM registro WHERE fkmaquina = %s"
 
-    print(maquina_opcao)
     cursor.execute(query, (maquina_opcao,) if tipo_media == 'média por máquina' else ())
     resultado = cursor.fetchone()[0]
     
@@ -143,7 +142,7 @@ def monitorar():
             valor_memoria_gb = valor_memoria_bytes / (1024 ** 3) 
             
             cursor.execute("""
-                INSERT INTO info (Processador, Memoria, MemoriaUsada, fkmaquina)
+                INSERT INTO registro (Processador, Memoria, MemoriaUsada, fkmaquina)
                 VALUES (%s, %s, %s, %s)
             """, (
                 valor_cpu,
