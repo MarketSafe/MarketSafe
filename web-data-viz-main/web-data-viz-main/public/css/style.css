@@ -415,7 +415,7 @@ body::-webkit-scrollbar-thumb{
     font-size: 20px;
     text-align: justify;
     font-family: "Hammersmith One";
-    color: #fff;
+    color: #bababa;
 }
 .cont-self1{
     width: 55%;
@@ -576,7 +576,7 @@ body::-webkit-scrollbar-thumb{
     color: #ff4242;
 }
 .ch span{
-    color: #adadad;
+    color: #bababa;
 }
 .checks button{
     width: 200px;
@@ -976,7 +976,7 @@ body::-webkit-scrollbar-thumb{
 }
 .funci p{
     width: 80%;
-    color: #fff;
+    color: #bababa;
 }
 
 .imagem_quando img {
