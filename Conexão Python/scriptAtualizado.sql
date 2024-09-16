@@ -1,3 +1,4 @@
+-- Script Correto
 drop database if exists marketsafe;
 create database marketsafe;
 use marketsafe;
@@ -54,5 +55,18 @@ truncate table registro;
 
 select * from maquina;
 
+-- drop user 'mktsAdm'@'%';
+create user if not exists 'mktsAdm'@'%' identified by 'sptech';
+grant all privileges on marketsafe.* to 'mktsAdm'@'%';
 
+-- drop user 'mktsUser'@'%';
+create user if not exists 'mktsUser'@'%' identified by 'sptech';
+grant insert, select on marketsafe.* to 'mktsUser'@'%';
 
+-- drop user 'mktsUserInsert'@'%';
+create user if not exists 'mktsUserInsert'@'%' identified by 'sptech';
+grant insert on marketsafe.* to 'mktsUserInsert'@'%';
+
+-- drop user 'mktsUserSelect'@'%';
+create user if not exists 'mktsUserSelect'@'%' identified by 'sptech';
+grant select on marketsafe.* to 'mktsUserSelect'@'%';
