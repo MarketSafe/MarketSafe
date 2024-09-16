@@ -303,12 +303,12 @@ body::-webkit-scrollbar-thumb{
     white-space: nowrap;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 1s, transform 0.5s;
     font-size: 15px;
     letter-spacing: 2px;
 }
 
-.pontinhos button:hover::after {
+.pontinhos:hover button::after {
     visibility: visible;
     opacity: 1;
     transform: translateX(10%) translateY(0);
@@ -1105,4 +1105,45 @@ body::-webkit-scrollbar-thumb{
 hr{
     width: 90%;
     background: #292a32;
+}
+
+
+
+/*NOSSOS SERVIÇOS CARDS*/
+
+.cards-servico{
+    display: flex;
+}
+
+.card-servico{
+    width: 350px;
+    height: 300px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3a3b47;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding-left: 1rem;
+    margin-right: 5%;
+    
+}
+.card-servico .icone {
+    color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+.card-servico .icone img {
+    display: flex;
+    width: 3rem;    
+}
+.card-servico .icone h5 {
+    text-shadow: 0px 2px 8px #ffffffa8;
+}
+
+.info-servico{
+    text-align: center;
 }
