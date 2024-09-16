@@ -44,16 +44,14 @@ alter table maquina add constraint foreign key fkMaquinaEmpresa (fkempresa) refe
 
 alter table registro add constraint foreign key fkRegistroMaquina (fkmaquina) references maquina (idmaquina);
 
-drop database marketsafe;
+-- drop database marketsafe;
 
-CREATE USER 'usuario'@'%' IDENTIFIED BY 'usuario123';
-GRANT ALL PRIVILEGES ON marketsafe.* TO 'usuario'@'%' with grant option;
-FLUSH PRIVILEGES;
-
-select * from registro;
-truncate table registro;
-
-select * from maquina;
+-- CREATE USER 'usuario'@'%' IDENTIFIED BY 'usuario123';
+-- GRANT ALL PRIVILEGES ON marketsafe.* TO 'usuario'@'%' with grant option;
+-- FLUSH PRIVILEGES;
+-- select * from registro;
+-- truncate table registro;
+-- select * from maquina;
 
 -- drop user 'mktsAdm'@'%';
 create user if not exists 'mktsAdm'@'%' identified by 'sptech';
