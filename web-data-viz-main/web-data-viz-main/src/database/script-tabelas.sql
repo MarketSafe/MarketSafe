@@ -1,11 +1,3 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql server
-*/
-
 create database marketsafe;
 use marketsafe;
 
@@ -50,7 +42,22 @@ CREATE TABLE usuario (
 	senha VARCHAR(50)
 );
 
-
 alter table maquina add constraint foreign key fkMaquinaEmpresa (fkempresa) references empresa (idempresa);
 
 alter table registro add constraint foreign key fkRegistroMaquina (fkmaquina) references maquina (idmaquina);
+
+-- drop user 'mktsAdm'@'%';
+create user if not exists 'mktsAdm'@'%' identified by 'sptech';
+grant all privileges on marketsafe.* to 'mktsAdm'@'%';
+
+-- drop user 'mktsUser'@'%';
+create user if not exists 'mktsUser'@'%' identified by 'sptech';
+grant insert, select on marketsafe.* to 'mktsUser'@'%';
+
+-- drop user 'mktsUserInsert'@'%';
+create user if not exists 'mktsUserInsert'@'%' identified by 'sptech';
+grant insert on marketsafe.* to 'mktsUserInsert'@'%';
+
+-- drop user 'mktsUserSelect'@'%';
+create user if not exists 'mktsUserSelect'@'%' identified by 'sptech';
+grant select on marketsafe.* to 'mktsUserSelect'@'%';
