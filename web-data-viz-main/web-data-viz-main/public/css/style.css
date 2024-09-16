@@ -380,7 +380,7 @@ body::-webkit-scrollbar-thumb{
 .card span{
     color: #fff;
     font-size: 18px;
-    text-shadow: 0px 2px 8px #ffffffa8, 5px 5px 30px #ffffff70;
+    text-shadow: 0px 2px 8px #ffffffa8;
 }
 /* terceira seção */
 .terceira{
