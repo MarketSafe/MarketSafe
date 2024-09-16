@@ -1037,7 +1037,7 @@ body::-webkit-scrollbar-thumb{
     /* display: flex; */
     /* flex-direction: row; */
     background-image: linear-gradient(#ff3131, #ff914d);
-    height: 400px;
+    height: 200px;
     width: 100%;
     border-radius: 20px 20px 0px 0px;
 
