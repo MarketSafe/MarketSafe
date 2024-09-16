@@ -3,11 +3,6 @@
 * {
     box-sizing: border-box;
 }
-
-/* #region teste  */ 
-
-
-/* #endregion*/
 body {
     margin: 0;
     font-family: 'poppins';
@@ -15,7 +10,6 @@ body {
     background: #292a32;
     overflow-x: hidden;
 }
-
 body::-webkit-scrollbar{
     width: 10px;
     background: #292a32;
@@ -309,15 +303,20 @@ body::-webkit-scrollbar-thumb{
     white-space: nowrap;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 1s, transform 0.5s;
     font-size: 15px;
     letter-spacing: 2px;
 }
 
-.pontinhos button:hover::after {
+.pontinhos:hover button::after {
     visibility: visible;
     opacity: 1;
     transform: translateX(10%) translateY(0);
+}
+@media (max-width: 768px) {
+    .lat-bar{
+        left: -30px;
+    }
 }
 .valores{
     width: 100%;
@@ -381,7 +380,7 @@ body::-webkit-scrollbar-thumb{
 .card span{
     color: #fff;
     font-size: 18px;
-    text-shadow: 0px 2px 8px #ffffffa8, 5px 5px 30px #ffffff70;
+    text-shadow: 0px 2px 8px #ffffffa8;
 }
 /* terceira seção */
 .terceira{
@@ -546,6 +545,7 @@ body::-webkit-scrollbar-thumb{
     justify-content: center;
 }
 .espc-dash .dah{
+    width: 100%;
     font-weight: 100;
     color: #fff;
     margin: 0;
@@ -631,6 +631,25 @@ body::-webkit-scrollbar-thumb{
     }
     .pagina img{
         display: none;
+    }
+    .mainDash{
+        display: none;
+    }
+    .quarta h1{
+        font-size: 35px;
+    }
+    .espc-dash .dah{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 32px;
+    }
+    .espc-dash{
+        width: 100%;
+        justify-content: center;
+        align-items: end;
+        margin-bottom: 100px;
     }
 }
 
@@ -951,6 +970,12 @@ body::-webkit-scrollbar-thumb{
     flex-direction: column;
     align-items: center;
 }
+@media (max-width: 768px) {
+    .pt1{
+        display: none;
+    }
+    
+}
 .funci{
     width: 95%;
     height: 45%;
@@ -1012,7 +1037,7 @@ body::-webkit-scrollbar-thumb{
     /* display: flex; */
     /* flex-direction: row; */
     background-image: linear-gradient(#ff3131, #ff914d);
-    height: 400px;
+    height: 200px;
     width: 100%;
     border-radius: 20px 20px 0px 0px;
 
@@ -1080,4 +1105,45 @@ body::-webkit-scrollbar-thumb{
 hr{
     width: 90%;
     background: #292a32;
+}
+
+
+
+/*NOSSOS SERVIÇOS CARDS*/
+
+.cards-servico{
+    display: flex;
+}
+
+.card-servico{
+    width: 350px;
+    height: 300px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3a3b47;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding-left: 1rem;
+    margin-right: 5%;
+    
+}
+.card-servico .icone {
+    color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+.card-servico .icone img {
+    display: flex;
+    width: 3rem;    
+}
+.card-servico .icone h5 {
+    text-shadow: 0px 2px 8px #ffffffa8;
+}
+
+.info-servico{
+    text-align: center;
 }
