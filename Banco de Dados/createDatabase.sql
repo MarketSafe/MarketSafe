@@ -21,9 +21,7 @@ create table empresa(
   cnpj char(18) not null unique,
   email varchar(80) not null unique,
   telefone char(19) not null unique
-
   fk_endereco int,
-
   constraint pk_empresa primary key (id, fk_endereco),
   constraint empresa_fk_endereco foreign key (fk_endereco) references endereco(id)
 );
@@ -36,9 +34,7 @@ create table funcionario(
   email varchar(80) not null unique,
   senha varchar(80) not null,
   telefone char(19) not null unique,
-
   fk_empresa int,
-  
   constraint pk_empresa primary key (id, fk_empresa),
   constraint funcionario_fk_empresa foreign key (fk_empresa) references empresa(id)
 );
@@ -47,9 +43,7 @@ create table maquina(
   id int auto_increment,
   hostname varchar(80) not null unique,
   marca varchar(80),
-
   fk_empresa int
-
   constraint pk_empresa primary key (id, fk_empresa),
   constraint maquina_fk_empresa foreign key (fk_empresa) references empresa(id)
 );
@@ -59,9 +53,7 @@ create table dados_maquina(
   data timestamp default current_timestamp,
   cpu float,
   memoria float,
-
   fk_maquina int
-
   constraint pk_empresa primary key (id, fk_maquina),
   constraint maquina_fk_maquina foreign key (fk_maquina) references empresa(id)
 );

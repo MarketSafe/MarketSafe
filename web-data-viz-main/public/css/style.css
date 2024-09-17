@@ -18,6 +18,8 @@ body::-webkit-scrollbar-thumb{
     background: #ff3131;
     border-radius: 10px;
 }
+
+
 .primeira{
     width: 100%;
     height: 100vh;
@@ -386,6 +388,9 @@ body::-webkit-scrollbar-thumb{
     background-position: center;
     transform: rotateY(180deg);
     text-align: center;
+    color: white;
+    justify-content: center;
+    margin-top: 5rem;
 }
 
 .back1{
@@ -721,6 +726,13 @@ body::-webkit-scrollbar-thumb{
 }
 
 /* lOGIN / CADASTRO */
+.body_login {
+    background-image: url(fundo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+}
 .body_cadastro {
     background-image: url(fundo.png);
     background-size: cover;
@@ -1178,14 +1190,21 @@ hr{
 
 /*NOSSOS SERVIÇOS CARDS*/
 
-.cards-servico{
-    display: flex;
+.cards-servico {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+    padding: 0 20px;
 }
 
-.card-servico{
+.card-servico {
     width: 350px;
     height: 300px;
-    border-radius: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1194,23 +1213,43 @@ hr{
     margin-bottom: 10px;
     padding-left: 1rem;
     margin-right: 5%;
-    
-}
-.card-servico .icone {
-    color: white;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    
-}
-.card-servico .icone img {
-    display: flex;
-    width: 3rem;    
-}
-.card-servico .icone h5 {
-    text-shadow: 0px 2px 8px #ffffffa8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.info-servico{
+.card-servico:hover {
+    transform: scale(1.05);
+}
+
+.card-servico .icone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
+
+.card-servico img {
+    
+    margin-bottom: 15px;
+    display: flex;
+    width: 3rem; 
+}
+
+.card-servico h5 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: white;
+}
+
+.card-servico .info-servico {
+    font-size: 14px;
+    color: white;
+}
+
+.cards-servico{
+    display: flex;
+}
+
+
+
+
