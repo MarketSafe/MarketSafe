@@ -68,7 +68,7 @@ body::-webkit-scrollbar-thumb{
     font-size: 35px;
     cursor: pointer;
 }
-@media (max-width: 580px) {
+ (max-width: 580px) {
     .logo{
         justify-content: start;
         margin-left: 20px;
@@ -96,14 +96,7 @@ body::-webkit-scrollbar-thumb{
     justify-content: space-around;
     align-items: center;
 }
-@media (max-width: 580px) {
-    .opts{
-        display: none;
-    }
-    .cel-opts{
-        display: flex;
-    }
-}
+
 .opts li{
     list-style: none;
     color: #fff;
@@ -135,11 +128,7 @@ body::-webkit-scrollbar-thumb{
     display: flex;
     align-items: center;
 }
-@media (max-width: 580px){
-    .content{
-        flex-direction: column-reverse;
-    }
-}
+
 .container{
     width: 50%;
     height: 90%;
@@ -190,11 +179,7 @@ body::-webkit-scrollbar-thumb{
     border-radius: 25px;
     cursor: pointer;
 }
-@media (max-width: 580px){
-    .butinho button{
-        font-size: 14px;
-    }
-}
+
 .butinho button:hover{
     background: #ffb718;
     transition: 0.5s;
@@ -219,27 +204,7 @@ body::-webkit-scrollbar-thumb{
     width: 80%;
 
 }
-@media (max-width: 580px) {
-    .container1{
-        width: 100%;
-    }
-    .container1 img{
-        position: relative;
-        left: 8px;
-    }
-    .container{
-        width: 90%;
-    }
-    .container p{
-        width: 100%;
-        text-align: center;
-    }
-    .container h1{
-        text-align: center;
-        width: 100%;
-        font-size: 10vw;
-    }
-}
+ 
 @keyframes float {
     0% {
         transform: translateY(0);
@@ -315,11 +280,7 @@ body::-webkit-scrollbar-thumb{
     opacity: 1;
     transform: translateX(10%) translateY(0);
 }
-@media (max-width: 768px) {
-    .lat-bar{
-        left: -30px;
-    }
-}
+
 .valores{
     width: 100%;
     height: 100%;
@@ -345,24 +306,7 @@ body::-webkit-scrollbar-thumb{
     justify-content: center; 
     justify-content: space-evenly;
 }
-@media (max-width: 580px){
-    .esp-cards{
-        flex-direction: column;
-        align-items: center;
-        height: 80%;
-        gap: 20px;
-    }
-    .valores{
-        gap: 10px;
-        width: calc(100% - 15px);
-        position: absolute;
-        right: 0;
-    }
-    .valores h1{
-        font-size: 50px;
-    }
-  
-}
+ 
 .card{
     width: 200px;
     height: 240px;
@@ -500,38 +444,7 @@ body::-webkit-scrollbar-thumb{
     display: flex;
     justify-content: end;
 }
-@media (max-width: 580px){
-    .main-ter{
-        flex-direction: column-reverse;
-        height: 100%;
-    }
-    .cont-self{
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .cont-self1{
-        display: none;
-    }
-    .cont-self1 img{
-        display: none;
-    }
-    .cont-self p{
-        padding-left: 20px;
-        text-align: center;
-    }
-    .cont-self h1{
-        font-size: 45px;
-    }
-}
 
-@media (max-width: 580px){
-    .terceira{
-        background-image: url(Back\ 3sec\ -\ cel.png);
-    }
-}
 .menu-burguer{
     width: 300px;
     height: 100%;
@@ -696,34 +609,6 @@ body::-webkit-scrollbar-thumb{
 
 .pagina img{
     width: 75%;
-}
-@media (max-width:580px) {
-    .pagina{
-        background-image: url(Back\ 4sec\ -\ cel.png);
-        background-size: cover;
-    }
-    .pagina img{
-        display: none;
-    }
-    .mainDash{
-        display: none;
-    }
-    .quarta h1{
-        font-size: 35px;
-    }
-    .espc-dash .dah{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        font-size: 32px;
-    }
-    .espc-dash{
-        width: 100%;
-        justify-content: center;
-        align-items: end;
-        margin-bottom: 100px;
-    }
 }
 
 /* lOGIN / CADASTRO */
@@ -1050,12 +935,7 @@ body::-webkit-scrollbar-thumb{
     flex-direction: column;
     align-items: center;
 }
-@media (max-width: 768px) {
-    .pt1{
-        display: none;
-    }
-    
-}
+
 .funci{
     width: 95%;
     height: 45%;
@@ -1109,7 +989,6 @@ body::-webkit-scrollbar-thumb{
     display: flex;
     align-items: end;
     justify-content: center;
-    height: 100%;
     width: 100%;
 }
 
@@ -1138,8 +1017,8 @@ body::-webkit-scrollbar-thumb{
 }
 
 .segunda_foto img {
-    height: 100px;
-    width: 130px;
+    height: 137px;
+    width: 200px;
 
 }
 
@@ -1253,4 +1132,129 @@ hr{
 
 
 
+ @media screen and (max-width: 900px) {
+    .logo{
+        justify-content: start;
+        margin-left: 20px;
+    }
 
+    .opts{
+        display: none;
+    }
+    .cel-opts{
+        display: flex;
+    }
+    .content{
+        flex-direction: column-reverse;
+    }
+
+    .butinho button{
+        font-size: 14px;
+    }
+
+    .container1{
+        width: 100%;
+    }
+    .container1 img{
+        position: relative;
+        left: 8px;
+    }
+    .container{
+        width: 90%;
+    }
+    .container p{
+        width: 100%;
+        text-align: center;
+    }
+    .container h1{
+        text-align: center;
+        width: 100%;
+        font-size: 10vw;
+    }
+    .lat-bar{
+        left: -30px;
+    }
+    .esp-cards{
+        flex-direction: column;
+        align-items: center;
+        height: 80%;
+        gap: 20px;
+    }
+    .valores{
+        gap: 10px;
+        width: calc(100% - 15px);
+        position: absolute;
+        right: 0;
+    }
+    .valores h1{
+        font-size: 50px;
+    }
+    .main-ter{
+        flex-direction: column-reverse;
+        height: 100%;
+    }
+    .cont-self{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cont-self1{
+        display: none;
+    }
+    .cont-self1 img{
+        display: none;
+    }
+    .cont-self p{
+        padding-left: 20px;
+        text-align: center;
+    }
+    .cont-self h1{
+        font-size: 45px;
+    }
+      
+    
+
+    .mainDash{
+        display: none;
+    }
+    .quarta h1{
+        font-size: 25px;
+        margin-top: 19rem;
+    }
+    .espc-dash .dah{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 32px;
+    }
+    .espc-dash{
+        width: 100%;
+        justify-content: center;
+        align-items: end;
+        margin-bottom: 100px;
+    }
+
+    .cards-servico {
+        flex-direction: column;
+        align-items: center; 
+      }
+
+      .card-servico {
+        width: 80%; 
+ 
+      }
+
+      .pontinhos{
+        display: none;
+      }
+
+      .hr{
+        display: none;
+      }
+
+      
+     
+}
