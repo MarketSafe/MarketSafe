@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #292935;
+    color: #fff;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1980" height="1080" viewBox="0 0 1980 1080" fill="none"><g clip-path="url(#clip0_54_2)"><rect width="1980" height="1080" fill="#292A32"/><rect x="430.44" y="-212" width="404.009" height="1401.12" transform="rotate(24.8332 430.44 -212)" fill="#FF914D" fill-opacity="0.9"/><g filter="url(#filter0_i_54_2)"><rect x="1574" y="751" width="329" height="312" rx="25" fill="url(#paint0_radial_54_2)" fill-opacity="0.6"/></g><g filter="url(#filter1_f_54_2)"><rect x="1754" y="848" width="193" height="184" rx="25" fill="url(#paint1_radial_54_2)" fill-opacity="0.4"/></g></g><defs><filter id="filter0_i_54_2" x="1574" y="751" width="329" height="316" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="2"/><feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/><feBlend mode="normal" in2="shape" result="effect1_innerShadow_54_2"/></filter><filter id="filter1_f_54_2" x="1750" y="844" width="201" height="192" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_54_2"/></filter><radialGradient id="paint0_radial_54_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1738.5 907) rotate(90) scale(156 164.5)"><stop offset="0.12" stop-color="#99572E"/><stop offset="0.76" stop-color="#FF914D"/></radialGradient><radialGradient id="paint1_radial_54_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1850.5 940) rotate(90) scale(92 96.5)"><stop offset="0.115" stop-color="#991D1D"/><stop offset="0.925" stop-color="#FF3131"/></radialGradient><clipPath id="clip0_54_2"><rect width="1980" height="1080" fill="white"/></clipPath></defs></svg>');
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+
+}
+
+.menu {
+    width: 250px;
+    background-color: #3c3c47;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 20px;
+    border-radius: 0.5rem;
+}
+
+.perfil img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.perfil h2 {
+    font-size: 1.5em;
+    margin-top: 2rem;
+    margin-left: 2.5rem;
+}
+
+.perfil p {
+    font-size: 1em;
+    color: #c0c0c0;
+    margin-top: 0.1rem;
+    margin-left: 2.5rem;
+}
+
+.regiao-select, .data-select {
+    width: 100%;
+    text-align: left;
+}
+
+.regiao-select label, .data-select label {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.regiao-select select, .data-select input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #484850;
+    border: none;
+    color: #fff;
+}
+
+.conteudo-esquerda {
+    flex: 1;
+    background-color: #292935;
+    padding: 20px;
+}
+
+.cel-opts{
+    width: 60px;
+    height: 100%;
+    font-family: "Hammersmith One", sans-serif;;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+
+.opts{
+    font-family: "Hammersmith One", sans-serif;
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 18rem;
+}
+
+.opts li{
+    list-style: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px; border-radius: 10px;
+}
+
+.opts li{
+    list-style: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px; border-radius: 10px;
+}
+.opts li:hover{
+    background: #f29b37;
+   color: #fff;
+   transition: 0.5s;
+}
+.opts button{
+    width: 150px;
+    height: 30px;
+    background: transparent;
+    border: 2px solid #292a32;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.opts button:hover{
+    background: #292a32;
+    color: #fff;
+    transition: 0.5s ease;
+}
