@@ -29,5 +29,5 @@ app.use("/usuario", usuarioRouter);
 
 // aplicação rodando:
 app.listen(PORTA_APP, function () {
-    console.log(`Servidor rodando em 127.0.0.1:${PORTA_APP}`);
+    console.log(`Servidor rodando em http://127.0.0.1:${PORTA_APP}`);
 });
