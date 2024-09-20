@@ -4,13 +4,18 @@
     box-sizing: border-box;
     scroll-behavior: auto;
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
 }
 body {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     font-family: 'poppins';
     padding: 0;
     background: #292a32;
     overflow-x: hidden;
+    gap: 5rem;
 }
 body::-webkit-scrollbar{
     width: 10px;
@@ -21,6 +26,9 @@ body::-webkit-scrollbar-thumb{
     border-radius: 10px;
 }
 
+h1 {
+    font-size: 2.5rem;
+}
 
 .primeira{
     width: 100%;
@@ -70,17 +78,10 @@ body::-webkit-scrollbar-thumb{
     font-size: 35px;
     cursor: pointer;
 }
-@media (max-width: 580px) {
-    .logo{
-        justify-content: start;
-        margin-left: 20px;
-    }
-    
-}
 .cel-opts{
     width: 60px;
     height: 100%;
-    font-family: "Hammersmith One", sans-serif;;
+    font-family: "Hammersmith One", sans-serif;
     display: none;
     justify-content: center;
     align-items: center;
@@ -98,14 +99,7 @@ body::-webkit-scrollbar-thumb{
     justify-content: space-around;
     align-items: center;
 }
-@media (max-width: 580px) {
-    .opts{
-        display: none;
-    }
-    .cel-opts{
-        display: flex;
-    }
-}
+
 .opts li{
     list-style: none;
     color: #fff;
@@ -137,11 +131,7 @@ body::-webkit-scrollbar-thumb{
     display: flex;
     align-items: center;
 }
-@media (max-width: 580px){
-    .content{
-        flex-direction: column-reverse;
-    }
-}
+
 .container{
     width: 50%;
     height: 90%;
@@ -192,11 +182,7 @@ body::-webkit-scrollbar-thumb{
     border-radius: 25px;
     cursor: pointer;
 }
-@media (max-width: 580px){
-    .butinho button{
-        font-size: 14px;
-    }
-}
+
 .butinho button:hover{
     background: #ffb718;
     transition: 0.5s;
@@ -219,29 +205,8 @@ body::-webkit-scrollbar-thumb{
 .container1 img{
     animation: float 4.2s ease-in-out infinite;
     width: 80%;
+}
 
-}
-@media (max-width: 580px) {
-    .container1{
-        width: 100%;
-    }
-    .container1 img{
-        position: relative;
-        left: 8px;
-    }
-    .container{
-        width: 90%;
-    }
-    .container p{
-        width: 100%;
-        text-align: center;
-    }
-    .container h1{
-        text-align: center;
-        width: 100%;
-        font-size: 10vw;
-    }
-}
 @keyframes float {
     0% {
         transform: translateY(0);
@@ -256,7 +221,6 @@ body::-webkit-scrollbar-thumb{
 /* segunda seção */
 .segunda{
     width: 100%;
-    height: 100vh;
     display: flex;
     background-size: cover;
 }
@@ -264,7 +228,6 @@ body::-webkit-scrollbar-thumb{
     width: 100px;
     height: 100vh;
     top: 0;
-    position: fixed;
     display: flex;
     opacity: 0;
     flex-direction: column;
@@ -317,57 +280,32 @@ body::-webkit-scrollbar-thumb{
     opacity: 1;
     transform: translateX(10%) translateY(0);
 }
-@media (max-width: 768px) {
-    .lat-bar{
-        left: -30px;
-    }
-}
+
 .valores{
     width: 100%;
-    height: 100%;
    display: flex;
    align-items: center;
    flex-direction: column;
    justify-content: center;
    font-family:  "Hammersmith One", sans-serif;;
-    position: absolute;
     z-index: 1;
     gap: 150px;
 }
 .valores h1{
-    font-size: 3.5vw;
     color: #ffffffd6;
     letter-spacing: 5px;
     text-shadow: 2px 2px 5px #ff4242, 5px 5px 30px #ff3131;
 }
 .esp-cards{
     width: 100%;
-    height: 60%;
     display: flex;
     justify-content: center; 
     justify-content: space-evenly;
 }
-@media (max-width: 580px){
-    .esp-cards{
-        flex-direction: column;
-        align-items: center;
-        height: 80%;
-        gap: 20px;
-    }
-    .valores{
-        gap: 10px;
-        width: calc(100% - 15px);
-        position: absolute;
-        right: 0;
-    }
-    .valores h1{
-        font-size: 50px;
-    }
-  
-}
+ 
 .card{
     width: 200px;
-    height: 240px;
+    height: 12em;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -381,7 +319,6 @@ body::-webkit-scrollbar-thumb{
 
 .face{
     width: 100%;
-    height: 100%;
     position: absolute;
 }
 
@@ -392,47 +329,32 @@ body::-webkit-scrollbar-thumb{
     text-align: center;
     color: white;
     justify-content: center;
-    margin-top: 5rem;
 }
-
-.back1{
-    background-image: url(./aperto.png);
+.back {
     background-size: cover;
     background-position: center;
     backface-visibility: hidden;
     border-radius: 10px;
+    height: 100%;
+}
+.back1{
+    background-image: url(./aperto.png);
 }
 
 .back2{
     background-image: url(./inovar.png);
-    background-size: cover;
-    background-position: center;
-    backface-visibility: hidden;
-    border-radius: 10px;
 }
 
 .back3{
     background-image: url(./Seguro.png);
-    background-size: cover;
-    background-position: center;
-    backface-visibility: hidden;
-    border-radius: 10px;
 }
 
 .back4{
     background-image: url(./Alvo.png);
-    background-size: cover;
-    background-position: center;
-    backface-visibility: hidden;
-    border-radius: 10px;
 }
 
 .back5{
     background-image: url(./Olho.png);
-    background-size: cover;
-    background-position: center;
-    backface-visibility: hidden;
-    border-radius: 10px;
 }
 
 .card:hover {
@@ -459,7 +381,6 @@ body::-webkit-scrollbar-thumb{
 /* terceira seção */
 .terceira{
     width: 100%;
-    height: 100vh;
     background-size: cover;
     background-image: url(Background\ 3sec.png);
     display: flex;
@@ -485,7 +406,6 @@ body::-webkit-scrollbar-thumb{
 .cont-self h1{
     margin: 0;
     font-family: "Hammersmith One";
-    font-size: 5vw;
     text-shadow: 0px 2px 8px #ff4242, 5px 5px 30px #ff3131;
     color: #fee6e6;
 }
@@ -502,38 +422,11 @@ body::-webkit-scrollbar-thumb{
     display: flex;
     justify-content: end;
 }
-@media (max-width: 580px){
-    .main-ter{
-        flex-direction: column-reverse;
-        height: 100%;
-    }
-    .cont-self{
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .cont-self1{
-        display: none;
-    }
-    .cont-self1 img{
-        display: none;
-    }
-    .cont-self p{
-        padding-left: 20px;
-        text-align: center;
-    }
-    .cont-self h1{
-        font-size: 45px;
-    }
+.cont-self1 img {
+    display: flex;
+    width: 100%;
 }
 
-@media (max-width: 580px){
-    .terceira{
-        background-image: url(Back\ 3sec\ -\ cel.png);
-    }
-}
 .menu-burguer{
     width: 300px;
     height: 100%;
@@ -587,16 +480,11 @@ body::-webkit-scrollbar-thumb{
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
-    /* background-image: url(fundo\ quarta.png); */
-    margin-top: 10%;
+    gap: 5rem;
 }
 .quarta h1{
     margin: 0;
     padding: 0;
-    font-size: 60px;
-    margin-bottom: 30px;
-    margin-top: 50px;
     color: white;
     text-shadow: 0px 2px 8px #ff4242, 5px 5px 30px #ff3131;
     font-family:"Hammersmith One", sans-serif;;
@@ -699,34 +587,6 @@ body::-webkit-scrollbar-thumb{
 .pagina img{
     width: 75%;
 }
-@media (max-width:580px) {
-    .pagina{
-        background-image: url(Back\ 4sec\ -\ cel.png);
-        background-size: cover;
-    }
-    .pagina img{
-        display: none;
-    }
-    .mainDash{
-        display: none;
-    }
-    .quarta h1{
-        font-size: 35px;
-    }
-    .espc-dash .dah{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        font-size: 32px;
-    }
-    .espc-dash{
-        width: 100%;
-        justify-content: center;
-        align-items: end;
-        margin-bottom: 100px;
-    }
-}
 
 /* lOGIN / CADASTRO */
 .body_login {
@@ -805,34 +665,44 @@ body::-webkit-scrollbar-thumb{
     border-radius: 10px;
     position: relative;
     overflow: hidden;
-    width: 1000px;
-    max-width: 100%;
-    min-height: 600px;
+    width: 400px;
+    padding: 2em 0;
+    margin-top: 6rem;
 
 }
 
 .formulario-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
     transition: all 0.6s ease-in-out;
 }
 
 .formulario-container h1 {
     font-family: "Hammersmith One", sans-serif;
-    font-size: 25px;
     margin-bottom: 20px;
 
 }
 
 .login-container {
     left: 0;
-    width: 50%;
     z-index: 2;
 }
 
 .caixinha-branca.direita-ativo .login-container {
     transform: translateX(100%);
+}
+@media screen and (max-width: 900px) {
+    .caixinha-branca{
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    min-height: 450px;
+    }
+
+    .caixinha-branca h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
 }
 
 .cadastro-container {
@@ -935,7 +805,6 @@ body::-webkit-scrollbar-thumb{
 
 .painel-animado h1 {
     font-family: "Hammersmith One", sans-serif;
-    font-size: 35px;
     margin-bottom: 20px;
 }
 
@@ -1052,12 +921,7 @@ body::-webkit-scrollbar-thumb{
     flex-direction: column;
     align-items: center;
 }
-@media (max-width: 768px) {
-    .pt1{
-        display: none;
-    }
-    
-}
+
 .funci{
     width: 95%;
     height: 45%;
@@ -1101,38 +965,15 @@ body::-webkit-scrollbar-thumb{
 
 /* sexta seção */
 .sexta{
-    width: 100%;
-    height: 50vh;
-    display: flex;
-    align-items: end;
-}
-
-.footer {
     display: flex;
     align-items: end;
     justify-content: center;
-    height: 100%;
-    width: 100%;
-}
-
-.container_footer {
-    /* display: flex; */
-    /* flex-direction: row; */
-    background-image: linear-gradient(#ff3131, #ff914d);
-    height: 200px;
-    width: 100%;
     border-radius: 20px 20px 0px 0px;
-
-}
-
-.footer_esquerdo {
-    display: flex;
-    flex-direction: row;
-
+    width: 100%;
+    background-image: linear-gradient(#ff3131, #ff914d);
 }
 
 .segunda_foto {
-    margin-left: 90px;
     display: flex;
     flex-direction: column;
     font-family: "Open Sans", sans-serif;
@@ -1140,24 +981,14 @@ body::-webkit-scrollbar-thumb{
 }
 
 .segunda_foto img {
-    height: 100px;
-    width: 130px;
-
-}
-
-.secao {
-    margin-left: 630px;
+    height: 137px;
+    width: 200px;
 }
 
 #diferentao {
     border: 1px solid black;
     border-radius: 40px;
     color: black;
-}
-
-.secao .esp-list {
-    display: flex;
-    flex-direction: row;
 }
 
 .divisoria{
@@ -1197,19 +1028,16 @@ hr{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    margin: 40px 0;
     padding: 0 20px;
 }
 
 .card-servico {
     width: 350px;
-    height: 300px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
     background: #3a3b47;
     flex-direction: column;
@@ -1218,17 +1046,16 @@ hr{
     margin-right: 5%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    text-align: center;
+    position: relative;
 }
 
 .card-servico:hover {
     transform: scale(1.05);
 }
 
-.card-servico .icone {
+.card-servico img {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
 }
 
 .card-servico img {
@@ -1254,5 +1081,99 @@ hr{
 }
 
 
+ @media screen and (max-width: 900px) {
+    .logo{
+        justify-content: start;
+        margin-left: 20px;
+    }
 
+    .cel-opts{
+        display: flex;
+    }
+    .content{
+        flex-direction: column-reverse;
+    }
 
+    .butinho button{
+        font-size: 14px;
+    }
+
+    .container1{
+        width: 100%;
+    }
+    .container1 img{
+        position: relative;
+        left: 8px;
+    }
+    .container{
+        width: 90%;
+    }
+    .container p{
+        width: 100%;
+        text-align: center;
+    }
+    .container h1{
+        text-align: center;
+        width: 100%;
+        font-size: 10vw;
+    }
+    .lat-bar{
+        left: -30px;
+    }
+    .esp-cards{
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .valores{
+        gap: 10px;
+        width: calc(100% - 15px);
+        right: 0;
+    }
+    .main-ter{
+        flex-direction: column-reverse;
+        height: 100%;
+    }
+    .cont-self{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cont-self1{
+        display: none;
+    }
+    .cont-self1 img{
+        display: none;
+    }
+    .cont-self p{
+        padding-left: 20px;
+        text-align: center;
+    }
+    .espc-dash .dah{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 32px;
+    }
+    .espc-dash{
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 100px;
+    }
+
+    .cards-servico {
+        flex-direction: column;
+        align-items: center; 
+      }
+
+      .card-servico {
+        width: 80%; 
+      }
+
+      .pontinhos, .hr, .opcao-footer,.mainDash,.opts{
+        display: none;
+      }
+
+}
