@@ -1,3 +1,5 @@
+-- initDatabase.sql
+
 -- createDatabase.sql:
 
 drop database if exists market_safe;
@@ -26,7 +28,7 @@ create table empresa(
   constraint empresa_fk_endereco foreign key (fk_endereco) references endereco(id)
 );
 
-create table funcionario(  
+create table funcionario(
   id int auto_increment,
   nome varchar(80) not null,
   cpf char(14) not null unique,
@@ -61,3 +63,22 @@ create table dados_maquina(
   constraint dados_maquina_fk_empresa foreign key (fk_empresa) references empresa(id),
   constraint dados_maquina_fk_maquina foreign key (fk_maquina) references maquina(id)
 );
+
+-- createUser.sql:
+
+-- drop user 'mktsAdm'@'%';
+create user if not exists 'mktsAdm'@'%' identified by 'sptech';
+grant all privileges on market_safe.* to 'mktsAdm'@'%';
+
+-- drop user 'mktsUser'@'%';
+create user if not exists 'mktsUser'@'%' identified by 'sptech';
+grant insert, select on market_safe.* to 'mktsUser'@'%';
+
+-- drop user 'mktsUserInsert'@'%';
+create user if not exists 'mktsUserInsert'@'%' identified by 'sptech';
+grant insert on market_safe.* to 'mktsUserInsert'@'%';
+
+-- drop user 'mktsUserSelect'@'%';
+create user if not exists 'mktsUserSelect'@'%' identified by 'sptech';
+grant select on market_safe.* to 'mktsUserSelect'@'%';
+
