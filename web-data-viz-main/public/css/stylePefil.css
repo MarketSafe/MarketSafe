@@ -1,0 +1,196 @@
+body{
+    background-size: 100%;
+    background-image: url('data:image/svg+xml,<svg width="2269" height="1402" viewBox="0 0 2269 1402" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_83_3)"><rect width="2269" height="1402" fill="%23292A32"/><rect width="134.432" height="1827.45" transform="matrix(0.915331 0.402703 -0.392682 0.919674 1925.16 -193)" fill="%23FF914D"/><rect width="134.432" height="1827.45" transform="matrix(0.915331 0.402703 -0.392682 0.919674 2069.95 -138.967)" fill="%23FFB418"/><rect width="134.432" height="1827.45" transform="matrix(0.915331 0.402703 -0.392682 0.919674 1738.61 -138.799)" fill="%23FF3131"/></g><defs><clipPath id="clip0_83_3"><rect width="2269" height="1402" fill="white"/></clipPath></defs></svg>')
+}
+
+
+.Engloba_perfil{
+    display: flex;
+    height: 35rem;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.divPerfil{
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    font-family: 'ADLaM Display';
+    color: #fff;
+    font-size: small;
+    width: 23%;
+    height: 100%;
+}
+
+.titulo_perfil{
+    display: flex;
+    align-items: center;
+
+}
+.botao_senha{
+    width: 7rem;
+    height: 4rem;
+    border-style: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #ff3131;
+    font-weight:bold;
+    font-family: 'ADLaM Display';
+    margin-top: 42%;
+}
+
+.div_fundo_btn_cam{
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+    background-color: #FF914D;
+    transform: translate(0,-70%); /*NAGASHI GOD, THE KING OF CSS*/
+    width: 2.25rem;
+    height: 2.25rem;
+    position: relative;
+}
+
+.movendo_camerazinha{
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+}
+
+.imagenzinha_camera{
+    padding: 6%;
+    margin-left: 1%;
+}
+
+.divDados{
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 10px;
+    font-family: 'ADLaM Display';
+    color: #fff;
+    font-size: medium;
+    width: 23%;
+    height: 100%;
+}
+.div_labels{
+    padding-top: 20%;
+    padding-left: 7%;
+}
+
+.divDados .div_labels input{
+    border-style: none;
+    border-radius: 5px;
+    height: 1.5rem;
+    font-family: 'ADLaM Display';
+    text-align: center;
+    width: 90%;
+    background-color: #ffffff;
+    margin-top: 3%;
+}
+
+.divDados .div_labels .input_Cargo{
+    display: flex;
+    text-align: center;
+    border-style: none;
+    border-radius: 5px;
+    width: 90%;
+    font-family: 'ADLaM Display';
+    background-color: #ffffff;
+}
+
+.div_labels img{
+    width: 20px;
+    position: relative;
+    transform: translate(0, -116%);
+}
+
+.divDados select{
+    width: 70%;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.div_btn_Atulaizar{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5rem;
+}
+
+.divDados .div_btn_Atulaizar button{
+    width: 8rem;
+    height: 4rem;
+    border-style: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #FF914D;
+    font-weight:bold;
+    font-family: 'ADLaM Display';
+}
+
+.divMapa{
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    font-family: 'ADLaM Display';
+    color: #fff;
+    font-size: small;
+    width: 23%;
+    height: 100%;
+}
+
+.div_titulo_Mapa{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    height: 7%;
+    border-radius: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding-top: 5%;
+    background-color: #292A32;
+    font-family: 'ADLaM Display';
+}
+
+.div_fundo_mapa{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    padding: 2%;
+    margin: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.imagem_mapa img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    border-radius: 10px;
+    padding-top: 5%;
+    padding-left: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.divMapa button{
+    width: 7rem;
+    height: 4rem;
+    border-style: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #FFB418;
+    font-weight:bold;
+    font-family: 'ADLaM Display';
+    margin-top: 10%;
+}
