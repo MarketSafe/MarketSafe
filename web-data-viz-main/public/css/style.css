@@ -1087,7 +1087,7 @@ hr{
 }
 
 
- @media screen and (max-width: 900px) {
+ @media screen and (max-aspect-ratio: 1/1) {
     .logo{
         justify-content: start;
         margin-left: 20px;
