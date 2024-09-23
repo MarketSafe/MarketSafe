@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/stylePefil.css">
+    <link href='https://fonts.googleapis.com/css?family=ADLaM Display' rel='stylesheet'>
+    <title>Document</title>
+</head>
+<body>
+    <div class="Engloba_perfil">
+    <div class="divPerfil">
+        <div class="titulo_perfil">
+        <h1>Foto de Perfil </h1><img src="./css/icon_cam.png" style="width: 40px;">
+        </div>
+        <div>
+            <img class="quadrante_img" src="./css/foto_perfil.jpg" style="border-radius: 20px; width: 180px;">
+            <div class="movendo_camerazinha">
+            <div class="div_fundo_btn_cam">
+            <img class="imagenzinha_camera" src="./css/img_cam_btn.png" style="width: 30px;">
+            </div>
+        </div>
+        </div>
+        <button class="botao_senha" onclick="MudarSenha()">Mudar Senha</button>
+    </div>
+    <div class="divDados">
+        <div class="div_labels">
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="label_nome">
+        <br>
+        <br>
+        <label for="email">Email:</label><br>
+        <input type="text" class="input_email">
+        <br>
+        <br>
+        <label for="cpf">CPF:</label><br>
+        <input type="text" id="cpf-input" placeholder="___.___.___-__" autocomplete="off" maxlength="14"><br>
+        <br>
+        <label for="cargo">Cargo</label><br>
+        <input type="text" class="input input_Cargo" placeholder="Analista" disabled=""><img src="./css/icon_Cadeado.webp">
+    </div>
+        <br>
+        <br>
+        <div class="div_btn_Atulaizar">
+        <button onclick="Atualizar()">Atualizar Dados</button>
+        </div>
+    </div>
+
+    <div class="divMapa">
+        <div class="div_titulo_Mapa">
+            <h2>Endereço</h2>
+            <br>
+        </div>
+        <div class="div_fundo_mapa">
+            <div class="imagem_mapa">
+                <img src="./css/maps_Analista.png">
+            </div>
+        </div>
+        <br>
+        <button onclick="Monitorar()">Monitorar</button> 
+
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+
+const cpfInput = document.querySelector('#cpf-input')
+    cpfInput.addEventListener('keypress', () => {
+        let cpfInputlength = cpfInput.value.length
+
+        if (cpfInputlength == 3 || cpfInputlength == 7) {
+            cpfInput.value += '.'
+        } else if (cpfInputlength == 11) {
+            cpfInput.value += '-'
+        }
+    })
+</script>
