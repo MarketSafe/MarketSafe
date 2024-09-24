@@ -64,7 +64,7 @@
                              <label for="periodo">Período</label>
                             </div>
                             <div class="seta-dash">
-                             <img id="nova-troca" src="./css/seta-dash.svg" alt="">
+                             <img id="novaTroca" src="./css/seta-dash.svg" alt="">
                             </div>
                         </div>
                         <div class="periodo-select">
@@ -89,14 +89,19 @@
 
 <script>
 const trocaConteudo = document.getElementById('troca');
+const trocaConteudo2 = document.getElementById('novaTroca');
 const conteudo1 = document.getElementById('conteudo1');
 const conteudo2 = document.getElementById('conteudo2');
 
 trocaConteudo.addEventListener('click', function () {
-  
-    if (conteudo2.style.display === 'none' || conteudo2.style.display === '') {
         conteudo2.style.display = 'block'; 
         conteudo1.style.display = 'none'; 
-    } 
+
+});
+
+trocaConteudo2.addEventListener('click', function () {
+      conteudo1.style.display = 'block'; 
+      conteudo2.style.display = 'none'; 
+  
 });
 </script>
