@@ -1,3 +1,5 @@
+// app.js:
+
 // dependências:
 //   importação da framework "express":
 const express = require("express");
@@ -16,18 +18,22 @@ const PORTA_APP = process.env.APP_PORT;
 const HOST_APP = process.env.APP_HOST;
 
 //   importação das rotas:
-const usuarioRouter = require("./src/routers/usuarioRouter.js");
+const funcionarioRouter = require("./src/routers/funcionarioRouter.js");
+const maquinaRouter = require("./src/routers/maquinaRouter.js");
 
-// aplicação:
+// declaração da variável de aplicação:
 const app = express();
 
-//   configurações:
+//   definição das configurações:
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 
-//   configuração das rotas:
-app.use("/usuario", usuarioRouter);
+//   definição da configuração de rotas:
+app.use("/funcionario", funcionarioRouter);
+app.use("/maquina", maquinaRouter);
+
+//   configuração de arquivos estáticos (*.html, *.css, *.js):
+app.use(express.static(path.join(__dirname, "public")));
 
 //   início da aplicação:
 app.listen(PORTA_APP, function () {
