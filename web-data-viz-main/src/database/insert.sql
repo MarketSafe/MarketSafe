@@ -6,4 +6,6 @@ insert into empresa (razao_social, nome_fantasia, cnpj, email, telefone, fk_ende
 
 insert into funcionario (nome, cpf, cargo, email, senha, telefone, fk_empresa) values ("nome", "123.456.789-01", "cargo", "email", "senha", "+12 (34) 56789-0123", 1);
 
-insert into maquina (hostname, fk_empresa) values ("abc", 1);
+insert into filial (fk_empresa, fk_endereco) values (1, 1);
+
+insert into totem (mac_address, fk_filial) values ("abc", 1);

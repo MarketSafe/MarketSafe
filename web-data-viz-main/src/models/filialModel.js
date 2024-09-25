@@ -1,13 +1,13 @@
-// maquinaModel.js:
+// filialModel.js:
 
 // dependências:
 //   importação do arquivo `config.js`:
 const database = require("../database/config.js");
 
 // declaração da função `cadastrar`:
-function cadastrar(hostname, fk_empresa) {
+function cadastrar(fk_empresa, fk_endereco) {
   // declaração da variável de instrução sql:
-  const instrucao = `insert into maquina (hostname, fk_empresa) values ('${hostname}', '${fk_empresa}');`;
+  const instrucao = `insert into filial (fk_empresa, fk_endereco) values (${fk_empresa}, ${fk_endereco});`;
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
@@ -17,14 +17,14 @@ function cadastrar(hostname, fk_empresa) {
 // declaração da função `listar`:
 function listar(fk_empresa) {
   // declaração da variável de instrução sql:
-  const instrucao = `select id, hostname, fk_empresa from maquina where fk_empresa = '${fk_empresa}';`;
+  const instrucao = `select filial.id as filialId, filial.cadastro as filialCadastro, endereco.cep as enderecoCep, endereco.bairro as enderecoBairro, endereco.rua as enderecoRua, endereco.numero as enderecoNumero, endereco.complemento as enderecoComplemento from filial join endereco on filial.fk_endereco = endereco.id where fk_filial = '${fk_filial}';`;
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
   return resultado;
 }
 
-// exporta as funções do arquivo `maquinaModel.js`:
+// exporta as funções do arquivo `filialModel.js`:
 module.exports = {
   cadastrar,
   listar,

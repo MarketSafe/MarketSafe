@@ -52,6 +52,7 @@ function cadastrar(req, res) {
   const email = req.body.email;
   const senha = req.body.senha;
   const telefone = req.body.telefone;
+  const filial = req.body.filial;
 
   // validação das variáveis recebidas:
   if (emailAutenticacao === undefined) {
@@ -74,25 +75,44 @@ function cadastrar(req, res) {
     // envia para a função `autenticar` do arquivo `funcionarioModel.js`:
     funcionarioModel
       .autenticar(emailAutenticacao, senhaAutenticacao)
-      .then(function (resultado) {
+      .then(function (resultadoAutenticar) {
         // caso a quantidade de registros encontrados seja igual a 1, o usuário está autenticado:
-        if (resultado.length === 1) {
-          const funcionarioAutenticado = resultado[0]; // recebe o primeiro (e único) registro do select
+        if (resultadoAutenticar.length === 1) {
+          const funcionarioAutenticado = resultadoAutenticar[0]; // recebe o primeiro (e único) registro do select
           // envia para a função `cadastrar` do arquivo `funcionarioModel.js`:
-          funcionarioModel
-            .cadastrar(nome, cpf, cargo, email, senha, telefone, funcionarioAutenticado.fk_empresa)
-            .then(function (resultado) {
-              // retorna a resposta com status 200 (sucesso) em json contendo o id do novo usuário cadastrado:
-              res.status(200).json({
-                id: resultado.insertId,
+
+          // caso seja especificada a filial do novo usuário:
+          if (filial) {
+            funcionarioModel
+              .cadastrarPorFilial(nome, cpf, cargo, email, senha, telefone, funcionarioAutenticado.fk_empresa, filial)
+              .then(function (resultado) {
+                // retorna a resposta com status 200 (sucesso) em json contendo o id do novo usuário cadastrado:
+                res.status(200).json({
+                  id: resultado.insertId,
+                });
+              })
+              // em caso de erro no servidor:
+              .catch(function (erro) {
+                console.log("Erro no servidor:", erro);
+                // retorna o erro com o status 500 (erro de servidor):
+                res.status(500).json({ erro: erro.sqlMessage });
               });
-            })
-            // em caso de erro no servidor:
-            .catch(function (erro) {
-              console.log("Erro no servidor:", erro);
-              // retorna o erro com o status 500 (erro de servidor):
-              res.status(500).json({ erro: erro.sqlMessage });
-            });
+          } else {
+            funcionarioModel
+              .cadastrar(nome, cpf, cargo, email, senha, telefone, funcionarioAutenticado.fk_empresa)
+              .then(function (resultado) {
+                // retorna a resposta com status 200 (sucesso) em json contendo o id do novo usuário cadastrado:
+                res.status(200).json({
+                  id: resultado.insertId,
+                });
+              })
+              // em caso de erro no servidor:
+              .catch(function (erro) {
+                console.log("Erro no servidor:", erro);
+                // retorna o erro com o status 500 (erro de servidor):
+                res.status(500).json({ erro: erro.sqlMessage });
+              });
+          }
         } else {
           res.status(401).json({ erro: "Login inválido" }); // retorna a resposta com status 401 (não autorizado) para o cliente da requisição
         }

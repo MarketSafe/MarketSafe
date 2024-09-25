@@ -19,7 +19,8 @@ const HOST_APP = process.env.APP_HOST;
 
 //   importação das rotas:
 const funcionarioRouter = require("./src/routers/funcionarioRouter.js");
-const maquinaRouter = require("./src/routers/maquinaRouter.js");
+const filialRouter = require("./src/routers/filialRouter.js");
+const totemRouter = require("./src/routers/totemRouter.js");
 
 // declaração da variável de aplicação:
 const app = express();
@@ -30,7 +31,8 @@ app.use(express.json());
 
 //   definição da configuração de rotas:
 app.use("/funcionario", funcionarioRouter);
-app.use("/maquina", maquinaRouter);
+app.use("/filial", filialRouter);
+app.use("/totem", totemRouter);
 
 //   configuração de arquivos estáticos (*.html, *.css, *.js):
 app.use(express.static(path.join(__dirname, "public")));
