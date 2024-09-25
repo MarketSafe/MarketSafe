@@ -171,7 +171,13 @@ body{
     flex-direction: column;
 }
 
-.imagem_mapa img{
+.imagem_mapa{
+    width: 100%;
+    margin-left: 12.3%;
+}
+
+.imagem_mapa #map{
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -192,5 +198,5 @@ body{
     background-color: #FFB418;
     font-weight:bold;
     font-family: 'ADLaM Display';
-    margin-top: 10%;
+    margin-top: 27.3%;
 }
