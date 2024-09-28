@@ -686,8 +686,6 @@ h1 {
 }
 
 .login-container {
-    position: absolute;
-    width: 50%;
     left: 0;
     z-index: 2;
 }
