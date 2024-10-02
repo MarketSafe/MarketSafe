@@ -43,9 +43,9 @@ while (True):
     writer.writeheader()
     writer.writerows(dados)
   
-  # s3 = boto3.client(service_name = "s3", region_name = "us-east-1", aws_access_key_id = accessKeyId, aws_secret_access_key = secretAccessKey, aws_session_token = sessionToken)
+  s3 = boto3.client(service_name = "s3", region_name = "us-east-1", aws_access_key_id = accessKeyId, aws_secret_access_key = secretAccessKey, aws_session_token = sessionToken)
   
-  # s3.upload_file("registro.csv", "s3-raw-mkts", csvName)
+  s3.upload_file("registro.csv", "s3-raw-mkts", csvName)
   
   if (prints == "s"): print("\"" + csvName + "\" enviado !")
   
