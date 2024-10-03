@@ -1203,27 +1203,41 @@ hr{
     height: 60%;
 }
 
+#func{
+    width: 25%;
+}
+
+#filial{
+    width: 50%;
+}
+
+#totem{
+    width: 25%;
+}
+
 .cadastro_gerente .form_func{
     background-image: linear-gradient(#FF3131, #FF3131, #FF914D);
-
     height: 100%;
-    width: 25%;
+    width: 100%;
     text-align: center;
     border-radius: 10px 0px 0px 10px;
+}
+
+.textoTotem{
+    z-index: 1;
 }
 
 .cadastro_gerente .form_filial{
     background-color: #FCFCFC;
     height: 100%;
-    width: 50%;
+    width: 100%;
     text-align: center;
-    z-index: 10;
 }
 
 .cadastro_gerente .form_totem{
     background-image: linear-gradient(#FFB418, #FFB418, #FFDB91);
     height: 100%;
-    width: 25%;
+    width: 100%;
     text-align: center;
     border-radius: 0px 10px 10px 0px;
 }
@@ -1242,9 +1256,12 @@ hr{
     animation: slide-left 1s;
 }
 
+.repete{
+    animation: slide-left 1s;
+}
+
 .form_totem .box_superior{
     animation: slide-right 1s;
-    z-index: 1E;
 }
 
 .cadastro_gerente .box_inferior{
@@ -1261,6 +1278,7 @@ hr{
     font-weight: 500;
     font-style: normal;
     padding-top: 8%;
+    
 }
 
 .cadastro_gerente .ggbox_inferior {
@@ -1273,6 +1291,13 @@ hr{
     width: 40%;
     height: 15%;
     margin-top: 5%;
+    border-radius: 10px;
+    padding-left: 2%;
+}
+
+#filialInputs{
+    height: 100%;
+    width: 100%;
 }
 
 .cadastro_gerente .ggbox_inferior button{
@@ -1287,16 +1312,26 @@ hr{
     font-style: normal;
     font-size: 25px;
 }
+
+.expande {
+    animation: expande 1s both;
+}
+
+.diminui {
+    animation: diminui 1s both;
+}
   
   @keyframes slide-left {
     from {
       margin-left: 100%;
       width: 300%; 
+      color: #00000000;
     }
   
     to {
       margin-left: 0%;
       width: 100%;
+      color: #000000;
     }
   }
 
@@ -1304,10 +1339,32 @@ hr{
     from {
       margin-left: -600px;
       width: 300%; 
+      color: #00000000;
     }
   
     to {
       margin-left: 0%;
       width: 100%;
+      color: #000000;
+    }
+  }
+
+  @keyframes expande {
+    from {
+      width: 25%; 
+    }
+  
+    to {
+      width: 50%;
+    }
+  }
+
+  @keyframes diminui {
+    from {
+      width: 50%; 
+    }
+  
+    to {
+      width: 25%;
     }
   }
