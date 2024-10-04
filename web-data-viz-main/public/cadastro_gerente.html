@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="cadastro_gerente">
+        <div class="form_gerente">
+
+            <div id="func">
+                <div class="form_func">
+                    <div class="box_superior">
+                        Realizar<br> Cadastro de<br> Funcionário
+                    </div>
+                    <div class="box_inferior">
+                        <img src="./css/imgFunc.png" alt="" width="55%" height="80%" onclick="trocar(0)" id="imgFunc">
+                    </div>
+                </div>
+            </div>
+
+            <div id="filial">
+                <div class="form_filial">
+                    <div class="ggbox_superior" id="txt_filial">
+                        Realizar Cadastro <br>de Filial
+                    </div>
+                    <div class="ggbox_inferior">
+                        <div id="filialInputs">
+                            <input type="text" placeholder="CEP"> <input type="text" placeholder="Bairro"> <br> 
+                            <input type="text" placeholder="Rua"> <input type="text" placeholder="Numero"> <br> 
+                            <input type="text" placeholder="complemento"> <input type="text" placeholder="Confirmar"> <br>
+                            <button>Cadastrar</button>
+                        </div>
+                        <img src="./css/imgFilial.png" alt="" width="60%" height="50%" onclick="trocar(1)" id="imgFilial">
+                    </div>
+                </div>
+            </div>
+
+            <div id="totem">
+                <div class="form_totem">
+                    <div class="box_superior">
+                        <div class="textoTotem">
+                            Realizar<br> Cadastro de<br> Totem
+                        </div>
+                    </div>
+                    <div class="box_inferior">
+                        <img src="./css/imgTotem.png" alt="" width="55%" height="80%" onclick="trocar(2)" id="imgTotem">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+    var posicao = 1;
+    const expFu = func.classList;
+    const expFi = filial.classList;
+    const expTo = totem.classList;
+        
+    imgFilial.style.display = 'none'
+
+    function trocar(param){
+        if (param == 0){
+        txt_filial.style.height = '40%'
+
+        // const list = totem.classList;
+        // list.add("repete");
+        
+        // setTimeout(() => {
+        //     list.remove("repete");
+        // }, 1500);
+
+        expFu.remove("diminui")
+        expFu.add("expande")
+
+        imgFunc.style.display = 'none'
+
+        if (posicao == 1){
+            filialInputs.style.display = 'none'
+            expFi.remove("expande")
+            expFi.add("diminui")
+
+            imgFilial.style.display = 'Flex'
+            imgFilial.style.marginLeft = '20%'
+            imgFilial.style.marginTop = '28%'
+
+        } else if (posicao == 2){
+            expTo.remove("expande")
+            expTo.add("diminui")
+            imgTotem.style.display = 'Flex'
+            imgTotem.style.marginLeft = '20%'
+
+        }
+
+        posicao = 0;
+
+        } else if (param == 1){
+        txt_filial.style.height = '30%'
+
+        // const list = totem.classList;
+        // list.add("repete");
+
+        // setTimeout(() => {
+        //     list.remove("repete");
+        // }, 1500);
+
+        expFi.remove("diminui")
+        expFi.add("expande")
+
+        imgFilial.style.display = 'none'
+
+        if (posicao == 0){
+            filialInputs.style.display = 'none'
+            expFu.remove("expande")
+            expFu.add("diminui")
+            imgFunc.style.display = 'Flex'
+            imgFunc.style.marginLeft = '20%'
+
+        } else if (posicao == 2){
+            expTo.remove("expande")
+            expTo.add("diminui")
+            imgTotem.style.display = 'Flex'
+            imgTotem.style.marginLeft = '20%'
+        }
+
+        posicao = 1;
+
+        }
+
+        else if (param == 2){
+        txt_filial.style.height = '40%'
+
+        // const list = totem.classList;
+        // list.add("repete");
+
+        // setTimeout(() => {
+        //     list.remove("repete");
+        // }, 1500);
+
+        expTo.remove("diminui")
+        expTo.add("expande")
+
+        imgTotem.style.display = 'none'
+
+        if (posicao == 0){
+            expFu.remove("expande")
+            expFu.add("diminui")
+            imgFunc.style.display = 'Flex'
+            imgFunc.style.marginLeft = '20%'
+
+        } else if (posicao == 1){
+            filialInputs.style.display = 'none'
+            expFi.remove("expande")
+            expFi.add("diminui")
+            imgFilial.style.display = 'Flex'
+            imgFilial.style.marginLeft = '20%'
+            imgFilial.style.marginTop = '28%'
+        }
+
+        posicao = 2;
+
+        }
+    }
+</script>
