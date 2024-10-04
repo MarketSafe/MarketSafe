@@ -98,16 +98,16 @@ const cpfInput = document.querySelector('#cpf-input')
 
     function success(pos){
     
-        const lat = pos.coords.latitude;
-        const lng = pos.coords.longitude;
-        const accuracy = pos.coords.accuracy;
+        //const lat = pos.coords.latitude;
+        //const lng = pos.coords.longitude;
+        //const accuracy = pos.coords.accuracy;
 
         // Adiciona o marcador do usuário e um círculo ao redor
-        let marker = L.marker([lat, lng]).addTo(map);
-        let circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
+        //let marker = L.marker([lat, lng]).addTo(map);
+        //let circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
 
         // Ajusta o zoom para englobar a localização do usuário
-        map.fitBounds(circle.getBounds());
+        //map.fitBounds(circle.getBounds());
     }  
 
     function error(err){
@@ -117,5 +117,60 @@ const cpfInput = document.querySelector('#cpf-input')
             alert("Não pode ser pega a localização atual");
         }
     }
+
+    //Aqui a gente cria um Vetor para armazenar todos os caminhos do icones que estamos usando
+var IconeAleatorio = ['./css/local_verde.png',
+                      './css/local_vermelho.png',
+                      './css/local_laranja.png',
+                      './css/local_amarelo.png'];
+
+// Ai depois tem que usar uma função pra retornar um dos valores presentes no vetor das imagens
+function PegandoUmaImagemAi(){
+    var ImagemAleatoria = Math.floor(Math.random() * IconeAleatorio.length); /*O Math.floor arredonda o numero aleatório multiplicado
+     pelo tamanho do Vetor, para um numero inteiro*/
+    return IconeAleatorio[ImagemAleatoria]; //E depois ele vê para qual imagem o numero retonado se refere dentro do Vetor
+}
+
+
+//Definindo a Cor dos Icones nos mapas
+// Definindo a classe de ícones
+var greenIcon = new L.Icon({
+    iconUrl: PegandoUmaImagemAi(), // Ai ao invés de colocar o caminho normal, a gente coloca a Função em si 
+    iconSize: [55, 77], // Tamanho do ícone
+    iconAnchor: [22, 50], // Ponto de ancoragem
+    popupAnchor: [6, -30] // Ponto do popup relativo ao ícone
+});
+
+var redIcon = new L.Icon({
+    iconUrl: PegandoUmaImagemAi(),
+    iconSize: [55, 77],
+    iconAnchor: [22, 50],
+    popupAnchor: [6, -30]
+});
+
+var orangeIcon = new L.Icon({
+    iconUrl: PegandoUmaImagemAi(),
+    iconSize: [55, 77],
+    iconAnchor: [22, 50],
+    popupAnchor: [6, -30]
+});
+
+var yellowIcon = new L.Icon({
+    iconUrl: PegandoUmaImagemAi(),
+    iconSize: [55, 77],
+    iconAnchor: [22, 50],
+    popupAnchor: [6, -30]
+});
+
+    // Adiciona uma coordenada pré-definida (Edifício Digital Building)
+    const predefinedLat = -23.5590;
+    const predefinedLng = -46.6621;
+
+    // Coloca o marcador do Edifício Digital Building
+    let predefinedMarker = 
+    L.marker([predefinedLat, predefinedLng], {icon: redIcon}).addTo(map);
+    predefinedMarker.bindPopup("Edifício Digital Building");/*.openPopup(); Esse openPopup() serve 
+    apenas pro PopUp já aparecer exibindo ao carregarmos a pg*/
+
 
 </script>
