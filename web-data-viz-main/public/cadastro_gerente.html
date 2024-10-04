@@ -16,7 +16,7 @@
                         Realizar<br> Cadastro de<br> Funcionário
                     </div>
                     <div class="box_inferior">
-                        <img src="./css/imgFunc.png" alt="" width="55%" height="80%" onclick="trocar(0)" id="imgFunc">
+                        <img src="./css/imgFunc2.png" alt="" width="55%" height="75%" onclick="trocar(0)" id="imgFunc" class="imgExp">
                     </div>
                 </div>
             </div>
@@ -33,20 +33,26 @@
                             <input type="text" placeholder="complemento"> <input type="text" placeholder="Confirmar"> <br>
                             <button>Cadastrar</button>
                         </div>
-                        <img src="./css/imgFilial.png" alt="" width="60%" height="50%" onclick="trocar(1)" id="imgFilial">
+                        <img src="./css/imgFilial2.png" alt="" width="60%" height="50%" onclick="trocar(1)" id="imgFilial" class="imgExp">
                     </div>
                 </div>
             </div>
 
             <div id="totem">
                 <div class="form_totem">
-                    <div class="box_superior">
-                        <div class="textoTotem">
-                            Realizar<br> Cadastro de<br> Totem
+                    <div class="Tbox_superior" id="Tbox">
+                        <div class="textoTotem" id="txt_totem">
+                            Realizar Cadastro de<br> Totem
                         </div>
                     </div>
-                    <div class="box_inferior">
-                        <img src="./css/imgTotem.png" alt="" width="55%" height="80%" onclick="trocar(2)" id="imgTotem">
+                    <div class="box_inferior" id="TboxI">
+                        <div id="totemInputs">
+                            <input type="text" placeholder="CEP"> <input type="text" placeholder="Bairro"> <br> 
+                            <input type="text" placeholder="Rua"> <input type="text" placeholder="Numero"> <br> 
+                            <input type="text" placeholder="complemento"> <input type="text" placeholder="Confirmar"> <br>
+                            <button>Cadastrar</button>
+                        </div>
+                        <img src="./css/imgTotem2.png" alt="" width="55%" height="80%" onclick="trocar(2)" id="imgTotem" class="imgExp">
                     </div>
                 </div>
             </div>
@@ -64,17 +70,16 @@
     const expTo = totem.classList;
         
     imgFilial.style.display = 'none'
+    totemInputs.style.display = 'none'
 
     function trocar(param){
         if (param == 0){
+        totemInputs.style.display = 'none'
         txt_filial.style.height = '40%'
+        txt_totem.style.height = '100%'
 
-        // const list = totem.classList;
-        // list.add("repete");
-        
-        // setTimeout(() => {
-        //     list.remove("repete");
-        // }, 1500);
+        TboxI.style.height = '50%'
+        Tbox.style.height = '50%'
 
         expFu.remove("diminui")
         expFu.add("expande")
@@ -87,8 +92,8 @@
             expFi.add("diminui")
 
             imgFilial.style.display = 'Flex'
-            imgFilial.style.marginLeft = '20%'
-            imgFilial.style.marginTop = '28%'
+            imgFilial.style.marginLeft = '25%'
+            imgFilial.style.marginTop = '31%'
 
         } else if (posicao == 2){
             expTo.remove("expande")
@@ -101,22 +106,33 @@
         posicao = 0;
 
         } else if (param == 1){
+        totemInputs.style.display = 'none'
         txt_filial.style.height = '30%'
+        txt_totem.style.height = '100%'
 
+        TboxI.style.height = '50%'
+        Tbox.style.height = '50%'
+
+        txt_totem.style.fontSize= '28px'
+         txt_totem.style.paddingTop = '15%'
+
+         txt_filial.style.fontSize= '40px'
+         txt_filial.style.paddingTop = '8%'
+        
         // const list = totem.classList;
         // list.add("repete");
-
+        
         // setTimeout(() => {
-        //     list.remove("repete");
-        // }, 1500);
-
-        expFi.remove("diminui")
-        expFi.add("expande")
-
-        imgFilial.style.display = 'none'
+            //     list.remove("repete");
+            // }, 1500);
+            
+            expFi.remove("diminui")
+            expFi.add("expande")
+            
+            imgFilial.style.display = 'none'
+            filialInputs.style.display = 'block'
 
         if (posicao == 0){
-            filialInputs.style.display = 'none'
             expFu.remove("expande")
             expFu.add("diminui")
             imgFunc.style.display = 'Flex'
@@ -135,34 +151,40 @@
 
         else if (param == 2){
         txt_filial.style.height = '40%'
+        Tbox.style.height = '30%'
+        Tbox.style.paddingTop = '0%'
 
-        // const list = totem.classList;
-        // list.add("repete");
+         txt_totem.style.fontSize= '40px'
+         txt_totem.style.paddingTop = '8%'
 
-        // setTimeout(() => {
-        //     list.remove("repete");
-        // }, 1500);
+         txt_filial.style.fontSize= '28px'
+         txt_filial.style.paddingTop = '15%'
+        
 
         expTo.remove("diminui")
         expTo.add("expande")
 
         imgTotem.style.display = 'none'
-
+        totemInputs.style.display = 'block'
+        
+        
         if (posicao == 0){
             expFu.remove("expande")
             expFu.add("diminui")
             imgFunc.style.display = 'Flex'
             imgFunc.style.marginLeft = '20%'
-
+            
         } else if (posicao == 1){
             filialInputs.style.display = 'none'
             expFi.remove("expande")
             expFi.add("diminui")
             imgFilial.style.display = 'Flex'
-            imgFilial.style.marginLeft = '20%'
-            imgFilial.style.marginTop = '28%'
+            imgFilial.style.marginLeft = '25%'
+            imgFilial.style.marginTop = '31%'
         }
 
+        TboxI.style.height = '70%'
+        totemInputs.style.height = '100%'
         posicao = 2;
 
         }

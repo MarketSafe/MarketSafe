@@ -1185,7 +1185,7 @@ hr{
 /* CSS tela cadastro para o Gerente */
 
 .cadastro_gerente{
-    background-image: url(fundo.png);
+    background-image: url(fundo2.png);
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
@@ -1201,6 +1201,8 @@ hr{
     flex-direction: row;
     width: 60%;
     height: 60%;
+    /* border: #292A32 solid 3px;
+    border-radius: 10px; */
 }
 
 #func{
@@ -1216,7 +1218,7 @@ hr{
 }
 
 .cadastro_gerente .form_func{
-    background-image: linear-gradient(#FF3131, #FF3131, #FF914D);
+    background-image: linear-gradient(#FF3131, #FF3131, #FF3131, #FF914D);
     height: 100%;
     width: 100%;
     text-align: center;
@@ -1225,9 +1227,19 @@ hr{
 
 .textoTotem{
     z-index: 1;
+    height: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.imgExp:hover{
+    scale: 1.1;
+    box-shadow: 16px 16px var(--shadow);
+    transition: all 0.2s;
 }
 
 .cadastro_gerente .form_filial{
+    /* background-image: linear-gradient(#D9D9D9, #D9D9D9, #FCFCFC,  #FCFCFC); */
     background-color: #FCFCFC;
     height: 100%;
     width: 100%;
@@ -1235,7 +1247,7 @@ hr{
 }
 
 .cadastro_gerente .form_totem{
-    background-image: linear-gradient(#FFB418, #FFB418, #FFDB91);
+    background-image: linear-gradient(#FFB418, #FFB418, #FFB418,  #FFDB91);
     height: 100%;
     width: 100%;
     text-align: center;
@@ -1252,7 +1264,21 @@ hr{
     padding-top: 15%;
 }
 
+.cadastro_gerente .Tbox_superior{
+    font-size: 28px;
+    height: 50%;
+
+    font-family: "Hammersmith One", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    padding-top: 15%;
+}
+
 .form_func .box_superior{
+    animation: slide-left 1s;
+}
+
+.form_func .Tbox_superior{
     animation: slide-left 1s;
 }
 
@@ -1263,6 +1289,12 @@ hr{
 .form_totem .box_superior{
     animation: slide-right 1s;
 }
+
+.form_totem .Tbox_superior{
+    animation: slide-right 1s;
+}
+
+
 
 .cadastro_gerente .box_inferior{
     padding-top: 10%;
@@ -1278,6 +1310,8 @@ hr{
     font-weight: 500;
     font-style: normal;
     padding-top: 8%;
+    padding-left: 2%;
+    padding-right: 2%;
     
 }
 
@@ -1285,14 +1319,30 @@ hr{
     height: 70%;
 }
 
-.cadastro_gerente .ggbox_inferior input{
-    background-color: #D9D9D9;
+.cadastro_gerente input{
+    background-color: #b9b9b9;
     border-style: none;
     width: 40%;
     height: 15%;
     margin-top: 5%;
     border-radius: 10px;
     padding-left: 2%;
+    color: #FFF;
+}
+
+.cadastro_gerente input::placeholder{
+    color: #262626;
+}
+
+#totemInputs input{
+    background-color: #ffffff;
+    border-style: none;
+    width: 40%;
+    height: 15%;
+    margin-top: 5%;
+    border-radius: 10px;
+    padding-left: 2%;
+    color: #FFF;
 }
 
 #filialInputs{
@@ -1300,17 +1350,24 @@ hr{
     width: 100%;
 }
 
-.cadastro_gerente .ggbox_inferior button{
-    background-color: #D9D9D9;
+#totemInputs{
+    height: 100%;
+    width: 100%;
+}
+
+.cadastro_gerente button{
+    background-color: #393b46;
     border-style: none;
     width: 40%;
     height: 15%;
     margin-top: 5%;
+    color: #FFF;
  
     font-family: "Hammersmith One", sans-serif;
     font-weight: 500;
     font-style: normal;
     font-size: 25px;
+    border-radius: 10px;
 }
 
 .expande {
