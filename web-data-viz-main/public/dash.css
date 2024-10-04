@@ -115,3 +115,47 @@ body {
     margin-left: 0.3rem;
 }
     
+.dashes {
+    background-color: #3c3c47;
+    border-radius: 0.5rem;
+    width: 1150px;
+    gap: 20px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.container-dashes {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashes-baixo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.grafico1 {
+    display: flex;
+    flex-direction: column;
+    background-color: #292A32;
+    height: 350px;
+    width: 500px;
+    border-radius: 0.5rem;
+    align-items: center;
+    padding: 30px;
+    justify-content: center;
+}
+
+.grafico2 {
+    display: flex;
+    flex-direction: column;
+    background-color: #292A32;
+    height: 350px;
+    width: 500px;
+    border-radius: 0.5rem;
+    align-items: center;
+    padding: 30px;
+    justify-content: center;
+}
