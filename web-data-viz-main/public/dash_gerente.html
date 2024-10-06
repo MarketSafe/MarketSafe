@@ -7,6 +7,8 @@
     <title>MarketSafe | Dashboard</title>
     <link rel="stylesheet" href="dash.css">
     <link rel="icon" href="css/icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 
 <body>
@@ -81,6 +83,29 @@
                 <button class="botao-comparar">COMPARAR</button>
             </div>
         </div>
+
+        <div class="dashes">
+            <div class="container-dashes">
+                <div class="gauge">
+                <!-- ESSA É A DIV DE GAUGE E DE QTD DE TOTENS (o nome da classe é tbd :P)  -->
+                     <!-- TODO: MEXER NELA EM OUTRO MOMENTO -->
+                </div>
+                <div class="dashes-baixo">
+                    <div class="grafico1">
+                        <span>Quantidade de sobrecargas por Filial</span>
+                        <canvas id="grafico2" style="height: 100px;">
+
+                        </canvas>
+                    </div>
+                    <div class="grafico2">
+                        <span>Distribuição de consumo entre Filiais</span>
+                        <canvas id="grafico1" style="height: 200px;">
+
+                        </canvas>
+                    </div>
+                </div>    
+            </div>    
+        </div>
     </div>
 
 </body>
@@ -104,4 +129,103 @@ trocaConteudo2.addEventListener('click', function () {
       conteudo2.style.display = 'none'; 
   
 });
+
+const data = {
+  labels: [
+    'Filial 1',
+    'Filial 2',
+    'Filial 3',
+    'Filial 4'
+  ],
+  datasets: [{
+    data: [40, 10, 20, 30],
+    backgroundColor: [
+      '#FFB418',
+      '#FFFFFF',
+      '#FF914D',
+      '#FF3131'
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'doughnut',
+  data: data,
+  options: {
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    elements: {
+        arc: {
+            borderWidth: 0
+        }
+    }
+  }
+};
+
+let doughnut = new Chart(
+    document.getElementById('grafico1'),
+    config
+);
+
+const labels = [
+    'Filial 1',
+    'Filial 2',
+    'Filial 3',
+    'Filial 4',
+];
+
+const data2 = {
+  labels: labels,
+  datasets: [{
+    axis: 'y',
+    data: [40, 19, 34, 45],
+    fill: true,
+    backgroundColor: [
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418'
+    ]
+  }]
+};
+
+const config2 = {
+  type: 'bar',
+  data: data2,
+  options: {
+    indexAxis: 'y',
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        y: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                display: false
+            }
+        },
+        x: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                color: '#505050'
+            }
+        }
+    }
+  }
+};
+
+let side_bar = new Chart(
+    document.getElementById('grafico2'),
+    config2
+)
+
 </script>

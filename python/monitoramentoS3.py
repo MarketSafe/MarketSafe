@@ -1,9 +1,58 @@
 import time
 from uuid import getnode
 import csv
-
+from atlassian import Jira
+from requests import HTTPError
 import psutil
 import boto3
+
+def abrirChamadoCpu():
+  jira = Jira(
+      url = "", 
+      username = "",
+      password = ""
+  )
+
+  try:
+      jira.issue_create(
+          fields={
+          'project': {
+              'key': 'SUP' 
+          },
+          'summary': 'Alerta de alta utilização da CPU',
+          'description': 'O dispositivo com MAC mac_address está com alto uso de CPU: cpu_porcentagem',
+          'issuetype': {
+              "name": "Task" 
+          },
+        
+          }
+      )
+  except HTTPError as e:
+      print(e.response.text)
+
+def abrirChamadoRam():
+  jira = Jira(
+      url = "", 
+      username = "",
+      password = "" 
+  )
+
+  try:
+      jira.issue_create(
+          fields={
+          'project': {
+              'key': 'SUP' 
+          },
+          'summary': 'Alerta de alta utilização da RAM',
+          'description': 'O dispositivo com MAC mac_address está com alto uso de RAM: ram_porcentagem', 
+          'issuetype': {
+              "name": "Task"
+          },
+        
+          }
+      )
+  except HTTPError as e:
+      print(e.response.text)
 
 accessKeyId = input("Insira o id da sua chave de acesso: ")
 secretAccessKey = input("Insira a sua chave de acesso secreta: ")
@@ -35,6 +84,10 @@ while (True):
     
     if (prints == "s"): print(str(i + 1) + " dado(s) lido(s)...")
     time.sleep(1)
+
+    if(cpuPorcentagem > 85): abrirChamadoCpu()
+
+    if(ramPorcentagem > 85): abrirChamadoRam()
 
   csvName = "registro." + str(contagem) + "." + hex(getnode())[2:] + ".csv"
   
