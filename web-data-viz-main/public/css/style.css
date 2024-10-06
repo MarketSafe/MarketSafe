@@ -1262,6 +1262,9 @@ hr{
     font-weight: 500;
     font-style: normal;
     padding-top: 15%;
+
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .cadastro_gerente .Tbox_superior{
@@ -1351,6 +1354,11 @@ hr{
 }
 
 #totemInputs{
+    height: 100%;
+    width: 100%;
+}
+
+#funcInputs{
     height: 100%;
     width: 100%;
 }

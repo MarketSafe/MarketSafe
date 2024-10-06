@@ -12,10 +12,17 @@
 
             <div id="func">
                 <div class="form_func">
-                    <div class="box_superior">
-                        Realizar<br> Cadastro de<br> Funcionário
+                    <div class="box_superior" id="txt_func">
+                        Realizar Cadastro de<br> Funcionário
                     </div>
-                    <div class="box_inferior">
+                    <div class="box_inferior" id="FboxI">
+                        <div id="funcInputs">
+                            <input type="text" placeholder="Nome"> <input type="text" placeholder="CPF"> <br> 
+                            <input type="text" placeholder="Cargo"> <input type="text" placeholder="Email"> <br> 
+                            <input type="text" placeholder="Senha"> <input type="text" placeholder="Telefone"> <br>
+                            <input type="text" placeholder="Filial"> <br>
+                            <button>Cadastrar</button>
+                        </div>
                         <img src="./css/imgFunc2.png" alt="" width="55%" height="75%" onclick="trocar(0)" id="imgFunc" class="imgExp">
                     </div>
                 </div>
@@ -33,7 +40,7 @@
                             <input type="text" placeholder="complemento"> <input type="text" placeholder="Confirmar"> <br>
                             <button>Cadastrar</button>
                         </div>
-                        <img src="./css/imgFilial2.png" alt="" width="60%" height="50%" onclick="trocar(1)" id="imgFilial" class="imgExp">
+                        <img src="./css/imgFilial3.png" alt="" width="65%" height="50%" onclick="trocar(1)" id="imgFilial" class="imgExp">
                     </div>
                 </div>
             </div>
@@ -47,9 +54,8 @@
                     </div>
                     <div class="box_inferior" id="TboxI">
                         <div id="totemInputs">
-                            <input type="text" placeholder="CEP"> <input type="text" placeholder="Bairro"> <br> 
-                            <input type="text" placeholder="Rua"> <input type="text" placeholder="Numero"> <br> 
-                            <input type="text" placeholder="complemento"> <input type="text" placeholder="Confirmar"> <br>
+                            <input type="text" placeholder="MacAdress"> <br> 
+                            <input type="text" placeholder="Filial"> <br> <br>
                             <button>Cadastrar</button>
                         </div>
                         <img src="./css/imgTotem2.png" alt="" width="55%" height="80%" onclick="trocar(2)" id="imgTotem" class="imgExp">
@@ -71,15 +77,30 @@
         
     imgFilial.style.display = 'none'
     totemInputs.style.display = 'none'
+    funcInputs.style.display = 'none'
 
     function trocar(param){
         if (param == 0){
+        FboxI.style.marginTop = '0%'
+
         totemInputs.style.display = 'none'
         txt_filial.style.height = '40%'
         txt_totem.style.height = '100%'
 
+        FboxI.style.paddingTop = '0%'
+
+        txt_filial.style.fontSize= '28px'
+        txt_filial.style.paddingTop = '15%'
+
+        txt_func.style.fontSize= '40px'
+
+        funcInputs.style.display = 'block'
+
         TboxI.style.height = '50%'
         Tbox.style.height = '50%'
+
+        txt_func.style.height = '30%'
+        txt_func.style.paddingTop = '8%'
 
         expFu.remove("diminui")
         expFu.add("expande")
@@ -92,7 +113,7 @@
             expFi.add("diminui")
 
             imgFilial.style.display = 'Flex'
-            imgFilial.style.marginLeft = '25%'
+            imgFilial.style.marginLeft = '20%'
             imgFilial.style.marginTop = '31%'
 
         } else if (posicao == 2){
@@ -101,23 +122,34 @@
             imgTotem.style.display = 'Flex'
             imgTotem.style.marginLeft = '20%'
 
+            txt_totem.style.fontSize= '28px'
+            txt_totem.style.paddingTop = '15%'
+
         }
 
         posicao = 0;
 
         } else if (param == 1){
+        funcInputs.style.display = 'none'
+            
         totemInputs.style.display = 'none'
         txt_filial.style.height = '30%'
         txt_totem.style.height = '100%'
+        TboxI.style.paddingTop = '12%'
 
         TboxI.style.height = '50%'
         Tbox.style.height = '50%'
 
         txt_totem.style.fontSize= '28px'
-         txt_totem.style.paddingTop = '15%'
 
-         txt_filial.style.fontSize= '40px'
-         txt_filial.style.paddingTop = '8%'
+        txt_func.style.fontSize= '28px'
+        txt_func.style.paddingTop = '15%'
+
+        txt_filial.style.fontSize= '40px'
+        txt_filial.style.paddingTop = '8%'
+
+        FboxI.style.marginTop = '50%'
+        FboxI.style.height = '48%'
         
         // const list = totem.classList;
         // list.add("repete");
@@ -150,16 +182,23 @@
         }
 
         else if (param == 2){
+        funcInputs.style.display = 'none'
+
         txt_filial.style.height = '40%'
         Tbox.style.height = '30%'
         Tbox.style.paddingTop = '0%'
 
-         txt_totem.style.fontSize= '40px'
-         txt_totem.style.paddingTop = '8%'
+        txt_totem.style.fontSize= '40px'
+        txt_totem.style.paddingTop = '8%'
+         
+        txt_func.style.fontSize= '28px'
+        txt_func.style.paddingTop = '15%'
 
-         txt_filial.style.fontSize= '28px'
-         txt_filial.style.paddingTop = '15%'
+        txt_filial.style.fontSize= '28px'
+        txt_filial.style.paddingTop = '15%'
         
+        FboxI.style.marginTop = '50%'
+        FboxI.style.height = '48%'
 
         expTo.remove("diminui")
         expTo.add("expande")
@@ -179,11 +218,12 @@
             expFi.remove("expande")
             expFi.add("diminui")
             imgFilial.style.display = 'Flex'
-            imgFilial.style.marginLeft = '25%'
+            imgFilial.style.marginLeft = '20%'
             imgFilial.style.marginTop = '31%'
         }
 
         TboxI.style.height = '70%'
+        TboxI.style.paddingTop = '2%'
         totemInputs.style.height = '100%'
         posicao = 2;
 
