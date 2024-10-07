@@ -81,11 +81,6 @@
         var emailVar = document.getElementById("email_login_input").value;
         var senhaVar = document.getElementById("senha_login_input").value;
 
-        console.log("Enviando dados para login:", {
-            emailServer: emailVar,
-            senhaServer: senhaVar
-        });
-
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
@@ -95,41 +90,38 @@
             setInterval(sumirMensagem, 5000)
         }
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
 
-        fetch("/usuarios/autenticar", {
-            method: "POST",
+        fetch("/funcionario/autenticar", {
+            method: "post",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
+                email: emailVar,
+                senha: senhaVar
             })
         }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!");
 
             if (resposta.ok) {
-                console.log(resposta);
-
                 resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.idUsuario;
-
-                    setTimeout(function () {
-                        window.location = "index.html";
-                    }, 1000);
+                    
+                    console.log(json)
+                    sessionStorage.setItem('EMAIL_USUARIO', emailVar)
+                    sessionStorage.setItem('NOME_USUARIO', json.nome)
+                    sessionStorage.setItem('ID_USUARIO', json.id)
+                    sessionStorage.setItem('SENHA_USUARIO', senhaVar)
+                    
+                    
+                    console.log(6);
+                    window.location = "cadastro_gerente.html";
+                    
 
                 });
 
             } else {
                 console.log("Houve um erro ao tentar realizar o login!");
 
-                resposta.text().then(texto => {
+                resposta.json().then(texto => {
                     console.error(texto);
                     finalizarAguardar(texto);
                 });
