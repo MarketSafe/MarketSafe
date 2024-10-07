@@ -6,53 +6,36 @@ from requests import HTTPError
 import psutil
 import boto3
 
-def abrirChamadoCpu():
+
+def abrirChamado(macAddress, cpu, ram):
+  componentes = []
+
+  if cpu != None:
+    componentes.append("CPU")
+  if ram != None:
+    componentes.append("RAM")
+
   jira = Jira(
-      url = "", 
+      url = "",
       username = "",
       password = ""
   )
 
   try:
-      jira.issue_create(
-          fields={
-          'project': {
-              'key': 'SUP' 
-          },
-          'summary': 'Alerta de alta utilização da CPU',
-          'description': 'O dispositivo com MAC mac_address está com alto uso de CPU: cpu_porcentagem',
-          'issuetype': {
-              "name": "Task" 
-          },
-        
-          }
-      )
+    jira.issue_create(
+      fields = {
+        'project': {
+          'key': 'SUP'
+        },
+        'summary': 'Alerta: Alta utilização de ' + " e ".join(componentes),
+        'description': 'O dispositivo com MAC mac_address está com alto uso de CPU: cpu_porcentagem',
+        'issuetype': {
+          "name": "Task"
+        },
+      }
+    )
   except HTTPError as e:
-      print(e.response.text)
-
-def abrirChamadoRam():
-  jira = Jira(
-      url = "", 
-      username = "",
-      password = "" 
-  )
-
-  try:
-      jira.issue_create(
-          fields={
-          'project': {
-              'key': 'SUP' 
-          },
-          'summary': 'Alerta de alta utilização da RAM',
-          'description': 'O dispositivo com MAC mac_address está com alto uso de RAM: ram_porcentagem', 
-          'issuetype': {
-              "name": "Task"
-          },
-        
-          }
-      )
-  except HTTPError as e:
-      print(e.response.text)
+    print(e.response.text)
 
 accessKeyId = input("Insira o id da sua chave de acesso: ")
 secretAccessKey = input("Insira a sua chave de acesso secreta: ")
@@ -68,6 +51,8 @@ while (True):
 
 if (prints == "s"): print("Monitoramento iniciado.")
 
+macAddress = hex(getnode())[2:]
+
 contagem = 0
 
 while (True):
@@ -77,27 +62,38 @@ while (True):
     cpuPorcentagem = psutil.cpu_percent()
     ramPorcentagem = psutil.virtual_memory().percent
     dados.append({
-      "mac_address": hex(getnode())[2:],
+      "mac_address": macAddress,
       "cpu_porcentagem": cpuPorcentagem,
       "ram_porcentagem": ramPorcentagem
     })
     
     if (prints == "s"): print(str(i + 1) + " dado(s) lido(s)...")
+
+    if (cpuPorcentagem > 85 or ramPorcentagem > 85):
+      cpu = None
+      ram = None
+      if(cpuPorcentagem > 85):
+        cpu = cpuPorcentagem
+      if(ramPorcentagem > 85):
+        ram = ramPorcentagem
+      abrirChamado(macAddress, cpu, ram)
+
     time.sleep(1)
 
-    if(cpuPorcentagem > 85): abrirChamadoCpu()
-
-    if(ramPorcentagem > 85): abrirChamadoRam()
-
   csvName = "registro." + str(contagem) + "." + hex(getnode())[2:] + ".csv"
-  
-  with open("registro0.csv", "w", newline="") as csvfile:
+
+  with open("registro.csv", "w", newline="") as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames = ["mac_address", "cpu_porcentagem", "ram_porcentagem"])
     writer.writeheader()
     writer.writerows(dados)
   
-  s3 = boto3.client(service_name = "s3", region_name = "us-east-1", aws_access_key_id = accessKeyId, aws_secret_access_key = secretAccessKey, aws_session_token = sessionToken)
-  
+  s3 = boto3.client(
+    service_name = "s3",
+    region_name = "us-east-1",
+    aws_access_key_id = accessKeyId,
+    aws_secret_access_key = secretAccessKey,
+    aws_session_token = sessionToken
+  )
   s3.upload_file("registro.csv", "s3-raw-mkts", csvName)
   
   if (prints == "s"): print("\"" + csvName + "\" enviado !")
