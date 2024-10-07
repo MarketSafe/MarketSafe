@@ -17,11 +17,11 @@
                     </div>
                     <div class="box_inferior" id="FboxI">
                         <div id="funcInputs">
-                            <input type="text" placeholder="Nome"> <input type="text" placeholder="CPF"> <br> 
-                            <input type="text" placeholder="Cargo"> <input type="text" placeholder="Email"> <br> 
-                            <input type="text" placeholder="Senha"> <input type="text" placeholder="Telefone"> <br>
-                            <input type="text" placeholder="Filial"> <br>
-                            <button>Cadastrar</button>
+                            <input type="text" placeholder="Nome" id="nome_input"> <input type="text" placeholder="CPF" id="cpf_input"> <br> 
+                            <input type="text" placeholder="Cargo" id="cargo_input"> <input type="text" placeholder="Email" id="email_input"> <br> 
+                            <input type="text" placeholder="Senha" id="senha_input"> <input type="text" placeholder="Telefone" id="telefone_input"> <br>
+                            <input type="text" placeholder="Filial" id="filial_input"> <br>
+                            <button onclick="cadastrarFunc()">Cadastrar</button>
                         </div>
                         <img src="./css/imgFunc2.png" alt="" width="55%" height="75%" onclick="trocar(0)" id="imgFunc" class="imgExp">
                     </div>
@@ -35,10 +35,10 @@
                     </div>
                     <div class="ggbox_inferior">
                         <div id="filialInputs">
-                            <input type="text" placeholder="CEP"> <input type="text" placeholder="Bairro"> <br> 
-                            <input type="text" placeholder="Rua"> <input type="text" placeholder="Numero"> <br> 
-                            <input type="text" placeholder="complemento"> <input type="text" placeholder="Confirmar"> <br>
-                            <button>Cadastrar</button>
+                            <input type="text" placeholder="CEP" id="cep_input"> <input type="text" placeholder="Bairro" id="bairro_input"> <br> 
+                            <input type="text" placeholder="Rua" id="rua_input"> <input type="text" placeholder="Numero" id="numero_input"> <br> 
+                            <input type="text" placeholder="complemento" id="complemento_input"> <input type="text" placeholder="Confirmar"> <br>
+                            <button onclick="cadastrarFilial()">Cadastrar</button>
                         </div>
                         <img src="./css/imgFilial3.png" alt="" width="65%" height="50%" onclick="trocar(1)" id="imgFilial" class="imgExp">
                     </div>
@@ -54,9 +54,9 @@
                     </div>
                     <div class="box_inferior" id="TboxI">
                         <div id="totemInputs">
-                            <input type="text" placeholder="MacAdress"> <br> 
-                            <input type="text" placeholder="Filial"> <br> <br>
-                            <button>Cadastrar</button>
+                            <input type="text" placeholder="MacAdress" id="mac_input"> <br> 
+                            <input type="text" placeholder="Filial" id="Tfilial_input"> <br> <br>
+                            <button onclick="cadastrarTotem()">Cadastrar</button>
                         </div>
                         <img src="./css/imgTotem2.png" alt="" width="55%" height="80%" onclick="trocar(2)" id="imgTotem" class="imgExp">
                     </div>
@@ -229,4 +229,130 @@
 
         }
     }
+
+
+    async function cadastrarFunc() {
+        var nomeVar = nome_input.value
+        var cpfVar = cpf_input.value
+        var cargoVar = cargo_input.value
+        var emailVar = email_input.value
+        var senhaVar = senha_input.value
+        var telefoneVar = telefone_input.value
+        var filialVar = filial_input.value
+
+    if (nomeVar === "" || cpfVar === "" || cargoVar === "" || emailVar === "" || senhaVar === "" || telefoneVar === "" || filialVar === "") {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
+        // finalizarAguardar();
+        return false;
+    }
+
+    const resposta = await fetch("/funcionario/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nome : nomeVar,
+            cpf : cpfVar,
+            cargo : cargoVar,
+            email : emailVar,
+            senha : senhaVar,
+            telefone : telefoneVar,
+            filial : filialVar,
+            emailAutenticacao : sessionStorage.getItem('EMAIL_USUARIO'),
+            senhaAutenticacao : sessionStorage.getItem('SENHA_USUARIO')
+        })
+    })
+    if (resposta.ok) {
+        
+            window.location = "cadastro_gerente.html";
+        
+    } else {
+        return resposta.json().then(err => { throw err; });
+    }
+    
+    return false; // Previne que o formulário recarregue a página
+}
+
+
+
+async function cadastrarFilial() {
+
+        var cepVar = cep_input.value
+        var bairroVar = bairro_input.value
+        var ruaVar = rua_input.value
+        var numeroVar = numero_input.value
+        var complementoVar = complemento_input.value
+
+    if (cepVar === "" || bairroVar === "" || ruaVar === "" || numeroVar === "" || complementoVar === "") {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
+        // finalizarAguardar();
+        return false;
+    }
+
+    const resposta = await fetch("/filial/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            cep : cepVar,
+            bairro : bairroVar,
+            rua : ruaVar,
+            numero : numeroVar,
+            complemento : complementoVar,
+            emailAutenticacao : sessionStorage.getItem('EMAIL_USUARIO'),
+            senhaAutenticacao : sessionStorage.getItem('SENHA_USUARIO')
+        })
+    })
+    if (resposta.ok) {
+            window.location = "cadastro_gerente.html";
+        
+    } else {
+        return resposta.json().then(err => { throw err; });
+    }
+    
+    return false; // Previne que o formulário recarregue a página
+}
+
+async function cadastrarTotem() {
+
+var macVar = mac_input.value
+var filialVar = Tfilial_input.value
+
+if (macVar === "" || filialVar === "") {
+cardErro.style.display = "block";
+mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
+// finalizarAguardar();
+return false;
+}
+
+console.log(filial_input.value)
+
+const resposta = await fetch("/totem/cadastrar", {
+method: "POST",
+headers: {
+    "Content-Type": "application/json"
+},
+body: JSON.stringify({
+    mac_address : macVar,
+    fk_filial : filialVar,
+
+    emailAutenticacao : sessionStorage.getItem('EMAIL_USUARIO'),
+    senhaAutenticacao : sessionStorage.getItem('SENHA_USUARIO')
+})
+})
+if (resposta.ok) {
+    window.location = "cadastro_gerente.html";
+
+} else {
+return resposta.json().then(err => { throw err; });
+}
+
+return false; // Previne que o formulário recarregue a página
+}
+
+
 </script>
