@@ -1,10 +1,12 @@
-import time
 from uuid import getnode
-import csv
+import json
+import psutil
+from datetime import datetime 
 from atlassian import Jira
 from requests import HTTPError
 import psutil
 import boto3
+import time 
 
 
 def abrirChamado(macAddress, cpu, ram):
@@ -42,32 +44,34 @@ secretAccessKey = input("Insira a sua chave de acesso secreta: ")
 sessionToken = input("Insira o seu token de sessão: ")
 
 prints = ""
-while (True):
+while True:
   prints = input("Deseja exibir prints da execução ? (s/n; default: n): ")
-  if (prints == ""): prints = "n"
-  if (prints in ["s", "n"]):
+  if prints == "": prints = "n"
+  if prints in ["s", "n"]:
     break
   print("Inválido, tente novamente")
 
-if (prints == "s"): print("Monitoramento iniciado.")
+if prints == "s": print("Monitoramento iniciado.")
 
 macAddress = hex(getnode())[2:]
 
 contagem = 0
 
-while (True):
+while True:
   dados = []
   
   for i in range(10):
     cpuPorcentagem = psutil.cpu_percent()
     ramPorcentagem = psutil.virtual_memory().percent
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
     dados.append({
       "mac_address": macAddress,
       "cpu_porcentagem": cpuPorcentagem,
-      "ram_porcentagem": ramPorcentagem
+      "ram_porcentagem": ramPorcentagem,
+      "data_hora": timestamp  
     })
     
-    if (prints == "s"): print(str(i + 1) + " dado(s) lido(s)...")
+    if prints == "s": print(f"{i + 1} dado(s) lido(s)...")
 
     if (cpuPorcentagem > 85 or ramPorcentagem > 85):
       cpu = None
@@ -78,14 +82,13 @@ while (True):
         ram = ramPorcentagem
       abrirChamado(macAddress, cpu, ram)
 
+
     time.sleep(1)
 
-  csvName = "registro." + str(contagem) + "." + hex(getnode())[2:] + ".csv"
+  jsonName = "registro." + str(contagem) + "." + hex(getnode())[2:] + ".json"
 
-  with open("registro.csv", "w", newline="") as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames = ["mac_address", "cpu_porcentagem", "ram_porcentagem"])
-    writer.writeheader()
-    writer.writerows(dados)
+  with open(jsonName, "w") as jsonfile:
+    json.dump(dados, jsonfile, indent=4) 
   
   s3 = boto3.client(
     service_name = "s3",
@@ -94,8 +97,9 @@ while (True):
     aws_secret_access_key = secretAccessKey,
     aws_session_token = sessionToken
   )
-  s3.upload_file("registro.csv", "s3-raw-mkts", csvName)
+  s3.upload_file("registro.json", "s3-raw-mkts", jsonName)
   
-  if (prints == "s"): print("\"" + csvName + "\" enviado !")
+  if (prints == "s"): print("\"" + jsonName + "\" enviado !")
   
   contagem += 1
+
