@@ -26,7 +26,7 @@ function autenticar(req, res) {
           // retorna a resposta com status 200 (sucesso) em json contendo os dados do usuário autenticado:
           res.status(200).json({
             id: funcionario.id,
-            nome: funcionario.nome,
+            nome: funcionario.nome
           });
         } else {
           res.status(401).json({ erro: "Login inválido" }); // retorna a resposta com status 401 (não autorizado) para o cliente da requisição
