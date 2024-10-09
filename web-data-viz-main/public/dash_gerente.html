@@ -9,6 +9,8 @@
     <link rel="icon" href="css/icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 
 <body>
@@ -91,15 +93,15 @@
                      <!-- TODO: MEXER NELA EM OUTRO MOMENTO -->
                 </div>
                 <div class="dashes-baixo">
-                    <div class="grafico1">
+                    <div class="grafico2">
                         <span>Quantidade de sobrecargas por Filial</span>
                         <canvas id="grafico2" style="height: 100px;">
 
                         </canvas>
                     </div>
-                    <div class="grafico2">
-                        <span>Distribuição de consumo entre Filiais</span>
-                        <canvas id="grafico1" style="height: 200px;">
+                    <div class="grafico1">
+                        <!-- <span>Distribuição de consumo entre Filiais</span> -->
+                        <canvas id="grafico1">
 
                         </canvas>
                     </div>
@@ -145,30 +147,74 @@ const data = {
       '#FF914D',
       '#FF3131'
     ],
-    hoverOffset: 4
+    datalabels: {
+        color: [
+            '#FFFFFF',
+            '#000000',
+            '#FFFFFF',
+            '#FFFFFF'
+        ]
+    }
+    // hoverOffset: 4
   }]
 };
+
 const config = {
   type: 'doughnut',
   data: data,
   options: {
     plugins: {
         legend: {
-            display: false
-        }
+            display: true,
+            labels: {
+                color: 'white'
+            }
+        },
+        tooltip: {
+            callbacks: {
+                label: function (tooltipItem) {
+                    var dataset = tooltipItem.dataset.data;
+                    var total = dataset.reduce((prev, curr) => prev + curr, 0);
+                    var currentValue = dataset[tooltipItem.dataIndex];
+                    var porcentagem = ((currentValue / total) * 100).toFixed(1);
+
+                    return `${data.labels[tooltipItem.dataIndex]}: ${porcentagem}%`;
+                }
+            }
+        },
+        title: {
+            display: true,
+            text: 'Distribuição de consumo entre Filiais',
+            color: 'white',
+            position: 'top'
+        },
     },
     elements: {
         arc: {
             borderWidth: 0
         }
-    }
-  }
+    },
+    // scales: {
+    //     x: {
+    //         title: {
+    //             display: true,
+    //             color: 'white',
+    //             text: 'Distribuição de consumo entre Filiais',
+    //         }
+    //     }
+    // }
+},
+  plugins: [ChartDataLabels]
 };
 
 let doughnut = new Chart(
     document.getElementById('grafico1'),
     config
 );
+
+// document.getElementById('grafico1').style.height = '100%'
+// document.getElementById('grafico1').style.width = 'auto'
+// document.getElementById('grafico1').style.boxSizing = ''
 
 const labels = [
     'Filial 1',
@@ -178,35 +224,35 @@ const labels = [
 ];
 
 const data2 = {
-  labels: labels,
-  datasets: [{
-    axis: 'y',
-    data: [40, 19, 34, 45],
-    fill: true,
-    backgroundColor: [
-      '#FFB418',
-      '#FFB418',
-      '#FFB418',
-      '#FFB418'
-    ]
-  }]
+    labels: labels,
+    datasets: [{
+        axis: 'y',
+        data: [40, 19, 34, 45],
+        fill: true,
+        backgroundColor: [
+            '#FFB418',
+            '#FFB418',
+            '#FFB418',
+            '#FFB418'
+        ]
+    }]
 };
 
 const config2 = {
-  type: 'bar',
-  data: data2,
-  options: {
-    indexAxis: 'y',
-    plugins: {
-        legend: {
-            display: false
-        }
-    },
-    scales: {
-        y: {
-            ticks: {
-                color: 'white'
-            },
+    type: 'bar',
+    data: data2,
+    options: {
+        indexAxis: 'y',
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                ticks: {
+                    color: 'white'
+                },
             grid: {
                 display: false
             }
@@ -220,7 +266,7 @@ const config2 = {
             }
         }
     }
-  }
+}
 };
 
 let side_bar = new Chart(
@@ -228,4 +274,20 @@ let side_bar = new Chart(
     config2
 )
 
+// datalabels: {
+//     anchor: 'end',
+//     align: 'end',
+//     formatter: ((value, ctx) => {
+//         console.log(ctx)
+//         const totalSum = ctx.dataset.data.reduce((accumulator, currentValue) => {
+//             return accumulator + currentValue
+//         }, 0);
+//         console.log(totalSum)
+//         const percentage = value / totalSum * 100;
+//         return `${percentage.toFixed(1)}%`;
+//     }),
+//     font: {
+//         size: 30
+//     }
+// }
 </script>
