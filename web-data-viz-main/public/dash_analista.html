@@ -7,6 +7,10 @@
     <title>MarketSafe | Dashboard</title>
     <link rel="stylesheet" href="dash.css">
     <link rel="icon" href="css/icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 
 <body>
@@ -81,6 +85,30 @@
                 <button class="botao-comparar">COMPARAR</button>
             </div>
         </div>
+
+        <div class="dashes">
+            <div class="container-dashes">
+                <div class="gauge">
+                <!-- ESSA É A DIV DE GAUGE E DE QTD DE TOTENS (o nome da classe é tbd :P)  -->
+                     <!-- TODO: MEXER NELA EM OUTRO MOMENTO -->
+                </div>
+                <div class="dashes-baixo">
+                    <div class="grafico1">
+                        <span>Quantidade de sobrecargas por dia</span>
+                        <canvas id="grafico2" style="height: 100px;">
+
+                        </canvas>
+                    </div>
+                    <div class="grafico2">
+                        <span>Gasto de CPU x Tempo</span>
+                        <canvas id="grafico1" style="height: 200px;">
+
+                        </canvas>
+                    </div>
+                </div>    
+            </div>    
+        </div>
+
     </div>
 
 </body>
@@ -104,4 +132,139 @@ trocaConteudo2.addEventListener('click', function () {
       conteudo2.style.display = 'none'; 
   
 });
+
+const data = {
+    labels: [
+    '0',
+    '5',
+    '10',
+    '15',
+    '20',
+    '25',
+    '30'
+    ],
+  datasets: [
+    {
+      label: 'T5',
+      data: [75, 69, 80, 66, 46],
+      borderColor: '#FF914D',
+      backgroundColor: '#FF914D'
+    },
+    {
+      label: 'T7',
+      data: [62, 54, 66, 53, 68],
+      borderColor: '#FF3131',
+      backgroundColor: '#FF3131'
+    }
+  ]
+};
+
+const config = {
+  type: 'line',
+  data: data,
+  options: {
+    plugins: {
+        legend: {
+            display: true,
+            color: 'white',
+            labels: {
+                color: 'white'
+            }
+        }
+    },
+    scales: {
+        y: {
+            min: 0,
+            max: 100,
+            grid: {
+                color: '#9A9A9A'
+            },
+            ticks: {
+                color: 'white',
+                callback: function(value, index, values) {
+                    return `${value}%`;
+                }
+            }
+        },
+        x: {
+            ticks: {
+                color: 'white'
+            },
+            title : {
+                display: true,
+                text: 'Dia',
+                color: 'white'
+            }
+        }
+    }
+  }
+};
+
+let doughnut = new Chart(
+    document.getElementById('grafico1'),
+    config
+);
+
+const labels = [
+    '5',
+    '10',
+    '15',
+    '20',
+    '25',
+    '30'
+];
+
+const data2 = {
+  labels: labels,
+  datasets: [{
+    axis: 'x',
+    data: [17, 7, 13, 21, 5, 5],
+    fill: true,
+    backgroundColor: [
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418'
+    ]
+  }]
+};
+
+const config2 = {
+  type: 'bar',
+  data: data2,
+  options: {
+    indexAxis: 'x',
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        y: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                color: '#505050'
+            }
+        },
+        x: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                display: false
+            }
+        }
+    }
+  }
+};
+
+let side_bar = new Chart(
+    document.getElementById('grafico2'),
+    config2
+)
+
 </script>
