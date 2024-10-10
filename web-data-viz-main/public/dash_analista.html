@@ -11,10 +11,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <!-- Isso aqui é pro gráfico de gouge -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
-
+    <div class="header">
+        <ul class="navbar">
+            <li><a href="perfilAnalista.html">Perfil</a></li>
+            <li><a>|</a></li>
+            <li class="agora"><a href="dash_analista.html">Dashboard</a></li>
+            <li><a>|</a></li>
+            <li><a href="">Ajuda</a></li>
+            <li><a>|</a></li>
+            <li><a href="index.html">Sair</a></li>
+        </ul>
+    </div>
     <div class="container">
         <div class="menu">
             <div class="perfil">
@@ -88,9 +100,25 @@
 
         <div class="dashes">
             <div class="container-dashes">
+                <div class="primeira_linha_graficos">
                 <div class="gauge">
+                    <!-- npm install chartjs-chart-gauge | Talvez seja necessario usar esse comando no terminal -->  
                 <!-- ESSA É A DIV DE GAUGE E DE QTD DE TOTENS (o nome da classe é tbd :P)  -->
                      <!-- TODO: MEXER NELA EM OUTRO MOMENTO -->
+                        <div class="chartBox">
+                          <canvas id="myChart"></canvas>
+                        </div>
+                </div>
+                <div class="totens">
+                    <h3>Quantidade de Totens</h1>
+                    <div class="totens-quantidade">
+                        10
+                    </div>
+                    <h4>Nº de Totens com Problema</h4>
+                    <div class="totens-problema">
+                        3
+                    </div>
+                </div>
                 </div>
                 <div class="dashes-baixo">
                     <div class="grafico1">
@@ -110,6 +138,7 @@
         </div>
 
     </div>
+
 
 </body>
 
@@ -267,4 +296,179 @@ let side_bar = new Chart(
     config2
 )
 
-</script>
+    // GAUGE PRR
+
+    const dataGauge = {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+      datasets: [{
+        label: 'Weekly Sales',
+        data: [10, 12, 6, 9, 10, 5],
+        backgroundColor: [
+          'rgba(0, 255, 0, 0.2)',    
+          'rgba(173, 255, 47, 0.2)', 
+          'rgba(255, 255, 0, 0.2)',  
+          'rgba(255, 165, 0, 0.2)',  
+          'rgba(255, 69, 0, 0.2)',   
+          'rgba(255, 0, 0, 0.2)'    
+        ],
+        borderColor: [
+          'rgba(0, 255, 0, 1)',      
+          'rgba(173, 255, 47, 1)',   
+          'rgba(255, 255, 0, 1)',    
+          'rgba(255, 165, 0, 1)',    
+          'rgba(255, 0, 0, 1)',     
+          'rgba(139, 0, 0, 1)'      
+        ],
+              }]
+    };
+
+
+    const gaugeNeedle = {
+        id: 'gaugeNeedle',
+        afterDatasetsDraw(chart, args, plugins){
+            const {ctx, data} = chart;
+
+            ctx.save();
+            const xCenter = chart.getDatasetMeta(0).data[0].x;
+            const yCenter = chart.getDatasetMeta(0).data[0].y; 
+
+            const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius;
+            const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius;
+        
+            const widthSlice = (outerRadius - innerRadius) / 2;
+            const radius = 14;
+            const angle = Math.PI / 180;
+
+            ctx.beginPath();
+
+            const needleValue = chart.config.options.needleValue;
+
+            const dataTotal = data.datasets[0].data.reduce((a, b) => 
+            a + b, 0);
+
+            console.log((chart.getDatasetMeta(0).data[0].circumference / Math.PI) / data.datasets[0].data[0] * needleValue )
+            
+            const circumference = ((chart.getDatasetMeta(0).data[0].
+            circumference / Math.PI) / data.datasets[0].data[0]) * needleValue;
+
+
+            ctx.translate(xCenter, yCenter);
+            ctx.rotate(Math.PI * (circumference + 1.5) )
+
+            ctx.strokeStyle = "black";
+            ctx.fillStyle = "grey";
+            ctx.lineWidth = 0.5;
+            ctx.moveTo( 0 - 12, 0);
+            ctx.lineTo( 0, 0 - innerRadius - widthSlice);
+            ctx.lineTo( 0 + 12, 0);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.fill();
+
+
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, angle * 360, false);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    // gaugeFlowMeter
+     const gaugeFlowMeter = {
+        id: 'gaugeFlowMeter',
+        afterDatasetsDraw(chart, args, plugins){
+            const {ctx, data} = chart;
+
+            ctx.save();
+            const needleValue = chart.config.options.needleValue;
+            const xCenter = chart.getDatasetMeta(0).data[0].x;
+            const yCenter = chart.getDatasetMeta(0).data[0].y; 
+
+    
+            const circumference = ((chart.getDatasetMeta(0).data[0].
+            circumference / Math.PI) / data.datasets[0].data[0]) * needleValue;
+
+            const percentegeValue = (circumference * 100).toFixed(1);
+
+            // FlowMeter
+            ctx.font = 'bold 20px sans-serif';
+            ctx.fillStyle = 'grey';
+            ctx.textAling = 'center'
+            ctx.fillText(`${percentegeValue}%`, xCenter -20, yCenter + 34)
+
+
+
+
+        }
+     }
+
+     const gaugeLabels = {
+        id: 'gaugeLabels',
+        afterDatasetsDraw(chart, args, plugins){
+            const {ctx, chartArea: {left, right}} = chart;
+            const xCenter = chart.getDatasetMeta(0).data[0].x;
+            const yCenter = chart.getDatasetMeta(0).data[0].y;
+
+            const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius;
+            const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius;
+            const widthSlice = (outerRadius - innerRadius) / 2;
+
+
+            ctx.translate(xCenter, yCenter);
+            ctx.font = 'bold 15px sans-serif';
+            ctx.fillStyle = 'white';
+            ctx.textAling = 'center'
+            ctx.fillText('Bom', -8 - innerRadius - widthSlice, 0 + 20);
+            ctx.fillText('Perigo', -40 + innerRadius + widthSlice, 0 + 20);
+
+            ctx.restore()
+        }
+     }
+
+    // config 
+    const configGauge = {
+      type: 'doughnut',
+      data: dataGauge,
+      options: {
+            leyout:{
+                padding:{
+                    bottom: 50
+                }
+            },
+        circumference: 180,
+        rotation: 270,
+        cutout: '70%',
+        aspectRatio: 1.3,
+        needleValue: 0,  // Não definam esse valor aqui para um numero maior que 52
+        plugins: {
+            legend:{
+                display: false
+            },        
+            tooltip: {
+                enabled: false
+            }
+        }
+
+      },
+      plugins: [gaugeNeedle, gaugeFlowMeter, gaugeLabels] 
+    };
+
+    function updateGauge(chart, maxValue) {
+     chart.options.needleValue = Math.floor(Math.random() * maxValue);
+     chart.update();
+    }
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      configGauge
+    );
+
+    setInterval(() => {
+    updateGauge(myChart, 52);
+    }, 2000);
+
+    </script>
+
+
+
