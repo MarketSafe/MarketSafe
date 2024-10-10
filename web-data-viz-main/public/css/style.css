@@ -1352,6 +1352,28 @@ hr{
     color: #000000;
 }
 
+#totemInputs select{
+    background-color: #ffffff;
+    border-style: none;
+    width: 40%;
+    height: 15%;
+    margin-top: 5%;
+    border-radius: 10px;
+    padding-left: 2%;
+    color: #000000;
+}
+
+#funcInputs select{
+    background-color: #ffffff;
+    border-style: none;
+    width: 40%;
+    height: 15%;
+    margin-top: 5%;
+    border-radius: 10px;
+    padding-left: 2%;
+    color: #000000;
+}
+
 #filialInputs{
     height: 100%;
     width: 100%;
