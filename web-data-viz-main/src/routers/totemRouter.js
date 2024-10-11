@@ -15,6 +15,7 @@ router.post("/cadastrar", function (req, res) {
   totemController.cadastrar(req, res);
 });
 
+// envia a requisição do tipo post "/listar" para a função `listar` do `totemController.js`:
 router.post("/listar", function (req, res) {
   totemController.listar(req, res);
 });

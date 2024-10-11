@@ -15,6 +15,7 @@ router.post("/cadastrar", function (req, res) {
   filialController.cadastrar(req, res);
 });
 
+// envia a requisição do tipo post "/listar" para a função `listar` do `filialController.js`:
 router.post("/listar", function (req, res) {
   filialController.listar(req, res);
 });

@@ -21,6 +21,7 @@ const HOST_APP = process.env.APP_HOST;
 const funcionarioRouter = require("./src/routers/funcionarioRouter.js");
 const filialRouter = require("./src/routers/filialRouter.js");
 const totemRouter = require("./src/routers/totemRouter.js");
+const alertaRouter = require("./src/routers/alertaRouter.js");
 
 // declaração da variável de aplicação:
 const app = express();
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use("/funcionario", funcionarioRouter);
 app.use("/filial", filialRouter);
 app.use("/totem", totemRouter);
+app.use("/alerta", alertaRouter);
 
 //   configuração de arquivos estáticos (*.html, *.css, *.js):
 app.use(express.static(path.join(__dirname, "public")));
