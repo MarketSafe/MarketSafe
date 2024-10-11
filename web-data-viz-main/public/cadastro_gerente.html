@@ -254,7 +254,7 @@
         var emailVar = email_input.value
         var senhaVar = senha_input.value
         var telefoneVar = telefone_input.value
-        var filialVar = filial_input.value
+        var filialVar = Ffilial_input.value
 
         if (nomeVar === "" || cpfVar === "" || cargoVar === "" || emailVar === "" || senhaVar === "" || telefoneVar === "" || filialVar === "") {
             cardErro.style.display = "block";
@@ -345,7 +345,7 @@
             return false;
         }
 
-        console.log(filial_input.value)
+        console.log(Tfilial_input.value)
 
         const resposta = await fetch("/totem/cadastrar", {
             method: "POST",
