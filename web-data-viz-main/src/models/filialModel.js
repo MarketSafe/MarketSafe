@@ -17,7 +17,7 @@ function cadastrar(fk_empresa, fk_endereco) {
 // declaração da função `listar`:
 function listar(fk_empresa) {
   // declaração da variável de instrução sql:
-  const instrucao = `select filial.id as filialId, filial.cadastro as filialCadastro, endereco.cep as enderecoCep, endereco.bairro as enderecoBairro, endereco.rua as enderecoRua, endereco.numero as enderecoNumero, endereco.complemento as enderecoComplemento from filial join endereco on filial.fk_endereco = endereco.id where fk_empresa = '${fk_empresa}';`;
+  const instrucao = `select filial.id as filialId, filial.data_hora as filialDataHora, endereco.cep as enderecoCep, endereco.bairro as enderecoBairro, endereco.rua as enderecoRua, endereco.numero as enderecoNumero, endereco.complemento as enderecoComplemento from filial join endereco on filial.fk_endereco = endereco.id where fk_empresa = '${fk_empresa}';`;
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:

@@ -1,21 +1,43 @@
 from uuid import getnode
 import json
 import psutil
-from datetime import datetime 
+from datetime import datetime
 from atlassian import Jira
 from requests import HTTPError
 import psutil
 import boto3
-import time 
+import time
+import mysql.connector
 
+macAddress = hex(getnode())[2:]
 
-def abrirChamado(macAddress, cpu, ram):
+conn = mysql.connector.connect(
+  host = "127.0.0.1",
+  user = "aluno",
+  password = "sptech",
+  database = "market_safe"
+)
+
+mycursor = conn.cursor()
+mycursor.execute("select id from totem where mac_address = '" + macAddress + "'")
+fkTotem = mycursor.fetchone()
+
+def gerarAlerta(dataHora, cpu, ram):
+  mycursor = conn.cursor()
+  mycursor.execute("insert into alerta (data_hora, cpu_porcentagem, ram_porcentagem, fk_totem) values (\"" + str(dataHora) + "\", " + str(cpu) + ", " + str(ram) + ", " + str(fkTotem) + ")")
+  mycursor = conn.cursor()
+  conn.commit()
+  mycursor.close()
+
   componentes = []
+  componentesValores = []
 
-  if cpu != None:
+  if(cpuPorcentagem > 85):
     componentes.append("CPU")
-  if ram != None:
+    componentesValores.append("CPU: " + cpu)
+  if(ramPorcentagem > 85):
     componentes.append("RAM")
+    componentes.append("RAM: " + ram)
 
   jira = Jira(
       url = "",
@@ -26,12 +48,12 @@ def abrirChamado(macAddress, cpu, ram):
   try:
     jira.issue_create(
       fields = {
-        'project': {
-          'key': 'SUP'
+        "project": {
+          "key": "SUP"
         },
-        'summary': 'Alerta: Alta utilização de ' + " e ".join(componentes),
-        'description': 'O dispositivo com MAC mac_address está com alto uso de CPU: cpu_porcentagem',
-        'issuetype': {
+        "summary": "Alerta: Alta utilização de " + " e ".join(componentes),
+        "description": "O totem com o endereço MAC \"" + macAddress + "\" está com alto uso de " + " e ".join(componentes) + ". Valores:\n  " + "; ".join(componentesValores),
+        "issuetype": {
           "name": "Task"
         },
       }
@@ -39,67 +61,64 @@ def abrirChamado(macAddress, cpu, ram):
   except HTTPError as e:
     print(e.response.text)
 
-accessKeyId = input("Insira o id da sua chave de acesso: ")
-secretAccessKey = input("Insira a sua chave de acesso secreta: ")
-sessionToken = input("Insira o seu token de sessão: ")
 
-prints = ""
-while True:
-  prints = input("Deseja exibir prints da execução ? (s/n; default: n): ")
-  if prints == "": prints = "n"
-  if prints in ["s", "n"]:
-    break
-  print("Inválido, tente novamente")
-
-if prints == "s": print("Monitoramento iniciado.")
-
-macAddress = hex(getnode())[2:]
-
-contagem = 0
-
-while True:
-  dados = []
+if (fkTotem == None):
+  print("Máquina com endereço MAC " + macAddress + " não cadastrada.")
+else:
+  fkTotem = fkTotem[0]
   
-  for i in range(10):
-    cpuPorcentagem = psutil.cpu_percent()
-    ramPorcentagem = psutil.virtual_memory().percent
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-    dados.append({
-      "mac_address": macAddress,
-      "cpu_porcentagem": cpuPorcentagem,
-      "ram_porcentagem": ramPorcentagem,
-      "data_hora": timestamp  
-    })
-    
-    if prints == "s": print(f"{i + 1} dado(s) lido(s)...")
+  accessKeyId = input("Insira seu access_key_id: ")
+  secretAccessKey = input("Insira seu secret_access_key: ")
+  sessionToken = input("Insira seu session_token: ")
 
-    if (cpuPorcentagem > 85 or ramPorcentagem > 85):
-      cpu = None
-      ram = None
-      if(cpuPorcentagem > 85):
-        cpu = cpuPorcentagem
-      if(ramPorcentagem > 85):
-        ram = ramPorcentagem
-      abrirChamado(macAddress, cpu, ram)
+  prints = ""
+  while True:
+    prints = input("Deseja exibir prints da execução ? (s/n; default: n): ")
+    if prints == "": prints = "n"
+    if prints in ["s", "n"]:
+      break
+    print("Inválido, tente novamente")
 
+  if prints == "s": print("Monitoramento iniciado.")
 
-    time.sleep(1)
+  contagem = 0
 
-  jsonName = "registro." + str(contagem) + "." + hex(getnode())[2:] + ".json"
+  while True:
+    dados = []
 
-  with open(jsonName, "w") as jsonfile:
-    json.dump(dados, jsonfile, indent=4) 
-  
-  s3 = boto3.client(
-    service_name = "s3",
-    region_name = "us-east-1",
-    aws_access_key_id = accessKeyId,
-    aws_secret_access_key = secretAccessKey,
-    aws_session_token = sessionToken
-  )
-  s3.upload_file("registro.json", "s3-raw-mkts", jsonName)
-  
-  if (prints == "s"): print("\"" + jsonName + "\" enviado !")
-  
-  contagem += 1
+    for i in range(10):
+      cpuPorcentagem = psutil.cpu_percent()
+      ramPorcentagem = psutil.virtual_memory().percent
+      dataHora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+      dados.append({
+        "data_hora": dataHora,
+        "mac_address": macAddress,
+        "cpu_porcentagem": cpuPorcentagem,
+        "ram_porcentagem": ramPorcentagem
+      })
 
+      if prints == "s": print(dados[i])
+      if prints == "s": print(f"{i + 1} dado(s) lido(s)...")
+
+      if (cpuPorcentagem > 85 or ramPorcentagem > 85):
+        gerarAlerta(dataHora, cpuPorcentagem, ramPorcentagem)
+
+      time.sleep(1)
+
+    jsonName = "registro." + str(contagem) + "." + hex(getnode())[2:] + ".json"
+
+    with open("registro.json", "w") as jsonfile:
+      json.dump(dados, jsonfile)
+
+    s3 = boto3.client(
+      service_name = "s3",
+      region_name = "us-east-1",
+      aws_access_key_id = accessKeyId,
+      aws_secret_access_key = secretAccessKey,
+      aws_session_token = sessionToken
+    )
+    s3.upload_file("registro.json", "s3-raw-mkts", jsonName)
+
+    if (prints == "s"): print("\"" + jsonName + "\" enviado !")
+
+    contagem += 1

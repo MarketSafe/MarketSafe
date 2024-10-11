@@ -92,10 +92,10 @@ function listar(req, res) {
     // envia para a função `autenticar` do arquivo `funcionarioModel.js`:
     funcionarioModel
       .autenticar(emailAutenticacao, senhaAutenticacao)
-      .then(function (resultado) {
+      .then(function (resultadoAutenticar) {
         // caso a quantidade de registros encontrados seja igual a 1, o usuário está autenticado:
-        if (resultado.length === 1) {
-          const funcionarioAutenticado = resultado[0]; // recebe o primeiro (e único) registro do select
+        if (resultadoAutenticar.length === 1) {
+          const funcionarioAutenticado = resultadoAutenticar[0]; // recebe o primeiro (e único) registro do select
           // envia para a função `listar` do arquivo `filialModel.js`:
           filialModel
             .listar(funcionarioAutenticado.fk_empresa)

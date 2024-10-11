@@ -17,7 +17,7 @@ function cadastrar(mac_address, fk_filial) {
 // declaração da função `listar`:
 function listar(fk_filial) {
   // declaração da variável de instrução sql:
-  const instrucao = `select id, mac_address, fk_filial from totem where fk_filial = '${fk_filial}';`;
+  const instrucao = `select id, data_hora, mac_address, fk_filial from totem where fk_filial = '${fk_filial}';`;
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
