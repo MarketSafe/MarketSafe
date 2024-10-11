@@ -34,10 +34,10 @@ def gerarAlerta(dataHora, cpu, ram):
 
   if(cpuPorcentagem > 85):
     componentes.append("CPU")
-    componentesValores.append("CPU: " + cpu)
+    componentesValores.append("CPU: " + str(cpu))
   if(ramPorcentagem > 85):
     componentes.append("RAM")
-    componentes.append("RAM: " + ram)
+    componentesValores.append("RAM: " + str(ram))
 
   jira = Jira(
       url = "",
@@ -105,7 +105,7 @@ else:
 
       time.sleep(1)
 
-    jsonName = "registro." + str(contagem) + "." + hex(getnode())[2:] + ".json"
+    jsonName = "monitoramento/registro." + str(contagem) + "." + hex(getnode())[2:] + ".json"
 
     with open("registro.json", "w") as jsonfile:
       json.dump(dados, jsonfile)
@@ -117,7 +117,7 @@ else:
       aws_secret_access_key = secretAccessKey,
       aws_session_token = sessionToken
     )
-    s3.upload_file("registro.json", "s3-raw-mkts", jsonName)
+    s3.upload_file("registro.json", "s3-raw-mktsf", jsonName)
 
     if (prints == "s"): print("\"" + jsonName + "\" enviado !")
 
