@@ -15,9 +15,14 @@ router.post("/cadastrar", function (req, res) {
   totemController.cadastrar(req, res);
 });
 
-// envia a requisição do tipo post "/listar" para a função `listar` do `totemController.js`:
-router.post("/listar", function (req, res) {
-  totemController.listar(req, res);
+// envia a requisição do tipo post "/listarPorFilial" para a função `listarPorFilial` do `totemController.js`:
+router.post("/listarPorFilial", function (req, res) {
+  totemController.listarPorFilial(req, res);
+});
+
+// envia a requisição do tipo post "/listarPorEmpresa" para a função `listarPorEmpresa` do `totemController.js`:
+router.post("/listarPorEmpresa", function (req, res) {
+  totemController.listarPorEmpresa(req, res);
 });
 
 // exporta a variável de roteador do arquivo `totemRouter.js`:
