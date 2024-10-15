@@ -169,7 +169,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     height: 100%;
 }
 
@@ -181,42 +181,43 @@ body {
     align-items: center;
     padding: 30px;
     justify-content: center;
-    height: 350px;
-    width: 400px;
-}
-
-#grafico21 {
-    width: 0px;
+    width: 380px;
+    margin-top: 50px;
 }
 
 .grafico2 {
     display: flex;
     flex-direction: column;
     background-color: #292A32;
-    height: 350px;
-    width: 500px;
+    width: 380px;
     border-radius: 0.5rem;
     align-items: center;
     padding: 30px;
+    margin-top: 50px;
     justify-content: center;
 }
 
 .primeira_linha_graficos{
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+    justify-content: space-around ;
     margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    padding: 10px;
 }
 
 .totens{
-    width: 30%;
-    height: 13rem;
+    width: 33%;
+    height: 15rem;
     display: flex;
     background-color: #292A32;
     align-items: center;
     flex-direction: column;
     border-radius: 5px;
+    margin-right: 3%;
 }
 
 .totens h3{
@@ -260,33 +261,9 @@ body {
     border-color: #f76060;
 }
 
-/*Tentativa do Gauge*/
 
-
-* {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
-  .chartMenu {
-    width: 10vw;
-    height: 40px;
-    background: #1A1A1A;
-    color: rgb(179, 52, 52);
-  }
-  .chartMenu p {
-    padding: 10px;
-    font-size: 20px;
-  }
-  .chartCard {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .chartBox {
-    width: 300px;
-    padding: 20px;
-    border-radius: 5px;
+.grafico_percent{
     background-color: #292A32;
-  }
+    border-radius: 7px;
+}
+
