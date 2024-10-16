@@ -24,8 +24,6 @@ function cadastrar(req, res) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {
     res.status(400).json({ erro: "`senhaAutenticacao` undefined" });
-  } else if (cep === undefined) {
-    res.status(400).json({ erro: "`cep` undefined" });
   } else {
     // envia para a função `autenticar` do arquivo `funcionarioModel.js`:
     funcionarioModel
@@ -35,21 +33,34 @@ function cadastrar(req, res) {
         if (resultadoAutenticar.length === 1) {
           const funcionarioAutenticado = resultadoAutenticar[0]; // recebe o primeiro (e único) registro do select
 
-          // envia para a função `cadastrar` do arquivo `enderecoModel.js`:
-          enderecoModel
-            .cadastrar(cep, bairro, rua, numero, complemento)
-            .then(function (resultadoCadastrarEndereco) {
-              // declara a variável do id do endereço cadastrado:
-              const idEndereco = resultadoCadastrarEndereco.insertId;
+          // caso o cargo do funcionário seja "gerente":
+          if (funcionarioAutenticado.cargo === "gerente") {
+            // valida o cep recebido:
+            if (cep === undefined) {
+              res.status(400).json({ erro: "`cep` undefined" });
+            } else {
+              // envia para a função `cadastrar` do arquivo `enderecoModel.js`:
+              enderecoModel
+                .cadastrar(cep, bairro, rua, numero, complemento)
+                .then(function (resultadoCadastrarEndereco) {
+                  // declara a variável do id do endereço cadastrado:
+                  const idEndereco = resultadoCadastrarEndereco.insertId;
 
-              // envia para a função `cadastrar` do arquivo `filialModel.js`:
-              filialModel
-                .cadastrar(funcionarioAutenticado.fk_empresa, idEndereco)
-                .then(function (resultado) {
-                  // retorna a resposta com status 200 (sucesso) em json contendo o id da nova filial cadastrada:
-                  res.status(200).json({
-                    id: resultado.insertId,
-                  });
+                  // envia para a função `cadastrar` do arquivo `filialModel.js`:
+                  filialModel
+                    .cadastrar(funcionarioAutenticado.fk_empresa, idEndereco)
+                    .then(function (resultado) {
+                      // retorna a resposta com status 200 (sucesso) em json contendo o id da nova filial cadastrada:
+                      res.status(200).json({
+                        id: resultado.insertId,
+                      });
+                    })
+                    // em caso de erro no servidor:
+                    .catch(function (erro) {
+                      console.log("Erro no servidor:", erro);
+                      // retorna o erro com o status 500 (erro de servidor):
+                      res.status(500).json({ erro: erro.sqlMessage });
+                    });
                 })
                 // em caso de erro no servidor:
                 .catch(function (erro) {
@@ -57,13 +68,10 @@ function cadastrar(req, res) {
                   // retorna o erro com o status 500 (erro de servidor):
                   res.status(500).json({ erro: erro.sqlMessage });
                 });
-            })
-            // em caso de erro no servidor:
-            .catch(function (erro) {
-              console.log("Erro no servidor:", erro);
-              // retorna o erro com o status 500 (erro de servidor):
-              res.status(500).json({ erro: erro.sqlMessage });
-            });
+            }
+          } else {
+            res.status(403).json({ erro: "Acesso negado" }); // retorna a resposta com status 403 (Proibido) para o cliente da requisição
+          }
         } else {
           res.status(401).json({ erro: "Login inválido" }); // retorna a resposta com status 401 (não autorizado) para o cliente da requisição
         }
@@ -96,19 +104,25 @@ function listar(req, res) {
         // caso a quantidade de registros encontrados seja igual a 1, o usuário está autenticado:
         if (resultadoAutenticar.length === 1) {
           const funcionarioAutenticado = resultadoAutenticar[0]; // recebe o primeiro (e único) registro do select
-          // envia para a função `listar` do arquivo `filialModel.js`:
-          filialModel
-            .listar(funcionarioAutenticado.fk_empresa)
-            .then(function (resultado) {
-              // retorna a resposta com status 200 (sucesso) em json contendo as filiais da empresa do usuário autenticado:
-              res.status(200).json(resultado);
-            })
-            // em caso de erro no servidor:
-            .catch(function (erro) {
-              console.log("Erro no servidor:", erro);
-              // retorna o erro com o status 500 (erro de servidor):
-              res.status(500).json({ erro: erro.sqlMessage });
-            });
+
+          // caso o cargo do funcionário seja "gerente":
+          if (funcionarioAutenticado.cargo === "gerente") {
+            // envia para a função `listar` do arquivo `filialModel.js`:
+            filialModel
+              .listar(funcionarioAutenticado.fk_empresa)
+              .then(function (resultado) {
+                // retorna a resposta com status 200 (sucesso) em json contendo as filiais da empresa do usuário autenticado:
+                res.status(200).json(resultado);
+              })
+              // em caso de erro no servidor:
+              .catch(function (erro) {
+                console.log("Erro no servidor:", erro);
+                // retorna o erro com o status 500 (erro de servidor):
+                res.status(500).json({ erro: erro.sqlMessage });
+              });
+          } else {
+            res.status(403).json({ erro: "Acesso negado" }); // retorna a resposta com status 403 (Proibido) para o cliente da requisição
+          }
         } else {
           res.status(401).json({ erro: "Login inválido" }); // retorna a resposta com status 401 (não autorizado) para o cliente da requisição
         }

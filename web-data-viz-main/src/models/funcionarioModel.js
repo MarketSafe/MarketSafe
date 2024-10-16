@@ -7,7 +7,7 @@ const database = require("../database/config.js");
 // declaração da função `autenticar`:
 function autenticar(email, senha) {
   // declaração da variável de instrução sql:
-  const instrucao = `select id, data_hora, nome, cpf, cargo, email, senha, telefone, fk_empresa FROM funcionario where email = '${email}' and senha = '${senha}';`;
+  const instrucao = `select id, data_hora, nome, cpf, cargo, telefone, fk_empresa FROM funcionario where email = '${email}' and senha = '${senha}';`;
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:

@@ -10,7 +10,7 @@ function autenticar(req, res) {
   const email = req.body.email;
   const senha = req.body.senha;
 
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (email === undefined) {
     res.status(400).json({ erro: "`email` undefined" });
   } else if (senha === undefined) {
@@ -26,7 +26,7 @@ function autenticar(req, res) {
           // retorna a resposta com status 200 (sucesso) em json contendo os dados do usuário autenticado:
           res.status(200).json({
             id: funcionario.id,
-            nome: funcionario.nome
+            nome: funcionario.nome,
           });
         } else {
           res.status(401).json({ erro: "Login inválido" }); // retorna a resposta com status 401 (não autorizado) para o cliente da requisição
@@ -54,23 +54,11 @@ function cadastrar(req, res) {
   const telefone = req.body.telefone;
   const filial = req.body.filial;
 
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (emailAutenticacao === undefined) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {
     res.status(400).json({ erro: "`senhaAutenticacao` undefined" });
-  } else if (nome === undefined) {
-    res.status(400).json({ erro: "`nome` undefined" });
-  } else if (cpf === undefined) {
-    res.status(400).json({ erro: "`cpf` undefined" });
-  } else if (cargo === undefined) {
-    res.status(400).json({ erro: "`cargo` undefined" });
-  } else if (email === undefined) {
-    res.status(400).json({ erro: "`email` undefined" });
-  } else if (senha === undefined) {
-    res.status(400).json({ erro: "`senha` undefined" });
-  } else if (telefone === undefined) {
-    res.status(400).json({ erro: "`telefone` undefined" });
   } else {
     // envia para a função `autenticar` do arquivo `funcionarioModel.js`:
     funcionarioModel
@@ -79,39 +67,67 @@ function cadastrar(req, res) {
         // caso a quantidade de registros encontrados seja igual a 1, o usuário está autenticado:
         if (resultadoAutenticar.length === 1) {
           const funcionarioAutenticado = resultadoAutenticar[0]; // recebe o primeiro (e único) registro do select
-          // envia para a função `cadastrar` do arquivo `funcionarioModel.js`:
 
-          // caso seja especificada a filial do novo usuário:
-          if (filial) {
-            funcionarioModel
-              .cadastrarPorFilial(nome, cpf, cargo, email, senha, telefone, funcionarioAutenticado.fk_empresa, filial)
-              .then(function (resultado) {
-                // retorna a resposta com status 200 (sucesso) em json contendo o id do novo usuário cadastrado:
-                res.status(200).json({
-                  id: resultado.insertId,
-                });
-              })
-              // em caso de erro no servidor:
-              .catch(function (erro) {
-                console.log("Erro no servidor:", erro);
-                // retorna o erro com o status 500 (erro de servidor):
-                res.status(500).json({ erro: erro.sqlMessage });
-              });
+          // caso o cargo do funcionário seja "gerente":
+          if (funcionarioAutenticado.cargo === "gerente") {
+            // valida as variáveis recebidas:
+            if (nome === undefined) {
+              res.status(400).json({ erro: "`nome` undefined" });
+            } else if (cpf === undefined) {
+              res.status(400).json({ erro: "`cpf` undefined" });
+            } else if (cargo === undefined) {
+              res.status(400).json({ erro: "`cargo` undefined" });
+            } else if (email === undefined) {
+              res.status(400).json({ erro: "`email` undefined" });
+            } else if (senha === undefined) {
+              res.status(400).json({ erro: "`senha` undefined" });
+            } else if (telefone === undefined) {
+              res.status(400).json({ erro: "`telefone` undefined" });
+            } else {
+              // caso o cargo do novo usuário seja "analista":
+              if (cargo === "analista") {
+                // valida a filial recebida:
+                if (filial === undefined) {
+                  res.status(400).json({ erro: "`filial` undefined" });
+                } else {
+                  // envia para a função `cadastrarPorFilial` do arquivo `funcionarioModel.js`:
+                  funcionarioModel
+                    .cadastrarPorFilial(nome, cpf, cargo, email, senha, telefone, funcionarioAutenticado.fk_empresa, filial)
+                    .then(function (resultado) {
+                      // retorna a resposta com status 200 (sucesso) em json contendo o id do novo usuário cadastrado:
+                      res.status(200).json({
+                        id: resultado.insertId,
+                      });
+                    })
+                    // em caso de erro no servidor:
+                    .catch(function (erro) {
+                      console.log("Erro no servidor:", erro);
+                      // retorna o erro com o status 500 (erro de servidor):
+                      res.status(500).json({ erro: erro.sqlMessage });
+                    });
+                }
+              } else if (cargo === "gerente") {
+                // envia para a função `cadastrar` do arquivo `funcionarioModel.js`:
+                funcionarioModel
+                  .cadastrar(nome, cpf, cargo, email, senha, telefone, funcionarioAutenticado.fk_empresa)
+                  .then(function (resultado) {
+                    // retorna a resposta com status 200 (sucesso) em json contendo o id do novo usuário cadastrado:
+                    res.status(200).json({
+                      id: resultado.insertId,
+                    });
+                  })
+                  // em caso de erro no servidor:
+                  .catch(function (erro) {
+                    console.log("Erro no servidor:", erro);
+                    // retorna o erro com o status 500 (erro de servidor):
+                    res.status(500).json({ erro: erro.sqlMessage });
+                  });
+              } else {
+                res.status(400).json({ erro: "Cargo inválido" }); // retorna a resposta com status 403 (Proibido) para o cliente da requisição
+              }
+            }
           } else {
-            funcionarioModel
-              .cadastrar(nome, cpf, cargo, email, senha, telefone, funcionarioAutenticado.fk_empresa)
-              .then(function (resultado) {
-                // retorna a resposta com status 200 (sucesso) em json contendo o id do novo usuário cadastrado:
-                res.status(200).json({
-                  id: resultado.insertId,
-                });
-              })
-              // em caso de erro no servidor:
-              .catch(function (erro) {
-                console.log("Erro no servidor:", erro);
-                // retorna o erro com o status 500 (erro de servidor):
-                res.status(500).json({ erro: erro.sqlMessage });
-              });
+            res.status(403).json({ erro: "Acesso negado" }); // retorna a resposta com status 403 (Proibido) para o cliente da requisição
           }
         } else {
           res.status(401).json({ erro: "Login inválido" }); // retorna a resposta com status 401 (não autorizado) para o cliente da requisição
