@@ -10,12 +10,12 @@ const alertaController = require("../controllers/alertaController.js");
 // declaração da variável do roteador:
 const router = express.Router();
 
-// envia a requisição do tipo post "/listar" para a função `cadastrar` do `alertaController.js`:
-router.post("/listar", function (req, res) {
-  alertaController.listar(req, res);
+// envia a requisição do tipo post "/listarPorEmpresa" para a função `listarPorEmpresa` do `alertaController.js`:
+router.post("/listarPorEmpresa", function (req, res) {
+  alertaController.listarPorEmpresa(req, res);
 });
 
-// envia a requisição do tipo post "/listarPorFilial" para a função `cadastrar` do `alertaController.js`:
+// envia a requisição do tipo post "/listarPorFilial" para a função `listarPorFilial` do `alertaController.js`:
 router.post("/listarPorFilial", function (req, res) {
   alertaController.listarPorFilial(req, res);
 });

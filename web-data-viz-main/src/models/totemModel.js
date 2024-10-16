@@ -15,9 +15,19 @@ function cadastrar(mac_address, fk_filial) {
 }
 
 // declaração da função `listar`:
-function listar(fk_filial) {
+function listarPorFilial(fk_filial) {
   // declaração da variável de instrução sql:
-  const instrucao = `select id, data_hora, mac_address, fk_filial from totem where fk_filial = '${fk_filial}';`;
+  const instrucao = `select id, data_hora, mac_address from totem where fk_filial = '${fk_filial}';`;
+  // declaração da variável de resultado da execução:
+  const resultado = database.executar(instrucao);
+  // retorna o resultado da execução:
+  return resultado;
+}
+
+// declaração da função `listar`:
+function listarPorEmpresa(fk_empresa) {
+  // declaração da variável de instrução sql:
+  const instrucao = `select id, data_hora, mac_address, fk_filial from totem where fk_empresa = '${fk_empresa}';`;
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
@@ -27,5 +37,6 @@ function listar(fk_filial) {
 // exporta as funções do arquivo `totemModel.js`:
 module.exports = {
   cadastrar,
-  listar,
+  listarPorFilial,
+  listarPorEmpresa,
 };
