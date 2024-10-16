@@ -11,8 +11,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- Isso aqui é pro gráfico de gouge -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script> -->
 </head>
 
 <body>
@@ -39,8 +40,8 @@
                     <label for="region">Componente</label>
                     <select id="region">
                         <option value="">Selecione uma opção</option>
-                        <option value="regiao1">Processador</option>
-                        <option value="regiao2">Memória</option>
+                        <option id="1" value="1">Processador</option>
+                        <option value="2">Memória</option>
                     </select>
                 </div>
             </div>
@@ -49,13 +50,13 @@
                     <label for="filial">Filial Selecionadas</label>
                     <select id="filial">
                         <option value="" selected>Selecione uma opção</option>
-                        <option value="filial1">Filial 1</option>
-                        <option value="filial2">Filial 2</option>
+                        <option value="1">Filial 1</option>
+                        <option value="2">Filial 2</option>
                     </select>
                     <select id="filial2">
                         <option value="" selected>Selecione uma opção</option>
-                        <option value="filial1">Filial 1</option>
-                        <option value="filial2">Filial 2</option>
+                        <option value="1">Filial 1</option>
+                        <option value="2">Filial 2</option>
                     </select>
                 </div>
                 <div id="conteudo1" class="data-select">
@@ -85,8 +86,8 @@
                         </div>
                         <div class="periodo-select">
                             <select id="opts-select">
-                                <option value="" selected>Selecione uma opção</option>
-                                <option value="mes">Mês</option>
+                                <option>Selecione uma opção</option>
+                                <option value="mes"> Mês</option>
                                 <option value="semana">Semana</option>
                                 <option value="ano">Ano</option>
                             </select>
@@ -94,17 +95,21 @@
                     </div>
                 </div>
 
-                <button class="botao-comparar">COMPARAR</button>
+                <button onclick="comparar()" class="botao-comparar">COMPARAR</button>
             </div>
         </div>
 
         <div class="dashes">
             <div class="container-dashes">
+                <h3>Totens com mais gasto na última hora</h3>
                 <div class="primeira_linha_graficos">
-                    <div class="grafico_percent">
-                        <canvas id="grafico_percent" style="width: 450px; padding: 15px;">
-
-                        </canvas>
+                    <div class="div_para_graficos">
+                    <div class="graficoCPU">
+                        <canvas id="cpuChart" ></canvas>
+                    </div>
+                    <div class="graficoRAM">
+                    <canvas id="ramChart" ></canvas>
+                    </div>
                     </div>
                   <div class="totens">
                     <h3>Quantidade de Totens</h1>
@@ -119,16 +124,16 @@
                 </div>
                 <div class="dashes-baixo">
                     <div class="grafico1">
-                        <span>Quantidade de sobrecargas por dia</span>
+                        <span class="span_graf">Totens com mais alertas (na última hora)</span>
                         <canvas id="grafico2" style="height: 100px;">
 
                         </canvas>
                     </div>
-                    <div class="grafico2">
-                        <span>Gasto de CPU x Tempo</span>
-                        <canvas id="grafico1" style="height: 200px;">
-
-                        </canvas>
+                    <div class="div_alinhar_doughnut">
+                    <span class="span_graf">Maior e menor consumo de CPU entre totens (no dia)</span>
+                    <div class="grafico_doughnut">
+                        <div id="grafico_doughnut"></div>
+                    </div>
                     </div>
                 </div>    
             </div>    
@@ -136,12 +141,30 @@
 
     </div>
 
-
 </body>
 
 </html>
 
 <script>
+
+function comparar(){
+
+    const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
+    const dashes_baixo = document.getElementById('dashes-baixo');
+
+    var region = region.value;
+    var filial = filial.value;
+    var filial2 = filial2.value;
+
+    if(region == 2 && filial == 2 && filial2 == 2){
+        grafico1.style.display = 'none'; 
+        grafico2.style.display = 'none';
+    }
+
+}
+
+
+
 const trocaConteudo = document.getElementById('troca');
 const trocaConteudo2 = document.getElementById('novaTroca');
 const conteudo1 = document.getElementById('conteudo1');
@@ -159,162 +182,132 @@ trocaConteudo2.addEventListener('click', function () {
   
 });
 
+   const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+   const cpuChart = new Chart(cpuCtx, {
+       type: 'bar',
+       data: {
+           labels: ['Totem 1', 'Totem 4', 'Totem 6'],
+           datasets: [{
+               label: 'CPU',
+               data: [80, 50, 70],
+               backgroundColor: 'orange',
+               borderWidth: 1
+           }]
+       },
+       options: {
+           scales: {
+               y: {
+                   beginAtZero: true,
+                   max: 100,
+                   ticks: {
+                       callback: function(value) {
+                           return value + '%';
+                       }
+                   }
+               }
+           }
+       }
+   });
 
-// Gráfico de Linhas para RAM e CPU (%)
+   // Gráfico de RAM
+   const ramCtx = document.getElementById('ramChart').getContext('2d');
+   const ramChart = new Chart(ramCtx, {
+       type: 'bar',
+       data: {
+           labels: ['Totem 6', 'Totem 2', 'Totem 1'],
+           datasets: [{
+               label: 'RAM',
+               data: [60, 90, 70],
+               backgroundColor: 'red',
+               borderWidth: 1
+           }]
+       },
+       options: {
+           scales: {
+               y: {
+                   beginAtZero: true,
+                   max: 100,
+                   ticks: {
+                       callback: function(value) {
+                           return value + '%';
+                       }
+                   }
+               }
+           }
+       }
+   });
 
-const data3 = {
-    labels: [
-    '0',
-    '5',
-    '10',
-    '15',
-    '20',
-    '25',
-    '30'
-    ],
-  datasets: [
-    {
-      label: 'CPU',
-      data: [75, 69, 80, 66, 46],
-      borderColor: '#FF914D',
-      backgroundColor: '#FF914D'
+// Gráfico com o ApexJs
+var elemento = document.getElementById('grafico_doughnut');
+
+var seriesData = [80, 32, 56]; // Dados da série
+
+var options = {
+    series: seriesData,
+    chart: {
+        height: 400,
+        width: '100%',
+        type: 'radialBar',
     },
-    {
-      label: 'RAM',
-      data: [62, 54, 66, 53, 68],
-      borderColor: '#FF3131',
-      backgroundColor: '#FF3131'
-    }
-  ]
-};
-
-const config3 = {
-  type: 'line',
-  data: data3,
-  options: {
-    plugins: {
-        legend: {
-            display: true,
-            color: 'white',
-            labels: {
-                color: 'white'
-            }
-        }
-    },
-    scales: {
-        y: {
-            min: 0,
-            max: 100,
-            grid: {
-                color: '#9A9A9A'
+    plotOptions: {
+        radialBar: {
+            dataLabels: {
+                name: {
+                    fontSize: '20px',
+                    color: 'white', // Cor do nome
+                },
+                value: {
+                    fontSize: '20px',
+                    color: 'white', // Cor do valor
+                },
             },
-            ticks: {
-                color: 'white',
-                callback: function(value, index, values) {
-                    return `${value}%`;
-                }
-            }
+            // Ajuste o tamanho das barras
+            track: {
+                background: '#3e3e3e', // Cor do fundo do gráfico
+                strokeWidth: '100%', // Largura do fundo
+            },
+            // Ajuste a largura das barras
+            hollow: {
+                margin: 15, // Margem ao redor do centro (hollow)
+                size: '45%', // Tamanho do espaço vazio no centro
+            },
         },
-        x: {
-            ticks: {
-                color: 'white'
-            },
-            title : {
-                display: true,
-                text: 'Dia',
-                color: 'white'
-            }
-        }
-    }
-  }
-};
-
-let linhaPercent = new Chart(
-    document.getElementById('grafico_percent'),
-    config3
-);
-
-
-
-const data = {
-    labels: [
-    '0',
-    '5',
-    '10',
-    '15',
-    '20',
-    '25',
-    '30'
-    ],
-  datasets: [
-    {
-      label: 'T5',
-      data: [75, 69, 80, 66, 46],
-      borderColor: '#FF914D',
-      backgroundColor: '#FF914D'
     },
-    {
-      label: 'T7',
-      data: [62, 54, 66, 53, 68],
-      borderColor: '#FF3131',
-      backgroundColor: '#FF3131'
-    }
-  ]
-};
-
-const config = {
-  type: 'line',
-  data: data,
-  options: {
-    plugins: {
-        legend: {
-            display: true,
-            color: 'white',
-            labels: {
-                color: 'white'
-            }
-        }
-    },
-    scales: {
-        y: {
-            min: 0,
-            max: 100,
-            grid: {
-                color: '#9A9A9A'
-            },
-            ticks: {
-                color: 'white',
-                callback: function(value, index, values) {
-                    return `${value}%`;
-                }
-            }
+    labels: ['Totem 5', 'Totem 2', 'Totem 3'],
+    legend: {
+        show: true,
+        floating: true,
+        position: 'left',
+        horizontalAlign: 'center',
+        verticalAlign: 'middle',
+        labels: {
+            colors: 'white', // Cor das labels
         },
-        x: {
-            ticks: {
-                color: 'white'
-            },
-            title : {
-                display: true,
-                text: 'Dia',
-                color: 'white'
-            }
-        }
-    }
-  }
+        onItemClick: {
+            toggleDataSeries: false, // Desativa a funcionalidade de clicar nas labels
+        },
+    },
+    grid: {
+        padding: {
+            top: 10,
+            bottom: 10,
+            left: 140,
+        },
+    },
 };
 
-let doughnut = new Chart(
-    document.getElementById('grafico1'),
-    config
-);
+var chart = new ApexCharts(elemento, options);
+chart.render();
+
+//------------------------------------------------//
 
 const labels = [
-    '5',
-    '10',
-    '15',
-    '20',
-    '25',
-    '30'
+    'Totem 1',
+    'Totem 2',
+    'Totem 3',
+    'Totem 4',
+    'Totem 5',
+    'Totem 6'
 ];
 
 const data2 = {
@@ -338,14 +331,14 @@ const config2 = {
   type: 'bar',
   data: data2,
   options: {
-    indexAxis: 'x',
+    indexAxis: 'y',
     plugins: {
         legend: {
             display: false
         }
     },
     scales: {
-        y: {
+        x: {
             ticks: {
                 color: 'white'
             },
@@ -353,7 +346,7 @@ const config2 = {
                 color: '#505050'
             }
         },
-        x: {
+        y: {
             ticks: {
                 color: 'white'
             },
@@ -527,10 +520,10 @@ let side_bar = new Chart(
 
 
     // render init block
-    const myChart = new Chart(
-      document.getElementById('myChart'),
-      configGauge
-    );
+    // const myChart = new Chart(
+    //   document.getElementById('myChart'),
+    //   configGauge
+    // );
 
 
     </script>
