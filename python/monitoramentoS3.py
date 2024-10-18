@@ -1,7 +1,7 @@
 from uuid import getnode
 import json
 import psutil
-from datetime import datetime, timedelta
+import datetime
 from atlassian import Jira
 from requests import HTTPError
 import boto3
@@ -58,7 +58,7 @@ def gerarAlerta(dataHora, cpu, ram):
         print(e.response.text)
 
 def verificarAlerta(mac, cpuPorcentagem, ramPorcentagem):
-    agora = datetime.now()
+    agora = datetime.datetime.now()
 
     # Se o uso de CPU ou RAM for maior que 85% 
     if cpuPorcentagem > 85 or ramPorcentagem > 85:
@@ -89,9 +89,9 @@ else:
         for i in range(10):
             cpuPorcentagem = psutil.cpu_percent()
             ramPorcentagem = psutil.virtual_memory().percent
-            dataHora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            dataHora = datetime.datetime.now()
             dados.append({
-                "data_hora": dataHora,
+                "data_hora": dataHora.strftime("%Y-%m-%d %H:%M:%S"),
                 "mac_address": macAddress,
                 "cpu_porcentagem": cpuPorcentagem,
                 "ram_porcentagem": ramPorcentagem
@@ -104,7 +104,7 @@ else:
 
             time.sleep(1)
 
-        jsonName = f"monitoramento/registro.{contagem}.{macAddress}.json"
+        jsonName = f"monitoramento/registro.{dataHora.strftime("%Y-%m-%d.%H-%M-%S")}.{macAddress}.json"
 
         with open("registro.json", "w") as jsonfile:
             json.dump(dados, jsonfile)
