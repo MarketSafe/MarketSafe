@@ -1,404 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
 
-<body onload="listarFiliais()">
+  <body onload="listarFiliais()">
     <div class="cadastro_gerente">
-        <div class="form_gerente">
-
-            <div id="func">
-                <div class="form_func">
-                    <div class="box_superior" id="txt_func">
-                        Realizar Cadastro de<br> Funcionário
-                    </div>
-                    <div class="box_inferior" id="FboxI">
-                        <div id="funcInputs">
-                            <input type="text" placeholder="Nome" id="nome_input"> <input type="text" placeholder="CPF"
-                                id="cpf_input"> <br>
-                            <input type="text" placeholder="Cargo" id="cargo_input"> <input type="text"
-                                placeholder="Email" id="email_input"> <br>
-                            <input type="text" placeholder="Senha" id="senha_input"> <input type="text"
-                                placeholder="Telefone" id="telefone_input"> <br>
-                                <select name="fl" type="text" placeholder="Filial" id="Ffilial_input">
-                                    <option value="#" disabled selected> Selecione uma Opção</option>
-                                </select> <br>
-                            <button onclick="cadastrarFunc()">Cadastrar</button>
-                        </div>
-                        <img src="./css/imgFunc2.png" alt="" width="55%" height="75%" onclick="trocar(0)" id="imgFunc"
-                            class="imgExp">
-                    </div>
-                </div>
+      <div class="form_gerente">
+        <div id="func">
+          <div class="form_func">
+            <div class="box_superior" id="txt_func">
+              Realizar Cadastro de<br />
+              Funcionário
             </div>
-
-            <div id="filial">
-                <div class="form_filial">
-                    <div class="ggbox_superior" id="txt_filial">
-                        Realizar Cadastro <br>de Filial
-                    </div>
-                    <div class="ggbox_inferior">
-                        <div id="filialInputs">
-                            <input type="text" placeholder="CEP" id="cep_input"> <input type="text" placeholder="Bairro"
-                                id="bairro_input"> <br>
-                            <input type="text" placeholder="Rua" id="rua_input"> <input type="text" placeholder="Numero"
-                                id="numero_input"> <br>
-                            <input type="text" placeholder="complemento" id="complemento_input"> <input type="text"
-                                placeholder="Confirmar"> <br>
-                            <button onclick="cadastrarFilial()">Cadastrar</button>
-                        </div>
-                        <img src="./css/imgFilial3.png" alt="" width="65%" height="50%" onclick="trocar(1)"
-                            id="imgFilial" class="imgExp">
-                    </div>
-                </div>
+            <div class="box_inferior" id="FboxI">
+              <div id="funcInputs">
+                <input type="text" placeholder="Nome" id="nome_input" /> <input type="text" placeholder="CPF" id="cpf_input" /> <br />
+                <input type="text" placeholder="Cargo" id="cargo_input" /> <input type="text" placeholder="Email" id="email_input" /> <br />
+                <input type="text" placeholder="Senha" id="senha_input" /> <input type="text" placeholder="Telefone" id="telefone_input" /> <br />
+                <select name="fl" type="text" placeholder="Filial" id="Ffilial_input">
+                  <option value="#" disabled selected>Selecione uma Opção</option>
+                </select>
+                <br />
+                <button onclick="cadastrarFunc()">Cadastrar</button>
+              </div>
+              <img src="./css/imgFunc2.png" alt="" width="55%" height="75%" onclick="trocar(0)" id="imgFunc" class="imgExp" />
             </div>
-
-            <div id="totem">
-                <div class="form_totem">
-                    <div class="Tbox_superior" id="Tbox">
-                        <div class="textoTotem" id="txt_totem">
-                            Realizar Cadastro de<br> Totem
-                        </div>
-                    </div>
-                    <div class="box_inferior" id="TboxI">
-                        <div id="totemInputs">
-                            <input type="text" placeholder="MacAdress" id="mac_input"> <br>
-                            <select name="fl" type="text" placeholder="Filial" id="Tfilial_input">
-                                <option value="#" disabled selected> Selecione uma Opção</option>
-                            </select> <br> <br>
-                            <button onclick="cadastrarTotem()">Cadastrar</button>
-                        </div>
-                        <img src="./css/imgTotem2.png" alt="" width="55%" height="80%" onclick="trocar(2)" id="imgTotem"
-                            class="imgExp">
-                    </div>
-                </div>
-            </div>
-
+          </div>
         </div>
+
+        <div id="filial">
+          <div class="form_filial">
+            <div class="ggbox_superior" id="txt_filial">Realizar Cadastro <br />de Filial</div>
+            <div class="ggbox_inferior">
+              <div id="filialInputs">
+                <input type="text" placeholder="CEP" id="cep_input" /> <input type="text" placeholder="Bairro" id="bairro_input" /> <br />
+                <input type="text" placeholder="Rua" id="rua_input" /> <input type="text" placeholder="Numero" id="numero_input" /> <br />
+                <input type="text" placeholder="complemento" id="complemento_input" /> <input type="text" placeholder="Confirmar" /> <br />
+                <button onclick="cadastrarFilial()">Cadastrar</button>
+              </div>
+              <img src="./css/imgFilial3.png" alt="" width="65%" height="50%" onclick="trocar(1)" id="imgFilial" class="imgExp" />
+            </div>
+          </div>
+        </div>
+
+        <div id="totem">
+          <div class="form_totem">
+            <div class="Tbox_superior" id="Tbox">
+              <div class="textoTotem" id="txt_totem">
+                Realizar Cadastro de<br />
+                Totem
+              </div>
+            </div>
+            <div class="box_inferior" id="TboxI">
+              <div id="totemInputs">
+                <input type="text" placeholder="MacAdress" id="mac_input" /> <br />
+                <select name="fl" type="text" placeholder="Filial" id="Tfilial_input">
+                  <option value="#" disabled selected>Selecione uma Opção</option>
+                </select>
+                <br />
+                <br />
+                <button onclick="cadastrarTotem()">Cadastrar</button>
+              </div>
+              <img src="./css/imgTotem2.png" alt="" width="55%" height="80%" onclick="trocar(2)" id="imgTotem" class="imgExp" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
-    var posicao = 1;
-    const expFu = func.classList;
-    const expFi = filial.classList;
-    const expTo = totem.classList;
+  var posicao = 1;
+  const expFu = func.classList;
+  const expFi = filial.classList;
+  const expTo = totem.classList;
 
-    imgFilial.style.display = 'none'
-    totemInputs.style.display = 'none'
-    funcInputs.style.display = 'none'
+  imgFilial.style.display = "none";
+  totemInputs.style.display = "none";
+  funcInputs.style.display = "none";
 
-    function trocar(param) {
-        if (param == 0) {
-            FboxI.style.marginTop = '0%'
+  function trocar(param) {
+    if (param == 0) {
+      FboxI.style.marginTop = "0%";
 
-            totemInputs.style.display = 'none'
-            txt_filial.style.height = '40%'
-            txt_totem.style.height = '100%'
+      totemInputs.style.display = "none";
+      txt_filial.style.height = "40%";
+      txt_totem.style.height = "100%";
 
-            FboxI.style.paddingTop = '0%'
+      FboxI.style.paddingTop = "0%";
 
-            txt_filial.style.fontSize = '28px'
-            txt_filial.style.paddingTop = '15%'
+      txt_filial.style.fontSize = "28px";
+      txt_filial.style.paddingTop = "15%";
 
-            txt_func.style.fontSize = '40px'
+      txt_func.style.fontSize = "40px";
 
-            funcInputs.style.display = 'block'
+      funcInputs.style.display = "block";
 
-            TboxI.style.height = '50%'
-            Tbox.style.height = '50%'
+      TboxI.style.height = "50%";
+      Tbox.style.height = "50%";
 
-            txt_func.style.height = '30%'
-            txt_func.style.paddingTop = '8%'
+      txt_func.style.height = "30%";
+      txt_func.style.paddingTop = "8%";
 
-            expFu.remove("diminui")
-            expFu.add("expande")
+      expFu.remove("diminui");
+      expFu.add("expande");
 
-            imgFunc.style.display = 'none'
+      imgFunc.style.display = "none";
 
-            if (posicao == 1) {
-                filialInputs.style.display = 'none'
-                expFi.remove("expande")
-                expFi.add("diminui")
+      if (posicao == 1) {
+        filialInputs.style.display = "none";
+        expFi.remove("expande");
+        expFi.add("diminui");
 
-                imgFilial.style.display = 'Flex'
-                imgFilial.style.marginLeft = '20%'
-                imgFilial.style.marginTop = '31%'
+        imgFilial.style.display = "Flex";
+        imgFilial.style.marginLeft = "20%";
+        imgFilial.style.marginTop = "31%";
+      } else if (posicao == 2) {
+        expTo.remove("expande");
+        expTo.add("diminui");
+        imgTotem.style.display = "Flex";
+        imgTotem.style.marginLeft = "20%";
 
-            } else if (posicao == 2) {
-                expTo.remove("expande")
-                expTo.add("diminui")
-                imgTotem.style.display = 'Flex'
-                imgTotem.style.marginLeft = '20%'
+        txt_totem.style.fontSize = "28px";
+        txt_totem.style.paddingTop = "15%";
+      }
 
-                txt_totem.style.fontSize = '28px'
-                txt_totem.style.paddingTop = '15%'
+      posicao = 0;
+    } else if (param == 1) {
+      funcInputs.style.display = "none";
 
-            }
+      totemInputs.style.display = "none";
+      txt_filial.style.height = "30%";
+      txt_totem.style.height = "100%";
+      TboxI.style.paddingTop = "12%";
 
-            posicao = 0;
+      TboxI.style.height = "50%";
+      Tbox.style.height = "50%";
 
-        } else if (param == 1) {
-            funcInputs.style.display = 'none'
+      txt_totem.style.fontSize = "28px";
 
-            totemInputs.style.display = 'none'
-            txt_filial.style.height = '30%'
-            txt_totem.style.height = '100%'
-            TboxI.style.paddingTop = '12%'
+      txt_func.style.fontSize = "28px";
+      txt_func.style.paddingTop = "15%";
 
-            TboxI.style.height = '50%'
-            Tbox.style.height = '50%'
+      txt_filial.style.fontSize = "40px";
+      txt_filial.style.paddingTop = "8%";
 
-            txt_totem.style.fontSize = '28px'
+      FboxI.style.marginTop = "50%";
+      FboxI.style.height = "48%";
 
-            txt_func.style.fontSize = '28px'
-            txt_func.style.paddingTop = '15%'
+      // const list = totem.classList;
+      // list.add("repete");
 
-            txt_filial.style.fontSize = '40px'
-            txt_filial.style.paddingTop = '8%'
+      // setTimeout(() => {
+      //     list.remove("repete");
+      // }, 1500);
 
-            FboxI.style.marginTop = '50%'
-            FboxI.style.height = '48%'
+      expFi.remove("diminui");
+      expFi.add("expande");
 
-            // const list = totem.classList;
-            // list.add("repete");
+      imgFilial.style.display = "none";
+      filialInputs.style.display = "block";
 
-            // setTimeout(() => {
-            //     list.remove("repete");
-            // }, 1500);
+      if (posicao == 0) {
+        expFu.remove("expande");
+        expFu.add("diminui");
+        imgFunc.style.display = "Flex";
+        imgFunc.style.marginLeft = "20%";
+      } else if (posicao == 2) {
+        expTo.remove("expande");
+        expTo.add("diminui");
+        imgTotem.style.display = "Flex";
+        imgTotem.style.marginLeft = "20%";
+      }
 
-            expFi.remove("diminui")
-            expFi.add("expande")
+      posicao = 1;
+    } else if (param == 2) {
+      funcInputs.style.display = "none";
 
-            imgFilial.style.display = 'none'
-            filialInputs.style.display = 'block'
+      txt_filial.style.height = "40%";
+      Tbox.style.height = "30%";
+      Tbox.style.paddingTop = "0%";
 
-            if (posicao == 0) {
-                expFu.remove("expande")
-                expFu.add("diminui")
-                imgFunc.style.display = 'Flex'
-                imgFunc.style.marginLeft = '20%'
+      txt_totem.style.fontSize = "40px";
+      txt_totem.style.paddingTop = "8%";
 
-            } else if (posicao == 2) {
-                expTo.remove("expande")
-                expTo.add("diminui")
-                imgTotem.style.display = 'Flex'
-                imgTotem.style.marginLeft = '20%'
-            }
+      txt_func.style.fontSize = "28px";
+      txt_func.style.paddingTop = "15%";
 
-            posicao = 1;
+      txt_filial.style.fontSize = "28px";
+      txt_filial.style.paddingTop = "15%";
 
-        }
+      FboxI.style.marginTop = "50%";
+      FboxI.style.height = "48%";
 
-        else if (param == 2) {
-            funcInputs.style.display = 'none'
+      expTo.remove("diminui");
+      expTo.add("expande");
 
-            txt_filial.style.height = '40%'
-            Tbox.style.height = '30%'
-            Tbox.style.paddingTop = '0%'
+      imgTotem.style.display = "none";
+      totemInputs.style.display = "block";
 
-            txt_totem.style.fontSize = '40px'
-            txt_totem.style.paddingTop = '8%'
+      if (posicao == 0) {
+        expFu.remove("expande");
+        expFu.add("diminui");
+        imgFunc.style.display = "Flex";
+        imgFunc.style.marginLeft = "20%";
+      } else if (posicao == 1) {
+        filialInputs.style.display = "none";
+        expFi.remove("expande");
+        expFi.add("diminui");
+        imgFilial.style.display = "Flex";
+        imgFilial.style.marginLeft = "20%";
+        imgFilial.style.marginTop = "31%";
+      }
 
-            txt_func.style.fontSize = '28px'
-            txt_func.style.paddingTop = '15%'
+      TboxI.style.height = "70%";
+      TboxI.style.paddingTop = "2%";
+      totemInputs.style.height = "100%";
+      posicao = 2;
+    }
+  }
 
-            txt_filial.style.fontSize = '28px'
-            txt_filial.style.paddingTop = '15%'
+  async function cadastrarFunc() {
+    var nomeVar = nome_input.value;
+    var cpfVar = cpf_input.value;
+    var cargoVar = cargo_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var telefoneVar = telefone_input.value;
+    var filialVar = Ffilial_input.value;
 
-            FboxI.style.marginTop = '50%'
-            FboxI.style.height = '48%'
-
-            expTo.remove("diminui")
-            expTo.add("expande")
-
-            imgTotem.style.display = 'none'
-            totemInputs.style.display = 'block'
-
-
-            if (posicao == 0) {
-                expFu.remove("expande")
-                expFu.add("diminui")
-                imgFunc.style.display = 'Flex'
-                imgFunc.style.marginLeft = '20%'
-
-            } else if (posicao == 1) {
-                filialInputs.style.display = 'none'
-                expFi.remove("expande")
-                expFi.add("diminui")
-                imgFilial.style.display = 'Flex'
-                imgFilial.style.marginLeft = '20%'
-                imgFilial.style.marginTop = '31%'
-            }
-
-            TboxI.style.height = '70%'
-            TboxI.style.paddingTop = '2%'
-            totemInputs.style.height = '100%'
-            posicao = 2;
-
-        }
+    if (nomeVar === "" || cpfVar === "" || cargoVar === "" || emailVar === "" || senhaVar === "" || telefoneVar === "" || filialVar === "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
+      // finalizarAguardar();
+      return false;
     }
 
-
-    async function cadastrarFunc() {
-        var nomeVar = nome_input.value
-        var cpfVar = cpf_input.value
-        var cargoVar = cargo_input.value
-        var emailVar = email_input.value
-        var senhaVar = senha_input.value
-        var telefoneVar = telefone_input.value
-        var filialVar = Ffilial_input.value
-
-        if (nomeVar === "" || cpfVar === "" || cargoVar === "" || emailVar === "" || senhaVar === "" || telefoneVar === "" || filialVar === "") {
-            cardErro.style.display = "block";
-            mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
-            // finalizarAguardar();
-            return false;
-        }
-
-        const resposta = await fetch("/funcionario/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nome: nomeVar,
-                cpf: cpfVar,
-                cargo: cargoVar,
-                email: emailVar,
-                senha: senhaVar,
-                telefone: telefoneVar,
-                filial: filialVar,
-                emailAutenticacao: sessionStorage.getItem('EMAIL_USUARIO'),
-                senhaAutenticacao: sessionStorage.getItem('SENHA_USUARIO')
-            })
-        })
-        if (resposta.ok) {
-
-            window.location = "cadastro_gerente.html";
-
-        } else {
-            return resposta.json().then(err => { throw err; });
-        }
-
-        return false; // Previne que o formulário recarregue a página
+    const resposta = await fetch("/funcionario/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nome: nomeVar,
+        cpf: cpfVar,
+        cargo: cargoVar,
+        email: emailVar,
+        senha: senhaVar,
+        telefone: telefoneVar,
+        filial: filialVar,
+        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+      }),
+    });
+    if (resposta.ok) {
+      window.location = "cadastro_gerente.html";
+    } else {
+      return resposta.json().then((err) => {
+        throw err;
+      });
     }
 
+    return false; // Previne que o formulário recarregue a página
+  }
 
+  async function cadastrarFilial() {
+    var cepVar = cep_input.value;
+    var bairroVar = bairro_input.value;
+    var ruaVar = rua_input.value;
+    var numeroVar = numero_input.value;
+    var complementoVar = complemento_input.value;
 
-    async function cadastrarFilial() {
-
-        var cepVar = cep_input.value
-        var bairroVar = bairro_input.value
-        var ruaVar = rua_input.value
-        var numeroVar = numero_input.value
-        var complementoVar = complemento_input.value
-
-        if (cepVar === "" || bairroVar === "" || ruaVar === "" || numeroVar === "" || complementoVar === "") {
-            cardErro.style.display = "block";
-            mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
-            // finalizarAguardar();
-            return false;
-        }
-
-        const resposta = await fetch("/filial/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                cep: cepVar,
-                bairro: bairroVar,
-                rua: ruaVar,
-                numero: numeroVar,
-                complemento: complementoVar,
-                emailAutenticacao: sessionStorage.getItem('EMAIL_USUARIO'),
-                senhaAutenticacao: sessionStorage.getItem('SENHA_USUARIO')
-            })
-        })
-        if (resposta.ok) {
-            window.location = "cadastro_gerente.html";
-
-        } else {
-            return resposta.json().then(err => { throw err; });
-        }
-
-        return false; // Previne que o formulário recarregue a página
+    if (cepVar === "" || bairroVar === "" || ruaVar === "" || numeroVar === "" || complementoVar === "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
+      // finalizarAguardar();
+      return false;
     }
 
-    async function cadastrarTotem() {
-
-        var macVar = mac_input.value
-        var filialVar = Tfilial_input.value
-
-        if (macVar === "" || filialVar === "") {
-            cardErro.style.display = "block";
-            mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
-            // finalizarAguardar();
-            return false;
-        }
-
-        console.log(Tfilial_input.value)
-
-        const resposta = await fetch("/totem/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                mac_address: macVar,
-                fk_filial: filialVar,
-
-                emailAutenticacao: sessionStorage.getItem('EMAIL_USUARIO'),
-                senhaAutenticacao: sessionStorage.getItem('SENHA_USUARIO')
-            })
-        })
-        if (resposta.ok) {
-            window.location = "cadastro_gerente.html";
-
-        } else {
-            return resposta.json().then(err => { throw err; });
-        }
-
-        return false; // Previne que o formulário recarregue a página
+    const resposta = await fetch("/filial/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cep: cepVar,
+        bairro: bairroVar,
+        rua: ruaVar,
+        numero: numeroVar,
+        complemento: complementoVar,
+        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+      }),
+    });
+    if (resposta.ok) {
+      window.location = "cadastro_gerente.html";
+    } else {
+      return resposta.json().then((err) => {
+        throw err;
+      });
     }
 
+    return false; // Previne que o formulário recarregue a página
+  }
 
-    async function listarFiliais() {
+  async function cadastrarTotem() {
+    var macVar = mac_input.value;
+    var filialVar = Tfilial_input.value;
 
-        const resposta = await fetch("/filial/listar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailAutenticacao: sessionStorage.getItem('EMAIL_USUARIO'),
-                senhaAutenticacao: sessionStorage.getItem('SENHA_USUARIO')
-            })
-        })
-        if (resposta.ok) {
-            const dados = await resposta.json()
-
-            console.log(dados)
-            
-            dados.forEach(element => {
-                Ffilial_input.innerHTML += '<option>' + element.filialId + '</option>'
-                Tfilial_input.innerHTML += '<option>' + element.filialId + '</option>'
-            });
-
-
-        } else {
-            return resposta.json().then(err => { throw err; });
-        }
-
-
-        return false; // Previne que o formulário recarregue a página
+    if (macVar === "" || filialVar === "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
+      // finalizarAguardar();
+      return false;
     }
+
+    console.log(Tfilial_input.value);
+
+    const resposta = await fetch("/totem/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        mac_address: macVar,
+        fk_filial: filialVar,
+
+        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+      }),
+    });
+    if (resposta.ok) {
+      window.location = "cadastro_gerente.html";
+    } else {
+      return resposta.json().then((err) => {
+        throw err;
+      });
+    }
+
+    return false; // Previne que o formulário recarregue a página
+  }
+
+  async function listarFiliais() {
+    const resposta = await fetch("/filial/listar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+      }),
+    });
+    if (resposta.ok) {
+      const dados = await resposta.json();
+
+      console.log(dados);
+
+      dados.forEach((element) => {
+        Ffilial_input.innerHTML += "<option>" + element.filialId + "</option>";
+        Tfilial_input.innerHTML += "<option>" + element.filialId + "</option>";
+      });
+    } else {
+      return resposta.json().then((err) => {
+        throw err;
+      });
+    }
+
+    return false; // Previne que o formulário recarregue a página
+  }
 </script>

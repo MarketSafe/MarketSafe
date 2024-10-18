@@ -1,140 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <script src="./js/sessao.js"></script>
 
-    <link rel="stylesheet" href="./css/style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="css/icon.png">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="icon" href="css/icon.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
 
     <title>MarketSafe | Login</title>
-</head>
+  </head>
 
-<body class="body_login">
-
+  <body class="body_login">
     <div class="header">
+      <a href="index.html">
+        <div class="logo">MKTS</div>
+      </a>
+      <div class="cel-opts">
+        <i class="bx bx-menu"></i>
+      </div>
+      <div class="opts">
         <a href="index.html">
-            <div class="logo">MKTS</div>
+          <li>Inicio</li>
         </a>
-        <div class="cel-opts">
-            <i class='bx bx-menu'></i>
-        </div>
-        <div class="opts">
-            <a href="index.html">
-                <li>Inicio</li>
-            </a>
-            <a href="#">
-                <li>Sobre</li>
-            </a>
-            <a href="#">
-                <li>Suporte</li>
-            </a>
-        </div>
+        <a href="#">
+          <li>Sobre</li>
+        </a>
+        <a href="#">
+          <li>Suporte</li>
+        </a>
+      </div>
     </div>
 
     <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
         </div>
+      </div>
+    </div>
 
-        <div class="painel">
-            <div class="caixinha-branca" id="caixinha-branca">
-                <div class="formulario-container login-container">
-                    <form class="login-cadastro">
-                        <h1>Bem-Vindo de volta!</h1>
-                        <input type="email" placeholder="Email" id="email_login_input" />
-                        <input type="password" placeholder="Senha" id="senha_login_input" />
+    <div class="painel">
+      <div class="caixinha-branca" id="caixinha-branca">
+        <div class="formulario-container login-container">
+          <form class="login-cadastro">
+            <h1>Bem-Vindo de volta!</h1>
+            <input type="email" placeholder="Email" id="email_login_input" />
+            <input type="password" placeholder="Senha" id="senha_login_input" />
 
-                        <button onclick="entrar()">Login</button>
+            <button type="button" onclick="entrar()">Login</button>
 
-                        <div id="div_aguardar" class="loading-div">
-                            <img src="./assets/img/circle-loading.gif" id="loading-gif" />
-                        </div>
+            <div id="div_aguardar" class="loading-div">
+              <img src="./assets/img/circle-loading.gif" id="loading-gif" />
+            </div>
 
-                        <div id="div_erros_login"></div>
-                    </form>
-                </div>
-                <!-- <div class="container-animado">
+            <div id="div_erros_login"></div>
+          </form>
+        </div>
+        <!-- <div class="container-animado">
                     <div class="deslize">
                         <div class="painel-animado animacao-direita">
                             <img src="./assets/img/Logo Self 2.png" alt="logo">
                         </div>
                     </div>
                 </div> -->
-            </div>
-
-</body>
-
+      </div>
+    </div>
+  </body>
 </html>
 <script>
-    function entrar() {
-        aguardar();
+  function entrar() {
+    aguardar();
 
-        var emailVar = document.getElementById("email_login_input").value;
-        var senhaVar = document.getElementById("senha_login_input").value;
+    var emailVar = document.getElementById("email_login_input").value;
+    var senhaVar = document.getElementById("senha_login_input").value;
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
-            finalizarAguardar();
-            return false;
+    if (emailVar == "" || senhaVar == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "(Preencha todos os campos para prosseguir)";
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    fetch("/funcionario/autenticar", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailVar,
+        senha: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json().then((json) => {
+            console.log(json);
+
+            sessionStorage.setItem("ID_USUARIO", json.id);
+            sessionStorage.setItem("NOME_USUARIO", json.nome);
+            sessionStorage.setItem("EMAIL_USUARIO", emailVar);
+            sessionStorage.setItem("SENHA_USUARIO", senhaVar);
+
+            window.location = "cadastro_gerente.html";
+          });
         } else {
-            setInterval(sumirMensagem, 5000)
+          console.log("Houve um erro ao tentar realizar o login!");
+
+          resposta.json().then((texto) => {
+            console.error(texto);
+            finalizarAguardar(JSON.stringify(texto));
+          });
         }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
 
+    return false;
+  }
 
-        fetch("/funcionario/autenticar", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: emailVar,
-                senha: senhaVar
-            })
-        }).then(function (resposta) {
-
-            if (resposta.ok) {
-                resposta.json().then(json => {
-                    
-                    console.log(json)
-                    sessionStorage.setItem('EMAIL_USUARIO', emailVar)
-                    sessionStorage.setItem('NOME_USUARIO', json.nome)
-                    sessionStorage.setItem('ID_USUARIO', json.id)
-                    sessionStorage.setItem('SENHA_USUARIO', senhaVar)
-                    
-                    
-                    console.log(6);
-                    window.location = "cadastro_gerente.html";
-                    
-
-                });
-
-            } else {
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.json().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
 </script>
