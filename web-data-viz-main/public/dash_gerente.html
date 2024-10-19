@@ -1,256 +1,306 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="dash.css" />
-    <link rel="icon" href="css/icon.png" />
+    <link rel="stylesheet" href="dash.css">
+    <link rel="icon" href="css/icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-  </head>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
 
-  <body>
-    <div class="container">
-      <div class="menu">
-        <div class="perfil">
-          <img src="../public/assets/img/foto-gerente.jpg" alt="Foto Perfil" />
-          <h2>Vitor</h2>
-          <p>Gerente</p>
-        </div>
-        <div class="engloba-itens">
-          <div class="regiao-select">
-            <label for="region">Componente</label>
-            <select id="region">
-              <option value="">Selecione uma opção</option>
-              <option value="regiao1">Processador</option>
-              <option value="regiao2">Memória</option>
-            </select>
-          </div>
-        </div>
-        <div class="engloba-itens2">
-          <div class="filial-select">
-            <label for="filial">Filial Selecionadas</label>
-            <select id="filial">
-              <option value="" selected>Selecione uma opção</option>
-              <option value="filial1">Filial 1</option>
-              <option value="filial2">Filial 2</option>
-            </select>
-            <select id="filial2">
-              <option value="" selected>Selecione uma opção</option>
-              <option value="filial1">Filial 1</option>
-              <option value="filial2">Filial 2</option>
-            </select>
-          </div>
-          <div id="conteudo1" class="data-select">
-            <div class="mudar-periodo">
-              <div>
-                <label for="start-date">Período</label>
-              </div>
-              <div class="seta-dash">
-                <img id="troca" src="./css/seta-dash.svg" alt="" />
-              </div>
-            </div>
-            <div class="campo-datas">
-              <input type="date" id="start-date" />
-              <input type="date" id="end-date" />
-            </div>
-          </div>
+</head>
 
-          <div id="conteudo2" style="display: none">
-            <div class="data-select">
-              <div class="mudar-periodo">
-                <div>
-                  <label for="periodo">Período</label>
-                </div>
-                <div class="seta-dash">
-                  <img id="novaTroca" src="./css/seta-dash.svg" alt="" />
-                </div>
-              </div>
-              <div class="periodo-select">
-                <select id="opts-select">
-                  <option value="" selected>Selecione uma opção</option>
-                  <option value="mes">Mês</option>
-                  <option value="semana">Semana</option>
-                  <option value="ano">Ano</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <button class="botao-comparar">COMPARAR</button>
-        </div>
-      </div>
-
-      <div class="dashes">
-        <div class="container-dashes">
-          <div class="gauge">
-            <!-- ESSA É A DIV DE GAUGE E DE QTD DE TOTENS (o nome da classe é tbd :P)  -->
-            <!-- TODO: MEXER NELA EM OUTRO MOMENTO -->
-          </div>
-          <div class="dashes-baixo">
-            <div class="grafico2">
-              <span>Quantidade de sobrecargas por Filial</span>
-              <canvas id="grafico2" style="height: 100px"> </canvas>
-            </div>
-            <div class="grafico1">
-              <!-- <span>Distribuição de consumo entre Filiais</span> -->
-              <canvas id="grafico1"> </canvas>
-            </div>
-          </div>
-        </div>
-      </div>
+<body>
+    <div class="header">
+        <ul class="navbar">
+            <li><a href="perfilAnalista.html">Perfil</a></li>
+            <li><a>|</a></li>
+            <li class="agora"><a href="dash_analista.html">Dashboard</a></li>
+            <li><a>|</a></li>
+            <li><a href="">Ajuda</a></li>
+            <li><a>|</a></li>
+            <li><a href="index.html">Sair</a></li>
+        </ul>
     </div>
-  </body>
+    <div class="container">
+        <div class="menu">
+            <div class="perfil">
+                <img src="../public/assets/img/foto-gerente.jpg" alt="Foto Perfil">
+                <h2>Vitor</h2>
+                <p>Gerente</p>
+            </div>
+            <div class="engloba-itens">
+                <div class="regiao-select">
+                    <label for="region">Componente</label>
+                    <select id="region">
+                        <option value="">Selecione uma opção</option>
+                        <option id="1" value="1">Processador</option>
+                        <option value="2">Memória</option>
+                    </select>
+                </div>
+            </div>
+            <div class="engloba-itens2">
+                <div class="filial-select">
+                    <label for="filial">Filial Selecionadas</label>
+                    <select id="filial">
+                        <option value="" selected>Selecione uma opção</option>
+                        <option value="1">Filial 1</option>
+                        <option value="2">Filial 2</option>
+                    </select>
+                    <select id="filial2">
+                        <option value="" selected>Selecione uma opção</option>
+                        <option value="1">Filial 1</option>
+                        <option value="2">Filial 2</option>
+                    </select>
+                </div>
+                <div id="conteudo1" class="data-select">
+                    <div class="mudar-periodo">
+                        <div>
+                            <label for="start-date">Período</label>
+                        </div>
+                        <div class="seta-dash">
+                            <img id="troca" src="./css/seta-dash.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="campo-datas">
+                        <input type="date" id="start-date">
+                        <input type="date" id="end-date">
+                    </div>
+                </div>
+
+                <div id="conteudo2" style="display: none;">
+                    <div class="data-select">
+                        <div class="mudar-periodo">
+                            <div>
+                                <label for="periodo">Período</label>
+                            </div>
+                            <div class="seta-dash">
+                                <img id="novaTroca" src="./css/seta-dash.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="periodo-select">
+                            <select id="opts-select">
+                                <option>Selecione uma opção</option>
+                                <option value="mes"> Mês</option>
+                                <option value="semana">Semana</option>
+                                <option value="ano">Ano</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="comparar()" class="botao-comparar">COMPARAR</button>
+            </div>
+        </div>
+
+        <div class="dashes">
+            <div class="container-dashes">
+                <h3>3 Filiais com mais alertas (no dia)</h3>
+                <div class="primeira_linha_graficos">
+                    <div class="div_para_graficos">
+                        <div class="graficoCPU">
+                            <canvas id="cpuChart"></canvas>
+                        </div>
+                        <div class="graficoRAM">
+                            <canvas id="ramChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="totens">
+                        <h3>Quantidade de Filiais</h1>
+                            <div class="totens-quantidade">
+                                8
+                            </div>
+                            <h4>Nº de filiais com problema</h4>
+                            <div class="totens-problema">
+                                4 </div>
+                    </div>
+                </div>
+                <div class="dashes-baixo">
+                    <div class="grafico1">
+                        <span class="span_graf">Alertas por Zonas (no dia)</span>
+                        <canvas id="radarChart" width="400" height="400">
+
+                        </canvas>
+                    </div>
+                    <div class="grafico_wordcloud">
+                        <h3>Word Cloud - Bairros de São Paulo</h3>
+                        <div class="wordcloud-container">
+                            <canvas id="wordCloudChart" style="width:100%; height:400px;"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</body>
+
 </html>
 
 <script>
-  const trocaConteudo = document.getElementById("troca");
-  const trocaConteudo2 = document.getElementById("novaTroca");
-  const conteudo1 = document.getElementById("conteudo1");
-  const conteudo2 = document.getElementById("conteudo2");
 
-  trocaConteudo.addEventListener("click", function () {
-    conteudo2.style.display = "block";
-    conteudo1.style.display = "none";
-  });
+    function comparar() {
 
-  trocaConteudo2.addEventListener("click", function () {
-    conteudo1.style.display = "block";
-    conteudo2.style.display = "none";
-  });
+        const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
+        const dashes_baixo = document.getElementById('dashes-baixo');
 
-  const data = {
-    labels: ["Filial 1", "Filial 2", "Filial 3", "Filial 4"],
-    datasets: [
-      {
-        data: [40, 10, 20, 30],
-        backgroundColor: ["#FFB418", "#FFFFFF", "#FF914D", "#FF3131"],
-        datalabels: {
-          color: ["#FFFFFF", "#000000", "#FFFFFF", "#FFFFFF"],
+        var region = region.value;
+        var filial = filial.value;
+        var filial2 = filial2.value;
+
+        if (region == 2 && filial == 2 && filial2 == 2) {
+            grafico1.style.display = 'none';
+            grafico2.style.display = 'none';
+        }
+
+    }
+
+
+
+    const trocaConteudo = document.getElementById('troca');
+    const trocaConteudo2 = document.getElementById('novaTroca');
+    const conteudo1 = document.getElementById('conteudo1');
+    const conteudo2 = document.getElementById('conteudo2');
+
+    trocaConteudo.addEventListener('click', function () {
+        conteudo2.style.display = 'block';
+        conteudo1.style.display = 'none';
+
+    });
+
+    trocaConteudo2.addEventListener('click', function () {
+        conteudo1.style.display = 'block';
+        conteudo2.style.display = 'none';
+
+    });
+
+    const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+    const cpuChart = new Chart(cpuCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Filial 1', 'Filial 4', 'Filial 6'],
+            datasets: [{
+                label: 'CPU',
+                data: [80, 50, 70],
+                backgroundColor: 'orange',
+                borderWidth: 1
+            }]
         },
-        // hoverOffset: 4
-      },
-    ],
-  };
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function (value) {
+                            return value;
+                        }
+                    }
+                }
+            }
+        }
+    });
 
-  const config = {
-    type: "doughnut",
-    data: data,
-    options: {
-      plugins: {
-        legend: {
-          display: true,
-          labels: {
-            color: "white",
-          },
+    // Gráfico de RAM
+    const ramCtx = document.getElementById('ramChart').getContext('2d');
+    const ramChart = new Chart(ramCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Filial 6', 'Filial 2', 'Filial 1'],
+            datasets: [{
+                label: 'RAM',
+                data: [60, 90, 70],
+                backgroundColor: 'red',
+                borderWidth: 1
+            }]
         },
-        tooltip: {
-          callbacks: {
-            label: function (tooltipItem) {
-              var dataset = tooltipItem.dataset.data;
-              var total = dataset.reduce((prev, curr) => prev + curr, 0);
-              var currentValue = dataset[tooltipItem.dataIndex];
-              var porcentagem = ((currentValue / total) * 100).toFixed(1);
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function (value) {
+                            return value;
+                        }
+                    }
+                }
+            }
+        }
+    });
 
-              return `${data.labels[tooltipItem.dataIndex]}: ${porcentagem}%`;
+    // Word Cloud Chart
+    const wordCloudCtx = document.getElementById('wordCloudChart').getContext('2d');
+
+    const dataWordCloud = {
+        labels: [
+            "ÁguaRasa", "AltodePinheiros", "Anhanguera", "Aricanduva", "ArturAlvim",
+            "BarraFunda", "BelaVista", "Belém", "BomRetiro", "Brasilândia",
+            "Butantã", "Cachoeirinha", "Cambuci", "CampoBelo", "CampoGrande",
+            "CampoLimpo", "Cangaíba", "CapãoRedondo", "Carrão", "CasaVerde",
+            "CidadeAdemar", "CidadeDutra", "CidadeLíder", "CidadeTiradentes",
+            "Consolação", "Cursino", "ErmelinoMatarazzo", "FreguesiadoÓ", "Grajaú",
+            "Guaianases", "Iguatemi", "Ipiranga", "ItaimBibi", "ItaimPaulista",
+            "Itaquera", "Jabaquara", "Jaçanã", "Jaguara", "Jaguaré", "Jaraguá",
+            "JardimÂngela", "JardimHelena", "JardimPaulista", "JardimSãoLuís",
+            "Lapa", "Liberdade", "Limão", "Mandaqui", "Marsilac", "Moema",
+            "Mooca", "Morumbi", "Parelheiros", "Pari", "ParquedoCarmo", "Penha",
+            "Perdizes", "Pinheiros", "PonteRasa", "RaposoTavares", "República",
+            "RioPequeno", "Sacomã", "SantaCecília", "Santana", "SantoAmaro",
+            "SãoDomingos", "SãoLucas", "SãoMateus", "SãoMiguelPaulista",
+            "SãoRafael", "Sapopemba", "Saúde", "Sé", "Tatuapé", "Tremembé",
+            "Tucuruvi", "VilaAndrade", "VilaCuruçá", "VilaFormosa", "VilaGuilherme",
+            "VilaJacuí", "VilaLeopoldina", "VilaMaria", "VilaMariana", "VilaMatilde",
+            "VilaMedeiros", "VilaPrudente", "VilaSônia"
+        ],
+        datasets: [{
+            label: 'Quantidade de Alertas:',
+            data: [10, 9, 12, 14, 7, 8, 10, 9, 11, 12, 13, 10, 8, 14, 11, 13, 7, 12, 9, 10],
+            padding: 1,
+            color: function (context) {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                const max = Math.max(...context.dataset.data);
+                const min = Math.min(...context.dataset.data);
+                const percent = (value - min) / (max - min);
+                const colors = ['#FF5733', '#FFBD33', '#33FF57', '#3375FF']; //cores
+                return colors[Math.floor(percent * (colors.length - 1))];
             },
-          },
+            size: function (context) {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                return value * 1.5; //dar mais destaque nas palvras
+            }
+        }]
+    };
+    const optionsWordCloud = {
+        plugins: {
+            legend: { display: false }
+        },
+        layout: {
+            fit: true
         },
         title: {
-          display: true,
-          text: "Distribuição de consumo entre Filiais",
-          color: "white",
-          position: "top",
-        },
-      },
-      elements: {
-        arc: {
-          borderWidth: 0,
-        },
-      },
-      // scales: {
-      //     x: {
-      //         title: {
-      //             display: true,
-      //             color: 'white',
-      //             text: 'Distribuição de consumo entre Filiais',
-      //         }
-      //     }
-      // }
-    },
-    plugins: [ChartDataLabels],
-  };
+            display: true,
+            text: 'Bairros de São Paulo'
+        }
+    };
 
-  let doughnut = new Chart(document.getElementById("grafico1"), config);
+    new Chart(wordCloudCtx, {
+        type: 'wordCloud',
+        data: dataWordCloud,
+        options: optionsWordCloud
+    });
 
-  // document.getElementById('grafico1').style.height = '100%'
-  // document.getElementById('grafico1').style.width = 'auto'
-  // document.getElementById('grafico1').style.boxSizing = ''
-
-  const labels = ["Filial 1", "Filial 2", "Filial 3", "Filial 4"];
-
-  const data2 = {
-    labels: labels,
-    datasets: [
-      {
-        axis: "y",
-        data: [40, 19, 34, 45],
-        fill: true,
-        backgroundColor: ["#FFB418", "#FFB418", "#FFB418", "#FFB418"],
-      },
-    ],
-  };
-
-  const config2 = {
-    type: "bar",
-    data: data2,
-    options: {
-      indexAxis: "y",
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        y: {
-          ticks: {
-            color: "white",
-          },
-          grid: {
-            display: false,
-          },
-        },
-        x: {
-          ticks: {
-            color: "white",
-          },
-          grid: {
-            color: "#505050",
-          },
-        },
-      },
-    },
-  };
-
-  let side_bar = new Chart(document.getElementById("grafico2"), config2);
-
-  // datalabels: {
-  //     anchor: 'end',
-  //     align: 'end',
-  //     formatter: ((value, ctx) => {
-  //         console.log(ctx)
-  //         const totalSum = ctx.dataset.data.reduce((accumulator, currentValue) => {
-  //             return accumulator + currentValue
-  //         }, 0);
-  //         console.log(totalSum)
-  //         const percentage = value / totalSum * 100;
-  //         return `${percentage.toFixed(1)}%`;
-  //     }),
-  //     font: {
-  //         size: 30
-  //     }
-  // }
+  
 </script>

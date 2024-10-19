@@ -340,3 +340,15 @@ body {
     width: 380px;
     margin-left: 80px;
 }
+
+/* .wordcloud-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #2c2f38;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 70%;
+    margin: 0 auto;
+    gap: 20px;
+} */
