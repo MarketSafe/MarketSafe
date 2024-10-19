@@ -15,3 +15,7 @@ grant insert on market_safe.* to 'mktsUserInsert'@'%';
 drop user if exists 'mktsUserSelect'@'%';
 create user 'mktsUserSelect'@'%' identified by 'sptech';
 grant select on market_safe.* to 'mktsUserSelect'@'%';
+
+drop user if exists 'mktsUserInsertAlerta'@'%';
+create user 'mktsUserInsertAlerta'@'%' identified by 'sptech';
+grant insert on market_safe.alerta to 'mktsUserInsertAlerta'@'%';

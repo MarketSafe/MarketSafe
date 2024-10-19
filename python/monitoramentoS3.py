@@ -63,7 +63,7 @@ def verificarAlerta(mac, cpuPorcentagem, ramPorcentagem):
     # Se o uso de CPU ou RAM for maior que 85% 
     if cpuPorcentagem > 85 or ramPorcentagem > 85:
         # Verifica se já houve um alerta nos últimos 5 minutos para esse MAC
-        if mac not in ultimos_alertas or agora - ultimos_alertas[mac] > timedelta(minutes=5):
+        if mac not in ultimos_alertas or agora - ultimos_alertas[mac] > datetime.timedelta(minutes=5):
             gerarAlerta(agora.strftime("%Y-%m-%d %H:%M:%S"), cpuPorcentagem, ramPorcentagem)
             ultimos_alertas[mac] = agora  # Atualiza o tempo do último alerta
 
@@ -91,10 +91,10 @@ else:
             ramPorcentagem = psutil.virtual_memory().percent
             dataHora = datetime.datetime.now()
             dados.append({
-                "data_hora": dataHora.strftime("%Y-%m-%d %H:%M:%S"),
-                "mac_address": macAddress,
-                "cpu_porcentagem": cpuPorcentagem,
-                "ram_porcentagem": ramPorcentagem
+                "dataHora": dataHora.strftime("%Y-%m-%d %H:%M:%S"),
+                "macAddress": macAddress,
+                "cpuPorcentagem": cpuPorcentagem,
+                "ramPorcentagem": ramPorcentagem
             })
 
             if prints == "s": print(dados[i])
