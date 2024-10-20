@@ -17,11 +17,8 @@ public class MonitoramentoData {
   private Integer cpuPorcentagem;
   @JsonProperty("ramPorcentagem")
   private Integer ramPorcentagem;
-  @JsonIgnore
   private Integer fkFilial;
-  @JsonIgnore
   private Integer fkEmpresa;
-  @JsonIgnore
   private String bairro;
 
   // Getters e setters:

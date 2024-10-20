@@ -1,7 +1,10 @@
 package school.sptech.bucket.mappers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.bucket.data.MonitoramentoData;
 import school.sptech.database.Conexao;
@@ -42,8 +45,9 @@ public class MonitoramentoMapper {
         return registros;
     }
     public List<MonitoramentoData> mapCsv(InputStream inputStream) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(inputStream, new TypeReference<List<MonitoramentoData>>() {
-        });
+        CsvSchema monitoramentoDataSchema = CsvSchema.emptySchema().withHeader();
+        CsvMapper mapper = new CsvMapper();
+        MappingIterator<MonitoramentoData> monitoramentoData = mapper.readerFor(MonitoramentoData.class).with(monitoramentoDataSchema).readValues(inputStream);
+        return monitoramentoData.readAll();
     }
 }
