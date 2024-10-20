@@ -41,8 +41,8 @@ public class TotemEntity {
   @Override
   public String toString() {
     return "TotemEntity { Integer id: " + getId() +
-            ", String dataHora: " + getDataHora() +
-            ", Integer macAddress: " + getMacAddress() +
+            ", String dataHora: \"" + getDataHora() +
+            "\", Integer macAddress: " + getMacAddress() +
             ", Integer fkFilial: " + getFkFilial() + " }";
   }
 }
