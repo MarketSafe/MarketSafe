@@ -112,8 +112,31 @@
 
         <div class="dashes">
             <div class="container-dashes">
-                <h3>3 Filiais com mais alertas (no dia)</h3>
-                <div class="primeira_linha_graficos">
+                <h3>3 Filiais com mais alertas (no mês)</h3>
+                <div class="ranking">
+                    <table>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Filial Bairro</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr class="highlight">
+                            <td>1</td>
+                            <td>Paulista</td>
+                            <td>19</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Água Rasa</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Pinheiros</td>
+                            <td>9</td>
+                        </tr>
+                    </table>
+                    <!-- <div class="primeira_linha_graficos">
                     <div class="div_para_graficos">
                         <div class="graficoCPU">
                             <canvas id="cpuChart"></canvas>
@@ -121,17 +144,18 @@
                         <div class="graficoRAM">
                             <canvas id="ramChart"></canvas>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="totens">
                         <h3>Quantidade de Filiais</h1>
                             <div class="totens-quantidade">
                                 8
                             </div>
-                            <h4>Nº de filiais com problema</h4>
+                            <h4>Nº de filiais com alertas ativos</h4>
                             <div class="totens-problema">
                                 4 </div>
                     </div>
                 </div>
+            </div>
                 <div class="dashes-baixo">
                     <div class="radar-container">
                         <span class="span_graf">Alertas por Zonas (no dia)</span>
@@ -194,130 +218,62 @@
 
     // });
 
-    const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-    const cpuChart = new Chart(cpuCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Filial 1', 'Filial 4', 'Filial 6'],
-            datasets: [{
-                label: 'CPU',
-                data: [80, 50, 70],
-                backgroundColor: 'orange',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        callback: function (value) {
-                            return value;
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // Gráfico de RAM
-    const ramCtx = document.getElementById('ramChart').getContext('2d');
-    const ramChart = new Chart(ramCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Filial 6', 'Filial 2', 'Filial 1'],
-            datasets: [{
-                label: 'RAM',
-                data: [60, 90, 70],
-                backgroundColor: 'red',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        callback: function (value) {
-                            return value;
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    /*
-
-        IMPORTANTE: O WORD CLOUD FOI COMENTADO POIS IMPEDIA O PLOT DO RADAR.
-
-    */
-
-    // Word Cloud Chart
-    // const wordCloudCtx = document.getElementById('wordCloudChart').getContext('2d');
-
-    // const dataWordCloud = {
-    //     labels: [
-    //         "ÁguaRasa", "AltodePinheiros", "Anhanguera", "Aricanduva", "ArturAlvim",
-    //         "BarraFunda", "BelaVista", "Belém", "BomRetiro", "Brasilândia",
-    //         "Butantã", "Cachoeirinha", "Cambuci", "CampoBelo", "CampoGrande",
-    //         "CampoLimpo", "Cangaíba", "CapãoRedondo", "Carrão", "CasaVerde",
-    //         "CidadeAdemar", "CidadeDutra", "CidadeLíder", "CidadeTiradentes",
-    //         "Consolação", "Cursino", "ErmelinoMatarazzo", "FreguesiadoÓ", "Grajaú",
-    //         "Guaianases", "Iguatemi", "Ipiranga", "ItaimBibi", "ItaimPaulista",
-    //         "Itaquera", "Jabaquara", "Jaçanã", "Jaguara", "Jaguaré", "Jaraguá",
-    //         "JardimÂngela", "JardimHelena", "JardimPaulista", "JardimSãoLuís",
-    //         "Lapa", "Liberdade", "Limão", "Mandaqui", "Marsilac", "Moema",
-    //         "Mooca", "Morumbi", "Parelheiros", "Pari", "ParquedoCarmo", "Penha",
-    //         "Perdizes", "Pinheiros", "PonteRasa", "RaposoTavares", "República",
-    //         "RioPequeno", "Sacomã", "SantaCecília", "Santana", "SantoAmaro",
-    //         "SãoDomingos", "SãoLucas", "SãoMateus", "SãoMiguelPaulista",
-    //         "SãoRafael", "Sapopemba", "Saúde", "Sé", "Tatuapé", "Tremembé",
-    //         "Tucuruvi", "VilaAndrade", "VilaCuruçá", "VilaFormosa", "VilaGuilherme",
-    //         "VilaJacuí", "VilaLeopoldina", "VilaMaria", "VilaMariana", "VilaMatilde",
-    //         "VilaMedeiros", "VilaPrudente", "VilaSônia"
-    //     ],
-    //     datasets: [{
-    //         label: 'Quantidade de Alertas:',
-    //         data: [10, 9, 12, 14, 7, 8, 10, 9, 11, 12, 13, 10, 8, 14, 11, 13, 7, 12, 9, 10],
-    //         padding: 1,
-    //         color: function (context) {
-    //             const index = context.dataIndex;
-    //             const value = context.dataset.data[index];
-    //             const max = Math.max(...context.dataset.data);
-    //             const min = Math.min(...context.dataset.data);
-    //             const percent = (value - min) / (max - min);
-    //             const colors = ['#FF5733', '#FFBD33', '#33FF57', '#3375FF']; //cores
-    //             return colors[Math.floor(percent * (colors.length - 1))];
-    //         },
-    //         size: function (context) {
-    //             const index = context.dataIndex;
-    //             const value = context.dataset.data[index];
-    //             return value * 1.5; //dar mais destaque nas palvras
+    // const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+    // const cpuChart = new Chart(cpuCtx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Filial 1', 'Filial 4', 'Filial 6'],
+    //         datasets: [{
+    //             label: 'CPU',
+    //             data: [80, 50, 70],
+    //             backgroundColor: 'orange',
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 max: 100,
+    //                 ticks: {
+    //                     callback: function (value) {
+    //                         return value;
+    //                     }
+    //                 }
+    //             }
     //         }
-    //     }]
-    // };
-    // const optionsWordCloud = {
-    //     plugins: {
-    //         legend: { display: false }
-    //     },
-    //     layout: {
-    //         fit: true
-    //     },
-    //     title: {
-    //         display: true,
-    //         text: 'Bairros de São Paulo'
     //     }
-    // };
-
-    // new Chart(wordCloudCtx, {
-    //     type: 'wordCloud',
-    //     data: dataWordCloud,
-    //     options: optionsWordCloud
     // });
 
+    // // Gráfico de RAM
+    // const ramCtx = document.getElementById('ramChart').getContext('2d');
+    // const ramChart = new Chart(ramCtx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Filial 6', 'Filial 2', 'Filial 1'],
+    //         datasets: [{
+    //             label: 'RAM',
+    //             data: [60, 90, 70],
+    //             backgroundColor: 'red',
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 max: 100,
+    //                 ticks: {
+    //                     callback: function (value) {
+    //                         return value;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
+
+    
     // Radar Chart
     const radarCtx = document.getElementById('radarChart').getContext('2d');
     const dataRadar = {
