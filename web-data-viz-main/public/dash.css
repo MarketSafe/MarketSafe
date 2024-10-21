@@ -352,3 +352,29 @@ body {
     margin: 0 auto;
     gap: 20px;
 } */
+
+.grafico_wordcloud {
+    display: flex;
+    flex-direction: column;
+    background-color: #292A32;
+    border-radius: 7px;
+    width: 50%;
+}
+
+.wordcloud-container{
+    display: flex;
+    flex-direction: row;
+    background-color: #2c2f38;
+    border-radius: 7px;
+}
+
+.radar-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #292A32;
+    border-radius: 0.5rem;
+    align-items: center;
+    padding: 30px;
+    justify-content: center;
+    width: 34%
+}

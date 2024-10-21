@@ -123,16 +123,16 @@
                     </div>
                 </div>
                 <div class="dashes-baixo">
-                    <div class="grafico1">
+                    <div class="radar-container">
                         <span class="span_graf">Alertas por Zonas (no dia)</span>
-                        <canvas id="radarChart" width="400" height="400">
+                        <canvas id="radarChart">
 
                         </canvas>
                     </div>
                     <div class="grafico_wordcloud">
                         <h3>Word Cloud - Bairros de São Paulo</h3>
                         <div class="wordcloud-container">
-                            <canvas id="wordCloudChart" style="width:100%; height:400px;"></canvas>
+                            <canvas id="wordCloudChart" style="width:100%; height:350px;"></canvas>
                         </div>
                     </div>
 
@@ -239,68 +239,134 @@
         }
     });
 
+    /*
+
+        IMPORTANTE: O WORD CLOUD FOI COMENTADO POIS IMPEDIA O PLOT DO RADAR.
+
+    */
+
     // Word Cloud Chart
-    const wordCloudCtx = document.getElementById('wordCloudChart').getContext('2d');
+    // const wordCloudCtx = document.getElementById('wordCloudChart').getContext('2d');
 
-    const dataWordCloud = {
-        labels: [
-            "ÁguaRasa", "AltodePinheiros", "Anhanguera", "Aricanduva", "ArturAlvim",
-            "BarraFunda", "BelaVista", "Belém", "BomRetiro", "Brasilândia",
-            "Butantã", "Cachoeirinha", "Cambuci", "CampoBelo", "CampoGrande",
-            "CampoLimpo", "Cangaíba", "CapãoRedondo", "Carrão", "CasaVerde",
-            "CidadeAdemar", "CidadeDutra", "CidadeLíder", "CidadeTiradentes",
-            "Consolação", "Cursino", "ErmelinoMatarazzo", "FreguesiadoÓ", "Grajaú",
-            "Guaianases", "Iguatemi", "Ipiranga", "ItaimBibi", "ItaimPaulista",
-            "Itaquera", "Jabaquara", "Jaçanã", "Jaguara", "Jaguaré", "Jaraguá",
-            "JardimÂngela", "JardimHelena", "JardimPaulista", "JardimSãoLuís",
-            "Lapa", "Liberdade", "Limão", "Mandaqui", "Marsilac", "Moema",
-            "Mooca", "Morumbi", "Parelheiros", "Pari", "ParquedoCarmo", "Penha",
-            "Perdizes", "Pinheiros", "PonteRasa", "RaposoTavares", "República",
-            "RioPequeno", "Sacomã", "SantaCecília", "Santana", "SantoAmaro",
-            "SãoDomingos", "SãoLucas", "SãoMateus", "SãoMiguelPaulista",
-            "SãoRafael", "Sapopemba", "Saúde", "Sé", "Tatuapé", "Tremembé",
-            "Tucuruvi", "VilaAndrade", "VilaCuruçá", "VilaFormosa", "VilaGuilherme",
-            "VilaJacuí", "VilaLeopoldina", "VilaMaria", "VilaMariana", "VilaMatilde",
-            "VilaMedeiros", "VilaPrudente", "VilaSônia"
-        ],
-        datasets: [{
-            label: 'Quantidade de Alertas:',
-            data: [10, 9, 12, 14, 7, 8, 10, 9, 11, 12, 13, 10, 8, 14, 11, 13, 7, 12, 9, 10],
-            padding: 1,
-            color: function (context) {
-                const index = context.dataIndex;
-                const value = context.dataset.data[index];
-                const max = Math.max(...context.dataset.data);
-                const min = Math.min(...context.dataset.data);
-                const percent = (value - min) / (max - min);
-                const colors = ['#FF5733', '#FFBD33', '#33FF57', '#3375FF']; //cores
-                return colors[Math.floor(percent * (colors.length - 1))];
-            },
-            size: function (context) {
-                const index = context.dataIndex;
-                const value = context.dataset.data[index];
-                return value * 1.5; //dar mais destaque nas palvras
+    // const dataWordCloud = {
+    //     labels: [
+    //         "ÁguaRasa", "AltodePinheiros", "Anhanguera", "Aricanduva", "ArturAlvim",
+    //         "BarraFunda", "BelaVista", "Belém", "BomRetiro", "Brasilândia",
+    //         "Butantã", "Cachoeirinha", "Cambuci", "CampoBelo", "CampoGrande",
+    //         "CampoLimpo", "Cangaíba", "CapãoRedondo", "Carrão", "CasaVerde",
+    //         "CidadeAdemar", "CidadeDutra", "CidadeLíder", "CidadeTiradentes",
+    //         "Consolação", "Cursino", "ErmelinoMatarazzo", "FreguesiadoÓ", "Grajaú",
+    //         "Guaianases", "Iguatemi", "Ipiranga", "ItaimBibi", "ItaimPaulista",
+    //         "Itaquera", "Jabaquara", "Jaçanã", "Jaguara", "Jaguaré", "Jaraguá",
+    //         "JardimÂngela", "JardimHelena", "JardimPaulista", "JardimSãoLuís",
+    //         "Lapa", "Liberdade", "Limão", "Mandaqui", "Marsilac", "Moema",
+    //         "Mooca", "Morumbi", "Parelheiros", "Pari", "ParquedoCarmo", "Penha",
+    //         "Perdizes", "Pinheiros", "PonteRasa", "RaposoTavares", "República",
+    //         "RioPequeno", "Sacomã", "SantaCecília", "Santana", "SantoAmaro",
+    //         "SãoDomingos", "SãoLucas", "SãoMateus", "SãoMiguelPaulista",
+    //         "SãoRafael", "Sapopemba", "Saúde", "Sé", "Tatuapé", "Tremembé",
+    //         "Tucuruvi", "VilaAndrade", "VilaCuruçá", "VilaFormosa", "VilaGuilherme",
+    //         "VilaJacuí", "VilaLeopoldina", "VilaMaria", "VilaMariana", "VilaMatilde",
+    //         "VilaMedeiros", "VilaPrudente", "VilaSônia"
+    //     ],
+    //     datasets: [{
+    //         label: 'Quantidade de Alertas:',
+    //         data: [10, 9, 12, 14, 7, 8, 10, 9, 11, 12, 13, 10, 8, 14, 11, 13, 7, 12, 9, 10],
+    //         padding: 1,
+    //         color: function (context) {
+    //             const index = context.dataIndex;
+    //             const value = context.dataset.data[index];
+    //             const max = Math.max(...context.dataset.data);
+    //             const min = Math.min(...context.dataset.data);
+    //             const percent = (value - min) / (max - min);
+    //             const colors = ['#FF5733', '#FFBD33', '#33FF57', '#3375FF']; //cores
+    //             return colors[Math.floor(percent * (colors.length - 1))];
+    //         },
+    //         size: function (context) {
+    //             const index = context.dataIndex;
+    //             const value = context.dataset.data[index];
+    //             return value * 1.5; //dar mais destaque nas palvras
+    //         }
+    //     }]
+    // };
+    // const optionsWordCloud = {
+    //     plugins: {
+    //         legend: { display: false }
+    //     },
+    //     layout: {
+    //         fit: true
+    //     },
+    //     title: {
+    //         display: true,
+    //         text: 'Bairros de São Paulo'
+    //     }
+    // };
+
+    // new Chart(wordCloudCtx, {
+    //     type: 'wordCloud',
+    //     data: dataWordCloud,
+    //     options: optionsWordCloud
+    // });
+
+    // Radar Chart
+    const radarCtx = document.getElementById('radarChart').getContext('2d');
+    const dataRadar = {
+      labels: [
+        'Central',
+        'Norte',
+        'Sul',
+        'Oeste',
+        'Leste'
+      ],
+      datasets: [{
+        label: 'Alertas(???)', // TODO: Trocar o nome dessa label
+        data: [78, 55, 90, 75, 80],
+        fill: false,
+        borderColor: '#FF3131'
+      }]
+    };
+
+    const configRadar = {
+    type: 'radar',
+    data: dataRadar,
+    options: {
+        elements: {
+            line: {
+                borderWidth: 3
             }
-        }]
-    };
-    const optionsWordCloud = {
+        },
+        scales: {
+            r: {
+                grid: {
+                    color: '#CCCCCC',
+                    circular: true
+                },
+                angleLines: {
+                    color: '#CCCCCC'
+                },
+                min: 0,
+                max: 100,
+                ticks: {
+                    stepSize: 25,
+                    color: 'white',
+                    showLabelBackdrop: false
+                },
+                pointLabels: {
+                    color: 'white'
+                }
+            }
+        },
         plugins: {
-            legend: { display: false }
-        },
-        layout: {
-            fit: true
-        },
-        title: {
-            display: true,
-            text: 'Bairros de São Paulo'
+            legend: {
+                display: false
+            }
         }
+    }
     };
 
-    new Chart(wordCloudCtx, {
-        type: 'wordCloud',
-        data: dataWordCloud,
-        options: optionsWordCloud
-    });
+    let radar = new Chart(
+        document.getElementById('radarChart'),
+        configRadar
+    );
 
-  
 </script>
