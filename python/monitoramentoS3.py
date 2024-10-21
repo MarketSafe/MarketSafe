@@ -1,7 +1,7 @@
 from uuid import getnode
 import json
 import psutil
-from datetime import datetime, timedelta
+import datetime
 from atlassian import Jira
 from requests import HTTPError
 import boto3
@@ -58,12 +58,12 @@ def gerarAlerta(dataHora, cpu, ram):
         print(e.response.text)
 
 def verificarAlerta(mac, cpuPorcentagem, ramPorcentagem):
-    agora = datetime.now()
+    agora = datetime.datetime.now()
 
     # Se o uso de CPU ou RAM for maior que 85% 
     if cpuPorcentagem > 85 or ramPorcentagem > 85:
         # Verifica se já houve um alerta nos últimos 5 minutos para esse MAC
-        if mac not in ultimos_alertas or agora - ultimos_alertas[mac] > timedelta(minutes=5):
+        if mac not in ultimos_alertas or agora - ultimos_alertas[mac] > datetime.timedelta(minutes=5):
             gerarAlerta(agora.strftime("%Y-%m-%d %H:%M:%S"), cpuPorcentagem, ramPorcentagem)
             ultimos_alertas[mac] = agora  # Atualiza o tempo do último alerta
 
@@ -89,12 +89,12 @@ else:
         for i in range(10):
             cpuPorcentagem = psutil.cpu_percent()
             ramPorcentagem = psutil.virtual_memory().percent
-            dataHora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            dataHora = datetime.datetime.now()
             dados.append({
-                "data_hora": dataHora,
-                "mac_address": macAddress,
-                "cpu_porcentagem": cpuPorcentagem,
-                "ram_porcentagem": ramPorcentagem
+                "dataHora": dataHora.strftime("%Y-%m-%d %H:%M:%S"),
+                "macAddress": macAddress,
+                "cpuPorcentagem": cpuPorcentagem,
+                "ramPorcentagem": ramPorcentagem
             })
 
             if prints == "s": print(dados[i])
@@ -104,7 +104,7 @@ else:
 
             time.sleep(1)
 
-        jsonName = f"monitoramento/registro.{contagem}.{macAddress}.json"
+        jsonName = f"monitoramento/registro.{dataHora.strftime("%Y-%m-%d.%H-%M-%S")}.{macAddress}.json"
 
         with open("registro.json", "w") as jsonfile:
             json.dump(dados, jsonfile)

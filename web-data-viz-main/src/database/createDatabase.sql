@@ -47,7 +47,7 @@ create table funcionario(
   data_hora timestamp default current_timestamp,
   nome varchar(80) not null,
   cpf char(14) not null unique,
-  cargo enum('técnico', 'gerente') not null,
+  cargo enum('analista', 'gerente') not null,
   email varchar(80) not null unique,
   senha varchar(80) not null,
   telefone char(19) not null unique,
