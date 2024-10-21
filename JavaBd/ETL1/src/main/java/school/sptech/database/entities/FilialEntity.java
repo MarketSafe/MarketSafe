@@ -41,8 +41,8 @@ public class FilialEntity {
   @Override
   public String toString() {
     return "FilialEntity { Integer id: " + getId() +
-            ", String dataHora: " + getDataHora() +
-            ", Integer fkEmpresa: " + getFkEmpresa() +
+            ", String dataHora: \"" + getDataHora() +
+            "\", Integer fkEmpresa: " + getFkEmpresa() +
             ", Integer fkEndereco: " + getFkEndereco() + " }";
   }
 }

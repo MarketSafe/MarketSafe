@@ -58,11 +58,11 @@ public class EnderecoEntity {
 
   @Override
   public String toString() {
-    return "EnderecoEntity { Integer id:" + getId() +
-            "String cep:" + getCep() +
-            "String bairro:" + getBairro() +
-            "String rua:" + getRua() +
-            "Integer numero:" + getNumero() +
-            "String complemento:" + getComplemento() + " }";
+    return "EnderecoEntity { Integer id: " + getId() +
+            ", String cep: \"" + getCep() +
+            "\", String bairro: \"" + getBairro() +
+            "\", String rua: \"" + getRua() +
+            "\", Integer numero: " + getNumero() +
+            ", String complemento: \"" + getComplemento() + "\" }";
   }
 }

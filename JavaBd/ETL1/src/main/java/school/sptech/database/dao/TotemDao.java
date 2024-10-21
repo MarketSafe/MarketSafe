@@ -12,6 +12,6 @@ public class TotemDao {
   }
 
   public TotemEntity selectByMacAddress(String macAddress) {
-    return conexao.query("select * from totem where mac_address = " + macAddress, new BeanPropertyRowMapper<TotemEntity>(TotemEntity.class)).get(0);
+    return conexao.query("select * from totem where mac_address = '" + macAddress + "'", new BeanPropertyRowMapper<TotemEntity>(TotemEntity.class)).get(0);
   }
 }
