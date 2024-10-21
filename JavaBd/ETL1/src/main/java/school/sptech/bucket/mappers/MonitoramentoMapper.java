@@ -37,7 +37,7 @@ public class MonitoramentoMapper {
             FilialEntity filialDb = filialDao.selectById(totemDb.getFkFilial());
             EnderecoEntity enderecoDb = enderecoDaoDao.selectById(filialDb.getFkEndereco());
 
-            monitoramentoData.setFkFilial(totemDb.getFkFilial());
+            monitoramentoData.setFilial(totemDb.getFkFilial());
             monitoramentoData.setFkEmpresa(filialDb.getFkEmpresa());
             monitoramentoData.setBairro(enderecoDb.getBairro());
         }

@@ -40,7 +40,7 @@ public class Main implements RequestHandler<S3Event, String> {
 
       String trustedName = "";
 
-      if (sourceKey.contains("pix")) {
+      if (sourceKey.contains("crawler")) {
         // dados do crawler:
         // Conversão do JSON para uma lista de objetos usando o Mapper:
         CrawlerMapper mapper = new CrawlerMapper();
@@ -61,7 +61,7 @@ public class Main implements RequestHandler<S3Event, String> {
         List<MonitoramentoData> data = mapper.mapJson(s3RawInputStream);
 
         // nome do arquivo no trusted:
-        trustedName = "empresa" + data.get(0).getFkFilial().toString() + ".csv";
+        trustedName = "monitoramento/empresa" + data.get(0).getFilial().toString() + ".csv";
 
 
         // pega os dados do arquivo no bucket trusted caso exista e altera a lista de objetos:
