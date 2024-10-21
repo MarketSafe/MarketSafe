@@ -11,7 +11,7 @@ import mysql.connector
 macAddress = hex(getnode())[2:]
 conn = mysql.connector.connect(
   host="127.0.0.1",
-  user="aluno",
+  user="mktsUser",
   password="sptech",
   database="market_safe"
 )
