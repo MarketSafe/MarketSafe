@@ -3,15 +3,7 @@ package school.sptech.bucket.writers;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.QuoteMode;
-import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.bucket.data.MonitoramentoData;
-import school.sptech.database.Conexao;
-import school.sptech.database.dao.EnderecoDao;
-import school.sptech.database.dao.FilialDao;
-import school.sptech.database.dao.TotemDao;
-import school.sptech.database.entities.EnderecoEntity;
-import school.sptech.database.entities.FilialEntity;
-import school.sptech.database.entities.TotemEntity;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -30,12 +22,12 @@ public class MonitoramentoCsvWriter {
     // Processar e escrever cada objeto no CSV:
     for (MonitoramentoData monitoramentoData : dados) {
       csvPrinter.printRecord(
-              monitoramentoData.getData(),
-              monitoramentoData.getHora(),
+              monitoramentoData.getDataFromDataHora(),
+              monitoramentoData.getHoraFromDataHora(),
               monitoramentoData.getMacAddress(),
               monitoramentoData.getCpuPorcentagem(),
               monitoramentoData.getRamPorcentagem(),
-              monitoramentoData.getFkFilial(),
+              monitoramentoData.getFilial(),
               monitoramentoData.getBairro()
       );
     }

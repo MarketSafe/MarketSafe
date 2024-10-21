@@ -1,6 +1,5 @@
 package school.sptech.bucket.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,13 +10,17 @@ public class MonitoramentoData {
 
   @JsonProperty("dataHora")
   private String dataHora;
+  @JsonProperty("data")
+  private String data;
+  @JsonProperty("hora")
+  private String hora;
   @JsonProperty("macAddress")
   private String macAddress;
   @JsonProperty("cpuPorcentagem")
   private Integer cpuPorcentagem;
   @JsonProperty("ramPorcentagem")
   private Integer ramPorcentagem;
-  private Integer fkFilial;
+  private Integer filial;
   private Integer fkEmpresa;
   private String bairro;
 
@@ -28,6 +31,22 @@ public class MonitoramentoData {
 
   public void setDataHora(String dataHora) {
     this.dataHora = dataHora;
+  }
+
+  public String getData() {
+    return data;
+  }
+
+  public void setData(String data) {
+    this.data = data;
+  }
+
+  public String getHora() {
+    return hora;
+  }
+
+  public void setHora(String hora) {
+    this.hora = hora;
   }
 
   public String getMacAddress() {
@@ -54,8 +73,8 @@ public class MonitoramentoData {
     this.ramPorcentagem = ramPorcentagem;
   }
 
-  public Integer getFkFilial() {
-    return fkFilial;
+  public Integer getFilial() {
+    return filial;
   }
 
   public Integer getFkEmpresa() {
@@ -66,8 +85,8 @@ public class MonitoramentoData {
     this.fkEmpresa = fkEmpresa;
   }
 
-  public void setFkFilial(Integer fkFilial) {
-    this.fkFilial = fkFilial;
+  public void setFilial(Integer filial) {
+    this.filial = filial;
   }
 
   public String getBairro() {
@@ -78,11 +97,19 @@ public class MonitoramentoData {
     this.bairro = bairro;
   }
 
-  public String getData() {
-    return dataHora.substring(0, dataHora.indexOf(' '));
+  public String getDataFromDataHora() {
+    if (data == null) {
+      return dataHora.substring(0, dataHora.indexOf(' '));
+    } else {
+      return getData();
+    }
   }
 
-  public String getHora() {
-    return dataHora.substring(dataHora.indexOf(' ') + 1);
+  public String getHoraFromDataHora() {
+    if (hora == null) {
+      return dataHora.substring(dataHora.indexOf(' ') + 1);
+    } else {
+      return getHora();
+    }
   }
 }
