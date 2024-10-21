@@ -61,21 +61,6 @@
                     </select>
                 </div>
                 <div id="conteudo1" class="data-select">
-                    <div class="mudar-periodo">
-                        <div>
-                            <label for="start-date">Período</label>
-                        </div>
-                        <div class="seta-dash">
-                            <img id="troca" src="./css/seta-dash.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="campo-datas">
-                        <input type="date" id="start-date">
-                        <input type="date" id="end-date">
-                    </div>
-                </div>
-
-                <div id="conteudo2" style="display: none;">
                     <div class="data-select">
                         <div class="mudar-periodo">
                             <div>
@@ -93,7 +78,32 @@
                                 <option value="ano">Ano</option>
                             </select>
                         </div>
-                    </div>
+
+                        <div class="filtros">        
+                            <div class="wrapper">
+                                <div class="values">
+                                    <span id="range1">
+                                        0
+                                    </span>
+                                    <span> &dash; </span>
+                                    <span id="range2">
+                                        100
+                                    </span>
+                                </div>
+                                <div class="sliderContainer">
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne()">
+                                    <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo()">
+                                    <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                                    <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>    
+                </div>
+
+                <div>
                 </div>
 
                 <button onclick="comparar()" class="botao-comparar">COMPARAR</button>
@@ -132,7 +142,7 @@
                     <div class="grafico_wordcloud">
                         <h3>Word Cloud - Bairros de São Paulo</h3>
                         <div class="wordcloud-container">
-                            <canvas id="wordCloudChart" style="width:100%; height:350px;"></canvas>
+                            <canvas id="wordCloudChart" style="width:100%; height:350px;"></canvas> 
                         </div>
                     </div>
 
@@ -166,23 +176,23 @@
     }
 
 
+    
+    // const trocaConteudo = document.getElementById('troca');
+    // const trocaConteudo2 = document.getElementById('novaTroca');
+    // const conteudo1 = document.getElementById('conteudo1');
+    // const conteudo2 = document.getElementById('conteudo2');
 
-    const trocaConteudo = document.getElementById('troca');
-    const trocaConteudo2 = document.getElementById('novaTroca');
-    const conteudo1 = document.getElementById('conteudo1');
-    const conteudo2 = document.getElementById('conteudo2');
+    // trocaConteudo.addEventListener('click', function () {
+    //     conteudo2.style.display = 'block';
+    //     conteudo1.style.display = 'none';
 
-    trocaConteudo.addEventListener('click', function () {
-        conteudo2.style.display = 'block';
-        conteudo1.style.display = 'none';
+    // });
 
-    });
+    // trocaConteudo2.addEventListener('click', function () {
+    //     conteudo1.style.display = 'block';
+    //     conteudo2.style.display = 'none';
 
-    trocaConteudo2.addEventListener('click', function () {
-        conteudo1.style.display = 'block';
-        conteudo2.style.display = 'none';
-
-    });
+    // });
 
     const cpuCtx = document.getElementById('cpuChart').getContext('2d');
     const cpuChart = new Chart(cpuCtx, {
@@ -368,5 +378,40 @@
         document.getElementById('radarChart'),
         configRadar
     );
+
+    window.onload = function () {
+    slideOne();
+    slideTwo();
+  };
+  
+  let sliderOne = document.getElementById("slider-1");
+  let sliderTwo = document.getElementById("slider-2");
+  let displayValOne = document.getElementById("range1");
+  let displayValTwo = document.getElementById("range2");
+  let minGap = 1;
+  let sliderTrack = document.querySelector(".slider-track");
+  let sliderMaxValue = document.getElementById("slider-1").max;
+  
+  function slideOne() {
+    if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+      sliderOne.value = parseInt(sliderTwo.value) - minGap;
+    }
+    if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+    else displayValOne.textContent = sliderOne.value + ':00 ';
+    fillColor();
+  }
+  function slideTwo() {
+    if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+      sliderTwo.value = parseInt(sliderOne.value) + minGap;
+    }
+    if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+    else displayValTwo.textContent = sliderTwo.value + ':00';
+    fillColor();
+  }
+  function fillColor() {
+    percent1 = (sliderOne.value / sliderMaxValue) * 100;
+    percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+    sliderTrack.style.background = `linear-gradient(to right, #b3b3bd ${percent1}% , #144b97 ${percent1}% , #144b97 ${percent2}%, #b3b3bd ${percent2}%)`;
+  }
 
 </script>
