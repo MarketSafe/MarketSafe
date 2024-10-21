@@ -164,8 +164,9 @@ body {
 
 .container-dashes {
     display: flex;
-    flex-direction: column;
     text-align: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container-dashes h3{
@@ -177,8 +178,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    height: 100%;
+    justify-content: space-between;
 }
 
 .grafico1 {
@@ -377,4 +377,36 @@ body {
     padding: 30px;
     justify-content: center;
     width: 34%
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 45%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #af744c;
+    color: white;
+}
+
+
+tr:hover {
+    background-color: #ddd;
+    color: #292935;
+}
+
+.ranking{
+    display: flex;
+    justify-content: space-between;
 }
