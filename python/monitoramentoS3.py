@@ -39,23 +39,23 @@ def gerarAlerta(dataHora, cpu, ram):
         componentes.append("RAM")
         componentesValores.append(f"RAM: {ram}")
 
-    jira = Jira(
-        url="",
-        username="",
-        password=""
-    )
+    # jira = Jira(
+    #     url="",
+    #     username="",
+    #     password=""
+    # )
 
-    try:
-        jira.issue_create(
-            fields={
-                "project": {"key": "SUP"},
-                "summary": "Alerta: Alta utilização de " + " e ".join(componentes),
-                "description": f"O totem com o endereço MAC \"{macAddress}\" está com alto uso de {', '.join(componentes)}. Valores: " + "; ".join(componentesValores),
-                "issuetype": {"name": "Task"}
-            }
-        )
-    except HTTPError as e:
-        print(e.response.text)
+    # try:
+    #     jira.issue_create(
+    #         fields={
+    #             "project": {"key": "SUP"},
+    #             "summary": "Alerta: Alta utilização de " + " e ".join(componentes),
+    #             "description": f"O totem com o endereço MAC \"{macAddress}\" está com alto uso de {', '.join(componentes)}. Valores: " + "; ".join(componentesValores),
+    #             "issuetype": {"name": "Task"}
+    #         }
+    #     )
+    # except HTTPError as e:
+    #     print(e.response.text)
 
 def verificarAlerta(mac, cpuPorcentagem, ramPorcentagem):
     agora = datetime.datetime.now()
@@ -104,7 +104,7 @@ else:
 
             time.sleep(1)
 
-        jsonName = f"monitoramento/registro.{dataHora.strftime("%Y-%m-%d.%H-%M-%S")}.{macAddress}.json"
+        jsonName = "monitoramento/registro." + dataHora.strftime("%Y-%m-%d.%H-%M-%S") + "." + macAddress + ".json"
 
         with open("registro.json", "w") as jsonfile:
             json.dump(dados, jsonfile)
