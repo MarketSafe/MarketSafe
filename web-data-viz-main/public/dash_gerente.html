@@ -73,11 +73,29 @@
                         </div>
                         <div class="periodo-select">
                             <select id="opts-select" onchange="aparecer()">
-                                <option selected disabled>Selecione uma opção</option>
+                                <option selected disabled value="#">Selecione uma opção</option>
                                 <option value="mes"> Mês</option>
-                                <option value="semana">Semana</option>
-                                <option value="ano">Ano</option>
+                                <option value="semana"> Semana</option>
+                                <option value="ano"> Ano</option>
                             </select>
+
+                            <select id="select-mes" onchange="filtrar(1)">
+                                <option value="setembro"> Setembro </option>
+                                <option value="agosto"> Agosto </option>
+                                <option value="voltar"> Voltar </option>
+                            </select>
+
+                            <select id="select-semana" onchange="filtrar(2)">
+                                <option value="1"> Semana 1 </option>
+                                <option value="2"> Semana 2 </option>
+                                <option value="3" selected> Semana 3 </option>
+                                <option value="voltar"> Voltar </option>
+                            </select>
+
+                            <select id="select-ano" onchange="filtrar(3)">
+                                <option value="2023" selected> 2023 </option>
+                                <option value="voltar"> Voltar </option>
+                            </select> 
                         </div>
 
                         <div id="ano">
@@ -120,6 +138,29 @@
                                         <span> &ThickSpace; &dash; &ThickSpace; </span>
                                         <span id="range2M">
                                             31
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="semana">
+                            <div class="filtros">        
+                                <div class="wrapper">
+                                    <div class="sliderContainer">
+                                        <div class="slider-trackS"></div>
+                                        <input type="range" min="1" max="7" value="1" id="slider-1S" oninput="slideOne(3)" disabled>
+                                        <input type="range" min="1" max="7" value="7" id="slider-2S" oninput="slideTwo(3)" disabled>
+                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                                    </div>
+                                    <div class="values">
+                                        <span id="range1S">
+                                            1
+                                        </span>
+                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
+                                        <span id="range2S">
+                                            7
                                         </span>
                                     </div>
                                 </div>
@@ -360,15 +401,15 @@
     );
 
     window.onload = function () {
-        slideOne(1);
-        slideTwo(1);
-        slideOne(2);
-        slideTwo(2);
+        start();
     };
 
   
 //   ANO
   let sliderAno = document.getElementById("ano");
+
+  let selectAno = document.getElementById("select-ano");
+  selectAno.style.display = 'none'
   
   let sliderOne = document.getElementById("slider-1");
   let sliderTwo = document.getElementById("slider-2");
@@ -378,17 +419,97 @@
   let sliderTrack = document.querySelector(".slider-track");
   let sliderMaxValue = document.getElementById("slider-1").max;
   
-  sliderOne.style.opacity = '60%'
-  sliderTwo.style.opacity = '60%'
-  displayValOne.style.opacity = '50%'
-  displayValTwo.style.opacity = '50%'
-  sliderTrack.style.opacity = '10%'
+  function start(){
 
-  displayValOne.style.display = 'none'
-  displayValTwo.style.display = 'none'
+      sliderOneM.disabled = true;
+      sliderTwoM.disabled = true;
+
+      sliderOneS.disabled = true;
+      sliderTwoS.disabled = true;
+
+      sliderOne.disabled = true;
+      sliderTwo.disabled = true;
+
+      sliderOneM.value = 1;
+      sliderTwoM.value = 31;
+
+      sliderOneS.value = 1;
+      sliderTwoS.value = 7;
+
+      sliderOne.value = 1;
+      sliderTwo.value = 12;
+
+      sliderOne.style.opacity = '60%'
+      sliderTwo.style.opacity = '60%'
+      displayValOne.style.opacity = '50%'
+      displayValTwo.style.opacity = '50%'
+      sliderTrack.style.opacity = '10%'
+    
+      displayValOne.style.display = 'none'
+      displayValTwo.style.display = 'none'
+
+
+      sliderOneM.style.opacity = '60%'
+      sliderTwoM.style.opacity = '60%'
+      displayValOneM.style.opacity = '50%'
+      displayValTwoM.style.opacity = '50%'
+      sliderTrackM.style.opacity = '10%'
+    
+      displayValOneM.style.display = 'none'
+      displayValTwoM.style.display = 'none'
+
+
+      sliderOneS.style.opacity = '60%'
+      sliderTwoS.style.opacity = '60%'
+      displayValOneS.style.opacity = '50%'
+      displayValTwoS.style.opacity = '50%'
+      sliderTrackS.style.opacity = '10%'
+    
+      displayValOneS.style.display = 'none'
+      displayValTwoS.style.display = 'none'
+
+      slideOne(1);
+      slideTwo(1);
+      slideOne(2);
+      slideTwo(2);
+      slideOne(3);
+      slideTwo(3);
+
+
+  }
+
+  function filtrar(){
+    if(selectMes.value == "voltar"){
+        selectPr.value = "#"
+        selectPr.style.display = 'flex'
+        selectMes.style.display = 'none'
+        selectMes.value = "setembro"
+
+        start();
+    } else if(selectSemana.value == "voltar"){
+        selectPr.value = "#"
+        selectPr.style.display = 'flex'
+        
+        selectSemana.style.display = 'none'
+        selectSemana.value = 3
+
+        start();
+    } else if(selectAno.value == "voltar"){
+        selectPr.value = "#"
+        selectPr.style.display = 'flex'
+        
+        selectAno.style.display = 'none'
+        selectAno.value = "2023"
+
+        start();
+    } 
+  }
 
 
   // MÊS
+  let selectMes = document.getElementById("select-mes");
+  selectMes.style.display = 'none'
+  
   let sliderMes = document.getElementById("mes");
   sliderMes.style.display = 'none'
 
@@ -398,6 +519,20 @@
   let displayValTwoM = document.getElementById("range2M");
   let sliderTrackM = document.querySelector(".slider-trackM");
   let sliderMaxValueM = document.getElementById("slider-1M").max;
+
+  // SEMANA
+  let selectSemana = document.getElementById("select-semana");
+  selectSemana.style.display = 'none'
+
+  let sliderSemana = document.getElementById("semana");
+  sliderSemana.style.display = 'none'
+
+  let sliderOneS = document.getElementById("slider-1S");
+  let sliderTwoS = document.getElementById("slider-2S");
+  let displayValOneS = document.getElementById("range1S");
+  let displayValTwoS = document.getElementById("range2S");
+  let sliderTrackS = document.querySelector(".slider-trackS");
+  let sliderMaxValueS = document.getElementById("slider-1S").max;
 
 
 
@@ -411,9 +546,22 @@
     displayValTwo.style.opacity = '100%'
     sliderTrack.style.opacity = '100%'
 
+    sliderOneM.style.opacity = '100%'
+    sliderTwoM.style.opacity = '100%'
+    displayValOneM.style.opacity = '100%'
+    displayValTwoM.style.opacity = '100%'
+    sliderTrackM.style.opacity = '100%'
+
+    sliderOneS.style.opacity = '100%'
+    sliderTwoS.style.opacity = '100%'
+    displayValOneS.style.opacity = '100%'
+    displayValTwoS.style.opacity = '100%'
+    sliderTrackS.style.opacity = '100%'
+
     
     if (selectPr.value == "ano"){
         sliderMes.style.display = 'none'
+        sliderSemana.style.display = 'none'
         sliderAno.style.display = 'flex'
 
         sliderOne.disabled = false;
@@ -422,8 +570,12 @@
         displayValOne.style.display = 'flex'
         displayValTwo.style.display = 'flex'
 
+        selectAno.style.display = 'flex'
+        selectPr.style.display = 'none'
+
     } else if (selectPr.value == "mes"){
         sliderMes.style.display = 'flex'
+        sliderSemana.style.display = 'none'
         sliderAno.style.display = 'none'
 
         sliderOneM.disabled = false;
@@ -431,6 +583,23 @@
         
         displayValOneM.style.display = 'flex'
         displayValTwoM.style.display = 'flex'
+
+        selectMes.style.display = 'flex'
+        selectPr.style.display = 'none'
+
+    } else if (selectPr.value == "semana"){
+        sliderMes.style.display = 'none'
+        sliderAno.style.display = 'none'
+        sliderSemana.style.display = 'flex'
+
+        sliderOneS.disabled = false;
+        sliderTwoS.disabled = false;
+        
+        displayValOneS.style.display = 'flex'
+        displayValTwoS.style.display = 'flex'
+
+        selectSemana.style.display = 'flex'
+        selectPr.style.display = 'none'
     }
 
   }
@@ -465,6 +634,21 @@
         displayValOneM.textContent = sliderOneM.value
         
         fillColor(2);
+    } else if(param == 3){
+        if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
+          sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
+        }
+        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+        // else displayValOne.textContent = sliderOne.value + ':00 ';
+        if (sliderOneS.value == 1) displayValOneS.textContent = 'Seg'
+        else if (sliderOneS.value == 2) displayValOneS.textContent = 'Ter'
+        else if (sliderOneS.value == 3) displayValOneS.textContent = 'Qua'
+        else if (sliderOneS.value == 4) displayValOneS.textContent = 'Qui'
+        else if (sliderOneS.value == 5) displayValOneS.textContent = 'Sex'
+        else if (sliderOneS.value == 6) displayValOneS.textContent = 'Sab'
+        else if (sliderOneS.value == 7) displayValOneS.textContent = 'Dom'
+        
+        fillColor(3);
     }
   }
 
@@ -498,6 +682,21 @@
         displayValTwoM.textContent = sliderTwoM.value
         
         fillColor(2);
+    } else if(param == 3){
+        if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
+          sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
+        }
+        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+        // else displayValOne.textContent = sliderOne.value + ':00 ';
+        if (sliderTwoS.value == 1) displayValTwoS.textContent = 'Seg'
+        else if (sliderTwoS.value == 2) displayValTwoS.textContent = 'Ter'
+        else if (sliderTwoS.value == 3) displayValTwoS.textContent = 'Qua'
+        else if (sliderTwoS.value == 4) displayValTwoS.textContent = 'Qui'
+        else if (sliderTwoS.value == 5) displayValTwoS.textContent = 'Sex'
+        else if (sliderTwoS.value == 6) displayValTwoS.textContent = 'Sab'
+        else if (sliderTwoS.value == 7) displayValTwoS.textContent = 'Dom'
+        
+        fillColor(3);
     }
   }
   function fillColor(param) {
@@ -509,6 +708,10 @@
         percent1 = (sliderOneM.value / sliderMaxValueM) * 100;
         percent2 = (sliderTwoM.value / sliderMaxValueM) * 100;
         sliderTrackM.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    } else if (param == 3){
+        percent1 = (sliderOneS.value / sliderMaxValueS) * 100;
+        percent2 = (sliderTwoS.value / sliderMaxValueS) * 100;
+        sliderTrackS.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
     }
   }
 
