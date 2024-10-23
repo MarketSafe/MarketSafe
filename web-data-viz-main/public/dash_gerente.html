@@ -1,256 +1,515 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="dash.css" />
-    <link rel="icon" href="css/icon.png" />
+    <link rel="stylesheet" href="dash.css">
+    <link rel="icon" href="css/icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-  </head>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
 
-  <body>
-    <div class="container">
-      <div class="menu">
-        <div class="perfil">
-          <img src="../public/assets/img/foto-gerente.jpg" alt="Foto Perfil" />
-          <h2>Vitor</h2>
-          <p>Gerente</p>
-        </div>
-        <div class="engloba-itens">
-          <div class="regiao-select">
-            <label for="region">Componente</label>
-            <select id="region">
-              <option value="">Selecione uma opção</option>
-              <option value="regiao1">Processador</option>
-              <option value="regiao2">Memória</option>
-            </select>
-          </div>
-        </div>
-        <div class="engloba-itens2">
-          <div class="filial-select">
-            <label for="filial">Filial Selecionadas</label>
-            <select id="filial">
-              <option value="" selected>Selecione uma opção</option>
-              <option value="filial1">Filial 1</option>
-              <option value="filial2">Filial 2</option>
-            </select>
-            <select id="filial2">
-              <option value="" selected>Selecione uma opção</option>
-              <option value="filial1">Filial 1</option>
-              <option value="filial2">Filial 2</option>
-            </select>
-          </div>
-          <div id="conteudo1" class="data-select">
-            <div class="mudar-periodo">
-              <div>
-                <label for="start-date">Período</label>
-              </div>
-              <div class="seta-dash">
-                <img id="troca" src="./css/seta-dash.svg" alt="" />
-              </div>
-            </div>
-            <div class="campo-datas">
-              <input type="date" id="start-date" />
-              <input type="date" id="end-date" />
-            </div>
-          </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 
-          <div id="conteudo2" style="display: none">
-            <div class="data-select">
-              <div class="mudar-periodo">
-                <div>
-                  <label for="periodo">Período</label>
-                </div>
-                <div class="seta-dash">
-                  <img id="novaTroca" src="./css/seta-dash.svg" alt="" />
-                </div>
-              </div>
-              <div class="periodo-select">
-                <select id="opts-select">
-                  <option value="" selected>Selecione uma opção</option>
-                  <option value="mes">Mês</option>
-                  <option value="semana">Semana</option>
-                  <option value="ano">Ano</option>
-                </select>
-              </div>
-            </div>
-          </div>
+</head>
 
-          <button class="botao-comparar">COMPARAR</button>
-        </div>
-      </div>
-
-      <div class="dashes">
-        <div class="container-dashes">
-          <div class="gauge">
-            <!-- ESSA É A DIV DE GAUGE E DE QTD DE TOTENS (o nome da classe é tbd :P)  -->
-            <!-- TODO: MEXER NELA EM OUTRO MOMENTO -->
-          </div>
-          <div class="dashes-baixo">
-            <div class="grafico2">
-              <span>Quantidade de sobrecargas por Filial</span>
-              <canvas id="grafico2" style="height: 100px"> </canvas>
-            </div>
-            <div class="grafico1">
-              <!-- <span>Distribuição de consumo entre Filiais</span> -->
-              <canvas id="grafico1"> </canvas>
-            </div>
-          </div>
-        </div>
-      </div>
+<body>
+    <div class="header">
+        <ul class="navbar">
+            <li><a href="perfilAnalista.html">Perfil</a></li>
+            <li><a>|</a></li>
+            <li class="agora"><a href="dash_analista.html">Dashboard</a></li>
+            <li><a>|</a></li>
+            <li><a href="">Ajuda</a></li>
+            <li><a>|</a></li>
+            <li><a href="index.html">Sair</a></li>
+        </ul>
     </div>
-  </body>
+    <div class="container">
+        <div class="menu">
+            <div class="perfil">
+                <img src="../public/assets/img/foto-gerente.jpg" alt="Foto Perfil">
+                <h2>Vitor</h2>
+                <p>Gerente</p>
+            </div>
+            <div class="engloba-itens">
+                <div class="regiao-select">
+                    <label for="region">Componente</label>
+                    <select id="region">
+                        <option value="">Selecione uma opção</option>
+                        <option id="1" value="1">Processador</option>
+                        <option value="2">Memória</option>
+                    </select>
+                </div>
+            </div>
+            <div class="engloba-itens2">
+                <div class="filial-select">
+                    <label for="filial">Filial Selecionadas</label>
+                    <select id="filial">
+                        <option value="" selected>Selecione uma opção</option>
+                        <option value="1">Filial 1</option>
+                        <option value="2">Filial 2</option>
+                    </select>
+                    <select id="filial2">
+                        <option value="" selected>Selecione uma opção</option>
+                        <option value="1">Filial 1</option>
+                        <option value="2">Filial 2</option>
+                    </select>
+                </div>
+                <div id="conteudo1" class="data-select">
+                    <div class="data-select">
+                        <div class="mudar-periodo">
+                            <div>
+                                <label for="periodo">Período</label>
+                            </div>
+                        </div>
+                        <div class="periodo-select">
+                            <select id="opts-select" onchange="aparecer()">
+                                <option selected disabled>Selecione uma opção</option>
+                                <option value="mes"> Mês</option>
+                                <option value="semana">Semana</option>
+                                <option value="ano">Ano</option>
+                            </select>
+                        </div>
+
+                        <div id="ano">
+                            <div class="filtros">        
+                                <div class="wrapper">
+                                    <div class="sliderContainer">
+                                        <div class="slider-track"></div>
+                                        <input type="range" min="1" max="12" value="1" id="slider-1" oninput="slideOne(1)" disabled>
+                                        <input type="range" min="1" max="12" value="12" id="slider-2" oninput="slideTwo(1)" disabled>
+                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                                    </div>
+                                    <div class="values">
+                                        <span id="range1">
+                                            0
+                                        </span>
+                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
+                                        <span id="range2">
+                                            12
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="mes">
+                            <div class="filtros">        
+                                <div class="wrapper">
+                                    <div class="sliderContainer">
+                                        <div class="slider-trackM"></div>
+                                        <input type="range" min="1" max="31" value="1" id="slider-1M" oninput="slideOne(2)" disabled>
+                                        <input type="range" min="1" max="31" value="31" id="slider-2M" oninput="slideTwo(2)" disabled>
+                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                                    </div>
+                                    <div class="values">
+                                        <span id="range1M">
+                                            1
+                                        </span>
+                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
+                                        <span id="range2M">
+                                            31
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>    
+                </div>
+
+                <div>
+                </div>
+
+                <button onclick="comparar()" class="botao-comparar">Comparar</button>
+            </div>
+        </div>
+
+        <div class="dashes">
+            <div class="container-dashes">
+                <h3>3 Filiais com mais alertas (no mês)</h3>
+                <div class="ranking">
+                    <table>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Filial Bairro</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr class="highlight">
+                            <td>1</td>
+                            <td>Paulista</td>
+                            <td>19</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Água Rasa</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Pinheiros</td>
+                            <td>9</td>
+                        </tr>
+                    </table>
+                    <!-- <div class="primeira_linha_graficos">
+                    <div class="div_para_graficos">
+                        <div class="graficoCPU">
+                            <canvas id="cpuChart"></canvas>
+                        </div>
+                        <div class="graficoRAM">
+                            <canvas id="ramChart"></canvas>
+                        </div>
+                    </div> -->
+                    <div class="totens">
+                        <h3>Quantidade de Filiais</h1>
+                            <div class="totens-quantidade">
+                                8
+                            </div>
+                            <h4>Nº de filiais com alertas ativos</h4>
+                            <div class="totens-problema">
+                                4 </div>
+                    </div>
+                </div>
+            </div>
+                <div class="dashes-baixo">
+                    <div class="radar-container">
+                        <span class="span_graf">Alertas por Zonas (no dia)</span>
+                        <canvas id="radarChart">
+
+                        </canvas>
+                    </div>
+                    <div class="grafico_wordcloud">
+                        <h3>Word Cloud - Bairros de São Paulo</h3>
+                        <div class="wordcloud-container">
+                            <canvas id="wordCloudChart" style="width:100%; height:350px;"></canvas> 
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</body>
+
 </html>
 
 <script>
-  const trocaConteudo = document.getElementById("troca");
-  const trocaConteudo2 = document.getElementById("novaTroca");
-  const conteudo1 = document.getElementById("conteudo1");
-  const conteudo2 = document.getElementById("conteudo2");
 
-  trocaConteudo.addEventListener("click", function () {
-    conteudo2.style.display = "block";
-    conteudo1.style.display = "none";
-  });
+    function comparar() {
 
-  trocaConteudo2.addEventListener("click", function () {
-    conteudo1.style.display = "block";
-    conteudo2.style.display = "none";
-  });
+        const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
+        const dashes_baixo = document.getElementById('dashes-baixo');
 
-  const data = {
-    labels: ["Filial 1", "Filial 2", "Filial 3", "Filial 4"],
-    datasets: [
-      {
-        data: [40, 10, 20, 30],
-        backgroundColor: ["#FFB418", "#FFFFFF", "#FF914D", "#FF3131"],
-        datalabels: {
-          color: ["#FFFFFF", "#000000", "#FFFFFF", "#FFFFFF"],
-        },
-        // hoverOffset: 4
-      },
-    ],
-  };
+        var region = region.value;
+        var filial = filial.value;
+        var filial2 = filial2.value;
 
-  const config = {
-    type: "doughnut",
-    data: data,
+        if (region == 2 && filial == 2 && filial2 == 2) {
+            grafico1.style.display = 'none';
+            grafico2.style.display = 'none';
+        }
+
+    }
+    
+    // const trocaConteudo = document.getElementById('troca');
+    // const trocaConteudo2 = document.getElementById('novaTroca');
+    // const conteudo1 = document.getElementById('conteudo1');
+    // const conteudo2 = document.getElementById('conteudo2');
+
+    // trocaConteudo.addEventListener('click', function () {
+    //     conteudo2.style.display = 'block';
+    //     conteudo1.style.display = 'none';
+
+    // });
+
+    // trocaConteudo2.addEventListener('click', function () {
+    //     conteudo1.style.display = 'block';
+    //     conteudo2.style.display = 'none';
+
+    // });
+
+    // const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+    // const cpuChart = new Chart(cpuCtx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Filial 1', 'Filial 4', 'Filial 6'],
+    //         datasets: [{
+    //             label: 'CPU',
+    //             data: [80, 50, 70],
+    //             backgroundColor: 'orange',
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 max: 100,
+    //                 ticks: {
+    //                     callback: function (value) {
+    //                         return value;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
+
+    // // Gráfico de RAM
+    // const ramCtx = document.getElementById('ramChart').getContext('2d');
+    // const ramChart = new Chart(ramCtx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Filial 6', 'Filial 2', 'Filial 1'],
+    //         datasets: [{
+    //             label: 'RAM',
+    //             data: [60, 90, 70],
+    //             backgroundColor: 'red',
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 max: 100,
+    //                 ticks: {
+    //                     callback: function (value) {
+    //                         return value;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
+
+    
+    // Radar Chart
+    const radarCtx = document.getElementById('radarChart').getContext('2d');
+    const dataRadar = {
+      labels: [
+        'Central',
+        'Norte',
+        'Sul',
+        'Oeste',
+        'Leste'
+      ],
+      datasets: [{
+        label: 'Alertas(???)', // TODO: Trocar o nome dessa label
+        data: [78, 55, 90, 75, 80],
+        fill: false,
+        borderColor: '#FF3131'
+      }]
+    };
+
+    const configRadar = {
+    type: 'radar',
+    data: dataRadar,
     options: {
-      plugins: {
-        legend: {
-          display: true,
-          labels: {
-            color: "white",
-          },
+        elements: {
+            line: {
+                borderWidth: 3
+            }
         },
-        tooltip: {
-          callbacks: {
-            label: function (tooltipItem) {
-              var dataset = tooltipItem.dataset.data;
-              var total = dataset.reduce((prev, curr) => prev + curr, 0);
-              var currentValue = dataset[tooltipItem.dataIndex];
-              var porcentagem = ((currentValue / total) * 100).toFixed(1);
-
-              return `${data.labels[tooltipItem.dataIndex]}: ${porcentagem}%`;
-            },
-          },
+        scales: {
+            r: {
+                grid: {
+                    color: '#CCCCCC',
+                    circular: true
+                },
+                angleLines: {
+                    color: '#CCCCCC'
+                },
+                min: 0,
+                max: 100,
+                ticks: {
+                    stepSize: 25,
+                    color: 'white',
+                    showLabelBackdrop: false
+                },
+                pointLabels: {
+                    color: 'white'
+                }
+            }
         },
-        title: {
-          display: true,
-          text: "Distribuição de consumo entre Filiais",
-          color: "white",
-          position: "top",
-        },
-      },
-      elements: {
-        arc: {
-          borderWidth: 0,
-        },
-      },
-      // scales: {
-      //     x: {
-      //         title: {
-      //             display: true,
-      //             color: 'white',
-      //             text: 'Distribuição de consumo entre Filiais',
-      //         }
-      //     }
-      // }
-    },
-    plugins: [ChartDataLabels],
-  };
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+    };
 
-  let doughnut = new Chart(document.getElementById("grafico1"), config);
+    let radar = new Chart(
+        document.getElementById('radarChart'),
+        configRadar
+    );
 
-  // document.getElementById('grafico1').style.height = '100%'
-  // document.getElementById('grafico1').style.width = 'auto'
-  // document.getElementById('grafico1').style.boxSizing = ''
+    window.onload = function () {
+        slideOne(1);
+        slideTwo(1);
+        slideOne(2);
+        slideTwo(2);
+    };
 
-  const labels = ["Filial 1", "Filial 2", "Filial 3", "Filial 4"];
+  
+//   ANO
+  let sliderAno = document.getElementById("ano");
+  
+  let sliderOne = document.getElementById("slider-1");
+  let sliderTwo = document.getElementById("slider-2");
+  let displayValOne = document.getElementById("range1");
+  let displayValTwo = document.getElementById("range2");
+  let minGap = 1;
+  let sliderTrack = document.querySelector(".slider-track");
+  let sliderMaxValue = document.getElementById("slider-1").max;
+  
+  sliderOne.style.opacity = '60%'
+  sliderTwo.style.opacity = '60%'
+  displayValOne.style.opacity = '50%'
+  displayValTwo.style.opacity = '50%'
+  sliderTrack.style.opacity = '10%'
 
-  const data2 = {
-    labels: labels,
-    datasets: [
-      {
-        axis: "y",
-        data: [40, 19, 34, 45],
-        fill: true,
-        backgroundColor: ["#FFB418", "#FFB418", "#FFB418", "#FFB418"],
-      },
-    ],
-  };
+  displayValOne.style.display = 'none'
+  displayValTwo.style.display = 'none'
 
-  const config2 = {
-    type: "bar",
-    data: data2,
-    options: {
-      indexAxis: "y",
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        y: {
-          ticks: {
-            color: "white",
-          },
-          grid: {
-            display: false,
-          },
-        },
-        x: {
-          ticks: {
-            color: "white",
-          },
-          grid: {
-            color: "#505050",
-          },
-        },
-      },
-    },
-  };
 
-  let side_bar = new Chart(document.getElementById("grafico2"), config2);
+  // MÊS
+  let sliderMes = document.getElementById("mes");
+  sliderMes.style.display = 'none'
 
-  // datalabels: {
-  //     anchor: 'end',
-  //     align: 'end',
-  //     formatter: ((value, ctx) => {
-  //         console.log(ctx)
-  //         const totalSum = ctx.dataset.data.reduce((accumulator, currentValue) => {
-  //             return accumulator + currentValue
-  //         }, 0);
-  //         console.log(totalSum)
-  //         const percentage = value / totalSum * 100;
-  //         return `${percentage.toFixed(1)}%`;
-  //     }),
-  //     font: {
-  //         size: 30
-  //     }
-  // }
+  let sliderOneM = document.getElementById("slider-1M");
+  let sliderTwoM = document.getElementById("slider-2M");
+  let displayValOneM = document.getElementById("range1M");
+  let displayValTwoM = document.getElementById("range2M");
+  let sliderTrackM = document.querySelector(".slider-trackM");
+  let sliderMaxValueM = document.getElementById("slider-1M").max;
+
+
+
+
+  let selectPr = document.getElementById("opts-select");
+
+  function aparecer(){
+    sliderOne.style.opacity = '100%'
+    sliderTwo.style.opacity = '100%'
+    displayValOne.style.opacity = '100%'
+    displayValTwo.style.opacity = '100%'
+    sliderTrack.style.opacity = '100%'
+
+    
+    if (selectPr.value == "ano"){
+        sliderMes.style.display = 'none'
+        sliderAno.style.display = 'flex'
+
+        sliderOne.disabled = false;
+        sliderTwo.disabled = false;
+
+        displayValOne.style.display = 'flex'
+        displayValTwo.style.display = 'flex'
+
+    } else if (selectPr.value == "mes"){
+        sliderMes.style.display = 'flex'
+        sliderAno.style.display = 'none'
+
+        sliderOneM.disabled = false;
+        sliderTwoM.disabled = false;
+        
+        displayValOneM.style.display = 'flex'
+        displayValTwoM.style.display = 'flex'
+    }
+
+  }
+
+  function slideOne(param) {
+    if(param == 1){
+        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+          sliderOne.value = parseInt(sliderTwo.value) - minGap;
+        }
+        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+        // else displayValOne.textContent = sliderOne.value + ':00 ';
+        if (sliderOne.value == 1) displayValOne.textContent = 'Jan'
+        else if (sliderOne.value == 2) displayValOne.textContent = 'Fev'
+        else if (sliderOne.value == 3) displayValOne.textContent = 'Mar'
+        else if (sliderOne.value == 4) displayValOne.textContent = 'Abr'
+        else if (sliderOne.value == 5) displayValOne.textContent = 'Mai'
+        else if (sliderOne.value == 6) displayValOne.textContent = 'Jun'
+        else if (sliderOne.value == 7) displayValOne.textContent = 'Jul'
+        else if (sliderOne.value == 8) displayValOne.textContent = 'Ago'
+        else if (sliderOne.value == 9) displayValOne.textContent = 'Set'
+        else if (sliderOne.value == 10) displayValOne.textContent = 'Out'
+        else if (sliderOne.value == 11) displayValOne.textContent = 'Nov'
+        else if (sliderOne.value == 12) displayValOne.textContent = 'Dez'
+        fillColor(1);
+
+    } else if(param == 2){
+        if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
+          sliderOneM.value = parseInt(sliderTwoM.value) - minGap;
+        }
+        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+        // else displayValOne.textContent = sliderOne.value + ':00 ';
+        displayValOneM.textContent = sliderOneM.value
+        
+        fillColor(2);
+    }
+  }
+
+  function slideTwo(param) {
+    if (param == 1){
+        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+          sliderTwo.value = parseInt(sliderOne.value) + minGap;
+        }
+        // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+        // else displayValTwo.textContent = sliderTwo.value + ':00';
+        if (sliderTwo.value == 1) displayValTwo.textContent = 'Jan'
+        else if (sliderTwo.value == 2) displayValTwo.textContent = 'Fev'
+        else if (sliderTwo.value == 3) displayValTwo.textContent = 'Mar'
+        else if (sliderTwo.value == 4) displayValTwo.textContent = 'Abr'
+        else if (sliderTwo.value == 5) displayValTwo.textContent = 'Mai'
+        else if (sliderTwo.value == 6) displayValTwo.textContent = 'Jun'
+        else if (sliderTwo.value == 7) displayValTwo.textContent = 'Jul'
+        else if (sliderTwo.value == 8) displayValTwo.textContent = 'Ago'
+        else if (sliderTwo.value == 9) displayValTwo.textContent = 'Set'
+        else if (sliderTwo.value == 10) displayValTwo.textContent = 'Out'
+        else if (sliderTwo.value == 11) displayValTwo.textContent = 'Nov'
+        else if (sliderTwo.value == 12) displayValTwo.textContent = 'Dez'
+        fillColor(1);
+    }
+    else if (param == 2){
+        if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
+          sliderTwoM.value = parseInt(sliderOneM.value) + minGap;
+        }
+        // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+        // else displayValTwo.textContent = sliderTwo.value + ':00';
+        displayValTwoM.textContent = sliderTwoM.value
+        
+        fillColor(2);
+    }
+  }
+  function fillColor(param) {
+    if (param == 1){
+        percent1 = (sliderOne.value / sliderMaxValue) * 100;
+        percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+        sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    } else if (param == 2){
+        percent1 = (sliderOneM.value / sliderMaxValueM) * 100;
+        percent2 = (sliderTwoM.value / sliderMaxValueM) * 100;
+        sliderTrackM.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    }
+  }
+
 </script>
