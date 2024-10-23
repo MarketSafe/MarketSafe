@@ -444,7 +444,15 @@ tr:hover {
     margin-bottom: 0px;
 }
 
+#slider-1S {
+    margin-bottom: 0px;
+}
+
 #slider-2M {
+    margin-bottom: 0px;
+}
+
+#slider-2S {
     margin-bottom: 0px;
 }
   
@@ -491,6 +499,14 @@ tr:hover {
     position: absolute;
     border-radius: 5px;
   }
+
+  .slider-trackS {
+    width: 100%;
+    height: 5px;
+    position: absolute;
+    border-radius: 5px;
+  }
+
   
   input[type="range"]::-webkit-slider-runnable-track {
     -webkit-appearance: none;

@@ -75,8 +75,8 @@
                             <select id="opts-select" onchange="aparecer()">
                                 <option selected disabled>Selecione uma opção</option>
                                 <option value="mes"> Mês</option>
-                                <option value="semana">Semana</option>
-                                <option value="ano">Ano</option>
+                                <option value="semana"> Semana</option>
+                                <option value="ano"> Ano</option>
                             </select>
                         </div>
 
@@ -120,6 +120,29 @@
                                         <span> &ThickSpace; &dash; &ThickSpace; </span>
                                         <span id="range2M">
                                             31
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="semana">
+                            <div class="filtros">        
+                                <div class="wrapper">
+                                    <div class="sliderContainer">
+                                        <div class="slider-trackS"></div>
+                                        <input type="range" min="1" max="7" value="1" id="slider-1S" oninput="slideOne(3)" disabled>
+                                        <input type="range" min="1" max="7" value="7" id="slider-2S" oninput="slideTwo(3)" disabled>
+                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                                    </div>
+                                    <div class="values">
+                                        <span id="range1S">
+                                            1
+                                        </span>
+                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
+                                        <span id="range2S">
+                                            7
                                         </span>
                                     </div>
                                 </div>
@@ -364,6 +387,8 @@
         slideTwo(1);
         slideOne(2);
         slideTwo(2);
+        slideOne(3);
+        slideTwo(3);
     };
 
   
@@ -399,6 +424,17 @@
   let sliderTrackM = document.querySelector(".slider-trackM");
   let sliderMaxValueM = document.getElementById("slider-1M").max;
 
+  // SEMANA
+  let sliderSemana = document.getElementById("semana");
+  sliderSemana.style.display = 'none'
+
+  let sliderOneS = document.getElementById("slider-1S");
+  let sliderTwoS = document.getElementById("slider-2S");
+  let displayValOneS = document.getElementById("range1S");
+  let displayValTwoS = document.getElementById("range2S");
+  let sliderTrackS = document.querySelector(".slider-trackS");
+  let sliderMaxValueS = document.getElementById("slider-1S").max;
+
 
 
 
@@ -414,6 +450,7 @@
     
     if (selectPr.value == "ano"){
         sliderMes.style.display = 'none'
+        sliderSemana.style.display = 'none'
         sliderAno.style.display = 'flex'
 
         sliderOne.disabled = false;
@@ -424,6 +461,7 @@
 
     } else if (selectPr.value == "mes"){
         sliderMes.style.display = 'flex'
+        sliderSemana.style.display = 'none'
         sliderAno.style.display = 'none'
 
         sliderOneM.disabled = false;
@@ -431,6 +469,17 @@
         
         displayValOneM.style.display = 'flex'
         displayValTwoM.style.display = 'flex'
+
+    } else if (selectPr.value == "semana"){
+        sliderMes.style.display = 'none'
+        sliderAno.style.display = 'none'
+        sliderSemana.style.display = 'flex'
+
+        sliderOneS.disabled = false;
+        sliderTwoS.disabled = false;
+        
+        displayValOneS.style.display = 'flex'
+        displayValTwoS.style.display = 'flex'
     }
 
   }
@@ -465,6 +514,21 @@
         displayValOneM.textContent = sliderOneM.value
         
         fillColor(2);
+    } else if(param == 3){
+        if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
+          sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
+        }
+        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+        // else displayValOne.textContent = sliderOne.value + ':00 ';
+        if (sliderOneS.value == 1) displayValOneS.textContent = 'Seg'
+        else if (sliderOneS.value == 2) displayValOneS.textContent = 'Ter'
+        else if (sliderOneS.value == 3) displayValOneS.textContent = 'Qua'
+        else if (sliderOneS.value == 4) displayValOneS.textContent = 'Qui'
+        else if (sliderOneS.value == 5) displayValOneS.textContent = 'Sex'
+        else if (sliderOneS.value == 6) displayValOneS.textContent = 'Sab'
+        else if (sliderOneS.value == 7) displayValOneS.textContent = 'Dom'
+        
+        fillColor(3);
     }
   }
 
@@ -498,6 +562,21 @@
         displayValTwoM.textContent = sliderTwoM.value
         
         fillColor(2);
+    } else if(param == 3){
+        if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
+          sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
+        }
+        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+        // else displayValOne.textContent = sliderOne.value + ':00 ';
+        if (sliderTwoS.value == 1) displayValTwoS.textContent = 'Seg'
+        else if (sliderTwoS.value == 2) displayValTwoS.textContent = 'Ter'
+        else if (sliderTwoS.value == 3) displayValTwoS.textContent = 'Qua'
+        else if (sliderTwoS.value == 4) displayValTwoS.textContent = 'Qui'
+        else if (sliderTwoS.value == 5) displayValTwoS.textContent = 'Sex'
+        else if (sliderTwoS.value == 6) displayValTwoS.textContent = 'Sab'
+        else if (sliderTwoS.value == 7) displayValTwoS.textContent = 'Dom'
+        
+        fillColor(3);
     }
   }
   function fillColor(param) {
@@ -509,6 +588,10 @@
         percent1 = (sliderOneM.value / sliderMaxValueM) * 100;
         percent2 = (sliderTwoM.value / sliderMaxValueM) * 100;
         sliderTrackM.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    } else if (param == 3){
+        percent1 = (sliderOneS.value / sliderMaxValueS) * 100;
+        percent2 = (sliderTwoS.value / sliderMaxValueS) * 100;
+        sliderTrackS.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
     }
   }
 
