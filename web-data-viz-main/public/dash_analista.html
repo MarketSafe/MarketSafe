@@ -39,9 +39,9 @@
                 <div class="regiao-select">
                     <label for="region">Componente</label>
                     <select id="region">
-                        <option value="">Selecione uma opção</option>
+                        <option value="0">Visão Geral</option>
                         <option id="1" value="1">Processador</option>
-                        <option value="2">Memória</option>
+                        <option selected value="2">Memória</option>
                     </select>
                 </div>
             </div>
@@ -49,23 +49,23 @@
                 <div class="filial-select">
                     <label for="filial">Filial Selecionadas</label>
                     <select id="filial">
-                        <option value="" selected>Selecione uma opção</option>
+                        <option value="0">Visão Geral</option>
                         <option value="1">Filial 1</option>
-                        <option value="2">Filial 2</option>
+                        <option selected value="2">Filial 2</option>
                     </select>
                     <select id="filial2">
-                        <option value="" selected>Selecione uma opção</option>
+                        <option value="0">Visão Geral</option>
                         <option value="1">Filial 1</option>
-                        <option value="2">Filial 2</option>
+                        <option selected value="2">Filial 2</option>
                     </select>
                 </div>
                 <div id="conteudo1" class="data-select">
                     <div class="mudar-periodo">
                         <div>
-                         <label for="start-date">Período</label>
+                            <label for="start-date">Período</label>
                         </div>
                         <div class="seta-dash">
-                         <img id="troca" src="./css/seta-dash.svg" alt="">
+                            <img id="troca" src="./css/seta-dash.svg" alt="">
                         </div>
                     </div>
                     <div class="campo-datas">
@@ -78,10 +78,10 @@
                     <div class="data-select">
                         <div class="mudar-periodo">
                             <div>
-                             <label for="periodo">Período</label>
+                                <label for="periodo">Período</label>
                             </div>
                             <div class="seta-dash">
-                             <img id="novaTroca" src="./css/seta-dash.svg" alt="">
+                                <img id="novaTroca" src="./css/seta-dash.svg" alt="">
                             </div>
                         </div>
                         <div class="periodo-select">
@@ -99,27 +99,27 @@
             </div>
         </div>
 
-        <div class="dashes">
-            <div class="container-dashes">
-                <h3>Totens com mais gasto na última hora</h3>
-                <div class="primeira_linha_graficos">
+        <div id="dashes" class="dashes">
+            <div id="container-dashes" class="container-dashes">
+                <h3 id="div_titulo">Totens com mais gasto na última hora</h3>
+                <div id="primeira_linha_graficos" class="primeira_linha_graficos">
                     <div class="div_para_graficos">
-                    <div class="graficoCPU">
-                        <canvas id="cpuChart" ></canvas>
+                        <div id="graficoCPU" class="graficoCPU">
+                            <canvas id="cpuChart"></canvas>
+                        </div>
+                        <div class="graficoRAM">
+                            <canvas id="ramChart"></canvas>
+                        </div>
                     </div>
-                    <div class="graficoRAM">
-                    <canvas id="ramChart" ></canvas>
-                    </div>
-                    </div>
-                  <div class="totens">
-                    <h3>Quantidade de Totens</h1>
-                    <div class="totens-quantidade">
-                        10
-                    </div>
-                    <h4>Nº de Totens com Problema</h4>
-                    <div class="totens-problema">
-                        3
-                    </div>
+                    <div class="totens">
+                        <h3>Quantidade de Totens</h1>
+                            <div class="totens-quantidade">
+                                10
+                            </div>
+                            <h4>Nº de Totens com Problema</h4>
+                            <div class="totens-problema">
+                                3
+                            </div>
                     </div>
                 </div>
                 <div class="dashes-baixo">
@@ -130,17 +130,96 @@
                         </canvas>
                     </div>
                     <div class="div_alinhar_doughnut">
-                    <span class="span_graf">Maior e menor consumo de CPU entre totens (no dia)</span>
-                    <div class="grafico_doughnut">
-                        <div id="grafico_doughnut"></div>
+                        <span id="span_graf" class="span_graf">Maior e menor consumo de CPU entre totens (no dia)</span>
+                        <div class="grafico_doughnut">
+                            <div id="grafico_doughnut"></div>
+                        </div>
                     </div>
-                    </div>
-                </div>    
-            </div>    
-        </div>
+                </div>
+            </div>
 
-    </div>
-    </div>
+            <div id="tela_elementos" class="tela_elementos" style="display: none;">
+                <div class="div_tela2">
+                    <button onclick="indicador()" class="botao_indicador">Indicadores</button>
+                    <button onclick="grafico()" class="botao_grafico">Gráficos</button>
+                </div>
+                <div class="gasto_cpu">
+
+                    <h2>Gasto de CPU</h2>
+
+                    <div class="primeira_linha_totem">
+                        <div class="div_totens">
+                            <div class="titulo_totem">
+                                <h4>Totem 5</h4>
+                                <div class="Totem5">
+                                    80%
+                                </div>
+                            </div>
+                            <div class="titulo_totem">
+                                <h4>Totem 7</h4>
+                                <div class="Totem7">
+                                    40%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="titulo_quantidade">Quantidade de Sobrecargas no dia</h3>
+                    <div class="primeira_linha_totem">
+                        <div class="div_totens">
+                            <div class="titulo_totem">
+                                <h4>Totem 5</h4>
+                                <div class="Totem5_segundo">
+                                    8
+                                </div>
+                            </div>
+                            <div class="titulo_totem">
+                                <h4>Totem 7</h4>
+                                <div class="Totem7_segundo">
+                                    4
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="tela_elementos2" class="tela_elementos2" style="display: none;">
+            <div class="div_tela2">
+                <button onclick="indicador2()" class="botao_indicador2">Indicadores</button>
+                <button onclick="grafico2()" class="botao_grafico2">Gráficos</button>
+            </div>
+            <div class="grafico_compara">
+                <div class="graficos_tela_2">
+                    <div class="linha_gf_comparacao">
+                        <div class="fundo_dough_2">
+                            <span id="span_graf" class="span_graf">Consumo de CPU entre Totens</span>
+                            <div class="grafico_doughnut_2">
+                                <div id="grafico_doughnut2"></div>
+                            </div>
+                        </div>
+                        <div class="graficoLinha2">
+                            <span>Gasto de CPU x Tempo</span>
+                            <canvas id="graficoLinha2"></canvas>
+                        </div>
+                    </div>
+                    <div id="linha_gf_comparacao" class="linha_gf_comparacao">
+
+                        <div id="grafico_Bar_1" class="grafico_Bar_tela2">
+                            <span>Totem 5</span>
+                            <canvas id="GfBar_Tela2"></canvas>
+                            <span class="span_gf_bar">Dia</span>
+                        </div>
+                        <div id="grafico_Bar_2" class="grafico_Bar_tela2">
+                            <span>Totem 7</span>
+                            <canvas id="GfBar2_Tela2"></canvas>
+                            <span class="span_gf_bar">Dia</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </body>
 
@@ -148,221 +227,320 @@
 
 <script>
 
-function comparar(){
-
-    const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
-    const dashes_baixo = document.getElementById('dashes-baixo');
-
-    var region = region.value;
-    var filial = filial.value;
-    var filial2 = filial2.value;
-
-    if(region == 2 && filial == 2 && filial2 == 2){
-        grafico1.style.display = 'none'; 
-        grafico2.style.display = 'none';
+    function indicador2(){
+    var tela_elemento = document.getElementById('tela_elementos');
+    var tela_elemento2 = document.getElementById('tela_elementos2');
+    
+    tela_elemento.style.display = 'block'; 
+    tela_elemento2.style.display = 'none'; 
     }
 
-}
+    function grafico(){
+    var tela_elemento = document.getElementById('tela_elementos');
+    var tela_elemento2 = document.getElementById('tela_elementos2');
+    
+    tela_elemento.style.display = 'none'; 
+    tela_elemento2.style.display = 'block';
+    }
+
+    function comparar() {
+
+        var primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
+        var span_graf = document.getElementById('span_graf');
+        var region = document.getElementById('region').value;
+        var filial = document.getElementById('filial').value;
+        var filial2 = document.getElementById('filial2').value;
+        var grafico1 = document.querySelector('.grafico1');
+        var grafico2 = document.querySelector('.grafico_doughnut');
+        var div_titulo = document.getElementById('div_titulo');
+
+        var tela_elemento = document.getElementById('tela_elementos');
+        var tela_elemento2 = document.getElementById('tela_elementos2');
+
+        if (region == 2 && filial == 2 && filial2 == 2) {
+            grafico1.style.display = 'none';
+            grafico2.style.display = 'none';
+            span_graf.style.display = 'none';
+            primeira_linha_graficos.style.display = 'none';
+            div_titulo.style.display = 'none';
+
+            tela_elemento.style.display = 'block';
+            tela_elemento2.style.display = 'none';
+
+        } else {
+            grafico1.style.display = '';
+            grafico2.style.display = '';
+            span_graf.style.display = '';
+            primeira_linha_graficos.style.display = '';
+            div_titulo.style.display = '';
+        }
+    }
 
 
+    const trocaConteudo = document.getElementById('troca');
+    const trocaConteudo2 = document.getElementById('novaTroca');
+    const conteudo1 = document.getElementById('conteudo1');
+    const conteudo2 = document.getElementById('conteudo2');
 
-const trocaConteudo = document.getElementById('troca');
-const trocaConteudo2 = document.getElementById('novaTroca');
-const conteudo1 = document.getElementById('conteudo1');
-const conteudo2 = document.getElementById('conteudo2');
+    trocaConteudo.addEventListener('click', function () {
+        conteudo2.style.display = 'block';
+        conteudo1.style.display = 'none';
 
-trocaConteudo.addEventListener('click', function () {
-        conteudo2.style.display = 'block'; 
-        conteudo1.style.display = 'none'; 
+    });
 
-});
+    trocaConteudo2.addEventListener('click', function () {
+        conteudo1.style.display = 'block';
+        conteudo2.style.display = 'none';
 
-trocaConteudo2.addEventListener('click', function () {
-      conteudo1.style.display = 'block'; 
-      conteudo2.style.display = 'none'; 
-  
-});
+    });
 
-   const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-   const cpuChart = new Chart(cpuCtx, {
-       type: 'bar',
-       data: {
-           labels: ['Totem 1', 'Totem 4', 'Totem 6'],
-           datasets: [{
-               label: 'CPU',
-               data: [80, 50, 70],
-               backgroundColor: 'orange',
-               borderWidth: 1
-           }]
-       },
-       options: {
-           scales: {
-               y: {
-                   beginAtZero: true,
-                   max: 100,
-                   ticks: {
-                       callback: function(value) {
-                           return value + '%';
-                       }
-                   }
-               }
-           }
-       }
-   });
+    const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+    const cpuChart = new Chart(cpuCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Totem 1', 'Totem 4', 'Totem 6'],
+            datasets: [{
+                label: 'CPU',
+                data: [80, 50, 70],
+                backgroundColor: 'orange',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function (value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
 
-   // Gráfico de RAM
-   const ramCtx = document.getElementById('ramChart').getContext('2d');
-   const ramChart = new Chart(ramCtx, {
-       type: 'bar',
-       data: {
-           labels: ['Totem 6', 'Totem 2', 'Totem 1'],
-           datasets: [{
-               label: 'RAM',
-               data: [60, 90, 70],
-               backgroundColor: 'red',
-               borderWidth: 1
-           }]
-       },
-       options: {
-           scales: {
-               y: {
-                   beginAtZero: true,
-                   max: 100,
-                   ticks: {
-                       callback: function(value) {
-                           return value + '%';
-                       }
-                   }
-               }
-           }
-       }
-   });
+    // Gráfico de RAM
+    const ramCtx = document.getElementById('ramChart').getContext('2d');
+    const ramChart = new Chart(ramCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Totem 6', 'Totem 2', 'Totem 1'],
+            datasets: [{
+                label: 'RAM',
+                data: [60, 90, 70],
+                backgroundColor: 'red',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function (value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
 
-// Gráfico com o ApexJs
-var elemento = document.getElementById('grafico_doughnut');
+    // Gráfico com o ApexJs
+    var elemento = document.getElementById('grafico_doughnut');
 
-var seriesData = [80, 32, 56]; // Dados da série
+    var seriesData = [80, 32, 56]; // Dados da série
 
-var options = {
-    series: seriesData,
-    chart: {
-        height: 400,
-        width: '100%',
-        type: 'radialBar',
-    },
-    plotOptions: {
-        radialBar: {
-            dataLabels: {
-                name: {
-                    fontSize: '20px',
-                    color: 'white', // Cor do nome
+    var options = {
+        series: seriesData,
+        chart: {
+            height: 400,
+            width: '100%',
+            type: 'radialBar',
+        },
+        plotOptions: {
+            radialBar: {
+                dataLabels: {
+                    name: {
+                        fontSize: '20px',
+                        color: 'white', // Cor do nome
+                    },
+                    value: {
+                        fontSize: '20px',
+                        color: 'white', // Cor do valor
+                    },
                 },
-                value: {
-                    fontSize: '20px',
-                    color: 'white', // Cor do valor
+                // Ajuste o tamanho das barras
+                track: {
+                    background: '#3e3e3e', // Cor do fundo do gráfico
+                    strokeWidth: '100%', // Largura do fundo
+                },
+                // Ajuste a largura das barras
+                hollow: {
+                    margin: 15, // Margem ao redor do centro (hollow)
+                    size: '45%', // Tamanho do espaço vazio no centro
                 },
             },
-            // Ajuste o tamanho das barras
-            track: {
-                background: '#3e3e3e', // Cor do fundo do gráfico
-                strokeWidth: '100%', // Largura do fundo
-            },
-            // Ajuste a largura das barras
-            hollow: {
-                margin: 15, // Margem ao redor do centro (hollow)
-                size: '45%', // Tamanho do espaço vazio no centro
-            },
         },
-    },
-    labels: ['Totem 5', 'Totem 2', 'Totem 3'],
-    legend: {
-        show: true,
-        floating: true,
-        position: 'left',
-        horizontalAlign: 'center',
-        verticalAlign: 'middle',
-        labels: {
-            colors: 'white', // Cor das labels
-        },
-        onItemClick: {
-            toggleDataSeries: false, // Desativa a funcionalidade de clicar nas labels
-        },
-    },
-    grid: {
-        padding: {
-            top: 10,
-            bottom: 10,
-            left: 140,
-        },
-    },
-};
-
-var chart = new ApexCharts(elemento, options);
-chart.render();
-
-//------------------------------------------------//
-
-const labels = [
-    'Totem 1',
-    'Totem 2',
-    'Totem 3',
-    'Totem 4',
-    'Totem 5',
-    'Totem 6'
-];
-
-const data2 = {
-  labels: labels,
-  datasets: [{
-    axis: 'x',
-    data: [17, 7, 13, 21, 5, 5],
-    fill: true,
-    backgroundColor: [
-      '#FFB418',
-      '#FFB418',
-      '#FFB418',
-      '#FFB418',
-      '#FFB418',
-      '#FFB418'
-    ]
-  }]
-};
-
-const config2 = {
-  type: 'bar',
-  data: data2,
-  options: {
-    indexAxis: 'y',
-    plugins: {
+        labels: ['Totem 5', 'Totem 2', 'Totem 3'],
         legend: {
-            display: false
-        }
-    },
-    scales: {
-        x: {
-            ticks: {
-                color: 'white'
+            show: true,
+            floating: true,
+            position: 'left',
+            horizontalAlign: 'center',
+            verticalAlign: 'middle',
+            labels: {
+                colors: 'white', // Cor das labels
             },
-            grid: {
-                color: '#505050'
-            }
+            onItemClick: {
+                toggleDataSeries: false, // Desativa a funcionalidade de clicar nas labels
+            },
         },
-        y: {
-            ticks: {
-                color: 'white'
+        grid: {
+            padding: {
+                top: 10,
+                bottom: 10,
+                left: 140,
             },
-            grid: {
-                display: false
+        },
+    };
+
+    var chart = new ApexCharts(elemento, options);
+    chart.render();
+
+    //------------------------------------------------//
+
+    // Gráfico com o ApexJs da tela de Comparação
+    var elemento = document.getElementById('grafico_doughnut2');
+
+    var seriesData = [80, 32]; // Dados da série
+
+    var options = {
+        series: seriesData,
+        chart: {
+            height: 400,
+            width: '100%',
+            type: 'radialBar',
+        },
+        plotOptions: {
+            radialBar: {
+                dataLabels: {
+                    name: {
+                        fontSize: '20px',
+                        color: 'white', // Cor do nome
+                    },
+                    value: {
+                        fontSize: '20px',
+                        color: 'white', // Cor do valor
+                    },
+                },
+                // Ajuste o tamanho das barras
+                track: {
+                    background: '#3e3e3e', // Cor do fundo do gráfico
+                    strokeWidth: '100%', // Largura do fundo
+                },
+                // Ajuste a largura das barras
+                hollow: {
+                    margin: 15, // Margem ao redor do centro (hollow)
+                    size: '45%', // Tamanho do espaço vazio no centro
+                },
+            },
+        },
+        labels: ['Totem 5', 'Totem 2'],
+        legend: {
+            show: true,
+            floating: true,
+            position: 'left',
+            horizontalAlign: 'center',
+            verticalAlign: 'middle',
+            labels: {
+                colors: 'white', // Cor das labels
+            },
+            onItemClick: {
+                toggleDataSeries: false, // Desativa a funcionalidade de clicar nas labels
+            },
+        },
+        grid: {
+            padding: {
+                top: 10,
+                bottom: 10,
+                left: 140,
+            },
+        },
+    };
+
+    var chart = new ApexCharts(elemento, options);
+    chart.render();
+
+    //------------------------------------------------//
+
+
+    //graficoLinha2
+
+    const labels = [
+        'Totem 1',
+        'Totem 2',
+        'Totem 3',
+        'Totem 4',
+        'Totem 5',
+        'Totem 6'
+    ];
+
+    const data2 = {
+        labels: labels,
+        datasets: [{
+            axis: 'x',
+            data: [17, 7, 13, 21, 5, 5],
+            fill: true,
+            backgroundColor: [
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418'
+            ]
+        }]
+    };
+
+    const config2 = {
+        type: 'bar',
+        data: data2,
+        options: {
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    grid: {
+                        color: '#505050'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
             }
         }
-    }
-  }
-};
+    };
 
-let side_bar = new Chart(
-    document.getElementById('grafico2'),
-    config2
-)
+    let side_bar = new Chart(
+        document.getElementById('grafico2'),
+        config2
+    )
 
     // // GAUGE PRR
 
@@ -402,7 +580,7 @@ let side_bar = new Chart(
 
     //         const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius;
     //         const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius;
-        
+
     //         const widthSlice = (outerRadius - innerRadius) / 3;
     //         const radius = 14;
     //         const angle = Math.PI / 180;
@@ -415,7 +593,7 @@ let side_bar = new Chart(
     //         a + b, 0);
 
     //         console.log((chart.getDatasetMeta(0).data[0].circumference / Math.PI) / data.datasets[0].data[0] * needleValue )
-            
+
     //         const circumference = ((chart.getDatasetMeta(0).data[0].
     //         circumference / Math.PI) / data.datasets[0].data[0]) * needleValue;
 
@@ -452,7 +630,7 @@ let side_bar = new Chart(
     //         const xCenter = chart.getDatasetMeta(0).data[0].x;
     //         const yCenter = chart.getDatasetMeta(0).data[0].y; 
 
-    
+
     //         const circumference = ((chart.getDatasetMeta(0).data[0].
     //         circumference / Math.PI) / data.datasets[0].data[0]) * needleValue;
 
@@ -466,7 +644,7 @@ let side_bar = new Chart(
 
     //     }
     //  }
-     
+
 
     //  const gaugeLabels = {
     //     id: 'gaugeLabels',
@@ -527,7 +705,203 @@ let side_bar = new Chart(
     // );
 
 
-    </script>
+    const data3 = {
+        labels: [
+            '0',
+            '5',
+            '10',
+            '15',
+            '20',
+            '25',
+            '30'
+        ],
+        datasets: [
+            {
+                label: 'T5',
+                data: [75, 69, 80, 66, 46],
+                borderColor: '#FF914D',
+                backgroundColor: '#FF914D'
+            },
+            {
+                label: 'T7',
+                data: [62, 54, 66, 53, 68],
+                borderColor: '#FF3131',
+                backgroundColor: '#FF3131'
+            }
+        ]
+    };
+    const config3 = {
+        type: 'line',
+        data: data3,
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    color: 'white',
+                    labels: {
+                        color: 'white'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                    grid: {
+                        color: '#9A9A9A'
+                    },
+                    ticks: {
+                        color: 'white',
+                        callback: function (value, index, values) {
+                            return `${value}%`;
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Dia',
+                        color: 'white'
+                    }
+                }
+            }
+        }
+    };
 
+    let side_line = new Chart(
+        document.getElementById('graficoLinha2'),
+        config3
+    )
 
+    //---------------Gráfico de barra 1 da tela 2------------------------//
 
+    const labels4 = [
+        '5',
+        '10',
+        '15',
+        '20',
+        '25',
+        '30'
+    ];
+
+    const data4 = {
+        labels: labels4,
+        datasets: [{
+            axis: 'y',
+            data: [13, 5, 17, 19, 10, 8],
+            fill: true,
+            backgroundColor: [
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418'
+            ]
+        }]
+    };
+
+    const config4 = {
+        type: 'bar',
+        data: data4,
+        options: {
+            indexAxis: 'x',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    grid: {
+                        color: '#505050'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    };
+
+    let side_bar2 = new Chart(
+        document.getElementById('GfBar_Tela2'),
+        config4
+    )
+
+    //---------------Gráfico de barra 2 da tela 2------------------------//
+
+    const labels5 = [
+        '5',
+        '10',
+        '15',
+        '20',
+        '25',
+        '30'
+    ];
+
+    const data5 = {
+        labels: labels5,
+        datasets: [{
+            axis: 'y',
+            data: [17, 7, 33, 21, 17, 10],
+            fill: true,
+            backgroundColor: [
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418',
+                '#FFB418'
+            ]
+        }]
+    };
+
+    const config5 = {
+        type: 'bar',
+        data: data5,
+        options: {
+            indexAxis: 'x',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    grid: {
+                        color: '#505050'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    };
+
+    let side_bar3 = new Chart(
+        document.getElementById('GfBar2_Tela2'),
+        config5
+    )
+
+</script>
