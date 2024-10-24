@@ -179,7 +179,7 @@
         </div>
 
         <div class="dashes">
-            <div class="container-dashes">
+            <div class="container-dashes" id="grafico1">
                 <h3>3 Filiais com mais alertas (no mês)</h3>
                 <div class="ranking">
                     <table>
@@ -218,7 +218,7 @@
                     </div>
                 </div>
             </div>
-                <div class="dashes-baixo">
+                <div class="dashes-baixo" id="grafico2">
                     <div class="radar-container">
                         <span class="span_graf">Alertas por Zonas (no dia)</span>
                         <canvas id="radarChart">
@@ -250,14 +250,13 @@
         const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
         const dashes_baixo = document.getElementById('dashes-baixo');
 
-        var region = region.value;
-        var filial = filial.value;
-        var filial2 = filial2.value;
+        
 
-        if (region == 2 && filial == 2 && filial2 == 2) {
-            grafico1.style.display = 'none';
-            grafico2.style.display = 'none';
-        }
+        const gf1 = document.getElementById('grafico1');
+        const gf2 = document.getElementById('grafico2');
+
+        gf1.style.display = 'none'; 
+        gf2.style.display = 'none'; 
 
     }
     
