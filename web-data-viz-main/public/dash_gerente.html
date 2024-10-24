@@ -279,59 +279,59 @@
     // });
 
     // const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-    const cpuChart = new Chart(cpuCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Filial 1', 'Filial 4', 'Filial 6'],
-            datasets: [{
-                label: 'CPU',
-                data: [80, 50, 70],
-                backgroundColor: 'orange',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        callback: function (value) {
-                            return value;
-                        }
-                    }
-                }
-            }
-        }
-    });
+    // const cpuChart = new Chart(cpuCtx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Filial 1', 'Filial 4', 'Filial 6'],
+    //         datasets: [{
+    //             label: 'CPU',
+    //             data: [80, 50, 70],
+    //             backgroundColor: 'orange',
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 max: 100,
+    //                 ticks: {
+    //                     callback: function (value) {
+    //                         return value;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
 
     // // Gráfico de RAM
-    const ramCtx = document.getElementById('ramChart').getContext('2d');
-    const ramChart = new Chart(ramCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Filial 6', 'Filial 2', 'Filial 1'],
-            datasets: [{
-                label: 'RAM',
-                data: [60, 90, 70],
-                backgroundColor: 'red',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        callback: function (value) {
-                            return value;
-                        }
-                    }
-                }
-            }
-        }
-    });
+    // const ramCtx = document.getElementById('ramChart').getContext('2d');
+    // const ramChart = new Chart(ramCtx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Filial 6', 'Filial 2', 'Filial 1'],
+    //         datasets: [{
+    //             label: 'RAM',
+    //             data: [60, 90, 70],
+    //             backgroundColor: 'red',
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 max: 100,
+    //                 ticks: {
+    //                     callback: function (value) {
+    //                         return value;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
 
     
     // Radar Chart
