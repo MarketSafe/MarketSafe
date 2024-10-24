@@ -43,9 +43,9 @@
                 <div class="regiao-select">
                     <label for="region">Componente</label>
                     <select id="region">
-                        <option value="0">Visão Geral</option>
+                        <option selected value="0">Selecione uma Opção</option>
                         <option id="1" value="1">Processador</option>
-                        <option selected value="2">Memória</option>
+                        <option value="2">Memória</option>
                     </select>
                 </div>
             </div>
@@ -53,14 +53,14 @@
                 <div class="filial-select">
                     <label for="filial">Filial Selecionadas</label>
                     <select id="filial">
-                        <option value="0">Visão Geral</option>
+                        <option selected value="0">Selecione uma Opção</option>
                         <option value="1">Filial 1</option>
-                        <option selected value="2">Filial 2</option>
+                        <option value="2">Filial 2</option>
                     </select>
                     <select id="filial2">
-                        <option value="0">Visão Geral</option>
+                        <option selected value="0">Selecione uma Opção</option>
                         <option value="1">Filial 1</option>
-                        <option selected value="2">Filial 2</option>
+                        <option value="2">Filial 2</option>
                     </select>
                 </div>
 
@@ -323,15 +323,10 @@ function comparar(){
     const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
     const dashes_baixo = document.getElementById('dashes-baixo');
 
-    var region = region.value;
-    var filial = filial.value;
-    var filial2 = filial2.value;
+    const tela1 = document.getElementById('grafico1');
 
-    if(region == 2 && filial == 2 && filial2 == 2){
-        grafico1.style.display = 'none'; 
-        grafico2.style.display = 'none';
-    }
-
+    grafico1.style.display = 'none'; 
+    
 }
 
 

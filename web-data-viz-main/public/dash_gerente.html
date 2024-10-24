@@ -178,226 +178,62 @@
             </div>
         </div>
 
-        <div class="dashes" id="dashes">
-            <!-- <div class="dash-navbar">
-                <button onclick="comparar()">
-                    Indicadores
-                </button>
-                <button onclick="compararGraficos()">
-                    Gráficos
-                </button>
-            </div>
-            <div class="graficosContainer" id="graficosContainer"> -->
-                <div class="container-dashes" id="container_dashes">
-                    <!-- <h2>
-                        Gasto de Processador médio mensal
-                    </h2>
-                    <div class="graficos">
-                    <div class="graficosTitulos">
-                        <h1 style="color: white;" id="titulo1">
-                            Filial 5
-                        </h1>
-                        <h1 style="color: white;" id="titulo2">
-                            Filial 7
-                        </h1>
-                    </div>
-                    <div class="graficosCanvas">
-                        <canvas id="doughnutFilial1" style="width: 900px;">
-                            
-                        </canvas>
-                        <canvas id="doughnutFilial2" style="width: 900px;">
-                            
-                        </canvas>
-                    </div>
-                </div>
-                
-                <div class="graficos2">
-                                        <h2>
-                                            Quantidade de sobrecarga (processador) por Mês
-                                        </h2>
-                                    <div class="graficosTitulos2">
-                                        <h1 style="color: white;" id="titulo11">
-                                            Filial 5
-                                        </h1>
-                                        <h1 style="color: white;" id="titulo22">
-                                            Filial 7
-                                        </h1>
-                                    </div>
-                                    <div class="graficosCanvas2">
-                                    <canvas id="barraFilial1" style="width: 900px;">
-                
-                                    </canvas>
-                                    <canvas id="barraFilial2" style="width: 900px;">
-                
-                                    </canvas>
-                                    </div> -->
-                                    
-                                                    <h3>3 Filiais com mais alertas (no mês)</h3>
-                                                    <div class="ranking">
-                                                        <table>
-                                                            <tr>
-                                                                <th>Posição</th>
-                                                                <th>Filial Bairro</th>
-                                                                <th>Quantidade</th>
-                                                            </tr>
-                                                            <tr class="highlight">
-                                                                <td>1</td>
-                                                                <td>Paulista</td>
-                                                                <td>19</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td>Água Rasa</td>
-                                                                <td>12</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>Pinheiros</td>
-                                                                <td>9</td>
-                                                            </tr>
-                                                        </table>
-                                                      <div>
-                                                        
-                                                      </div>
-                                                        <div class="totens">
-                                                            <h3>Quantidade de Filiais</h1>
-                                                                <div class="totens-quantidade">
-                                                                    8
-                                                                </div>
-                                                                <h4>Nº de filiais com alertas ativos</h4>
-                                                                <div class="totens-problema">
-                                                                    4 </div>
-                                                        </div>
-                                                    </div>
-                </div>
-                <div class="dashes-baixo" id="dashes_baixo">
-                        <div class="radar-container">
-                            <span class="span_graf">Alertas por Zonas (no dia)</span>
-                            <canvas id="radarChart">
-    
-                            </canvas>
-                        </div>
-                        <div class="grafico_wordcloud">
-                            <h3>Word Cloud - Bairros de São Paulo</h3>
-                            <div class="wordcloud-container">
-                                <img src="./assets/img/wordCloud.png" alt="" style="width: 420px; margin-left: 5rem;">
+        <div class="dashes">
+            <div class="container-dashes">
+                <h3>3 Filiais com mais alertas (no mês)</h3>
+                <div class="ranking">
+                    <table>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Filial Bairro</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr class="highlight">
+                            <td>1</td>
+                            <td>Paulista</td>
+                            <td>19</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Água Rasa</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Pinheiros</td>
+                            <td>9</td>
+                        </tr>
+                    </table>
+                  <div>
+                    
+                  </div>
+                    <div class="totens">
+                        <h3>Quantidade de Filiais</h1>
+                            <div class="totens-quantidade">
+                                8
                             </div>
-                        </div>
+                            <h4>Nº de filiais com alertas ativos</h4>
+                            <div class="totens-problema">
+                                4 </div>
                     </div>
-                    <div id="indicadores" style="display: none;">
-                    <div class="dash-navbar">
-                        <button onclick="comparar()">
-                            Indicadores
-                        </button>
-                        <button onclick="compararGraficos()">
-                            Gráficos
-                        </button>
-                    </div>
-                    <div class="indicadoresGraficosContainer" id="indicadoresGraficosContainer">
-                        <div class="container-dashes" id="container_dashes_totens1">
-                            <h2>
-                                Gasto de CPU
-                            </h2>
-        
-                            <div class="totensComparacao" id="totensComparacao">
-                                <div class="totensComparados" id="totensComparados">
-                                    <h3 id="totem1">Totem 5</h3>
-                                    <h3 id="totem2">Totem 7</h3>
-                                </div>
-                                <div class="totensPorcentagem" id="totensPorcentagem">
-                                    <div class="totemSelecionado11" id="totemSelecionado1">
-                                        <h1>80%</h1>
-                                    </div>
-                                    <div class="totemSelecionado21" id="totemSelecionado2">
-                                        <h1>40%</h1>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                                <div class="container-dashes" id="container_dashes_totens2">
-                                    <h2>
-                                        Quantidade de sobrecargas no dia
-                                    </h2>
-                                    <div class="totensComparacao" id="totensComparacao">
-                                        <div class="totensComparados" id="totensComparados">
-                                            <h3 id="totem1">Totem 5</h3>
-                                            <h3 id="totem2">Totem 7</h3>
-                                        </div>
-                                        <div class="totensPorcentagem" id="totensPorcentagem">
-                                            <div class="totemSelecionado12" id="totemSelecionado1">
-                                                <h1>3</h1>
-                                            </div>
-                                            <div class="totemSelecionado22" id="totemSelecionado2">
-                                                <h1>19</h1>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="graficosContainer" id="graficosContainer" style="display: none">
-                                <h2>
-                                        Gasto de Processador médio mensal
-                                    </h2>
-                                    <div class="graficos">
-                                    <div class="graficosTitulos">
-                                        <h1 style="color: white;" id="titulo1">
-                                            Filial 5
-                                        </h1>
-                                        <h1 style="color: white;" id="titulo2">
-                                            Filial 7
-                                        </h1>
-                                    </div>
-                                    <div class="graficosCanvas">
-                                        <canvas id="doughnutFilial1" style="width: 900px;">
-                                            
-                                        </canvas>
-                                        <canvas id="doughnutFilial2" style="width: 900px;">
-                                            
-                                        </canvas>
-                                    </div>
-                                </div>
-                                
-                                <div class="graficos2">
-                                                        <h2>
-                                                            Quantidade de sobrecarga (processador) por Mês
-                                                        </h2>
-                                                    <div class="graficosTitulos2">
-                                                        <h1 style="color: white;" id="titulo11">
-                                                            Filial 5
-                                                        </h1>
-                                                        <h1 style="color: white;" id="titulo22">
-                                                            Filial 7
-                                                        </h1>
-                                                    </div>
-                                                    <div class="graficosCanvas2">
-                                                    <canvas id="barraFilial1" style="width: 900px;">
-                                
-                                                    </canvas>
-                                                    <canvas id="barraFilial2" style="width: 900px;">
-                                
-                                                    </canvas>
-                                                    </div>
-                                                    </div>
-                                    </div>
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                
-                    </div>
-                    </div>
-                            <!-- EM CIMA DISSO -->
-                </div>
                 </div>
             </div>
+                <div class="dashes-baixo">
+                    <div class="radar-container">
+                        <span class="span_graf">Alertas por Zonas (no dia)</span>
+                        <canvas id="radarChart">
 
-            </div>
-            </div>
-            </div>
-        </div>
-    </div>
+                        </canvas>
+                    </div>
+                    <div class="grafico_wordcloud">
+                        <h3>Word Cloud - Bairros de São Paulo</h3>
+                        <div class="wordcloud-container">
+                            <img src="./assets/img/wordCloud.png" alt="" style="width: 420px; margin-left: 5rem;">
+                        </div>
+                    </div>
 
-    </div>
-    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -421,14 +257,14 @@
         // const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
         // const dashes_baixo = document.getElementById('dashes-baixo');
 
-        // var region = region.value;
-        // var filial = filial.value;
-        // var filial2 = filial2.value;
+        var region = region.value;
+        var filial = filial.value;
+        var filial2 = filial2.value;
 
-        // if (region == 2 && filial == 2 && filial2 == 2) {
-        //     grafico1.style.display = 'none';
-        //     grafico2.style.display = 'none';
-        // }
+        if (region == 2 && filial == 2 && filial2 == 2) {
+            grafico1.style.display = 'none';
+            grafico2.style.display = 'none';
+        }
 
     }
 
