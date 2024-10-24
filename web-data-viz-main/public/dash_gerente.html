@@ -203,15 +203,9 @@
                             <td>9</td>
                         </tr>
                     </table>
-                    <!-- <div class="primeira_linha_graficos">
-                    <div class="div_para_graficos">
-                        <div class="graficoCPU">
-                            <canvas id="cpuChart"></canvas>
-                        </div>
-                        <div class="graficoRAM">
-                            <canvas id="ramChart"></canvas>
-                        </div>
-                    </div> -->
+                  <div>
+                    
+                  </div>
                     <div class="totens">
                         <h3>Quantidade de Filiais</h1>
                             <div class="totens-quantidade">
@@ -233,7 +227,7 @@
                     <div class="grafico_wordcloud">
                         <h3>Word Cloud - Bairros de São Paulo</h3>
                         <div class="wordcloud-container">
-                            <canvas id="wordCloudChart" style="width:100%; height:350px;"></canvas> 
+                            <img src="./assets/img/wordCloud.png" alt="" style="width: 420px; margin-left: 5rem;">
                         </div>
                     </div>
 
@@ -265,79 +259,6 @@
         }
 
     }
-    
-    // const trocaConteudo = document.getElementById('troca');
-    // const trocaConteudo2 = document.getElementById('novaTroca');
-    // const conteudo1 = document.getElementById('conteudo1');
-    // const conteudo2 = document.getElementById('conteudo2');
-
-    // trocaConteudo.addEventListener('click', function () {
-    //     conteudo2.style.display = 'block';
-    //     conteudo1.style.display = 'none';
-
-    // });
-
-    // trocaConteudo2.addEventListener('click', function () {
-    //     conteudo1.style.display = 'block';
-    //     conteudo2.style.display = 'none';
-
-    // });
-
-    // const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-    // const cpuChart = new Chart(cpuCtx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Filial 1', 'Filial 4', 'Filial 6'],
-    //         datasets: [{
-    //             label: 'CPU',
-    //             data: [80, 50, 70],
-    //             backgroundColor: 'orange',
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true,
-    //                 max: 100,
-    //                 ticks: {
-    //                     callback: function (value) {
-    //                         return value;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
-
-    // // Gráfico de RAM
-    // const ramCtx = document.getElementById('ramChart').getContext('2d');
-    // const ramChart = new Chart(ramCtx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Filial 6', 'Filial 2', 'Filial 1'],
-    //         datasets: [{
-    //             label: 'RAM',
-    //             data: [60, 90, 70],
-    //             backgroundColor: 'red',
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true,
-    //                 max: 100,
-    //                 ticks: {
-    //                     callback: function (value) {
-    //                         return value;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
-
     
     // Radar Chart
     const radarCtx = document.getElementById('radarChart').getContext('2d');
