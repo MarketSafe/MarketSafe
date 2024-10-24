@@ -238,6 +238,7 @@ body {
     align-items: center;
     flex-direction: column;
     border-radius: 5px;
+    margin: 7px;
 }
 
 .totens h3{
