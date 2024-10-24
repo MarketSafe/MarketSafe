@@ -8,6 +8,7 @@ from requests import HTTPError
 import boto3
 import time
 import mysql.connector
+import dotenv
 
 if not os.path.isfile(".env"):
   print("Variáveis de ambiente não configuradas (crie um arquivo \".env\" no mesmo diretório que esta pasta seguindo o exemplo do arquivo \".env.example\").")
@@ -15,6 +16,8 @@ else:
   env = dotenv.dotenv_values()
 
   macAddress = hex(getnode())[2:]
+  porcentagemAlerta = 85
+  
   conn = mysql.connector.connect(
     host=env["DB_HOST"],
     user="mktsUser",
@@ -57,10 +60,10 @@ else:
       componentes = []
       componentesValores = []
 
-      if cpu > 85:
+      if cpu > porcentagemAlerta:
           componentes.append("CPU")
           componentesValores.append(f"CPU: {cpu}")
-      if ram > 85:
+      if ram > porcentagemAlerta:
           componentes.append("RAM")
           componentesValores.append(f"RAM: {ram}")
       
@@ -70,7 +73,7 @@ else:
       agora = datetime.datetime.now()
 
       # Se o uso de CPU ou RAM for maior que 85% 
-      if cpuPorcentagem > 85 or ramPorcentagem > 85:
+      if cpuPorcentagem > porcentagemAlerta or ramPorcentagem > porcentagemAlerta:
           # Verifica se já houve um alerta nos últimos 5 minutos para esse MAC
           if mac not in ultimos_alertas or agora - ultimos_alertas[mac] > datetime.timedelta(minutes=5):
               gerarAlerta(agora.strftime("%Y-%m-%d %H:%M:%S"), cpuPorcentagem, ramPorcentagem)
