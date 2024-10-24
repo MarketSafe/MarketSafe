@@ -8,6 +8,7 @@ from requests import HTTPError
 import boto3
 import time
 import mysql.connector
+import dotenv
 
 if not os.path.isfile(".env"):
   print("Variáveis de ambiente não configuradas (crie um arquivo \".env\" no mesmo diretório que esta pasta seguindo o exemplo do arquivo \".env.example\").")
