@@ -9,10 +9,10 @@
     <link rel="icon" href="css/icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -178,62 +178,226 @@
             </div>
         </div>
 
-        <div class="dashes">
-            <div class="container-dashes">
-                <h3>3 Filiais com mais alertas (no mês)</h3>
-                <div class="ranking">
-                    <table>
-                        <tr>
-                            <th>Posição</th>
-                            <th>Filial Bairro</th>
-                            <th>Quantidade</th>
-                        </tr>
-                        <tr class="highlight">
-                            <td>1</td>
-                            <td>Paulista</td>
-                            <td>19</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Água Rasa</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Pinheiros</td>
-                            <td>9</td>
-                        </tr>
-                    </table>
-                  <div>
-                    
-                  </div>
-                    <div class="totens">
-                        <h3>Quantidade de Filiais</h1>
-                            <div class="totens-quantidade">
-                                8
-                            </div>
-                            <h4>Nº de filiais com alertas ativos</h4>
-                            <div class="totens-problema">
-                                4 </div>
-                    </div>
-                </div>
+        <div class="dashes" id="dashes">
+            <!-- <div class="dash-navbar">
+                <button onclick="comparar()">
+                    Indicadores
+                </button>
+                <button onclick="compararGraficos()">
+                    Gráficos
+                </button>
             </div>
-                <div class="dashes-baixo">
-                    <div class="radar-container">
-                        <span class="span_graf">Alertas por Zonas (no dia)</span>
-                        <canvas id="radarChart">
-
+            <div class="graficosContainer" id="graficosContainer"> -->
+                <div class="container-dashes" id="container_dashes">
+                    <!-- <h2>
+                        Gasto de Processador médio mensal
+                    </h2>
+                    <div class="graficos">
+                    <div class="graficosTitulos">
+                        <h1 style="color: white;" id="titulo1">
+                            Filial 5
+                        </h1>
+                        <h1 style="color: white;" id="titulo2">
+                            Filial 7
+                        </h1>
+                    </div>
+                    <div class="graficosCanvas">
+                        <canvas id="doughnutFilial1" style="width: 900px;">
+                            
+                        </canvas>
+                        <canvas id="doughnutFilial2" style="width: 900px;">
+                            
                         </canvas>
                     </div>
-                    <div class="grafico_wordcloud">
-                        <h3>Word Cloud - Bairros de São Paulo</h3>
-                        <div class="wordcloud-container">
-                            <img src="./assets/img/wordCloud.png" alt="" style="width: 420px; margin-left: 5rem;">
+                </div>
+                
+                <div class="graficos2">
+                                        <h2>
+                                            Quantidade de sobrecarga (processador) por Mês
+                                        </h2>
+                                    <div class="graficosTitulos2">
+                                        <h1 style="color: white;" id="titulo11">
+                                            Filial 5
+                                        </h1>
+                                        <h1 style="color: white;" id="titulo22">
+                                            Filial 7
+                                        </h1>
+                                    </div>
+                                    <div class="graficosCanvas2">
+                                    <canvas id="barraFilial1" style="width: 900px;">
+                
+                                    </canvas>
+                                    <canvas id="barraFilial2" style="width: 900px;">
+                
+                                    </canvas>
+                                    </div> -->
+                                    
+                                                    <h3>3 Filiais com mais alertas (no mês)</h3>
+                                                    <div class="ranking">
+                                                        <table>
+                                                            <tr>
+                                                                <th>Posição</th>
+                                                                <th>Filial Bairro</th>
+                                                                <th>Quantidade</th>
+                                                            </tr>
+                                                            <tr class="highlight">
+                                                                <td>1</td>
+                                                                <td>Paulista</td>
+                                                                <td>19</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Água Rasa</td>
+                                                                <td>12</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Pinheiros</td>
+                                                                <td>9</td>
+                                                            </tr>
+                                                        </table>
+                                                      <div>
+                                                        
+                                                      </div>
+                                                        <div class="totens">
+                                                            <h3>Quantidade de Filiais</h1>
+                                                                <div class="totens-quantidade">
+                                                                    8
+                                                                </div>
+                                                                <h4>Nº de filiais com alertas ativos</h4>
+                                                                <div class="totens-problema">
+                                                                    4 </div>
+                                                        </div>
+                                                    </div>
+                </div>
+                <div class="dashes-baixo" id="dashes_baixo">
+                        <div class="radar-container">
+                            <span class="span_graf">Alertas por Zonas (no dia)</span>
+                            <canvas id="radarChart">
+    
+                            </canvas>
+                        </div>
+                        <div class="grafico_wordcloud">
+                            <h3>Word Cloud - Bairros de São Paulo</h3>
+                            <div class="wordcloud-container">
+                                <img src="./assets/img/wordCloud.png" alt="" style="width: 420px; margin-left: 5rem;">
+                            </div>
                         </div>
                     </div>
-
+                    <div id="indicadores" style="display: none;">
+                    <div class="dash-navbar">
+                        <button onclick="comparar()">
+                            Indicadores
+                        </button>
+                        <button onclick="compararGraficos()">
+                            Gráficos
+                        </button>
+                    </div>
+                    <div class="indicadoresGraficosContainer" id="indicadoresGraficosContainer">
+                        <div class="container-dashes" id="container_dashes_totens1">
+                            <h2>
+                                Gasto de CPU
+                            </h2>
+        
+                            <div class="totensComparacao" id="totensComparacao">
+                                <div class="totensComparados" id="totensComparados">
+                                    <h3 id="totem1">Totem 5</h3>
+                                    <h3 id="totem2">Totem 7</h3>
+                                </div>
+                                <div class="totensPorcentagem" id="totensPorcentagem">
+                                    <div class="totemSelecionado11" id="totemSelecionado1">
+                                        <h1>80%</h1>
+                                    </div>
+                                    <div class="totemSelecionado21" id="totemSelecionado2">
+                                        <h1>40%</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                                <div class="container-dashes" id="container_dashes_totens2">
+                                    <h2>
+                                        Quantidade de sobrecargas no dia
+                                    </h2>
+                                    <div class="totensComparacao" id="totensComparacao">
+                                        <div class="totensComparados" id="totensComparados">
+                                            <h3 id="totem1">Totem 5</h3>
+                                            <h3 id="totem2">Totem 7</h3>
+                                        </div>
+                                        <div class="totensPorcentagem" id="totensPorcentagem">
+                                            <div class="totemSelecionado12" id="totemSelecionado1">
+                                                <h1>3</h1>
+                                            </div>
+                                            <div class="totemSelecionado22" id="totemSelecionado2">
+                                                <h1>19</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="graficosContainer" id="graficosContainer" style="display: none">
+                                <h2>
+                                        Gasto de Processador médio mensal
+                                    </h2>
+                                    <div class="graficos">
+                                    <div class="graficosTitulos">
+                                        <h1 style="color: white;" id="titulo1">
+                                            Filial 5
+                                        </h1>
+                                        <h1 style="color: white;" id="titulo2">
+                                            Filial 7
+                                        </h1>
+                                    </div>
+                                    <div class="graficosCanvas">
+                                        <canvas id="doughnutFilial1" style="width: 900px;">
+                                            
+                                        </canvas>
+                                        <canvas id="doughnutFilial2" style="width: 900px;">
+                                            
+                                        </canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="graficos2">
+                                                        <h2>
+                                                            Quantidade de sobrecarga (processador) por Mês
+                                                        </h2>
+                                                    <div class="graficosTitulos2">
+                                                        <h1 style="color: white;" id="titulo11">
+                                                            Filial 5
+                                                        </h1>
+                                                        <h1 style="color: white;" id="titulo22">
+                                                            Filial 7
+                                                        </h1>
+                                                    </div>
+                                                    <div class="graficosCanvas2">
+                                                    <canvas id="barraFilial1" style="width: 900px;">
+                                
+                                                    </canvas>
+                                                    <canvas id="barraFilial2" style="width: 900px;">
+                                
+                                                    </canvas>
+                                                    </div>
+                                                    </div>
+                                    </div>
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                    </div>
+                            <!-- EM CIMA DISSO -->
+                </div>
                 </div>
             </div>
+
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
         </div>
 
     </div>
@@ -247,18 +411,31 @@
 
     function comparar() {
 
-        const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
-        const dashes_baixo = document.getElementById('dashes-baixo');
+        document.getElementById('container_dashes').style.display='none';
+        document.getElementById('dashes_baixo').style.display='none';
+        document.getElementById('indicadores').style.display='block';
+        document.getElementById('container_dashes_totens1').style.display='block';
+        document.getElementById('container_dashes_totens2').style.display='block';
+        document.getElementById('graficosContainer').style.display='none';
 
-        var region = region.value;
-        var filial = filial.value;
-        var filial2 = filial2.value;
+        // const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
+        // const dashes_baixo = document.getElementById('dashes-baixo');
 
-        if (region == 2 && filial == 2 && filial2 == 2) {
-            grafico1.style.display = 'none';
-            grafico2.style.display = 'none';
-        }
+        // var region = region.value;
+        // var filial = filial.value;
+        // var filial2 = filial2.value;
 
+        // if (region == 2 && filial == 2 && filial2 == 2) {
+        //     grafico1.style.display = 'none';
+        //     grafico2.style.display = 'none';
+        // }
+
+    }
+
+    function compararGraficos() {
+        document.getElementById('container_dashes_totens1').style.display='none';
+        document.getElementById('container_dashes_totens2').style.display='none';
+        document.getElementById('graficosContainer').style.display='block';
     }
     
     // const trocaConteudo = document.getElementById('troca');
@@ -335,7 +512,7 @@
 
     
     // Radar Chart
-    const radarCtx = document.getElementById('radarChart').getContext('2d');
+    // const radarCtx = document.getElementById('radarChart').getContext('2d');
     const dataRadar = {
       labels: [
         'Central',
@@ -394,6 +571,242 @@
         document.getElementById('radarChart'),
         configRadar
     );
+
+    const doughnutFilial1Ctx = document.getElementById('doughnutFilial1').getContext('2d');
+    const doughnutFilial2Ctx = document.getElementById('doughnutFilial2').getContext('2d');
+
+var gradient1 = doughnutFilial1Ctx.createLinearGradient(0, 0, 200, 0);
+ gradient1.addColorStop(0.0, '#FF8008');
+ gradient1.addColorStop(0.8, '#FFC837');
+
+ const counter = {
+  id: 'counter',
+  beforeDraw(chart, args, options) {
+    const{ ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
+    ctx.save();
+    ctx.font = '30px sans-serif';
+    ctx.fillStyle = 'white'
+    ctx.textAlign = 'center';
+    ctx.fillText('70%', width / 2, top + (height / 1.8));
+  }
+ };
+
+const datadoughnutFilial1 = {
+  labels: [
+    'Não gasto',
+    'Gasto'
+  ],
+  datasets : [{
+    data: [100 - 70, 70],
+    backgroundColor: [
+      '#EEEEEE',
+      gradient1
+    ],
+    borderWidth: 0,
+    borderRadius: [0, 100],
+    spacing: -8
+  }]
+};
+
+const configdoughnutFilial1 = {
+  type: 'doughnut',
+  data: datadoughnutFilial1,
+  options: {
+    cutout: '70%',
+    plugins: {
+      legend: {
+        display: false
+      },
+      labels: {
+        color: 'white'
+      }
+    },
+    hover: {
+      mode: null
+    }
+  },
+  plugins: [counter]
+};
+
+let doughnutFilial1 = new Chart(
+  doughnutFilial1Ctx,
+  configdoughnutFilial1
+);
+
+ const counter1 = {
+  id: 'counter1',
+  beforeDraw(chart, args, options) {
+    const{ ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
+    ctx.save();
+    ctx.font = '30px sans-serif';
+    ctx.fillStyle = 'white'
+    ctx.textAlign = 'center';
+    ctx.fillText('50%', width / 2, top + (height / 1.8));
+  }
+ };
+
+
+
+const datadoughnutFilial2 = {
+  labels: [
+    'Não gasto',
+    'Gasto'
+  ],
+  datasets : [{
+    data: [100 - 50, 50],
+    backgroundColor: [
+      '#EEEEEE',
+      gradient1
+    ],
+    borderWidth: 0,
+    borderRadius: [0, 100],
+    spacing: -8
+  }]
+};
+
+const configdoughnutFilial2 = {
+  type: 'doughnut',
+  data: datadoughnutFilial2,
+  options: {
+    cutout: '70%',
+    plugins: {
+      legend: {
+        display: false
+      },
+      labels: {
+        color: 'white'
+      }
+    },
+    hover: {
+      mode: null
+    }
+  },
+  plugins: [counter1]
+};
+
+let doughnutFilial2 = new Chart(
+  doughnutFilial2Ctx,
+  configdoughnutFilial2
+);
+
+const barralabels1 = [
+    '5',
+    '10',
+    '15',
+    '20',
+    '25',
+    '30'
+];
+const barradata1 = {
+  labels: barralabels1,
+  datasets: [{
+    axis: 'x',
+    data: [17, 7, 13, 21, 5, 5],
+    fill: true,
+    backgroundColor: [
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418'
+    ]
+  }]
+};
+const barraconfig1 = {
+  type: 'bar',
+  data: barradata1,
+  options: {
+    indexAxis: 'x',
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        y: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                color: '#505050'
+            }
+        },
+        x: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                display: false
+            }
+        }
+    }
+  }
+};
+let barra1 = new Chart(
+    document.getElementById('barraFilial1'),
+    barraconfig1
+)
+
+const barralabels2 = [
+    '5',
+    '10',
+    '15',
+    '20',
+    '25',
+    '30'
+];
+const barradata2 = {
+  labels: barralabels2,
+  datasets: [{
+    axis: 'x',
+    data: [30, 15, 7, 12, 18, 5],
+    fill: true,
+    backgroundColor: [
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418',
+      '#FFB418'
+    ]
+  }]
+};
+
+const barraconfig2 = {
+  type: 'bar',
+  data: barradata2,
+  options: {
+    indexAxis: 'x',
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        y: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                color: '#505050'
+            }
+        },
+        x: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                display: false
+            }
+        }
+    }
+  }
+};
+let side_bar = new Chart(
+    document.getElementById('barraFilial2'),
+    barraconfig2
+)
 
     window.onload = function () {
         start();
