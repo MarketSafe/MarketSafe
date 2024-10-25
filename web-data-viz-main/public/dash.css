@@ -616,10 +616,6 @@ tr:hover {
     height: 100%;
 }
 
-.gasto_cpu h2{
-    margin: 80px 20px 20px 0px;
-}
-
 .Totem5{
     display: flex;
     align-items: center;
@@ -627,6 +623,7 @@ tr:hover {
     background-color: #D46606;
     width: 100%;
     height: 100%;
+    font-weight: bold;
     font-size: 35px;
     border-radius: 7px;
     border-style: solid;
@@ -640,10 +637,11 @@ tr:hover {
     background-color: #006D04;
     width: 100%;
     height: 100%;
+    font-weight: bold;
     font-size: 35px;
     border-radius: 7px;
     border-style: solid;
-    border-color: #017c05;
+    border-color: #14cf1a;
 
 }
 
@@ -674,26 +672,28 @@ tr:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #237F2B ;
+    background-color: #FF3131;
     width: 100%;
     height: 100%;
+    font-weight: bold;
     font-size: 35px;
-    border-radius: 7px;
+    border-radius: 10px;
     border-style: solid;
-    border-color: #259b2f ;
+    border-color: #bb1010 ;
 }
 
 .Totem7_segundo{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #FF3131;
+    background-color: #237F2B ;
     width: 100%;
     height: 100%;
+    font-weight: bold;
     font-size: 35px;
     border-radius: 7px;
     border-style: solid;
-    border-color: #ff3f3f ;
+    border-color: #034b09 ;
 }
 
 .titulo_quantidade{
@@ -731,12 +731,15 @@ tr:hover {
 
 .graficos_tela_2{
     display: flex;
+    align-items: center;
     flex-direction: column;
-    background-color: #292A32;
+    background-color: #292935;
     border-radius: 8px;
     justify-content: space-evenly;
-    width: 90%;
-    height: 80%;
+    margin-top: 20px;
+    margin-left: 10%;
+    width: 100%;
+    height: 100%;
 }
 
 .fundo_dough_2{
@@ -745,19 +748,20 @@ tr:hover {
     flex-direction: column;
     justify-content: center;
     background-color: #292A32;
-    height: 275px;
-    margin-top: 9   px;
+    width: 50%;
+    height: 100%;
 }
 
 .graficoLinha2{
     display: flex;
     padding-left: 20px;
-    max-width: 400px;
+    width: 50%;
     max-height: 300px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background-color: #292A32;
+    margin-right: 3%;
 }
 
 .linha_gf_comparacao{
@@ -782,13 +786,29 @@ tr:hover {
 
 .grafico_Bar_tela2{
     display: flex;
-    max-width: 300px;
+    width: 40%;
     max-height: 200px;
     flex-direction: column;
     margin: 16px;
+    margin-left: 3%;
 }
 
 .grafico_Bar_tela2 span{
+    display: flex;
+    flex-direction: row-reverse;
+    font-size:x-large;
+}
+
+.grafico2_Bar_tela2{
+    display: flex;
+    width: 40%;
+    max-height: 200px;
+    flex-direction: column;
+    margin: 16px;
+    margin-left: 9%;
+}
+
+.grafico2_Bar_tela2 span{
     display: flex;
     flex-direction: row-reverse;
     font-size:x-large;
@@ -966,4 +986,74 @@ tr:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+#titulo11 {
+    margin-right: 10%;
+}
+
+#titulo22 {
+    margin-left: 5%;
+}
+
+.gasto_cpu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
+    height: 100%;
+    background-color: #292935;
+    border-radius: 7px;
+}
+
+
+.gasto_cpu h2{
+    margin: 0px 0px 40px 0px;
+}
+
+.gasto_cpu h3{
+    margin: 0px 0px 20px 0px;
+}
+
+.div_tela2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao_indicador{
+    border-style: none;
+    background-color: transparent;
+    font-size: large;
+    font-weight: bold;
+    color:#E9864A;
+    margin-right: 10px;
+}
+
+.botao_grafico{
+    border-style: none;
+    background-color: transparent;
+    font-size: large;
+    font-weight: bold;
+    color:#ddd;
+    margin-left: 10px;
+}
+
+.botao_indicador2{
+    border-style: none;
+    background-color: transparent;
+    font-size: large;
+    font-weight: bold;
+    color:#ddd;
+    margin-right: 10px;
+}
+
+.botao_grafico2{
+    border-style: none;
+    background-color: transparent;
+    font-size: large;
+    font-weight: bold;
+    color:#E9864A;
+    margin-left: 10px;
 }
