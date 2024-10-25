@@ -734,12 +734,15 @@ tr:hover {
 
 .graficos_tela_2{
     display: flex;
+    align-items: center;
     flex-direction: column;
-    background-color: #292A32;
+    background-color: #292935;
     border-radius: 8px;
     justify-content: space-evenly;
-    width: 90%;
-    height: 80%;
+    margin-top: 20px;
+    margin-left: 10%;
+    width: 100%;
+    height: 100%;
 }
 
 .fundo_dough_2{
@@ -748,19 +751,20 @@ tr:hover {
     flex-direction: column;
     justify-content: center;
     background-color: #292A32;
-    height: 275px;
-    margin-top: 9   px;
+    width: 50%;
+    height: 100%;
 }
 
 .graficoLinha2{
     display: flex;
     padding-left: 20px;
-    max-width: 400px;
+    width: 50%;
     max-height: 300px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background-color: #292A32;
+    margin-right: 3%;
 }
 
 .linha_gf_comparacao{
@@ -785,13 +789,29 @@ tr:hover {
 
 .grafico_Bar_tela2{
     display: flex;
-    max-width: 300px;
+    width: 40%;
     max-height: 200px;
     flex-direction: column;
     margin: 16px;
+    margin-left: 3%;
 }
 
 .grafico_Bar_tela2 span{
+    display: flex;
+    flex-direction: row-reverse;
+    font-size:x-large;
+}
+
+.grafico2_Bar_tela2{
+    display: flex;
+    width: 40%;
+    max-height: 200px;
+    flex-direction: column;
+    margin: 16px;
+    margin-left: 9%;
+}
+
+.grafico2_Bar_tela2 span{
     display: flex;
     flex-direction: row-reverse;
     font-size:x-large;
