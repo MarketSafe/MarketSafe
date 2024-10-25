@@ -241,7 +241,8 @@
                                 Gráficos
                             </button>
                         </div>
-                        <div class="indicadoresGraficosContainer" id="indicadoresGraficosContainer">
+                        </div>
+                        <div class="indicadoresGraficosContainer" id="indicadoresGraficosContainer" style="display: none;">
                             <div class="container-dashes" id="container_dashes_totens1">
                                 <h2>
                                     Gasto de CPU
@@ -282,39 +283,39 @@
                                         </div>
                                 </div>
                                 <div class="graficosContainer" id="graficosContainer" style="display: none">
-                                    <h2>
+                                    <h1 style="color: white;">
                                             Gasto de Processador médio mensal
-                                        </h2>
+                                        </h1>
                                         <div class="graficos">
                                         <div class="graficosTitulos">
-                                            <h1 style="color: white;" id="titulo1">
+                                            <h2 style="color: white;" id="titulo1">
                                                 Filial 5
-                                            </h1>
-                                            <h1 style="color: white;" id="titulo2">
+                                            </h2>
+                                            <h2 style="color: white;" id="titulo2">
                                                 Filial 7
-                                            </h1>
+                                            </h2>
                                         </div>
                                         <div class="graficosCanvas">
                                             <canvas id="doughnutFilial1" style="width: 900px;">
                                                 
                                             </canvas>
-                                            <canvas id="doughnutFilial2" style="width: 900px;">
+                                            <canvas id="doughnutFilial2" style="width: 100px;">
                                                 
                                             </canvas>
                                         </div>
                                     </div>
                                     
                                     <div class="graficos2">
-                                                            <h2>
-                                                                Quantidade de sobrecarga (processador) por Mês
-                                                            </h2>
+                                                            <h1 id="tituloGraficos2" style="color: white;">
+                                                                Quantidade de Sobrecarga (Processador) por Mês
+                                                            </h1>
                                                         <div class="graficosTitulos2">
-                                                            <h1 style="color: white;" id="titulo11">
+                                                            <h2 style="color: white;" id="titulo11">
                                                                 Filial 5
-                                                            </h1>
-                                                            <h1 style="color: white;" id="titulo22">
+                                                            </h2>
+                                                            <h2 style="color: white;" id="titulo22">
                                                                 Filial 7
-                                                            </h1>
+                                                            </h2>
                                                         </div>
                                                         <div class="graficosCanvas2">
                                                         <canvas id="barraFilial1" style="width: 900px;">
@@ -327,7 +328,7 @@
                                                         </div>
                                         </div>
                                         </div>
-                                </div>
+                                
                                 </div>
                             </div>
                     
@@ -354,6 +355,7 @@
         document.getElementById('container_dashes_totens1').style.display='block';
         document.getElementById('container_dashes_totens2').style.display='block';
         document.getElementById('graficosContainer').style.display='none';
+        document.getElementById('indicadoresGraficosContainer').style.display='block';
 
         // const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
         // const dashes_baixo = document.getElementById('dashes-baixo');
@@ -459,7 +461,6 @@
         'Leste'
       ],
       datasets: [{
-        label: 'Alertas(???)', // TODO: Trocar o nome dessa label
         data: [78, 55, 90, 75, 80],
         fill: false,
         borderColor: '#FF3131'
@@ -528,7 +529,7 @@ var gradient1 = doughnutFilial1Ctx.createLinearGradient(0, 0, 200, 0);
   }
  };
 
-const datadoughnutFilial1 = {
+ const datadoughnutFilial1 = {
   labels: [
     'Não gasto',
     'Gasto'
@@ -567,8 +568,13 @@ const configdoughnutFilial1 = {
 
 let doughnutFilial1 = new Chart(
   doughnutFilial1Ctx,
-  configdoughnutFilial1
+  configdoughnutFilial1,
+//   setInterval(() => {
+//   chart.update();
+// }, 1000)
 );
+
+
 
  const counter1 = {
   id: 'counter1',
@@ -675,13 +681,18 @@ const barraconfig1 = {
             },
             grid: {
                 display: false
+            },
+            title: {
+                display: true,
+                text: 'Dias do mês',
+                color: 'white'
             }
         }
     }
   }
 };
 let barra1 = new Chart(
-    document.getElementById('barraFilial1'),
+    document.getElementById('barraFilial1').getContext('2d'),
     barraconfig1
 )
 
@@ -735,13 +746,18 @@ const barraconfig2 = {
             },
             grid: {
                 display: false
+            },
+            title: {
+                display: true,
+                text: 'Dias do mês',
+                color: 'white'
             }
         }
     }
   }
 };
 let side_bar = new Chart(
-    document.getElementById('barraFilial2'),
+    document.getElementById('barraFilial2').getContext('2d'),
     barraconfig2
 )
 
