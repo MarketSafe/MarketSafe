@@ -171,7 +171,6 @@ body {
     height: auto;
     margin-top: 1%;
     padding: 10px;
-    margin-right: 1.5%;
     justify-content: space-between;
     align-items: center;
     
@@ -179,14 +178,15 @@ body {
 
 .container-dashes {
     display: flex;
-    height: 50%;
+    height: 100%;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
 .container-dashes h3{
     width: 77%;
-    margin: 5px;
+    margin-left: 20%;
+    margin-bottom: 1%;
 }
 
 .container-dashes table {
@@ -232,23 +232,26 @@ body {
     flex-direction: row;
     width: 100%;
     height: 50%;
-    justify-content: space-evenly;
+    justify-content: space-around;
     margin-bottom: 10px;
 }
 
 .totens{
-    width: 15%;
-    height: 15rem;
+    width: 25%;
+    height: 100%;
     display: flex;
     background-color: #292A32;
     align-items: center;
     flex-direction: column;
     border-radius: 5px;
-    margin: 7px;
 }
 
 .totens h3{
-    margin: 5%;
+    display: flex;
+    align-items: center;
+    margin-left: 23%;
+    margin-top: 10%;
+    width: 100%; 
 }
 
 .totens h4{
