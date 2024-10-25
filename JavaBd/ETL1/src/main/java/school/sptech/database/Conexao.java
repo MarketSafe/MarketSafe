@@ -8,7 +8,7 @@ public class Conexao {
   private JdbcTemplate template;
 
   public Conexao() {
-    ipPorta = "34.207.194.243:3306";
+    ipPorta = "127.0.0.1:3306";
     BasicDataSource dataSource = new BasicDataSource();
     dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
     dataSource.setUrl("jdbc:mysql://" + ipPorta + "/market_safe");

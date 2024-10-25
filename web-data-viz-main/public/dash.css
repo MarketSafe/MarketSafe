@@ -396,12 +396,14 @@ body {
 .radar-container {
     display: flex;
     flex-direction: column;
-    background-color: #292A32;
     border-radius: 0.5rem;
     align-items: center;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
     justify-content: center;
-    width: 30%
+    width: 80%;
+    margin-left: 12%;
 }
 
 h1 {

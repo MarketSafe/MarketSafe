@@ -186,10 +186,11 @@
         </div>
 
         <div class="dashes" style="height: 100%;">
-            <h3>3 Filiais com mais alertas (no mês)</h3>
+            <h3></h3>
             <div class="container-dashes" id="container_dashes" style="height: 37%;">
-                <div style="display: flex; background-color: #2c2f38; height: 100%; padding: 2%; width: 60%; padding-top: 2%; padding-bottom: 2%; justify-content: space-between; border-radius: 10px;">
-                    <div class="ranking"  style="height: 100%; display: flex; flex-direction: column;">
+                <div style="display: flex; background-color: #2c2f38; height: 100%; padding: 2%; width: 60%; padding-top: 0.1%; padding-bottom: 2%; justify-content: space-between; border-radius: 10px;">
+                    <div class="ranking"  style="height: 100%; display: flex; flex-direction: column; padding-top: 5%;">
+                        <h3 style="width: 100%; margin-left: 0%; margin-bottom: 1%; margin-top: 0%;">3 Filiais com mais alertas (no mês)</h3>
                         <table style="height: 100%;">
                             <tr>
                                 <th>Posição</th>
@@ -213,8 +214,13 @@
                             </tr>
                         </table>
                     </div>
-                    <div style="height: 100%; width: 40%;">
-                        <img src="assets/img/thumbnail_metaPlot2.png" alt="" style="height: 100%; width: 100%;">
+                    <div style="height: 100%; width: 50%;">
+                        <div class="radar-container">
+                            <span class="span_graf">Alertas por Zonas (no dia)</span>
+                            <canvas id="radarChart">
+        
+                            </canvas>
+                        </div>
                     </div>
                 </div>
 
@@ -229,12 +235,8 @@
                 </div>
             </div>
             <div class="dashes-baixo" id="dashes_baixo" style="justify-content: space-between; margin-top: 1%; margin-left: 4%; margin-right: 4%;">
-                <div class="radar-container">
-                    <span class="span_graf">Alertas por Zonas (no dia)</span>
-                    <canvas id="radarChart">
+                <img src="assets/img/thumbnail_metaPlotOr.png" alt="" style="height: 96%; width: 65%; border-radius: 10px;">                
 
-                    </canvas>
-                </div>
                 <div class="grafico_wordcloud">
                     <h3>Word Cloud - Bairros de São Paulo</h3>
                     <div class="wordcloud-container">
@@ -252,8 +254,8 @@
                     </button>
                 </div>
             </div>
-            <div class="indicadoresGraficosContainer" id="indicadoresGraficosContainer" style="display: none;">
-                <div class="container-dashes" id="container_dashes_totens1">
+            <div class="indicadoresGraficosContainer" id="indicadoresGraficosContainer" style="display: none;  background-color: transparent;">
+                <div class="container-dashes" id="container_dashes_totens1" style="height: 40%; ">
                     <h2>
                         Gasto de CPU
                     </h2>
@@ -273,7 +275,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-dashes" id="container_dashes_totens2">
+                <div class="container-dashes" id="container_dashes_totens2" style="height: 40%;">
                     <h2>
                         Quantidade de sobrecargas no dia
                     </h2>
