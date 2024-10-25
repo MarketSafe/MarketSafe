@@ -175,7 +175,7 @@
         </div>
 
         <div class="dashes">
-            <div class="container-dashes" id="grafico1">
+            <div class="container-dashes" id="grafico1" style="display: none;">
                 <h3>Totens com mais gasto na última hora</h3>
                 <div class="primeira_linha_graficos">
                     <div class="div_para_graficos">
@@ -213,7 +213,7 @@
                 </div>
             </div>
 
-            <div id="tela_elementos" class="tela_elementos" style="display: none;">
+            <div id="tela_elementos" class="tela_elementos" style="display: block;">
                 <div class="div_tela2">
                     <button onclick="indicador()" class="botao_indicador">Indicadores</button>
                     <button onclick="grafico()" class="botao_grafico">Gráficos</button>
@@ -326,6 +326,7 @@ function comparar(){
     const tela1 = document.getElementById('grafico1');
 
     grafico1.style.display = 'none'; 
+    tela_elementos.style.display = 'block'
     
 }
 
