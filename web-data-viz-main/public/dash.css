@@ -988,14 +988,6 @@ tr:hover {
     justify-content: space-evenly;
 }
 
-#titulo11 {
-    margin-right: 10%;
-}
-
-#titulo22 {
-    margin-left: 5%;
-}
-
 .gasto_cpu{
     display: flex;
     align-items: center;
