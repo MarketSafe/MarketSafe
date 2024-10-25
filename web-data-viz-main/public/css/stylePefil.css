@@ -1,8 +1,50 @@
 body{
+    font-family: Arial, sans-serif;
     background-size: 100%;
     background-image: url('data:image/svg+xml,<svg width="2269" height="1402" viewBox="0 0 2269 1402" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_83_3)"><rect width="2269" height="1402" fill="%23292A32"/><rect width="134.432" height="1827.45" transform="matrix(0.915331 0.402703 -0.392682 0.919674 1925.16 -193)" fill="%23FF914D"/><rect width="134.432" height="1827.45" transform="matrix(0.915331 0.402703 -0.392682 0.919674 2069.95 -138.967)" fill="%23FFB418"/><rect width="134.432" height="1827.45" transform="matrix(0.915331 0.402703 -0.392682 0.919674 1738.61 -138.799)" fill="%23FF3131"/></g><defs><clipPath id="clip0_83_3"><rect width="2269" height="1402" fill="white"/></clipPath></defs></svg>')
 }
 
+.navbar{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    color: #fff;  
+    position: relative;
+    margin-right: 5%;
+    font-size: large;
+}
+
+.header{
+    margin-left: 1.23rem;
+    background-color: #484850;
+    width: 97%;
+    height: 2.5rem;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.header a{
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px 0 5px;
+}
+
+.agora a{
+    font-weight: 700;
+    color: #E9864A !important; 
+}
+
+.header a{
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px 0 5px;
+}
 
 .Engloba_perfil{
     display: flex;

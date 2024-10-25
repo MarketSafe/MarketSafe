@@ -170,11 +170,11 @@ body {
     width: 90%;
     height: auto;
     margin-top: 1%;
+    margin-right: 1.4%;
     padding: 10px;
     margin-right: 1.5%;
     justify-content: space-between;
     align-items: center;
-    
 }
 
 .container-dashes {
