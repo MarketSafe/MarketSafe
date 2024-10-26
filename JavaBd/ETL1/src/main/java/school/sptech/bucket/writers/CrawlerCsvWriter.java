@@ -14,12 +14,13 @@ public class CrawlerCsvWriter {
     // Criar um CSV em memória utilizando ByteArrayOutputStream:
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-    CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.Builder.create().setHeader("anoMes", "pagRegiao", "recRegiao", "quantidade").setDelimiter(",").setQuoteMode(QuoteMode.ALL).build());
+    CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.Builder.create().setHeader("ano", "mes", "pagRegiao", "recRegiao", "quantidade").setDelimiter(",").setQuoteMode(QuoteMode.ALL).build());
 
     // Processar e escrever cada objeto no CSV:
     for (CrawlerData crawlerData : dados) {
       csvPrinter.printRecord(
-              crawlerData.getAnoMes(),
+              crawlerData.getAno(),
+              crawlerData.getMes(),
               crawlerData.getPagRegiao(),
               crawlerData.getRecRegiao(),
               crawlerData.getQuantidade()
