@@ -5,6 +5,9 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
     font-family: Arial, sans-serif;
     background-color: #292935;
     color: #fff;
@@ -51,11 +54,12 @@ body {
 
 .container {
     display: flex;
-    height: 100vh;
+    flex: 1;
 }
 
 .menu {
     width: 250px;
+    height: 95%;
     background-color: #3c3c47;
     padding: 10px;
     display: flex;
@@ -168,13 +172,11 @@ body {
     background-color: #3c3c47;
     border-radius: 0.5rem;
     width: 90%;
-    height: auto;
+    height: 95%;
     margin-top: 1%;
     margin-right: 1.5%;
     padding: 10px;
     margin-right: 1.5%;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .container-dashes {
@@ -202,7 +204,6 @@ body {
 
 .dashes-baixo {
     display: flex;
-    height: 50%;
     flex-direction: row;
     justify-content: space-evenly;
 }
@@ -362,8 +363,6 @@ body {
     flex-direction: column;
     background-color: #292A32;
     border-radius: 7px;
-    width: 50%;
-    height: 100%;
 }
 
 .div_alinhar_doughnut span{
