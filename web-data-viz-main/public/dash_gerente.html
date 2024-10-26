@@ -53,16 +53,18 @@
             </div>
             <div class="engloba-itens2">
                 <div class="filial-select">
-                    <label for="filial">Filial Selecionadas</label>
+                    <label for="filial">Totens Selecionados</label>
                     <select id="selectFilial1">
                         <option value="" selected>Selecione uma opção</option>
                         <option value="1">Filial 1</option>
                         <option value="2">Filial 2</option>
+                        <option value="3">Filial 3</option>
                     </select>
                     <select id="selectFilial2">
                         <option value="" selected>Selecione uma opção</option>
                         <option value="1">Filial 1</option>
                         <option value="2">Filial 2</option>
+                        <option value="3">Filial 3</option>
                     </select>
                 </div>
 
@@ -364,7 +366,7 @@
         // const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
         // const dashes_baixo = document.getElementById('dashes-baixo');
 
-        
+
         let region = document.getElementById("region");
         let selectFilial1 = document.getElementById("selectFilial1");
         let selectFilial2 = document.getElementById("selectFilial2");
@@ -379,12 +381,18 @@
             let elemento = elementosFilial2[i];
             elemento.innerHTML = "Filial " + selectFilial2.value;
         }
+
+        document.querySelector('.botao_indicador').style.color = '#E9864A';
+        document.querySelector('.botao_grafico').style.color = '#ddd';
     }
 
     function compararGraficos() {
         document.getElementById('container_dashes_totens1').style.display = 'none';
         document.getElementById('container_dashes_totens2').style.display = 'none';
         document.getElementById('graficosContainer').style.display = 'block';
+
+        document.querySelector('.botao_indicador').style.color = '#ddd';
+        document.querySelector('.botao_grafico').style.color = '#E9864A';
     }
 
     // const trocaConteudo = document.getElementById('troca');
