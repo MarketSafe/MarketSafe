@@ -51,16 +51,26 @@
             </div>
             <div class="engloba-itens2">
                 <div class="filial-select">
-                    <label for="filial">Filial Selecionadas</label>
+                    <label for="filial">Totens Selecionados</label>
                     <select id="filial">
                         <option selected value="0">Selecione uma Opção</option>
-                        <option value="1">Filial 1</option>
-                        <option value="2">Filial 2</option>
+                        <option value="1">Totem 1</option>
+                        <option value="2">Totem 2</option>
+                        <option value="3">Totem 3</option>
+                        <option value="4">Totem 4</option>
+                        <option value="5">Totem 5</option>
+                        <option value="6">Totem 6</option>
+                        <option value="7">Totem 7</option>
                     </select>
                     <select id="filial2">
                         <option selected value="0">Selecione uma Opção</option>
-                        <option value="1">Filial 1</option>
-                        <option value="2">Filial 2</option>
+                        <option value="1">Totem 1</option>
+                        <option value="2">Totem 2</option>
+                        <option value="3">Totem 3</option>
+                        <option value="4">Totem 4</option>
+                        <option value="5">Totem 5</option>
+                        <option value="6">Totem 6</option>
+                        <option value="7">Totem 7</option>
                     </select>
                 </div>
 
@@ -225,13 +235,13 @@
                     <div class="primeira_linha_totem">
                         <div class="div_totens">
                             <div class="titulo_totem">
-                                <h4>Totem 5</h4>
+                                <h4>Totem <span id="rst1">0</span></h4>
                                 <div class="Totem5">
                                     80%
                                 </div>
                             </div>
                             <div class="titulo_totem">
-                                <h4>Totem 7</h4>
+                                <h4>Totem <span id="rst2">0</span></h4>
                                 <div class="Totem7">
                                     40%
                                 </div>
@@ -242,13 +252,13 @@
                     <div class="primeira_linha_totem">
                         <div class="div_totens">
                             <div class="titulo_totem">
-                                <h4>Totem 5</h4>
+                                <h4>Totem <span id="rst3">0</span></h4>
                                 <div class="Totem5_segundo">
                                     8
                                 </div>
                             </div>
                             <div class="titulo_totem">
-                                <h4>Totem 7</h4>
+                                <h4>Totem <span id="rst4">0</span></h4>
                                 <div class="Totem7_segundo">
                                     4
                                 </div>
@@ -265,8 +275,8 @@
                 <button onclick="grafico2()" class="botao_grafico2">Gráficos</button>
             </div>
             <div class="grafico_compara">
-                <div class="graficos_tela_2">
-                    <div class="linha_gf_comparacao">
+                <div class="graficos_tela_2" style="gap: 0px;">
+                    <div class="linha_gf_comparacao" style="height: 33%;">
                         <div class="fundo_dough_2">
                             <span id="span_graf" class="span_graf">Consumo de CPU entre Totens</span>
                             <div class="grafico_doughnut_2">
@@ -281,14 +291,16 @@
                     <div id="linha_gf_comparacao" class="linha_gf_comparacao">
 
                         <div id="grafico_Bar_1" class="grafico_Bar_tela2">
-                            <span>Totem 5</span>
+                            <span style="flex-direction: row;">Alertas por Dia</span>
+                            <span><span id="rst5">0</span></span>
                             <canvas id="GfBar_Tela2"></canvas>
-                            <span class="span_gf_bar">Dia</span>
+                            <!-- <span class="span_gf_bar">Dia</span> -->
                         </div>
                         <div id="grafico_Bar_2" class="grafico2_Bar_tela2">
-                            <span>Totem 7</span>
+                            <span style="flex-direction: row;">Alertas por Dia</span>
+                            <span><span id="rst6">0</span></span>
                             <canvas id="GfBar2_Tela2"></canvas>
-                            <span class="span_gf_bar">Dia</span>
+                            <!-- <span class="span_gf_bar">Dia</span> -->
                         </div>
 
                     </div>
@@ -320,6 +332,9 @@ function indicador2(){
 
 function comparar(){
 
+    const tt1Slct = document.getElementById('filial');
+    const tt2Slct = document.getElementById('filial2');    
+
     const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
     const dashes_baixo = document.getElementById('dashes-baixo');
 
@@ -327,7 +342,27 @@ function comparar(){
 
     grafico1.style.display = 'none'; 
     tela_elementos.style.display = 'block'
+
+    const rst1Slct = document.getElementById('rst1');
+    const rst2Slct = document.getElementById('rst2');
     
+    const rst3Slct = document.getElementById('rst3');
+    const rst4Slct = document.getElementById('rst4');
+
+    const rst5Slct = document.getElementById('rst5');
+    const rst6Slct = document.getElementById('rst6');
+
+    rst1Slct.innerHTML = tt1Slct.value;
+    rst2Slct.innerHTML = tt2Slct.value;
+
+    rst3Slct.innerHTML = tt1Slct.value;
+    rst4Slct.innerHTML = tt2Slct.value;
+
+    rst5Slct.innerHTML = "Totem " + tt1Slct.value;
+    rst6Slct.innerHTML = "Totem " + tt2Slct.value;
+
+    plotarDg2();
+    plotarGFL2();
 }
 
 
@@ -507,9 +542,19 @@ function comparar(){
     //------------------------------------------------//
 
     // Gráfico com o ApexJs da tela de Comparação
+
+    function plotarDg2(){
+
+    const tt1Slct = document.getElementById('filial');
+    const tt2Slct = document.getElementById('filial2');  
+
     var elemento = document.getElementById('grafico_doughnut2');
 
     var seriesData = [80, 32]; // Dados da série
+
+    var label1 = "Totem "+ tt1Slct.value;
+    var label2 = "Totem "+ tt2Slct.value;
+
 
     var options = {
         series: seriesData,
@@ -542,7 +587,7 @@ function comparar(){
                 },
             },
         },
-        labels: ['Totem 5', 'Totem 2'],
+        labels: [label1, label2],
         legend: {
             show: true,
             floating: true,
@@ -567,11 +612,93 @@ function comparar(){
 
     var chart = new ApexCharts(elemento, options);
     chart.render();
+}
 
     //------------------------------------------------//
 
 
+    function plotarGFL2(){
+
+    var tt1Slct = document.getElementById('filial');
+    var tt2Slct = document.getElementById('filial2');  
+
     //graficoLinha2
+
+    var lbgfl = "T" + tt1Slct.value;
+    var lbgfl2 = "T" + tt2Slct.value;
+
+    const data3 = {
+        labels: [
+            '0',
+            '5',
+            '10',
+            '15',
+            '20',
+            '25',
+            '30'
+        ],
+        datasets: [
+            {
+                label: lbgfl,
+                data: [75, 69, 80, 66, 46],
+                borderColor: '#FF914D',
+                backgroundColor: '#FF914D'
+            },
+            {
+                label: lbgfl2,
+                data: [62, 54, 66, 53, 68],
+                borderColor: '#FF3131',
+                backgroundColor: '#FF3131'
+            }
+        ]
+    };
+    const config3 = {
+        type: 'line',
+        data: data3,
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    color: 'white',
+                    labels: {
+                        color: 'white'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                    grid: {
+                        color: '#9A9A9A'
+                    },
+                    ticks: {
+                        color: 'white',
+                        callback: function (value, index, values) {
+                            return `${value}%`;
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Dia',
+                        color: 'white'
+                    }
+                }
+            }
+        }
+    };
+
+    let side_line = new Chart(
+        document.getElementById('graficoLinha2'),
+        config3
+    )
+
+    }
 
     const labels = [
         'Totem 1',
@@ -796,78 +923,6 @@ function comparar(){
     //   document.getElementById('myChart'),
     //   configGauge
     // );
-
-    
-    const data3 = {
-        labels: [
-            '0',
-            '5',
-            '10',
-            '15',
-            '20',
-            '25',
-            '30'
-        ],
-        datasets: [
-            {
-                label: 'T5',
-                data: [75, 69, 80, 66, 46],
-                borderColor: '#FF914D',
-                backgroundColor: '#FF914D'
-            },
-            {
-                label: 'T7',
-                data: [62, 54, 66, 53, 68],
-                borderColor: '#FF3131',
-                backgroundColor: '#FF3131'
-            }
-        ]
-    };
-    const config3 = {
-        type: 'line',
-        data: data3,
-        options: {
-            plugins: {
-                legend: {
-                    display: true,
-                    color: 'white',
-                    labels: {
-                        color: 'white'
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    min: 0,
-                    max: 100,
-                    grid: {
-                        color: '#9A9A9A'
-                    },
-                    ticks: {
-                        color: 'white',
-                        callback: function (value, index, values) {
-                            return `${value}%`;
-                        }
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Dia',
-                        color: 'white'
-                    }
-                }
-            }
-        }
-    };
-
-    let side_line = new Chart(
-        document.getElementById('graficoLinha2'),
-        config3
-    )
 
     //---------------Gráfico de barra 1 da tela 2------------------------//
 
