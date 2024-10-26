@@ -54,12 +54,12 @@
             <div class="engloba-itens2">
                 <div class="filial-select">
                     <label for="filial">Filial Selecionadas</label>
-                    <select id="filial">
+                    <select id="selectFilial1">
                         <option value="" selected>Selecione uma opção</option>
                         <option value="1">Filial 1</option>
                         <option value="2">Filial 2</option>
                     </select>
-                    <select id="filial2">
+                    <select id="selectFilial2">
                         <option value="" selected>Selecione uma opção</option>
                         <option value="1">Filial 1</option>
                         <option value="2">Filial 2</option>
@@ -225,7 +225,7 @@
                 </div>
 
                 <div class="totens">
-                    <h3>Quantidade de Filiais</h1>
+                    <h3>Quantidade de Filiais</h3>
                         <div class="totens-quantidade">
                             8
                         </div>
@@ -262,8 +262,8 @@
 
                     <div class="totensComparacao" id="totensComparacao">
                         <div class="totensComparados" id="totensComparados">
-                            <h3 id="totem1">Totem 5</h3>
-                            <h3 id="totem2">Totem 7</h3>
+                            <h3 class="filial1">Totem 5</h3>
+                            <h3 class="filial2">Totem 7</h3>
                         </div>
                         <div class="totensPorcentagem" id="totensPorcentagem">
                             <div class="totemSelecionado11" id="totemSelecionado1">
@@ -281,8 +281,8 @@
                     </h2>
                     <div class="totensComparacao" id="totensComparacao">
                         <div class="totensComparados" id="totensComparados">
-                            <h3 id="totem1">Totem 5</h3>
-                            <h3 id="totem2">Totem 7</h3>
+                            <h3 class="filial1">Totem 5</h3>
+                            <h3 class="filial2">Totem 7</h3>
                         </div>
                         <div class="totensPorcentagem" id="totensPorcentagem">
                             <div class="totemSelecionado12" id="totemSelecionado1">
@@ -300,10 +300,10 @@
                     </h1>
                     <div class="graficos">
                         <div class="graficosTitulos">
-                            <h2 style="color: white;" id="titulo1">
+                            <h2 style="color: white;" class="filial1">
                                 Filial 5
                             </h2>
-                            <h2 style="color: white;" id="titulo2">
+                            <h2 style="color: white;" class="filial2">
                                 Filial 7
                             </h2>
                         </div>
@@ -322,10 +322,10 @@
                             Quantidade de Sobrecarga (Processador) por Mês
                         </h1>
                         <div class="graficosTitulos2">
-                            <h2 style="color: white;" id="titulo11">
+                            <h2 style="color: white;" class="filial1">
                                 Filial 5
                             </h2>
-                            <h2 style="color: white;" id="titulo22">
+                            <h2 style="color: white;" class="filial2">
                                 Filial 7
                             </h2>
                         </div>
@@ -364,15 +364,21 @@
         // const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
         // const dashes_baixo = document.getElementById('dashes-baixo');
 
-        var region = region.value;
-        var filial = filial.value;
-        var filial2 = filial2.value;
-
-        if (region == 2 && filial == 2 && filial2 == 2) {
-            grafico1.style.display = 'none';
-            grafico2.style.display = 'none';
+        
+        let region = document.getElementById("region");
+        let selectFilial1 = document.getElementById("selectFilial1");
+        let selectFilial2 = document.getElementById("selectFilial2");
+        let elementosFilial1 = document.getElementsByClassName("filial1");
+        let elementosFilial2 = document.getElementsByClassName("filial2");
+        
+        for (let i = 0; i < elementosFilial1.length; i++) {
+            let elemento = elementosFilial1[i];
+            elemento.innerHTML = "Filial " + selectFilial1.value;
         }
-
+        for (let i = 0; i < elementosFilial2.length; i++) {
+            let elemento = elementosFilial2[i];
+            elemento.innerHTML = "Filial " + selectFilial2.value;
+        }
     }
 
     function compararGraficos() {
