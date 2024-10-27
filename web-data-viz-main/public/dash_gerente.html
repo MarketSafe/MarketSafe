@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="css/dash_gerente.css">
-    <link rel="icon" href="css/icon.png">
+    <link rel="stylesheet" href="css/dash_gerente.css" />
+    <link rel="icon" href="css/icon.png" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script> -->
@@ -15,1083 +14,962 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="header">
-        <ul class="navbar">
-            <li><a href="perfilAnalista.html">Perfil</a></li>
-            <li><a>|</a></li>
-            <li class="agora"><a href="dash_analista.html">Dashboard</a></li>
-            <li><a>|</a></li>
-            <li><a href="">Ajuda</a></li>
-            <li><a>|</a></li>
-            <li><a href="index.html">Sair</a></li>
-        </ul>
+      <ul class="navbar">
+        <li><a href="perfilAnalista.html">Perfil</a></li>
+        <li><a>|</a></li>
+        <li class="agora"><a href="dash_analista.html">Dashboard</a></li>
+        <li><a>|</a></li>
+        <li><a href="">Ajuda</a></li>
+        <li><a>|</a></li>
+        <li><a href="index.html">Sair</a></li>
+      </ul>
     </div>
     <div class="container">
-        <div class="menu">
-            <div class="perfil">
-                <img src="./assets/img/foto-gerente.jpg" alt="Foto Perfil">
-                <h2>Vitor</h2>
-                <p>Gerente</p>
-            </div>
-            <div class="engloba-itens">
-                <div class="regiao-select">
-                    <label for="region">Componente</label>
-                    <select id="region">
-                        <option value="">Selecione uma opção</option>
-                        <option id="1" value="1">Processador</option>
-                        <option value="2">Memória</option>
-                    </select>
-                </div>
-            </div>
-            <div class="engloba-itens2">
-                <div class="filial-select">
-                    <label for="filial">Totens Selecionados</label>
-                    <select id="selectFilial1">
-                        <option value="" selected>Selecione uma opção</option>
-                        <option value="1">Filial 1</option>
-                        <option value="2">Filial 2</option>
-                        <option value="3">Filial 3</option>
-                    </select>
-                    <select id="selectFilial2">
-                        <option value="" selected>Selecione uma opção</option>
-                        <option value="1">Filial 1</option>
-                        <option value="2">Filial 2</option>
-                        <option value="3">Filial 3</option>
-                    </select>
-                </div>
+      <div class="menu">
+        <div class="perfil">
+          <img src="./assets/img/foto-gerente.jpg" alt="Foto Perfil" />
+          <h2>Vitor</h2>
+          <p>Gerente</p>
+        </div>
+        <div class="engloba-itens">
+          <div class="regiao-select">
+            <label for="region">Componente</label>
+            <select id="region">
+              <option value="">Selecione uma opção</option>
+              <option id="1" value="1">Processador</option>
+              <option value="2">Memória</option>
+            </select>
+          </div>
+        </div>
+        <div class="engloba-itens2">
+          <div class="filial-select">
+            <label for="filial">Totens Selecionados</label>
+            <select id="selectFilial1">
+              <option value="" selected>Selecione uma opção</option>
+              <option value="1">Filial 1</option>
+              <option value="2">Filial 2</option>
+              <option value="3">Filial 3</option>
+            </select>
+            <select id="selectFilial2">
+              <option value="" selected>Selecione uma opção</option>
+              <option value="1">Filial 1</option>
+              <option value="2">Filial 2</option>
+              <option value="3">Filial 3</option>
+            </select>
+          </div>
 
-                <div id="conteudo1" class="data-select">
-                    <div class="data-select">
-                        <div class="mudar-periodo">
-                            <div>
-                                <label for="periodo">Período</label>
-                            </div>
-                        </div>
-                        <div class="periodo-select">
-                            <select id="opts-select" onchange="aparecer()">
-                                <option selected disabled value="#">Selecione uma opção</option>
-                                <option value="mes"> Mês</option>
-                                <option value="semana"> Semana</option>
-                                <option value="ano"> Ano</option>
-                            </select>
-
-                            <select id="select-mes" onchange="filtrar(1)">
-                                <option value="setembro"> Setembro </option>
-                                <option value="agosto"> Agosto </option>
-                                <option value="voltar"> Voltar </option>
-                            </select>
-
-                            <select id="select-semana" onchange="filtrar(2)">
-                                <option value="1"> Semana 1 </option>
-                                <option value="2"> Semana 2 </option>
-                                <option value="3" selected> Semana 3 </option>
-                                <option value="voltar"> Voltar </option>
-                            </select>
-
-                            <select id="select-ano" onchange="filtrar(3)">
-                                <option value="2023" selected> 2023 </option>
-                                <option value="voltar"> Voltar </option>
-                            </select>
-                        </div>
-
-                        <div id="ano">
-                            <div class="filtros">
-                                <div class="wrapper">
-                                    <div class="sliderContainer">
-                                        <div class="slider-track"></div>
-                                        <input type="range" min="1" max="12" value="1" id="slider-1"
-                                            oninput="slideOne(1)" disabled>
-                                        <input type="range" min="1" max="12" value="12" id="slider-2"
-                                            oninput="slideTwo(1)" disabled>
-                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
-                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
-                                    </div>
-                                    <div class="values">
-                                        <span id="range1">
-                                            0
-                                        </span>
-                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
-                                        <span id="range2">
-                                            12
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="mes">
-                            <div class="filtros">
-                                <div class="wrapper">
-                                    <div class="sliderContainer">
-                                        <div class="slider-trackM"></div>
-                                        <input type="range" min="1" max="31" value="1" id="slider-1M"
-                                            oninput="slideOne(2)" disabled>
-                                        <input type="range" min="1" max="31" value="31" id="slider-2M"
-                                            oninput="slideTwo(2)" disabled>
-                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
-                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
-                                    </div>
-                                    <div class="values">
-                                        <span id="range1M">
-                                            1
-                                        </span>
-                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
-                                        <span id="range2M">
-                                            31
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="semana">
-                            <div class="filtros">
-                                <div class="wrapper">
-                                    <div class="sliderContainer">
-                                        <div class="slider-trackS"></div>
-                                        <input type="range" min="1" max="7" value="1" id="slider-1S"
-                                            oninput="slideOne(3)" disabled>
-                                        <input type="range" min="1" max="7" value="7" id="slider-2S"
-                                            oninput="slideTwo(3)" disabled>
-                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
-                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
-                                    </div>
-                                    <div class="values">
-                                        <span id="range1S">
-                                            1
-                                        </span>
-                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
-                                        <span id="range2S">
-                                            7
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+          <div id="conteudo1" class="data-select">
+            <div class="data-select">
+              <div class="mudar-periodo">
                 <div>
+                  <label for="periodo">Período</label>
                 </div>
+              </div>
+              <div class="periodo-select">
+                <select id="opts-select" onchange="aparecer()">
+                  <option selected disabled value="#">Selecione uma opção</option>
+                  <option value="mes">Mês</option>
+                  <option value="semana">Semana</option>
+                  <option value="ano">Ano</option>
+                </select>
 
-                <button onclick="comparar()" class="botao-comparar">Comparar</button>
+                <select id="select-mes" onchange="filtrar(1)">
+                  <option value="setembro">Setembro</option>
+                  <option value="agosto">Agosto</option>
+                  <option value="voltar">Voltar</option>
+                </select>
+
+                <select id="select-semana" onchange="filtrar(2)">
+                  <option value="1">Semana 1</option>
+                  <option value="2">Semana 2</option>
+                  <option value="3" selected>Semana 3</option>
+                  <option value="voltar">Voltar</option>
+                </select>
+
+                <select id="select-ano" onchange="filtrar(3)">
+                  <option value="2023" selected>2023</option>
+                  <option value="voltar">Voltar</option>
+                </select>
+              </div>
+
+              <div id="ano">
+                <div class="filtros">
+                  <div class="wrapper">
+                    <div class="sliderContainer">
+                      <div class="slider-track"></div>
+                      <input type="range" min="1" max="12" value="1" id="slider-1" oninput="slideOne(1)" disabled />
+                      <input type="range" min="1" max="12" value="12" id="slider-2" oninput="slideTwo(1)" disabled />
+                      <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                      <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                    </div>
+                    <div class="values">
+                      <span id="range1"> 0 </span>
+                      <span> &ThickSpace; &dash; &ThickSpace; </span>
+                      <span id="range2"> 12 </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="mes">
+                <div class="filtros">
+                  <div class="wrapper">
+                    <div class="sliderContainer">
+                      <div class="slider-trackM"></div>
+                      <input type="range" min="1" max="31" value="1" id="slider-1M" oninput="slideOne(2)" disabled />
+                      <input type="range" min="1" max="31" value="31" id="slider-2M" oninput="slideTwo(2)" disabled />
+                      <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                      <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                    </div>
+                    <div class="values">
+                      <span id="range1M"> 1 </span>
+                      <span> &ThickSpace; &dash; &ThickSpace; </span>
+                      <span id="range2M"> 31 </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="semana">
+                <div class="filtros">
+                  <div class="wrapper">
+                    <div class="sliderContainer">
+                      <div class="slider-trackS"></div>
+                      <input type="range" min="1" max="7" value="1" id="slider-1S" oninput="slideOne(3)" disabled />
+                      <input type="range" min="1" max="7" value="7" id="slider-2S" oninput="slideTwo(3)" disabled />
+                      <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                      <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                    </div>
+                    <div class="values">
+                      <span id="range1S"> 1 </span>
+                      <span> &ThickSpace; &dash; &ThickSpace; </span>
+                      <span id="range2S"> 7 </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div></div>
+
+          <button onclick="comparar()" class="botao-comparar">Comparar</button>
         </div>
+      </div>
 
-        <div class="dashes">
-            <h3></h3>
-            <div class="container-dashes" id="container_dashes" style="height: 37%;">
-                <div style="display: flex; background-color: #2c2f38; height: 100%; padding: 2%; width: 60%; padding-top: 0.1%; padding-bottom: 2%; justify-content: space-between; border-radius: 10px;">
-                    <div class="ranking"  style="height: 100%; display: flex; flex-direction: column; padding-top: 5%;">
-                        <h3 style="width: 100%; margin-left: 0%; margin-bottom: 1%; margin-top: 0%;">3 Filiais com mais alertas (no mês)</h3>
-                        <table style="height: 100%;">
-                            <tr>
-                                <th>Posição</th>
-                                <th>Filial Bairro</th>
-                                <th>Quantidade</th>
-                            </tr>
-                            <tr class="highlight">
-                                <td>1</td>
-                                <td>Paulista</td>
-                                <td>19</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Água Rasa</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Pinheiros</td>
-                                <td>9</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div style="height: 100%; width: 50%;">
-                        <div class="radar-container">
-                            <span class="span_graf">Alertas por Zonas (no dia)</span>
-                            <canvas id="radarChart">
-        
-                            </canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="totens">
-                    <h3>Quantidade de Filiais</h3>
-                        <div class="totens-quantidade">
-                            8
-                        </div>
-                        <h4>Nº de filiais com alertas ativos</h4>
-                        <div class="totens-problema">
-                            4 </div>
-                </div>
+      <div class="dashes">
+        <h3></h3>
+        <div class="container-dashes" id="container_dashes" style="height: 37%">
+          <div style="display: flex; background-color: #2c2f38; height: 100%; padding: 2%; width: 60%; justify-content: space-between; border-radius: 10px">
+            <div class="ranking" style="height: 100%; display: flex; flex-direction: column">
+              <h3 style="width: 100%; margin-left: 0%; margin-bottom: 1%; margin-top: 0%">3 Filiais com mais alertas (no mês)</h3>
+              <table style="height: 100%">
+                <tr>
+                  <th>Posição</th>
+                  <th>Filial Bairro</th>
+                  <th>Quantidade</th>
+                </tr>
+                <tr class="highlight">
+                  <td>1</td>
+                  <td>Paulista</td>
+                  <td>19</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Água Rasa</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Pinheiros</td>
+                  <td>9</td>
+                </tr>
+              </table>
             </div>
-            <div class="dashes-baixo" id="dashes_baixo" style="justify-content: space-between; margin-top: 1%; margin-left: 4%; margin-right: 4%;">
-                <img src="assets/img/thumbnail_metaPlotOr.png" alt="" style="height: 96%; width: 65%; border-radius: 10px;">                
-
-                <div class="grafico_wordcloud">
-                    <h3>Word Cloud - Bairros de São Paulo</h3>
-                    <div class="wordcloud-container">
-                        <img src="./assets/img/wordCloud.png" alt="">
-                    </div>
-                </div>
+            <div style="height: 100%; width: 50%">
+              <div class="radar-container">
+                <span class="span_graf">Alertas por Zonas (no dia)</span>
+                <canvas id="radarChart"> </canvas>
+              </div>
             </div>
-            <div id="indicadores" style="display: none;">
-                <div class="div_tela2">
-                    <button onclick="comparar()" class="botao_indicador">
-                        Indicadores
-                    </button>
-                    <button onclick="compararGraficos()" class="botao_grafico">
-                        Gráficos
-                    </button>
-                </div>
+          </div>
+
+          <div class="totens">
+            <div class="totens-quantidade">
+              <h3>Quantidade de Filiais</h3>
+              <span>8</span>
             </div>
-            <div class="indicadoresGraficosContainer" id="indicadoresGraficosContainer" style="display: none;">
-                <div class="container-dashes" id="container_dashes_totens1" style="height: 40%; ">
-                    <h2>
-                        Gasto de CPU
-                    </h2>
-
-                    <div class="totensComparacao" id="totensComparacao">
-                        <div class="totensComparados" id="totensComparados">
-                            <h3 class="filial1">Totem 5</h3>
-                            <h3 class="filial2">Totem 7</h3>
-                        </div>
-                        <div class="totensPorcentagem" id="totensPorcentagem">
-                            <div class="totemSelecionado11" id="totemSelecionado1">
-                                <h1>80%</h1>
-                            </div>
-                            <div class="totemSelecionado21" id="totemSelecionado2">
-                                <h1>40%</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-dashes" id="container_dashes_totens2" style="height: 40%;">
-                    <h2>
-                        Quantidade de sobrecargas no dia
-                    </h2>
-                    <div class="totensComparacao" id="totensComparacao">
-                        <div class="totensComparados" id="totensComparados">
-                            <h3 class="filial1">Totem 5</h3>
-                            <h3 class="filial2">Totem 7</h3>
-                        </div>
-                        <div class="totensPorcentagem" id="totensPorcentagem">
-                            <div class="totemSelecionado12" id="totemSelecionado1">
-                                <h1>3</h1>
-                            </div>
-                            <div class="totemSelecionado22" id="totemSelecionado2">
-                                <h1>19</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="graficosContainer" id="graficosContainer" style="display: none">
-                    <h1 style="color: white;">
-                        Gasto de Processador médio mensal
-                    </h1>
-                    <div class="graficos">
-                        <div class="graficosTitulos">
-                            <h2 style="color: white;" class="filial1">
-                                Filial 5
-                            </h2>
-                            <h2 style="color: white;" class="filial2">
-                                Filial 7
-                            </h2>
-                        </div>
-                        <div class="graficosCanvas">
-                            <canvas id="doughnutFilial1" style="width: 900px;">
-
-                            </canvas>
-                            <canvas id="doughnutFilial2" style="width: 100px;">
-
-                            </canvas>
-                        </div>
-                    </div>
-
-                    <div class="graficos2">
-                        <h1 id="tituloGraficos2" style="color: white;">
-                            Quantidade de Sobrecarga (Processador) por Mês
-                        </h1>
-                        <div class="graficosTitulos2">
-                            <h2 style="color: white;" class="filial1">
-                                Filial 5
-                            </h2>
-                            <h2 style="color: white;" class="filial2">
-                                Filial 7
-                            </h2>
-                        </div>
-                        <div class="graficosCanvas2">
-                            <canvas id="barraFilial1" style="width: 900px;">
-
-                            </canvas>
-                            <canvas id="barraFilial2" style="width: 900px;">
-
-                            </canvas>
-                        </div>
-                    </div>
-                </div>
+            <div class="totens-problema">
+              <h4>Nº de filiais com alertas ativos</h4>
+              <span>4</span>
             </div>
-
+          </div>
         </div>
+        <div class="dashes-baixo" id="dashes_baixo" style="justify-content: space-between; margin-top: 1%; margin-left: 4%; margin-right: 4%">
+          <img src="assets/img/thumbnail_metaPlotOr.png" alt="" style="height: 96%; width: 65%; border-radius: 10px" />
+
+          <div class="grafico_wordcloud">
+            <h3>Word Cloud - Bairros de São Paulo</h3>
+            <div class="wordcloud-container">
+              <img src="./assets/img/wordCloud.png" alt="" />
+            </div>
+          </div>
+        </div>
+        <div id="indicadores" style="display: none">
+          <div class="div_tela2">
+            <button onclick="comparar()" class="botao_indicador">Indicadores</button>
+            <button onclick="compararGraficos()" class="botao_grafico">Gráficos</button>
+          </div>
+        </div>
+        <div class="indicadoresGraficosContainer" id="indicadoresGraficosContainer" style="display: none">
+          <div class="container-dashes" id="container_dashes_totens1" style="height: 40%">
+            <h2>Gasto de CPU</h2>
+
+            <div class="totensComparacao" id="totensComparacao">
+                <div class="indicador-filial">
+                    <h3 class="filial1">Filial</h3>
+                    <div class="totemSelecionado11">
+                      <h1>80%</h1>
+                    </div>
+                </div>
+                <div class="indicador-filial">
+                    <h3 class="filial2">Filial</h3>
+                    <div class="totemSelecionado21">
+                      <h1>40%</h1>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="container-dashes" id="container_dashes_totens2" style="height: 40%">
+            <h2>Quantidade de sobrecargas no dia</h2>
+
+            <div class="totensComparacao" id="totensComparacao">
+                <div class="indicador-filial">
+                    <h3 class="filial1">Filial</h3>
+                    <div class="totemSelecionado12">
+                      <h1>3</h1>
+                    </div>
+                </div>
+                <div class="indicador-filial">
+                    <h3 class="filial2">Filial</h3>
+                    <div class="totemSelecionado22">
+                      <h1>19</h1>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="graficosContainer" id="graficosContainer" style="display: none">
+            <h1 style="color: white">Gasto de Processador médio mensal</h1>
+            <div class="graficos">
+              <div class="graficosTitulos">
+                <h2 style="color: white" class="filial1">Filial 5</h2>
+                <h2 style="color: white" class="filial2">Filial 7</h2>
+              </div>
+              <div class="graficosCanvas">
+                <canvas id="doughnutFilial1" style="width: 900px"> </canvas>
+                <canvas id="doughnutFilial2" style="width: 100px"> </canvas>
+              </div>
+            </div>
+
+            <div class="graficos2">
+              <h1 id="tituloGraficos2" style="color: white">Quantidade de Sobrecarga (Processador) por Mês</h1>
+              <div class="graficosTitulos2">
+                <h2 style="color: white" class="filial1">Filial 5</h2>
+                <h2 style="color: white" class="filial2">Filial 7</h2>
+              </div>
+              <div class="graficosCanvas2">
+                <canvas id="barraFilial1" style="width: 900px"> </canvas>
+                <canvas id="barraFilial2" style="width: 900px"> </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-</body>
-
+  </body>
 </html>
 
 <script>
+  function comparar() {
+    document.getElementById("container_dashes").style.display = "none";
+    document.getElementById("dashes_baixo").style.display = "none";
+    document.getElementById("indicadores").style.display = "block";
+    document.getElementById("container_dashes_totens1").style.display = "flex";
+    document.getElementById("container_dashes_totens2").style.display = "flex";
+    document.getElementById("graficosContainer").style.display = "none";
+    document.getElementById("indicadoresGraficosContainer").style.display = "block";
 
-    function comparar() {
+    // const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
+    // const dashes_baixo = document.getElementById('dashes-baixo');
 
-        document.getElementById('container_dashes').style.display = 'none';
-        document.getElementById('dashes_baixo').style.display = 'none';
-        document.getElementById('indicadores').style.display = 'block';
-        document.getElementById('container_dashes_totens1').style.display = 'block';
-        document.getElementById('container_dashes_totens2').style.display = 'block';
-        document.getElementById('graficosContainer').style.display = 'none';
-        document.getElementById('indicadoresGraficosContainer').style.display = 'block';
+    let region = document.getElementById("region");
+    let selectFilial1 = document.getElementById("selectFilial1");
+    let selectFilial2 = document.getElementById("selectFilial2");
+    let elementosFilial1 = document.getElementsByClassName("filial1");
+    let elementosFilial2 = document.getElementsByClassName("filial2");
 
-        // const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
-        // const dashes_baixo = document.getElementById('dashes-baixo');
-
-
-        let region = document.getElementById("region");
-        let selectFilial1 = document.getElementById("selectFilial1");
-        let selectFilial2 = document.getElementById("selectFilial2");
-        let elementosFilial1 = document.getElementsByClassName("filial1");
-        let elementosFilial2 = document.getElementsByClassName("filial2");
-        
-        for (let i = 0; i < elementosFilial1.length; i++) {
-            let elemento = elementosFilial1[i];
-            elemento.innerHTML = "Filial " + selectFilial1.value;
-        }
-        for (let i = 0; i < elementosFilial2.length; i++) {
-            let elemento = elementosFilial2[i];
-            elemento.innerHTML = "Filial " + selectFilial2.value;
-        }
-
-        document.querySelector('.botao_indicador').style.color = '#E9864A';
-        document.querySelector('.botao_grafico').style.color = '#ddd';
+    for (let i = 0; i < elementosFilial1.length; i++) {
+      let elemento = elementosFilial1[i];
+      elemento.innerHTML = "Filial " + selectFilial1.value;
+    }
+    for (let i = 0; i < elementosFilial2.length; i++) {
+      let elemento = elementosFilial2[i];
+      elemento.innerHTML = "Filial " + selectFilial2.value;
     }
 
-    function compararGraficos() {
-        document.getElementById('container_dashes_totens1').style.display = 'none';
-        document.getElementById('container_dashes_totens2').style.display = 'none';
-        document.getElementById('graficosContainer').style.display = 'block';
+    document.querySelector(".botao_indicador").style.color = "#E9864A";
+    document.querySelector(".botao_grafico").style.color = "#ddd";
+  }
 
-        document.querySelector('.botao_indicador').style.color = '#ddd';
-        document.querySelector('.botao_grafico').style.color = '#E9864A';
-    }
+  function compararGraficos() {
+    document.getElementById("container_dashes_totens1").style.display = "none";
+    document.getElementById("container_dashes_totens2").style.display = "none";
+    document.getElementById("graficosContainer").style.display = "block";
 
-    // const trocaConteudo = document.getElementById('troca');
-    // const trocaConteudo2 = document.getElementById('novaTroca');
-    // const conteudo1 = document.getElementById('conteudo1');
-    // const conteudo2 = document.getElementById('conteudo2');
+    document.querySelector(".botao_indicador").style.color = "#ddd";
+    document.querySelector(".botao_grafico").style.color = "#E9864A";
+  }
 
-    // trocaConteudo.addEventListener('click', function () {
-    //     conteudo2.style.display = 'block';
-    //     conteudo1.style.display = 'none';
+  // const trocaConteudo = document.getElementById('troca');
+  // const trocaConteudo2 = document.getElementById('novaTroca');
+  // const conteudo1 = document.getElementById('conteudo1');
+  // const conteudo2 = document.getElementById('conteudo2');
 
-    // });
+  // trocaConteudo.addEventListener('click', function () {
+  //     conteudo2.style.display = 'block';
+  //     conteudo1.style.display = 'none';
 
-    // trocaConteudo2.addEventListener('click', function () {
-    //     conteudo1.style.display = 'block';
-    //     conteudo2.style.display = 'none';
+  // });
 
-    // });
+  // trocaConteudo2.addEventListener('click', function () {
+  //     conteudo1.style.display = 'block';
+  //     conteudo2.style.display = 'none';
 
-    // const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-    // const cpuChart = new Chart(cpuCtx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Filial 1', 'Filial 4', 'Filial 6'],
-    //         datasets: [{
-    //             label: 'CPU',
-    //             data: [80, 50, 70],
-    //             backgroundColor: 'orange',
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true,
-    //                 max: 100,
-    //                 ticks: {
-    //                     callback: function (value) {
-    //                         return value;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
+  // });
 
-    // // Gráfico de RAM
-    // const ramCtx = document.getElementById('ramChart').getContext('2d');
-    // const ramChart = new Chart(ramCtx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Filial 6', 'Filial 2', 'Filial 1'],
-    //         datasets: [{
-    //             label: 'RAM',
-    //             data: [60, 90, 70],
-    //             backgroundColor: 'red',
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true,
-    //                 max: 100,
-    //                 ticks: {
-    //                     callback: function (value) {
-    //                         return value;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
+  // const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+  // const cpuChart = new Chart(cpuCtx, {
+  //     type: 'bar',
+  //     data: {
+  //         labels: ['Filial 1', 'Filial 4', 'Filial 6'],
+  //         datasets: [{
+  //             label: 'CPU',
+  //             data: [80, 50, 70],
+  //             backgroundColor: 'orange',
+  //             borderWidth: 1
+  //         }]
+  //     },
+  //     options: {
+  //         scales: {
+  //             y: {
+  //                 beginAtZero: true,
+  //                 max: 100,
+  //                 ticks: {
+  //                     callback: function (value) {
+  //                         return value;
+  //                     }
+  //                 }
+  //             }
+  //         }
+  //     }
+  // });
 
+  // // Gráfico de RAM
+  // const ramCtx = document.getElementById('ramChart').getContext('2d');
+  // const ramChart = new Chart(ramCtx, {
+  //     type: 'bar',
+  //     data: {
+  //         labels: ['Filial 6', 'Filial 2', 'Filial 1'],
+  //         datasets: [{
+  //             label: 'RAM',
+  //             data: [60, 90, 70],
+  //             backgroundColor: 'red',
+  //             borderWidth: 1
+  //         }]
+  //     },
+  //     options: {
+  //         scales: {
+  //             y: {
+  //                 beginAtZero: true,
+  //                 max: 100,
+  //                 ticks: {
+  //                     callback: function (value) {
+  //                         return value;
+  //                     }
+  //                 }
+  //             }
+  //         }
+  //     }
+  // });
 
-    // Radar Chart
-    // const radarCtx = document.getElementById('radarChart').getContext('2d');
-    const dataRadar = {
-        labels: [
-            'Central',
-            'Norte',
-            'Sul',
-            'Oeste',
-            'Leste'
-        ],
-        datasets: [{
-            data: [78, 55, 90, 75, 80],
-            fill: false,
-            borderColor: '#FF3131'
-        }]
-    };
+  // Radar Chart
+  // const radarCtx = document.getElementById('radarChart').getContext('2d');
+  const dataRadar = {
+    labels: ["Central", "Norte", "Sul", "Oeste", "Leste"],
+    datasets: [
+      {
+        data: [78, 55, 90, 75, 80],
+        fill: false,
+        borderColor: "#FF3131",
+      },
+    ],
+  };
 
-    const configRadar = {
-        type: 'radar',
-        data: dataRadar,
-        options: {
-            elements: {
-                line: {
-                    borderWidth: 3
-                }
-            },
-            scales: {
-                r: {
-                    grid: {
-                        color: '#CCCCCC',
-                        circular: true
-                    },
-                    angleLines: {
-                        color: '#CCCCCC'
-                    },
-                    min: 0,
-                    max: 100,
-                    ticks: {
-                        stepSize: 25,
-                        color: 'white',
-                        showLabelBackdrop: false
-                    },
-                    pointLabels: {
-                        color: 'white'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    };
-
-    let radar = new Chart(
-        document.getElementById('radarChart'),
-        configRadar
-    );
-
-    const doughnutFilial1Ctx = document.getElementById('doughnutFilial1').getContext('2d');
-    const doughnutFilial2Ctx = document.getElementById('doughnutFilial2').getContext('2d');
-
-    var gradient1 = doughnutFilial1Ctx.createLinearGradient(0, 0, 200, 0);
-    gradient1.addColorStop(0.0, '#FF8008');
-    gradient1.addColorStop(0.8, '#FFC837');
-
-    const counter = {
-        id: 'counter',
-        beforeDraw(chart, args, options) {
-            const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
-            ctx.save();
-            ctx.font = '30px sans-serif';
-            ctx.fillStyle = 'white'
-            ctx.textAlign = 'center';
-            ctx.fillText('70%', width / 2, top + (height / 1.8));
-        }
-    };
-
-    const datadoughnutFilial1 = {
-        labels: [
-            'Não gasto',
-            'Gasto'
-        ],
-        datasets: [{
-            data: [100 - 70, 70],
-            backgroundColor: [
-                '#EEEEEE',
-                gradient1
-            ],
-            borderWidth: 0,
-            borderRadius: [0, 100],
-            spacing: -8
-        }]
-    };
-
-    const configdoughnutFilial1 = {
-        type: 'doughnut',
-        data: datadoughnutFilial1,
-        options: {
-            cutout: '70%',
-            plugins: {
-                legend: {
-                    display: false
-                },
-                labels: {
-                    color: 'white'
-                }
-            },
-            hover: {
-                mode: null
-            }
+  const configRadar = {
+    type: "radar",
+    data: dataRadar,
+    options: {
+      elements: {
+        line: {
+          borderWidth: 3,
         },
-        plugins: [counter]
-    };
-
-    let doughnutFilial1 = new Chart(
-        doughnutFilial1Ctx,
-        configdoughnutFilial1,
-        //   setInterval(() => {
-        //   chart.update();
-        // }, 1000)
-    );
-
-
-
-    const counter1 = {
-        id: 'counter1',
-        beforeDraw(chart, args, options) {
-            const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
-            ctx.save();
-            ctx.font = '30px sans-serif';
-            ctx.fillStyle = 'white'
-            ctx.textAlign = 'center';
-            ctx.fillText('50%', width / 2, top + (height / 1.8));
-        }
-    };
-
-
-
-    const datadoughnutFilial2 = {
-        labels: [
-            'Não gasto',
-            'Gasto'
-        ],
-        datasets: [{
-            data: [100 - 50, 50],
-            backgroundColor: [
-                '#EEEEEE',
-                gradient1
-            ],
-            borderWidth: 0,
-            borderRadius: [0, 100],
-            spacing: -8
-        }]
-    };
-
-    const configdoughnutFilial2 = {
-        type: 'doughnut',
-        data: datadoughnutFilial2,
-        options: {
-            cutout: '70%',
-            plugins: {
-                legend: {
-                    display: false
-                },
-                labels: {
-                    color: 'white'
-                }
-            },
-            hover: {
-                mode: null
-            }
+      },
+      scales: {
+        r: {
+          grid: {
+            color: "#CCCCCC",
+            circular: true,
+          },
+          angleLines: {
+            color: "#CCCCCC",
+          },
+          min: 0,
+          max: 100,
+          ticks: {
+            stepSize: 25,
+            color: "white",
+            showLabelBackdrop: false,
+          },
+          pointLabels: {
+            color: "white",
+          },
         },
-        plugins: [counter1]
-    };
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    },
+  };
 
-    let doughnutFilial2 = new Chart(
-        doughnutFilial2Ctx,
-        configdoughnutFilial2
-    );
+  let radar = new Chart(document.getElementById("radarChart"), configRadar);
 
-    const barralabels1 = [
-        '5',
-        '10',
-        '15',
-        '20',
-        '25',
-        '30'
-    ];
-    const barradata1 = {
-        labels: barralabels1,
-        datasets: [{
-            axis: 'x',
-            data: [17, 7, 13, 21, 5, 5],
-            fill: true,
-            backgroundColor: [
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418'
-            ]
-        }]
-    };
-    const barraconfig1 = {
-        type: 'bar',
-        data: barradata1,
-        options: {
-            indexAxis: 'x',
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        color: '#505050'
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Dias do mês',
-                        color: 'white'
-                    }
-                }
-            }
-        }
-    };
-    let barra1 = new Chart(
-        document.getElementById('barraFilial1').getContext('2d'),
-        barraconfig1
-    )
+  const doughnutFilial1Ctx = document.getElementById("doughnutFilial1").getContext("2d");
+  const doughnutFilial2Ctx = document.getElementById("doughnutFilial2").getContext("2d");
 
-    const barralabels2 = [
-        '5',
-        '10',
-        '15',
-        '20',
-        '25',
-        '30'
-    ];
-    const barradata2 = {
-        labels: barralabels2,
-        datasets: [{
-            axis: 'x',
-            data: [30, 15, 7, 12, 18, 5],
-            fill: true,
-            backgroundColor: [
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418'
-            ]
-        }]
-    };
+  var gradient1 = doughnutFilial1Ctx.createLinearGradient(0, 0, 200, 0);
+  gradient1.addColorStop(0.0, "#FF8008");
+  gradient1.addColorStop(0.8, "#FFC837");
 
-    const barraconfig2 = {
-        type: 'bar',
-        data: barradata2,
-        options: {
-            indexAxis: 'x',
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        color: '#505050'
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Dias do mês',
-                        color: 'white'
-                    }
-                }
-            }
-        }
-    };
-    let side_bar = new Chart(
-        document.getElementById('barraFilial2').getContext('2d'),
-        barraconfig2
-    )
+  const counter = {
+    id: "counter",
+    beforeDraw(chart, args, options) {
+      const {
+        ctx,
+        chartArea: { top, right, bottom, left, width, height },
+      } = chart;
+      ctx.save();
+      ctx.font = "30px sans-serif";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.fillText("70%", width / 2, top + height / 1.8);
+    },
+  };
 
-    window.onload = function () {
-        start();
-    };
+  const datadoughnutFilial1 = {
+    labels: ["Não gasto", "Gasto"],
+    datasets: [
+      {
+        data: [100 - 70, 70],
+        backgroundColor: ["#EEEEEE", gradient1],
+        borderWidth: 0,
+        borderRadius: [0, 100],
+        spacing: -8,
+      },
+    ],
+  };
 
+  const configdoughnutFilial1 = {
+    type: "doughnut",
+    data: datadoughnutFilial1,
+    options: {
+      cutout: "70%",
+      plugins: {
+        legend: {
+          display: false,
+        },
+        labels: {
+          color: "white",
+        },
+      },
+      hover: {
+        mode: null,
+      },
+    },
+    plugins: [counter],
+  };
 
-    //   ANO
-    let sliderAno = document.getElementById("ano");
+  let doughnutFilial1 = new Chart(
+    doughnutFilial1Ctx,
+    configdoughnutFilial1
+    //   setInterval(() => {
+    //   chart.update();
+    // }, 1000)
+  );
 
-    let selectAno = document.getElementById("select-ano");
-    selectAno.style.display = 'none'
+  const counter1 = {
+    id: "counter1",
+    beforeDraw(chart, args, options) {
+      const {
+        ctx,
+        chartArea: { top, right, bottom, left, width, height },
+      } = chart;
+      ctx.save();
+      ctx.font = "30px sans-serif";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.fillText("50%", width / 2, top + height / 1.8);
+    },
+  };
 
-    let sliderOne = document.getElementById("slider-1");
-    let sliderTwo = document.getElementById("slider-2");
-    let displayValOne = document.getElementById("range1");
-    let displayValTwo = document.getElementById("range2");
-    let minGap = 1;
-    let sliderTrack = document.querySelector(".slider-track");
-    let sliderMaxValue = document.getElementById("slider-1").max;
+  const datadoughnutFilial2 = {
+    labels: ["Não gasto", "Gasto"],
+    datasets: [
+      {
+        data: [100 - 50, 50],
+        backgroundColor: ["#EEEEEE", gradient1],
+        borderWidth: 0,
+        borderRadius: [0, 100],
+        spacing: -8,
+      },
+    ],
+  };
 
-    function start() {
+  const configdoughnutFilial2 = {
+    type: "doughnut",
+    data: datadoughnutFilial2,
+    options: {
+      cutout: "70%",
+      plugins: {
+        legend: {
+          display: false,
+        },
+        labels: {
+          color: "white",
+        },
+      },
+      hover: {
+        mode: null,
+      },
+    },
+    plugins: [counter1],
+  };
 
-        sliderOneM.disabled = true;
-        sliderTwoM.disabled = true;
+  let doughnutFilial2 = new Chart(doughnutFilial2Ctx, configdoughnutFilial2);
 
-        sliderOneS.disabled = true;
-        sliderTwoS.disabled = true;
+  const barralabels1 = ["5", "10", "15", "20", "25", "30"];
+  const barradata1 = {
+    labels: barralabels1,
+    datasets: [
+      {
+        axis: "x",
+        data: [17, 7, 13, 21, 5, 5],
+        fill: true,
+        backgroundColor: ["#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418"],
+      },
+    ],
+  };
+  const barraconfig1 = {
+    type: "bar",
+    data: barradata1,
+    options: {
+      indexAxis: "x",
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      scales: {
+        y: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            color: "#505050",
+          },
+        },
+        x: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            display: false,
+          },
+          title: {
+            display: true,
+            text: "Dias do mês",
+            color: "white",
+          },
+        },
+      },
+    },
+  };
+  let barra1 = new Chart(document.getElementById("barraFilial1").getContext("2d"), barraconfig1);
 
-        sliderOne.disabled = true;
-        sliderTwo.disabled = true;
+  const barralabels2 = ["5", "10", "15", "20", "25", "30"];
+  const barradata2 = {
+    labels: barralabels2,
+    datasets: [
+      {
+        axis: "x",
+        data: [30, 15, 7, 12, 18, 5],
+        fill: true,
+        backgroundColor: ["#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418"],
+      },
+    ],
+  };
 
-        sliderOneM.value = 1;
-        sliderTwoM.value = 31;
+  const barraconfig2 = {
+    type: "bar",
+    data: barradata2,
+    options: {
+      indexAxis: "x",
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      scales: {
+        y: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            color: "#505050",
+          },
+        },
+        x: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            display: false,
+          },
+          title: {
+            display: true,
+            text: "Dias do mês",
+            color: "white",
+          },
+        },
+      },
+    },
+  };
+  let side_bar = new Chart(document.getElementById("barraFilial2").getContext("2d"), barraconfig2);
 
-        sliderOneS.value = 1;
-        sliderTwoS.value = 7;
+  window.onload = function () {
+    start();
+  };
 
-        sliderOne.value = 1;
-        sliderTwo.value = 12;
+  //   ANO
+  let sliderAno = document.getElementById("ano");
 
-        sliderOne.style.opacity = '60%'
-        sliderTwo.style.opacity = '60%'
-        displayValOne.style.opacity = '50%'
-        displayValTwo.style.opacity = '50%'
-        sliderTrack.style.opacity = '10%'
+  let selectAno = document.getElementById("select-ano");
+  selectAno.style.display = "none";
 
-        displayValOne.style.display = 'none'
-        displayValTwo.style.display = 'none'
+  let sliderOne = document.getElementById("slider-1");
+  let sliderTwo = document.getElementById("slider-2");
+  let displayValOne = document.getElementById("range1");
+  let displayValTwo = document.getElementById("range2");
+  let minGap = 1;
+  let sliderTrack = document.querySelector(".slider-track");
+  let sliderMaxValue = document.getElementById("slider-1").max;
 
+  function start() {
+    sliderOneM.disabled = true;
+    sliderTwoM.disabled = true;
 
-        sliderOneM.style.opacity = '60%'
-        sliderTwoM.style.opacity = '60%'
-        displayValOneM.style.opacity = '50%'
-        displayValTwoM.style.opacity = '50%'
-        sliderTrackM.style.opacity = '10%'
+    sliderOneS.disabled = true;
+    sliderTwoS.disabled = true;
 
-        displayValOneM.style.display = 'none'
-        displayValTwoM.style.display = 'none'
+    sliderOne.disabled = true;
+    sliderTwo.disabled = true;
 
+    sliderOneM.value = 1;
+    sliderTwoM.value = 31;
 
-        sliderOneS.style.opacity = '60%'
-        sliderTwoS.style.opacity = '60%'
-        displayValOneS.style.opacity = '50%'
-        displayValTwoS.style.opacity = '50%'
-        sliderTrackS.style.opacity = '10%'
+    sliderOneS.value = 1;
+    sliderTwoS.value = 7;
 
-        displayValOneS.style.display = 'none'
-        displayValTwoS.style.display = 'none'
+    sliderOne.value = 1;
+    sliderTwo.value = 12;
 
-        slideOne(1);
-        slideTwo(1);
-        slideOne(2);
-        slideTwo(2);
-        slideOne(3);
-        slideTwo(3);
+    sliderOne.style.opacity = "60%";
+    sliderTwo.style.opacity = "60%";
+    displayValOne.style.opacity = "50%";
+    displayValTwo.style.opacity = "50%";
+    sliderTrack.style.opacity = "10%";
 
+    displayValOne.style.display = "none";
+    displayValTwo.style.display = "none";
 
+    sliderOneM.style.opacity = "60%";
+    sliderTwoM.style.opacity = "60%";
+    displayValOneM.style.opacity = "50%";
+    displayValTwoM.style.opacity = "50%";
+    sliderTrackM.style.opacity = "10%";
+
+    displayValOneM.style.display = "none";
+    displayValTwoM.style.display = "none";
+
+    sliderOneS.style.opacity = "60%";
+    sliderTwoS.style.opacity = "60%";
+    displayValOneS.style.opacity = "50%";
+    displayValTwoS.style.opacity = "50%";
+    sliderTrackS.style.opacity = "10%";
+
+    displayValOneS.style.display = "none";
+    displayValTwoS.style.display = "none";
+
+    slideOne(1);
+    slideTwo(1);
+    slideOne(2);
+    slideTwo(2);
+    slideOne(3);
+    slideTwo(3);
+  }
+
+  function filtrar() {
+    if (selectMes.value == "voltar") {
+      selectPr.value = "#";
+      selectPr.style.display = "flex";
+      selectMes.style.display = "none";
+      selectMes.value = "setembro";
+
+      start();
+    } else if (selectSemana.value == "voltar") {
+      selectPr.value = "#";
+      selectPr.style.display = "flex";
+
+      selectSemana.style.display = "none";
+      selectSemana.value = 3;
+
+      start();
+    } else if (selectAno.value == "voltar") {
+      selectPr.value = "#";
+      selectPr.style.display = "flex";
+
+      selectAno.style.display = "none";
+      selectAno.value = "2023";
+
+      start();
     }
+  }
 
-    function filtrar() {
-        if (selectMes.value == "voltar") {
-            selectPr.value = "#"
-            selectPr.style.display = 'flex'
-            selectMes.style.display = 'none'
-            selectMes.value = "setembro"
+  // MÊS
+  let selectMes = document.getElementById("select-mes");
+  selectMes.style.display = "none";
 
-            start();
-        } else if (selectSemana.value == "voltar") {
-            selectPr.value = "#"
-            selectPr.style.display = 'flex'
+  let sliderMes = document.getElementById("mes");
+  sliderMes.style.display = "none";
 
-            selectSemana.style.display = 'none'
-            selectSemana.value = 3
+  let sliderOneM = document.getElementById("slider-1M");
+  let sliderTwoM = document.getElementById("slider-2M");
+  let displayValOneM = document.getElementById("range1M");
+  let displayValTwoM = document.getElementById("range2M");
+  let sliderTrackM = document.querySelector(".slider-trackM");
+  let sliderMaxValueM = document.getElementById("slider-1M").max;
 
-            start();
-        } else if (selectAno.value == "voltar") {
-            selectPr.value = "#"
-            selectPr.style.display = 'flex'
+  // SEMANA
+  let selectSemana = document.getElementById("select-semana");
+  selectSemana.style.display = "none";
 
-            selectAno.style.display = 'none'
-            selectAno.value = "2023"
+  let sliderSemana = document.getElementById("semana");
+  sliderSemana.style.display = "none";
 
-            start();
-        }
+  let sliderOneS = document.getElementById("slider-1S");
+  let sliderTwoS = document.getElementById("slider-2S");
+  let displayValOneS = document.getElementById("range1S");
+  let displayValTwoS = document.getElementById("range2S");
+  let sliderTrackS = document.querySelector(".slider-trackS");
+  let sliderMaxValueS = document.getElementById("slider-1S").max;
+
+  let selectPr = document.getElementById("opts-select");
+
+  function aparecer() {
+    sliderOne.style.opacity = "100%";
+    sliderTwo.style.opacity = "100%";
+    displayValOne.style.opacity = "100%";
+    displayValTwo.style.opacity = "100%";
+    sliderTrack.style.opacity = "100%";
+
+    sliderOneM.style.opacity = "100%";
+    sliderTwoM.style.opacity = "100%";
+    displayValOneM.style.opacity = "100%";
+    displayValTwoM.style.opacity = "100%";
+    sliderTrackM.style.opacity = "100%";
+
+    sliderOneS.style.opacity = "100%";
+    sliderTwoS.style.opacity = "100%";
+    displayValOneS.style.opacity = "100%";
+    displayValTwoS.style.opacity = "100%";
+    sliderTrackS.style.opacity = "100%";
+
+    if (selectPr.value == "ano") {
+      sliderMes.style.display = "none";
+      sliderSemana.style.display = "none";
+      sliderAno.style.display = "flex";
+
+      sliderOne.disabled = false;
+      sliderTwo.disabled = false;
+
+      displayValOne.style.display = "flex";
+      displayValTwo.style.display = "flex";
+
+      selectAno.style.display = "flex";
+      selectPr.style.display = "none";
+    } else if (selectPr.value == "mes") {
+      sliderMes.style.display = "flex";
+      sliderSemana.style.display = "none";
+      sliderAno.style.display = "none";
+
+      sliderOneM.disabled = false;
+      sliderTwoM.disabled = false;
+
+      displayValOneM.style.display = "flex";
+      displayValTwoM.style.display = "flex";
+
+      selectMes.style.display = "flex";
+      selectPr.style.display = "none";
+    } else if (selectPr.value == "semana") {
+      sliderMes.style.display = "none";
+      sliderAno.style.display = "none";
+      sliderSemana.style.display = "flex";
+
+      sliderOneS.disabled = false;
+      sliderTwoS.disabled = false;
+
+      displayValOneS.style.display = "flex";
+      displayValTwoS.style.display = "flex";
+
+      selectSemana.style.display = "flex";
+      selectPr.style.display = "none";
     }
+  }
 
+  function slideOne(param) {
+    if (param == 1) {
+      if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+        sliderOne.value = parseInt(sliderTwo.value) - minGap;
+      }
+      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+      // else displayValOne.textContent = sliderOne.value + ':00 ';
+      if (sliderOne.value == 1) displayValOne.textContent = "Jan";
+      else if (sliderOne.value == 2) displayValOne.textContent = "Fev";
+      else if (sliderOne.value == 3) displayValOne.textContent = "Mar";
+      else if (sliderOne.value == 4) displayValOne.textContent = "Abr";
+      else if (sliderOne.value == 5) displayValOne.textContent = "Mai";
+      else if (sliderOne.value == 6) displayValOne.textContent = "Jun";
+      else if (sliderOne.value == 7) displayValOne.textContent = "Jul";
+      else if (sliderOne.value == 8) displayValOne.textContent = "Ago";
+      else if (sliderOne.value == 9) displayValOne.textContent = "Set";
+      else if (sliderOne.value == 10) displayValOne.textContent = "Out";
+      else if (sliderOne.value == 11) displayValOne.textContent = "Nov";
+      else if (sliderOne.value == 12) displayValOne.textContent = "Dez";
+      fillColor(1);
+    } else if (param == 2) {
+      if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
+        sliderOneM.value = parseInt(sliderTwoM.value) - minGap;
+      }
+      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+      // else displayValOne.textContent = sliderOne.value + ':00 ';
+      displayValOneM.textContent = sliderOneM.value;
 
-    // MÊS
-    let selectMes = document.getElementById("select-mes");
-    selectMes.style.display = 'none'
+      fillColor(2);
+    } else if (param == 3) {
+      if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
+        sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
+      }
+      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+      // else displayValOne.textContent = sliderOne.value + ':00 ';
+      if (sliderOneS.value == 1) displayValOneS.textContent = "Seg";
+      else if (sliderOneS.value == 2) displayValOneS.textContent = "Ter";
+      else if (sliderOneS.value == 3) displayValOneS.textContent = "Qua";
+      else if (sliderOneS.value == 4) displayValOneS.textContent = "Qui";
+      else if (sliderOneS.value == 5) displayValOneS.textContent = "Sex";
+      else if (sliderOneS.value == 6) displayValOneS.textContent = "Sab";
+      else if (sliderOneS.value == 7) displayValOneS.textContent = "Dom";
 
-    let sliderMes = document.getElementById("mes");
-    sliderMes.style.display = 'none'
-
-    let sliderOneM = document.getElementById("slider-1M");
-    let sliderTwoM = document.getElementById("slider-2M");
-    let displayValOneM = document.getElementById("range1M");
-    let displayValTwoM = document.getElementById("range2M");
-    let sliderTrackM = document.querySelector(".slider-trackM");
-    let sliderMaxValueM = document.getElementById("slider-1M").max;
-
-    // SEMANA
-    let selectSemana = document.getElementById("select-semana");
-    selectSemana.style.display = 'none'
-
-    let sliderSemana = document.getElementById("semana");
-    sliderSemana.style.display = 'none'
-
-    let sliderOneS = document.getElementById("slider-1S");
-    let sliderTwoS = document.getElementById("slider-2S");
-    let displayValOneS = document.getElementById("range1S");
-    let displayValTwoS = document.getElementById("range2S");
-    let sliderTrackS = document.querySelector(".slider-trackS");
-    let sliderMaxValueS = document.getElementById("slider-1S").max;
-
-
-
-
-    let selectPr = document.getElementById("opts-select");
-
-    function aparecer() {
-        sliderOne.style.opacity = '100%'
-        sliderTwo.style.opacity = '100%'
-        displayValOne.style.opacity = '100%'
-        displayValTwo.style.opacity = '100%'
-        sliderTrack.style.opacity = '100%'
-
-        sliderOneM.style.opacity = '100%'
-        sliderTwoM.style.opacity = '100%'
-        displayValOneM.style.opacity = '100%'
-        displayValTwoM.style.opacity = '100%'
-        sliderTrackM.style.opacity = '100%'
-
-        sliderOneS.style.opacity = '100%'
-        sliderTwoS.style.opacity = '100%'
-        displayValOneS.style.opacity = '100%'
-        displayValTwoS.style.opacity = '100%'
-        sliderTrackS.style.opacity = '100%'
-
-
-        if (selectPr.value == "ano") {
-            sliderMes.style.display = 'none'
-            sliderSemana.style.display = 'none'
-            sliderAno.style.display = 'flex'
-
-            sliderOne.disabled = false;
-            sliderTwo.disabled = false;
-
-            displayValOne.style.display = 'flex'
-            displayValTwo.style.display = 'flex'
-
-            selectAno.style.display = 'flex'
-            selectPr.style.display = 'none'
-
-        } else if (selectPr.value == "mes") {
-            sliderMes.style.display = 'flex'
-            sliderSemana.style.display = 'none'
-            sliderAno.style.display = 'none'
-
-            sliderOneM.disabled = false;
-            sliderTwoM.disabled = false;
-
-            displayValOneM.style.display = 'flex'
-            displayValTwoM.style.display = 'flex'
-
-            selectMes.style.display = 'flex'
-            selectPr.style.display = 'none'
-
-        } else if (selectPr.value == "semana") {
-            sliderMes.style.display = 'none'
-            sliderAno.style.display = 'none'
-            sliderSemana.style.display = 'flex'
-
-            sliderOneS.disabled = false;
-            sliderTwoS.disabled = false;
-
-            displayValOneS.style.display = 'flex'
-            displayValTwoS.style.display = 'flex'
-
-            selectSemana.style.display = 'flex'
-            selectPr.style.display = 'none'
-        }
-
+      fillColor(3);
     }
+  }
 
-    function slideOne(param) {
-        if (param == 1) {
-            if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-                sliderOne.value = parseInt(sliderTwo.value) - minGap;
-            }
-            // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-            // else displayValOne.textContent = sliderOne.value + ':00 ';
-            if (sliderOne.value == 1) displayValOne.textContent = 'Jan'
-            else if (sliderOne.value == 2) displayValOne.textContent = 'Fev'
-            else if (sliderOne.value == 3) displayValOne.textContent = 'Mar'
-            else if (sliderOne.value == 4) displayValOne.textContent = 'Abr'
-            else if (sliderOne.value == 5) displayValOne.textContent = 'Mai'
-            else if (sliderOne.value == 6) displayValOne.textContent = 'Jun'
-            else if (sliderOne.value == 7) displayValOne.textContent = 'Jul'
-            else if (sliderOne.value == 8) displayValOne.textContent = 'Ago'
-            else if (sliderOne.value == 9) displayValOne.textContent = 'Set'
-            else if (sliderOne.value == 10) displayValOne.textContent = 'Out'
-            else if (sliderOne.value == 11) displayValOne.textContent = 'Nov'
-            else if (sliderOne.value == 12) displayValOne.textContent = 'Dez'
-            fillColor(1);
+  function slideTwo(param) {
+    if (param == 1) {
+      if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+        sliderTwo.value = parseInt(sliderOne.value) + minGap;
+      }
+      // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+      // else displayValTwo.textContent = sliderTwo.value + ':00';
+      if (sliderTwo.value == 1) displayValTwo.textContent = "Jan";
+      else if (sliderTwo.value == 2) displayValTwo.textContent = "Fev";
+      else if (sliderTwo.value == 3) displayValTwo.textContent = "Mar";
+      else if (sliderTwo.value == 4) displayValTwo.textContent = "Abr";
+      else if (sliderTwo.value == 5) displayValTwo.textContent = "Mai";
+      else if (sliderTwo.value == 6) displayValTwo.textContent = "Jun";
+      else if (sliderTwo.value == 7) displayValTwo.textContent = "Jul";
+      else if (sliderTwo.value == 8) displayValTwo.textContent = "Ago";
+      else if (sliderTwo.value == 9) displayValTwo.textContent = "Set";
+      else if (sliderTwo.value == 10) displayValTwo.textContent = "Out";
+      else if (sliderTwo.value == 11) displayValTwo.textContent = "Nov";
+      else if (sliderTwo.value == 12) displayValTwo.textContent = "Dez";
+      fillColor(1);
+    } else if (param == 2) {
+      if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
+        sliderTwoM.value = parseInt(sliderOneM.value) + minGap;
+      }
+      // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+      // else displayValTwo.textContent = sliderTwo.value + ':00';
+      displayValTwoM.textContent = sliderTwoM.value;
 
-        } else if (param == 2) {
-            if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
-                sliderOneM.value = parseInt(sliderTwoM.value) - minGap;
-            }
-            // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-            // else displayValOne.textContent = sliderOne.value + ':00 ';
-            displayValOneM.textContent = sliderOneM.value
+      fillColor(2);
+    } else if (param == 3) {
+      if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
+        sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
+      }
+      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+      // else displayValOne.textContent = sliderOne.value + ':00 ';
+      if (sliderTwoS.value == 1) displayValTwoS.textContent = "Seg";
+      else if (sliderTwoS.value == 2) displayValTwoS.textContent = "Ter";
+      else if (sliderTwoS.value == 3) displayValTwoS.textContent = "Qua";
+      else if (sliderTwoS.value == 4) displayValTwoS.textContent = "Qui";
+      else if (sliderTwoS.value == 5) displayValTwoS.textContent = "Sex";
+      else if (sliderTwoS.value == 6) displayValTwoS.textContent = "Sab";
+      else if (sliderTwoS.value == 7) displayValTwoS.textContent = "Dom";
 
-            fillColor(2);
-        } else if (param == 3) {
-            if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
-                sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
-            }
-            // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-            // else displayValOne.textContent = sliderOne.value + ':00 ';
-            if (sliderOneS.value == 1) displayValOneS.textContent = 'Seg'
-            else if (sliderOneS.value == 2) displayValOneS.textContent = 'Ter'
-            else if (sliderOneS.value == 3) displayValOneS.textContent = 'Qua'
-            else if (sliderOneS.value == 4) displayValOneS.textContent = 'Qui'
-            else if (sliderOneS.value == 5) displayValOneS.textContent = 'Sex'
-            else if (sliderOneS.value == 6) displayValOneS.textContent = 'Sab'
-            else if (sliderOneS.value == 7) displayValOneS.textContent = 'Dom'
-
-            fillColor(3);
-        }
+      fillColor(3);
     }
-
-    function slideTwo(param) {
-        if (param == 1) {
-            if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-                sliderTwo.value = parseInt(sliderOne.value) + minGap;
-            }
-            // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
-            // else displayValTwo.textContent = sliderTwo.value + ':00';
-            if (sliderTwo.value == 1) displayValTwo.textContent = 'Jan'
-            else if (sliderTwo.value == 2) displayValTwo.textContent = 'Fev'
-            else if (sliderTwo.value == 3) displayValTwo.textContent = 'Mar'
-            else if (sliderTwo.value == 4) displayValTwo.textContent = 'Abr'
-            else if (sliderTwo.value == 5) displayValTwo.textContent = 'Mai'
-            else if (sliderTwo.value == 6) displayValTwo.textContent = 'Jun'
-            else if (sliderTwo.value == 7) displayValTwo.textContent = 'Jul'
-            else if (sliderTwo.value == 8) displayValTwo.textContent = 'Ago'
-            else if (sliderTwo.value == 9) displayValTwo.textContent = 'Set'
-            else if (sliderTwo.value == 10) displayValTwo.textContent = 'Out'
-            else if (sliderTwo.value == 11) displayValTwo.textContent = 'Nov'
-            else if (sliderTwo.value == 12) displayValTwo.textContent = 'Dez'
-            fillColor(1);
-        }
-        else if (param == 2) {
-            if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
-                sliderTwoM.value = parseInt(sliderOneM.value) + minGap;
-            }
-            // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
-            // else displayValTwo.textContent = sliderTwo.value + ':00';
-            displayValTwoM.textContent = sliderTwoM.value
-
-            fillColor(2);
-        } else if (param == 3) {
-            if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
-                sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
-            }
-            // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-            // else displayValOne.textContent = sliderOne.value + ':00 ';
-            if (sliderTwoS.value == 1) displayValTwoS.textContent = 'Seg'
-            else if (sliderTwoS.value == 2) displayValTwoS.textContent = 'Ter'
-            else if (sliderTwoS.value == 3) displayValTwoS.textContent = 'Qua'
-            else if (sliderTwoS.value == 4) displayValTwoS.textContent = 'Qui'
-            else if (sliderTwoS.value == 5) displayValTwoS.textContent = 'Sex'
-            else if (sliderTwoS.value == 6) displayValTwoS.textContent = 'Sab'
-            else if (sliderTwoS.value == 7) displayValTwoS.textContent = 'Dom'
-
-            fillColor(3);
-        }
+  }
+  function fillColor(param) {
+    if (param == 1) {
+      percent1 = (sliderOne.value / sliderMaxValue) * 100;
+      percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+      sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    } else if (param == 2) {
+      percent1 = (sliderOneM.value / sliderMaxValueM) * 100;
+      percent2 = (sliderTwoM.value / sliderMaxValueM) * 100;
+      sliderTrackM.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    } else if (param == 3) {
+      percent1 = (sliderOneS.value / sliderMaxValueS) * 100;
+      percent2 = (sliderTwoS.value / sliderMaxValueS) * 100;
+      sliderTrackS.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
     }
-    function fillColor(param) {
-        if (param == 1) {
-            percent1 = (sliderOne.value / sliderMaxValue) * 100;
-            percent2 = (sliderTwo.value / sliderMaxValue) * 100;
-            sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
-        } else if (param == 2) {
-            percent1 = (sliderOneM.value / sliderMaxValueM) * 100;
-            percent2 = (sliderTwoM.value / sliderMaxValueM) * 100;
-            sliderTrackM.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
-        } else if (param == 3) {
-            percent1 = (sliderOneS.value / sliderMaxValueS) * 100;
-            percent2 = (sliderTwoS.value / sliderMaxValueS) * 100;
-            sliderTrackS.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
-        }
-    }
-
+  }
 </script>
