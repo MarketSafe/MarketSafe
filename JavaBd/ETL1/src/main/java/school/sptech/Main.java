@@ -40,7 +40,7 @@ public class Main implements RequestHandler<S3Event, String> {
 
       String trustedName = "";
 
-      if (sourceKey.contains("pix")) {
+      if (sourceKey.contains("crawler")) {
         // dados do crawler:
         // Conversão do JSON para uma lista de objetos usando o Mapper:
         CrawlerMapper mapper = new CrawlerMapper();

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="./css/dash_analista.css">
-    <link rel="icon" href="css/icon.png">
+    <link rel="stylesheet" href="./css/dash_analista.css" />
+    <link rel="icon" href="css/icon.png" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
@@ -15,342 +14,324 @@
     <!-- Isso aqui é pro gráfico de gouge -->
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script> -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  </head>
 
-<body>
+  <body>
     <div class="header">
-        <ul class="navbar">
-            <li><a href="perfilAnalista.html">Perfil</a></li>
-            <li><a>|</a></li>
-            <li class="agora"><a href="dash_analista.html">Dashboard</a></li>
-            <li><a>|</a></li>
-            <li><a href="">Ajuda</a></li>
-            <li><a>|</a></li>
-            <li><a href="index.html">Sair</a></li>
-        </ul>
+      <ul class="navbar">
+        <li><a href="perfilAnalista.html">Perfil</a></li>
+        <li><a>|</a></li>
+        <li class="agora"><a href="dash_analista.html">Dashboard</a></li>
+        <li><a>|</a></li>
+        <li><a href="">Ajuda</a></li>
+        <li><a>|</a></li>
+        <li><a href="index.html">Sair</a></li>
+      </ul>
     </div>
     <div class="container">
-        <div class="menu">
-            <div class="perfil">
-                <img src="./css/foto-anilista.jpg" alt="Foto Perfil">
-                <h2>Fred</h2>
-                <p>Analista</p>
-            </div>
-            <div class="engloba-itens">
-                <div class="regiao-select">
-                    <label for="region">Componente</label>
-                    <select id="region">
-                        <option selected value="0">Selecione uma Opção</option>
-                        <option id="1" value="1">Processador</option>
-                        <option value="2">Memória</option>
-                    </select>
+      <div class="menu">
+        <div class="perfil">
+          <img src="./css/foto-anilista.jpg" alt="Foto Perfil" />
+          <h2>Fred</h2>
+          <p>Analista</p>
+        </div>
+        <div class="engloba-itens">
+          <div class="regiao-select">
+            <label for="region">Componente</label>
+            <select id="region">
+              <option selected value="0">Selecione uma Opção</option>
+              <option id="1" value="1">Processador</option>
+              <option value="2">Memória</option>
+            </select>
+          </div>
+        </div>
+        <div class="engloba-itens2">
+          <div class="filial-select">
+            <label for="filial">Totens Selecionados</label>
+            <select id="filial">
+              <option selected value="0">Selecione uma Opção</option>
+              <option value="1">Totem 1</option>
+              <option value="2">Totem 2</option>
+              <option value="3">Totem 3</option>
+              <option value="4">Totem 4</option>
+              <option value="5">Totem 5</option>
+              <option value="6">Totem 6</option>
+              <option value="7">Totem 7</option>
+            </select>
+            <select id="filial2">
+              <option selected value="0">Selecione uma Opção</option>
+              <option value="1">Totem 1</option>
+              <option value="2">Totem 2</option>
+              <option value="3">Totem 3</option>
+              <option value="4">Totem 4</option>
+              <option value="5">Totem 5</option>
+              <option value="6">Totem 6</option>
+              <option value="7">Totem 7</option>
+            </select>
+          </div>
+
+          <div id="conteudo1" class="data-select">
+            <div class="data-select">
+              <div class="mudar-periodo">
+                <div>
+                  <label for="periodo">Período</label>
                 </div>
-            </div>
-            <div class="engloba-itens2">
-                <div class="filial-select">
-                    <label for="filial">Totens Selecionados</label>
-                    <select id="filial">
-                        <option selected value="0">Selecione uma Opção</option>
-                        <option value="1">Totem 1</option>
-                        <option value="2">Totem 2</option>
-                        <option value="3">Totem 3</option>
-                        <option value="4">Totem 4</option>
-                        <option value="5">Totem 5</option>
-                        <option value="6">Totem 6</option>
-                        <option value="7">Totem 7</option>
-                    </select>
-                    <select id="filial2">
-                        <option selected value="0">Selecione uma Opção</option>
-                        <option value="1">Totem 1</option>
-                        <option value="2">Totem 2</option>
-                        <option value="3">Totem 3</option>
-                        <option value="4">Totem 4</option>
-                        <option value="5">Totem 5</option>
-                        <option value="6">Totem 6</option>
-                        <option value="7">Totem 7</option>
-                    </select>
+              </div>
+              <div class="periodo-select">
+                <select id="opts-select" onchange="aparecer()">
+                  <option selected disabled value="#">Selecione uma opção</option>
+                  <option value="mes">Mês</option>
+                  <option value="semana">Semana</option>
+                  <option value="ano">Ano</option>
+                </select>
+
+                <select id="select-mes" onchange="filtrar(1)">
+                  <option value="setembro">Setembro</option>
+                  <option value="agosto">Agosto</option>
+                  <option value="voltar">Voltar</option>
+                </select>
+
+                <select id="select-semana" onchange="filtrar(2)">
+                  <option value="1">Semana 1</option>
+                  <option value="2">Semana 2</option>
+                  <option value="3" selected>Semana 3</option>
+                  <option value="voltar">Voltar</option>
+                </select>
+
+                <select id="select-ano" onchange="filtrar(3)">
+                  <option value="2023" selected>2023</option>
+                  <option value="voltar">Voltar</option>
+                </select>
+              </div>
+
+              <div id="ano">
+                <div class="filtros">
+                  <div class="wrapper">
+                    <div class="sliderContainer">
+                      <div class="slider-track"></div>
+                      <input type="range" min="1" max="12" value="1" id="slider-1" oninput="slideOne(1)" disabled />
+                      <input type="range" min="1" max="12" value="12" id="slider-2" oninput="slideTwo(1)" disabled />
+                      <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                      <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                    </div>
+                    <div class="values">
+                      <span id="range1"> 0 </span>
+                      <span> &ThickSpace; &dash; &ThickSpace; </span>
+                      <span id="range2"> 12 </span>
+                    </div>
+                  </div>
                 </div>
+              </div>
 
-                <div id="conteudo1" class="data-select">
-                    <div class="data-select">
-                        <div class="mudar-periodo">
-                            <div>
-                                <label for="periodo">Período</label>
-                            </div>
-                        </div>
-                        <div class="periodo-select">
-                            <select id="opts-select" onchange="aparecer()">
-                                <option selected disabled value="#">Selecione uma opção</option>
-                                <option value="mes"> Mês</option>
-                                <option value="semana"> Semana</option>
-                                <option value="ano"> Ano</option>
-                            </select>
-
-                            <select id="select-mes" onchange="filtrar(1)">
-                                <option value="setembro"> Setembro </option>
-                                <option value="agosto"> Agosto </option>
-                                <option value="voltar"> Voltar </option>
-                            </select>
-
-                            <select id="select-semana" onchange="filtrar(2)">
-                                <option value="1"> Semana 1 </option>
-                                <option value="2"> Semana 2 </option>
-                                <option value="3" selected> Semana 3 </option>
-                                <option value="voltar"> Voltar </option>
-                            </select>
-
-                            <select id="select-ano" onchange="filtrar(3)">
-                                <option value="2023" selected> 2023 </option>
-                                <option value="voltar"> Voltar </option>
-                            </select> 
-                        </div>
-
-                        <div id="ano">
-                            <div class="filtros">        
-                                <div class="wrapper">
-                                    <div class="sliderContainer">
-                                        <div class="slider-track"></div>
-                                        <input type="range" min="1" max="12" value="1" id="slider-1" oninput="slideOne(1)" disabled>
-                                        <input type="range" min="1" max="12" value="12" id="slider-2" oninput="slideTwo(1)" disabled>
-                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
-                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
-                                    </div>
-                                    <div class="values">
-                                        <span id="range1">
-                                            0
-                                        </span>
-                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
-                                        <span id="range2">
-                                            12
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="mes">
-                            <div class="filtros">        
-                                <div class="wrapper">
-                                    <div class="sliderContainer">
-                                        <div class="slider-trackM"></div>
-                                        <input type="range" min="1" max="31" value="1" id="slider-1M" oninput="slideOne(2)" disabled>
-                                        <input type="range" min="1" max="31" value="31" id="slider-2M" oninput="slideTwo(2)" disabled>
-                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
-                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
-                                    </div>
-                                    <div class="values">
-                                        <span id="range1M">
-                                            1
-                                        </span>
-                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
-                                        <span id="range2M">
-                                            31
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="semana">
-                            <div class="filtros">        
-                                <div class="wrapper">
-                                    <div class="sliderContainer">
-                                        <div class="slider-trackS"></div>
-                                        <input type="range" min="1" max="7" value="1" id="slider-1S" oninput="slideOne(3)" disabled>
-                                        <input type="range" min="1" max="7" value="7" id="slider-2S" oninput="slideTwo(3)" disabled>
-                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
-                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
-                                    </div>
-                                    <div class="values">
-                                        <span id="range1S">
-                                            1
-                                        </span>
-                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
-                                        <span id="range2S">
-                                            7
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>    
+              <div id="mes">
+                <div class="filtros">
+                  <div class="wrapper">
+                    <div class="sliderContainer">
+                      <div class="slider-trackM"></div>
+                      <input type="range" min="1" max="31" value="1" id="slider-1M" oninput="slideOne(2)" disabled />
+                      <input type="range" min="1" max="31" value="31" id="slider-2M" oninput="slideTwo(2)" disabled />
+                      <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                      <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                    </div>
+                    <div class="values">
+                      <span id="range1M"> 1 </span>
+                      <span> &ThickSpace; &dash; &ThickSpace; </span>
+                      <span id="range2M"> 31 </span>
+                    </div>
+                  </div>
                 </div>
+              </div>
 
-                <button onclick="comparar()" class="botao-comparar">Comparar</button>
+              <div id="semana">
+                <div class="filtros">
+                  <div class="wrapper">
+                    <div class="sliderContainer">
+                      <div class="slider-trackS"></div>
+                      <input type="range" min="1" max="7" value="1" id="slider-1S" oninput="slideOne(3)" disabled />
+                      <input type="range" min="1" max="7" value="7" id="slider-2S" oninput="slideTwo(3)" disabled />
+                      <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                      <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                    </div>
+                    <div class="values">
+                      <span id="range1S"> 1 </span>
+                      <span> &ThickSpace; &dash; &ThickSpace; </span>
+                      <span id="range2S"> 7 </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <button onclick="comparar()" class="botao-comparar">Comparar</button>
+        </div>
+      </div>
+
+      <div class="dashes">
+        <div class="container-dashes" id="grafico1">
+          <div class="primeira_linha_graficos">
+            <div class="div_para_graficos">
+              <h3>Totens com mais gasto na última hora</h3>
+              <div style="display: flex; width: 100%; justify-content: space-evenly; height: 70%">
+                <div id="graficoCPU" class="graficoCPU">
+                  <canvas id="cpuChart"></canvas>
+                </div>
+                <div class="graficoRAM">
+                  <canvas id="ramChart"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="totens">
+              <div class="totens-quantidade">
+                <h3>Quantidade de Totens</h3>
+                <span>10</span>
+              </div>
+              <div class="totens-problema">
+                <h4>Nº de Totens com Problema</h4>
+                <span>3</span>
+              </div>
+            </div>
+          </div>
+          <div class="dashes-baixo">
+            <div class="grafico1">
+              <span class="span_graf">Totens com mais alertas (na última hora)</span>
+              <div>
+                <canvas id="grafico2" style="height: 100px"> </canvas>
+              </div>
+            </div>
+            <div class="div_alinhar_doughnut">
+              <span id="span_graf" class="span_graf">Maior e menor consumo de CPU entre totens (no dia)</span>
+              <div class="grafico_doughnut">
+                <div id="grafico_doughnut"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="dashes">
-            <div class="container-dashes" id="grafico1" style="display: block;">
-                <h3>Totens com mais gasto na última hora</h3>
-                <div class="primeira_linha_graficos">
-                    <div class="div_para_graficos">
-                        <div id="graficoCPU" class="graficoCPU">
-                            <canvas id="cpuChart"></canvas>
-                        </div>
-                        <div class="graficoRAM">
-                            <canvas id="ramChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="totens">
-                        <h3>Quantidade de Totens</h1>
-                            <div class="totens-quantidade">
-                                10
-                            </div>
-                            <h4>Nº de Totens com Problema</h4>
-                            <div class="totens-problema">
-                                3
-                            </div>
-                    </div>
-                </div>
-                <div class="dashes-baixo">
-                    <div class="grafico1">
-                        <span class="span_graf">Totens com mais alertas (na última hora)</span>
-                        <canvas id="grafico2" style="height: 100px;">
+        <div id="tela_elementos" class="tela_elementos" style="display: none">
+          <div class="div_tela2">
+            <button onclick="indicador()" class="botao_indicador">Indicadores</button>
+            <button onclick="grafico()" class="botao_grafico">Gráficos</button>
+          </div>
+          <div class="gasto_cpu">
+            <h2>Gasto de CPU</h2>
 
-                        </canvas>
-                    </div>
-                    <div class="div_alinhar_doughnut">
-                        <span id="span_graf" class="span_graf">Maior e menor consumo de CPU entre totens (no dia)</span>
-                        <div class="grafico_doughnut">
-                            <div id="grafico_doughnut"></div>
-                        </div>
-                    </div>
+            <div class="primeira_linha_totem">
+              <div class="div_totens">
+                <div class="titulo_totem">
+                  <h4>Totem <span id="rst1">0</span></h4>
+                  <div class="Totem5">80%</div>
                 </div>
+                <div class="titulo_totem">
+                  <h4>Totem <span id="rst2">0</span></h4>
+                  <div class="Totem7">40%</div>
+                </div>
+              </div>
             </div>
-
-            <div id="tela_elementos" class="tela_elementos" style="display: none;">
-                <div class="div_tela2">
-                    <button onclick="indicador()" class="botao_indicador">Indicadores</button>
-                    <button onclick="grafico()" class="botao_grafico">Gráficos</button>
+            <h3 class="titulo_quantidade">Quantidade de Sobrecargas no dia</h3>
+            <div class="primeira_linha_totem">
+              <div class="div_totens">
+                <div class="titulo_totem">
+                  <h4>Totem <span id="rst3">0</span></h4>
+                  <div class="Totem5_segundo">8</div>
                 </div>
-                <div class="gasto_cpu">
-
-                    <h2>Gasto de CPU</h2>
-
-                    <div class="primeira_linha_totem">
-                        <div class="div_totens">
-                            <div class="titulo_totem">
-                                <h4>Totem <span id="rst1">0</span></h4>
-                                <div class="Totem5">
-                                    80%
-                                </div>
-                            </div>
-                            <div class="titulo_totem">
-                                <h4>Totem <span id="rst2">0</span></h4>
-                                <div class="Totem7">
-                                    40%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="titulo_quantidade">Quantidade de Sobrecargas no dia</h3>
-                    <div class="primeira_linha_totem">
-                        <div class="div_totens">
-                            <div class="titulo_totem">
-                                <h4>Totem <span id="rst3">0</span></h4>
-                                <div class="Totem5_segundo">
-                                    8
-                                </div>
-                            </div>
-                            <div class="titulo_totem">
-                                <h4>Totem <span id="rst4">0</span></h4>
-                                <div class="Totem7_segundo">
-                                    4
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="titulo_totem">
+                  <h4>Totem <span id="rst4">0</span></h4>
+                  <div class="Totem7_segundo">4</div>
                 </div>
-
+              </div>
             </div>
-            <div id="tela_elementos2" class="tela_elementos2" style="display: none;">
-            <div class="div_tela2">
-                <button onclick="indicador2()" class="botao_indicador2">Indicadores</button>
-                <button onclick="grafico2()" class="botao_grafico2">Gráficos</button>
-            </div>
-            <div class="grafico_compara">
-                <div class="graficos_tela_2" style="gap: 0px;">
-                    <div class="linha_gf_comparacao" style="height: 33%;">
-                        <div class="fundo_dough_2">
-                            <span id="span_graf" class="span_graf">Consumo de CPU entre Totens</span>
-                            <div class="grafico_doughnut_2">
-                                <div id="grafico_doughnut2"></div>
-                            </div>
-                        </div>
-                        <div class="graficoLinha2">
-                            <span>Gasto de CPU x Tempo</span>
-                            <canvas id="graficoLinha2"></canvas>
-                        </div>
-                    </div>
-                    <div id="linha_gf_comparacao" class="linha_gf_comparacao">
-
-                        <div id="grafico_Bar_1" class="grafico_Bar_tela2">
-                            <span style="flex-direction: row;">Alertas por Dia</span>
-                            <span><span id="rst5">0</span></span>
-                            <canvas id="GfBar_Tela2"></canvas>
-                            <!-- <span class="span_gf_bar">Dia</span> -->
-                        </div>
-                        <div id="grafico_Bar_2" class="grafico2_Bar_tela2">
-                            <span style="flex-direction: row;">Alertas por Dia</span>
-                            <span><span id="rst6">0</span></span>
-                            <canvas id="GfBar2_Tela2"></canvas>
-                            <!-- <span class="span_gf_bar">Dia</span> -->
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-
-</body>
-
+        <div id="tela_elementos2" class="tela_elementos2" style="display: none">
+          <div class="div_tela2">
+            <button onclick="indicador2()" class="botao_indicador2">Indicadores</button>
+            <button onclick="grafico2()" class="botao_grafico2">Gráficos</button>
+          </div>
+          <div class="grafico_compara">
+            <div class="graficos_tela_2" style="gap: 0px">
+              <div class="linha_gf_comparacao" style="height: 33%">
+                <div class="fundo_dough_2">
+                  <span id="span_graf" class="span_graf">Consumo de CPU entre Totens</span>
+                  <div class="grafico_doughnut_2">
+                    <div id="grafico_doughnut2"></div>
+                  </div>
+                </div>
+                <div class="graficoLinha2">
+                  <span>Gasto de CPU x Tempo</span>
+                  <canvas id="graficoLinha2"></canvas>
+                </div>
+              </div>
+              <div id="linha_gf_comparacao" class="linha_gf_comparacao">
+                <div style="flex: 1">
+                  <div style="display: flex">
+                    <span style="flex-direction: row">Alertas por Dia</span>
+                    <span id="rst5">0</span>
+                  </div>
+                  <div id="grafico_Bar_1" class="grafico_Bar_tela2" style="height: 100%">
+                    <canvas id="GfBar_Tela2"></canvas>
+                  </div>
+                  <!-- <span class="span_gf_bar">Dia</span> -->
+                </div>
+                <div style="flex: 1">
+                  <div style="display: flex">
+                    <span style="flex-direction: row">Alertas por Dia</span>
+                    <span id="rst6">0</span>
+                  </div>
+                  <div id="grafico_Bar_2" class="grafico2_Bar_tela2" style="height: 100%">
+                    <canvas id="GfBar2_Tela2"></canvas>
+                  </div>
+                  <!-- <span class="span_gf_bar">Dia</span> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
 
 <script>
+  function indicador2() {
+    var tela_elemento = document.getElementById("tela_elementos");
+    var tela_elemento2 = document.getElementById("tela_elementos2");
 
-function indicador2(){
-    var tela_elemento = document.getElementById('tela_elementos');
-    var tela_elemento2 = document.getElementById('tela_elementos2');
-    
-    tela_elemento.style.display = 'block'; 
-    tela_elemento2.style.display = 'none'; 
-    }
+    tela_elemento.style.display = "block";
+    tela_elemento2.style.display = "none";
+  }
 
-    function grafico(){
-    var tela_elemento = document.getElementById('tela_elementos');
-    var tela_elemento2 = document.getElementById('tela_elementos2');
-    
-    tela_elemento.style.display = 'none'; 
-    tela_elemento2.style.display = 'block';
-    }
+  function grafico() {
+    var tela_elemento = document.getElementById("tela_elementos");
+    var tela_elemento2 = document.getElementById("tela_elementos2");
 
-function comparar(){
+    tela_elemento.style.display = "none";
+    tela_elemento2.style.display = "block";
+  }
 
-    const tt1Slct = document.getElementById('filial');
-    const tt2Slct = document.getElementById('filial2');    
+  function comparar() {
+    const tt1Slct = document.getElementById("filial");
+    const tt2Slct = document.getElementById("filial2");
 
-    const primeira_linha_graficos = document.getElementById('primeira_linha_graficos');
-    const dashes_baixo = document.getElementById('dashes-baixo');
+    const primeira_linha_graficos = document.getElementById("primeira_linha_graficos");
+    const dashes_baixo = document.getElementById("dashes-baixo");
 
-    const tela1 = document.getElementById('grafico1');
+    const tela1 = document.getElementById("grafico1");
 
-    grafico1.style.display = 'none'; 
-    tela_elementos.style.display = 'block'
+    grafico1.style.display = "none";
+    tela_elementos.style.display = "block";
 
-    const rst1Slct = document.getElementById('rst1');
-    const rst2Slct = document.getElementById('rst2');
-    
-    const rst3Slct = document.getElementById('rst3');
-    const rst4Slct = document.getElementById('rst4');
+    const rst1Slct = document.getElementById("rst1");
+    const rst2Slct = document.getElementById("rst2");
 
-    const rst5Slct = document.getElementById('rst5');
-    const rst6Slct = document.getElementById('rst6');
+    const rst3Slct = document.getElementById("rst3");
+    const rst4Slct = document.getElementById("rst4");
+
+    const rst5Slct = document.getElementById("rst5");
+    const rst6Slct = document.getElementById("rst6");
 
     rst1Slct.innerHTML = tt1Slct.value;
     rst2Slct.innerHTML = tt2Slct.value;
@@ -363,264 +344,262 @@ function comparar(){
 
     plotarDg2();
     plotarGFL2();
-}
+  }
 
+  // const trocaConteudo = document.getElementById('troca');
+  // const trocaConteudo2 = document.getElementById('novaTroca');
+  // const conteudo1 = document.getElementById('conteudo1');
+  // const conteudo2 = document.getElementById('conteudo2');
 
+  // trocaConteudo.addEventListener('click', function () {
+  //         conteudo2.style.display = 'block';
+  //         conteudo1.style.display = 'none';
 
-// const trocaConteudo = document.getElementById('troca');
-// const trocaConteudo2 = document.getElementById('novaTroca');
-// const conteudo1 = document.getElementById('conteudo1');
-// const conteudo2 = document.getElementById('conteudo2');
+  // });
 
-// trocaConteudo.addEventListener('click', function () {
-//         conteudo2.style.display = 'block'; 
-//         conteudo1.style.display = 'none'; 
+  // trocaConteudo2.addEventListener('click', function () {
+  //       conteudo1.style.display = 'block';
+  //       conteudo2.style.display = 'none';
 
-// });
+  // });
 
-// trocaConteudo2.addEventListener('click', function () {
-//       conteudo1.style.display = 'block'; 
-//       conteudo2.style.display = 'none'; 
-  
-// });
-
-    const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-    const cpuChart = new Chart(cpuCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Totem 1', 'Totem 4', 'Totem 6'],
-            datasets: [{
-                label: 'CPU',
-                data: [80, 50, 70],
-                backgroundColor: 'orange',
-                borderWidth: 1
-            }]
+  const cpuCtx = document.getElementById("cpuChart").getContext("2d");
+  const cpuChart = new Chart(cpuCtx, {
+    type: "bar",
+    data: {
+      labels: ["Totem 1", "Totem 4", "Totem 6"],
+      datasets: [
+        {
+          label: "CPU",
+          data: [80, 50, 70],
+          backgroundColor: "orange",
+          borderWidth: 1,
         },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        callback: function (value) {
-                            return value + '%';
-                        },
-                        color: 'white'
-                    },
-                    grid: {
-                        color: '#505050'
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        display: false
-                    }
-                }
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: function (value) {
+              return value + "%";
             },
-            plugins: {
-                legend: {
-                    labels: {
-                        color: 'white'
-                    }
-                }
-            }
-        }
-    });
-
-    // Gráfico de RAM
-    const ramCtx = document.getElementById('ramChart').getContext('2d');
-    const ramChart = new Chart(ramCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Totem 6', 'Totem 2', 'Totem 1'],
-            datasets: [{
-                label: 'RAM',
-                data: [60, 90, 70],
-                backgroundColor: 'red',
-                borderWidth: 1
-            }]
+            color: "white",
+          },
+          grid: {
+            color: "#505050",
+          },
         },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        callback: function (value) {
-                            return value + '%';
-                        },
-                        color: 'white'
-                    },
-                    grid: {
-                        color: '#505050'
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        display: false
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    labels: {
-                        color: 'white'
-                    }
-                }
-            }
-        }
-    });
-
-    // Gráfico com o ApexJs
-    var elemento = document.getElementById('grafico_doughnut');
-
-    var seriesData = [80, 32, 56]; // Dados da série
-
-    var options = {
-        series: seriesData,
-        chart: {
-            height: 400,
-            width: '100%',
-            type: 'radialBar',
+        x: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            display: false,
+          },
         },
-        plotOptions: {
-            radialBar: {
-                dataLabels: {
-                    name: {
-                        fontSize: '20px',
-                        color: 'white', // Cor do nome
-                    },
-                    value: {
-                        fontSize: '20px',
-                        color: 'white', // Cor do valor
-                    },
-                },
-                // Ajuste o tamanho das barras
-                track: {
-                    background: '#3e3e3e', // Cor do fundo do gráfico
-                    strokeWidth: '100%', // Largura do fundo
-                },
-                // Ajuste a largura das barras
-                hollow: {
-                    margin: 15, // Margem ao redor do centro (hollow)
-                    size: '45%', // Tamanho do espaço vazio no centro
-                },
-            },
-        },
-        labels: ['Totem 5', 'Totem 2', 'Totem 3'],
+      },
+      plugins: {
         legend: {
-            show: true,
-            floating: true,
-            position: 'left',
-            horizontalAlign: 'center',
-            verticalAlign: 'middle',
-            labels: {
-                colors: 'white', // Cor das labels
-            },
-            onItemClick: {
-                toggleDataSeries: false, // Desativa a funcionalidade de clicar nas labels
-            },
+          labels: {
+            color: "white",
+          },
         },
-        grid: {
-            padding: {
-                top: 10,
-                bottom: 10,
-                left: 140,
-            },
+      },
+    },
+  });
+
+  // Gráfico de RAM
+  const ramCtx = document.getElementById("ramChart").getContext("2d");
+  const ramChart = new Chart(ramCtx, {
+    type: "bar",
+    data: {
+      labels: ["Totem 6", "Totem 2", "Totem 1"],
+      datasets: [
+        {
+          label: "RAM",
+          data: [60, 90, 70],
+          backgroundColor: "red",
+          borderWidth: 1,
         },
-    };
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: function (value) {
+              return value + "%";
+            },
+            color: "white",
+          },
+          grid: {
+            color: "#505050",
+          },
+        },
+        x: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: "white",
+          },
+        },
+      },
+    },
+  });
 
-    var chart = new ApexCharts(elemento, options);
-    chart.render();
+  // Gráfico com o ApexJs
+  var elemento = document.getElementById("grafico_doughnut");
 
-    //------------------------------------------------//
+  var seriesData = [80, 32, 56]; // Dados da série
 
-    // Gráfico com o ApexJs da tela de Comparação
+  var options = {
+    series: seriesData,
+    chart: {
+      height: 400,
+      width: "100%",
+      type: "radialBar",
+    },
+    plotOptions: {
+      radialBar: {
+        dataLabels: {
+          name: {
+            fontSize: "20px",
+            color: "white", // Cor do nome
+          },
+          value: {
+            fontSize: "20px",
+            color: "white", // Cor do valor
+          },
+        },
+        // Ajuste o tamanho das barras
+        track: {
+          background: "#3e3e3e", // Cor do fundo do gráfico
+          strokeWidth: "100%", // Largura do fundo
+        },
+        // Ajuste a largura das barras
+        hollow: {
+          margin: 15, // Margem ao redor do centro (hollow)
+          size: "45%", // Tamanho do espaço vazio no centro
+        },
+      },
+    },
+    labels: ["Totem 5", "Totem 2", "Totem 3"],
+    legend: {
+      show: true,
+      floating: true,
+      position: "left",
+      horizontalAlign: "center",
+      verticalAlign: "middle",
+      labels: {
+        colors: "white", // Cor das labels
+      },
+      onItemClick: {
+        toggleDataSeries: false, // Desativa a funcionalidade de clicar nas labels
+      },
+    },
+    grid: {
+      padding: {
+        top: 10,
+        bottom: 10,
+        left: 140,
+      },
+    },
+  };
 
-    function plotarDg2(){
+  var chart = new ApexCharts(elemento, options);
+  chart.render();
 
-    const tt1Slct = document.getElementById('filial');
-    const tt2Slct = document.getElementById('filial2');  
+  //------------------------------------------------//
 
-    var elemento = document.getElementById('grafico_doughnut2');
+  // Gráfico com o ApexJs da tela de Comparação
+
+  function plotarDg2() {
+    const tt1Slct = document.getElementById("filial");
+    const tt2Slct = document.getElementById("filial2");
+
+    var elemento = document.getElementById("grafico_doughnut2");
 
     var seriesData = [80, 32]; // Dados da série
 
-    var label1 = "Totem "+ tt1Slct.value;
-    var label2 = "Totem "+ tt2Slct.value;
-
+    var label1 = "Totem " + tt1Slct.value;
+    var label2 = "Totem " + tt2Slct.value;
 
     var options = {
-        series: seriesData,
-        chart: {
-            height: 400,
-            width: '100%',
-            type: 'radialBar',
-        },
-        plotOptions: {
-            radialBar: {
-                dataLabels: {
-                    name: {
-                        fontSize: '20px',
-                        color: 'white', // Cor do nome
-                    },
-                    value: {
-                        fontSize: '20px',
-                        color: 'white', // Cor do valor
-                    },
-                },
-                // Ajuste o tamanho das barras
-                track: {
-                    background: '#3e3e3e', // Cor do fundo do gráfico
-                    strokeWidth: '100%', // Largura do fundo
-                },
-                // Ajuste a largura das barras
-                hollow: {
-                    margin: 15, // Margem ao redor do centro (hollow)
-                    size: '45%', // Tamanho do espaço vazio no centro
-                },
+      series: seriesData,
+      chart: {
+        height: 400,
+        width: "100%",
+        type: "radialBar",
+      },
+      plotOptions: {
+        radialBar: {
+          dataLabels: {
+            name: {
+              fontSize: "20px",
+              color: "white", // Cor do nome
             },
-        },
-        labels: [label1, label2],
-        legend: {
-            show: true,
-            floating: true,
-            position: 'left',
-            horizontalAlign: 'center',
-            verticalAlign: 'middle',
-            labels: {
-                colors: 'white', // Cor das labels
+            value: {
+              fontSize: "20px",
+              color: "white", // Cor do valor
             },
-            onItemClick: {
-                toggleDataSeries: false, // Desativa a funcionalidade de clicar nas labels
-            },
+          },
+          // Ajuste o tamanho das barras
+          track: {
+            background: "#3e3e3e", // Cor do fundo do gráfico
+            strokeWidth: "100%", // Largura do fundo
+          },
+          // Ajuste a largura das barras
+          hollow: {
+            margin: 15, // Margem ao redor do centro (hollow)
+            size: "45%", // Tamanho do espaço vazio no centro
+          },
         },
-        grid: {
-            padding: {
-                top: 10,
-                bottom: 10,
-                left: 140,
-            },
+      },
+      labels: [label1, label2],
+      legend: {
+        show: true,
+        floating: true,
+        position: "left",
+        horizontalAlign: "center",
+        verticalAlign: "middle",
+        labels: {
+          colors: "white", // Cor das labels
         },
+        onItemClick: {
+          toggleDataSeries: false, // Desativa a funcionalidade de clicar nas labels
+        },
+      },
+      grid: {
+        padding: {
+          top: 10,
+          bottom: 10,
+          left: 140,
+        },
+      },
     };
 
     var chart = new ApexCharts(elemento, options);
     chart.render();
-}
+  }
 
-    //------------------------------------------------//
+  //------------------------------------------------//
 
-
-    function plotarGFL2(){
-
-    var tt1Slct = document.getElementById('filial');
-    var tt2Slct = document.getElementById('filial2');  
+  function plotarGFL2() {
+    var tt1Slct = document.getElementById("filial");
+    var tt2Slct = document.getElementById("filial2");
 
     //graficoLinha2
 
@@ -628,442 +607,376 @@ function comparar(){
     var lbgfl2 = "T" + tt2Slct.value;
 
     const data3 = {
-        labels: [
-            '0',
-            '5',
-            '10',
-            '15',
-            '20',
-            '25',
-            '30'
-        ],
-        datasets: [
-            {
-                label: lbgfl,
-                data: [75, 69, 80, 66, 46],
-                borderColor: '#FF914D',
-                backgroundColor: '#FF914D'
-            },
-            {
-                label: lbgfl2,
-                data: [62, 54, 66, 53, 68],
-                borderColor: '#FF3131',
-                backgroundColor: '#FF3131'
-            }
-        ]
+      labels: ["0", "5", "10", "15", "20", "25", "30"],
+      datasets: [
+        {
+          label: lbgfl,
+          data: [75, 69, 80, 66, 46],
+          borderColor: "#FF914D",
+          backgroundColor: "#FF914D",
+        },
+        {
+          label: lbgfl2,
+          data: [62, 54, 66, 53, 68],
+          borderColor: "#FF3131",
+          backgroundColor: "#FF3131",
+        },
+      ],
     };
     const config3 = {
-        type: 'line',
-        data: data3,
-        options: {
-            plugins: {
-                legend: {
-                    display: true,
-                    color: 'white',
-                    labels: {
-                        color: 'white'
-                    }
-                }
+      type: "line",
+      data: data3,
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            color: "white",
+            labels: {
+              color: "white",
             },
-            scales: {
-                y: {
-                    min: 0,
-                    max: 100,
-                    grid: {
-                        color: '#9A9A9A'
-                    },
-                    ticks: {
-                        color: 'white',
-                        callback: function (value, index, values) {
-                            return `${value}%`;
-                        }
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Dia',
-                        color: 'white'
-                    }
-                }
-            }
-        }
-    };
-
-    let side_line = new Chart(
-        document.getElementById('graficoLinha2'),
-        config3
-    )
-
-    }
-
-    const labels = [
-        'Totem 1',
-        'Totem 2',
-        'Totem 3',
-        'Totem 4',
-        'Totem 5',
-        'Totem 6'
-    ];
-
-    const data2 = {
-        labels: labels,
-        datasets: [{
-            axis: 'x',
-            data: [17, 7, 13, 21, 5, 5],
-            fill: true,
-            backgroundColor: [
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418'
-            ]
-        }]
-    };
-
-    const config2 = {
-        type: 'bar',
-        data: data2,
-        options: {
-            indexAxis: 'y',
-            plugins: {
-                legend: {
-                    display: false
-                }
+          },
+        },
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            grid: {
+              color: "#9A9A9A",
             },
-            scales: {
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        color: '#505050'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        }
-    };
-
-    let side_bar = new Chart(
-        document.getElementById('grafico2'),
-        config2
-    )
-
-    // // GAUGE PRR
-
-    // const dataGauge = {
-    //   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-    //   datasets: [{
-    //     label: 'Weekly Sales',
-    //     data: [10, 12, 6, 9, 10, 5],
-    //     backgroundColor: [
-    //       'rgba(0, 255, 0, 0.2)',    
-    //       'rgba(173, 255, 47, 0.2)', 
-    //       'rgba(255, 255, 0, 0.2)',  
-    //       'rgba(255, 165, 0, 0.2)',  
-    //       'rgba(255, 69, 0, 0.2)',   
-    //       'rgba(255, 0, 0, 0.2)'    
-    //     ],
-    //     borderColor: [
-    //       'rgba(0, 255, 0, 1)',      
-    //       'rgba(173, 255, 47, 1)',   
-    //       'rgba(255, 255, 0, 1)',    
-    //       'rgba(255, 165, 0, 1)',    
-    //       'rgba(255, 0, 0, 1)',     
-    //       'rgba(139, 0, 0, 1)'      
-    //     ],
-    //           }]
-    // };
-
-
-    // const gaugeNeedle = {
-    //     id: 'gaugeNeedle',
-    //     afterDatasetsDraw(chart, args, plugins){
-    //         const {ctx, data} = chart;
-
-    //         ctx.save();
-    //         const xCenter = chart.getDatasetMeta(0).data[0].x;
-    //         const yCenter = chart.getDatasetMeta(0).data[0].y; 
-
-    //         const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius;
-    //         const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius;
-
-    //         const widthSlice = (outerRadius - innerRadius) / 3;
-    //         const radius = 14;
-    //         const angle = Math.PI / 180;
-
-    //         ctx.beginPath();
-
-    //         const needleValue = chart.config.options.needleValue;
-
-    //         const dataTotal = data.datasets[0].data.reduce((a, b) => 
-    //         a + b, 0);
-
-    //         console.log((chart.getDatasetMeta(0).data[0].circumference / Math.PI) / data.datasets[0].data[0] * needleValue )
-
-    //         const circumference = ((chart.getDatasetMeta(0).data[0].
-    //         circumference / Math.PI) / data.datasets[0].data[0]) * needleValue;
-
-
-    //         ctx.translate(xCenter, yCenter);
-    //         ctx.rotate(Math.PI * (circumference + 1.5) )
-
-    //         ctx.strokeStyle = "black";
-    //         ctx.fillStyle = "grey";
-    //         ctx.lineWidth = 0.5;
-    //         ctx.moveTo( 0 - 12, 0);
-    //         ctx.lineTo( 0, 0 - innerRadius - widthSlice);
-    //         ctx.lineTo( 0 + 12, 0);
-    //         ctx.closePath();
-    //         ctx.stroke();
-    //         ctx.fill();
-
-
-    //         ctx.beginPath();
-    //         ctx.arc(0, 0, radius, 0, angle * 360, false);
-    //         ctx.fill();
-    //         ctx.restore();
-    //     }
-    // }
-
-    // // gaugeFlowMeter
-    //  const gaugeFlowMeter = {
-    //     id: 'gaugeFlowMeter',
-    //     afterDatasetsDraw(chart, args, plugins){
-    //         const {ctx, data} = chart;
-
-    //         ctx.save();
-    //         const needleValue = chart.config.options.needleValue;
-    //         const xCenter = chart.getDatasetMeta(0).data[0].x;
-    //         const yCenter = chart.getDatasetMeta(0).data[0].y; 
-
-
-    //         const circumference = ((chart.getDatasetMeta(0).data[0].
-    //         circumference / Math.PI) / data.datasets[0].data[0]) * needleValue;
-
-    //         const percentegeValue = (circumference * 100).toFixed(1);
-
-    //         // FlowMeter
-    //         ctx.font = 'bold 20px sans-serif';
-    //         ctx.fillStyle = 'grey';
-    //         ctx.textAling = 'center'
-    //         ctx.fillText(`${percentegeValue}%`, xCenter -20, yCenter + 34)
-
-    //     }
-    //  }
-
-
-    //  const gaugeLabels = {
-    //     id: 'gaugeLabels',
-    //     afterDatasetsDraw(chart, args, plugins){
-    //         const {ctx, chartArea: {left, right}} = chart;
-    //         const xCenter = chart.getDatasetMeta(0).data[0].x;
-    //         const yCenter = chart.getDatasetMeta(0).data[0].y;
-
-    //         const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius;
-    //         const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius;
-    //         const widthSlice = (outerRadius - innerRadius) / 2;
-
-
-    //         ctx.translate(xCenter, yCenter);
-    //         ctx.font = 'bold 15px sans-serif';
-    //         ctx.fillStyle = 'white';
-    //         ctx.textAling = 'center'
-    //         ctx.fillText('Bom', -8 - innerRadius - widthSlice, 0 + 20);
-    //         ctx.fillText('Perigo', -31 + innerRadius + widthSlice, 0 + 20);
-
-    //         ctx.restore()
-    //     }
-    //  }
-
-    // // config 
-    // const configGauge = {
-    //   type: 'doughnut',
-    //   data: dataGauge,
-    //   options: {
-    //         leyout:{
-    //             padding:{
-    //                 bottom: 50
-    //             },
-    //         },
-    //     circumference: 180,
-    //     rotation: 270,
-    //     cutout: '70%',
-    //     aspectRatio: 1.3,
-    //     needleValue: 24,  // Não definam esse valor aqui para um numero maior que 52
-    //     plugins: {
-    //         legend:{
-    //             display: false
-    //         },        
-    //         tooltip: {
-    //             enabled: false
-    //         }
-    //     }
-
-    //   },
-    //   plugins: [gaugeNeedle, gaugeFlowMeter, gaugeLabels] 
-    // };
-
-
-    // render init block
-    // const myChart = new Chart(
-    //   document.getElementById('myChart'),
-    //   configGauge
-    // );
-
-    //---------------Gráfico de barra 1 da tela 2------------------------//
-
-    const labels4 = [
-        '5',
-        '10',
-        '15',
-        '20',
-        '25',
-        '30'
-    ];
-
-    const data4 = {
-        labels: labels4,
-        datasets: [{
-            axis: 'y',
-            data: [13, 5, 17, 19, 10, 8],
-            fill: true,
-            backgroundColor: [
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418'
-            ]
-        }]
-    };
-
-    const config4 = {
-        type: 'bar',
-        data: data4,
-        options: {
-            indexAxis: 'x',
-            plugins: {
-                legend: {
-                    display: false
-                }
+            ticks: {
+              color: "white",
+              callback: function (value, index, values) {
+                return `${value}%`;
+              },
             },
-            scales: {
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        color: '#505050'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        }
-    };
-
-    let side_bar2 = new Chart(
-        document.getElementById('GfBar_Tela2'),
-        config4
-    )
-
-    //---------------Gráfico de barra 2 da tela 2------------------------//
-
-    const labels5 = [
-        '5',
-        '10',
-        '15',
-        '20',
-        '25',
-        '30'
-    ];
-
-    const data5 = {
-        labels: labels5,
-        datasets: [{
-            axis: 'y',
-            data: [17, 7, 33, 21, 17, 10],
-            fill: true,
-            backgroundColor: [
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418',
-                '#FFB418'
-            ]
-        }]
-    };
-
-    const config5 = {
-        type: 'bar',
-        data: data5,
-        options: {
-            indexAxis: 'x',
-            plugins: {
-                legend: {
-                    display: false
-                }
+          },
+          x: {
+            ticks: {
+              color: "white",
             },
-            scales: {
-                x: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        color: '#505050'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: 'white'
-                    },
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        }
+            title: {
+              display: true,
+              text: "Dia",
+              color: "white",
+            },
+          },
+        },
+      },
     };
 
-    let side_bar3 = new Chart(
-        document.getElementById('GfBar2_Tela2'),
-        config5
-    )
+    let side_line = new Chart(document.getElementById("graficoLinha2"), config3);
+  }
 
+  const labels = ["Totem 1", "Totem 2", "Totem 3", "Totem 4", "Totem 5", "Totem 6"];
 
-    window.onload = function () {
-        start();
-    };
+  const data2 = {
+    labels: labels,
+    datasets: [
+      {
+        axis: "x",
+        data: [17, 7, 13, 21, 5, 5],
+        fill: true,
+        backgroundColor: ["#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418"],
+      },
+    ],
+  };
 
-  
-//   ANO
+  const config2 = {
+    type: "bar",
+    data: data2,
+    options: {
+      indexAxis: "y",
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            color: "#505050",
+          },
+        },
+        y: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+    },
+  };
+
+  let side_bar = new Chart(document.getElementById("grafico2"), config2);
+
+  // // GAUGE PRR
+
+  // const dataGauge = {
+  //   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  //   datasets: [{
+  //     label: 'Weekly Sales',
+  //     data: [10, 12, 6, 9, 10, 5],
+  //     backgroundColor: [
+  //       'rgba(0, 255, 0, 0.2)',
+  //       'rgba(173, 255, 47, 0.2)',
+  //       'rgba(255, 255, 0, 0.2)',
+  //       'rgba(255, 165, 0, 0.2)',
+  //       'rgba(255, 69, 0, 0.2)',
+  //       'rgba(255, 0, 0, 0.2)'
+  //     ],
+  //     borderColor: [
+  //       'rgba(0, 255, 0, 1)',
+  //       'rgba(173, 255, 47, 1)',
+  //       'rgba(255, 255, 0, 1)',
+  //       'rgba(255, 165, 0, 1)',
+  //       'rgba(255, 0, 0, 1)',
+  //       'rgba(139, 0, 0, 1)'
+  //     ],
+  //           }]
+  // };
+
+  // const gaugeNeedle = {
+  //     id: 'gaugeNeedle',
+  //     afterDatasetsDraw(chart, args, plugins){
+  //         const {ctx, data} = chart;
+
+  //         ctx.save();
+  //         const xCenter = chart.getDatasetMeta(0).data[0].x;
+  //         const yCenter = chart.getDatasetMeta(0).data[0].y;
+
+  //         const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius;
+  //         const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius;
+
+  //         const widthSlice = (outerRadius - innerRadius) / 3;
+  //         const radius = 14;
+  //         const angle = Math.PI / 180;
+
+  //         ctx.beginPath();
+
+  //         const needleValue = chart.config.options.needleValue;
+
+  //         const dataTotal = data.datasets[0].data.reduce((a, b) =>
+  //         a + b, 0);
+
+  //         console.log((chart.getDatasetMeta(0).data[0].circumference / Math.PI) / data.datasets[0].data[0] * needleValue )
+
+  //         const circumference = ((chart.getDatasetMeta(0).data[0].
+  //         circumference / Math.PI) / data.datasets[0].data[0]) * needleValue;
+
+  //         ctx.translate(xCenter, yCenter);
+  //         ctx.rotate(Math.PI * (circumference + 1.5) )
+
+  //         ctx.strokeStyle = "black";
+  //         ctx.fillStyle = "grey";
+  //         ctx.lineWidth = 0.5;
+  //         ctx.moveTo( 0 - 12, 0);
+  //         ctx.lineTo( 0, 0 - innerRadius - widthSlice);
+  //         ctx.lineTo( 0 + 12, 0);
+  //         ctx.closePath();
+  //         ctx.stroke();
+  //         ctx.fill();
+
+  //         ctx.beginPath();
+  //         ctx.arc(0, 0, radius, 0, angle * 360, false);
+  //         ctx.fill();
+  //         ctx.restore();
+  //     }
+  // }
+
+  // // gaugeFlowMeter
+  //  const gaugeFlowMeter = {
+  //     id: 'gaugeFlowMeter',
+  //     afterDatasetsDraw(chart, args, plugins){
+  //         const {ctx, data} = chart;
+
+  //         ctx.save();
+  //         const needleValue = chart.config.options.needleValue;
+  //         const xCenter = chart.getDatasetMeta(0).data[0].x;
+  //         const yCenter = chart.getDatasetMeta(0).data[0].y;
+
+  //         const circumference = ((chart.getDatasetMeta(0).data[0].
+  //         circumference / Math.PI) / data.datasets[0].data[0]) * needleValue;
+
+  //         const percentegeValue = (circumference * 100).toFixed(1);
+
+  //         // FlowMeter
+  //         ctx.font = 'bold 20px sans-serif';
+  //         ctx.fillStyle = 'grey';
+  //         ctx.textAling = 'center'
+  //         ctx.fillText(`${percentegeValue}%`, xCenter -20, yCenter + 34)
+
+  //     }
+  //  }
+
+  //  const gaugeLabels = {
+  //     id: 'gaugeLabels',
+  //     afterDatasetsDraw(chart, args, plugins){
+  //         const {ctx, chartArea: {left, right}} = chart;
+  //         const xCenter = chart.getDatasetMeta(0).data[0].x;
+  //         const yCenter = chart.getDatasetMeta(0).data[0].y;
+
+  //         const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius;
+  //         const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius;
+  //         const widthSlice = (outerRadius - innerRadius) / 2;
+
+  //         ctx.translate(xCenter, yCenter);
+  //         ctx.font = 'bold 15px sans-serif';
+  //         ctx.fillStyle = 'white';
+  //         ctx.textAling = 'center'
+  //         ctx.fillText('Bom', -8 - innerRadius - widthSlice, 0 + 20);
+  //         ctx.fillText('Perigo', -31 + innerRadius + widthSlice, 0 + 20);
+
+  //         ctx.restore()
+  //     }
+  //  }
+
+  // // config
+  // const configGauge = {
+  //   type: 'doughnut',
+  //   data: dataGauge,
+  //   options: {
+  //         leyout:{
+  //             padding:{
+  //                 bottom: 50
+  //             },
+  //         },
+  //     circumference: 180,
+  //     rotation: 270,
+  //     cutout: '70%',
+  //     aspectRatio: 1.3,
+  //     needleValue: 24,  // Não definam esse valor aqui para um numero maior que 52
+  //     plugins: {
+  //         legend:{
+  //             display: false
+  //         },
+  //         tooltip: {
+  //             enabled: false
+  //         }
+  //     }
+
+  //   },
+  //   plugins: [gaugeNeedle, gaugeFlowMeter, gaugeLabels]
+  // };
+
+  // render init block
+  // const myChart = new Chart(
+  //   document.getElementById('myChart'),
+  //   configGauge
+  // );
+
+  //---------------Gráfico de barra 1 da tela 2------------------------//
+
+  const labels4 = ["5", "10", "15", "20", "25", "30"];
+
+  const data4 = {
+    labels: labels4,
+    datasets: [
+      {
+        axis: "y",
+        data: [13, 5, 17, 19, 10, 8],
+        fill: true,
+        backgroundColor: ["#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418"],
+      },
+    ],
+  };
+
+  const config4 = {
+    type: "bar",
+    data: data4,
+    options: {
+      indexAxis: "x",
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            color: "#505050",
+          },
+        },
+        y: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+    },
+  };
+
+  let side_bar2 = new Chart(document.getElementById("GfBar_Tela2"), config4);
+
+  //---------------Gráfico de barra 2 da tela 2------------------------//
+
+  const labels5 = ["5", "10", "15", "20", "25", "30"];
+
+  const data5 = {
+    labels: labels5,
+    datasets: [
+      {
+        axis: "y",
+        data: [17, 7, 33, 21, 17, 10],
+        fill: true,
+        backgroundColor: ["#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418", "#FFB418"],
+      },
+    ],
+  };
+
+  const config5 = {
+    type: "bar",
+    data: data5,
+    options: {
+      indexAxis: "x",
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            color: "#505050",
+          },
+        },
+        y: {
+          ticks: {
+            color: "white",
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+    },
+  };
+
+  let side_bar3 = new Chart(document.getElementById("GfBar2_Tela2"), config5);
+
+  window.onload = function () {
+    start();
+  };
+
+  //   ANO
   let sliderAno = document.getElementById("ano");
 
   let selectAno = document.getElementById("select-ano");
-  selectAno.style.display = 'none'
-  
+  selectAno.style.display = "none";
+
   let sliderOne = document.getElementById("slider-1");
   let sliderTwo = document.getElementById("slider-2");
   let displayValOne = document.getElementById("range1");
@@ -1071,100 +984,94 @@ function comparar(){
   let minGap = 1;
   let sliderTrack = document.querySelector(".slider-track");
   let sliderMaxValue = document.getElementById("slider-1").max;
-  
-  function start(){
 
-      sliderOneM.disabled = true;
-      sliderTwoM.disabled = true;
+  function start() {
+    sliderOneM.disabled = true;
+    sliderTwoM.disabled = true;
 
-      sliderOneS.disabled = true;
-      sliderTwoS.disabled = true;
+    sliderOneS.disabled = true;
+    sliderTwoS.disabled = true;
 
-      sliderOne.disabled = true;
-      sliderTwo.disabled = true;
+    sliderOne.disabled = true;
+    sliderTwo.disabled = true;
 
-      sliderOneM.value = 1;
-      sliderTwoM.value = 31;
+    sliderOneM.value = 1;
+    sliderTwoM.value = 31;
 
-      sliderOneS.value = 1;
-      sliderTwoS.value = 7;
+    sliderOneS.value = 1;
+    sliderTwoS.value = 7;
 
-      sliderOne.value = 1;
-      sliderTwo.value = 12;
+    sliderOne.value = 1;
+    sliderTwo.value = 12;
 
-      sliderOne.style.opacity = '60%'
-      sliderTwo.style.opacity = '60%'
-      displayValOne.style.opacity = '50%'
-      displayValTwo.style.opacity = '50%'
-      sliderTrack.style.opacity = '10%'
-    
-      displayValOne.style.display = 'none'
-      displayValTwo.style.display = 'none'
+    sliderOne.style.opacity = "60%";
+    sliderTwo.style.opacity = "60%";
+    displayValOne.style.opacity = "50%";
+    displayValTwo.style.opacity = "50%";
+    sliderTrack.style.opacity = "10%";
 
+    displayValOne.style.display = "none";
+    displayValTwo.style.display = "none";
 
-      sliderOneM.style.opacity = '60%'
-      sliderTwoM.style.opacity = '60%'
-      displayValOneM.style.opacity = '50%'
-      displayValTwoM.style.opacity = '50%'
-      sliderTrackM.style.opacity = '10%'
-    
-      displayValOneM.style.display = 'none'
-      displayValTwoM.style.display = 'none'
+    sliderOneM.style.opacity = "60%";
+    sliderTwoM.style.opacity = "60%";
+    displayValOneM.style.opacity = "50%";
+    displayValTwoM.style.opacity = "50%";
+    sliderTrackM.style.opacity = "10%";
 
+    displayValOneM.style.display = "none";
+    displayValTwoM.style.display = "none";
 
-      sliderOneS.style.opacity = '60%'
-      sliderTwoS.style.opacity = '60%'
-      displayValOneS.style.opacity = '50%'
-      displayValTwoS.style.opacity = '50%'
-      sliderTrackS.style.opacity = '10%'
-    
-      displayValOneS.style.display = 'none'
-      displayValTwoS.style.display = 'none'
+    sliderOneS.style.opacity = "60%";
+    sliderTwoS.style.opacity = "60%";
+    displayValOneS.style.opacity = "50%";
+    displayValTwoS.style.opacity = "50%";
+    sliderTrackS.style.opacity = "10%";
 
-      slideOne(1);
-      slideTwo(1);
-      slideOne(2);
-      slideTwo(2);
-      slideOne(3);
-      slideTwo(3);
+    displayValOneS.style.display = "none";
+    displayValTwoS.style.display = "none";
 
-
+    slideOne(1);
+    slideTwo(1);
+    slideOne(2);
+    slideTwo(2);
+    slideOne(3);
+    slideTwo(3);
   }
 
-  function filtrar(){
-    if(selectMes.value == "voltar"){
-        selectPr.value = "#"
-        selectPr.style.display = 'flex'
-        selectMes.style.display = 'none'
-        selectMes.value = "setembro"
+  function filtrar() {
+    if (selectMes.value == "voltar") {
+      selectPr.value = "#";
+      selectPr.style.display = "flex";
+      selectMes.style.display = "none";
+      selectMes.value = "setembro";
 
-        start();
-    } else if(selectSemana.value == "voltar"){
-        selectPr.value = "#"
-        selectPr.style.display = 'flex'
-        
-        selectSemana.style.display = 'none'
-        selectSemana.value = 3
+      start();
+    } else if (selectSemana.value == "voltar") {
+      selectPr.value = "#";
+      selectPr.style.display = "flex";
 
-        start();
-    } else if(selectAno.value == "voltar"){
-        selectPr.value = "#"
-        selectPr.style.display = 'flex'
-        
-        selectAno.style.display = 'none'
-        selectAno.value = "2023"
+      selectSemana.style.display = "none";
+      selectSemana.value = 3;
 
-        start();
-    } 
+      start();
+    } else if (selectAno.value == "voltar") {
+      selectPr.value = "#";
+      selectPr.style.display = "flex";
+
+      selectAno.style.display = "none";
+      selectAno.value = "2023";
+
+      start();
+    }
   }
-
 
   // MÊS
   let selectMes = document.getElementById("select-mes");
-  selectMes.style.display = 'none'
-  
+  selectMes.style.display = "none";
+
   let sliderMes = document.getElementById("mes");
-  sliderMes.style.display = 'none'
+  sliderMes.style.display = "none";
 
   let sliderOneM = document.getElementById("slider-1M");
   let sliderTwoM = document.getElementById("slider-2M");
@@ -1175,10 +1082,10 @@ function comparar(){
 
   // SEMANA
   let selectSemana = document.getElementById("select-semana");
-  selectSemana.style.display = 'none'
+  selectSemana.style.display = "none";
 
   let sliderSemana = document.getElementById("semana");
-  sliderSemana.style.display = 'none'
+  sliderSemana.style.display = "none";
 
   let sliderOneS = document.getElementById("slider-1S");
   let sliderTwoS = document.getElementById("slider-2S");
@@ -1187,185 +1094,175 @@ function comparar(){
   let sliderTrackS = document.querySelector(".slider-trackS");
   let sliderMaxValueS = document.getElementById("slider-1S").max;
 
-
-
-
   let selectPr = document.getElementById("opts-select");
 
-  function aparecer(){
-    sliderOne.style.opacity = '100%'
-    sliderTwo.style.opacity = '100%'
-    displayValOne.style.opacity = '100%'
-    displayValTwo.style.opacity = '100%'
-    sliderTrack.style.opacity = '100%'
+  function aparecer() {
+    sliderOne.style.opacity = "100%";
+    sliderTwo.style.opacity = "100%";
+    displayValOne.style.opacity = "100%";
+    displayValTwo.style.opacity = "100%";
+    sliderTrack.style.opacity = "100%";
 
-    sliderOneM.style.opacity = '100%'
-    sliderTwoM.style.opacity = '100%'
-    displayValOneM.style.opacity = '100%'
-    displayValTwoM.style.opacity = '100%'
-    sliderTrackM.style.opacity = '100%'
+    sliderOneM.style.opacity = "100%";
+    sliderTwoM.style.opacity = "100%";
+    displayValOneM.style.opacity = "100%";
+    displayValTwoM.style.opacity = "100%";
+    sliderTrackM.style.opacity = "100%";
 
-    sliderOneS.style.opacity = '100%'
-    sliderTwoS.style.opacity = '100%'
-    displayValOneS.style.opacity = '100%'
-    displayValTwoS.style.opacity = '100%'
-    sliderTrackS.style.opacity = '100%'
+    sliderOneS.style.opacity = "100%";
+    sliderTwoS.style.opacity = "100%";
+    displayValOneS.style.opacity = "100%";
+    displayValTwoS.style.opacity = "100%";
+    sliderTrackS.style.opacity = "100%";
 
-    
-    if (selectPr.value == "ano"){
-        sliderMes.style.display = 'none'
-        sliderSemana.style.display = 'none'
-        sliderAno.style.display = 'flex'
+    if (selectPr.value == "ano") {
+      sliderMes.style.display = "none";
+      sliderSemana.style.display = "none";
+      sliderAno.style.display = "flex";
 
-        sliderOne.disabled = false;
-        sliderTwo.disabled = false;
+      sliderOne.disabled = false;
+      sliderTwo.disabled = false;
 
-        displayValOne.style.display = 'flex'
-        displayValTwo.style.display = 'flex'
+      displayValOne.style.display = "flex";
+      displayValTwo.style.display = "flex";
 
-        selectAno.style.display = 'flex'
-        selectPr.style.display = 'none'
+      selectAno.style.display = "flex";
+      selectPr.style.display = "none";
+    } else if (selectPr.value == "mes") {
+      sliderMes.style.display = "flex";
+      sliderSemana.style.display = "none";
+      sliderAno.style.display = "none";
 
-    } else if (selectPr.value == "mes"){
-        sliderMes.style.display = 'flex'
-        sliderSemana.style.display = 'none'
-        sliderAno.style.display = 'none'
+      sliderOneM.disabled = false;
+      sliderTwoM.disabled = false;
 
-        sliderOneM.disabled = false;
-        sliderTwoM.disabled = false;
-        
-        displayValOneM.style.display = 'flex'
-        displayValTwoM.style.display = 'flex'
+      displayValOneM.style.display = "flex";
+      displayValTwoM.style.display = "flex";
 
-        selectMes.style.display = 'flex'
-        selectPr.style.display = 'none'
+      selectMes.style.display = "flex";
+      selectPr.style.display = "none";
+    } else if (selectPr.value == "semana") {
+      sliderMes.style.display = "none";
+      sliderAno.style.display = "none";
+      sliderSemana.style.display = "flex";
 
-    } else if (selectPr.value == "semana"){
-        sliderMes.style.display = 'none'
-        sliderAno.style.display = 'none'
-        sliderSemana.style.display = 'flex'
+      sliderOneS.disabled = false;
+      sliderTwoS.disabled = false;
 
-        sliderOneS.disabled = false;
-        sliderTwoS.disabled = false;
-        
-        displayValOneS.style.display = 'flex'
-        displayValTwoS.style.display = 'flex'
+      displayValOneS.style.display = "flex";
+      displayValTwoS.style.display = "flex";
 
-        selectSemana.style.display = 'flex'
-        selectPr.style.display = 'none'
+      selectSemana.style.display = "flex";
+      selectPr.style.display = "none";
     }
-
   }
 
   function slideOne(param) {
-    if(param == 1){
-        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-          sliderOne.value = parseInt(sliderTwo.value) - minGap;
-        }
-        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-        // else displayValOne.textContent = sliderOne.value + ':00 ';
-        if (sliderOne.value == 1) displayValOne.textContent = 'Jan'
-        else if (sliderOne.value == 2) displayValOne.textContent = 'Fev'
-        else if (sliderOne.value == 3) displayValOne.textContent = 'Mar'
-        else if (sliderOne.value == 4) displayValOne.textContent = 'Abr'
-        else if (sliderOne.value == 5) displayValOne.textContent = 'Mai'
-        else if (sliderOne.value == 6) displayValOne.textContent = 'Jun'
-        else if (sliderOne.value == 7) displayValOne.textContent = 'Jul'
-        else if (sliderOne.value == 8) displayValOne.textContent = 'Ago'
-        else if (sliderOne.value == 9) displayValOne.textContent = 'Set'
-        else if (sliderOne.value == 10) displayValOne.textContent = 'Out'
-        else if (sliderOne.value == 11) displayValOne.textContent = 'Nov'
-        else if (sliderOne.value == 12) displayValOne.textContent = 'Dez'
-        fillColor(1);
+    if (param == 1) {
+      if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+        sliderOne.value = parseInt(sliderTwo.value) - minGap;
+      }
+      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+      // else displayValOne.textContent = sliderOne.value + ':00 ';
+      if (sliderOne.value == 1) displayValOne.textContent = "Jan";
+      else if (sliderOne.value == 2) displayValOne.textContent = "Fev";
+      else if (sliderOne.value == 3) displayValOne.textContent = "Mar";
+      else if (sliderOne.value == 4) displayValOne.textContent = "Abr";
+      else if (sliderOne.value == 5) displayValOne.textContent = "Mai";
+      else if (sliderOne.value == 6) displayValOne.textContent = "Jun";
+      else if (sliderOne.value == 7) displayValOne.textContent = "Jul";
+      else if (sliderOne.value == 8) displayValOne.textContent = "Ago";
+      else if (sliderOne.value == 9) displayValOne.textContent = "Set";
+      else if (sliderOne.value == 10) displayValOne.textContent = "Out";
+      else if (sliderOne.value == 11) displayValOne.textContent = "Nov";
+      else if (sliderOne.value == 12) displayValOne.textContent = "Dez";
+      fillColor(1);
+    } else if (param == 2) {
+      if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
+        sliderOneM.value = parseInt(sliderTwoM.value) - minGap;
+      }
+      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+      // else displayValOne.textContent = sliderOne.value + ':00 ';
+      displayValOneM.textContent = sliderOneM.value;
 
-    } else if(param == 2){
-        if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
-          sliderOneM.value = parseInt(sliderTwoM.value) - minGap;
-        }
-        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-        // else displayValOne.textContent = sliderOne.value + ':00 ';
-        displayValOneM.textContent = sliderOneM.value
-        
-        fillColor(2);
-    } else if(param == 3){
-        if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
-          sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
-        }
-        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-        // else displayValOne.textContent = sliderOne.value + ':00 ';
-        if (sliderOneS.value == 1) displayValOneS.textContent = 'Seg'
-        else if (sliderOneS.value == 2) displayValOneS.textContent = 'Ter'
-        else if (sliderOneS.value == 3) displayValOneS.textContent = 'Qua'
-        else if (sliderOneS.value == 4) displayValOneS.textContent = 'Qui'
-        else if (sliderOneS.value == 5) displayValOneS.textContent = 'Sex'
-        else if (sliderOneS.value == 6) displayValOneS.textContent = 'Sab'
-        else if (sliderOneS.value == 7) displayValOneS.textContent = 'Dom'
-        
-        fillColor(3);
+      fillColor(2);
+    } else if (param == 3) {
+      if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
+        sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
+      }
+      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+      // else displayValOne.textContent = sliderOne.value + ':00 ';
+      if (sliderOneS.value == 1) displayValOneS.textContent = "Seg";
+      else if (sliderOneS.value == 2) displayValOneS.textContent = "Ter";
+      else if (sliderOneS.value == 3) displayValOneS.textContent = "Qua";
+      else if (sliderOneS.value == 4) displayValOneS.textContent = "Qui";
+      else if (sliderOneS.value == 5) displayValOneS.textContent = "Sex";
+      else if (sliderOneS.value == 6) displayValOneS.textContent = "Sab";
+      else if (sliderOneS.value == 7) displayValOneS.textContent = "Dom";
+
+      fillColor(3);
     }
   }
 
   function slideTwo(param) {
-    if (param == 1){
-        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-          sliderTwo.value = parseInt(sliderOne.value) + minGap;
-        }
-        // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
-        // else displayValTwo.textContent = sliderTwo.value + ':00';
-        if (sliderTwo.value == 1) displayValTwo.textContent = 'Jan'
-        else if (sliderTwo.value == 2) displayValTwo.textContent = 'Fev'
-        else if (sliderTwo.value == 3) displayValTwo.textContent = 'Mar'
-        else if (sliderTwo.value == 4) displayValTwo.textContent = 'Abr'
-        else if (sliderTwo.value == 5) displayValTwo.textContent = 'Mai'
-        else if (sliderTwo.value == 6) displayValTwo.textContent = 'Jun'
-        else if (sliderTwo.value == 7) displayValTwo.textContent = 'Jul'
-        else if (sliderTwo.value == 8) displayValTwo.textContent = 'Ago'
-        else if (sliderTwo.value == 9) displayValTwo.textContent = 'Set'
-        else if (sliderTwo.value == 10) displayValTwo.textContent = 'Out'
-        else if (sliderTwo.value == 11) displayValTwo.textContent = 'Nov'
-        else if (sliderTwo.value == 12) displayValTwo.textContent = 'Dez'
-        fillColor(1);
-    }
-    else if (param == 2){
-        if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
-          sliderTwoM.value = parseInt(sliderOneM.value) + minGap;
-        }
-        // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
-        // else displayValTwo.textContent = sliderTwo.value + ':00';
-        displayValTwoM.textContent = sliderTwoM.value
-        
-        fillColor(2);
-    } else if(param == 3){
-        if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
-          sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
-        }
-        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-        // else displayValOne.textContent = sliderOne.value + ':00 ';
-        if (sliderTwoS.value == 1) displayValTwoS.textContent = 'Seg'
-        else if (sliderTwoS.value == 2) displayValTwoS.textContent = 'Ter'
-        else if (sliderTwoS.value == 3) displayValTwoS.textContent = 'Qua'
-        else if (sliderTwoS.value == 4) displayValTwoS.textContent = 'Qui'
-        else if (sliderTwoS.value == 5) displayValTwoS.textContent = 'Sex'
-        else if (sliderTwoS.value == 6) displayValTwoS.textContent = 'Sab'
-        else if (sliderTwoS.value == 7) displayValTwoS.textContent = 'Dom'
-        
-        fillColor(3);
+    if (param == 1) {
+      if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+        sliderTwo.value = parseInt(sliderOne.value) + minGap;
+      }
+      // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+      // else displayValTwo.textContent = sliderTwo.value + ':00';
+      if (sliderTwo.value == 1) displayValTwo.textContent = "Jan";
+      else if (sliderTwo.value == 2) displayValTwo.textContent = "Fev";
+      else if (sliderTwo.value == 3) displayValTwo.textContent = "Mar";
+      else if (sliderTwo.value == 4) displayValTwo.textContent = "Abr";
+      else if (sliderTwo.value == 5) displayValTwo.textContent = "Mai";
+      else if (sliderTwo.value == 6) displayValTwo.textContent = "Jun";
+      else if (sliderTwo.value == 7) displayValTwo.textContent = "Jul";
+      else if (sliderTwo.value == 8) displayValTwo.textContent = "Ago";
+      else if (sliderTwo.value == 9) displayValTwo.textContent = "Set";
+      else if (sliderTwo.value == 10) displayValTwo.textContent = "Out";
+      else if (sliderTwo.value == 11) displayValTwo.textContent = "Nov";
+      else if (sliderTwo.value == 12) displayValTwo.textContent = "Dez";
+      fillColor(1);
+    } else if (param == 2) {
+      if (parseInt(sliderTwoM.value) - parseInt(sliderOneM.value) <= minGap) {
+        sliderTwoM.value = parseInt(sliderOneM.value) + minGap;
+      }
+      // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+      // else displayValTwo.textContent = sliderTwo.value + ':00';
+      displayValTwoM.textContent = sliderTwoM.value;
+
+      fillColor(2);
+    } else if (param == 3) {
+      if (parseInt(sliderTwoS.value) - parseInt(sliderOneS.value) <= minGap) {
+        sliderOneS.value = parseInt(sliderTwoS.value) - minGap;
+      }
+      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+      // else displayValOne.textContent = sliderOne.value + ':00 ';
+      if (sliderTwoS.value == 1) displayValTwoS.textContent = "Seg";
+      else if (sliderTwoS.value == 2) displayValTwoS.textContent = "Ter";
+      else if (sliderTwoS.value == 3) displayValTwoS.textContent = "Qua";
+      else if (sliderTwoS.value == 4) displayValTwoS.textContent = "Qui";
+      else if (sliderTwoS.value == 5) displayValTwoS.textContent = "Sex";
+      else if (sliderTwoS.value == 6) displayValTwoS.textContent = "Sab";
+      else if (sliderTwoS.value == 7) displayValTwoS.textContent = "Dom";
+
+      fillColor(3);
     }
   }
   function fillColor(param) {
-    if (param == 1){
-        percent1 = (sliderOne.value / sliderMaxValue) * 100;
-        percent2 = (sliderTwo.value / sliderMaxValue) * 100;
-        sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
-    } else if (param == 2){
-        percent1 = (sliderOneM.value / sliderMaxValueM) * 100;
-        percent2 = (sliderTwoM.value / sliderMaxValueM) * 100;
-        sliderTrackM.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
-    } else if (param == 3){
-        percent1 = (sliderOneS.value / sliderMaxValueS) * 100;
-        percent2 = (sliderTwoS.value / sliderMaxValueS) * 100;
-        sliderTrackS.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    if (param == 1) {
+      percent1 = (sliderOne.value / sliderMaxValue) * 100;
+      percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+      sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    } else if (param == 2) {
+      percent1 = (sliderOneM.value / sliderMaxValueM) * 100;
+      percent2 = (sliderTwoM.value / sliderMaxValueM) * 100;
+      sliderTrackM.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    } else if (param == 3) {
+      percent1 = (sliderOneS.value / sliderMaxValueS) * 100;
+      percent2 = (sliderTwoS.value / sliderMaxValueS) * 100;
+      sliderTrackS.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
     }
   }
-
-    </script>
+</script>

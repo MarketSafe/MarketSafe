@@ -26,6 +26,14 @@ public class CrawlerData {
     this.anoMes = anoMes;
   }
 
+  public Integer getAno() {
+    return Integer.parseInt(anoMes.toString().substring(0, 4));
+  }
+
+  public Integer getMes() {
+    return Integer.parseInt(anoMes.toString().substring(4));
+  }
+
   public String getPagRegiao() {
     return pagRegiao;
   }
