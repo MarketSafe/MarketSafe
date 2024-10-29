@@ -40,14 +40,17 @@ sudo apt install python3-venv -y
 python3 -m venv amb
 source amb/bin/activate
 
-# install python lib:
+# install python libs:
 pip install psutil boto3 atlassian-python-api mysql-connector-python python-dotenv
+deactivate
 
 # configuração das variáveis de ambiente do python:
-cd ~/MarketSafe/python
-cp .env.example .env
+# cd ~/MarketSafe/python
+# cp .env.example .env
 # inserir as credenciais (coloca um = no final de cada linha e insere os valores entre aspas duplas, sem espaços dos lados do igual)
 # nano .env
 
+# iniciar o servidor node:
+cd ~/MarketSafe/web-data-viz-main
 npm i
 npm start
