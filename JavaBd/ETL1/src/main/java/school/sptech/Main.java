@@ -23,7 +23,7 @@ public class Main implements RequestHandler<S3Event, String> {
   private final AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
 
   // Bucket de destino para o CSV gerado:
-  private static final String DESTINATION_BUCKET = "s3-trusted-mktsf";
+  private static final String DESTINATION_BUCKET = "trusted-mkts2";
 
   @Override
   public String handleRequest(S3Event s3Event, Context context) {
