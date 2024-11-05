@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarketSafe | Dashboard</title>
+    <link rel="stylesheet" href="./css/dash_gisele.css" />
+    <link rel="icon" href="css/icon.png" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <div class="div_logo">
+                <div class="logo">
+                    <img src="assets/img/Logo Self 2.png" alt="">
+                </div>
+                <div class="MKTS">
+                    <h1>MKTS</h1>
+                </div>
+            </div>
+            <div class="select_dash">
+                <h2>Dashboards</h2>
+            </div>
+            <div class="regiao-select">
+                <div class="analista">
+                    <h3>Analista</h3>
+                </div>
+                <div class="monitoramento">
+                    <p>Monitoramento</p> <i class='bx bx-show'></i>
+                </div>
+                <div class="monitoramento">
+                    <p>Histórico</p> <i class='bx bx-file-blank'></i>
+                </div>
+                <div class="monitoramento">
+                    <p>BenchMark</p> <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+            </div>
+            <div class="linha">
+            </div>
+            <div class="perfil">
+                <div class="foto_perfil">
+                    <img src="css/foto-anilista.jpg" alt="">
+                </div>
+                <div class="nome_perfil">
+                    <div class="nome">
+                        <h2>Vitor</h2>
+                    </div>
+                    <hr>
+                    <div class="cargo">
+                        <p>Gerente</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashes-historico">
+            <div class="dashboard-title">Histórico de Monitoramento</div>
+            <div class="engloba-indicador">
+                <div class="status-container">
+                    <div class="fundo-status">
+                        <div class="alerta-status-title">Status de Performance da Filial</div>
+                        <div class="engloba-status">
+                            <div class="status-box critico">
+                                <div class="status-label">Crítico</div>
+                                <div class="status-numero">4</div>
+                            </div>
+                            <div class="status-box atencao">
+                                <div class="status-label">Atenção</div>
+                                <div class="status-numero">2</div>
+                            </div>
+                            <div class="status-box normal">
+                                <div class="status-label">Normal</div>
+                                <div class="status-numero">5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alerta-container">
+                    <div class="alerta-frequencia">
+                        <div class="alerta-frequencia-title">Frequência de Alertas por Bairro</div>
+                        <div class="word-cloud">
+                            <canvas id="canvas" width="250px" height="100px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fundo-grafico">
+                <div class="fundo-grafico-title">Tendência Diária de Alertas de Sobrecarga</div>
+                <div class="chart-area">
+                    <canvas id="barChart" width="550px" height="275px"></canvas>
+                    <select id="filial">
+                        <option value="">Selecione uma opção</option>
+                        <option value="1">Filial 1</option>
+                        <option value="2">Filial 2</option>
+                        <option value="2">Filial 3</option>
+                        <option value="2">Filial 4</option>
+                        <option value="2">Filial 5</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    const labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+    const data = {
+        labels: labels,
+        datasets: [{
+            axis: 'y',
+            label: 'Quantidade de Alerta ',
+            data: [22, 31, 29, 34, 45, 60, 56],
+            fill: false,
+            backgroundColor: [
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgb(255, 159, 64)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            indexAxis: 'x',
+            responsive: true,
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    const barChart = new Chart(
+        document.getElementById('barChart'),
+        config
+    );
+
+
+    // wordcloud
+    const bairros = [
+        "ÁguaRasa", "AltodePinheiros", "Anhanguera", "Aricanduva", "BarraFunda",
+        "BelaVista", "Butantã", "Cachoeirinha", "Cambuci",
+        "CampoBelo", "CampoGrande", "CampoLimpo", "CapãoRedondo", "Carrão", "CasaVerde",
+        "CidadeAdemar", "CidadeDutra", "CidadeLíder", "Consolação", "Iguatemi", "Ipiranga",
+        "ItaimBibi", "ItaimPaulista", "Itaquera", "Jabaquara", "Jaçanã", "Jaguara", "Jaguaré",
+        "Jaraguá", "JardimÂngela", "JardimHelena", "JardimPaulista", "JardimSãoLuís", "Lapa",
+        "Liberdade", "Moema", "Mooca", "Morumbi", "Parelheiros", "Pinheiros", "PonteRasa", "RaposoTavares",
+        "República", "Sacomã", "SantoAmaro", "Sé",
+        "Tatuapé", "Tucuruvi", "VilaAndrade", "VilaMariana",
+        "VilaPrudente", "VilaSônia"
+    ];
+    const colors = [
+        '#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FF8F33',
+        '#33FFD1', '#8D33FF', '#FFBD33', '#33FFF5', '#FF3333',
+        '#A533FF', '#FF8333', '#33FF75', '#333CFF', '#FF333E',
+        '#FF57F6', '#33FF83', '#5773FF', '#FFA533', '#57FF33'
+    ];
+
+    // Mapeando bairros para objetos com chave e valor
+    const words = bairros.map((bairro, index) => ({
+        key: bairro,
+        value: index % 10 + 10,  // Ajuste o valor conforme sua lógica desejada
+        color: colors[index % colors.length]
+    }));
+
+    // Configurando o gráfico de nuvem de palavras
+    const ctx = document.getElementById('canvas').getContext('2d');
+    new Chart(ctx, {
+        type: 'wordCloud',
+        data: {
+            labels: words.map(word => word.key),
+            datasets: [{
+                label: 'Qtd Alertas:',
+                data: words.map(word => word.value),
+                color: words.map(word => word.color)
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>
