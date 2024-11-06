@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="dashes">
-            <div class="icon" onclick="Alertas()">
+            <div class="icon" onclick="acionarAlertasENotificacao()">
                 <i class="fa-solid fa-triangle-exclamation"><span id="QtdAlertas"></span></i>
             </div>
             <div id="chart-timeline"></div>
@@ -122,15 +122,28 @@
                 </div>
                 <div class="totens">
                     <div class="totens-quantidade">
-                      <h3>Quantidade de Totens</h3>
-                      <span>7</span>
+                        <h3>Quantidade de Totens</h3>
+                        <span>7</span>
                     </div>
                     <div class="totens-problema">
-                      <h4>Nº de Totens com Problema</h4>
-                      <span>4</span>
+                        <h4>Nº de Totens com Problema</h4>
+                        <span>4</span>
                     </div>
-                  </div>
+                </div>
             </div>
+            <button class="button" onclick="notificacao(ErroMsg)">Teste Notificar</button>
+
+            <div class="notifi-box" id="box">
+                <h2>Alertas<span id="QtdAlertas2"></span></h2> <!--textinho dentro do alerta-->
+                <div class="notifi-item">
+                    <div class="text">
+                        <h4 id="Txt_totem">Totem 4</h4>
+                        <p>O Totem 4 deu problema</p>
+                    </div>
+                </div>
+            </div>
+            <div id="notify_box"></div>
+
         </div>
 
     </div>
@@ -188,16 +201,16 @@
         legend: {
             show: true,
         },
-        xaxis:{
-            labels:{
+        xaxis: {
+            labels: {
                 show: false
             }
         },
-        yaxis:{
-            labels:{
+        yaxis: {
+            labels: {
                 show: false
             },
-            title:{
+            title: {
                 text: ''
             }
         }
@@ -205,4 +218,61 @@
 
     var chart = new ApexCharts(document.querySelector("#chart-timeline"), options);
     chart.render();
+
+    //-------------- Alertas -----------------//
+
+    let notify_box = document.getElementById('notify_box');
+    let ErroMsg = '<i class="fa-solid fa-circle-exclamation"></i> Erro no Totem';
+
+    var QtdNotify = 0;
+    var QtdNotify2 = 0;
+    var contador = 0;
+
+    var box = document.getElementById('box');
+    var down = false;
+
+    function Alertas() {
+        if (down) {
+            box.style.height = '0px';
+            box.style.opacity = 0;
+            box.classList.remove('open'); // Remove a classe open imediatamente
+            down = false;
+        } else {
+            box.style.height = '510px';
+            box.style.opacity = 1;
+            setTimeout(function () {
+                box.classList.add('open'); // Adiciona a classe open após a animação de altura
+            }, 300); // Tempo deve coincidir com a duração da transição em CSS
+            down = true;
+        }
+
+    }
+
+    function notificacao(msg) {
+
+        let notify = document.createElement('div');
+        notify.classList.add('notify');
+        notify.innerHTML = msg;
+        notify_box.appendChild(notify);
+
+
+        setTimeout(() => {
+            notify.remove();
+        }, 5000);
+
+        for (i = 0; i <= contador; i++) {
+            QtdNotify++;
+            QtdNotify2++;
+            document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
+            document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
+            document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+        }
+
+    }
+
+    function acionarAlertasENotificacao() {
+        Alertas();
+        notificacao();
+    }
+
 </script>

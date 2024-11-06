@@ -377,3 +377,158 @@ th {
     background-color: #292A32;
     font-weight: bold;
 }
+
+
+/* CSS dos Alertas */
+/* Sla q merda colocar aqui */
+
+.icon{
+    display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+}
+
+.icon i{
+    display: flex;
+    flex-direction: row;
+    width: 7%;
+    color: tomato;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 30px;
+}
+.icon span{
+    font-size: 12px;
+    position: relative;
+    right: +7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 10px 10px 10px 10px;
+    width: 18%;
+    height: 15px;
+    align-items: center;
+}
+
+.notifi-box {
+	width: 300px;
+	height: 0px;
+    justify-content: center;
+	opacity: 0;
+    border-radius: 10px;
+	position: absolute;
+	top: 63px;
+	right: 35px;
+	transition: 300ms opacity, 1s height;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.notifi-box h2 {
+	font-size: 20px;
+	padding: 20px;
+    margin-right: 10px;
+    align-items: center;
+	border-bottom: 3px solid rgba(212, 81, 21, 0.533);
+	color: #999;
+}
+.notifi-box h2 span {
+	color: tomato;
+    margin-left: 10px;
+}
+.notifi-item {
+	display: flex;
+	border-bottom: 1px solid #3A3B47;
+	padding: 15px 5px;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+.notifi-item:hover {
+	background-color: #3A3B47;
+}
+.notifi-item img {
+	display: block;
+	width: 50px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+.notifi-item .text h4 {
+	color: #777;
+	font-size: 16px;
+	margin-top: 10px;
+}
+.notifi-item .text p {
+	color: #aaa;
+	font-size: 12px;
+}
+
+.notifi-box .notifi-item {
+    opacity: 0; /* Oculta os itens */
+    transition: opacity 0.3s ease; /* Transição suave */
+}
+
+/* Adiciona uma classe 'open' para tornar os itens visíveis */
+.notifi-box.open .notifi-item {
+    opacity: 1;
+}
+
+
+/* ------ Notificação ------ */
+
+#notify_box{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.notify{
+    width: 400px;
+    height: 80px;
+    background-color: #ECCBAE;
+    border-radius: 10px;
+    font-weight: 500;
+    margin: 15px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    position: relative;
+    transform: translateX(100%);
+    animation: moveleft 0.5s linear forwards;
+}
+
+@keyframes moveleft{
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.notify i{
+   margin:  0 20px;
+   font-size: 35px;
+   color: tomato; 
+}
+
+.notify::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: 1%;
+    margin-bottom: 0.2%;
+    border-radius: 0px 10px 10px 10px;
+    width: 100%;
+    height: 6px;
+    background: tomato;
+    animation: anim 5s linear forwards;
+}
+
+@keyframes anim {
+    100%{
+        width: 0;
+    }
+}
