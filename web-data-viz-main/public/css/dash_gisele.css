@@ -310,3 +310,36 @@ margin-top: 7px;
     /* border-style: none; */
 }
 
+table {
+    width: 45%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #cf804c;
+    color: white;
+}
+
+
+tr:hover {
+    background-color: #ddd;
+    color: #292935;
+}
+
+.ranking{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    flex-direction: column
+}
+
+.engloba-grafico{
+    display: flex;
+}
+

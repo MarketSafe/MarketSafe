@@ -81,29 +81,66 @@
                         </div>
                     </div>
                 </div>
-                <div class="alerta-container">
+
+                <div class="ranking">
+                    <h3 style="width: 100%; margin-left: 0%; margin-bottom: 1%; margin-top: 0%">3 Promoções com mais
+                        Alerta</h3>
+                    <table style="height: 100%">
+                        <tr>
+                            <th>Posição</th>
+                            <th>Promoções</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Carne</td>
+                            <td>20</td>
+                        </tr>
+                        <tr class="highlight">
+                            <td>2</td>
+                            <td>Bebidas</td>
+                            <td>16</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Frutas</td>
+                            <td>9</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- <div class="alerta-container">
                     <div class="alerta-frequencia">
                         <div class="alerta-frequencia-title">Frequência de Alertas por Bairro</div>
                         <div class="word-cloud">
                             <canvas id="canvas" width="373px" height="150px"></canvas>
                         </div>
                     </div>
+                </div> -->
+            </div>
+            <div class="engloba-grafico">
+
+
+                <div class="fundo-grafico">
+                    <div class="fundo-grafico-title">Tendência Diária de Alertas de Sobrecarga</div>
+                    <div class="chart-area">
+                        <canvas id="barChart" width="550px" height="275px"></canvas>
+                        <select id="filial">
+                            <option value="">Selecione uma opção</option>
+                            <option value="1">Filial 1</option>
+                            <option value="2">Filial 2</option>
+                            <option value="3">Filial 3</option>
+                            <option value="4">Filial 4</option>
+                            <option value="5">Filial 5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="fundo-grafico">
+                    <div class="grafico-pizza">
+                        <canvas id="pieChart" width="350px" height="225px"></canvas>
+                    </div>
                 </div>
             </div>
-            <div class="fundo-grafico">
-                <div class="fundo-grafico-title">Tendência Diária de Alertas de Sobrecarga</div>
-                <div class="chart-area">
-                    <canvas id="barChart" width="550px" height="275px"></canvas>
-                    <select id="filial">
-                        <option value="">Selecione uma opção</option>
-                        <option value="1">Filial 1</option>
-                        <option value="2">Filial 2</option>
-                        <option value="3">Filial 3</option>
-                        <option value="4">Filial 4</option>
-                        <option value="5">Filial 5</option>
-                    </select>
-                </div>
-            </div>
+
         </div>
     </div>
     </div>
@@ -114,113 +151,174 @@
 
 <script>
 
-function MudandoValoresDash() {
-    var selectOpcao = document.getElementById('filial').value;
+    function MudandoValoresDash() {
+        var selectOpcao = document.getElementById('filial').value;
 
-    if (selectOpcao === '1') {
-        barChart.data.datasets[0].data = [45, 68, 32, 34, 45, 60, 56];
-    } else if (selectOpcao === '2') {
-        barChart.data.datasets[0].data = [52, 35, 12, 34, 45, 60, 56];
-    } else if (selectOpcao === '3') {
-        barChart.data.datasets[0].data = [15, 28, 42, 34, 45, 60, 56];
-    } else if (selectOpcao === '4') {
-        barChart.data.datasets[0].data = [2, 8, 17, 34, 45, 32, 21];
-    } else if (selectOpcao === '5') {
-        barChart.data.datasets[0].data = [15, 28, 42, 34, 12, 21, 61];
-    }
-
-    // Atualizar o gráfico após mudar os valores
-    barChart.update();
-}
-
-const labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
-const data = {
-    labels: labels,
-    datasets: [{
-        axis: 'y',
-        label: 'Quantidade de Alerta ',
-        data: [0, 0, 0, 0, 0, 0, 0], 
-        fill: false,
-        backgroundColor: [
-            'rgba(255, 159, 64, 1)'
-        ],
-        borderColor: [
-            'rgb(255, 159, 64)'
-        ],
-        borderWidth: 1
-    }]
-};
-
-const config = {
-    type: 'bar',
-    data: data,
-    options: {
-        indexAxis: 'x',
-        responsive: true,
-        scales: {
-            x: {
-                beginAtZero: true
-            }
+        if (selectOpcao === '1') {
+            barChart.data.datasets[0].data = [45, 68, 32, 34, 45, 60, 56];
+            pieChart.data.datasets[0].data = [70, 30]; 
+        } else if (selectOpcao === '2') {
+            barChart.data.datasets[0].data = [52, 35, 12, 34, 45, 60, 56];
+            pieChart.data.datasets[0].data = [65, 35];
+        } else if (selectOpcao === '3') {
+            barChart.data.datasets[0].data = [15, 28, 42, 34, 45, 60, 56];
+            pieChart.data.datasets[0].data = [60, 40];
+        } else if (selectOpcao === '4') {
+            barChart.data.datasets[0].data = [2, 8, 17, 34, 45, 32, 21];
+            pieChart.data.datasets[0].data = [75, 25];
+        } else if (selectOpcao === '5') {
+            barChart.data.datasets[0].data = [15, 28, 42, 34, 12, 21, 61];
+            pieChart.data.datasets[0].data = [35, 65];
         }
+
+        barChart.update();
+        pieChart.update();
     }
-};
 
+    const labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+    const data = {
+        labels: labels,
+        datasets: [{
+            axis: 'y',
+            label: 'Quantidade de Alerta ',
+            data: [0, 0, 0, 0, 0, 0, 0],
+            fill: false,
+            backgroundColor: [
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgb(255, 159, 64)'
+            ],
+            borderWidth: 1
+        }]
+    };
 
-const barChart = new Chart(
-    document.getElementById('barChart'),
-    config
-);
-
-// Adicionar um event listener ao select para atualizar o gráfico quando o valor mudar
-document.getElementById('filial').addEventListener('change', MudandoValoresDash);
-
-
-
-    // wordcloud
-    const bairros = [
-        "ÁguaRasa", "AltodePinheiros", "Anhanguera", "Aricanduva", "BarraFunda",
-        "BelaVista", "Butantã", "Cachoeirinha", "Cambuci",
-        "CampoBelo", "CampoGrande", "CampoLimpo", "CapãoRedondo", "Carrão", "CasaVerde",
-        "CidadeAdemar", "CidadeDutra", "CidadeLíder", "Consolação", "Iguatemi", "Ipiranga",
-        "ItaimBibi", "ItaimPaulista", "Itaquera", "Jabaquara", "Jaçanã", "Jaguara", "Jaguaré",
-        "Jaraguá", "JardimÂngela", "JardimHelena", "JardimPaulista", "JardimSãoLuís", "Lapa",
-        "Liberdade", "Moema", "Mooca", "Morumbi", "Parelheiros", "Pinheiros", "PonteRasa", "RaposoTavares",
-        "República", "Sacomã", "SantoAmaro", "Sé",
-        "Tatuapé", "Tucuruvi", "VilaAndrade", "VilaMariana",
-        "VilaPrudente", "VilaSônia"
-    ];
-    const colors = [
-        '#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FF8F33',
-        '#33FFD1', '#8D33FF', '#FFBD33', '#33FFF5', '#FF3333',
-        '#A533FF', '#FF8333', '#33FF75', '#333CFF', '#FF333E',
-        '#FF57F6', '#33FF83', '#5773FF', '#FFA533', '#57FF33'
-    ];
-
-    // Mapeando bairros para objetos com chave e valor
-    const words = bairros.map((bairro, index) => ({
-        key: bairro,
-        value: index % 10 + 10,  // Ajuste o valor conforme sua lógica desejada
-        color: colors[index % colors.length]
-    }));
-
-    // Configurando o gráfico de nuvem de palavras
-    const ctx = document.getElementById('canvas').getContext('2d');
-    new Chart(ctx, {
-        type: 'wordCloud',
-        data: {
-            labels: words.map(word => word.key),
-            datasets: [{
-                label: 'Qtd Alertas:',
-                data: words.map(word => word.value),
-                color: words.map(word => word.color)
-            }]
-        },
+    const config = {
+        type: 'bar',
+        data: data,
         options: {
+            indexAxis: 'x',
+            responsive: true,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                }, y: {
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                }
+            },
             plugins: {
                 legend: {
-                    display: false
+                    labels: {
+                        color: 'white'
+                    }
                 }
             }
         }
-    });
+    };
+
+    const barChart = new Chart(
+        document.getElementById('barChart'),
+        config
+    );
+
+    // Configuração do gráfico de pizza
+    const pieData = {
+        labels: ['Processador', 'Memória Ram'],
+        datasets: [{
+            data: [0,0],
+            backgroundColor: [
+                'rgb(155, 17, 30)',
+                'rgb(5, 79, 119)'
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+    const pieConfig = {
+        type: 'pie',
+        data: pieData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        font: {
+                            size: 15
+                        },
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Uso por Filial (por Componente)',
+                    color: 'rgba(255, 255, 255, 1)',
+                    font: { size: 24 },
+                    padding: { bottom: 30 }
+                }
+            }
+        }
+    };
+
+    // Inicializando o gráfico de pizza
+    const pieChart = new Chart(
+        document.getElementById('pieChart'),
+        pieConfig
+    );
+
+    // Adiciona um event listener ao select para atualizar os gráficos quando o valor mudar
+    document.getElementById('filial').addEventListener('change', MudandoValoresDash);
+
+    // // wordcloud
+    // const bairros = [
+    //     "ÁguaRasa", "AltodePinheiros", "Anhanguera", "Aricanduva", "BarraFunda",
+    //     "BelaVista", "Butantã", "Cachoeirinha", "Cambuci",
+    //     "CampoBelo", "CampoGrande", "CampoLimpo", "CapãoRedondo", "Carrão", "CasaVerde",
+    //     "CidadeAdemar", "CidadeDutra", "CidadeLíder", "Consolação", "Iguatemi", "Ipiranga",
+    //     "ItaimBibi", "ItaimPaulista", "Itaquera", "Jabaquara", "Jaçanã", "Jaguara", "Jaguaré",
+    //     "Jaraguá", "JardimÂngela", "JardimHelena", "JardimPaulista", "JardimSãoLuís", "Lapa",
+    //     "Liberdade", "Moema", "Mooca", "Morumbi", "Parelheiros", "Pinheiros", "PonteRasa", "RaposoTavares",
+    //     "República", "Sacomã", "SantoAmaro", "Sé",
+    //     "Tatuapé", "Tucuruvi", "VilaAndrade", "VilaMariana",
+    //     "VilaPrudente", "VilaSônia"
+    // ];
+    // const colors = [
+    //     '#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FF8F33',
+    //     '#33FFD1', '#8D33FF', '#FFBD33', '#33FFF5', '#FF3333',
+    //     '#A533FF', '#FF8333', '#33FF75', '#333CFF', '#FF333E',
+    //     '#FF57F6', '#33FF83', '#5773FF', '#FFA533', '#57FF33'
+    // ];
+
+    // // Mapeando bairros para objetos com chave e valor
+    // const words = bairros.map((bairro, index) => ({
+    //     key: bairro,
+    //     value: index % 10 + 10,  // Ajuste o valor conforme sua lógica desejada
+    //     color: colors[index % colors.length]
+    // }));
+
+    // // Configurando o gráfico de nuvem de palavras
+    // const ctx = document.getElementById('canvas').getContext('2d');
+    // new Chart(ctx, {
+    //     type: 'wordCloud',
+    //     data: {
+    //         labels: words.map(word => word.key),
+    //         datasets: [{
+    //             label: 'Qtd Alertas:',
+    //             data: words.map(word => word.value),
+    //             color: words.map(word => word.color)
+    //         }]
+    //     },
+    //     options: {
+    //         plugins: {
+    //             legend: {
+    //                 display: false
+    //             }
+    //         }
+    //     }
+    // });
 </script>
