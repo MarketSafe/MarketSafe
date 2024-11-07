@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarketSafe | Dashboard</title>
+    <link rel="stylesheet" href="./css/dash_individual_Isaque.css" />
+    <link rel="icon" href="css/icon.png" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://kit.fontawesome.com/0b71632824.js" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <div class="div_logo">
+                <img src="assets/img/Logo Self 2.png" alt="">
+                <div class="MKTS">
+                    <h1>MKTS</h1>
+                </div>
+            </div>
+            <div class="select_dash">
+                <h2>Dashboards</h2>
+            </div>
+            <div class="regiao-select">
+                <div class="analista">
+                    <h3>Analista</h3>
+                </div>
+                <div class="monitoramento">
+                    <p>Monitoramento</p> <i class='bx bx-show'></i>
+                </div>
+                <div class="monitoramento">
+                    <p>Histórico</p> <i class='bx bx-file-blank'></i>
+                </div>
+                <div class="monitoramento">
+                    <p>BenchMark</p> <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+            </div>
+            <div class="linha">
+            </div>
+            <div class="perfil">
+                <div class="foto_perfil">
+                    <img src="css/foto-anilista.jpg" alt="">
+                </div>
+                <div class="nome_perfil">
+                    <div class="nome">
+                        <h2>Fred</h2>
+                    </div>
+                    <hr>
+                    <div class="cargo">
+                        <p>Analista</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashes">
+            <div class="icon" onclick="acionarAlertasENotificacao()">
+                <i class="fa-solid fa-triangle-exclamation"><span id="QtdAlertas"></span></i>
+            </div>
+            <div id="chart-timeline"></div>
+            <div class="bloco_monitoramento">
+                <div class="bloco1">
+                    <span class="span_bloco_monitoramento">Status</span>
+                    <div class="status">
+                        Normal
+                    </div>
+                </div>
+                <div class="bloco2">
+                    <span class="span_bloco_monitoramento">RAM</span>
+                    <div class="ram">
+                        85%
+                    </div>
+                </div>
+                <div class="bloco3">
+                    <span class="span_bloco_monitoramento">Atividade</span>
+                    <div class="tempo_ativo">
+                        03:27:30
+                    </div>
+                </div>
+                <div class="bloco4">
+                    <span class="span_bloco_monitoramento">Recomendado</span>
+                    <div class="recomendado">
+                        Reiniciar
+                    </div>
+                </div>
+
+            </div>
+            <div class="engloba_rank_qtdTotens">
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Posição</th>
+                                <th>Totem</th>
+                                <th>Qtd de Alertas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1º</td>
+                                <td>2</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>2º</td>
+                                <td>5</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>3º</td>
+                                <td>7</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="totens">
+                    <div class="totens-quantidade">
+                        <h3>Quantidade de Totens</h3>
+                        <span>7</span>
+                    </div>
+                    <div class="totens-problema">
+                        <h4>Nº de Totens com Problema</h4>
+                        <span>4</span>
+                    </div>
+                </div>
+            </div>
+            <button class="button" onclick="notificacao(ErroMsg)">Teste Notificar</button>
+
+            <div class="notifi-box" id="box">
+                <h2>Alertas<span id="QtdAlertas2"></span></h2> <!--textinho dentro do alerta-->
+                <div class="notifi-item">
+                    <div class="text">
+                        <h4 id="Txt_totem">Totem 4</h4>
+                        <p>O Totem 4 deu problema</p>
+                    </div>
+                </div>
+            </div>
+            <div id="notify_box"></div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    var options = {
+        series: [{
+            data: [
+                [Date.now() - 60000, 30.95],
+                [Date.now() - 50000, 31.34],
+                [Date.now() - 40000, 31.18],
+                [Date.now() - 30000, 31.05],
+                [Date.now() - 20000, 31.00],
+                [Date.now() - 10000, 30.95],
+                [Date.now(), 31.24]
+            ]
+        }],
+        chart: {
+            id: 'area-datetime',
+            type: 'area',
+            width: '75%',
+            height: 220,
+            toolbar: {
+                show: false,
+                tools: {
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: false,
+                }
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        tooltip: {
+            x: {
+                format: 'HH:mm:ss'
+            }
+        },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.9,
+                stops: [0, 100]
+            }
+        },
+        legend: {
+            show: true,
+        },
+        xaxis: {
+            labels: {
+                show: false
+            }
+        },
+        yaxis: {
+            labels: {
+                show: false
+            },
+            title: {
+                text: ''
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart-timeline"), options);
+    chart.render();
+
+    //-------------- Alertas -----------------//
+
+    let notify_box = document.getElementById('notify_box');
+    let ErroMsg = '<i class="fa-solid fa-circle-exclamation"></i> Erro no Totem';
+
+    var QtdNotify = 0;
+    var QtdNotify2 = 0;
+    var contador = 0;
+
+    var box = document.getElementById('box');
+    var down = false;
+
+    function Alertas() {
+        if (down) {
+            box.style.height = '0px';
+            box.style.opacity = 0;
+            box.classList.remove('open'); // Remove a classe open imediatamente
+            down = false;
+        } else {
+            box.style.height = '510px';
+            box.style.opacity = 1;
+            setTimeout(function () {
+                box.classList.add('open'); // Adiciona a classe open após a animação de altura
+            }, 300); // Tempo deve coincidir com a duração da transição em CSS
+            down = true;
+        }
+
+    }
+
+    function notificacao(msg) {
+
+        let notify = document.createElement('div');
+        notify.classList.add('notify');
+        notify.innerHTML = msg;
+        notify_box.appendChild(notify);
+
+
+        setTimeout(() => {
+            notify.remove();
+        }, 5000);
+
+        for (i = 0; i <= contador; i++) {
+            QtdNotify++;
+            QtdNotify2++;
+            document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
+            document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
+            document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+        }
+
+    }
+
+    function acionarAlertasENotificacao() {
+        Alertas();
+        notificacao();
+    }
+
+</script>

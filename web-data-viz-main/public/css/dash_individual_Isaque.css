@@ -1,0 +1,534 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    font-family: Arial, sans-serif;
+    background-color: #292935;
+    color: #fff;
+    background-image: url('data:image/svg+xml,<svg width="1951" height="1080" viewBox="0 0 1951 1080" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="430.44" y="-212" width="404.009" height="1401.12" transform="rotate(24.8332 430.44 -212)" fill="%23FF914D" fill-opacity="0.9"/><g filter="url(%23filter0_i_60_2)"><rect x="1574" y="751" width="329" height="312" rx="25" fill="url(%23paint0_radial_60_2)" fill-opacity="0.6"/></g><g filter="url(%23filter1_f_60_2)"><rect x="1754" y="848" width="193" height="184" rx="25" fill="url(%23paint1_radial_60_2)" fill-opacity="0.4"/></g><defs><filter id="filter0_i_60_2" x="1574" y="751" width="329" height="316" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="2"/><feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/><feBlend mode="normal" in2="shape" result="effect1_innerShadow_60_2"/></filter><filter id="filter1_f_60_2" x="1750" y="844" width="201" height="192" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_60_2"/></filter><radialGradient id="paint0_radial_60_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1738.5 907) rotate(90) scale(156 164.5)"><stop offset="0.12" stop-color="%2399572E"/><stop offset="0.76" stop-color="%23FF914D"/></radialGradient><radialGradient id="paint1_radial_60_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1850.5 940) rotate(90) scale(92 96.5)"><stop offset="0.115" stop-color="%23991D1D"/><stop offset="0.925" stop-color="%23FF3131"/></radialGradient></defs></svg>');
+    background-size: 96% 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+
+.menu {
+    width: 250px;
+    height: 98%;
+    background-color: #32333C;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px 0px 0px 10px;
+    position: relative;
+    z-index: 100;
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.384);
+}
+
+    
+.dashes {
+    background-color: #3A3B47;
+    border-radius: 0px 10px 10px 0px;
+    width: 90%;
+    height: 98%;
+    margin-right: 1.5%;
+    padding: 10px;
+}
+
+.div_logo{
+    width: 90%;
+    height: 15%;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+}
+
+.div_logo img{
+    aspect-ratio: 1;
+    height: 95%;
+    margin-top: 7%;
+    align-items: center;
+}
+
+.MKTS{
+    display: flex;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.regiao-select{
+    padding: 10px;
+    width: 90%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.regiao-select select {
+    padding: 6.5px;
+    margin-bottom: 10px;
+    background-color: #292A32; 
+    border: #fff solid 2px;
+    color: #fff;
+    font-size: 16px; 
+    width: 100%;
+    height: 42px;
+    border-radius: 10px;
+}
+
+.linha {
+    margin-top: 100%;
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    border-bottom: 3px solid #616161;
+}
+
+.perfil{
+    width: 80%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 2%;
+}
+
+.foto_perfil{
+    width: 35%;
+    align-items: center;
+}
+
+.perfil .foto_perfil img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.nome_perfil{
+    margin-left: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.nome_perfil hr{
+    width: 50px;
+    margin: 0%;
+}
+
+.nome_perfil h2{
+    margin: 0%;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.cargo p{
+    margin: 0%;
+}
+
+.monitoramento{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    border-left: 3px solid#E9864A;
+}
+
+.monitoramento p{
+    margin: 3%;
+    margin-left: 10px;
+}
+
+.analista{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 70%;
+    border-left: 3px solid#E9864A;
+    justify-content: center;
+}
+
+.analista h3{
+    margin: 5px;
+}
+
+/* Config da Minha tela */
+
+.icon{
+    display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+}
+
+.icon i{
+    display: flex;
+    flex-direction: row;
+    width: 7%;
+    color: tomato;
+    align-items: flex-start;
+    justify-content: center;
+    margin-right: 2%;
+    font-size: 30px;
+}
+.icon span{
+    font-size: 12px;
+    right: +7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 10px 10px 10px 10px;
+    width: 18%;
+    height: 15px;
+    align-items: center;
+}
+
+#chart-timeline{
+    padding-left: 1%;
+}
+
+.bloco_monitoramento{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bloco1{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 22%;
+    height: 150px;
+    background-color: #28283A;
+    border-radius: 5px;
+}
+.bloco2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 22%;
+    height: 150px;
+    background-color: #28283A;
+    border-radius: 5px;
+}
+.bloco3{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 22%;
+    height: 150px;
+    background-color: #28283A;
+    border-radius: 5px;
+}
+.bloco4{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 22%;
+    height: 150px;
+    background-color: #28283A;
+    border-radius: 5px;
+}
+
+.status{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #1cc716;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: bold;
+    font-size: xx-large;
+    width: 75%;
+    height: 65%;
+}
+
+.ram{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #d15710;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: bold;
+    font-size: xx-large;
+    width: 75%;
+    height: 65%; 
+}
+
+.tempo_ativo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #28283A;
+    color: #fff;
+    font-weight: bold;
+    font-size: xx-large;
+    width: 75%;
+    height: 65%; 
+}
+
+.recomendado{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #b3b012;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: bold;
+    font-size: xx-large;
+    width: 75%;
+    height: 65%; 
+}
+
+.span_bloco_monitoramento{
+    padding: 5px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.engloba_rank_qtdTotens{
+    display: flex;
+    padding-left: 2.5%;
+    padding-top: 7px;
+    width: 95.5%;
+    justify-content: space-between;
+}
+
+.totens{
+    width: 24%;
+    display: flex;
+    background-color: #292A32;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.totens div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.totens div span {
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    border-style: solid;
+    padding: 0.2em 0;
+    width: 40%;
+    font-size: xx-large;
+    font-weight: 700;
+}
+
+.totens-quantidade span {
+    border-color: #b1b1b9;
+    background-color: #f0f0f0;
+    color: #292935;
+}
+
+.totens-problema span {
+    border-color: #f76060;
+    background-color: #FF3131;
+    color: #eaeaf1;
+}
+
+table {
+    margin-top: 1%;
+    text-align: center;
+    color: #1a1818;
+    width: 190%;
+    height: 97%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    font-weight: bold;
+    font-size: x-large;
+    border: 1px solid #1a1818;
+    text-align: center;
+    background-color: #b1b1b9;
+}
+
+th {
+    color: #eaeaf1;
+    background-color: #292A32;
+    font-weight: bold;
+}
+
+
+/* CSS dos Alertas */
+/* Sla q merda colocar aqui */
+
+.icon{
+    display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+}
+
+.icon i{
+    display: flex;
+    flex-direction: row;
+    width: 7%;
+    color: tomato;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 30px;
+}
+.icon span{
+    font-size: 12px;
+    position: relative;
+    right: +7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 10px 10px 10px 10px;
+    width: 18%;
+    height: 15px;
+    align-items: center;
+}
+
+.notifi-box {
+	width: 300px;
+	height: 0px;
+    justify-content: center;
+	opacity: 0;
+    border-radius: 10px;
+	position: absolute;
+	top: 63px;
+	right: 35px;
+	transition: 300ms opacity, 1s height;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.notifi-box h2 {
+	font-size: 20px;
+	padding: 20px;
+    margin-right: 10px;
+    align-items: center;
+	border-bottom: 3px solid rgba(212, 81, 21, 0.533);
+	color: #999;
+}
+.notifi-box h2 span {
+	color: tomato;
+    margin-left: 10px;
+}
+.notifi-item {
+	display: flex;
+	border-bottom: 1px solid #3A3B47;
+	padding: 15px 5px;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+.notifi-item:hover {
+	background-color: #3A3B47;
+}
+.notifi-item img {
+	display: block;
+	width: 50px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+.notifi-item .text h4 {
+	color: #777;
+	font-size: 16px;
+	margin-top: 10px;
+}
+.notifi-item .text p {
+	color: #aaa;
+	font-size: 12px;
+}
+
+.notifi-box .notifi-item {
+    opacity: 0; /* Oculta os itens */
+    transition: opacity 0.3s ease; /* Transição suave */
+}
+
+/* Adiciona uma classe 'open' para tornar os itens visíveis */
+.notifi-box.open .notifi-item {
+    opacity: 1;
+}
+
+
+/* ------ Notificação ------ */
+
+#notify_box{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.notify{
+    width: 400px;
+    height: 80px;
+    background-color: #ECCBAE;
+    border-radius: 10px;
+    font-weight: 500;
+    margin: 15px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    position: relative;
+    transform: translateX(100%);
+    animation: moveleft 0.5s linear forwards;
+}
+
+@keyframes moveleft{
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.notify i{
+   margin:  0 20px;
+   font-size: 35px;
+   color: tomato; 
+}
+
+.notify::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: 1%;
+    margin-bottom: 0.2%;
+    border-radius: 0px 10px 10px 10px;
+    width: 100%;
+    height: 6px;
+    background: tomato;
+    animation: anim 5s linear forwards;
+}
+
+@keyframes anim {
+    100%{
+        width: 0;
+    }
+}
