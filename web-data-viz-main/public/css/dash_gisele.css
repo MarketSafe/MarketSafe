@@ -216,14 +216,17 @@ margin-top: 7px;
     gap: 2rem;
 }
 
-.status-box {
-    padding: 20px;
-    border-radius: 8px;
-    height: 3.5rem;
-    width: 6rem;
+.status-box{
+    width: 8.5rem;
+    height: 5.5rem;
+    border-radius: 10px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
+    position: relative;
+    transition: all 1000ms ease;
+    transform-style: preserve-3d;
 }
 
 .critico {
@@ -247,6 +250,44 @@ margin-top: 7px;
 .status-numero {
     font-size: 2em;
     font-weight: bold;
+}
+
+.face{
+    width: 100%;
+    position: absolute;
+}
+
+.front{
+    background-size: cover;
+    background-position: center;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    height: 100%;
+}
+.back {
+    background-size: cover;
+    background-position: center;
+    transform: rotateY(180deg);
+    text-align: center;
+    color: white;
+    justify-content: center;
+
+}
+
+.back1{
+    background-color: #ff4d4d;
+}
+
+.back2{
+    background-color: #ffcc00;
+}
+
+.back3{
+    background-color: #99cc66;
+}
+
+.status-box:hover {
+    transform: rotateY(180deg);
 }
 
 .alerta-container {
