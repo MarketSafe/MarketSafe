@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
 body {
     display: flex;
     flex-direction: column;
@@ -35,7 +37,7 @@ body {
     box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.384);
 }
 
-    
+
 .dashes-historico {
     background-color: #3A3B47;
     border-radius: 0px 10px 10px 0px;
@@ -46,7 +48,7 @@ body {
     margin-right: 1.5%;
 }
 
-.div_logo{
+.div_logo {
     width: 90%;
     height: 15%;
     align-items: center;
@@ -54,25 +56,28 @@ body {
     display: flex;
 }
 
-.logo{
+.logo {
     width: 60%;
     height: 80%;
 }
 
-.logo img{
+.logo img {
     width: 100%;
     height: 100%;
     margin-top: 7%;
     align-items: center;
 }
 
-.MKTS{
+.MKTS {
     display: flex;
     align-items: center;
     margin-top: 10%;
 }
 
-.regiao-select{
+.select_dash h2{
+    font-family: "Abel";
+}
+.regiao-select {
     padding: 10px;
     width: 90%;
     height: 20%;
@@ -84,10 +89,10 @@ body {
 .regiao-select select {
     padding: 6.5px;
     margin-bottom: 10px;
-    background-color: #292A32; 
+    background-color: #292A32;
     border: #fff solid 2px;
     color: #fff;
-    font-size: 16px; 
+    font-size: 16px;
     width: 100%;
     height: 42px;
     border-radius: 10px;
@@ -101,7 +106,7 @@ body {
     border-bottom: 3px solid #616161;
 }
 
-.perfil{
+.perfil {
     width: 80%;
     height: 100%;
     align-items: center;
@@ -110,13 +115,13 @@ body {
     justify-content: center;
 }
 
-.foto_perfil{
+.foto_perfil {
     width: 40%;
     height: 50%;
     align-items: center;
 }
 
-.perfil .foto_perfil img{
+.perfil .foto_perfil img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -124,29 +129,33 @@ body {
     flex-direction: row;
 }
 
-.nome_perfil{
+.nome_perfil {
     margin-left: 10px;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
-.nome_perfil hr{
+.nome_perfil hr {
     width: 50px;
     margin: 0%;
 }
 
-.nome_perfil h2{
+.nome_perfil h2 {
     margin: 0%;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 300;
+    font-family: "Abel";
 }
 
-.cargo p{
+.cargo p {
     margin: 0%;
+    font-size: 10px;
+    margin-top: 4px;
+    font-family: "Abel";
 }
 
-.monitoramento{
+.monitoramento {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -155,12 +164,13 @@ body {
     border-left: 3px solid#E9864A;
 }
 
-.monitoramento p{
+.monitoramento p {
     margin: 3%;
     margin-left: 10px;
+    font-family: "Abel";
 }
 
-.analista{
+.analista {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -169,8 +179,9 @@ body {
     justify-content: center;
 }
 
-.analista h3{
+.analista h3 {
     margin: 5px;
+    font-family: "Abel";
 }
 
 
@@ -182,31 +193,32 @@ body {
     font-weight: bold;
     margin-bottom: 20px;
     background-color: #33363f;
-    padding: 15px;
+    padding: 8px;
     border-radius: 8px;
+    font-family: "Abel";
 }
 
 .status-container {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 20px;   
     margin-left: 2rem;
-   
 }
 
-.alerta-status-title{
-font-size: 1.5em;
-margin-bottom: 15px;
-font-weight: bold;
-margin-left: 4.5rem;
-margin-top: 7px;
+.alerta-status-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 4.5rem;
+    margin-top: 7px;
+    font-family: "Abel";
 }
 
-.fundo-status{
+.fundo-status {
     background-color: #33363f;
+    height: 2.4rem;
 }
-.engloba-status{
+
+.engloba-status {
     flex: 1;
     background-color: #33363f;
     padding: 20px;
@@ -216,7 +228,7 @@ margin-top: 7px;
     gap: 2rem;
 }
 
-.status-box{
+.status-box {
     width: 8.5rem;
     height: 5.5rem;
     border-radius: 10px;
@@ -245,44 +257,48 @@ margin-top: 7px;
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-left: 2.1rem;
+    font-family: "Abel";
 }
 
 .status-numero {
     font-size: 2em;
     font-weight: bold;
+    margin-left: 3.5rem;
+    font-family: "Abel";
 }
 
-.face{
+.face {
     width: 100%;
     position: absolute;
 }
 
-.front{
-    background-size: cover;
-    background-position: center;
-    backface-visibility: hidden;
-    border-radius: 10px;
-    height: 100%;
-}
-.back {
+.front {
     background-size: cover;
     background-position: center;
     transform: rotateY(180deg);
     text-align: center;
     color: white;
     justify-content: center;
-
 }
 
-.back1{
+.back {
+    background-size: cover;
+    background-position: center;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.back1 {
     background-color: #ff4d4d;
 }
 
-.back2{
+.back2 {
     background-color: #ffcc00;
 }
 
-.back3{
+.back3 {
     background-color: #99cc66;
 }
 
@@ -290,26 +306,60 @@ margin-top: 7px;
     transform: rotateY(180deg);
 }
 
-.alerta-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    
-}
-
-.alerta-frequencia {
-    flex: 1;
+/* Estilo do Ranking */
+.ranking {
+    width: 41%;
+    height: 9.2rem;
     background-color: #33363f;
-    padding: 20px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    color: white;
 }
 
-.alerta-frequencia-title {
+.ranking-title {
     font-size: 1.5em;
-    margin-bottom: 15px;
     font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: "Abel";
+}
+
+.table {
+    width: 33rem;
+    height: 9rem;
+    border-collapse: collapse;
+    background-color: #575a64;
+    overflow: hidden;
+    color: white;
+}
+
+.table tr {
+    /* display: grid; */
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+th{
+    font-family: "Abel";  
+}
+.table tr:nth-child(2) {
+    background-color: #ffe034;
+    color: black;
+    font-family: "Abel";
+}
+
+.table tr:nth-child(3) {
+    background-color: #c0c0c0;
+    color: black;
+    font-family: "Abel";
+}
+
+.table tr:nth-child(4) {
+    background-color: #cd7f32;
+    color: black;
+    font-family: "Abel";
 }
 
 .fundo-grafico {
@@ -320,7 +370,14 @@ margin-top: 7px;
     flex-direction: column;
     align-items: center;
     width: 40rem;
-    height: 20rem;
+    height: 16rem;
+    margin-left: 2rem;
+}
+
+.plano-fundo {
+    background-color: #33363f;
+    width: 91.5%;
+    height: 27rem;
     margin-left: 2rem;
 }
 
@@ -328,22 +385,22 @@ margin-top: 7px;
     font-size: 1.5em;
     margin-bottom: 15px;
     font-weight: bold;
+    font-family: "Abel";
 }
 
-
-
-.engloba-indicador{
+.engloba-indicador {
     display: flex;
     gap: 10rem;
+    height: 170px;
 }
 
-.chart-area{
-  display: flex;
-  max-width: 550px;
-  max-height: 275px;
+.chart-area {
+    display: flex;
+    max-width: 550px;
+    max-height: 240px;
 }
 
-.chart-area select{
+.chart-area select {
     height: 3rem;
     background-color: #292935;
     color: white;
@@ -351,36 +408,59 @@ margin-top: 7px;
     /* border-style: none; */
 }
 
-table {
-    width: 45%;
-    border-collapse: collapse;
+.engloba-grafico {
+    display: flex;
 }
 
-th, td {
-    padding: 12px;
+
+css .filtros {
+    width: 80%;
+    margin-top: 1%;
+    border-radius: 10px;
+    background-color: #292A32;
+    margin-left: 2rem;
+}
+
+.selecoes {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    margin-left: 25rem;
+    margin-top: 3px;
+}
+
+.fTote {
+    background-color: #31333C;
+    width: 26%;
+    height: 4rem;
     text-align: center;
-    border: 1px solid #ddd;
+    border-radius: 10px;
+    border: #7C7C7C solid 1px;
+    margin-top: 1rem;
+
+    .h2-title {
+        margin: 0;
+        font-family: "Abel";
+    }
+
+    .fSelect {
+        display: flex;
+        margin-bottom: 2%;
+        justify-content: space-evenly;
+
+        select {
+            background-color: #3A3B47;
+            border: #4E4E4E solid 1px;
+            color: #fff;
+            border-radius: 5px;
+
+            font-family: "Abel";
+            font-weight: 200;
+            font-style: normal;
+            font-size: 18px;
+            margin-top: 0px;
+            margin-bottom: 4px;
+        }
+
+    }
 }
-
-th {
-    background-color: #cf804c;
-    color: white;
-}
-
-
-tr:hover {
-    background-color: #ddd;
-    color: #292935;
-}
-
-.ranking{
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
-    flex-direction: column
-}
-
-.engloba-grafico{
-    display: flex;
-}
-
