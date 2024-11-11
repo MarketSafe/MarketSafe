@@ -68,24 +68,29 @@
                         <div class="alerta-status-title">Status de Performance da Filial</div>
                         <div class="engloba-status">
                             <div class="status-box critico">
-                                <div class="face front">Filial 1</div>
+                                <div class="face front">Filial 1<br>
+                                    Filial 2
+                                </div>
                                 <div class="face back back1">
                                     <div class="status-label">Crítico</div>
-                                    <div class="status-numero">4</div>
+                                    <div class="status-numero">2</div>
                                 </div>
                             </div>
                             <div class="status-box atencao">
-                                <div class="face front ">Filial 2 </div>
+                                <div class="face front ">Filial 3 </div>
                                 <div class="face back back2">
                                     <div class="status-label">Atenção</div>
                                     <div class="status-numero">1</div>
                                 </div>
                             </div>
                             <div class="status-box normal">
-                                <div class="face front ">Filial 3</div>
+                                <div class="face front ">Filial 4<br>
+                                    Filial 5
+
+                                </div>
                                 <div class="face back back3">
                                     <div class="status-label">Normal</div>
-                                    <div class="status-numero">5</div>
+                                    <div class="status-numero">2</div>
                                 </div>
                             </div>
                         </div>
@@ -176,6 +181,12 @@
     function MudandoValoresDash() {
         var selectOpcao = document.getElementById('filial').value;
 
+        if (selectOpcao) {
+            pieChart.options.plugins.datalabels.display = true;
+        } else {
+            pieChart.options.plugins.datalabels.display = false;
+        }
+
         if (selectOpcao === '1') {
             barChart.data.datasets[0].data = [45, 68, 32, 34, 45, 60, 56];
             pieChart.data.datasets[0].data = [70, 30];
@@ -193,116 +204,116 @@
             pieChart.data.datasets[0].data = [35, 65];
         }
 
-            barChart.update();
-            pieChart.update();
-        }
+        barChart.update();
+        pieChart.update();
+    }
 
-        const labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
-        const data = {
-            labels: labels,
-            datasets: [{
-                axis: 'y',
-                label: 'Quantidade de Alerta ',
-                data: [0, 0, 0, 0, 0, 0, 0],
-                fill: false,
-                backgroundColor: [
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderColor: [
-                    'rgb(255, 159, 64)'
-                ],
-                borderWidth: 1
-            }]
-        };
+    const labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+    const data = {
+        labels: labels,
+        datasets: [{
+            axis: 'y',
+            label: 'Quantidade de Alerta ',
+            data: [0, 0, 0, 0, 0, 0, 0],
+            fill: false,
+            backgroundColor: [
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgb(255, 159, 64)'
+            ],
+            borderWidth: 1
+        }]
+    };
 
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {
-                indexAxis: 'x',
-                responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.90)'
-                        },
-                    }, y: {
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.90)'
-                        },
-                    }
-                },
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: 'white'
-                        }
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            indexAxis: 'x',
+            responsive: true,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                }, y: {
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white'
                     }
                 }
             }
-        };
+        }
+    };
 
-        const barChart = new Chart(
-            document.getElementById('barChart'),
-            config
-        );
+    const barChart = new Chart(
+        document.getElementById('barChart'),
+        config
+    );
 
-        // Configuração do gráfico de pizza
-        const pieData = {
-            labels: ['Processador', 'Memória Ram'],
-            datasets: [{
-                data: [0, 0],
-                backgroundColor: [
-                    'rgb(155, 17, 30)',
-                    'rgb(5, 79, 119)'
-                ],
-                hoverOffset: 4
-            }]
-        };
+    // Configuração do gráfico de pizza
+    const pieData = {
+        labels: ['Processador', 'Memória Ram'],
+        datasets: [{
+            data: [0, 0],
+            backgroundColor: [
+                'rgb(155, 17, 30)',
+                'rgb(5, 79, 119)'
+            ],
+            hoverOffset: 4
+        }]
+    };
 
-        const pieConfig = {
-            type: 'pie',
-            data: pieData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                        labels: {
-                            font: {
-                                size: 15,
-                                font: "Abel"
-                            },
-                            color: 'rgba(255, 255, 255, 0.90)'
-                        }
-                    },
-
-                    datalabels: {
-                        formatter: (value, context) => {
-                            const total = context.chart._metasets[context.datasetIndex].total;
-                            const percentage = ((value / total) * 100).toFixed(2);
-                            return `${percentage}%\n${value}`;
-                        },
-                        color: "#000",
+    const pieConfig = {
+        type: 'pie',
+        data: pieData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
                         font: {
-                            size: 18
-                        }
+                            size: 15
+                        },
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    }
+                },
+
+                datalabels: {
+                    display: false,
+                    formatter: (value, context) => {
+                        const total = context.chart._metasets[context.datasetIndex].total;
+                        const percentage = ((value / total) * 100).toFixed(2);
+                        return `${percentage}%\n${value}`;
+                    },
+                    color: "#000",
+                    font: {
+                        size: 18
                     }
                 }
-            },
-            plugins: [ChartDataLabels]
-        };
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
 
 
-        // Inicializando o gráfico de pizza
-        const pieChart = new Chart(
-            document.getElementById('pieChart'),
-            pieConfig
-        );
+    // Inicializando o gráfico de pizza
+    const pieChart = new Chart(
+        document.getElementById('pieChart'),
+        pieConfig
+    );
 
-        // Adiciona um event listener ao select para atualizar os gráficos quando o valor mudar
-        document.getElementById('filial').addEventListener('change', MudandoValoresDash);
+    // Adiciona um event listener ao select para atualizar os gráficos quando o valor mudar
+    document.getElementById('filial').addEventListener('change', MudandoValoresDash);
 
     // // wordcloud
     // const bairros = [
