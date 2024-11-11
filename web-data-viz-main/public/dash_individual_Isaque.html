@@ -60,10 +60,18 @@
             </div>
         </div>
         <div class="dashes">
-            <div class="icon" onclick="acionarAlertasENotificacao()">
-                <i class="fa-solid fa-triangle-exclamation"><span id="QtdAlertas"></span></i>
+            <div class="botoes_superiores">
+                <div class="botao_voltar">
+                    <a href="dash_individual_Isaque_Principal.html"><i class="fa-solid fa-chevron-left"></i></a>
+                </div>
+                <div class="icon" onclick="acionarAlertasENotificacao()">
+                    <i class="fa-solid fa-triangle-exclamation"><span id="QtdAlertas"></span></i>
+                </div>
             </div>
-            <div id="chart-timeline"></div>
+            <div class="Span_Titulo">
+                <span>Situação do Totem 3</span>
+            </div>
+            <div id="chart-timeline" style="height: 350px;"></div>
             <div class="bloco_monitoramento">
                 <div class="bloco1">
                     <span class="span_bloco_monitoramento">Status</span>
@@ -92,46 +100,9 @@
 
             </div>
             <div class="engloba_rank_qtdTotens">
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Posição</th>
-                                <th>Totem</th>
-                                <th>Qtd de Alertas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1º</td>
-                                <td>2</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>2º</td>
-                                <td>5</td>
-                                <td>6</td>
-                            </tr>
-                            <tr>
-                                <td>3º</td>
-                                <td>7</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="totens">
-                    <div class="totens-quantidade">
-                        <h3>Quantidade de Totens</h3>
-                        <span>7</span>
-                    </div>
-                    <div class="totens-problema">
-                        <h4>Nº de Totens com Problema</h4>
-                        <span>4</span>
-                    </div>
-                </div>
+
             </div>
-            <button class="button" onclick="notificacao(ErroMsg)">Teste Notificar</button>
+            <!-- <button class="button" onclick="notificacao(ErroMsg)">Teste Notificar</button> -->
 
             <div class="notifi-box" id="box">
                 <h2>Alertas<span id="QtdAlertas2"></span></h2> <!--textinho dentro do alerta-->
@@ -153,40 +124,55 @@
 </html>
 
 <script>
+
+    let dataSeries = [
+        { x: 0, y: Math.random() * 35 },
+        { x: 1, y: Math.random() * 35 },
+        { x: 2, y: Math.random() * 35 }
+    ];
+    let tempo = 3;
+
+    function TesteGrafico() {
+        var valorAleatorio = Math.random() * 60;
+        var DtAleatorio = parseFloat(valorAleatorio.toFixed(1));
+        dataSeries.push({ x: tempo, y: DtAleatorio });
+        tempo += 1;
+
+        if (dataSeries.length > 60) {
+            dataSeries.shift();
+        }
+    }
+
+    // Configurações do gráfico ApexCharts
     var options = {
         series: [{
-            data: [
-                [Date.now() - 60000, 30.95],
-                [Date.now() - 50000, 31.34],
-                [Date.now() - 40000, 31.18],
-                [Date.now() - 30000, 31.05],
-                [Date.now() - 20000, 31.00],
-                [Date.now() - 10000, 30.95],
-                [Date.now(), 31.24]
-            ]
+            name: 'Consumo',
+            data: dataSeries,
+            color: "#FF7000"
         }],
         chart: {
             id: 'area-datetime',
             type: 'area',
-            width: '75%',
-            height: 220,
-            toolbar: {
-                show: false,
-                tools: {
-                    selection: true,
-                    zoom: true,
-                    zoomin: true,
-                    zoomout: true,
-                    pan: false,
+            width: '95%',
+            height: 345,
+            animations: {
+                enabled: false,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 1000
                 }
+            },
+            toolbar: {
+                show: false
             }
         },
         dataLabels: {
             enabled: false
         },
         tooltip: {
+            theme: 'dark',
             x: {
-                format: 'HH:mm:ss'
+                show: false
             }
         },
         fill: {
@@ -202,22 +188,58 @@
             show: true,
         },
         xaxis: {
+            title: {
+                text: 'Captura dos Ultimos 60 segundos',
+                style:{
+                    color: '#ffff',
+                    fontSize: '15px',
+                    fontFamily: 'Abel',
+                },
+                offsetX: -330
+            },
+            type: 'numeric',
+            tickAmount: 10,
             labels: {
                 show: false
             }
         },
         yaxis: {
-            labels: {
-                show: false
-            },
-            title: {
-                text: ''
-            }
+            min: 0,
+        max: 100,
+        labels: {
+          formatter: function(value) {
+            if (value === 100) return 'Max - 100%';
+            if (value === 0) return 'Min - 0%';
+            return value + '%';
+          },
+          style: {
+            colors: '#ffffff',
+            fontSize: '12px',
+            fontFamily: 'Abel',
+            marginLeft: '15px'
+          },
+          offsetX: +5
+        }
+      },
+      title: {
+          text: '% em Uso',
+          style: {
+            color: '#ffffff',
+            fontSize: '20px',
+            fontFamily: 'Abel',
+          },
+          offsetX: +78
         }
     };
 
     var chart = new ApexCharts(document.querySelector("#chart-timeline"), options);
     chart.render();
+
+    setInterval(() => {
+        TesteGrafico();
+        chart.updateSeries([{ data: [...dataSeries] }]);
+    }, 1000);
+
 
     //-------------- Alertas -----------------//
 
@@ -235,14 +257,14 @@
         if (down) {
             box.style.height = '0px';
             box.style.opacity = 0;
-            box.classList.remove('open'); // Remove a classe open imediatamente
+            box.classList.remove('open'); 
             down = false;
         } else {
             box.style.height = '510px';
             box.style.opacity = 1;
             setTimeout(function () {
-                box.classList.add('open'); // Adiciona a classe open após a animação de altura
-            }, 300); // Tempo deve coincidir com a duração da transição em CSS
+                box.classList.add('open'); 
+            }, 300);
             down = true;
         }
 
@@ -272,7 +294,10 @@
 
     function acionarAlertasENotificacao() {
         Alertas();
-        notificacao();
+        // notificacao();
     }
+
+
+
 
 </script>

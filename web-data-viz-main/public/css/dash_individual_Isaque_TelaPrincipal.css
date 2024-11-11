@@ -167,11 +167,14 @@ body {
 /* Config da Minha tela */
 
 
-.botoes_superiores{
+.Div_Botao_Alerta{
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    border-radius: 7px 7px 0 0;
+    align-items: end;
+    flex-direction: row-reverse;
     background-color: #28283A;
+    border-radius: 7px 7px 0px 0px;
+
 }
 
 .fa-chevron-left{
@@ -185,7 +188,6 @@ body {
     width: 2rem;
     background-color: #31333C;
     border-radius: 10px;
-    margin: 10px;
     box-sizing: border-box;
     border: 2px solid #616161;
 }
@@ -194,28 +196,34 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 14px;
-    padding-bottom: 14px;
     background-color: #28283A;
+    width: 100%;
 }
 
 .Span_Titulo span{
+    margin:10px;
     font-size: x-large;
     font-weight: bold;
     font-family: 'Abel';
 }
 
 .icon{
+    width: 100%;
     display: flex;
     flex-direction: row-reverse;
     cursor: pointer;
-    margin: 15px 35px 15px 15px;
+    margin-right: 2.8%;
+    margin-top: 10px;
+}
+
+.fa-solid{
+    width: 10%;
 }
 
 .icon i{
     display: flex;
     flex-direction: row;
-    width: 7%;
+    width: 60%;
     color: tomato;
     align-items: flex-start;
     justify-content: center;
@@ -223,8 +231,8 @@ body {
     font-size: 30px;
 }
 .icon span{
-    font-size: 12px;
-    right: +7px;
+    font-size: 20px;
+    right: +5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -237,134 +245,35 @@ body {
     font-family: 'Abel';
 }
 
+#QtdAlertas{
+    width: 350px;
+    height: 15px;
+    border-radius: 50px;
+}
 
 #chart-timeline{
     padding-left: 1%;
+    width: 100%;
     height: 50%;
+}
+
+.Alinhando_Dashs{
+    display: flex;
     background-color: #28283A;
+    border-radius: 0px 0px 7px 7px;
 }
 
 .bloco_monitoramento{
     display: flex;
     justify-content: space-evenly;
-    background-color: #28283A;
     border-radius: 0 0 7px 7px;
-}
-
-.bloco1{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 22%;
-    height: 150px;
     background-color: #28283A;
-    border-radius: 5px;
-}
-.bloco2{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 22%;
-    height: 150px;
-    background-color: #28283A;
-    border-radius: 5px;
-}
-.bloco3{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 22%;
-    height: 150px;
-    background-color: #28283A;
-    border-radius: 5px;
-}
-.bloco4{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 22%;
-    height: 150px;
-    background-color: #28283A;
-    border-radius: 5px;
 }
 
-.status{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #1cc716;
-    border-radius: 7px;
-    color: #fff;
-    font-weight: bold;
-    font-size: xx-large;
-    font-family: 'Abel';
-    width: 75%;
-    height: 65%;
-}
-
-.ram{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #d15710;
-    border-radius: 7px;
-    color: #fff;
-    font-weight: bold;
-    font-size: xx-large;
-    font-family: 'Abel';
-    width: 75%;
-    height: 65%; 
-}
-
-.tempo_ativo{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #3A3B47;
-    border-radius: 7px;
-    color: #fff;
-    font-weight: bold;
-    font-size: xx-large;
-    font-family: 'Abel';
-    width: 75%;
-    height: 65%; 
-}
-
-.recomendado{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #b3b012;
-    border-radius: 7px;
-    color: #fff;
-    font-weight: bold;
-    font-size: xx-large;
-    font-family: 'Abel';
-    width: 75%;
-    height: 65%; 
-}
-
-.span_bloco_monitoramento{
-    padding: 5px;
-    font-weight: bold;
-    font-size: larger;
-    font-family: 'Abel';
-}
-
-.engloba_rank_qtdTotens{
-    display: flex;
-    padding-left: 2.5%;
-    padding-top: 7px;
-    width: 95.5%;
-    justify-content: space-between;
-}
 
 .totens{
     width: 24%;
+    height: 10%;
     display: flex;
     background-color: #292A32;
     align-items: stretch;
@@ -377,7 +286,7 @@ body {
 .totens div {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
     justify-content: center;
 }
@@ -387,7 +296,7 @@ body {
     justify-content: center;
     border-radius: 8px;
     border-style: solid;
-    padding: 0.2em 0;
+    padding: 0.2rem 0;
     width: 40%;
     font-size: xx-large;
     font-weight: 700;
@@ -397,12 +306,14 @@ body {
     border-color: #b1b1b9;
     background-color: #f0f0f0;
     color: #292935;
+    margin: 5px;
 }
 
 .totens-problema span {
     border-color: #f76060;
     background-color: #FF3131;
     color: #eaeaf1;
+    margin: 5px;
 }
 
 table {
@@ -474,8 +385,8 @@ th {
     justify-content: center;
 	opacity: 0;
     border-radius: 10px;
-	position: absolute;
     background-color: #28283A;
+	position: absolute;
 	top: 63px;
 	right: 35px;
 	transition: 300ms opacity, 1s height;
@@ -522,14 +433,15 @@ th {
     font-family: 'Abel';
 }
 
-.notifi-box .notifi-item { 
-    transition: 0.3s ease; 
+.notifi-box .notifi-item {
+    opacity: 0; /* Oculta os itens */
+    transition: opacity 0.3s ease; /* Transição suave */
 }
 
-.notifi-box .open{
+/* Adiciona uma classe 'open' para tornar os itens visíveis */
+.notifi-box.open .notifi-item {
     opacity: 1;
 }
-
 
 
 /* ------ Notificação ------ */
@@ -554,7 +466,7 @@ th {
     font-weight: 500;
     font-family: 'Abel';
     margin: 15px 0;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     position: relative;
@@ -594,4 +506,69 @@ th {
     }
 }
 
-/* Config Tela Principal */
+/* Config Dough */
+
+.Titulo_Intavel{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 5px;
+    border-radius: 7px 7px 0 0;
+    padding-bottom: 10px;
+    font-family: 'Abel';
+    background-color: #28283A;
+}
+
+#chart_Rosca{
+    display: flex;
+    flex-direction: row;
+}
+
+.totem-label {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-family: 'Abel';
+    font-weight: bold;
+}
+.legenda {
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.legenda-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.legenda-cor-bola {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: #FF4560;
+    margin-top: 3px;
+}
+
+.legenda-cor-bola2 {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: #FFA500;
+    margin-top: 3px;
+}
+
+.Direcionando_DashRosca1{
+    display: flex;
+}
+
+.Direcionando_Label{
+    display: flex;
+}
