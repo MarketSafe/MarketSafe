@@ -67,30 +67,35 @@
                     <div class="fundo-status">
                         <div class="alerta-status-title">Status de Performance da Filial</div>
                         <div class="engloba-status">
-                            <div class="status-box critico">
-                                <div class="face front">Filial 1<br>
-                                    Filial 2
-                                </div>
-                                <div class="face back back1">
-                                    <div class="status-label">Crítico</div>
-                                    <div class="status-numero">2</div>
-                                </div>
-                            </div>
-                            <div class="status-box atencao">
-                                <div class="face front ">Filial 3 </div>
-                                <div class="face back back2">
-                                    <div class="status-label">Atenção</div>
-                                    <div class="status-numero">1</div>
+                            <div class="area-fora">
+                                <div class="status-box critico">
+                                    <div class="face front">Filial 1<br>
+                                        Filial 2
+                                    </div>
+                                    <div class="face back back1">
+                                        <div class="status-label">Crítico</div>
+                                        <div class="status-numero">2</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="status-box normal">
-                                <div class="face front ">Filial 4<br>
-                                    Filial 5
-
+                            <div class="area-fora">
+                                <div class="status-box atencao">
+                                    <div class="face front ">Filial 3 </div>
+                                    <div class="face back back2">
+                                        <div class="status-label">Atenção</div>
+                                        <div class="status-numero">1</div>
+                                    </div>
                                 </div>
-                                <div class="face back back3">
-                                    <div class="status-label">Normal</div>
-                                    <div class="status-numero">2</div>
+                            </div>
+                            <div class="area-fora">
+                                <div class="status-box normal">
+                                    <div class="face front ">Filial 4<br>
+                                        Filial 5
+                                    </div>
+                                    <div class="face back back3">
+                                        <div class="status-label">Normal</div>
+                                        <div class="status-numero">2</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +264,6 @@
         config
     );
 
-    // Configuração do gráfico de pizza
     const pieData = {
         labels: ['Processador', 'Memória Ram'],
         datasets: [{
@@ -306,60 +310,13 @@
     };
 
 
-    // Inicializando o gráfico de pizza
+
     const pieChart = new Chart(
         document.getElementById('pieChart'),
         pieConfig
     );
 
-    // Adiciona um event listener ao select para atualizar os gráficos quando o valor mudar
+
     document.getElementById('filial').addEventListener('change', MudandoValoresDash);
 
-    // // wordcloud
-    // const bairros = [
-    //     "ÁguaRasa", "AltodePinheiros", "Anhanguera", "Aricanduva", "BarraFunda",
-    //     "BelaVista", "Butantã", "Cachoeirinha", "Cambuci",
-    //     "CampoBelo", "CampoGrande", "CampoLimpo", "CapãoRedondo", "Carrão", "CasaVerde",
-    //     "CidadeAdemar", "CidadeDutra", "CidadeLíder", "Consolação", "Iguatemi", "Ipiranga",
-    //     "ItaimBibi", "ItaimPaulista", "Itaquera", "Jabaquara", "Jaçanã", "Jaguara", "Jaguaré",
-    //     "Jaraguá", "JardimÂngela", "JardimHelena", "JardimPaulista", "JardimSãoLuís", "Lapa",
-    //     "Liberdade", "Moema", "Mooca", "Morumbi", "Parelheiros", "Pinheiros", "PonteRasa", "RaposoTavares",
-    //     "República", "Sacomã", "SantoAmaro", "Sé",
-    //     "Tatuapé", "Tucuruvi", "VilaAndrade", "VilaMariana",
-    //     "VilaPrudente", "VilaSônia"
-    // ];
-    // const colors = [
-    //     '#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FF8F33',
-    //     '#33FFD1', '#8D33FF', '#FFBD33', '#33FFF5', '#FF3333',
-    //     '#A533FF', '#FF8333', '#33FF75', '#333CFF', '#FF333E',
-    //     '#FF57F6', '#33FF83', '#5773FF', '#FFA533', '#57FF33'
-    // ];
-
-    // // Mapeando bairros para objetos com chave e valor
-    // const words = bairros.map((bairro, index) => ({
-    //     key: bairro,
-    //     value: index % 10 + 10,  // Ajuste o valor conforme sua lógica desejada
-    //     color: colors[index % colors.length]
-    // }));
-
-    // // Configurando o gráfico de nuvem de palavras
-    // const ctx = document.getElementById('canvas').getContext('2d');
-    // new Chart(ctx, {
-    //     type: 'wordCloud',
-    //     data: {
-    //         labels: words.map(word => word.key),
-    //         datasets: [{
-    //             label: 'Qtd Alertas:',
-    //             data: words.map(word => word.value),
-    //             color: words.map(word => word.color)
-    //         }]
-    //     },
-    //     options: {
-    //         plugins: {
-    //             legend: {
-    //                 display: false
-    //             }
-    //         }
-    //     }
-    // });
 </script>
