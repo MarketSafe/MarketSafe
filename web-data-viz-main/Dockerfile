@@ -1,7 +1,7 @@
 FROM node:lts-bookworm AS dependecies
 WORKDIR /
 COPY ./package.json ./
-RUN npm start
+RUN npm i
 
 FROM node:lts-alpine3.20 AS deploy
 WORKDIR /
