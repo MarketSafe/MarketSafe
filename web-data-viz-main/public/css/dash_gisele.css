@@ -302,7 +302,8 @@ body {
     background-color: #99cc66;
 }
 
-.status-box:hover {
+
+.area-fora:hover .status-box {
     transform: rotateY(180deg);
 }
 
