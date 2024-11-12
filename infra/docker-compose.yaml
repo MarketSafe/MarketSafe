@@ -1,0 +1,17 @@
+services:
+  site:
+    image: giselerezende/site:latest
+    ports:
+      - "3333:3333"
+    networks:
+      - mkts-network
+    depends_on: db
+  db:
+    image: giselerezende/db:latest
+    ports:
+      - "3306:3306"
+    networks:
+      - mkts-network
+networks:
+  mkts-network:
+    driver: bridge
