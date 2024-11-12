@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 
-<body>
+<body onload="atualizarTabela()">
     <div class="container">
         <div class="menu">
             <div class="div_logo">
@@ -104,12 +104,18 @@
                 <div class="ranking">
                     <div class="ranking-title">3 Promoções com mais Alertas</div>
                     <table class="table">
-                        <tr>
-                            <th>Posição</th>
-                            <th>Promoção</th>
-                            <th>Alertas</th>
-                        </tr>
-                        <tr>
+                        <thead>
+                            <tr>
+                                <th>Posição</th>
+                                <th>Promoção</th>
+                                <th>Alertas</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="corpoTabela">
+
+                        </tbody>
+                        <!-- <tr>
                             <td>1</td>
                             <td>Carnes</td>
                             <td>20</td>
@@ -123,7 +129,7 @@
                             <td>3</td>
                             <td>Frutas</td>
                             <td>9</td>
-                        </tr>
+                        </tr> -->
                     </table>
                 </div>
             </div>
@@ -144,15 +150,9 @@
                             </div>
                         </div>
                         <div class="fTote">
-                            <h2 class="h2-title">Semana</h2>
+                            <h2 class="h2-title">Mês</h2>
                             <div class="fSelect">
-                                <select id="">
-                                    <option value="">Escolha uma semana</option>
-                                    <option value="1">Semana 1</option>
-                                    <option value="2">Semana 2</option>
-                                    <option value="3">Semana 3</option>
-                                    <option value="4">Semana 4</option>
-                                </select>
+                                <input type="month" name="" id="">
                             </div>
                         </div>
                     </div>
@@ -182,6 +182,43 @@
 </html>
 
 <script>
+
+function adicionarPromocao(tabela, posicao, promocao, quantidadeDeAlertas) {
+    var linha = document.createElement('tr');
+    var lugar = document.createElement('td');
+    var desconto = document.createElement('td');
+    var qtdAlertas = document.createElement('td');
+
+    lugar.innerHTML = `${posicao}`;
+    desconto.textContent = promocao;
+    qtdAlertas.textContent = quantidadeDeAlertas;
+
+    linha.appendChild(lugar);
+    linha.appendChild(desconto);
+    linha.appendChild(qtdAlertas);
+    tabela.appendChild(linha);
+}
+
+function atualizarTabela() {
+    fetch('/ranking/classificacao')
+        .then(response => response.json())
+        .then(data => {
+            var tabela = document.getElementById("corpoTabela");
+
+            tabela.innerHTML = '';
+
+            
+            for (var i = 0; i < Math.min(3, data.length); i++) {
+                var item = data[i];
+                var nomePromocao = item.promocao;
+                var qtdAlertas = item.qtd_alertas;
+
+                adicionarPromocao(tabela, i + 1, nomePromocao, qtdAlertas);
+            }
+        })
+        .catch(error => console.error('Erro ao buscar promoção:', error));
+}
+
 
     function MudandoValoresDash() {
         var selectOpcao = document.getElementById('filial').value;
