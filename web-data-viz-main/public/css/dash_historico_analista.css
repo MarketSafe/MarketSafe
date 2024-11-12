@@ -322,3 +322,42 @@ body {
     height: 95%;
 }
 
+.media{
+    width: 40%;
+    height: 90%;
+    border-radius: 10px;
+    background-color: #28283A;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.texto{
+    align-items: center;
+    display: flex;
+    background-color: #3A3B47;
+    width: 80%;
+    height: 30%;
+    border-radius: 10px;
+}
+
+.texto p{
+    text-align: center;
+    font-family: "Abel";
+}
+
+.hora{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: #3A3B47;
+    width: 60%;
+    height: 30%;
+    border-radius: 10px;
+}
+
+.hora p{
+    font-family: "Abel";
+}
+

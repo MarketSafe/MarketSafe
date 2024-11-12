@@ -81,11 +81,18 @@
                     </div>
                 </div>
                 <div class="linha_grafico2">
-                    <div class="grafico3">
-                        a
+                    <div id="total" class="grafico3">
+
                     </div>
                     <div class="grafico4">
-                        a
+                        <div class="media">
+                            <div class="texto">
+                                <p>Média de horário com mais movimento</p>
+                            </div>
+                            <div class="hora">
+                                <p></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,10 +117,10 @@
                 show: false
             }
         },
-        title:{
+        title: {
             text: "Totens com mais alertas da semana",
             align: "center",
-            style:{
+            style: {
                 color: "#ffffff",
                 fontFamily: "Abel",
                 fontSize: "20px"
@@ -140,14 +147,13 @@
             max: 100,
             categories: ['Totem 3', 'Totem 5', 'Totem 4', 'Totem 7', 'Totem 1'],
             title: {
-                style: {
-                    color: "#FFFFFF"
+                text: 'Número de alertas por totem',
+                fontFamily: 'Abel',
+                style:{
+                    color: '#ffffff'
                 }
             },
             labels: {
-                formatter: function (value) {
-                    return value + "%";
-                },
                 style: {
                     colors: "#FFFFFF",
                     fontFamily: "Abel"
@@ -168,51 +174,59 @@
 
     //gráfico de linha com a taxa de alertas por dia da semana
     var options = {
-    series: [{
-        data: [10, 41, 35, 51, 49, 62, 80]
-    }],
-    chart: {
-        height: 250,
-        type: 'line',
-        zoom: {
+        series: [{
+            data: [10, 41, 35, 51, 49, 62, 80]
+        }],
+        chart: {
+            height: 250,
+            type: 'line',
+            zoom: {
+                enabled: false
+            },
+            toolbar: {
+                show: false
+            }
+        },
+        dataLabels: {
             enabled: false
         },
-        toolbar: {
-            show: false
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'straight',
-        colors: ['#FF8818']  // Define a cor da linha
-    },
-    title: {
-        text: 'Taxa de totem em alerta por dia da semana',
-        align: 'center',
-        style:{
-            color:'#ffffff',
-            fontSize: "20px",
-            fontFamily: "Abel"
-        }
-    },
-    grid: {
-        row: {
-            colors: ['transparent', 'transparent'], 
-            opacity: 0.5
+        stroke: {
+            curve: 'straight',
+            colors: ['#FF8818']  // Define a cor da linha
         },
-    },
-    xaxis: {
-        categories: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'],
-        labels: {
-            style:{
-                colors: "#ffffff",
+        title: {
+            text: 'Taxa de totem em alerta por dia da semana',
+            align: 'center',
+            style: {
+                color: '#ffffff',
+                fontSize: "20px",
                 fontFamily: "Abel"
             }
-        }
-    },
-    yaxis: {
+        },
+        grid: {
+            row: {
+                colors: ['transparent', 'transparent'],
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'],
+            labels: {
+                style: {
+                    colors: "#ffffff",
+                    fontFamily: "Abel"
+                }
+            }
+        },
+        yaxis: {
+            title:{
+                text: 'Taxa de alerta do total de totens',
+                align: 'center',
+                style:{
+                    color: '#ffffff',
+                    fontFamily: 'Abel'
+                }
+            },
             labels: {
                 style: {
                     colors: "#ffffff",
@@ -223,9 +237,81 @@
                 },
             }
         }
-};
+    };
 
-var chart = new ApexCharts(document.querySelector("#taxa"), options);
-chart.render();
+    var chart = new ApexCharts(document.querySelector("#taxa"), options);
+    chart.render();
+
+    // gráfico de barras do total de alertas nas horas
+    var options = {
+        series: [{
+            name: 'Total de alertas por hora',
+            data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 70, 79, 85]
+        },
+        ],
+        title:{
+            text: 'Total de alertas por hora',
+            align: 'center',
+            style:{
+                color: '#ffffff',
+                fontFamily: 'Abel',
+                fontSize: '20px'
+            }
+        },
+        chart: {
+            type: 'bar',
+            height: 250,
+            toolbar:{
+                show:false
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis:{
+            labels: {
+                style: {
+                    colors: '#ffffff',
+                    fontFamily: 'Abel'
+                }
+            },
+            categories: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'],
+        },
+
+        yaxis: {
+            labels: {
+            style: {
+                colors: '#ffffff',
+                fontFamily: 'Abel'
+            }
+        },
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return "$ " + val + " thousands"
+                }
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#total"), options);
+    chart.render();
+
 
 </script>
