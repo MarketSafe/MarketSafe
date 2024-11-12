@@ -449,8 +449,8 @@ body {
 
         & .ctdEsq{
             background-color: #292935;
-            width: 50%;
-            height: 90%;
+            width: 60%;
+            height: 100%;
             padding-left: 10px;
             padding-right: 10px;
             color: #FFF;
@@ -461,15 +461,21 @@ body {
             flex-direction: column;
 
             & .GfLinha{
-                width: 90%;
-                height: 100%;
+                height: 200px;
+                width: 100%;
+                
+            }
+
+            & .GfBar{
+                height: 200px;
+                width: 450px;
                 
             }
         }
 
         & .ctdDir{
             background-color: #292935;
-            width: 50%;
+            width: 40%;
             padding-left: 10px;
             padding-right: 10px;
             color: #FFF;
@@ -482,10 +488,10 @@ body {
             & h1{
                 font-size: 34px;
             }
-
+            
             & h3 {
-                font-weight: 100;
                 margin-bottom: 0px;
+                font-weight: 100;
                 margin-top: 5px;
                 width: 100%;
                 display: flex;
@@ -494,7 +500,7 @@ body {
 
                 span {
                     font-size: 20px;
-                    margin-bottom: 0px;
+                    margin-top: 15px;
                 }
 
                 span:nth-of-type(2) {

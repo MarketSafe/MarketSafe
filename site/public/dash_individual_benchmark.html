@@ -174,30 +174,46 @@
                             <h3>Horário:</h3>
                             <div class="filtrosSL">
                                 <div class="wrapper">
-                                  <div class="sliderContainer">
-                                    <div class="slider-track"></div>
-                                    <input type="range" min="0" max="24" value="1" id="slider-1" oninput="slideOne()"/>
-                                    <input type="range" min="0" max="24" value="12" id="slider-2" oninput="slideTwo()"/>
-                                    <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
-                                    <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
-                                  </div>
-                                  <div class="values">
-                                    <span id="range1"> 0 </span>
-                                    <span> &ThickSpace; &dash; &ThickSpace; </span>
-                                    <span id="range2"> 12 </span>
-                                  </div>
+                                    <div class="sliderContainer">
+                                        <div class="slider-track"></div>
+                                        <input type="range" min="0" max="24" value="1" id="slider-1"
+                                            oninput="slideOne()" />
+                                        <input type="range" min="0" max="24" value="12" id="slider-2"
+                                            oninput="slideTwo()" />
+                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                                    </div>
+                                    <div class="values">
+                                        <span id="range1"> 0 </span>
+                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
+                                        <span id="range2"> 12 </span>
+                                    </div>
                                 </div>
-                              </div>
+                            </div>
                         </div>
+                        <div class="GfBar">
+                            <canvas id="barChart"></canvas>
+                        </div>
+
                     </div>
                     <div class="ctdDir">
                         <div style="text-align: center; width: 80%;">
                             <h1>Dados dos alertas</h1>
 
-                            <h3><span>4</span> <span class="txt">Relação entre alertas totais</span> <span>8</span></h3>
-                            <div class="comparacao">
-                                <div class="barra1" id="barra1">50%</div>
-                                <div class="barra2" id="barra2">50%</div>
+                            <div>
+                                <h3><span>4</span> <span class="txt">Relação entre alertas totais</span> <span>8</span>
+                                </h3>
+                                <div class="comparacao">
+                                    <div class="barra1" id="barra1">50%</div>
+                                    <div class="barra2" id="barra2">50%</div>
+                                </div>
+
+                                <h3><span>4</span> <span class="txt">Relação entre alertas de CPU</span> <span>2</span>
+                                </h3>
+                                <div class="comparacao">
+                                    <div class="barra1" id="barra3">50%</div>
+                                    <div class="barra2" id="barra4">50%</div>
+                                </div>
                             </div>
 
                         </div>
@@ -208,7 +224,6 @@
             </div>
         </div>
 
-    </div>
     </div>
 </body>
 
@@ -261,6 +276,8 @@
     }
 
 
+    // Grafico de linha 
+
     const ctx = document.getElementById('lineChart');
 
     const labels = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
@@ -287,80 +304,136 @@
         },
         options: {
             scales: {
-                    x: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.90)'
-                        },
-                    }, y: {
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.90)'
-                        },
-                    }
-                },
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: 'white'
-                        }
-                    }
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                }, y: {
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
                 }
+            },
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        color: 'white',
+                        padding: 30
+                    },
+                }
+            }
         }
 
     });
 
-  let sliderOne = document.getElementById("slider-1");
-  let sliderTwo = document.getElementById("slider-2");
-  let displayValOne = document.getElementById("range1");
-  let displayValTwo = document.getElementById("range2");
-  let minGap = 1;
-  let sliderTrack = document.querySelector(".slider-track");
-  let sliderMaxValue = document.getElementById("slider-1").max;
+    // Grafico de Barras
 
-  sliderOne.value = 0;
-  sliderTwo.value = 24;
+    const ctx2 = document.getElementById('barChart');
+    const labels2 = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
-  slideOne()
-  slideTwo()
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+        labels: labels2,
+        datasets: [{
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+        }]
+    },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }, 
+    });
+
+    let sliderOne = document.getElementById("slider-1");
+    let sliderTwo = document.getElementById("slider-2");
+    let displayValOne = document.getElementById("range1");
+    let displayValTwo = document.getElementById("range2");
+    let minGap = 1;
+    let sliderTrack = document.querySelector(".slider-track");
+    let sliderMaxValue = document.getElementById("slider-1").max;
+
+    sliderOne.value = 0;
+    sliderTwo.value = 24;
+
+    slideOne()
+    slideTwo()
 
 
-  function slideOne(param) {
-      if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-        sliderOne.value = parseInt(sliderTwo.value) - minGap;
-      }
-      // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
-      // else displayValOne.textContent = sliderOne.value + ':00 ';
-      
-      displayValOne.textContent = sliderOne.value + ":00";
-      fillColor();
-  }
+    function slideOne(param) {
+        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+            sliderOne.value = parseInt(sliderTwo.value) - minGap;
+        }
+        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+        // else displayValOne.textContent = sliderOne.value + ':00 ';
 
-  function slideTwo(param) {
-      if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-        sliderTwo.value = parseInt(sliderOne.value) + minGap;
-      }
-      // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
-      // else displayValTwo.textContent = sliderTwo.value + ':00';
-      displayValTwo.textContent = sliderTwo.value + ":00";
-      fillColor();
-  }
+        displayValOne.textContent = sliderOne.value + ":00";
+        fillColor();
+    }
 
-  function fillColor(param) {
-      percent1 = (sliderOne.value / sliderMaxValue) * 100;
-      percent2 = (sliderTwo.value / sliderMaxValue) * 100;
-      sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
-  }
+    function slideTwo(param) {
+        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+            sliderTwo.value = parseInt(sliderOne.value) + minGap;
+        }
+        // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+        // else displayValTwo.textContent = sliderTwo.value + ':00';
+        displayValTwo.textContent = sliderTwo.value + ":00";
+        fillColor();
+    }
 
-  valor1 = (4 / 12) * 100
-  valor2 = (8 / 12) * 100
+    function fillColor(param) {
+        percent1 = (sliderOne.value / sliderMaxValue) * 100;
+        percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+        sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    }
 
-  barra1.style.width = valor1 + "%"
-  barra2.style.width = valor2 + "%"
+    valor1 = (4 / 12) * 100
+    valor2 = (8 / 12) * 100
 
-  valor1 = Math.trunc(valor1)
-  valor2 = Math.trunc(valor2)
+    barra1.style.width = valor1 + "%"
+    barra2.style.width = valor2 + "%"
 
-  barra1.innerHTML = valor1 + "%"
-  barra2.innerHTML = valor2 + "%"
+    valor1 = Math.trunc(valor1)
+    valor2 = Math.trunc(valor2)
+
+    barra1.innerHTML = valor1 + "%"
+    barra2.innerHTML = valor2 + "%"
+
+    valor3 = (4 / 6) * 100
+    valor4 = (2 / 6) * 100
+
+    barra3.style.width = valor3 + "%"
+    barra4.style.width = valor4 + "%"
+
+    valor3 = Math.trunc(valor3)
+    valor4 = Math.trunc(valor4)
+
+    barra3.innerHTML = valor3 + "%"
+    barra4.innerHTML = valor4 + "%"
 
 </script>
