@@ -10,6 +10,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
@@ -63,23 +64,20 @@
                 <h2>Escolha um periodo para analisar</h2>
                 <div class="select_periodo">
                     <select name="ano">
-                        <option selected value="">Escolha um ano</option>
-                    </select>
-                    <select name="ano">
                         <option selected value="">Escolha um mês</option>
                     </select>
                     <select name="ano">
-                        <option selected value="">Escolha uma semana</option>
+                        <option selected value="">Escolha os dias</option>
                     </select>
                 </div>
             </div>
             <div class="graficos_dashes">
                 <div class="linha_grafico1">
-                    <div class="grafico1">
-                        a
+                    <div id="rank" class="grafico1">
+
                     </div>
-                    <div class="grafico2">
-                        a
+                    <div id="taxa" class="grafico2">
+
                     </div>
                 </div>
                 <div class="linha_grafico2">
@@ -97,3 +95,137 @@
 </body>
 
 </html>
+
+<script>
+
+    // gráfico de barra do ranking
+    var options = {
+        series: [{
+            data: [50, 43, 38, 34, 25],
+        }],
+        chart: {
+            type: 'bar',
+            height: 230,
+            toolbar: {
+                show: false
+            }
+        },
+        title:{
+            text: "Totens com mais alertas da semana",
+            align: "center",
+            style:{
+                color: "#ffffff",
+                fontFamily: "Abel",
+                fontSize: "20px"
+            }
+        },
+        plotOptions: {
+            bar: {
+                borderRadiusApplication: 'end',
+                horizontal: true,
+                colors: {
+                    ranges: [{
+                        from: 0,
+                        to: 100,
+                        color: '#FF8818' // Cor das barras
+                    }]
+                }
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        xaxis: {
+            min: 0,
+            max: 100,
+            categories: ['Totem 3', 'Totem 5', 'Totem 4', 'Totem 7', 'Totem 1'],
+            title: {
+                style: {
+                    color: "#FFFFFF"
+                }
+            },
+            labels: {
+                formatter: function (value) {
+                    return value + "%";
+                },
+                style: {
+                    colors: "#FFFFFF",
+                    fontFamily: "Abel"
+                }
+            }
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: "#ffffff"
+                }
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#rank"), options);
+    chart.render();
+
+    //gráfico de linha com a taxa de alertas por dia da semana
+    var options = {
+    series: [{
+        data: [10, 41, 35, 51, 49, 62, 80]
+    }],
+    chart: {
+        height: 250,
+        type: 'line',
+        zoom: {
+            enabled: false
+        },
+        toolbar: {
+            show: false
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'straight',
+        colors: ['#FF8818']  // Define a cor da linha
+    },
+    title: {
+        text: 'Taxa de totem em alerta por dia da semana',
+        align: 'center',
+        style:{
+            color:'#ffffff',
+            fontSize: "20px",
+            fontFamily: "Abel"
+        }
+    },
+    grid: {
+        row: {
+            colors: ['transparent', 'transparent'], 
+            opacity: 0.5
+        },
+    },
+    xaxis: {
+        categories: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'],
+        labels: {
+            style:{
+                colors: "#ffffff",
+                fontFamily: "Abel"
+            }
+        }
+    },
+    yaxis: {
+            labels: {
+                style: {
+                    colors: "#ffffff",
+                    fontFamily: "Abel"
+                },
+                formatter: function (value) {
+                    return value + "%";
+                },
+            }
+        }
+};
+
+var chart = new ApexCharts(document.querySelector("#taxa"), options);
+chart.render();
+
+</script>
