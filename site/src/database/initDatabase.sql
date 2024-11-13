@@ -28,6 +28,7 @@ create table empresa(
   email varchar(80) not null unique,
   telefone char(19) not null unique,
   fk_endereco int unique,
+
   constraint empresa_fk_endereco foreign key (fk_endereco) references endereco(id)
 );
 -- tabela de filiais (cada empresa possui diversas filiais e cada filial possui 1 único endereçp, cardinalidade 1:n e cardinalidade 1:1):
@@ -36,6 +37,7 @@ create table filial(
   data_hora timestamp default current_timestamp,
   fk_empresa int,
   fk_endereco int unique,
+
   constraint filial_fk_empresa foreign key (fk_empresa) references empresa(id),
   constraint filial_fk_endereco foreign key (fk_endereco) references endereco(id)
 );
@@ -85,6 +87,7 @@ create table alerta(
   ram_porcentagem decimal(6, 2),
   fk_totem int,
   fk_promocao int,
+  
   constraint alerta_fk_totem foreign key (fk_totem) references totem(id),
   constraint alerta_fk_promocao foreign key (fk_promocao) references promocao(id)
 );
@@ -113,7 +116,7 @@ grant insert on market_safe.alerta to 'mktsUserInsertAlerta'@'%';
 
 -- insert.sql:
 
-iinsert into endereco (cep, bairro, rua, numero, complemento) values
+insert into endereco (cep, bairro, rua, numero, complemento) values
   ("123-45678", "bairro", "rua", 0, "complemento"),
   ("234-56789", "bairro 2", "avenida", 10, "prédio 1"),
   ("345-67890", "bairro 3", "travessa", 20, NULL),
@@ -160,5 +163,3 @@ select * from funcionario;
 select * from totem;
 
 select * from alerta;
-
-

@@ -39,6 +39,19 @@ create table filial(
   constraint filial_fk_empresa foreign key (fk_empresa) references empresa(id),
   constraint filial_fk_endereco foreign key (fk_endereco) references endereco(id)
 );
+
+alter table filial add column promocao_ativa int;
+
+create table promocao(
+id int primary key auto_increment,
+data_hora timestamp default current_timestamp,
+nome varchar(80) not null, 
+fk_filial int,
+constraint promocao_fk_filial foreign key (fk_filial) references filial(id)
+);
+
+alter table filial add constraint filial_fk_promocao foreign key (promocao_ativa) references promocao(id);
+
 -- tabela de funcionário (cada funcionário pode estar empregado em uma única empresa e em 0 ou 1 única filial, cardinalidade n:1, 0:1):
 create table funcionario(
   id int primary key auto_increment,
@@ -71,6 +84,8 @@ create table alerta(
   cpu_porcentagem decimal(6, 2),
   ram_porcentagem decimal(6, 2),
   fk_totem int,
-
-  constraint alerta_fk_totem foreign key (fk_totem) references totem(id)
+  fk_promocao int,
+  
+  constraint alerta_fk_totem foreign key (fk_totem) references totem(id),
+  constraint alerta_fk_promocao foreign key (fk_promocao) references promocao(id)
 );
