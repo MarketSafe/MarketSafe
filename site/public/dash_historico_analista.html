@@ -60,15 +60,28 @@
             <div class="titulo">
                 <h1>Dashboard Histórico</h1>
             </div>
-            <div class="periodo">
-                <h2>Escolha um periodo para analisar</h2>
-                <div class="select_periodo">
-                    <select name="ano">
-                        <option selected value="">Escolha um mês</option>
-                    </select>
-                    <select name="ano">
-                        <option selected value="">Escolha os dias</option>
-                    </select>
+            <div class="filtros">
+                <div class="periodo">
+                    <h2>Escolha um periodo para analisar</h2>
+                    <div class="select_periodo">
+                        <select name="ano">
+                            <option selected value="">MÊS</option>
+                        </select>
+                        <select name="ano">
+                            <option selected value="">ANO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="componente">
+                    <h2>Escolha um componente para analisar</h2>
+                    <div class="select_periodo">
+                        <select name="ano">
+                            <option selected value="">CPU</option>
+                        </select>
+                        <select name="ano">
+                            <option selected value="">RAM</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="graficos_dashes">
@@ -108,6 +121,7 @@
     // gráfico de barra do ranking
     var options = {
         series: [{
+            name: "Total de alertas do totem",
             data: [50, 43, 38, 34, 25],
         }],
         chart: {
@@ -149,7 +163,7 @@
             title: {
                 text: 'Número de alertas por totem',
                 fontFamily: 'Abel',
-                style:{
+                style: {
                     color: '#ffffff'
                 }
             },
@@ -161,10 +175,24 @@
             }
         },
         yaxis: {
+            formatter: function(value){
+                return value;
+            },
             labels: {
                 style: {
                     colors: "#ffffff"
                 }
+            }
+        },
+        tooltip: {
+            theme: 'dark',  // Define o tema escuro para o tooltip
+            style: {
+                fontFamily: 'Abel',
+                fontSize: '14px',
+                color: '#fff'
+            },
+            marker: {
+                show: false
             }
         }
     };
@@ -172,75 +200,94 @@
     var chart = new ApexCharts(document.querySelector("#rank"), options);
     chart.render();
 
+
     //gráfico de linha com a taxa de alertas por dia da semana
     var options = {
-        series: [{
-            data: [10, 41, 35, 51, 49, 62, 80]
-        }],
-        chart: {
-            height: 250,
-            type: 'line',
-            zoom: {
-                enabled: false
-            },
-            toolbar: {
-                show: false
-            }
-        },
-        dataLabels: {
+    series: [{
+        name: "Percentual total",  // Isso é para nomear a série
+        data: [10, 41, 35, 51, 49, 62, 80]
+    }],
+    chart: {
+        height: 250,
+        type: 'line',
+        zoom: {
             enabled: false
         },
-        stroke: {
-            curve: 'straight',
-            colors: ['#FF8818']  // Define a cor da linha
+        toolbar: {
+            show: false
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'straight',
+        colors: ['#FF8818']  // Define a cor da linha
+    },
+    title: {
+        text: 'Taxa de totem em alerta por dia da semana',
+        align: 'center',
+        style: {
+            color: '#ffffff',
+            fontSize: "20px",
+            fontFamily: "Abel"
+        }
+    },
+    grid: {
+        row: {
+            colors: ['transparent', 'transparent'],
+            opacity: 0.5
         },
+    },
+    xaxis: {
+        categories: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+        labels: {
+            style: {
+                colors: "#ffffff",
+                fontFamily: "Abel"
+            }
+        }
+    },
+    yaxis: {
         title: {
-            text: 'Taxa de totem em alerta por dia da semana',
+            text: 'Taxa de alerta do total de totens',
             align: 'center',
             style: {
                 color: '#ffffff',
-                fontSize: "20px",
+                fontFamily: 'Abel'
+            }
+        },
+        labels: {
+            style: {
+                colors: "#ffffff",
                 fontFamily: "Abel"
-            }
-        },
-        grid: {
-            row: {
-                colors: ['transparent', 'transparent'],
-                opacity: 0.5
             },
-        },
-        xaxis: {
-            categories: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'],
-            labels: {
-                style: {
-                    colors: "#ffffff",
-                    fontFamily: "Abel"
-                }
-            }
-        },
-        yaxis: {
-            title:{
-                text: 'Taxa de alerta do total de totens',
-                align: 'center',
-                style:{
-                    color: '#ffffff',
-                    fontFamily: 'Abel'
-                }
+            formatter: function (value) {
+                return value + "%";
             },
-            labels: {
-                style: {
-                    colors: "#ffffff",
-                    fontFamily: "Abel"
-                },
-                formatter: function (value) {
-                    return value + "%";
-                },
+        }
+    },
+    tooltip: {
+        theme: 'dark',  // Define o tema escuro para o tooltip
+        style: {
+            fontFamily: 'Abel',
+            fontSize: '14px',
+            color: '#fff'
+        },
+        marker: {
+            show: false
+        },
+        y: {
+            formatter: function (value) {
+                return value + '%';  // Personaliza o texto no tooltip
             }
         }
-    };
+    }
+};
 
-    var chart = new ApexCharts(document.querySelector("#taxa"), options);
-    chart.render();
+var chart = new ApexCharts(document.querySelector("#taxa"), options);
+chart.render();
+
 
     // gráfico de barras do total de alertas nas horas
     var options = {
@@ -249,10 +296,10 @@
             data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 70, 79, 85]
         },
         ],
-        title:{
+        title: {
             text: 'Total de alertas por hora',
             align: 'center',
-            style:{
+            style: {
                 color: '#ffffff',
                 fontFamily: 'Abel',
                 fontSize: '20px'
@@ -261,8 +308,8 @@
         chart: {
             type: 'bar',
             height: 250,
-            toolbar:{
-                show:false
+            toolbar: {
+                show: false
             }
         },
         plotOptions: {
@@ -280,7 +327,7 @@
             width: 2,
             colors: ['transparent']
         },
-        xaxis:{
+        xaxis: {
             labels: {
                 style: {
                     colors: '#ffffff',
@@ -292,22 +339,33 @@
 
         yaxis: {
             labels: {
-            style: {
-                colors: '#ffffff',
-                fontFamily: 'Abel'
-            }
-        },
+                style: {
+                    colors: '#ffffff',
+                    fontFamily: 'Abel'
+                }
+            },
         },
         fill: {
             opacity: 1
         },
+
         tooltip: {
+            theme: 'dark',  // Define o tema escuro para o tooltip
             y: {
                 formatter: function (val) {
-                    return "$ " + val + " thousands"
+                    return val
                 }
+            },
+            style: {
+                fontFamily: 'Abel',
+                fontSize: '14px',
+                color: '#fff'
+            },
+            marker: {
+                show: false
             }
         }
+
     };
 
     var chart = new ApexCharts(document.querySelector("#total"), options);

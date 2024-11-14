@@ -219,15 +219,43 @@ body {
     font-family: "Abel";
 }
 
+.filtros{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .periodo{
     align-items: center;
     justify-content: center;
     flex-direction: column;
     display: flex;
-    width: 100%;
+    width: 30%;
+    background-color: #31333C;
+    margin-top: 10px;
+    border-radius: 10px;
+    border-color: solid white;
+    border: #7C7C7C solid 2px;
+}
+
+.componente{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    width: 30%;
+    background-color: #31333C;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: #7C7C7C solid 2px;
 }
 
 .periodo h2{
+    font-family: "Abel";
+}
+
+.componente h2{
     font-family: "Abel";
 }
 
@@ -250,12 +278,27 @@ body {
     border: #fff solid 2px;
     color: #fff;
     font-size: 16px; 
-    width: 13%;
+    width: 20%;
     align-items: center;
     display: flex;
     height: 42px;
     border-radius: 10px;
-    margin: 0px 15px 0px 0px;
+    margin: 0px 15px 8px 0px;
+}
+
+.componente select{
+    padding: 6.5px;
+    margin-bottom: 10px;
+    background-color: #292A32; 
+    border: #fff solid 2px;
+    color: #fff;
+    font-size: 16px; 
+    width: 20%;
+    align-items: center;
+    display: flex;
+    height: 42px;
+    border-radius: 10px;
+    margin: 0px 15px 8px 0px;
 }
 
 .graficos_dashes{
@@ -317,7 +360,6 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-    background-color: #32333C;
     width: 45%;
     height: 95%;
 }
