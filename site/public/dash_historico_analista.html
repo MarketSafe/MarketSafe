@@ -64,11 +64,11 @@
                 <div class="periodo">
                     <h2>Escolha um periodo para analisar</h2>
                     <div class="select_periodo">
-                        <select name="ano">
+                        <select name="ano" id="select_mes">
                             <option selected value="">MÊS</option>
                         </select>
-                        <select name="ano">
-                            <option selected value="">ANO</option>
+                        <select name="ano" id="select_dia">
+                            <option selected value="" >DIAS</option>
                         </select>
                     </div>
                 </div>
@@ -76,10 +76,9 @@
                     <h2>Escolha um componente para analisar</h2>
                     <div class="select_periodo">
                         <select name="ano">
-                            <option selected value="">CPU</option>
-                        </select>
-                        <select name="ano">
-                            <option selected value="">RAM</option>
+                            <option selected value="">CPU
+                                <option value="">RAM</option>
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -371,5 +370,44 @@ chart.render();
     var chart = new ApexCharts(document.querySelector("#total"), options);
     chart.render();
 
+    cadastrarMes();
+    function cadastrarMes() {
+        fetch("/historicoLeo/cadastrarMes", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (meses) {
+                var select_mes = document.getElementById('select_mes');
+                meses.forEach((mes) => {
+                    select_mes.innerHTML += `<option value="${mes.id}">${mes.mes}</option>`;
+                });
+            })
+            .catch(function (erro) {
+                alert(erro);
+                console.log("Erro ao carregar linhas:", erro);
+            });
+    }
 
+    
+    function cadastrarDia() {
+        fetch("/historicoLeo/cadastrarDia", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (dias) {
+                var select_dia = document.getElementById('select_dia');
+                dias.forEach((dia) => {
+                    select_dia.innerHTML += `<option value="${dia.id}">${dia.intervalo_dias}</option>`;
+                });
+            })
+            .catch(function (erro) {
+                alert(erro);
+                console.log("Erro ao carregar linhas:", erro);
+            });
+    }
+    cadastrarDia();
 </script>
