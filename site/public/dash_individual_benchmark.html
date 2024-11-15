@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarketSafe | Dashboard</title>
+    <link rel="stylesheet" href="./css/dash_benchmark_analista.css" />
+    <link rel="icon" href="css/icon.png" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Afacad:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+
+    <script src="./js/heatmap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <div class="div_logo">
+                <img src="assets/img/Logo Self 2.png" alt="">
+                <div class="MKTS">
+                    <h1>MKTS</h1>
+                </div>
+            </div>
+            <div class="select_dash">
+                <h2>Dashboards</h2>
+            </div>
+            <div class="regiao-select">
+                <div class="analista">
+                    <h3>Analista</h3>
+                </div>
+                <div class="monitoramento">
+                    <p>Monitoramento</p> <i class='bx bx-show'></i>
+                </div>
+                <div class="monitoramento">
+                    <p>Histórico</p> <i class='bx bx-file-blank'></i>
+                </div>
+                <div class="monitoramento">
+                    <p>BenchMark</p> <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+            </div>
+            <div class="linha">
+            </div>
+            <div class="perfil">
+                <div class="foto_perfil">
+                    <img src="css/foto-anilista.jpg" alt="">
+                </div>
+                <div class="nome_perfil">
+                    <div class="nome">
+                        <h2>Fred</h2>
+                    </div>
+                    <hr>
+                    <div class="cargo">
+                        <p>Analista</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashes">
+
+            <!-- Tela de Benchmark para o analista -->
+            <div class="benchAnalista">
+                <div class="titulo" id="tituloBenchmark">
+                    <h1>Menu de Seleção - BenchMark</h1>
+                </div>
+                <div class="filtros" id="filtrosBenchmark">
+                    <div class="selecoes">
+                        <div class="fComp">
+                            <h2>Componente</h2>
+                            <div class="buttons">
+                                <button>
+                                    <h2>CPU</h2>
+                                </button>
+                                <button>
+                                    <h2>RAM</h2>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="fTote">
+                            <h2>Totens</h2>
+                            <div class="fSelect">
+                                <select name="" id="">
+                                    <option value="">Escolha um Totem</option>
+                                    <option value="">Totem 1</option>
+                                    <option value="">Totem 2</option>
+                                </select>
+                                <select name="" id="">
+                                    <option value="">Escolha um Totem</option>
+                                    <option value="">Totem 1</option>
+                                    <option value="">Totem 2</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="fPeri">
+                            <h2>Periodo</h2>
+                            <div class="datas">
+                                <input type="date">
+                                <input type="date">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="btFiltro" id="btFiltrar">
+                        <button class="comparacao" onclick="trocarTela()">Comparar</button>
+                    </div>
+                </div>
+                <div class="conteudo" id="ctd1">
+                    <div class="ctdEsq">
+                        <h2>Fluxo Mensal</h2>
+                        <div class="heatmap"></div>
+                    </div>
+                    <div class="ctdDir">
+                        <h2>Sugestões de Filtros <br> (Mensal)</h2>
+                        <div class="sug" style="margin-top: 5%;">
+                            <div>
+                                <h3>Componente: CPU</h3>
+                                <h3>Totens: 1 e 5</h3>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="0.5em" height="1em" viewBox="0 0 12 24">
+                                <defs>
+                                    <path id="weuiArrowOutlined0" fill="white"
+                                        d="m7.588 12.43l-1.061 1.06L.748 7.713a.996.996 0 0 1 0-1.413L6.527.52l1.06 1.06l-5.424 5.425z" />
+                                </defs>
+                                <use fill-rule="evenodd" href="#weuiArrowOutlined0"
+                                    transform="rotate(-180 5.02 9.505)" />
+                            </svg>
+                        </div>
+                        <div class="sug">
+                            <div>
+                                <h3>Componente: CPU</h3>
+                                <h3>Totens: 2 e 6</h3>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="0.5em" height="1em" viewBox="0 0 12 24">
+                                <defs>
+                                    <path id="weuiArrowOutlined0" fill="white"
+                                        d="m7.588 12.43l-1.061 1.06L.748 7.713a.996.996 0 0 1 0-1.413L6.527.52l1.06 1.06l-5.424 5.425z" />
+                                </defs>
+                                <use fill-rule="evenodd" href="#weuiArrowOutlined0"
+                                    transform="rotate(-180 5.02 9.505)" />
+                            </svg>
+                        </div>
+                        <div class="sug">
+                            <div>
+                                <h3>Componente: RAM</h3>
+                                <h3>Totens: 3 e 4</h3>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="0.5em" height="1em" viewBox="0 0 12 24">
+                                <defs>
+                                    <path id="weuiArrowOutlined0" fill="white"
+                                        d="m7.588 12.43l-1.061 1.06L.748 7.713a.996.996 0 0 1 0-1.413L6.527.52l1.06 1.06l-5.424 5.425z" />
+                                </defs>
+                                <use fill-rule="evenodd" href="#weuiArrowOutlined0"
+                                    transform="rotate(-180 5.02 9.505)" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="conteudo2" id="ctd2" style="display: none;">
+                    <div class="ctdEsq">
+                        <h1 class="tituloLinha"> Alertas x Totem em horários nos dias da semana </h1>
+                        <div class="GfLinha">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                        <div class="DBSlider">
+                            <h3>Horário:</h3>
+                            <div class="filtrosSL">
+                                <div class="wrapper">
+                                    <div class="sliderContainer">
+                                        <div class="slider-track"></div>
+                                        <input type="range" min="0" max="24" value="1" id="slider-1"
+                                            oninput="slideOne()" />
+                                        <input type="range" min="0" max="24" value="12" id="slider-2"
+                                            oninput="slideTwo()" />
+                                        <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
+                                        <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
+                                    </div>
+                                    <div class="values">
+                                        <span id="range1"> 0 </span>
+                                        <span> &ThickSpace; &dash; &ThickSpace; </span>
+                                        <span id="range2"> 12 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divisao"></div>
+                        <h1 class="tituloBarra"> Alertas por Totem </h1>
+                        <div class="GfBar">
+                            <canvas id="barChart"></canvas>
+                        </div>
+
+                    </div>
+                    <div class="ctdDir">
+                        <h1 class="tituloRsq"> Tempo de atividade dos totens x status </h1>
+                        <div class="graficoRosquina">
+                            <div class="graficoRsq1">
+                                <canvas id="donut1"></canvas>
+                            </div>
+                            <div class="graficoRsq2">
+                                <canvas id="donut2"></canvas>
+                            </div>
+                        </div>
+                        <div class="labelsRsq">
+                            <div
+                                style="height: 25px; width: 25px; background-color: rgb(150, 147, 147); margin-right: 5px; border: #FFF solid 2px;">
+                            </div>
+                            <h3>Ineficiente</h3>
+                            <div
+                                style="height: 25px; width: 25px; background-color: rgb(48, 170, 48); margin-right: 5px; border: #FFF solid 2px;">
+                            </div>
+                            <h3>Ideal</h3>
+                            <div
+                                style="height: 25px; width: 25px; background-color: #ff6384; margin-right: 5px; border: #FFF solid 2px;">
+                            </div>
+                            <h3>Crítico</h3>
+                        </div>
+                        <div class="divisao"></div>
+                        <div style="text-align: center; width: 80%;">
+                            <h1>Dados dos alertas</h1>
+                            <div>
+                                <h3><span>4</span> <span class="txt">Relação entre alertas totais</span> <span>8</span>
+                                </h3>
+                                <div class="comparacao">
+                                    <div class="barra1" id="barra1">50%</div>
+                                    <div class="barra2" id="barra2">50%</div>
+                                </div>
+
+                                <h3><span>4</span> <span class="txt">Relação entre alertas de CPU</span> <span>2</span>
+                                </h3>
+                                <div class="comparacao">
+                                    <div class="barra1" id="barra3">50%</div>
+                                    <div class="barra2" id="barra4">50%</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    var heatmapInstance = h337.create({
+        container: document.querySelector(".heatmap"),
+    });
+
+    var points = [];
+    var max = 20;
+    var min = 0;
+    var width = 850;
+    var height = 490;
+
+    atualizarFeed();
+
+    function atualizarFeed() {
+        // =========================================================================
+
+        var dado = 25;
+
+        var escada1 = { x: 38, y: 340, value: dado * 0.7, radius: 40, };
+        var escada2 = { x: 90, y: 340, value: dado * 0.5, radius: 40, };
+        //    var escada3 = { x: 545, y: 345, value: dado, radius: 40, };
+        //    var passarela1 = { x: 515, y: 370, value: dado * 1.2, radius: 40, };
+        //    var passarela2 = { x: 620, y: 250, value: dado * 1, radius: 40, };
+        //    var catraca = { x: 690, y: 172, value: dado * 0.8, radius: 40, };
+
+        points = [escada1, escada2];
+
+        var data = {
+            max: max,
+            min: min,
+            data: points,
+        }
+
+        heatmapInstance.setData(data);
+
+        // ========================================================================
+
+    }
+
+    function trocarTela() {
+        ctd1.style.display = 'none'
+        ctd2.style.display = 'flex'
+
+        btFiltrar.style.display = 'none'
+
+        filtrosBenchmark.style.marginTop = '0%'
+        filtrosBenchmark.style.paddingTop = '0%'
+        filtrosBenchmark.style.borderRadius = '0px 0px 10px 10px'
+        tituloBenchmark.style.borderRadius = '10px 10px 0px 0px'
+
+        tituloBenchmark.innerHTML = "<h1>BenchMark</h1>"
+    }
+
+
+    // Grafico de linha 
+
+    const ctx = document.getElementById('lineChart');
+
+    const labels = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'T1',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                borderColor: '#9D3C00',
+                backgroundColor: '#FF6F16',
+                tension: 0
+
+            },
+            {
+                label: 'T2',
+                data: [55, 49, 80, 21, 46, 35, 50],
+                borderColor: '#C98800',
+                backgroundColor: '#FFB418',
+                tension: 0
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                }, y: {
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        color: 'white',
+                        padding: 25,
+                        boxWidth: 20,
+                        boxHeight: 20
+                    },
+                }
+            }
+        }
+
+    });
+
+    // Grafico de Barras
+
+    const ctx2 = document.getElementById('barChart');
+    const labels2 = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: labels2,
+            datasets: [{
+                label: 'T1',
+                data: [45, 69, 60, 51, 26, 65, 48],
+                backgroundColor: [
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16'
+                ],
+                borderColor: [
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00'
+                ],
+                borderWidth: 2
+            }, {
+                label: 'T2',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: [
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418'
+                ],
+                borderColor: [
+                    '#C98800',
+                    '#C98800',
+                    '#C98800',
+                    '#C98800',
+                    '#C98800',
+                    '#C98800',
+                    '#C98800'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    }
+                },
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        color: 'white',
+                        padding: 25,
+                        boxWidth: 20,
+                        boxHeight: 20
+                    },
+                }
+            }
+        },
+    });
+
+    // Grafico de Rosquina 1
+
+    const ctx3 = document.getElementById('donut1');
+    labelsRsq = ["Ineficiente", "Ideal", "Crítico"]
+
+    new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [50, 300, 100],
+                backgroundColor: [
+                    'rgb(255, 99, 132)', // vermelho
+                    'rgb(48, 170, 48)',  // verde
+                    'rgb(150, 147, 147)'  // cinza
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: 'white',
+                        padding: 25,
+                        boxWidth: 20,
+                        boxHeight: 20
+                    },
+                }, 
+                title: {
+                display: true,
+                text: 'Totem 1',
+                color: 'white',
+                font: {
+                        size: 15
+                    }
+                }
+            }
+        }
+    });
+
+    // Grafico de Rosquina 2
+
+    const ctx4 = document.getElementById('donut2');
+
+    new Chart(ctx4, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [70, 240, 170],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(48, 170, 48)',
+                    'rgb(150, 147, 147)'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: 'white',
+                        padding: 25,
+                        boxWidth: 20,
+                        boxHeight: 20
+                    },
+                }, 
+                title: {
+                display: true,
+                text: 'Totem 2',
+                color: 'white',
+                font: {
+                        size: 15
+                    }
+                }
+            }
+        }
+    });
+
+    let sliderOne = document.getElementById("slider-1");
+    let sliderTwo = document.getElementById("slider-2");
+    let displayValOne = document.getElementById("range1");
+    let displayValTwo = document.getElementById("range2");
+    let minGap = 1;
+    let sliderTrack = document.querySelector(".slider-track");
+    let sliderMaxValue = document.getElementById("slider-1").max;
+
+    sliderOne.value = 0;
+    sliderTwo.value = 24;
+
+    slideOne()
+    slideTwo()
+
+
+    function slideOne(param) {
+        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+            sliderOne.value = parseInt(sliderTwo.value) - minGap;
+        }
+        // if (sliderOne.value < 10) displayValOne.textContent = '0' + sliderOne.value + ':00';
+        // else displayValOne.textContent = sliderOne.value + ':00 ';
+
+        displayValOne.textContent = sliderOne.value + ":00";
+        fillColor();
+    }
+
+    function slideTwo(param) {
+        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+            sliderTwo.value = parseInt(sliderOne.value) + minGap;
+        }
+        // if (sliderTwo.value < 10) displayValTwo.textContent = '0' + sliderTwo.value + ':00';
+        // else displayValTwo.textContent = sliderTwo.value + ':00';
+        displayValTwo.textContent = sliderTwo.value + ":00";
+        fillColor();
+    }
+
+    function fillColor(param) {
+        percent1 = (sliderOne.value / sliderMaxValue) * 100;
+        percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+        sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
+    }
+
+    valor1 = (4 / 12) * 100
+    valor2 = (8 / 12) * 100
+
+    barra1.style.width = valor1 + "%"
+    barra2.style.width = valor2 + "%"
+
+    valor1 = Math.trunc(valor1)
+    valor2 = Math.trunc(valor2)
+
+    barra1.innerHTML = valor1 + "%"
+    barra2.innerHTML = valor2 + "%"
+
+    valor3 = (4 / 6) * 100
+    valor4 = (2 / 6) * 100
+
+    barra3.style.width = valor3 + "%"
+    barra4.style.width = valor4 + "%"
+
+    valor3 = Math.trunc(valor3)
+    valor4 = Math.trunc(valor4)
+
+    barra3.innerHTML = valor3 + "%"
+    barra4.innerHTML = valor4 + "%"
+
+</script>

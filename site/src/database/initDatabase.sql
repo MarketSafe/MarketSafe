@@ -41,6 +41,19 @@ create table filial(
   constraint filial_fk_empresa foreign key (fk_empresa) references empresa(id),
   constraint filial_fk_endereco foreign key (fk_endereco) references endereco(id)
 );
+
+alter table filial add column promocao_ativa int;
+
+create table promocao(
+id int primary key auto_increment,
+data_hora timestamp default current_timestamp,
+nome varchar(80) not null, 
+fk_filial int,
+constraint promocao_fk_filial foreign key (fk_filial) references filial(id)
+);
+
+alter table filial add constraint filial_fk_promocao foreign key (promocao_ativa) references promocao(id);
+
 -- tabela de funcionário (cada funcionário pode estar empregado em uma única empresa e em 0 ou 1 única filial, cardinalidade n:1, 0:1):
 create table funcionario(
   id int primary key auto_increment,
@@ -73,8 +86,10 @@ create table alerta(
   cpu_porcentagem decimal(6, 2),
   ram_porcentagem decimal(6, 2),
   fk_totem int,
-
-  constraint alerta_fk_totem foreign key (fk_totem) references totem(id)
+  fk_promocao int,
+  
+  constraint alerta_fk_totem foreign key (fk_totem) references totem(id),
+  constraint alerta_fk_promocao foreign key (fk_promocao) references promocao(id)
 );
 
 -- createUser.sql:
@@ -102,17 +117,49 @@ grant insert on market_safe.alerta to 'mktsUserInsertAlerta'@'%';
 -- insert.sql:
 
 insert into endereco (cep, bairro, rua, numero, complemento) values
-  ("123-45678", "bairro", "rua", 0, "complemento");
+  ("123-45678", "bairro", "rua", 0, "complemento"),
+  ("234-56789", "bairro 2", "avenida", 10, "prédio 1"),
+  ("345-67890", "bairro 3", "travessa", 20, NULL),
+  ("456-78901", "bairro 4", "estrada", 30, "casa 2"),
+  ("567-89012", "bairro 5", "rodovia", 40, "bloco 3");
 
 insert into empresa (razao_social, nome_fantasia, cnpj, email, telefone, fk_endereco) values
-  ("razao_social", "nome_fantasia", "12.345.678/9012-34", "email", "telefone", 1);
+  ("Empresa Alfa Ltda", "Alfa Tech", "12.345.678/9012-34", "contato@alfa.com", "+12 (34) 56789-1234", 1),
+  ("Empresa Beta Ltda", "Beta Soluções", "98.765.432/1098-76", "contato@beta.com", "+12 (34) 56789-5678", 2);
 
 insert into funcionario (nome, cpf, cargo, email, senha, telefone, fk_empresa) values
   ("Gisele", "123.456.789-01", "gerente", "gisele@gmail.com", "123456789", "+12 (34) 56789-0123", 1),
   ("Nagasse", "123.456.789-02", "analista", "nagasse@gmail.com", "123456789", "+12 (34) 56789-0456", 1);
 
 insert into filial (fk_empresa, fk_endereco) values
-  (1, 1);
+  (1, 3),
+  (1, 4),
+  (2, 5);
 
 insert into totem (mac_address, fk_filial) values
-  ("873c66420d5f", 1);
+  ("873c66420d5f", 1),
+  ("abc123456789", 2),
+  ("def987654321", 3);
+
+insert into alerta values
+(default, "2024-11-09 12:12:12", 89.0, 15.9, 1, null),
+(default, "2024-11-10 12:12:12", 89.0, 15.9, 1, null),
+(default, "2024-11-11 12:12:12", 89.0, 15.9, 1, null),
+(default, "2024-11-12 12:12:12", 89.0, 15.9, 1, null),
+(default, "2024-11-13 12:12:12", 89.0, 15.9, 1, null);
+
+-- select.sql:
+
+select * from endereco;
+
+select * from empresa;
+
+select * from filial;
+
+select * from promocao;
+
+select * from funcionario;
+
+select * from totem;
+
+select * from alerta;
