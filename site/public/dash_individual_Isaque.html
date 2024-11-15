@@ -156,10 +156,15 @@
             width: '95%',
             height: 345,
             animations: {
-                enabled: false,
-                easing: 'linear',
-                dynamicAnimation: {
-                    speed: 1000
+                enabled: true,
+                speed: 800,
+                animateGradually: {
+                    enabled: true,
+                    delay: 5050
+                },
+                dynamicAnimation:{
+                    enabled: true,
+                    speed: 350
                 }
             },
             toolbar: {
@@ -204,7 +209,7 @@
             }
         },
         yaxis: {
-            min: 0,
+        min: 0,
         max: 100,
         labels: {
           formatter: function(value) {
