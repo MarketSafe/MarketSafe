@@ -346,7 +346,7 @@ body {
 th{
     font-family: "Abel";  
 }
-.table tr:nth-child(1) {
+.table tbody tr:nth-child(1) {
     background-color: #ffe034;
     color: black;
     font-family: "Abel";

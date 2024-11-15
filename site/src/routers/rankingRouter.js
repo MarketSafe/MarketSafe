@@ -1,10 +1,10 @@
-// alertaRouter.js:
+// rankingRouter.js:
 
 // dependências:
 //   importação da framework "express":
 const express = require("express");
 
-//   importação do arquivo `alertaController.js`:
+//   importação do arquivo `rankingController.js`:
 const rankingController = require("../controllers/rankingController.js");
 
 // declaração da variável do roteador:
@@ -16,5 +16,5 @@ router.get("/classificacao", function (req, res) {
 }); 
 
 
-// exporta a variável de roteador do arquivo `alertaRouter.js`:
+// exporta a variável de roteador do arquivo `rankingRouter.js`:
 module.exports = router;
