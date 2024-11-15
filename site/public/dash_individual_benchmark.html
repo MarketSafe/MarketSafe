@@ -68,10 +68,10 @@
 
             <!-- Tela de Benchmark para o analista -->
             <div class="benchAnalista">
-                <div class="titulo">
+                <div class="titulo" id="tituloBenchmark">
                     <h1>Menu de Seleção - BenchMark</h1>
                 </div>
-                <div class="filtros">
+                <div class="filtros" id="filtrosBenchmark">
                     <div class="selecoes">
                         <div class="fComp">
                             <h2>Componente</h2>
@@ -167,6 +167,7 @@
                 </div>
                 <div class="conteudo2" id="ctd2" style="display: none;">
                     <div class="ctdEsq">
+                        <h1 class="tituloLinha"> Alertas x Totem em horários nos dias da semana </h1>
                         <div class="GfLinha">
                             <canvas id="lineChart"></canvas>
                         </div>
@@ -191,15 +192,40 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="divisao"></div>
+                        <h1 class="tituloBarra"> Alertas por Totem </h1>
                         <div class="GfBar">
                             <canvas id="barChart"></canvas>
                         </div>
 
                     </div>
                     <div class="ctdDir">
+                        <h1 class="tituloRsq"> Tempo de atividade dos totens x status </h1>
+                        <div class="graficoRosquina">
+                            <div class="graficoRsq1">
+                                <canvas id="donut1"></canvas>
+                            </div>
+                            <div class="graficoRsq2">
+                                <canvas id="donut2"></canvas>
+                            </div>
+                        </div>
+                        <div class="labelsRsq">
+                            <div
+                                style="height: 25px; width: 25px; background-color: rgb(150, 147, 147); margin-right: 5px; border: #FFF solid 2px;">
+                            </div>
+                            <h3>Ineficiente</h3>
+                            <div
+                                style="height: 25px; width: 25px; background-color: rgb(48, 170, 48); margin-right: 5px; border: #FFF solid 2px;">
+                            </div>
+                            <h3>Ideal</h3>
+                            <div
+                                style="height: 25px; width: 25px; background-color: #ff6384; margin-right: 5px; border: #FFF solid 2px;">
+                            </div>
+                            <h3>Crítico</h3>
+                        </div>
+                        <div class="divisao"></div>
                         <div style="text-align: center; width: 80%;">
                             <h1>Dados dos alertas</h1>
-
                             <div>
                                 <h3><span>4</span> <span class="txt">Relação entre alertas totais</span> <span>8</span>
                                 </h3>
@@ -273,6 +299,13 @@
         ctd2.style.display = 'flex'
 
         btFiltrar.style.display = 'none'
+
+        filtrosBenchmark.style.marginTop = '0%'
+        filtrosBenchmark.style.paddingTop = '0%'
+        filtrosBenchmark.style.borderRadius = '0px 0px 10px 10px'
+        tituloBenchmark.style.borderRadius = '10px 10px 0px 0px'
+
+        tituloBenchmark.innerHTML = "<h1>BenchMark</h1>"
     }
 
 
@@ -287,7 +320,7 @@
         data: {
             labels: labels,
             datasets: [{
-                label: 'Totem 1',
+                label: 'T1',
                 data: [65, 59, 80, 81, 56, 55, 40],
                 borderColor: '#9D3C00',
                 backgroundColor: '#FF6F16',
@@ -295,7 +328,7 @@
 
             },
             {
-                label: 'Totem 2',
+                label: 'T2',
                 data: [55, 49, 80, 21, 46, 35, 50],
                 borderColor: '#C98800',
                 backgroundColor: '#FFB418',
@@ -320,7 +353,9 @@
                     position: 'right',
                     labels: {
                         color: 'white',
-                        padding: 30
+                        padding: 25,
+                        boxWidth: 20,
+                        boxHeight: 20
                     },
                 }
             }
@@ -336,38 +371,161 @@
     new Chart(ctx2, {
         type: 'bar',
         data: {
-        labels: labels2,
-        datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 205, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
-            ],
-            borderWidth: 1
-        }]
-    },
+            labels: labels2,
+            datasets: [{
+                label: 'T1',
+                data: [45, 69, 60, 51, 26, 65, 48],
+                backgroundColor: [
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16',
+                    '#FF6F16'
+                ],
+                borderColor: [
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00',
+                    '#9D3C00'
+                ],
+                borderWidth: 2
+            }, {
+                label: 'T2',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: [
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418',
+                    '#FFB418'
+                ],
+                borderColor: [
+                    '#C98800',
+                    '#C98800',
+                    '#C98800',
+                    '#C98800',
+                    '#C98800',
+                    '#C98800',
+                    '#C98800'
+                ],
+                borderWidth: 2
+            }]
+        },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    }
+                },
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        color: 'white',
+                        padding: 25,
+                        boxWidth: 20,
+                        boxHeight: 20
+                    },
                 }
             }
-        }, 
+        },
+    });
+
+    // Grafico de Rosquina 1
+
+    const ctx3 = document.getElementById('donut1');
+    labelsRsq = ["Ineficiente", "Ideal", "Crítico"]
+
+    new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [50, 300, 100],
+                backgroundColor: [
+                    'rgb(255, 99, 132)', // vermelho
+                    'rgb(48, 170, 48)',  // verde
+                    'rgb(150, 147, 147)'  // cinza
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: 'white',
+                        padding: 25,
+                        boxWidth: 20,
+                        boxHeight: 20
+                    },
+                }, 
+                title: {
+                display: true,
+                text: 'Totem 1',
+                color: 'white',
+                font: {
+                        size: 15
+                    }
+                }
+            }
+        }
+    });
+
+    // Grafico de Rosquina 2
+
+    const ctx4 = document.getElementById('donut2');
+
+    new Chart(ctx4, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [70, 240, 170],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(48, 170, 48)',
+                    'rgb(150, 147, 147)'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: 'white',
+                        padding: 25,
+                        boxWidth: 20,
+                        boxHeight: 20
+                    },
+                }, 
+                title: {
+                display: true,
+                text: 'Totem 2',
+                color: 'white',
+                font: {
+                        size: 15
+                    }
+                }
+            }
+        }
     });
 
     let sliderOne = document.getElementById("slider-1");
