@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="./css/dash_individual_Isaque_TelaPrincipal.css" />
+    <link rel="stylesheet" href="css/dash_individual_Isaque_TelaPrincipal.css"/>
     <link rel="icon" href="css/icon.png" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -20,7 +20,7 @@
     <div class="container">
         <div class="menu">
             <div class="div_logo">
-                <img src="assets/img/Logo Self 2.png" alt="">
+                <img src="../public/assets/img/Logo Self 2.png" alt="">
                 <div class="MKTS">
                     <h1>MKTS</h1>
                 </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="perfil">
                 <div class="foto_perfil">
-                    <img src="css/foto-anilista.jpg" alt="">
+                    <img src="../public/css/foto-anilista.jpg" alt="">
                 </div>
                 <div class="nome_perfil">
                     <div class="nome">
@@ -181,13 +181,11 @@
 
 <script>
 
+
+
     //Gráfico 1
 
-    var dataSeries = [
-        { x: 0, y: Math.random() },
-        { x: 1, y: Math.random() },
-        { x: 2, y: Math.random() }
-    ];
+    var dataSeries = [];
     var dataSeries2 = [
         { x: 0, y: Math.random() },
         { x: 1, y: Math.random() },
@@ -219,7 +217,7 @@
         var valorAleatorio4 = Math.random() * 75;
         var valorAleatorio5 = Math.random() * 75;
 
-        dataSeries.push({ x: tempo, y: parseFloat(valorAleatorio1.toFixed(1)) });
+    //    dataSeries.push({ x: tempo, y: parseFloat(valorAleatorio1.toFixed(1)) });
         dataSeries2.push({ x: tempo, y: parseFloat(valorAleatorio2.toFixed(1)) });
         dataSeries3.push({ x: tempo, y: parseFloat(valorAleatorio3.toFixed(1)) });
         dataSeries4.push({ x: tempo, y: parseFloat(valorAleatorio4.toFixed(1)) });
@@ -720,5 +718,38 @@
 
     var chart5 = new ApexCharts(document.querySelector("#chart_Rosca3"), options5);
     chart5.render();
+
+    var dataSeries = [];
+    var tempo = 0;
+
+    
+
+    function Atualizar_ValorT1() {
+    fetch("/monitoramento/AtualizarValorT1", 
+    { method: "POST" })
+        .then(response => {
+            console.log(response)
+            response.text().then(text => console.log(text))
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Erro ao buscar os dados do servidor.");
+            }
+        })
+        .then(resultado => {
+            if (resultado.length > 0) {
+                var valorCpu = resultado[0].consumo_cpu; 
+                dataSeries.push({ x: tempo, y: valorCpu });
+                tempo += 1; 
+                console.log(dataSeries); 
+            }
+        })
+        .catch(error => {
+            console.error("Erro na requisição:", error);
+        });
+}
+setInterval(Atualizar_ValorT1, 5000);
+
+
 
 </script>

@@ -24,7 +24,7 @@ const totemRouter = require("./src/routers/totemRouter.js");
 const alertaRouter = require("./src/routers/alertaRouter.js");
 const rankingRouter = require("./src/routers/rankingRouter.js");
 const historicoLeoRouter = require("./src/routers/historicoLeo.js");
-
+const monitoramentoRouterIsaque = require("./src/routers/monitoramentoRouterIsaque.js");
 // declaração da variável de aplicação:
 const app = express();
 
@@ -39,6 +39,7 @@ app.use("/totem", totemRouter);
 app.use("/alerta", alertaRouter);
 app.use("/ranking", rankingRouter);
 app.use("/historicoLeo", historicoLeoRouter);
+app.use("/monitoramento", monitoramentoRouterIsaque);
 
 //   configuração de arquivos estáticos (*.html, *.css, *.js):
 app.use(express.static(path.join(__dirname, "public")));
