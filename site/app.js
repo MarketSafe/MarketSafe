@@ -25,6 +25,7 @@ const alertaRouter = require("./src/routers/alertaRouter.js");
 const rankingRouter = require("./src/routers/rankingRouter.js");
 const historicoLeoRouter = require("./src/routers/historicoLeo.js");
 const monitoramentoRouterIsaque = require("./src/routers/monitoramentoRouterIsaque.js");
+const benchmarkGerenteRouter = require("./src/routers/dashboards/benchmarkGerenteRouter.js");
 // declara a variável de aplicação:
 const app = express();
 
@@ -40,6 +41,7 @@ app.use("/alerta", alertaRouter);
 app.use("/ranking", rankingRouter);
 app.use("/historicoLeo", historicoLeoRouter);
 app.use("/monitoramento", monitoramentoRouterIsaque);
+app.use("/benchmarkGerente", benchmarkGerenteRouter);
 
 //   configura arquivos estáticos (*.html, *.css, *.js):
 app.use(express.static(path.join(__dirname, "public")));
