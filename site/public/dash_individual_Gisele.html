@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 
-<body onload="atualizarTabela()">
+<body onload="inicializarPagina()">
     <div class="container">
         <div class="menu">
             <div class="div_logo">
@@ -149,6 +149,8 @@
                                 </select>
                             </div>
                         </div>
+                        <button id="filtrar">Filtrar</button>
+
                         <div class="fTote">
                             <h2 class="h2-title">Mês</h2>
                             <div class="fSelect">
@@ -182,41 +184,80 @@
 
 <script>
 
-function adicionarPromocao(tabela, posicao, promocao, quantidadeDeAlertas) {
-    var linha = document.createElement('tr');
-    var lugar = document.createElement('td');
-    var desconto = document.createElement('td');
-    var qtdAlertas = document.createElement('td');
 
-    lugar.innerHTML = `${posicao}`;
-    desconto.textContent = promocao;
-    qtdAlertas.textContent = quantidadeDeAlertas;
+    function adicionarPromocao(tabela, posicao, promocao, quantidadeDeAlertas) {
+        var linha = document.createElement('tr');
+        var lugar = document.createElement('td');
+        var desconto = document.createElement('td');
+        var qtdAlertas = document.createElement('td');
 
-    linha.appendChild(lugar);
-    linha.appendChild(desconto);
-    linha.appendChild(qtdAlertas);
-    tabela.appendChild(linha);
-}
+        lugar.innerHTML = `${posicao}`;
+        desconto.textContent = promocao;
+        qtdAlertas.textContent = quantidadeDeAlertas;
 
-function atualizarTabela() {
-    fetch('/ranking/classificacao')
-        .then(response => response.json())
-        .then(data => {
-            var tabela = document.getElementById("corpoTabela");
+        linha.appendChild(lugar);
+        linha.appendChild(desconto);
+        linha.appendChild(qtdAlertas);
+        tabela.appendChild(linha);
+    }
 
-            tabela.innerHTML = '';
 
-            
-            for (var i = 0; i < Math.min(3, data.length); i++) {
-                var item = data[i];
-                var nomePromocao = item.promocao;
-                var qtdAlertas = item.qtd_alertas;
+    function buscarPorFilial() {
+        document.getElementById('filtrar').addEventListener('click', () => {
+            const filial = document.getElementById('filial').value;
 
-                adicionarPromocao(tabela, i + 1, nomePromocao, qtdAlertas);
-            }
-        })
-        .catch(error => console.error('Erro ao buscar promoção:', error));
-}
+            fetch(`/ranking/buscarPorFilial?filial=${filial}`, {
+                method: 'GET',
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else if (response.status === 204) {
+                        return null;
+                    } else {
+                        throw new Error(`Erro ${response.status}: ${response.statusText}`);
+                    }
+                })
+                .then(data => {
+                    if (data) {
+                        console.log('Dados recebidos:', data);
+                        var tabela = document.getElementById("corpoTabela");
+                        tabela.innerHTML = '';
+
+                        for (var i = 0; i < data.length; i++) {
+                            var item = data[i];
+                            var nomePromocao = item.promocao;
+                            var qtdAlertas = item.qtd_alertas;
+
+                            adicionarPromocao(tabela, i + 1, nomePromocao, qtdAlertas);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados:', error);
+                });
+        });
+    }
+
+    function atualizarTabela() {
+        fetch('/ranking/classificacao')
+            .then(response => response.json())
+            .then(data => {
+                var tabela = document.getElementById("corpoTabela");
+
+                tabela.innerHTML = '';
+
+
+                for (var i = 0; i < Math.min(3, data.length); i++) {
+                    var item = data[i];
+                    var nomePromocao = item.promocao;
+                    var qtdAlertas = item.qtd_alertas;
+
+                    adicionarPromocao(tabela, i + 1, nomePromocao, qtdAlertas);
+                }
+            })
+            .catch(error => console.error('Erro ao buscar promoção:', error));
+    }
 
 
     function MudandoValoresDash() {
@@ -354,5 +395,10 @@ function atualizarTabela() {
 
 
     document.getElementById('filial').addEventListener('change', MudandoValoresDash);
+
+    function inicializarPagina() {
+        atualizarTabela();
+        buscarPorFilial();
+    }
 
 </script>

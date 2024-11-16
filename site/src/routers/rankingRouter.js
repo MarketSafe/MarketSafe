@@ -15,6 +15,9 @@ router.get("/classificacao", function (req, res) {
     rankingController.classificacao(req, res);
 }); 
 
+router.get("/buscarPorFilial", function (req, res) {
+    rankingController.atualizarTabela(req, res);
+});
 
 // exporta a variável de roteador do arquivo `rankingRouter.js`:
 module.exports = router;
