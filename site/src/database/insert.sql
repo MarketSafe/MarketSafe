@@ -1,6 +1,5 @@
 -- insert.sql:
 
-
 insert into endereco (cep, bairro, rua, numero, complemento) values
   ("123-45678", "bairro", "rua", 0, "complemento"),
   ("234-56789", "bairro 2", "avenida", 10, "prédio 1"),

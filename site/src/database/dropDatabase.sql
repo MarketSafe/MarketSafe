@@ -1,4 +1,4 @@
-drop database market_safe;
+drop database if exists market_safe;
 
 drop user if exists 'mktsAdm'@'%';
 drop user if exists 'mktsUser'@'%';
