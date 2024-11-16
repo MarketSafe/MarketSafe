@@ -76,10 +76,10 @@
                         <div class="fComp">
                             <h2>Componente</h2>
                             <div class="buttons">
-                                <button>
+                                <button onclick="selecionarCmp(1)" id="btCPU">
                                     <h2>CPU</h2>
                                 </button>
-                                <button>
+                                <button onclick="selecionarCmp(2)" id="btRAM">
                                     <h2>RAM</h2>
                                 </button>
                             </div>
@@ -87,15 +87,15 @@
                         <div class="fTote">
                             <h2>Totens</h2>
                             <div class="fSelect">
-                                <select name="" id="">
-                                    <option value="">Escolha um Totem</option>
-                                    <option value="">Totem 1</option>
-                                    <option value="">Totem 2</option>
+                                <select name="" id="totem_select1">
+                                    <option value="#">Escolha um Totem</option>
+                                    <option value="1">Totem 1</option>
+                                    <option value="2">Totem 2</option>
                                 </select>
-                                <select name="" id="">
-                                    <option value="">Escolha um Totem</option>
-                                    <option value="">Totem 1</option>
-                                    <option value="">Totem 2</option>
+                                <select name="" id="totem_select2">
+                                    <option value="#">Escolha um Totem</option>
+                                    <option value="1">Totem 1</option>
+                                    <option value="2">Totem 2</option>
                                 </select>
 
                             </div>
@@ -104,8 +104,8 @@
                         <div class="fPeri">
                             <h2>Periodo</h2>
                             <div class="datas">
-                                <input type="date">
-                                <input type="date">
+                                <input type="date" id="periodoInicio">
+                                <input type="date" id="periodoFim">
                             </div>
                         </div>
 
@@ -211,34 +211,50 @@
                         </div>
                         <div class="labelsRsq">
                             <div
-                                style="height: 25px; width: 25px; background-color: rgb(150, 147, 147); margin-right: 5px; border: #FFF solid 2px;">
+                                style="height: 20px; width: 20px; background-color: rgb(150, 147, 147); margin-right: 5px; border: #FFF solid 2px;">
                             </div>
                             <h3>Ineficiente</h3>
                             <div
-                                style="height: 25px; width: 25px; background-color: rgb(48, 170, 48); margin-right: 5px; border: #FFF solid 2px;">
+                                style="height: 20px; width: 20px; background-color: rgb(48, 170, 48); margin-right: 5px; border: #FFF solid 2px;">
                             </div>
                             <h3>Ideal</h3>
                             <div
-                                style="height: 25px; width: 25px; background-color: #ff6384; margin-right: 5px; border: #FFF solid 2px;">
+                                style="height: 20px; width: 20px; background-color: #ff6384; margin-right: 5px; border: #FFF solid 2px;">
                             </div>
                             <h3>Crítico</h3>
                         </div>
                         <div class="divisao"></div>
-                        <div style="text-align: center; width: 80%;">
+                        <div style="text-align: center; width: 90%;">
                             <h1>Dados dos alertas</h1>
                             <div>
-                                <h3><span>4</span> <span class="txt">Relação entre alertas totais</span> <span>8</span>
-                                </h3>
-                                <div class="comparacao">
-                                    <div class="barra1" id="barra1">50%</div>
-                                    <div class="barra2" id="barra2">50%</div>
+                                <h3><span class="txt">Relação entre alertas totais</span></h3>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <h3>12</h3>
+                                    <div class="comparacao">
+                                        <div class="barra1" id="barra1">50%</div>
+                                        <div class="barra2" id="barra2">50%</div>
+                                    </div>
+                                    <h3>8</h3>
                                 </div>
 
-                                <h3><span>4</span> <span class="txt">Relação entre alertas de CPU</span> <span>2</span>
-                                </h3>
-                                <div class="comparacao">
-                                    <div class="barra1" id="barra3">50%</div>
-                                    <div class="barra2" id="barra4">50%</div>
+                                <h3><span class="txt">Relação entre alertas de CPU</span></h3>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <h3>4</h3>
+                                    <div class="comparacao">
+                                        <div class="barra1" id="barra3">50%</div>
+                                        <div class="barra2" id="barra4">50%</div>
+                                    </div>
+                                    <h3>8</h3>
+                                </div>
+                                <div class="labelsAlerta">
+                                    <div
+                                        style="height: 20px; width: 20px; background-color: #FF6F16; margin-right: 5px; border: #FFF solid 2px;">
+                                    </div>
+                                    <h3>Totem 1</h3>
+                                    <div
+                                        style="height: 20px; width: 20px; background-color: #FFB418; margin-right: 5px; border: #FFF solid 2px;">
+                                    </div>
+                                    <h3>Totem 2</h3>
                                 </div>
                             </div>
 
@@ -294,19 +310,93 @@
 
     }
 
-    function trocarTela() {
-        ctd1.style.display = 'none'
-        ctd2.style.display = 'flex'
+    componente = "nulo"
 
-        btFiltrar.style.display = 'none'
+    function selecionarCmp(param) {
+        if (param == 1){
+            btCPU.style.backgroundColor = "#E9864A"
+            btCPU.style.borderColor = "#FF6000"
 
-        filtrosBenchmark.style.marginTop = '0%'
-        filtrosBenchmark.style.paddingTop = '0%'
-        filtrosBenchmark.style.borderRadius = '0px 0px 10px 10px'
-        tituloBenchmark.style.borderRadius = '10px 10px 0px 0px'
+            btRAM.style.backgroundColor = "#3A3B47"
+            btRAM.style.borderColor = "#4E4E4E"
 
-        tituloBenchmark.innerHTML = "<h1>BenchMark</h1>"
+            btRAM.style.opacity = "0.5" 
+            btCPU.style.opacity = "1" 
+
+            componente = "cpu"
+        }
+        else if (param == 2){
+            btRAM.style.backgroundColor = "#E9864A"
+            btRAM.style.borderColor = "#FF6000"
+
+            btCPU.style.backgroundColor = "#3A3B47"
+            btCPU.style.borderColor = "#4E4E4E"
+
+            btCPU.style.opacity = "0.5"
+            btRAM.style.opacity = "1"
+
+            componente = "ram"
+        }
     }
+
+
+    function trocarTela() {
+        prInicio = periodoInicio.value
+        prFim = periodoFim.value
+
+        totem1 = totem_select1.value;
+        totem2 = totem_select2.value;
+
+        if(componente == "nulo" || totem1 == "#" || totem2 == "#" || prInicio == "" || prFim == ""){
+            alert("Atenção, todos os itens do filtro devem ser preenchidos")
+        } else {
+            alimentarGraficos()
+
+            ctd1.style.display = 'none'
+            ctd2.style.display = 'flex'
+
+            btFiltrar.style.display = 'none'
+
+            filtrosBenchmark.style.marginTop = '0%'
+            filtrosBenchmark.style.paddingTop = '0%'
+            filtrosBenchmark.style.borderRadius = '0px 0px 10px 10px'
+            tituloBenchmark.style.borderRadius = '10px 10px 0px 0px'
+
+            tituloBenchmark.innerHTML = "<h1>BenchMark</h1>"
+        }
+    }
+
+    function alimentarGraficos() {
+
+        atualizarDados()
+
+        // if (selectOpcao) {
+        //     pieChart.options.plugins.datalabels.display = true;
+        // } else {
+        //     pieChart.options.plugins.datalabels.display = false;
+        // }
+
+        // if (selectOpcao === '1') {
+        //     barChart.data.datasets[0].data = [45, 68, 32, 34, 45, 60, 56];
+        //     pieChart.data.datasets[0].data = [70, 30];
+        // } else if (selectOpcao === '2') {
+        //     barChart.data.datasets[0].data = [52, 35, 12, 34, 45, 60, 56];
+        //     pieChart.data.datasets[0].data = [65, 35];
+        // } else if (selectOpcao === '3') {
+        //     barChart.data.datasets[0].data = [15, 28, 42, 34, 45, 60, 56];
+        //     pieChart.data.datasets[0].data = [60, 40];
+        // } else if (selectOpcao === '4') {
+        //     barChart.data.datasets[0].data = [2, 8, 17, 34, 45, 32, 21];
+        //     pieChart.data.datasets[0].data = [75, 25];
+        // } else if (selectOpcao === '5') {
+        //     barChart.data.datasets[0].data = [15, 28, 42, 34, 12, 21, 61];
+        //     pieChart.data.datasets[0].data = [35, 65];
+        // }
+
+        // barChart.update();
+        // pieChart.update();
+    }
+
 
 
     // Grafico de linha 
@@ -366,7 +456,7 @@
     // Grafico de Barras
 
     const ctx2 = document.getElementById('barChart');
-    const labels2 = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+    const labels2 = ['1', '2', '3', '4', '5', '6', '7'];
 
     new Chart(ctx2, {
         type: 'bar',
@@ -458,11 +548,12 @@
             datasets: [{
                 data: [50, 300, 100],
                 backgroundColor: [
-                    'rgb(255, 99, 132)', // vermelho
+                    '#FF3131', // vermelho
                     'rgb(48, 170, 48)',  // verde
                     'rgb(150, 147, 147)'  // cinza
                 ],
-                hoverOffset: 4
+                hoverOffset: 4,
+                borderWidth: 1
             }]
         },
         options: {
@@ -498,11 +589,12 @@
             datasets: [{
                 data: [70, 240, 170],
                 backgroundColor: [
-                    'rgb(255, 99, 132)',
+                    '#FF3131',
                     'rgb(48, 170, 48)',
                     'rgb(150, 147, 147)'
                 ],
-                hoverOffset: 4
+                hoverOffset: 4,
+                borderWidth: 1
             }]
         },
         options: {
@@ -570,8 +662,9 @@
         sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
     }
 
-    valor1 = (4 / 12) * 100
-    valor2 = (8 / 12) * 100
+    // Grafico barras horizontal
+    valor1 = (12 / 20) * 100
+    valor2 = (8 / 20) * 100
 
     barra1.style.width = valor1 + "%"
     barra2.style.width = valor2 + "%"
@@ -582,8 +675,8 @@
     barra1.innerHTML = valor1 + "%"
     barra2.innerHTML = valor2 + "%"
 
-    valor3 = (4 / 6) * 100
-    valor4 = (2 / 6) * 100
+    valor3 = (4 / 12) * 100
+    valor4 = (8 / 12) * 100
 
     barra3.style.width = valor3 + "%"
     barra4.style.width = valor4 + "%"
@@ -593,5 +686,35 @@
 
     barra3.innerHTML = valor3 + "%"
     barra4.innerHTML = valor4 + "%"
+
+
+    function atualizarDados() {
+        fetch(`/totem/listarAlertaPorTotem/${totem1}/${componente}/${prInicio}/${prFim}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+
+
 
 </script>
