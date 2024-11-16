@@ -1,13 +1,13 @@
 // filialRouter.js:
 
 // dependências:
-//   importação da framework "express":
+//   importa a framework "express":
 const express = require("express");
 
-//   importação do arquivo `filialController.js`:
+//   importa o arquivo `filialController.js`:
 const filialController = require("../controllers/filialController.js");
 
-// declaração da variável do roteador:
+// declara a variável do roteador:
 const router = express.Router();
 
 // envia a requisição do tipo post "/cadastrar" para a função `cadastrar` do `filialController.js`:

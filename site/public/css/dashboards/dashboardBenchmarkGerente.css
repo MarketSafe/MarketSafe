@@ -22,7 +22,7 @@ body {
 
 .menu {
     width: 250px;
-    height: 100%;
+    height: 94%;
     background-color: #32333C;
     padding: 10px;
     display: flex;
@@ -40,22 +40,11 @@ body {
     background-color: #3A3B47;
     border-radius: 0px 10px 10px 0px;
     width: 90%;
-    height: 100%;
+    height: 94%;
     margin-top: 1%;
     margin-right: 1.5%;
     padding: 10px;
     margin-right: 1.5%;
-    overflow: auto;
-}
-
-.dashes::-webkit-scrollbar{
-    width: 10px;
-    background-color: #3A3B47;
-}
-
-.dashes::-webkit-scrollbar-thumb{
-    background: #E9864A;
-    border-radius: 10px;
 }
 
 .div_logo{
@@ -73,10 +62,6 @@ body {
     align-items: center;
 }
 
-.div_logo h1{
-    font-family: "Abel";
-}
-
 .MKTS{
     display: flex;
     align-items: center;
@@ -92,10 +77,6 @@ body {
     align-items: center;
 }
 
-.select_dash h2{
-    font-family: "Abel";
-}
-
 .regiao-select select {
     padding: 6.5px;
     margin-bottom: 10px;
@@ -106,14 +87,6 @@ body {
     width: 100%;
     height: 42px;
     border-radius: 10px;
-}
-
-.regiao-select h3{
-    font-family: "Abel";
-}
-
-.regiao-select p{
-    font-family: "Abel";
 }
 
 .linha {
@@ -132,14 +105,6 @@ body {
     flex-direction: row;
     justify-content: center;
     padding-top: 2%;
-}
-
-.perfil h2{
-    font-family: "Abel";
-}
-
-.perfil p{
-    font-family: "Abel";
 }
 
 .foto_perfil{
@@ -203,203 +168,3 @@ body {
 .analista h3{
     margin: 5px;
 }
-
-.titulo{
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    display: flex;
-    width: 100%;
-    height: 10%;
-    background-color: #32333C;
-    font-size: 25px;
-}
-
-.titulo h1{
-    font-family: "Abel";
-}
-
-.filtros{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.periodo{
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    display: flex;
-    width: 30%;
-    background-color: #31333C;
-    margin-top: 10px;
-    border-radius: 10px;
-    border-color: solid white;
-    border: #7C7C7C solid 2px;
-}
-
-.componente{
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    display: flex;
-    width: 30%;
-    background-color: #31333C;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: #7C7C7C solid 2px;
-}
-
-.periodo h2{
-    font-family: "Abel";
-}
-
-.componente h2{
-    font-family: "Abel";
-}
-
-.select_periodo{
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    display: flex;
-}
-
-.select_periodo select{
-    font-family: "Abel";
-}
-
-.periodo select{
-    padding: 6.5px;
-    margin-bottom: 10px;
-    background-color: #292A32; 
-    border: #fff solid 2px;
-    color: #fff;
-    font-size: 16px; 
-    width: 20%;
-    align-items: center;
-    display: flex;
-    height: 42px;
-    border-radius: 10px;
-    margin: 0px 15px 8px 0px;
-}
-
-.componente select{
-    padding: 6.5px;
-    margin-bottom: 10px;
-    background-color: #292A32; 
-    border: #fff solid 2px;
-    color: #fff;
-    font-size: 16px; 
-    width: 20%;
-    align-items: center;
-    display: flex;
-    height: 42px;
-    border-radius: 10px;
-    margin: 0px 15px 8px 0px;
-}
-
-.graficos_dashes{
-    align-items: center;
-    flex-direction: column;
-    display: flex;
-    width: 100%;
-    height: 80%;
-}
-
-.linha_grafico1{
-    width: 100%;
-    height: 50%;
-    align-items: center;
-    flex-direction: row;
-    display: flex;
-    justify-content: space-around;
-}
-
-.linha_grafico2{
-    width: 100%;
-    height: 50%;
-    align-items: center;
-    flex-direction: row;
-    display: flex;
-    justify-content: space-around;
-}
-
-.grafico1{
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-    background-color: #32333C;
-    display: flex;
-    width: 45%;
-    height: 95%;
-}
-
-.grafico2{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    background-color: #32333C;
-    width: 45%;
-    height: 95%;
-}
-
-.grafico3{
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-    background-color: #32333C;
-    display: flex;
-    width: 45%;
-    height: 95%;
-}
-
-.grafico4{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    width: 45%;
-    height: 95%;
-}
-
-.media{
-    width: 40%;
-    height: 90%;
-    border-radius: 10px;
-    background-color: #28283A;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.texto{
-    align-items: center;
-    display: flex;
-    background-color: #3A3B47;
-    width: 80%;
-    height: 30%;
-    border-radius: 10px;
-}
-
-.texto p{
-    text-align: center;
-    font-family: "Abel";
-}
-
-.hora{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    background-color: #3A3B47;
-    width: 60%;
-    height: 30%;
-    border-radius: 10px;
-}
-
-.hora p{
-    font-family: "Abel";
-}
-

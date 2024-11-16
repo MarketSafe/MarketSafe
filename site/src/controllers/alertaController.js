@@ -1,19 +1,19 @@
 // alertaController.js:
 
 // dependências:
-//   importação do arquivo `alertaModel.js`:
+//   importa o arquivo `alertaModel.js`:
 const alertaModel = require("../models/alertaModel.js");
-//   importação do arquivo `funcionarioModel.js`:
+//   importa o arquivo `funcionarioModel.js`:
 const funcionarioModel = require("../models/funcionarioModel.js");
 
-// declaração da função `listarPorFilial` do arquivo `alertaController.js`:
+// declara a função `listarPorFilial` do arquivo `alertaController.js`:
 function listarPorFilial(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const emailAutenticacao = req.body.emailAutenticacao;
   const senhaAutenticacao = req.body.senhaAutenticacao;
   const filial = req.bodu.filial;
 
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (emailAutenticacao === undefined) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {
@@ -75,13 +75,13 @@ function listarPorFilial(req, res) {
   }
 }
 
-// declaração da função `listarPorEmpresa` do arquivo `alertaController.js`:
+// declara a função `listarPorEmpresa` do arquivo `alertaController.js`:
 function listarPorEmpresa(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const emailAutenticacao = req.body.emailAutenticacao;
   const senhaAutenticacao = req.body.senhaAutenticacao;
   
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (emailAutenticacao === undefined) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {

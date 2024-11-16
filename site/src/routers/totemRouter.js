@@ -1,13 +1,13 @@
 // totemRouter.js:
 
 // dependências:
-//   importação da framework "express":
+//   importa a framework "express":
 const express = require("express");
 
-//   importação do arquivo `totemController.js`:
+//   importa o arquivo `totemController.js`:
 const totemController = require("../controllers/totemController.js");
 
-// declaração da variável do roteador:
+// declara a variável do roteador:
 const router = express.Router();
 
 // envia a requisição do tipo post "/cadastrar" para a função `cadastrar` do `totemController.js`:

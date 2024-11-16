@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="./css/dash_individual_Isaque_TelaPrincipal.css" />
+    <link rel="stylesheet" href="css/dash_individual_Isaque_TelaPrincipal.css"/>
     <link rel="icon" href="css/icon.png" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -20,7 +20,7 @@
     <div class="container">
         <div class="menu">
             <div class="div_logo">
-                <img src="assets/img/Logo Self 2.png" alt="">
+                <img src="../public/assets/img/Logo Self 2.png" alt="">
                 <div class="MKTS">
                     <h1>MKTS</h1>
                 </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="perfil">
                 <div class="foto_perfil">
-                    <img src="css/foto-anilista.jpg" alt="">
+                    <img src="../public/css/foto-anilista.jpg" alt="">
                 </div>
                 <div class="nome_perfil">
                     <div class="nome">
@@ -82,8 +82,21 @@
                     </div>
                 </div>
             </div>
+            <div class="Fundo_Select_Totem">
+                <div class="Select_Totem" >
+                    Monitorar Totem
+                    <select name="" id="">
+                        <option selected disabled value="0">Selecionar</option>
+                        <option value="1">Totem 1</option>
+                        <option value="2">Totem 2</option>
+                        <option value="3">Totem 3</option>
+                        <option value="4">Totem 4</option>
+                        <option value="5">Totem 5</option>
+                    </select>
+                </div>
+            </div>
             <div class="Titulo_Intavel">
-                <span>Totens Intáveis</span>
+                <span>Totens Instáveis</span>
             </div>
             <div class="bloco_monitoramento">
                 <!-- 1º Dash Rosca  -->
@@ -124,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 2º Dash Rosca  -->
+                <!-- 3º Dash Rosca  -->
                 <div class="Dash_Doughs">
                     <div class="totem-label">Totem 3</div>
                     <div class="Direcionando_DashRosca1">
@@ -168,86 +181,84 @@
 
 <script>
 
+
+
     //Gráfico 1
 
-var dataSeries = [
-    { x: 0, y: Math.random()},
-    { x: 1, y: Math.random()},
-    { x: 2, y: Math.random()}
-];
-var dataSeries2 = [
-    { x: 0, y: Math.random()},
-    { x: 1, y: Math.random()},
-    { x: 2, y: Math.random()}
-];
-var dataSeries3 = [
-    { x: 0, y: Math.random()},
-    { x: 1, y: Math.random()},
-    { x: 2, y: Math.random()}
-];
-var dataSeries4 = [
-    { x: 0, y: Math.random()},
-    { x: 1, y: Math.random()},
-    { x: 2, y: Math.random()}
-];
-var dataSeries5 = [
-    { x: 0, y: Math.random()},
-    { x: 1, y: Math.random()},
-    { x: 2, y: Math.random()}
-];
+    var dataSeries = [];
+    var dataSeries2 = [
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
+    ];
+    var dataSeries3 = [
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
+    ];
+    var dataSeries4 = [
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
+    ];
+    var dataSeries5 = [
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
+    ];
 
-var tempo = 3;
+    var tempo = 3;
 
-function TesteGrafico() {
+    function TesteGrafico() {
 
-    var valorAleatorio1 = Math.random() * 75;
-    var valorAleatorio2 = Math.random() * 75;
-    var valorAleatorio3 = Math.random() * 75;
-    var valorAleatorio4 = Math.random() * 75;
-    var valorAleatorio5 = Math.random() * 75;
+        var valorAleatorio1 = Math.random() * 75;
+        var valorAleatorio2 = Math.random() * 75;
+        var valorAleatorio3 = Math.random() * 75;
+        var valorAleatorio4 = Math.random() * 75;
+        var valorAleatorio5 = Math.random() * 75;
 
-    dataSeries.push({ x: tempo, y: parseFloat(valorAleatorio1.toFixed(1)) });
-    dataSeries2.push({ x: tempo, y: parseFloat(valorAleatorio2.toFixed(1)) });
-    dataSeries3.push({ x: tempo, y: parseFloat(valorAleatorio3.toFixed(1)) });
-    dataSeries4.push({ x: tempo, y: parseFloat(valorAleatorio4.toFixed(1)) });
-    dataSeries5.push({ x: tempo, y: parseFloat(valorAleatorio5.toFixed(1)) });
+    //    dataSeries.push({ x: tempo, y: parseFloat(valorAleatorio1.toFixed(1)) });
+        dataSeries2.push({ x: tempo, y: parseFloat(valorAleatorio2.toFixed(1)) });
+        dataSeries3.push({ x: tempo, y: parseFloat(valorAleatorio3.toFixed(1)) });
+        dataSeries4.push({ x: tempo, y: parseFloat(valorAleatorio4.toFixed(1)) });
+        dataSeries5.push({ x: tempo, y: parseFloat(valorAleatorio5.toFixed(1)) });
 
-    tempo += 1;
+        tempo += 1;
 
-    if (dataSeries.length > 15) {
-        dataSeries.shift();
-        dataSeries2.shift();
-        dataSeries3.shift();
-        dataSeries4.shift();
-        dataSeries5.shift();
+        if (dataSeries.length > 15) {
+            dataSeries.shift();
+            dataSeries2.shift();
+            dataSeries3.shift();
+            dataSeries4.shift();
+            dataSeries5.shift();
+        }
     }
-}
 
 
     // Configurações do gráfico ApexCharts Gráfico 1
     var options = {
         series: [
-        {
-            name: 'T1',
-            data: dataSeries
-        },
-        {
-            name: 'T2',
-            data: dataSeries2
-        },
-        {
-            name: 'T3',
-            data: dataSeries3
-        },
-        {
-            name: 'T4',
-            data: dataSeries4
-        },
-        {
-            name: 'T5',
-            data: dataSeries5
-        }
-    ],
+            {
+                name: 'T1',
+                data: dataSeries
+            },
+            {
+                name: 'T2',
+                data: dataSeries2
+            },
+            {
+                name: 'T3',
+                data: dataSeries3
+            },
+            {
+                name: 'T4',
+                data: dataSeries4
+            },
+            {
+                name: 'T5',
+                data: dataSeries5
+            }
+        ],
         chart: {
             id: 'area-datetime',
             type: 'line',
@@ -285,9 +296,9 @@ function TesteGrafico() {
         },
         legend: {
             show: true,
-            labels:{
-            colors: "#ffff",
-            useSeriesColors: false
+            labels: {
+                colors: "#ffff",
+                useSeriesColors: false
             }
         },
         xaxis: {
@@ -340,45 +351,45 @@ function TesteGrafico() {
     chart.render();
 
     // Atualiza o gráfico a cada segundo com novos valores
-    setInterval(() => {
-        TesteGrafico();
-        chart.updateSeries([
-            { data: [...dataSeries] },
-            { data: [...dataSeries2] },
-            { data: [...dataSeries3] },
-            { data: [...dataSeries4] },
-            { data: [...dataSeries5] }
-        ]);
-    }, 1000);
+    // setInterval(() => {
+    //     TesteGrafico();
+    //     chart.updateSeries([
+    //         { data: [...dataSeries] },
+    //         { data: [...dataSeries2] },
+    //         { data: [...dataSeries3] },
+    //         { data: [...dataSeries4] },
+    //         { data: [...dataSeries5] }
+    //     ]);
+    // }, 1000);
 
     //-------------------------------------------------------//
 
     //Gráfico 2
 
     var dataSeries6 = [
-        { x: 0, y: Math.random()},
-        { x: 1, y: Math.random()},
-        { x: 2, y: Math.random()}
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
     ];
     var dataSeries7 = [
-        { x: 0, y: Math.random()},
-        { x: 1, y: Math.random()},
-        { x: 2, y: Math.random()}
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
     ];
     var dataSeries8 = [
-        { x: 0, y: Math.random()},
-        { x: 1, y: Math.random()},
-        { x: 2, y: Math.random()}
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
     ];
     var dataSeries9 = [
-        { x: 0, y: Math.random()},
-        { x: 1, y: Math.random()},
-        { x: 2, y: Math.random()}
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
     ];
     var dataSeries10 = [
-        { x: 0, y: Math.random()},
-        { x: 1, y: Math.random()},
-        { x: 2, y: Math.random()}
+        { x: 0, y: Math.random() },
+        { x: 1, y: Math.random() },
+        { x: 2, y: Math.random() }
     ];
     var tempo2 = 3;
 
@@ -391,7 +402,7 @@ function TesteGrafico() {
         var valorAleatorio8 = Math.random() * 60;
         var valorAleatorio9 = Math.random() * 60;
         var valorAleatorio10 = Math.random() * 60;
-        
+
         var DtAleatorio6 = parseFloat(valorAleatorio6.toFixed(1));
         var DtAleatorio7 = parseFloat(valorAleatorio7.toFixed(1));
         var DtAleatorio8 = parseFloat(valorAleatorio8.toFixed(1));
@@ -419,33 +430,33 @@ function TesteGrafico() {
     var options2 = {
         series: [
             {
-            name: 'T1',
-            data: dataSeries6
+                name: 'T1',
+                data: dataSeries6
             },
             {
-            name: 'T2',
-            data: dataSeries7
+                name: 'T2',
+                data: dataSeries7
             },
             {
-            name: 'T3',
-            data: dataSeries8
+                name: 'T3',
+                data: dataSeries8
             },
             {
-            name: 'T4',
-            data: dataSeries9
+                name: 'T4',
+                data: dataSeries9
             },
             {
-            name: 'T5',
-            data: dataSeries10
-            }
-    ],
+                name: 'T5',
+                data: dataSeries10,
+            },
+        ],
         chart: {
             id: 'area-datetime',
             type: 'line',
             width: '400px',
             height: 250,
             animations: {
-                enabled: false,
+                enabled: true,
                 easing: 'linear',
                 dynamicAnimation: {
                     speed: 1000
@@ -475,9 +486,9 @@ function TesteGrafico() {
         },
         legend: {
             show: true,
-            labels:{
-            colors: "#ffff",
-            useSeriesColors: false
+            labels: {
+                colors: "#ffff",
+                useSeriesColors: false
             },
         },
         xaxis: {
@@ -530,16 +541,16 @@ function TesteGrafico() {
     chart2.render();
 
     // Atualiza o gráfico a cada segundo com novos valores
-    setInterval(() => {
-        TesteGrafico2();
-        chart2.updateSeries([
-            { data: [...dataSeries6]},
-            { data: [...dataSeries7]},
-            { data: [...dataSeries8]},
-            { data: [...dataSeries9]},
-            { data: [...dataSeries10]}
-        ]);
-    }, 1000);
+    // setInterval(() => {
+    //     TesteGrafico2();
+    //     chart2.updateSeries([
+    //         { data: [...dataSeries6]},
+    //         { data: [...dataSeries7]},
+    //         { data: [...dataSeries8]},
+    //         { data: [...dataSeries9]},
+    //         { data: [...dataSeries10]}
+    //     ]);
+    // }, 1000);
 
 
     //-------------- Alertas -----------------//
@@ -558,14 +569,14 @@ function TesteGrafico() {
         if (down) {
             box.style.height = '0px';
             box.style.opacity = 0;
-            box.classList.remove('open'); 
+            box.classList.remove('open');
             down = false;
         } else {
             box.style.height = '510px';
             box.style.opacity = 1;
             setTimeout(function () {
-                box.classList.add('open'); 
-            }, 300); 
+                box.classList.add('open');
+            }, 300);
             down = true;
         }
 
@@ -603,9 +614,9 @@ function TesteGrafico() {
 
     // 1º Gráfico 
     var options3 = {
-        series: [80, 33], 
+        series: [80, 33],
         chart: {
-            width:200,
+            width: 200,
             height: 200,
             type: 'radialBar'
         },
@@ -623,7 +634,7 @@ function TesteGrafico() {
                 }
             }
         },
-        colors: ['#FF4560', '#FFA500'],  
+        colors: ['#FF4560', '#FFA500'],
         labels: ['RAM', 'CPU'],
         legend: {
             show: false
@@ -639,9 +650,9 @@ function TesteGrafico() {
     // 2º Gráfico 
 
     var options4 = {
-        series: [80, 33], 
+        series: [80, 33],
         chart: {
-            width:200,
+            width: 200,
             height: 200,
             type: 'radialBar'
         },
@@ -659,7 +670,7 @@ function TesteGrafico() {
                 }
             }
         },
-        colors: ['#FF4560', '#FFA500'],  
+        colors: ['#FF4560', '#FFA500'],
         labels: ['RAM', 'CPU'],
         legend: {
             show: false
@@ -675,9 +686,9 @@ function TesteGrafico() {
     // 3º Gráfico 
 
     var options5 = {
-        series: [80, 33], 
+        series: [80, 33],
         chart: {
-            width:200,
+            width: 200,
             height: 200,
             type: 'radialBar'
         },
@@ -695,7 +706,7 @@ function TesteGrafico() {
                 }
             }
         },
-        colors: ['#FF4560', '#FFA500'],  
+        colors: ['#FF4560', '#FFA500'],
         labels: ['RAM', 'CPU'],
         legend: {
             show: false
@@ -707,5 +718,38 @@ function TesteGrafico() {
 
     var chart5 = new ApexCharts(document.querySelector("#chart_Rosca3"), options5);
     chart5.render();
+
+    var dataSeries = [];
+    var tempo = 0;
+
+    
+
+    function Atualizar_ValorT1() {
+    fetch("/monitoramento/AtualizarValorT1", 
+    { method: "POST" })
+        .then(response => {
+            console.log(response)
+            response.text().then(text => console.log(text))
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Erro ao buscar os dados do servidor.");
+            }
+        })
+        .then(resultado => {
+            if (resultado.length > 0) {
+                var valorCpu = resultado[0].consumo_cpu; 
+                dataSeries.push({ x: tempo, y: valorCpu });
+                tempo += 1; 
+                console.log(dataSeries); 
+            }
+        })
+        .catch(error => {
+            console.error("Erro na requisição:", error);
+        });
+}
+setInterval(Atualizar_ValorT1, 5000);
+
+
 
 </script>

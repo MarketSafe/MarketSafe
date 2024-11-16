@@ -7,7 +7,10 @@ create database market_safe;
 -- usa o banco de dados criado:
 use market_safe;
 
--- tabela de endereços (rua, bairro, cep):
+-- tabelas:
+/**
+* tabela de endereços
+*/
 create table endereco (
   id int primary key auto_increment,
   cep char(9) not null,
@@ -16,7 +19,10 @@ create table endereco (
   numero int,
   complemento varchar(80)
 );
--- tabela de empresas (cada empresa possui um único endereço, cardinalidade 1:1):
+/**
+* tabela de empresas
+* cada empresa possui exatamente 1 único endereço, relacionamento 1:1
+*/
 create table empresa(
   id int primary key auto_increment,
   data_hora timestamp default current_timestamp,
@@ -25,34 +31,51 @@ create table empresa(
   cnpj char(18) not null unique,
   email varchar(80) not null unique,
   telefone char(19) not null unique,
-  fk_endereco int unique,
+  fk_endereco int not null unique,
 
   constraint empresa_fk_endereco foreign key (fk_endereco) references endereco(id)
 );
--- tabela de filiais (cada empresa possui diversas filiais e cada filial possui 1 único endereçp, cardinalidade 1:n e cardinalidade 1:1):
+/**
+* tabela de filiais
+* cada empresa possui 1 ou muitas filiais e
+* cada filial precisa pertencer à 1 única empresa, relacionamento 1:n
+* cada filial possui exatamente 1 único endereço, relacionamento 1:1
+*/
 create table filial(
   id int primary key auto_increment,
   data_hora timestamp default current_timestamp,
-  fk_empresa int,
-  fk_endereco int unique,
+  fk_empresa int not null,
+  fk_endereco int not null unique,
 
   constraint filial_fk_empresa foreign key (fk_empresa) references empresa(id),
   constraint filial_fk_endereco foreign key (fk_endereco) references endereco(id)
 );
 
-alter table filial add column promocao_ativa int;
-
+/**
+* tabela de promoções
+* cada filial possui 0 ou muitas promoções e
+* cada promoção precisa pertencer à 1 única filial, relacionamento 0:n
+*/
 create table promocao(
-id int primary key auto_increment,
-data_hora timestamp default current_timestamp,
-nome varchar(80) not null, 
-fk_filial int,
-constraint promocao_fk_filial foreign key (fk_filial) references filial(id)
+  id int primary key auto_increment,
+  data_hora timestamp default current_timestamp,
+  nome varchar(80) not null,
+  fk_filial int not null,
+
+  constraint promocao_fk_filial foreign key (fk_filial) references filial(id)
 );
 
-alter table filial add constraint filial_fk_promocao foreign key (promocao_ativa) references promocao(id);
+/* cada filial possui 0 ou 1 única promoção ativa, relacionamento 0:1
+*/
+alter table filial add column fk_promocao_ativa int;
+alter table filial add constraint filial_fk_promocao_ativa foreign key (fk_promocao_ativa) references promocao(id);
 
--- tabela de funcionário (cada funcionário pode estar empregado em uma única empresa e em 0 ou 1 única filial, cardinalidade n:1, 0:1):
+/* tabela de funcionário
+* cada empresa possui muitos funcionários e
+* cada funcionário precisa estar empregado em 1 única empresa, relacionamento 1:n
+* cada filial possui muitos funcionários e
+* cada funcionário pode estar empregado em 0 ou 1 única filial, relacionamento 0:n
+*/
 create table funcionario(
   id int primary key auto_increment,
   data_hora timestamp default current_timestamp,
@@ -62,28 +85,36 @@ create table funcionario(
   email varchar(80) not null unique,
   senha varchar(80) not null,
   telefone char(19) not null unique,
-  fk_empresa int,
+  fk_empresa int not null,
   fk_filial int,
 
   constraint funcionario_fk_empresa foreign key (fk_empresa) references empresa(id),
   constraint funcionario_fk_filial foreign key (fk_filial) references filial(id)
 );
--- tabela de totens (cada totem pertence a uma única filial, cardinalidade n:1):
+/* tabela de totens
+* cada filial possui muitos totens e
+* cada totem precisa pertencer à 1 única filial, relacionamento 1:n
+*/
 create table totem(
   id int primary key auto_increment,
   data_hora timestamp default current_timestamp,
   mac_address char(17) not null,
-  fk_filial int,
+  fk_filial int not null,
 
   constraint totem_fk_filial foreign key (fk_filial) references filial(id)
 );
--- tabela de alertas (cada totem pode possuir vários alertas, cardinalidade 1:n):
+/* tabela de alertas
+* cada totem possui muitos alertas e
+* cada alerta precisa pertencer a 1 único totem, relacionamento 1:n
+* cada promoção pode possuir muitos alertas e
+* cada alerta precisa pertencer a 0 ou 1 única promoção, relacionamento 0:1
+*/
 create table alerta(
   id int primary key auto_increment,
   data_hora timestamp default current_timestamp,
   cpu_porcentagem decimal(6, 2),
   ram_porcentagem decimal(6, 2),
-  fk_totem int,
+  fk_totem int not null,
   fk_promocao int,
   
   constraint alerta_fk_totem foreign key (fk_totem) references totem(id),

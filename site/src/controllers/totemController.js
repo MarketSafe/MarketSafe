@@ -1,20 +1,20 @@
 // totemController.js:
 
 // dependências:
-//   importação do arquivo `totemModel.js`:
+//   importa o arquivo `totemModel.js`:
 const totemModel = require("../models/totemModel.js");
-//   importação do arquivo `funcionarioModel.js`:
+//   importa o arquivo `funcionarioModel.js`:
 const funcionarioModel = require("../models/funcionarioModel.js");
 
-// declaração da função `cadastrar` do arquivo `totemController.js`:
+// declara a função `cadastrar` do arquivo `totemController.js`:
 function cadastrar(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const emailAutenticacao = req.body.emailAutenticacao;
   const senhaAutenticacao = req.body.senhaAutenticacao;
   const mac_address = req.body.mac_address;
   const fk_filial = req.body.fk_filial;
 
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (emailAutenticacao === undefined) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {
@@ -84,14 +84,14 @@ function cadastrar(req, res) {
   }
 }
 
-// declaração da função `listarPorFilial` do arquivo `totemController.js`:
+// declara a função `listarPorFilial` do arquivo `totemController.js`:
 function listarPorFilial(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const emailAutenticacao = req.body.emailAutenticacao;
   const senhaAutenticacao = req.body.senhaAutenticacao;
   const filial = req.body.filial;
 
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (emailAutenticacao === undefined) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {
@@ -153,13 +153,13 @@ function listarPorFilial(req, res) {
   }
 }
 
-// declaração da função `listarPorEmpresa` do arquivo `totemController.js`:
+// declara a função `listarPorEmpresa` do arquivo `totemController.js`:
 function listarPorEmpresa(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const emailAutenticacao = req.body.emailAutenticacao;
   const senhaAutenticacao = req.body.senhaAutenticacao;
 
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (emailAutenticacao === undefined) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {

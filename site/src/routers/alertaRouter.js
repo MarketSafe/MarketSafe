@@ -1,13 +1,13 @@
 // alertaRouter.js:
 
 // dependências:
-//   importação da framework "express":
+//   importa a framework "express":
 const express = require("express");
 
-//   importação do arquivo `alertaController.js`:
+//   importa o arquivo `alertaController.js`:
 const alertaController = require("../controllers/alertaController.js");
 
-// declaração da variável do roteador:
+// declara a variável do roteador:
 const router = express.Router();
 
 // envia a requisição do tipo post "/listarPorEmpresa" para a função `listarPorEmpresa` do `alertaController.js`:
