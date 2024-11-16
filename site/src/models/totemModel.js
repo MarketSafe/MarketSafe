@@ -39,7 +39,7 @@ function listarPorEmpresa(fk_empresa) {
 // declaração da função `listarAlertaPorTotem`:
 function listarAlertaPorTotem(totem, componente, inicio, fim) {
   // declaração da variável de instrução sql:
-  const instrucao = `select * from alerta where '${componente}'_porcentagem > 85 and fk_totem = '${totem}' and data_hora > '${inicio} 00:00:00' AND data_hora < '${fim} 23:59:59';`;
+  const instrucao = `select * from alerta where ${componente}_porcentagem > 85 and fk_totem = '${totem}' and data_hora > '${inicio} 00:00:00' AND data_hora < '${fim} 23:59:59';`;
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:

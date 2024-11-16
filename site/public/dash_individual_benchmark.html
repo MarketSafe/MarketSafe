@@ -689,7 +689,7 @@
 
 
     function atualizarDados() {
-        fetch(`/totem/listarAlertaPorTotem/${totem1}/${componente}/${prInicio}/${prFim}`).then(function (resposta) {
+        fetch(`/totem/listarAlertaPorTotem/${totem1}/${componente}/${prInicio}/${prFim}`, {method: "post"}).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
