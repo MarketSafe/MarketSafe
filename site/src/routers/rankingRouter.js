@@ -1,13 +1,13 @@
 // rankingRouter.js:
 
 // dependências:
-//   importação da framework "express":
+//   importa a framework "express":
 const express = require("express");
 
-//   importação do arquivo `rankingController.js`:
+//   importa o arquivo `rankingController.js`:
 const rankingController = require("../controllers/rankingController.js");
 
-// declaração da variável do roteador:
+// declara a variável do roteador:
 const router = express.Router();
 
 

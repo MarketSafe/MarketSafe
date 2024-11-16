@@ -1,13 +1,13 @@
 // funcionarioRouter.js:
 
 // dependências:
-//   importação da framework "express":
+//   importa a framework "express":
 const express = require("express");
 
-//   importação do arquivo `funcionarioController.js`:
+//   importa o arquivo `funcionarioController.js`:
 const funcionarioController = require("../controllers/funcionarioController.js");
 
-// declaração da variável do roteador:
+// declara a variável do roteador:
 const router = express.Router();
 
 // envia a requisição do tipo post "/autenticar" para função `autenticar` do `funcionarioController.js`:

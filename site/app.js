@@ -1,14 +1,14 @@
 // app.js:
 
 // dependências:
-//   importação da framework "express":
+//   importa a framework "express":
 const express = require("express");
-//   importação do middleware "cors":
+//   importa o middleware "cors":
 const cors = require("cors");
-//   importação da biblioteca "path":
+//   importa a biblioteca "path":
 const path = require("path");
 
-//   importação das variáveis de ambiente (.env):
+//   importa as variáveis de ambiente (.env):
 // const ambiente_processo = 'producao';
 const ambiente_processo = "desenvolvimento";
 
@@ -17,7 +17,7 @@ require("dotenv").config({ path: caminho_env });
 const PORTA_APP = process.env.APP_PORT;
 const HOST_APP = process.env.APP_HOST;
 
-//   importação das rotas:
+//   importa as rotas:
 const funcionarioRouter = require("./src/routers/funcionarioRouter.js");
 const filialRouter = require("./src/routers/filialRouter.js");
 const totemRouter = require("./src/routers/totemRouter.js");
@@ -25,14 +25,15 @@ const alertaRouter = require("./src/routers/alertaRouter.js");
 const rankingRouter = require("./src/routers/rankingRouter.js");
 const historicoLeoRouter = require("./src/routers/historicoLeo.js");
 const monitoramentoRouterIsaque = require("./src/routers/monitoramentoRouterIsaque.js");
-// declaração da variável de aplicação:
+const benchmarkGerenteRouter = require("./src/routers/dashboards/benchmarkGerenteRouter.js");
+// declara a variável de aplicação:
 const app = express();
 
-//   definição das configurações:
+//   define as configurações:
 app.use(cors());
 app.use(express.json());
 
-//   definição da configuração de rotas:
+//   define as configurações de rotas:
 app.use("/funcionario", funcionarioRouter);
 app.use("/filial", filialRouter);
 app.use("/totem", totemRouter);
@@ -40,11 +41,12 @@ app.use("/alerta", alertaRouter);
 app.use("/ranking", rankingRouter);
 app.use("/historicoLeo", historicoLeoRouter);
 app.use("/monitoramento", monitoramentoRouterIsaque);
+app.use("/benchmarkGerente", benchmarkGerenteRouter);
 
-//   configuração de arquivos estáticos (*.html, *.css, *.js):
+//   configura arquivos estáticos (*.html, *.css, *.js):
 app.use(express.static(path.join(__dirname, "public")));
 
-//   início da aplicação:
+//   inícia a aplicação:
 app.listen(PORTA_APP, function () {
   console.log(`Servidor rodando em http://127.0.0.1:${PORTA_APP}`);
 });

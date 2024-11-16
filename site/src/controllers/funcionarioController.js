@@ -1,12 +1,12 @@
 // funcionarioController.js:
 
 // dependências:
-//   importação do arquivo `funcionarioModel.js`:
+//   importa o arquivo `funcionarioModel.js`:
 const funcionarioModel = require("../models/funcionarioModel.js");
 
-// declaração da função `autenticar` do arquivo `funcionarioController.js`:
+// declara a função `autenticar` do arquivo `funcionarioController.js`:
 function autenticar(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const email = req.body.email;
   const senha = req.body.senha;
 
@@ -41,9 +41,9 @@ function autenticar(req, res) {
   }
 }
 
-// declaração da função `cadastrar` do arquivo `funcionarioController.js`:
+// declara a função `cadastrar` do arquivo `funcionarioController.js`:
 function cadastrar(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const emailAutenticacao = req.body.emailAutenticacao;
   const senhaAutenticacao = req.body.senhaAutenticacao;
   const nome = req.body.nome;
