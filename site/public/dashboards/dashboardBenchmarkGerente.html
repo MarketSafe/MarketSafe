@@ -11,69 +11,104 @@
     <div>
       <header>
         <div class="logo">
-          <img src="/assets/logo.png" alt="logo" />
+          <div class="img">
+            <img src="/assets/logo.png" alt="logo" />
+          </div>
           <h1>MKTS</h1>
         </div>
         <nav>
           <h1>Dashboards</h1>
-          <div class="gerente">
+          <section class="gerente">
             <h2>Gerente</h2>
             <ul>
               <li>
                 <a href="">
                   <h2>Previsão</h2>
-                  <img src="/assets/previsao.png" alt="previsao.png" />
+                  <img src="/assets/previsao.svg" alt="previsao.svg" />
                 </a>
               </li>
               <li>
                 <a href="/dash_individual_Gisele.html">
                   <h2>Histórico</h2>
-                  <img src="/assets/historico.png" alt="historico.png" />
+                  <img src="/assets/historico.svg" alt="historico.svg" />
                 </a>
               </li>
               <li>
                 <a href="/dashboards/dashboardBenchmarkGerente.html">
                   <h2>Benchmark</h2>
-                  <img src="/assets/benchmark.png" alt="previsao.png" />
+                  <img src="/assets/benchmark.svg" alt="previsao.svg" />
                 </a>
               </li>
             </ul>
-          </div>
-          <div class="analista">
+          </section>
+          <section class="analista">
             <h2>Analista</h2>
             <ul>
               <li>
                 <a href="/dash_individual_Isaque_Principal.html">
                   <h2>Monitoramento</h2>
-                  <img src="/assets/monitoramento.png" alt="monitoramento.png" />
+                  <img src="/assets/monitoramento.svg" alt="monitoramento.svg" />
                 </a>
               </li>
               <li>
                 <a href="/dash_historico_analista.html">
                   <h2>Histórico</h2>
-                  <img src="/assets/historico.png" alt="historico.png" />
+                  <img src="/assets/historico.svg" alt="historico.svg" />
                 </a>
               </li>
               <li>
                 <a href="/dashboards/dash_individual_benchmark.html">
                   <h2>Benchmark</h2>
-                  <img src="/assets/benchmark.png" alt="previsao.png" />
+                  <img src="/assets/benchmark.svg" alt="previsao.svg" />
                 </a>
               </li>
             </ul>
-          </div>
+          </section>
         </nav>
         <hr />
         <a class="perfil" href="/perfilGerente.html">
-          <img src="/assets/perfil.svg" alt="perfil.svg" />
+          <div class="img">
+            <img src="/assets/perfil.svg" alt="perfil.svg" />
+          </div>
           <div>
-            <h2>Fred</h2>
+            <span class="nome">Fred</span>
             <hr />
-            <p>Analista</p>
+            <span>Analista</span>
           </div>
         </a>
       </header>
-      <main></main>
+      <main>
+        <header>
+          <div>
+            <h1>Benchmark</h1>
+          </div>
+          <search>
+            <label>
+              <span>Filial 1</span>
+              <div>
+                <select class="filial">
+                  <option value="" selected disabled>Filial</option>
+                </select>
+                <select class="promocao">
+                  <option value="" selected disabled>Promocao</option>
+                </select>
+              </div>
+            </label>
+            <label>
+              <span>Filial 2</span>
+              <div>
+                <select class="filial">
+                  <option value="" selected disabled>Filial</option>
+                </select>
+                <select class="promocao">
+                  <option value="" selected disabled>Promocao</option>
+                </select>
+              </div>
+            </label>
+          </search>
+        </header>
+        <section class="dashboard"></section>
+      </main>
     </div>
   </body>
 </html>

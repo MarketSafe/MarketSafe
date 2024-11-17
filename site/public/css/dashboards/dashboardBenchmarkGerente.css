@@ -1,11 +1,13 @@
 /* imports: */
-@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+/* fonts: "Abel", "Hammersmith One" */
+@import url("https://fonts.googleapis.com/css2?family=Abel&family=Hammersmith+One&display=swap");
 
 /* root: */
 :root {
   --text-color: #ffffffff;
   --shadow-color: #0000007f;
 
+  --div-color: #616161ff;
   --header-color: #31333cff;
   --background-color: #292935ff;
   --dashboard-color: #3a3b47ff;
@@ -50,9 +52,6 @@ body {
   & a {
     text-decoration: none;
   }
-  & img {
-    width: 100%;
-  }
   & hr {
     border: 1px solid var(--text-color);
     width: 100%;
@@ -64,66 +63,143 @@ body {
     flex: 1;
 
     & > header {
+      gap: 2em;
       align-items: stretch;
       z-index: 1;
       box-shadow: 10px 0px 10px var(--shadow-color);
       border-radius: 10px 0px 5px 10px;
       padding: 2em;
       background-color: var(--header-color);
-      width: 25%;
+      width: 20rem;
 
       & > div.logo {
         width: 100%;
         flex-direction: row;
 
-        & > img {
+        & > div.img {
           flex: 1;
+
+          & > img {
+            width: 100%;
+          }
         }
         & > h1 {
           flex: 1;
+          font-family: "Hammersmith One", sans-serif;
         }
       }
       & > nav {
-        width: 75%;
+        gap: 2em;
+        justify-content: start;
         flex: 1;
+        width: 75%;
         align-self: center;
 
-        &, & * {
-          align-items: stretch;
-        }
-        & > div {
-          flex: 1;
+        & > section {
+          align-self: stretch;
 
           & > h2 {
             align-self: center;
           }
           & > ul {
-            & > li {
+            align-self: stretch;
 
+            &,
+            & > li {
+              align-items: stretch;
+            }
+            & > li {
               & > a {
                 flex-direction: row;
+                align-items: center;
                 justify-content: space-between;
+                padding: 0 0.5em;
+
+                & > img {
+                  height: 1em;
+                }
               }
             }
           }
         }
-        & > div.gerente {
+        & > section.gerente {
           border-left: 5px solid var(--gerente-color);
         }
-        & > div.analista {
+        & > section.analista {
           border-left: 5px solid var(--analista-color);
         }
       }
+      & > hr {
+        border-color: var(--div-color);
+      }
       & > a.perfil {
         flex-direction: row;
+        gap: 1em;
+
+        & > div.img > img {
+          height: 5em;
+        }
+        & > div > span.nome {
+          font-size: 2rem;
+        }
       }
     }
     & > main {
+      align-items: stretch;
       flex: 1;
       border-radius: 0px 10px 10px 0px;
       padding: 2em;
       background-color: var(--dashboard-color);
       height: 98%;
+
+      & > header {
+        gap: 1.5em;
+        align-items: stretch;
+
+        & > div {
+          border-radius: 10px;
+          padding: 0.5em;
+          background-color: var(--header-color);
+
+          & > h1 {
+            font-size: 3rem;
+          }
+        }
+        & > search {
+          flex-direction: row;
+          gap: 1.5em;
+
+          & > label {
+            gap: 0.5em;
+            flex: 1;
+            border-radius: 10px;
+            border: 1px solid var(--div-color);
+            padding: 1em;
+            background-color: var(--header-color);
+
+            & > span {
+              font-size: 2rem;
+            }
+            & > div {
+              flex-direction: row;
+              gap: 1em;
+              align-self: stretch;
+
+              & > select {
+                flex: 1;
+                border-radius: 5px;
+                border: 1px solid var(--div-color);
+                padding: 0.2em;
+                background-color: var(--dashboard-color);
+                font-size: 1.5rem;
+              }
+            }
+          }
+        }
+      }
+      & > section.dashboard {
+        flex: 1;
+      }
     }
   }
 }
