@@ -1,16 +1,16 @@
 // filialController.js:
 
 // dependências:
-//   importação do arquivo `filialModel.js`:
+//   importa o arquivo `filialModel.js`:
 const filialModel = require("../models/filialModel.js");
-//   importação do arquivo `enderecoModel.js`:
+//   importa o arquivo `enderecoModel.js`:
 const enderecoModel = require("../models/enderecoModel.js");
-//   importação do arquivo `funcionarioModel.js`:
+//   importa o arquivo `funcionarioModel.js`:
 const funcionarioModel = require("../models/funcionarioModel.js");
 
-// declaração da função `cadastrar` do arquivo `filialController.js`:
+// declara a função `cadastrar` do arquivo `filialController.js`:
 function cadastrar(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const emailAutenticacao = req.body.emailAutenticacao;
   const senhaAutenticacao = req.body.senhaAutenticacao;
   const cep = req.body.cep;
@@ -19,7 +19,7 @@ function cadastrar(req, res) {
   const numero = req.body.numero;
   const complemento = req.body.complemento;
 
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (emailAutenticacao === undefined) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {
@@ -85,13 +85,13 @@ function cadastrar(req, res) {
   }
 }
 
-// declaração da função `listar` do arquivo `filialController.js`:
+// declara a função `listar` do arquivo `filialController.js`:
 function listar(req, res) {
-  // declaração das variáveis recebidas:
+  // declara as variáveis recebidas:
   const emailAutenticacao = req.body.emailAutenticacao;
   const senhaAutenticacao = req.body.senhaAutenticacao;
 
-  // validação das variáveis recebidas:
+  // valida as variáveis recebidas:
   if (emailAutenticacao === undefined) {
     res.status(400).json({ erro: "`emailAutenticacao` undefined" });
   } else if (senhaAutenticacao === undefined) {
@@ -135,6 +135,7 @@ function listar(req, res) {
       });
   }
 }
+
 
 // exporta as funções do arquivo `filialController.js`:
 module.exports = {

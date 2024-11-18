@@ -1,7 +1,7 @@
 // config.js:
 
 // dependências:
-//   importação da biblioteca "mysql2":
+//   importa a biblioteca "mysql2":
 const mysql = require("mysql2");
 
 // configurações de conexão (já definidas préviamente no "app.js" por meio do arquivo ".env" ou ".env.dev"):
@@ -13,7 +13,7 @@ const mySqlConfig = {
   database: process.env.DB_DATABASE,
 };
 
-// declaração da função `executar`:
+// declara a função `executar`:
 function executar(instrucao) {
   // caso o ambiente não esteja configurado no arquivo ".env", ".env.dev" ou no início do arquivo "app.js", rejeita a execução, retornando um erro:
   if (process.env.AMBIENTE_PROCESSO !== "producao" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
@@ -24,7 +24,7 @@ function executar(instrucao) {
 
   // retorna uma promessa, que será cumprida em algum momento, retornando uma resposta ou um erro:
   return new Promise(function (resolve, reject) {
-    // declaração da variável de conexão:
+    // declara a variável de conexão:
     const conexao = mysql.createConnection(mySqlConfig);
 
     // conecta com o banco utilizando as configurações definidas:
