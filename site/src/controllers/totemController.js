@@ -204,9 +204,56 @@ function listarPorEmpresa(req, res) {
   }
 }
 
+
+function deletar(req, res) {
+  var idDiv = req.params.idDiv;
+  var idCap = req.params.idCap;
+
+  avisoModel.deletar(idDiv, idCap)
+      .then(
+          function (resultado) {
+              res.json(resultado);
+          }
+      )
+      .catch(
+          function (erro) {
+              console.log(erro);
+              console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+              res.status(500).json(erro.sqlMessage);
+          }
+      );
+}
+
+// declaração da função `listarAlertaPorTotem` do arquivo `totemController.js`:
+function listarAlertaPorTotem(req, res) {
+
+  console.log(req.params)
+  // declaração das variáveis recebidas:
+  const totem = req.params.totem;
+  const componente = req.params.componente;
+  const inicio = req.params.inicio;
+  const fim = req.params.fim;
+
+            // envia para a função `listarAlertaPorTotem` do arquivo `totemModel.js`:
+            totemModel
+              .listarAlertaPorTotem(totem, componente, inicio, fim)
+              .then(function (resultado) {
+                // retorna a resposta com status 200 (sucesso) em json contendo os totens da filial do usuário autenticado:
+                res.status(200).json(resultado);
+              })
+              // em caso de erro no servidor:
+              .catch(function (erro) {
+                console.log("Erro no servidor:", erro);
+                // retorna o erro com o status 500 (erro de servidor):
+                res.status(500).json({ erro: erro.sqlMessage });
+              }); 
+}
+
+
 // exporta as funções do arquivo `totemController.js`:
 module.exports = {
   cadastrar,
   listarPorFilial,
   listarPorEmpresa,
+  listarAlertaPorTotem,
 };

@@ -20,6 +20,12 @@ router.post("/listarPorFilial", function (req, res) {
   totemController.listarPorFilial(req, res);
 });
 
+
+// envia a requisição do tipo post "/listarAlertaPorTotem" para a função `listarAlertaPorTotem` do `totemController.js`:
+router.post("/listarAlertaPorTotem/:totem/:componente/:inicio/:fim", function (req, res) {
+  totemController.listarAlertaPorTotem(req, res);
+});
+
 // envia a requisição do tipo post "/listarPorEmpresa" para a função `listarPorEmpresa` do `totemController.js`:
 router.post("/listarPorEmpresa", function (req, res) {
   totemController.listarPorEmpresa(req, res);
