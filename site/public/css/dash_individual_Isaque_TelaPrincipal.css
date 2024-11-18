@@ -616,3 +616,16 @@ th {
     box-sizing: border-box;
     border: 2px solid #616161;
 }
+
+.Text_Ram{
+    font-size: large;
+    font-weight: bold;
+    font-family: "Abel";
+}
+
+.Text_Cpu{
+    font-size: large;
+    font-weight: bold;
+    font-family: "Abel";
+
+}

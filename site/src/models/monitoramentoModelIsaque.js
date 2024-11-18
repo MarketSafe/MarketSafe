@@ -7,7 +7,7 @@ function Atualizar_ValorT1() {
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT1
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 1
     `;
 
@@ -23,7 +23,7 @@ function Atualizar_ValorT2() {
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT2
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 2
     `;
 
@@ -39,7 +39,7 @@ function Atualizar_ValorT3() {
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT3
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 3
     `;
 
@@ -55,7 +55,7 @@ function Atualizar_ValorT4() {
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT4
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 4
     `;
 
@@ -71,7 +71,7 @@ function Atualizar_ValorT5() {
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT5
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 5
     `;
 
@@ -87,7 +87,7 @@ function Atualizar_ValorRamT1() {
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT1
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 1
     `;
 
@@ -103,7 +103,7 @@ function Atualizar_ValorRamT2() {
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT2
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 2
     `;
 
@@ -119,7 +119,7 @@ function Atualizar_ValorRamT3() {
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT3
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 3
     `;
 
@@ -135,7 +135,7 @@ function Atualizar_ValorRamT4() {
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT4
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 4
     `;
 
@@ -151,7 +151,7 @@ function Atualizar_ValorRamT5() {
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT5
-        FROM alerta 
+        FROM monitoramento 
         WHERE id = 5
     `;
 

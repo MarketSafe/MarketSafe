@@ -33,8 +33,8 @@ while descanso != 0:
 
     mydb = mysql.connector.connect(
         host="localhost",
-        user="mktsAdm",
-        password="sptech",
+        user="root",
+        password="Rosquinha1",
         database="market_safe"
     )
 
@@ -42,12 +42,12 @@ while descanso != 0:
 
     def verificar_valor():
 
-        cursor.execute("select count(*) from alerta;")
+        cursor.execute("select count(*) from monitoramento;")
         valoresTabela = cursor.fetchone()[0]
 
         if valoresTabela == 0:
 
-            insert = ("INSERT INTO alerta (data_hora, cpu_porcentagem, ram_porcentagem, fk_totem) VALUES (DEFAULT, %s, %s, DEFAULT);")
+            insert = ("INSERT INTO monitoramento (data_hora, cpu_porcentagem, ram_porcentagem, fk_totem) VALUES (DEFAULT, %s, %s, 1);")
 
             valor = ([dadoCPU_Totem1, memoriaRam_Totem1],
                      [dadoCPU_Totem2, memoriaRam_Totem2],
@@ -60,7 +60,7 @@ while descanso != 0:
         
         else:
 
-            update = ("update alerta set cpu_porcentagem = %s, ram_porcentagem = %s where id = %s;")
+            update = ("update monitoramento set cpu_porcentagem = %s, ram_porcentagem = %s where id = %s;")
 
             valor = ([dadoCPU_Totem1, memoriaRam_Totem1, 1],
                      [dadoCPU_Totem2, memoriaRam_Totem2, 2],
