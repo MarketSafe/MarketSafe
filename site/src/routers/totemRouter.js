@@ -26,6 +26,11 @@ router.post("/listarAlertaPorTotem/:totem/:componente/:inicio/:fim", function (r
   totemController.listarAlertaPorTotem(req, res);
 });
 
+// envia a requisição do tipo post "/listarAlertaPorTotemPorDiaDaSemana" para a função `listarAlertaPorTotem` do `totemController.js`:
+router.post("/listarAlertaPorTotemPorDiaDaSemana/:totem/:componente/:inicio/:fim/:hi/:hf", function (req, res) {
+  totemController.listarAlertaPorTotemPorDiaDaSemana(req, res);
+});
+
 // envia a requisição do tipo post "/listarPorEmpresa" para a função `listarPorEmpresa` do `totemController.js`:
 router.post("/listarPorEmpresa", function (req, res) {
   totemController.listarPorEmpresa(req, res);

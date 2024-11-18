@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/dashboards/dash_previsao_gerente.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>MarketSafe | Dashboard - Previsão</title>
+  </head>
+
+  <body>
+    <div>
+      <header>
+        <div class="logo">
+          <div class="img">
+            <img src="../assets/logo.png" alt="logo" />
+          </div>
+          <h1>MKTS</h1>
+        </div>
+        <nav>
+          <h1>Dashboards</h1>
+          <section class="gerente">
+            <h2>Gerente</h2>
+            <ul>
+              <li>
+                <a href="dash_previsao_gerente.html" class="agora"> 
+                  <h2>Previsão</h2>
+                  <img src="../assets/previsao.svg" alt="previsao.svg" />
+                </a>
+              </li>
+              <li>
+                <a href="/dash_individual_Gisele.html">
+                  <h2>Histórico</h2>
+                  <img src="../assets/historico.svg" alt="historico.svg" />
+                </a>
+              </li>
+              <li>
+                <a href="/dashboards/dashboardBenchmarkGerente.html">
+                  <h2>Benchmark</h2>
+                  <img src="../assets/benchmark.svg" alt="previsao.svg" />
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section class="analista">
+            <h2>Analista</h2>
+            <ul>
+              <li>
+                <a href="/dash_individual_Isaque_Principal.html">
+                  <h2>Monitoramento</h2>
+                  <img src="../assets/monitoramento.svg" alt="monitoramento.svg" />
+                </a>
+              </li>
+              <li>
+                <a href="../dash_historico_analista.html">
+                  <h2>Histórico</h2>
+                  <img src="../assets/historico.svg" alt="historico.svg" />
+                </a>
+              </li>
+              <li>
+                <a href="/dashboards/dash_individual_benchmark.html">
+                  <h2>Benchmark</h2>
+                  <img src="../assets/benchmark.svg" alt="previsao.svg" />
+                </a>
+              </li>
+            </ul>
+          </section>
+        </nav>
+        <hr />
+        <a class="perfil" href="/perfilGerente.html">
+          <div class="img">
+            <img src="../assets/perfil.svg" alt="perfil.svg" />
+          </div>
+          <div>
+            <span class="nome">Vitor</span>
+            <hr />
+            <span>Gerente</span>
+          </div>
+        </a>
+      </header>
+      <main>
+        <header>
+          <div>
+            <h1>Previsão</h1>
+          </div>
+          <search>
+            <label>
+              <span>Filial</span>
+              <div>
+                <select class="filial">
+                  <option value="" selected disabled>Filial</option>
+                </select>
+                <!-- <select class="promocao">
+                  <option value="" selected disabled>Promocao</option>
+                </select> -->
+              </div>
+            </label>
+            <label>
+              <span>Promoção</span>
+              <div>
+                <!-- <select class="filial">
+                  <option value="" selected disabled>Filial</option>
+                </select> -->
+                <select class="promocao">
+                  <option value="" selected disabled>Promoção</option>
+                </select>
+              </div>
+            </label>
+          </search>
+        </header>
+        <section class="dashboard">
+          <div>
+            
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

@@ -238,6 +238,36 @@ function listarAlertaPorTotem(req, res) {
             totemModel
               .listarAlertaPorTotem(totem, componente, inicio, fim)
               .then(function (resultado) {
+
+                // retorna a resposta com status 200 (sucesso) em json contendo os totens da filial do usuário autenticado:
+                res.status(200).json(resultado);
+              })
+              // em caso de erro no servidor:
+              .catch(function (erro) {
+                console.log("Erro no servidor:", erro);
+                // retorna o erro com o status 500 (erro de servidor):
+                res.status(500).json({ erro: erro.sqlMessage });
+              }); 
+}
+
+
+// declaração da função `listarAlertaPorTotemPorDiaDaSemana` do arquivo `totemController.js`:
+function listarAlertaPorTotemPorDiaDaSemana(req, res) {
+
+            console.log(req.params)
+            // declaração das variáveis recebidas:
+            const totem = req.params.totem;
+            const componente = req.params.componente;
+            const inicio = req.params.inicio;
+            const fim = req.params.fim;
+            const hi = req.params.hi;
+            const hf = req.params.hf;
+
+            // envia para a função `listarAlertaPorTotemPorDiaDaSemana` do arquivo `totemModel.js`:
+            totemModel
+              .listarAlertaPorTotemPorDiaDaSemana(totem, componente, inicio, fim, hi, hf)
+              .then(function (resultado) {
+                
                 // retorna a resposta com status 200 (sucesso) em json contendo os totens da filial do usuário autenticado:
                 res.status(200).json(resultado);
               })
@@ -256,4 +286,5 @@ module.exports = {
   listarPorFilial,
   listarPorEmpresa,
   listarAlertaPorTotem,
+  listarAlertaPorTotemPorDiaDaSemana
 };

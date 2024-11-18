@@ -41,9 +41,20 @@ function Obterclassificacao() {
     return database.executar(instrucaoSql);
 }
 
+function statusFiliais() {
+    // declara a variável de instrução sql:
+    const instrucao = `select f.id, f.nome, "critico" as status from filial f join totem t on f.id = t.fk_filial join alerta a on t.id = a.fk_totem group by f.id having  count(a.id) > 10 union
+    select f.id, f.nome, "atencao" as status from filial f join totem t on f.id = t.fk_filial join alerta a on t.id = a.fk_totem group by f.id having  count(a.id) <= 10 union
+    select f.id, f.nome, "normal" as status from filial f left join totem t on f.id = t.fk_filial left join alerta a on t.id = a.fk_totem group by f.id having count(a.id) = 0`;
+    // declara a variável de resultado da execução:
+    const resultado = database.executar(instrucao);
+    // retorna o resultado da execução:
+    return resultado;
+  }
 
 module.exports = {
     buscarPorFilial,
     atualizarTabela,
     Obterclassificacao,
+    statusFiliais,
 };
