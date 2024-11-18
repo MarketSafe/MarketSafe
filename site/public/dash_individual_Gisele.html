@@ -140,12 +140,12 @@
                             <h2 class="h2-title">Filial</h2>
                             <div class="fSelect">
                                 <select id="filial">
-                                    <option value="">Escolha uma filial</option>
+                                    <!-- <option value="">Escolha uma filial</option>
                                     <option value="1">Filial 1</option>
                                     <option value="2">Filial 2</option>
                                     <option value="3">Filial 3</option>
                                     <option value="4">Filial 4</option>
-                                    <option value="5">Filial 5</option>
+                                    <option value="5">Filial 5</option> -->
                                 </select>
                             </div>
                         </div>
@@ -206,8 +206,16 @@
         document.getElementById('filtrar').addEventListener('click', () => {
             const filial = document.getElementById('filial').value;
 
-            fetch(`/ranking/buscarPorFilial?filial=${filial}`, {
-                method: 'GET',
+            fetch(`/ranking/buscarPorFilial`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+                    senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                    filial,
+                })
             })
                 .then(response => {
                     if (response.ok) {
@@ -220,7 +228,7 @@
                 })
                 .then(data => {
                     if (data) {
-                        console.log('Dados recebidos:', data);
+                        // console.log('Dados recebidos:', data);
                         var tabela = document.getElementById("corpoTabela");
                         tabela.innerHTML = '';
 
@@ -240,8 +248,19 @@
     }
 
     function atualizarTabela() {
-        fetch('/ranking/classificacao')
-            .then(response => response.json())
+        fetch('/ranking/classificacao', {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+                senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+            })
+        })
+            .then(response => {
+                return response.json()
+            })
             .then(data => {
                 var tabela = document.getElementById("corpoTabela");
 
@@ -258,6 +277,42 @@
             })
             .catch(error => console.error('Erro ao buscar promoção:', error));
     }
+
+    async function carregarFiliais(fk_empresa) {
+        try {
+            const response = await fetch(`/filial/listar`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+                    senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                })
+            });
+            // console.log(response)
+            if (!response.ok) {
+                throw new Error('Erro ao buscar filiais');
+            }
+
+            const filiais = await response.json();
+            // console.log(filiais);
+            const filialSelect = document.getElementById('filial');
+            filialSelect.innerHTML = '<option value="">Escolha uma filial</option>';
+
+
+            for (let i = 0; i < filiais.length; i++) {
+                const filial = filiais[i];
+                const option = document.createElement('option');
+                option.value = filial.filialId;
+                option.textContent = filial.nome;
+                filialSelect.appendChild(option);
+            }
+        } catch (err) {
+            console.error('Erro ao carregar filiais:', err);
+        }
+    }
+
 
 
     function MudandoValoresDash() {
@@ -399,6 +454,7 @@
     function inicializarPagina() {
         atualizarTabela();
         buscarPorFilial();
+        carregarFiliais();
     }
 
 </script>
