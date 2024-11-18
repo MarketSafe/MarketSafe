@@ -178,9 +178,9 @@
                                     <div class="sliderContainer">
                                         <div class="slider-track"></div>
                                         <input type="range" min="0" max="24" value="1" id="slider-1"
-                                            oninput="slideOne()" />
+                                            oninput="slideOne()" onmouseup="atualizarDadosT1(), atualizarDadosT2()"/>
                                         <input type="range" min="0" max="24" value="12" id="slider-2"
-                                            oninput="slideTwo()" />
+                                            oninput="slideTwo()" onmouseup="atualizarDadosT1(), atualizarDadosT2()"/>
                                         <!-- <input type="range" min="0" max="23" value="10" id="slider-1" oninput="slideOne(), atualizarFeed()"> -->
                                         <!-- <input type="range" min="0" max="23" value="12" id="slider-2" oninput="slideTwo(), atualizarFeed()"> -->
                                     </div>
@@ -188,7 +188,7 @@
                                         <span id="range1"> 0 </span>
                                         <span> &ThickSpace; &dash; &ThickSpace; </span>
                                         <span id="range2"> 12 </span>
-                                    </div>
+                                    </div>  
                                 </div>
                             </div>
                         </div>
@@ -368,7 +368,10 @@
 
     function alimentarGraficos() {
 
-        atualizarDados()
+        atualizarDadosT1()
+
+        atualizarDadosT2()
+
 
         // if (selectOpcao) {
         //     pieChart.options.plugins.datalabels.display = true;
@@ -401,13 +404,11 @@
 
     // Grafico de linha 
 
-    const ctx = document.getElementById('lineChart');
+    // const ctx = document.getElementById('lineChart');
 
     const labels = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
+    const data = {
             labels: labels,
             datasets: [{
                 label: 'T1',
@@ -424,7 +425,11 @@
                 backgroundColor: '#FFB418',
                 tension: 0
             }]
-        },
+        };
+
+    const config = {
+        type: 'line',
+        data: data,
         options: {
             scales: {
                 x: {
@@ -451,7 +456,12 @@
             }
         }
 
-    });
+    };
+
+    const ctx = new Chart(
+        document.getElementById('lineChart'),
+        config
+    );
 
     // Grafico de Barras
 
@@ -688,8 +698,20 @@
     barra4.innerHTML = valor4 + "%"
 
 
-    function atualizarDados() {
-        fetch(`/totem/listarAlertaPorTotem/${totem1}/${componente}/${prInicio}/${prFim}`, {method: "post"}).then(function (resposta) {
+    function atualizarDadosT1() {
+        vrTemp = "" + sliderOne.value;
+        ax = ":00"
+        if (sliderTwo.value == 24){
+            sliderTwo.value = "23"
+            ax = ":59"
+        } 
+        
+        if (sliderOne.value < 10){
+            vrTemp = "0" + sliderOne.value
+            ax = ":59"
+        } 
+
+        fetch(`/totem/listarAlertaPorTotemPorDiaDaSemana/${totem1}/${componente}/${prInicio}/${prFim}/${vrTemp + ":00"}/${sliderTwo.value + ax}`, {method: "post"}).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
@@ -702,7 +724,52 @@
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                    
+                    dadosVetor = [resposta[6].qtd, resposta[0].qtd, resposta[1].qtd, resposta[2].qtd, resposta[3].qtd, resposta[4].qtd, resposta[5].qtd]
+
+                    ctx.data.datasets[0].data = dadosVetor;
+
+                    ctx.update();
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+    function atualizarDadosT2() {
+        vrTemp = "" + sliderOne.value;
+        ax = ":00"
+        if (sliderTwo.value == 24){
+            sliderTwo.value = "23"
+            ax = ":59"
+        } 
+        
+        if (sliderOne.value < 10){
+            vrTemp = "0" + sliderOne.value
+            ax = ":59"
+        } 
+        fetch(`/totem/listarAlertaPorTotemPorDiaDaSemana/${totem2}/${componente}/${prInicio}/${prFim}/${vrTemp + ":00"}/${sliderTwo.value + ax}`, {method: "post"}).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    dadosVetor2 = [resposta[6].qtd, resposta[0].qtd, resposta[1].qtd, resposta[2].qtd, resposta[3].qtd, resposta[4].qtd, resposta[5].qtd]
+
+                    ctx.data.datasets[1].data = dadosVetor2;
+
+                    ctx.update();
 
                 });
             } else {

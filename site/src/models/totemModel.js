@@ -34,8 +34,6 @@ function listarPorEmpresa(fk_empresa) {
   return resultado;
 }
 
-
-
 // declaração da função `listarAlertaPorTotem`:
 function listarAlertaPorTotem(totem, componente, inicio, fim) {
   // declaração da variável de instrução sql:
@@ -43,9 +41,15 @@ function listarAlertaPorTotem(totem, componente, inicio, fim) {
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
+    resultado
+  // retorna o resultado da execução:
+  return resultado;
+}
 
+// declaração da função `listarAlertaPorTotem`:
+function listarAlertaPorTotemPorDiaDaSemana(totem, componente, inicio, fim, hi, hf) {
   // declaração da variável de instrução sql:
-  const instrucao2 = `SELECT 
+  const instrucao = `SELECT 
     dias_semana.dia AS DIA_SEMANA,
     COALESCE(COUNT(alerta.id), 0) AS qtd
 FROM 
@@ -58,19 +62,22 @@ FROM
      SELECT 7) AS dias_semana
 LEFT JOIN 
     alerta ON DATE_FORMAT(alerta.data_hora, '%w') = dias_semana.dia
+    and ${componente}_porcentagem > 85 
+    and fk_totem = ${totem} 
+    and data_hora > '${inicio} 10:00:00' 
+    AND data_hora < '${fim} 23:59:59'
+    and TIME(data_hora) > '${hi}:00'
+    and TIME(data_hora) < '${hf}:00'
 GROUP BY 
     dias_semana.dia
 ORDER BY 
     FIELD(dias_semana.dia, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');`;
   // declaração da variável de resultado da execução:
-  const resultado2 = database.executar(instrucao2);
+  const resultado = database.executar(instrucao);
 
-  const resultadoFinal = {
-    resultado,
-    resultado2
-  }
+    resultado
   // retorna o resultado da execução:
-  return resultadoFinal;
+  return resultado;
 }
 
 
@@ -80,4 +87,5 @@ module.exports = {
   listarPorFilial,
   listarPorEmpresa,
   listarAlertaPorTotem,
+  listarAlertaPorTotemPorDiaDaSemana
 };
