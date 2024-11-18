@@ -22,11 +22,12 @@ function cadastrarDia() {
         ' até o dia ', 
         intervalo_fim  
     ) AS intervalo_dias,
-    COUNT(*) AS total_registros
+    qtd AS total_registros
 FROM (
     SELECT 
         (FLOOR((DAY(data_hora) - 1) / 7) * 7) + 1 AS intervalo_inicio,
-        LEAST((FLOOR((DAY(data_hora) - 1) / 7) * 7) + 7, DAY(LAST_DAY(data_hora))) AS intervalo_fim
+        LEAST((FLOOR((DAY(data_hora) - 1) / 7) * 7) + 7, DAY(LAST_DAY(data_hora))) AS intervalo_fim,
+        count(*) as qtd
     FROM alerta
     WHERE MONTH(data_hora) = MONTH(CURDATE())  
     GROUP BY intervalo_fim, intervalo_inicio   

@@ -5,8 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="./css/dash_gisele.css" />
-    <link rel="icon" href="css/icon.png" />
+    <link rel="stylesheet" href="/css/dash_gisele.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
@@ -20,7 +19,7 @@
         <div class="menu">
             <div class="div_logo">
                 <div class="logo">
-                    <img src="assets/img/Logo Self 2.png" alt="">
+                    <img src="/assets/img/Logo Self 2.png" alt="">
                 </div>
                 <div class="MKTS">
                     <h1>MKTS</h1>
@@ -47,7 +46,7 @@
             </div>
             <div class="perfil">
                 <div class="foto_perfil">
-                    <img src="./assets/img/foto-gerente.jpg" alt="">
+                    <img src="/assets/img/foto-gerente.jpg" alt="">
                 </div>
                 <div class="nome_perfil">
                     <div class="nome">
@@ -69,32 +68,28 @@
                         <div class="engloba-status">
                             <div class="area-fora">
                                 <div class="status-box critico">
-                                    <div class="face front">Filial 1<br>
-                                        Filial 2
-                                    </div>
+                                    <div class="face front"></div>
                                     <div class="face back back1">
                                         <div class="status-label">Crítico</div>
-                                        <div class="status-numero">2</div>
+                                        <div class="status-numero"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="area-fora">
                                 <div class="status-box atencao">
-                                    <div class="face front ">Filial 3 </div>
+                                    <div class="face front "></div>
                                     <div class="face back back2">
                                         <div class="status-label">Atenção</div>
-                                        <div class="status-numero">1</div>
+                                        <div class="status-numero"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="area-fora">
                                 <div class="status-box normal">
-                                    <div class="face front ">Filial 4<br>
-                                        Filial 5
-                                    </div>
+                                    <div class="face front "></div>
                                     <div class="face back back3">
                                         <div class="status-label">Normal</div>
-                                        <div class="status-numero">2</div>
+                                        <div class="status-numero"></div>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +178,7 @@
 </html>
 
 <script>
-
+    let filiais;
 
     function adicionarPromocao(tabela, posicao, promocao, quantidadeDeAlertas) {
         var linha = document.createElement('tr');
@@ -295,7 +290,7 @@
                 throw new Error('Erro ao buscar filiais');
             }
 
-            const filiais = await response.json();
+            filiais = await response.json();
             // console.log(filiais);
             const filialSelect = document.getElementById('filial');
             filialSelect.innerHTML = '<option value="">Escolha uma filial</option>';
@@ -310,6 +305,75 @@
             }
         } catch (err) {
             console.error('Erro ao carregar filiais:', err);
+        }
+    }
+
+    async function statusFiliais() {
+        try {
+            const response = await fetch(`/ranking/statusFiliais`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+                    senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                })
+            });
+            // console.log(await response)
+            if (!response.ok) {
+                throw new Error('Erro ao buscar filiais');
+            }
+
+            const dados = await response.json();
+
+            const normal = [];
+            const atencao = [];
+            const critico = [];
+            for (const linha of dados) {
+                switch (linha.status) {
+                    case "critico":
+                        critico.push(linha.nome)
+                        
+                        break;
+                    case "atencao":
+                        atencao.push(linha.nome)
+                        break;
+                    case "normal":
+                        normal.push(linha.nome)
+                        break;
+                }
+            }
+    
+            const cards = document.querySelector(".status-container").querySelectorAll(".status-box");
+
+            for (const card of cards) {
+                if (card.classList.contains("critico")){
+                    card.querySelector(".face.front").innerHTML = critico.join("<br />");
+                    card.querySelector(".status-numero").innerHTML = critico.length;
+                } else if (card.classList.contains("atencao")){
+                    card.querySelector(".face.front").innerHTML = atencao.join("<br />");
+                    card.querySelector(".status-numero").innerHTML = atencao.length;
+                }else if(card.classList.contains("normal")){
+                    card.querySelector(".face.front").innerHTML = normal.join("<br />");
+                    card.querySelector(".status-numero").innerHTML = normal.length;
+                }
+            }
+
+            // [
+            //     "a",
+            //     "b",
+            //     "c",
+            // ]
+            // for (const x of cards) {
+            //     console.log(x);
+            // }
+            // for (let i = 0; i < cards.length; i++) {
+            //     const x = cards[i];
+            //     console.log(x);
+            // }
+        } catch (error) {
+            console.log('Erro ao carregar filiais:', error)
         }
     }
 
@@ -455,6 +519,7 @@
         atualizarTabela();
         buscarPorFilial();
         carregarFiliais();
+        statusFiliais();
     }
 
 </script>
