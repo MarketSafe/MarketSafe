@@ -24,12 +24,18 @@ while descanso != 0:
     dadoCPU_Totem5 = dadoCPU_Totem1 * 1.8 
     memoriaRam_Totem5 = memoriaRam_Totem1 * 0.6
 
+    # mydb = mysql.connector.connect(
+    #     host="localhost",
+    #     user="root",
+    #     password="Rosquinha1",
+    #     database="market_safe" 
+    #)
+
     mydb = mysql.connector.connect(
         host="localhost",
-        user="root",
-        password="Rosquinha1",
-        database="market_safe" 
-
+        user="mktsAdm",
+        password="sptech",
+        database="market_safe"
     )
 
     cursor = mydb.cursor()
