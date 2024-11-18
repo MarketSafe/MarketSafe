@@ -19,5 +19,9 @@ router.post("/buscarPorFilial", function (req, res) {
     rankingController.atualizarTabela(req, res);
 });
 
+router.post("/statusFiliais", function (req, res) {
+    rankingController.statusFiliais(req, res);
+});
+
 // exporta a variável de roteador do arquivo `rankingRouter.js`:
 module.exports = router;
