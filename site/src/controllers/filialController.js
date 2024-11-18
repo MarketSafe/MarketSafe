@@ -136,6 +136,7 @@ function listar(req, res) {
   }
 }
 
+
 // exporta as funções do arquivo `filialController.js`:
 module.exports = {
   cadastrar,

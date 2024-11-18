@@ -11,11 +11,11 @@ const rankingController = require("../controllers/rankingController.js");
 const router = express.Router();
 
 
-router.get("/classificacao", function (req, res) {
+router.post("/classificacao", function (req, res) {
     rankingController.classificacao(req, res);
 }); 
 
-router.get("/buscarPorFilial", function (req, res) {
+router.post("/buscarPorFilial", function (req, res) {
     rankingController.atualizarTabela(req, res);
 });
 
