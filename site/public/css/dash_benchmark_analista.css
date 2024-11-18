@@ -587,6 +587,13 @@ body {
                 margin-bottom: 5px;
             }
 
+            & .txt:nth-of-type(2) {
+                text-align: center;
+                width: 100%;
+                margin-bottom: 5px;
+                margin-top: 5px;
+            }
+
             & .graficoRosquina {
                 display: flex;
                 /* justify-content: center; */
