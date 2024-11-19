@@ -7,7 +7,7 @@ function buscarPorFilial(filialId) {
         WHERE f.id = ${filialId} GROUP BY f.id, p.nome ORDER BY qtd_alertas DESC LIMIT 3;
     `;
 
-    console.log("Executando a instrução SQL para buscar por filial: \n" + instrucaoSql);
+    
 
     return database.executar(instrucaoSql, [filialId]);
 }
@@ -23,7 +23,6 @@ function atualizarTabela(limite_linhas) {
         LIMIT ${limite_linhas};
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql, [limite_linhas]);
 }
@@ -36,7 +35,7 @@ function Obterclassificacao() {
         GROUP BY p.id
         ORDER BY qtd_alertas DESC
     `;
-    console.log("Executando a instrução SQL para classificação: \n" + instrucaoSql);
+    
 
     return database.executar(instrucaoSql);
 }
@@ -50,11 +49,25 @@ function statusFiliais() {
     const resultado = database.executar(instrucao);
     // retorna o resultado da execução:
     return resultado;
-  }
+}
+
+function alertasMensal(fk_filial, mes) {
+    const instrucaoSql = `
+    select date_format(data_hora, "%w") dia , count(id) qtdAlertas from
+    (select a.id, a.data_hora from filial f
+    join totem t on t.fk_filial = f.id
+    join alerta a on a.fk_totem = t.id
+    where f.id = ${fk_filial} and date_format(a.data_hora, '%Y-%m') = '${mes}') as s group by date_format(data_hora, "%w");
+    `;
+//    console.log(instrucaoSql)
+
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     buscarPorFilial,
     atualizarTabela,
     Obterclassificacao,
     statusFiliais,
+    alertasMensal
 };

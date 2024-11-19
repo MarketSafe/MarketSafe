@@ -61,6 +61,25 @@
         </div>
         <div class="dashes-historico">
             <div class="dashboard-title">Histórico de Monitoramento</div>
+            <div class="filtros">
+                <div class="selecoes">
+                    <div class="fTote">
+                        <h2 class="h2-title">Filial</h2>
+                        <div class="fSelect">
+                            <select id="filial">
+                            </select>
+                        </div>
+                    </div>
+                    <button id="filtrar">Filtrar</button>
+
+                    <div class="fTote">
+                        <h2 class="h2-title">Mês</h2>
+                        <div class="fSelect">
+                            <input type="month" id="mes">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="engloba-indicador">
                 <div class="status-container">
                     <div class="fundo-status">
@@ -129,31 +148,7 @@
                 </div>
             </div>
             <div class="plano-fundo">
-                <div class="filtros">
-                    <div class="selecoes">
-                        <div class="fTote">
-                            <h2 class="h2-title">Filial</h2>
-                            <div class="fSelect">
-                                <select id="filial">
-                                    <!-- <option value="">Escolha uma filial</option>
-                                    <option value="1">Filial 1</option>
-                                    <option value="2">Filial 2</option>
-                                    <option value="3">Filial 3</option>
-                                    <option value="4">Filial 4</option>
-                                    <option value="5">Filial 5</option> -->
-                                </select>
-                            </div>
-                        </div>
-                        <button id="filtrar">Filtrar</button>
 
-                        <div class="fTote">
-                            <h2 class="h2-title">Mês</h2>
-                            <div class="fSelect">
-                                <input type="month" name="" id="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="engloba-grafico">
                     <div class="fundo-grafico">
                         <div class="fundo-grafico-title">Alertas Mensais por Dia da Semana</div>
@@ -180,6 +175,7 @@
 <script>
     let filiais;
 
+
     function adicionarPromocao(tabela, posicao, promocao, quantidadeDeAlertas) {
         var linha = document.createElement('tr');
         var lugar = document.createElement('td');
@@ -197,11 +193,13 @@
     }
 
 
-    function buscarPorFilial() {
-        document.getElementById('filtrar').addEventListener('click', () => {
+    async function buscarPorFilial() {
+        // console.log(filiais)
+        document.getElementById('filtrar').addEventListener('click', async () => {
             const filial = document.getElementById('filial').value;
 
-            fetch(`/ranking/buscarPorFilial`, {
+            atualizarGrafico();
+            const response = await fetch(`/ranking/buscarPorFilial`, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -212,38 +210,32 @@
                     filial,
                 })
             })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else if (response.status === 204) {
-                        return null;
-                    } else {
-                        throw new Error(`Erro ${response.status}: ${response.statusText}`);
-                    }
-                })
-                .then(data => {
-                    if (data) {
-                        // console.log('Dados recebidos:', data);
-                        var tabela = document.getElementById("corpoTabela");
-                        tabela.innerHTML = '';
 
-                        for (var i = 0; i < data.length; i++) {
-                            var item = data[i];
-                            var nomePromocao = item.promocao;
-                            var qtdAlertas = item.qtd_alertas;
+            if (response.ok) {
+                const data = await response.json();
+                if (data) {
+                    // console.log('Dados recebidos:', data);
+                    var tabela = document.getElementById("corpoTabela");
+                    tabela.innerHTML = '';
 
-                            adicionarPromocao(tabela, i + 1, nomePromocao, qtdAlertas);
-                        }
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        var nomePromocao = item.promocao;
+                        var qtdAlertas = item.qtd_alertas;
+
+                        adicionarPromocao(tabela, i + 1, nomePromocao, qtdAlertas);
                     }
-                })
-                .catch(error => {
-                    console.error('Erro ao buscar dados:', error);
-                });
+                }
+            } else if (response.status === 204) {
+                return null;
+            } else {
+                throw new Error(`Erro ${response.status}: ${response.statusText}`);
+            }
         });
     }
 
-    function atualizarTabela() {
-        fetch('/ranking/classificacao', {
+    async function atualizarTabela() {
+        const response = await fetch('/ranking/classificacao', {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
@@ -253,59 +245,51 @@
                 senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
             })
         })
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                var tabela = document.getElementById("corpoTabela");
+        const data = await response.json()
+        var tabela = document.getElementById("corpoTabela");
 
-                tabela.innerHTML = '';
+        tabela.innerHTML = '';
 
 
-                for (var i = 0; i < Math.min(3, data.length); i++) {
-                    var item = data[i];
-                    var nomePromocao = item.promocao;
-                    var qtdAlertas = item.qtd_alertas;
+        for (var i = 0; i < Math.min(3, data.length); i++) {
+            var item = data[i];
+            var nomePromocao = item.promocao;
+            var qtdAlertas = item.qtd_alertas;
 
-                    adicionarPromocao(tabela, i + 1, nomePromocao, qtdAlertas);
-                }
-            })
-            .catch(error => console.error('Erro ao buscar promoção:', error));
+            adicionarPromocao(tabela, i + 1, nomePromocao, qtdAlertas);
+        }
     }
 
     async function carregarFiliais(fk_empresa) {
-        try {
-            const response = await fetch(`/filial/listar`, {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-                    senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
-                })
-            });
-            // console.log(response)
-            if (!response.ok) {
-                throw new Error('Erro ao buscar filiais');
-            }
-
-            filiais = await response.json();
-            // console.log(filiais);
-            const filialSelect = document.getElementById('filial');
-            filialSelect.innerHTML = '<option value="">Escolha uma filial</option>';
-
-
-            for (let i = 0; i < filiais.length; i++) {
-                const filial = filiais[i];
-                const option = document.createElement('option');
-                option.value = filial.filialId;
-                option.textContent = filial.nome;
-                filialSelect.appendChild(option);
-            }
-        } catch (err) {
-            console.error('Erro ao carregar filiais:', err);
+        const response = await fetch(`/filial/listar`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+                senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+            })
+        });
+        // console.log(response)
+        if (!response.ok) {
+            throw new Error('Erro ao buscar filiais');
         }
+
+        filiais = await response.json();
+        // console.log(filiais);
+        const filialSelect = document.getElementById('filial');
+        filialSelect.innerHTML = '<option value="">Escolha uma filial</option>';
+
+
+        for (let i = 0; i < filiais.length; i++) {
+            const filial = filiais[i];
+            const option = document.createElement('option');
+            option.value = filial.filialId;
+            option.textContent = filial.nome;
+            filialSelect.appendChild(option);
+        }
+
     }
 
     async function statusFiliais() {
@@ -334,7 +318,7 @@
                 switch (linha.status) {
                     case "critico":
                         critico.push(linha.nome)
-                        
+
                         break;
                     case "atencao":
                         atencao.push(linha.nome)
@@ -344,17 +328,17 @@
                         break;
                 }
             }
-    
+
             const cards = document.querySelector(".status-container").querySelectorAll(".status-box");
 
             for (const card of cards) {
-                if (card.classList.contains("critico")){
+                if (card.classList.contains("critico")) {
                     card.querySelector(".face.front").innerHTML = critico.join("<br />");
                     card.querySelector(".status-numero").innerHTML = critico.length;
-                } else if (card.classList.contains("atencao")){
+                } else if (card.classList.contains("atencao")) {
                     card.querySelector(".face.front").innerHTML = atencao.join("<br />");
                     card.querySelector(".status-numero").innerHTML = atencao.length;
-                }else if(card.classList.contains("normal")){
+                } else if (card.classList.contains("normal")) {
                     card.querySelector(".face.front").innerHTML = normal.join("<br />");
                     card.querySelector(".status-numero").innerHTML = normal.length;
                 }
@@ -377,88 +361,93 @@
         }
     }
 
-
-
-    function MudandoValoresDash() {
-        var selectOpcao = document.getElementById('filial').value;
-
-        if (selectOpcao) {
-            pieChart.options.plugins.datalabels.display = true;
-        } else {
-            pieChart.options.plugins.datalabels.display = false;
-        }
-
-        if (selectOpcao === '1') {
-            barChart.data.datasets[0].data = [45, 68, 32, 34, 45, 60, 56];
-            pieChart.data.datasets[0].data = [70, 30];
-        } else if (selectOpcao === '2') {
-            barChart.data.datasets[0].data = [52, 35, 12, 34, 45, 60, 56];
-            pieChart.data.datasets[0].data = [65, 35];
-        } else if (selectOpcao === '3') {
-            barChart.data.datasets[0].data = [15, 28, 42, 34, 45, 60, 56];
-            pieChart.data.datasets[0].data = [60, 40];
-        } else if (selectOpcao === '4') {
-            barChart.data.datasets[0].data = [2, 8, 17, 34, 45, 32, 21];
-            pieChart.data.datasets[0].data = [75, 25];
-        } else if (selectOpcao === '5') {
-            barChart.data.datasets[0].data = [15, 28, 42, 34, 12, 21, 61];
-            pieChart.data.datasets[0].data = [35, 65];
-        }
-
-        barChart.update();
-        pieChart.update();
-    }
-
-    const labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
-    const data = {
-        labels: labels,
-        datasets: [{
-            axis: 'y',
-            label: 'Quantidade de Alerta ',
-            data: [0, 0, 0, 0, 0, 0, 0],
-            fill: false,
-            backgroundColor: [
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderColor: [
-                'rgb(255, 159, 64)'
-            ],
-            borderWidth: 1
-        }]
-    };
-
-    const config = {
-        type: 'bar',
-        data: data,
-        options: {
-            indexAxis: 'x',
-            responsive: true,
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: 'rgba(255, 255, 255, 0.90)'
-                    },
-                }, y: {
-                    ticks: {
-                        color: 'rgba(255, 255, 255, 0.90)'
-                    },
-                }
+    async function atualizarGrafico(dados) {
+        const filial = document.getElementById('filial').value;
+        // console.log(filial)
+        const response = await fetch('/ranking/alertasMensal', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            plugins: {
-                legend: {
-                    labels: {
-                        color: 'white'
+            body: JSON.stringify({
+                emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
+                senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                filial,
+                mes: document.getElementById('mes').value,
+            })
+        });
+
+        if (!response.ok) {
+            console.error(`Erro: ${response.statusText}`);
+            return;
+        } else if (response.status === 204) {
+            alert("Nnenhuma filial encontrada")
+            return;
+        }
+        // console.log(await response.text())
+        const result = await response.json();
+        const dias = [0, 1, 2, 3, 4, 5, 6];
+        const valores = [0, 0, 0, 0, 0, 0, 0];
+
+        for (let i = 0; i < result.length; i++) {
+            const item = result[i];
+            valores[item.dia] = item.qtdAlertas;
+        }
+
+        console.log(valores)
+        const labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+        const data = {
+            labels: labels,
+            datasets: [{
+                axis: 'y',
+                label: 'Quantidade de Alertas',
+                data: valores,
+                fill: false,
+                backgroundColor: [
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderColor: [
+                    'rgb(255, 159, 64)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                indexAxis: 'x',
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.90)'
+                        },
+                    },
+                    y: {
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.90)'
+                        },
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
                     }
                 }
             }
-        }
-    };
+        };
 
-    const barChart = new Chart(
-        document.getElementById('barChart'),
-        config
-    );
+        const barChart = new Chart(
+            document.getElementById('barChart'),
+            config
+        );
+        barChart.update();
+    }
 
     const pieData = {
         labels: ['Processador', 'Memória Ram'],
@@ -513,13 +502,13 @@
     );
 
 
-    document.getElementById('filial').addEventListener('change', MudandoValoresDash);
+    // document.getElementById('filial').addEventListener('change', MudandoValoresDash);
 
-    function inicializarPagina() {
-        atualizarTabela();
-        buscarPorFilial();
-        carregarFiliais();
-        statusFiliais();
+    async function inicializarPagina() {
+        await carregarFiliais();
+        await atualizarTabela();
+        await buscarPorFilial();
+        await statusFiliais();
     }
 
 </script>

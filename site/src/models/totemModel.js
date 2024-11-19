@@ -36,8 +36,43 @@ function listarPorEmpresa(fk_empresa) {
 
 // declaração da função `listarAlertaPorTotem`:
 function listarAlertaPorTotem(totem, componente, inicio, fim) {
+
+  rangeDias = []
+  cont = 0
+  var date = inicio.split("-");
+  dayI = parseInt(date[2]);
+
+  var dateD = fim.split("-");
+  dayF = parseInt(dateD[2]);
+
+  unions = `SELECT ${dayI} AS dia UNION ALL `
+
+  for (let i = dayI + 1; i <= dayF; i++){
+      rangeDias[cont] = i
+      cont = cont + 1;
+
+      unions += `SELECT ${i} UNION ALL `
+      
+  }
+  
+  unions += `SELECT ${dayF}`
+
   // declaração da variável de instrução sql:
-  const instrucao = `select * from alerta where ${componente}_porcentagem > 85 and fk_totem = '${totem}' and data_hora > '${inicio} 00:00:00' AND data_hora < '${fim} 23:59:59';`;
+  const instrucao = `SELECT 
+    dias_mes.dia AS DIA_MES,
+    COALESCE(COUNT(alerta.id), 0) AS qtd
+FROM 
+    (${unions}) AS dias_mes
+LEFT JOIN 
+    alerta ON DATE_FORMAT(alerta.data_hora, '%d') = dias_mes.dia
+    and ${componente}_porcentagem > 85 
+    and fk_totem = ${totem} 
+    and data_hora > '${inicio} 10:00:00' 
+    AND data_hora < '${fim} 23:59:59'
+GROUP BY 
+    dias_mes.dia;`;
+
+
   // declaração da variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:

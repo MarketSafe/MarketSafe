@@ -23,5 +23,9 @@ router.post("/statusFiliais", function (req, res) {
     rankingController.statusFiliais(req, res);
 });
 
+router.post("/alertasMensal", function (req, res) {
+    rankingController.alertasMensal(req, res);
+});
+
 // exporta a variável de roteador do arquivo `rankingRouter.js`:
 module.exports = router;
