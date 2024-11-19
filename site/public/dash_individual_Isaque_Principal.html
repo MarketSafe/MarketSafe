@@ -108,11 +108,11 @@
                             <div class="legenda-item">
                                 <div class="Direcionando_Label">
                                     <div class="legenda-cor-bola"></div>
-                                    <div style="font-family: Abel;">RAM 80%</div>
+                                    <div style="font-family: Abel;"><div class="Text_Ram" id="Ram_T1"></div></div>
                                 </div>
                                 <div class="Direcionando_Label">
                                     <div class="legenda-cor-bola2"></div>
-                                    <div style="font-family: Abel;">CPU 33%</div>
+                                    <div style="font-family: Abel;"><div class="Text_Cpu" id="Cpu_T1"></div></div>
                                 </div>
                             </div>
                         </div>
@@ -127,11 +127,11 @@
                             <div class="legenda-item">
                                 <div class="Direcionando_Label">
                                     <div class="legenda-cor-bola"></div>
-                                    <div style="font-family: Abel;">RAM 80%</div>
+                                    <div style="font-family: Abel;"><div class="Text_Ram" id="Ram_T2"></div></div>
                                 </div>
                                 <div class="Direcionando_Label">
                                     <div class="legenda-cor-bola2"></div>
-                                    <div style="font-family: Abel;">CPU 33%</div>
+                                    <div style="font-family: Abel;"><div class="Text_Cpu" id="Cpu_T2"></div></div>
                                 </div>
                             </div>
                         </div>
@@ -146,11 +146,11 @@
                             <div class="legenda-item">
                                 <div class="Direcionando_Label">
                                     <div class="legenda-cor-bola"></div>
-                                    <div style="font-family: Abel;">RAM 80%</div>
+                                    <div style="font-family: Abel;"><div class="Text_Ram" id="Ram_T3"></div></div>
                                 </div>
                                 <div class="Direcionando_Label">
                                     <div class="legenda-cor-bola2"></div>
-                                    <div style="font-family: Abel;">CPU 33%</div>
+                                    <div style="font-family: Abel;"><div class="Text_Cpu" id="Cpu_T3"></div></div>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +247,7 @@
             width: '400px',
             height: 250,
             animations: {
-                enabled: true,
+                enabled: false,
                 easing: 'linear',
                 dynamicAnimation: {
                     speed: 1000
@@ -415,7 +415,7 @@
             width: '400px',
             height: 250,
             animations: {
-                enabled: true,
+                enabled: false,
                 easing: 'linear',
                 dynamicAnimation: {
                     speed: 1000
@@ -886,7 +886,6 @@ function Atualizar_ValorT5() {
                     { name: 'T5', data: dataSeries5 }
                 ]);
 
-
             }
 
         })
@@ -1196,6 +1195,9 @@ function Atualizar_Dough1(){
 
     chart3.updateSeries([valorRAM, valorCPU]);
 
+    Ram_T1.innerHTML = `${valorRAM}%`;
+    Cpu_T1.innerHTML = `${valorCPU}%`;
+
     // console.log(VetorCpuT1, VetorRamT1)
 }
 setInterval(Atualizar_Dough1, 1000);
@@ -1211,6 +1213,9 @@ function Atualizar_Dough2(){
 
     chart4.updateSeries([valorRAM, valorCPU]);
 
+    Ram_T2.innerHTML = `${valorRAM}%`;
+    Cpu_T2.innerHTML = `${valorCPU}%`;
+
     // console.log(VetorCpuT2, VetorRamT2)
 }
 setInterval(Atualizar_Dough2, 1000);
@@ -1225,6 +1230,9 @@ function Atualizar_Dough3(){
     const valorRAM = VetorRamT3[0] || 0;
 
     chart5.updateSeries([valorRAM, valorCPU]);
+
+    Ram_T3.innerHTML = `${valorRAM}%`;
+    Cpu_T3.innerHTML = `${valorCPU}%`;
 
     // console.log(VetorCpuT3, VetorRamT3)
 }
@@ -1259,7 +1267,5 @@ function Atualizar_Dough5(){
     // console.log(VetorCpuT5, VetorRamT5)
 }
 setInterval(Atualizar_Dough5, 1000);
-
-
 
 </script>
