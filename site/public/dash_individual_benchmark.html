@@ -102,7 +102,7 @@
                         </div>
 
                         <div class="fPeri">
-                            <h2>Periodo</h2>
+                            <h2>Período</h2>
                             <div class="datas">
                                 <input type="date" id="periodoInicio">
                                 <input type="date" id="periodoFim">
@@ -195,7 +195,7 @@
                         <div class="divisao"></div>
                         <h1 class="tituloBarra"> Alertas por Totem </h1>
                         <div class="GfBar">
-                            <canvas id="barChart"></canvas>
+                            <canvas id="barChart" width="800"></canvas>
                         </div>
 
                     </div>
@@ -239,12 +239,12 @@
 
                                 <h3><span class="txt">Relação entre alertas de CPU</span></h3>
                                 <div style="display: flex; justify-content: space-between;">
-                                    <h3>4</h3>
+                                    <h3 id="alertasT1Cmp"></h3>
                                     <div class="comparacao">
-                                        <div class="barra1" id="barra3">50%</div>
-                                        <div class="barra2" id="barra4">50%</div>
+                                        <div class="barra1" id="barra3"></div>
+                                        <div class="barra2" id="barra4"></div>
                                     </div>
-                                    <h3>8</h3>
+                                    <h3 id="alertasT2Cmp"></h3>
                                 </div>
                                 <div class="labelsAlerta">
                                     <div
@@ -343,6 +343,7 @@
     function trocarTela() {
         prInicio = periodoInicio.value
         prFim = periodoFim.value
+        
 
         totem1 = totem_select1.value;
         totem2 = totem_select2.value;
@@ -363,6 +364,23 @@
             tituloBenchmark.style.borderRadius = '10px 10px 0px 0px'
 
             tituloBenchmark.innerHTML = "<h1>BenchMark</h1>"
+
+            var date = periodoInicio.value.split("-");
+            dayI = date[2];
+
+            var dateD = periodoFim.value.split("-");
+            dayF = dateD[2];
+
+            var rangeDias = [];
+            var cont = 0;
+
+            for (let i = dayI; i <= dayF; i++){
+                rangeDias[cont] = i
+                cont = cont + 1;
+            }
+            
+            ctx2.data.labels = rangeDias;
+            ctx2.update();
         }
     }
 
@@ -372,32 +390,14 @@
 
         atualizarDadosT2()
 
+        puxarAlertasPorDia()
 
-        // if (selectOpcao) {
-        //     pieChart.options.plugins.datalabels.display = true;
-        // } else {
-        //     pieChart.options.plugins.datalabels.display = false;
-        // }
+        puxarAlertasPorDia2()
 
-        // if (selectOpcao === '1') {
-        //     barChart.data.datasets[0].data = [45, 68, 32, 34, 45, 60, 56];
-        //     pieChart.data.datasets[0].data = [70, 30];
-        // } else if (selectOpcao === '2') {
-        //     barChart.data.datasets[0].data = [52, 35, 12, 34, 45, 60, 56];
-        //     pieChart.data.datasets[0].data = [65, 35];
-        // } else if (selectOpcao === '3') {
-        //     barChart.data.datasets[0].data = [15, 28, 42, 34, 45, 60, 56];
-        //     pieChart.data.datasets[0].data = [60, 40];
-        // } else if (selectOpcao === '4') {
-        //     barChart.data.datasets[0].data = [2, 8, 17, 34, 45, 32, 21];
-        //     pieChart.data.datasets[0].data = [75, 25];
-        // } else if (selectOpcao === '5') {
-        //     barChart.data.datasets[0].data = [15, 28, 42, 34, 12, 21, 61];
-        //     pieChart.data.datasets[0].data = [35, 65];
-        // }
+        setInterval(() => {
+            graficoBarrasHorizontal()
+        }, 500)
 
-        // barChart.update();
-        // pieChart.update();
     }
 
 
@@ -438,6 +438,7 @@
                         color: 'rgba(255, 255, 255, 0.90)'
                     },
                 }, y: {
+                    min: 0,
                     ticks: {
                         color: 'rgba(255, 255, 255, 0.90)'
                     },
@@ -465,12 +466,9 @@
 
     // Grafico de Barras
 
-    const ctx2 = document.getElementById('barChart');
     const labels2 = ['1', '2', '3', '4', '5', '6', '7'];
 
-    new Chart(ctx2, {
-        type: 'bar',
-        data: {
+    const data2 = {
             labels: labels2,
             datasets: [{
                 label: 'T1',
@@ -517,7 +515,11 @@
                 ],
                 borderWidth: 2
             }]
-        },
+        };
+
+    const config2 = {
+        type: 'bar',
+        data: data2,
         options: {
             scales: {
                 y: {
@@ -543,9 +545,15 @@
                         boxHeight: 20
                     },
                 }
-            }
-        },
-    });
+            },
+            maintainAspectRatio: false
+        }
+    };
+
+    const ctx2 = new Chart(
+        document.getElementById('barChart'),
+        config2
+    );
 
     // Grafico de Rosquina 1
 
@@ -672,31 +680,50 @@
         sliderTrack.style.background = `linear-gradient(to right, #3A3B47 ${percent1}% , #D7D7D8 ${percent1}% , #D7D7D8 ${percent2}%, #3A3B47 ${percent2}%)`;
     }
 
+
+    
+
     // Grafico barras horizontal
-    valor1 = (12 / 20) * 100
-    valor2 = (8 / 20) * 100
+    function graficoBarrasHorizontal() {
 
-    barra1.style.width = valor1 + "%"
-    barra2.style.width = valor2 + "%"
+        alertasT1 = alertasT1Cmp.innerHTML
+        alertasT2 = alertasT2Cmp.innerHTML
 
-    valor1 = Math.trunc(valor1)
-    valor2 = Math.trunc(valor2)
+        valor1 = (8 / 20) * 100
+        valor2 = (12 / 20) * 100
+        
+        barra1.style.width = valor1 + "%"
+        barra2.style.width = valor2 + "%"
+        
+        valor1 = Math.trunc(valor1)
+        valor2 = Math.trunc(valor2)
+        
+        barra1.innerHTML = valor1 + "%"
+        barra2.innerHTML = valor2 + "%"
+        
+        valor3 = (parseInt(alertasT1) / (parseInt(alertasT1) + parseInt(alertasT2))) * 100
+        valor4 = (parseInt(alertasT2) / (parseInt(alertasT1) + parseInt(alertasT2))) * 100
+        
+        console.log(alertasT1)
+        console.log(alertasT2)
+        console.log(valor3)
+        console.log(valor4)
+        
+        barra3.style.width = valor3 + "%"
+        barra4.style.width = valor4 + "%"
+        
+        valor3 = Math.trunc(valor3)
+        valor4 = Math.trunc(valor4)
+        
+        if (valor4 < 99){
+            barra3.innerHTML = valor3 + "%"
+        }
 
-    barra1.innerHTML = valor1 + "%"
-    barra2.innerHTML = valor2 + "%"
-
-    valor3 = (4 / 12) * 100
-    valor4 = (8 / 12) * 100
-
-    barra3.style.width = valor3 + "%"
-    barra4.style.width = valor4 + "%"
-
-    valor3 = Math.trunc(valor3)
-    valor4 = Math.trunc(valor4)
-
-    barra3.innerHTML = valor3 + "%"
-    barra4.innerHTML = valor4 + "%"
-
+        if (valor3 < 99) {
+            barra4.innerHTML = valor4 + "%"
+        }
+    }
+        
 
     function atualizarDadosT1() {
         vrTemp = "" + sliderOne.value;
@@ -770,6 +797,94 @@
                     ctx.data.datasets[1].data = dadosVetor2;
 
                     ctx.update();
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+    function puxarAlertasPorDia() {
+        fetch(`/totem/listarAlertaPorTotem/${totem1}/${componente}/${prInicio}/${prFim}`, {method: "post"}).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    dadosVetor3 = []
+
+                    var tamanhoRsp = Object.keys(resposta).length;
+
+                    somaAlertasT1 = 0
+
+                    count = 0;
+                    for (i = resposta[0].DIA_MES; i <= resposta[tamanhoRsp - 1].DIA_MES; i++){
+                        dadosVetor3[count] = resposta[count].qtd
+                        somaAlertasT1 += resposta[count].qtd
+                        count++
+                    }
+
+                    ctx2.data.datasets[0].data = dadosVetor3;
+                    
+                    ctx2.update();
+
+                    alertasT1Cmp.innerHTML = somaAlertasT1
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+
+
+    function puxarAlertasPorDia2() {
+        fetch(`/totem/listarAlertaPorTotem/${totem2}/${componente}/${prInicio}/${prFim}`, {method: "post"}).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    dadosVetor3 = []
+
+                    var tamanhoRsp = Object.keys(resposta).length;
+
+                    somaAlertasT2 = 0
+
+                    count = 0;
+                    for (i = resposta[0].DIA_MES; i <= resposta[tamanhoRsp - 1].DIA_MES; i++){
+                        dadosVetor3[count] = resposta[count].qtd
+                        somaAlertasT2 += resposta[count].qtd
+                        count++
+                    }
+
+                    ctx2.data.datasets[1].data = dadosVetor3;
+                    
+                    ctx2.update();
+
+                    alertasT2Cmp.innerHTML = somaAlertasT2
 
                 });
             } else {
