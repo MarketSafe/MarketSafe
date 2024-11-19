@@ -18,7 +18,37 @@ function cadastrarDia(req, res) {
         })
 }
 
+function cadastrarRanking(req, res) {
+    historicoLeoModel.cadastrarRanking()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function cadastrarTaxa(req, res) {
+    historicoLeoModel.cadastrarTaxa()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function cadastrarHora(req, res) {
+    historicoLeoModel.cadastrarHora()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
 module.exports = {
     cadastrarMes,
-    cadastrarDia
+    cadastrarDia,
+    cadastrarRanking,
+    cadastrarTaxa,
+    cadastrarHora
   }

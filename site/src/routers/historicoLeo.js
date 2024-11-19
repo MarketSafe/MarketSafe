@@ -12,4 +12,16 @@ router.get("/cadastrarDia", function(req, res){
     historicoLeoController.cadastrarDia(req, res); // Faz a rota dos servidores
 })
 
+router.get("/cadastrarRanking", function(req, res){
+    historicoLeoController.cadastrarRanking(req, res); // Faz a rota dos servidores
+})
+
+router.get("/cadastrarTaxa", function(req, res){
+    historicoLeoController.cadastrarTaxa(req, res); // Faz a rota dos servidores
+})
+
+router.get("/cadastrarHora", function(req, res){
+    historicoLeoController.cadastrarHora(req, res); // Faz a rota dos servidores
+})
+
 module.exports = router;
