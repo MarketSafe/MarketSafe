@@ -217,6 +217,12 @@ body {
                 padding: 0;
                 margin-left: -20px;
               }
+
+              & span {
+                flex: 1;
+                font-size: 1.5rem;
+              }
+
             }
           }
         }
