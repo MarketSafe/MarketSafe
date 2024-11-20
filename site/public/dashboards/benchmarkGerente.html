@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/dashboards/dashboardBenchmarkGerente.css" />
+    <link rel="stylesheet" href="/css/dashboards/benchmarkGerente.css" />
     <title>MarketSafe | Dashboard - Benchmark</title>
   </head>
 
   <body>
     <div>
       <header>
-        <div class="logo">
+        <a class="logo" href="/">
           <div class="img">
             <img src="/assets/logo.png" alt="logo" />
           </div>
           <h1>MKTS</h1>
-        </div>
+        </a>
         <nav>
           <h1>Dashboards</h1>
           <section class="gerente">
@@ -33,7 +33,7 @@
                   <img src="/assets/historico.svg" alt="historico.svg" />
                 </a>
               </li>
-              <li>
+              <li class="ativo">
                 <a href="/dashboards/dashboardBenchmarkGerente.html">
                   <h2>Benchmark</h2>
                   <img src="/assets/benchmark.svg" alt="previsao.svg" />
@@ -83,7 +83,7 @@
             <h1>Benchmark</h1>
           </div>
           <search>
-            <label>
+            <div>
               <span>Filial 1</span>
               <div>
                 <select class="filial">
@@ -93,21 +93,36 @@
                   <option value="" selected disabled>Promocao</option>
                 </select>
               </div>
-            </label>
-            <label>
+            </div>
+            <div>
               <span>Filial 2</span>
               <div>
                 <select class="filial">
                   <option value="" selected disabled>Filial</option>
+                  <option value="a">dwa</option>
+                  <option value="b">dwa</option>
                 </select>
                 <select class="promocao">
                   <option value="" selected disabled>Promocao</option>
                 </select>
               </div>
-            </label>
+            </div>
           </search>
         </header>
-        <section class="dashboard"></section>
+        <section class="dashboard">
+          <section class="indicadores">
+            <section class="filiais"></section>
+            <section class="empresa"></section>
+          </section>
+          <section class="graficos">
+            <div class="estado-filiais">
+              <canvas></canvas>
+            </div>
+            <div class="taxa-alerta">
+              <canvas></canvas>
+            </div>
+          </section>
+        </section>
       </main>
     </div>
   </body>

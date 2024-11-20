@@ -15,7 +15,7 @@
   --gerente-color: #ff3131ff;
   --analista-color: #e9864aff;
 
-  font-size: 1rem;
+  font-size: 1.5dvh;
 }
 
 /* defaults: */
@@ -40,7 +40,7 @@ body *:not(script) {
 body {
   align-items: stretch;
   height: 100dvh;
-  padding: 2em;
+  padding: 2rem;
   background: url("/assets/background.svg") no-repeat bottom left/cover var(--background-color);
 
   & h1 {
@@ -56,6 +56,12 @@ body {
     border: 1px solid var(--text-color);
     width: 100%;
   }
+  & :is(button, select) {
+    cursor: pointer;
+  }
+  & option[selected][disabled] {
+    display: none;
+  }
 
   & > div {
     flex-direction: row;
@@ -63,19 +69,23 @@ body {
     flex: 1;
 
     & > header {
-      gap: 2em;
+      gap: 2rem;
       align-items: stretch;
       z-index: 1;
       box-shadow: 10px 0px 10px var(--shadow-color);
       border-radius: 10px 0px 5px 10px;
-      padding: 2em;
+      padding: 2rem;
       background-color: var(--header-color);
       width: 20rem;
 
-      & > div.logo {
+      & > a.logo {
+        transition: transform 0.2s;
         width: 100%;
         flex-direction: row;
 
+        &:hover {
+          transform: scale(105%, 105%);
+        }
         & > div.img {
           flex: 1;
 
@@ -89,7 +99,7 @@ body {
         }
       }
       & > nav {
-        gap: 2em;
+        gap: 2rem;
         justify-content: start;
         flex: 1;
         width: 75%;
@@ -109,6 +119,15 @@ body {
               align-items: stretch;
             }
             & > li {
+              transition: transform 0.2s;
+
+              &:hover {
+                transform: scale(105%, 105%) translate(2.5%, 0%);
+              }
+              &.ativo {
+                border-radius: 3px;
+                background-color: var(--dashboard-color);
+              }
               & > a {
                 flex-direction: row;
                 align-items: center;
@@ -133,11 +152,15 @@ body {
         border-color: var(--div-color);
       }
       & > a.perfil {
+        transition: transform 0.2s;
         flex-direction: row;
-        gap: 1em;
+        gap: 1rem;
 
+        &:hover {
+          transform: scale(105%, 105%);
+        }
         & > div.img > img {
-          height: 5em;
+          height: 5rem;
         }
         & > div > span.nome {
           font-size: 2rem;
@@ -146,9 +169,10 @@ body {
     }
     & > main {
       align-items: stretch;
+      gap: 1rem;
       flex: 1;
       border-radius: 0px 10px 10px 0px;
-      padding: 2em;
+      padding: 2rem;
       background-color: var(--dashboard-color);
       height: 98%;
 
@@ -158,7 +182,7 @@ body {
 
         & > div {
           border-radius: 10px;
-          padding: 0.5em;
+          padding: 0.5rem;
           background-color: var(--header-color);
 
           & > h1 {
@@ -167,14 +191,14 @@ body {
         }
         & > search {
           flex-direction: row;
-          gap: 1.5em;
+          gap: 1.5rem;
 
-          & > label {
-            gap: 0.5em;
+          & > div {
+            gap: 0.5rem;
             flex: 1;
             border-radius: 10px;
             border: 1px solid var(--div-color);
-            padding: 1em;
+            padding: 1rem;
             background-color: var(--header-color);
 
             & > span {
@@ -182,23 +206,49 @@ body {
             }
             & > div {
               flex-direction: row;
-              gap: 1em;
+              gap: 1rem;
               align-self: stretch;
 
               & > select {
+                transition: transform 0.2s;
                 flex: 1;
                 border-radius: 5px;
                 border: 1px solid var(--div-color);
                 padding: 0.2em;
                 background-color: var(--dashboard-color);
                 font-size: 1.5rem;
+  
+                &:hover {
+                  transform: scale(105%, 105%);
+                }
               }
             }
           }
         }
       }
       & > section.dashboard {
+        gap: 1rem;
         flex: 1;
+
+        & > section {
+          flex-direction: row;
+          align-items: stretch;
+          gap: 1rem;
+          flex: 1;
+          width: 100%;
+
+          & > * {
+            flex: 1;
+            border-radius: 10px;
+            padding: 2rem;
+            background-color: var(--header-color);
+
+            & > canvas {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
       }
     }
   }
