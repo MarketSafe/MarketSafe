@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="./css/dashboards/dash_historico_analista.css" />
+    <link rel="stylesheet" href="../css/dash_historico_analista.css" />
     <link rel="icon" href="css/icon.png" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="menu">
             <div class="div_logo">
-                <img src="assets/img/Logo Self 2.png" alt="">
+                <img src="../assets/logo.png" alt="">
                 <div class="MKTS">
                     <h1>MKTS</h1>
                 </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="perfil">
                 <div class="foto_perfil">
-                    <img src="css/foto-anilista.jpg" alt="">
+                    <img src="../css/foto-anilista.jpg" alt="">
                 </div>
                 <div class="nome_perfil">
                     <div class="nome">
@@ -68,7 +68,7 @@
                             <option selected value="">MÊS</option>
                         </select>
                         <select name="ano" id="select_dia">
-                            <option selected value="" >DIAS</option>
+                            <option selected value="">DIAS</option>
                         </select>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     <div class="select_periodo">
                         <select name="ano">
                             <option selected value="">CPU
-                                <option value="">RAM</option>
+                            <option value="">RAM</option>
                             </option>
                         </select>
                     </div>
@@ -117,94 +117,169 @@
 
 <script>
 
-    // gráfico de barra do ranking
-    var options = {
-        series: [{
-            name: "Total de alertas do totem",
-            data: [50, 43, 38, 34, 25],
-        }],
-        chart: {
-            type: 'bar',
-            height: 230,
-            toolbar: {
-                show: false
-            }
-        },
-        title: {
-            text: "Totens com mais alertas da semana",
-            align: "center",
-            style: {
-                color: "#ffffff",
-                fontFamily: "Abel",
-                fontSize: "20px"
-            }
-        },
-        plotOptions: {
-            bar: {
-                borderRadiusApplication: 'end',
-                horizontal: true,
-                colors: {
-                    ranges: [{
-                        from: 0,
-                        to: 100,
-                        color: '#FF8818' // Cor das barras
-                    }]
+
+    
+cadastrarMes();
+    function cadastrarMes() {
+        fetch("/historicoLeo/cadastrarMes", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (meses) {
+                var select_mes = document.getElementById('select_mes');
+                meses.forEach((mes) => {
+                    select_mes.innerHTML += `<option value="${mes.id}">${mes.mes}</option>`;
+                    mudarRankingDia()
+                });
+            })
+            .catch(function (erro) {
+                alert(erro);
+                console.log("Erro ao carregar linhas:", erro);
+            });
+    }
+
+
+    function cadastrarDia() {
+        fetch("/historicoLeo/cadastrarDia", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (dias) {
+                var select_dia = document.getElementById('select_dia');
+                dias.forEach((dia) => {
+                    select_dia.innerHTML += `<option value="${dia.id}">${dia.intervalo_dias}</option>`;
+                });
+            })
+            .catch(function (erro) {
+                alert(erro);
+                console.log("Erro ao carregar linhas:", erro);
+            });
+    }
+    cadastrarDia();
+
+
+    cadastrarRanking()
+    function cadastrarRanking() {
+        const atualizarGrafico = (dados) => {
+            console.log(dados)
+            const totem = dados.map(item => item.totem)
+            const idTotem = dados.map(item => item.idTotem)
+            const total_alertas = dados.map(item => item.total_alertas)
+            
+            var options = {
+                series: [{
+                    name: "Total de alertas do totem",
+                    data: total_alertas,
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 230,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                title: {
+                    text: "Totens com mais alertas da semana",
+                    align: "center",
+                    style: {
+                        color: "#ffffff",
+                        fontFamily: "Abel",
+                        fontSize: "20px"
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadiusApplication: 'end',
+                        horizontal: true,
+                        colors: {
+                            ranges: [{
+                                from: 0,
+                                to: 100,
+                                color: '#FF8818' // Cor das barras
+                            }]
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    min: 0,
+                    max: 100,
+                    categories: idTotem,
+                    title: {
+                        text: 'Número de alertas por totem',
+                        fontFamily: 'Abel',
+                        style: {
+                            color: '#ffffff'
+                        }
+                    },
+                    labels: {
+                        style: {
+                            colors: "#FFFFFF",
+                            fontFamily: "Abel"
+                        }
+                    }
+                },
+                yaxis: {
+                    formatter: function (value) {
+                        return value;
+                    },
+                    labels: {
+                        style: {
+                            colors: "#ffffff"
+                        }
+                    }
+                },
+                tooltip: {
+                    theme: 'dark',  // Define o tema escuro para o tooltip
+                    style: {
+                        fontFamily: 'Abel',
+                        fontSize: '14px',
+                        color: '#fff'
+                    },
+                    marker: {
+                        show: false
+                    }
                 }
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        xaxis: {
-            min: 0,
-            max: 100,
-            categories: ['Totem 3', 'Totem 5', 'Totem 4', 'Totem 7', 'Totem 1'],
-            title: {
-                text: 'Número de alertas por totem',
-                fontFamily: 'Abel',
-                style: {
-                    color: '#ffffff'
-                }
-            },
-            labels: {
-                style: {
-                    colors: "#FFFFFF",
-                    fontFamily: "Abel"
-                }
-            }
-        },
-        yaxis: {
-            formatter: function(value){
-                return value;
-            },
-            labels: {
-                style: {
-                    colors: "#ffffff"
-                }
-            }
-        },
-        tooltip: {
-            theme: 'dark',  // Define o tema escuro para o tooltip
-            style: {
-                fontFamily: 'Abel',
-                fontSize: '14px',
-                color: '#fff'
-            },
-            marker: {
-                show: false
+            };
+
+            if (!window.chartGRAFICO) {
+                window.chartGRAFICO = new ApexCharts(document.querySelector("#rank"), options);
+                window.chartGRAFICO.render();
+            } else {
+                window.chartGRAFICO.updateOptions(options);
             }
         }
-    };
 
-    var chart = new ApexCharts(document.querySelector("#rank"), options);
-    chart.render();
+        const buscarDados = () => {
+            fetch("/historicoLeo/cadastrarRanking", {
+                method: "GET"
+            })
+                .then(resposta => resposta.json())
+                .then(atualizarGrafico)
+        };
 
+        buscarDados();
+        setInterval(buscarDados, 2000);
+    }
 
-    //gráfico de linha com a taxa de alertas por dia da semana
-    var options = {
+    cadastrarTaxa()
+    function cadastrarTaxa() {
+        console.log("AAAAAAAAAAAAAAA")
+        const atualizarGrafico2 = (dados2) => {
+            const dia = dados2.map(item => item.dia)
+            const total_alerta = dados2.map(item => item.total_alerta)
+            const taxa_porcentagem = dados2.map(item => item.taxa_porcentagem)
+
+            var options = {
     series: [{
-        name: "Percentual total",  // Isso é para nomear a série
-        data: [10, 41, 35, 51, 49, 62, 80]
+        name: "Percentual total",  
+        data: taxa_porcentagem
     }],
     chart: {
         height: 250,
@@ -221,10 +296,10 @@
     },
     stroke: {
         curve: 'straight',
-        colors: ['#FF8818']  // Define a cor da linha
+        colors: ['#FF8818'] 
     },
     title: {
-        text: 'Taxa de totem em alerta por dia da semana',
+        text: 'Taxa de totem em alerta por dia',
         align: 'center',
         style: {
             color: '#ffffff',
@@ -239,11 +314,16 @@
         },
     },
     xaxis: {
-        categories: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+        categories: dia,
         labels: {
             style: {
                 colors: "#ffffff",
                 fontFamily: "Abel"
+            },
+            formatter: function(value) {
+                // Supondo que 'dia' esteja em formato de data, formatamos para 'dd/MM'
+                const date = new Date(value);
+                return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
             }
         }
     },
@@ -267,7 +347,7 @@
         }
     },
     tooltip: {
-        theme: 'dark',  // Define o tema escuro para o tooltip
+        theme: 'dark',
         style: {
             fontFamily: 'Abel',
             fontSize: '14px',
@@ -276,138 +356,170 @@
         marker: {
             show: false
         },
+        x: {
+            // Formatação do tooltip para exibir apenas 'dd/MM'
+            formatter: function(value) {
+                const date = new Date(value);
+                return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+            }
+        },
         y: {
             formatter: function (value) {
-                return value + '%';  // Personaliza o texto no tooltip
+                return value + '%';  
             }
         }
     }
 };
 
-var chart = new ApexCharts(document.querySelector("#taxa"), options);
-chart.render();
-
-
-    // gráfico de barras do total de alertas nas horas
-    var options = {
-        series: [{
-            name: 'Total de alertas por hora',
-            data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 70, 79, 85]
-        },
-        ],
-        title: {
-            text: 'Total de alertas por hora',
-            align: 'center',
-            style: {
-                color: '#ffffff',
-                fontFamily: 'Abel',
-                fontSize: '20px'
-            }
-        },
-        chart: {
-            type: 'bar',
-            height: 250,
-            toolbar: {
-                show: false
-            }
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            labels: {
-                style: {
-                    colors: '#ffffff',
-                    fontFamily: 'Abel'
-                }
-            },
-            categories: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'],
-        },
-
-        yaxis: {
-            labels: {
-                style: {
-                    colors: '#ffffff',
-                    fontFamily: 'Abel'
-                }
-            },
-        },
-        fill: {
-            opacity: 1
-        },
-
-        tooltip: {
-            theme: 'dark',  // Define o tema escuro para o tooltip
-            y: {
-                formatter: function (val) {
-                    return val
-                }
-            },
-            style: {
-                fontFamily: 'Abel',
-                fontSize: '14px',
-                color: '#fff'
-            },
-            marker: {
-                show: false
+            if (!window.chartTAXA) {
+                window.chartTAXA = new ApexCharts(document.querySelector("#taxa"), options);
+                window.chartTAXA.render();
+            } else {
+                window.chartTAXA.updateOptions(options);
             }
         }
 
-    };
-
-    var chart = new ApexCharts(document.querySelector("#total"), options);
-    chart.render();
-
-    cadastrarMes();
-    function cadastrarMes() {
-        fetch("/historicoLeo/cadastrarMes", {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                return resposta.json();
+        const buscarDados2 = () => {
+            fetch("/historicoLeo/cadastrarTaxa", {
+                method: "GET"
             })
-            .then(function (meses) {
-                var select_mes = document.getElementById('select_mes');
-                meses.forEach((mes) => {
-                    select_mes.innerHTML += `<option value="${mes.id}">${mes.mes}</option>`;
-                });
-            })
-            .catch(function (erro) {
-                alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
-            });
+                .then(resposta => resposta.json())
+                .then(atualizarGrafico2)
+        };
+
+        buscarDados2();
+        setInterval(buscarDados2, 2000);
     }
 
-    
-    function cadastrarDia() {
-        fetch("/historicoLeo/cadastrarDia", {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .then(function (dias) {
-                var select_dia = document.getElementById('select_dia');
-                dias.forEach((dia) => {
-                    select_dia.innerHTML += `<option value="${dia.id}">${dia.intervalo_dias}</option>`;
-                });
-            })
-            .catch(function (erro) {
-                alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
-            });
+
+    cadastrarHora()
+    function cadastrarHora() {
+        console.log("AAAAAAAAAAAAAAA")
+        const atualizarGrafico3 = (dados3) => {
+            const hora = dados3.map(item => item.hora)
+            const total_alertas = dados3.map(item => item.total_alertas)
+
+            var options = {
+    series: [{
+        name: 'Total de alertas por hora',
+        data: total_alertas
+    }],
+    title: {
+        text: 'Total de alertas por hora',
+        align: 'center',
+        style: {
+            color: '#ffffff',
+            fontFamily: 'Abel',
+            fontSize: '20px'
+        }
+    },
+    chart: {
+        type: 'bar',
+        height: 250,
+        toolbar: {
+            show: false
+        }
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+    },
+    xaxis: {
+        labels: {
+            style: {
+                colors: '#ffffff',
+                fontFamily: 'Abel'
+            },
+            formatter: function(value) {
+                // Assume que 'hora' seja um número representando a hora (0-23)
+                var hour = value < 10 ? '0' + value : value;
+                return hour + ':00';
+            }
+        },
+        categories: hora
+    },
+    yaxis: {
+        labels: {
+            style: {
+                colors: '#ffffff',
+                fontFamily: 'Abel'
+            }
+        }
+    },
+    fill: {
+        opacity: 1
+    },
+    tooltip: {
+        theme: 'dark',
+        y: {
+            formatter: function(val) {
+                return val;
+            }
+        },
+        x: {
+            formatter: function(value) {
+                var hour = value < 10 ? '0' + value : value;
+                return hour + ':00';
+            }
+        },
+        style: {
+            fontFamily: 'Abel',
+            fontSize: '14px',
+            color: '#fff'
+        },
+        marker: {
+            show: false
+        }
     }
-    cadastrarDia();
+};
+
+    if (!window.chartHORA) {
+                window.chartHORA = new ApexCharts(document.querySelector("#total"), options);
+                window.chartHORA.render();
+            } else {
+                window.chartHORA.updateOptions(options);
+            }
+        }
+
+        const buscarDados3 = () => {
+            fetch("/historicoLeo/cadastrarHora", {
+                method: "GET"
+            })
+                .then(resposta => resposta.json())
+                .then(atualizarGrafico3)
+        };
+
+        buscarDados3();
+        setInterval(buscarDados3, 2000);
+}
+
+function mudarRankingDia() {
+    var selectMes = document.getElementById("select_mes");
+    var selectDia = document.getElementById("select_dia");
+
+    selectMes.addEventListener("change", atualizarRankingDia);
+    selectDia.addEventListener("change", atualizarRankingDia);
+}
+
+function atualizarRankingDia() {
+    var selectMes = document.getElementById("select_mes");
+    var selectDia = document.getElementById("select_dia");
+
+    var mes = selectMes.value; 
+    var dia = selectDia.value; 
+    console.log("Mês selecionado: ", mes);
+    console.log("Dia selecionado: ", dia);
+
+}
 </script>
