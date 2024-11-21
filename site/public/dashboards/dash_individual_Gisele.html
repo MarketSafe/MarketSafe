@@ -70,18 +70,17 @@
                             </select>
                         </div>
                     </div>
-                    <button id="filtrar">Filtrar</button>
-
                     <div class="fTote">
                         <h2 class="h2-title">Mês</h2>
                         <div class="fSelect">
                             <input type="month" id="mes">
                         </div>
                     </div>
+                    <button class="botao-filtrar" id="filtrar">Filtrar</button>
                 </div>
             </div>
             <div class="engloba-indicador">
-                <div class="status-container">
+                <div id="card-performance" class="status-container" style="display: flex;">
                     <div class="fundo-status">
                         <div class="alerta-status-title">Status de Performance da Filial</div>
                         <div class="engloba-status">
@@ -115,6 +114,13 @@
                         </div>
                     </div>
                 </div>
+                <div id="grafico-performance" class="status-container" style="display: none;">
+
+                    <div class="fundo-grafico-title">Histórico do Status da Performance</div>
+                    <div class="chart-status">
+                        <canvas id="stackedBarChart"></canvas>
+                    </div>
+                </div>
                 <div class="ranking">
                     <div class="ranking-title">3 Promoções com mais Alertas</div>
                     <table class="table">
@@ -129,21 +135,6 @@
                         <tbody id="corpoTabela">
 
                         </tbody>
-                        <!-- <tr>
-                            <td>1</td>
-                            <td>Carnes</td>
-                            <td>20</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Bebidas</td>
-                            <td>13</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Frutas</td>
-                            <td>9</td>
-                        </tr> -->
                     </table>
                 </div>
             </div>
@@ -196,9 +187,16 @@
     async function buscarPorFilial() {
         // console.log(filiais)
         document.getElementById('filtrar').addEventListener('click', async () => {
+
             const filial = document.getElementById('filial').value;
 
+
+
+
             atualizarGrafico();
+
+            document.getElementById('card-performance').style.display = "none"
+            document.getElementById('grafico-performance').style.display = "block"
             const response = await fetch(`/ranking/buscarPorFilial`, {
                 method: "post",
                 headers: {
@@ -381,7 +379,7 @@
             console.error(`Erro: ${response.statusText}`);
             return;
         } else if (response.status === 204) {
-            alert("Nnenhuma filial encontrada")
+            alert("Não houve nenhum alerta neste mês")
             return;
         }
         // console.log(await response.text())
@@ -394,7 +392,7 @@
             valores[item.dia] = item.qtdAlertas;
         }
 
-        console.log(valores)
+        // console.log(valores)
         const labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
         const data = {
             labels: labels,
@@ -501,8 +499,64 @@
         pieConfig
     );
 
+    const labels = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'];
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Crítico',
+                data: [2, 3, 1, 0],
 
-    // document.getElementById('filial').addEventListener('change', MudandoValoresDash);
+                backgroundColor: '#ff4d4d',
+            },
+            {
+                label: 'Atenção',
+                data: [1, 2, 2, 1],
+
+                backgroundColor: '#ffcc00',
+            },
+            {
+                label: 'Normal',
+                data: [2, 1, 2, 4],
+                backgroundColor: '#99cc66',
+            },
+        ],
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                },
+                y: {
+                    stacked: true,
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.90)'
+                    },
+                }
+            },
+
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white',
+                    },
+                },
+            },
+        },
+    };
+
+    const ctx = document.getElementById('stackedBarChart').getContext('2d');
+    const stackedBarChart = new Chart(ctx, config);
+
 
     async function inicializarPagina() {
         await carregarFiliais();
