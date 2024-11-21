@@ -44,6 +44,7 @@ create table empresa(
 create table filial(
   id int primary key auto_increment,
   data_hora timestamp default current_timestamp,
+  nome varchar(80) not null,
   fk_empresa int not null,
   fk_endereco int not null unique,
 
