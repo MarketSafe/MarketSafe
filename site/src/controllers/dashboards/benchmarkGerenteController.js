@@ -3,8 +3,6 @@
 // dependências:
 //   importa o arquivo `benchmarkGerenteModel.js`:
 const benchmarkGerenteModel = require("../../models/dashboards/benchmarkGerenteModel.js");
-//   importa o arquivo `util.js`:
-const funcionarioModel = require("../../../util/util.js");
 
 // declara a função `estadoFiliais` do arquivo `benchmarkGerenteController.js`:
 function estadoFiliais(req, res) {
