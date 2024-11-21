@@ -74,9 +74,10 @@ body {
     margin-top: 10%;
 }
 
-.select_dash h2{
+.select_dash h2 {
     font-family: "Abel";
 }
+
 .regiao-select {
     padding: 10px;
     width: 90%;
@@ -222,7 +223,6 @@ body {
     flex: 1;
     background-color: #33363f;
     padding: 20px;
-    border-radius: 8px;
     display: flex;
     justify-content: space-evenly;
     gap: 2rem;
@@ -340,12 +340,13 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: 10px;
     text-align: center;
-    font-family: "Abel"; 
+    font-family: "Abel";
 }
 
-th{
-    font-family: "Abel";  
+th {
+    font-family: "Abel";
 }
+
 .table tbody tr:nth-child(1) {
     background-color: #ffe034;
     color: black;
@@ -392,7 +393,7 @@ th{
 
 .engloba-indicador {
     display: flex;
-    gap: 10rem;
+    gap: 5rem;
     height: 170px;
 }
 
@@ -416,7 +417,7 @@ th{
 
 
 css .filtros {
-    width: 80%;
+    width: 70%;
     margin-top: 1%;
     border-radius: 10px;
     background-color: #292A32;
@@ -450,7 +451,8 @@ css .filtros {
         margin-bottom: 2%;
         justify-content: space-evenly;
 
-        input, select {
+        input,
+        select {
             background-color: #3A3B47;
             border: #4E4E4E solid 1px;
             color: #fff;
@@ -465,4 +467,28 @@ css .filtros {
         }
 
     }
+}
+
+.botao-filtrar {
+    background-color: #3A3B47;
+    border: #8e8c8c solid 2px;
+    color: #fff;
+    border-radius: 5px;
+    font-family: "Abel";
+    font-weight: 200;
+    font-style: normal;
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 4px;
+}
+
+#grafico-performance .chart-status {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+#stackedBarChart {
+    width: 70% !important;
+    height: auto !important;
 }
