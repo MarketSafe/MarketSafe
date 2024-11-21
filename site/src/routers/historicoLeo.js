@@ -24,4 +24,8 @@ router.get("/cadastrarHora", function(req, res){
     historicoLeoController.cadastrarHora(req, res); // Faz a rota dos servidores
 })
 
+router.get("/atualizarRanking_mes", function(req, res){
+    historicoLeoController.atualizarRanking_mes(req, res); // Faz a rota dos servidores
+})
+
 module.exports = router;

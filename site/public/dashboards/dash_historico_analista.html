@@ -117,6 +117,7 @@
 
 <script>
 
+
     
 cadastrarMes();
     function cadastrarMes() {
@@ -130,6 +131,7 @@ cadastrarMes();
                 var select_mes = document.getElementById('select_mes');
                 meses.forEach((mes) => {
                     select_mes.innerHTML += `<option value="${mes.id}">${mes.mes}</option>`;
+                    mudarRankingDia()
                 });
             })
             .catch(function (erro) {
@@ -161,9 +163,9 @@ cadastrarMes();
 
 
     cadastrarRanking()
-
     function cadastrarRanking() {
         const atualizarGrafico = (dados) => {
+            console.log(dados)
             const totem = dados.map(item => item.totem)
             const idTotem = dados.map(item => item.idTotem)
             const total_alertas = dados.map(item => item.total_alertas)
@@ -500,5 +502,24 @@ cadastrarMes();
 
         buscarDados3();
         setInterval(buscarDados3, 2000);
+}
+
+function mudarRankingDia() {
+    var selectMes = document.getElementById("select_mes");
+    var selectDia = document.getElementById("select_dia");
+
+    selectMes.addEventListener("change", atualizarRankingDia);
+    selectDia.addEventListener("change", atualizarRankingDia);
+}
+
+function atualizarRankingDia() {
+    var selectMes = document.getElementById("select_mes");
+    var selectDia = document.getElementById("select_dia");
+
+    var mes = selectMes.value; 
+    var dia = selectDia.value; 
+    console.log("Mês selecionado: ", mes);
+    console.log("Dia selecionado: ", dia);
+
 }
 </script>

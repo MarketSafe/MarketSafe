@@ -115,15 +115,22 @@
             <section class="empresa"></section>
           </section>
           <section class="graficos">
-            <div class="estado-filiais">
-              <canvas></canvas>
+            <div>
+              <div class="grafico estado-filiais">
+                <canvas></canvas>
+              </div>
             </div>
-            <div class="taxa-alerta">
-              <canvas></canvas>
+            <div>
+              <div class="grafico taxa-alerta">
+                <canvas></canvas>
+              </div>
             </div>
           </section>
         </section>
       </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script type="module" src="/js/dashboards/benchmarkGerente.js"></script>
   </body>
 </html>
