@@ -251,6 +251,54 @@ function listarAlertaPorTotem(req, res) {
 }
 
 
+
+function listarTodosAlertas(req, res) {
+  console.log(req.params)
+  // declaração das variáveis recebidas:
+
+            // envia para a função `listarAlertaPorTotem` do arquivo `totemModel.js`:
+            totemModel
+              .listarTodosAlertas()
+              .then(function (resultado) {
+
+                // retorna a resposta com status 200 (sucesso) em json contendo os totens da filial do usuário autenticado:
+                res.status(200).json(resultado);
+              })
+              // em caso de erro no servidor:
+              .catch(function (erro) {
+                console.log("Erro no servidor:", erro);
+                // retorna o erro com o status 500 (erro de servidor):
+                res.status(500).json({ erro: erro.sqlMessage });
+              }); 
+}
+
+function puxarTodosAlertasPorTotem(req, res) {
+
+  console.log(req.params)
+  // declaração das variáveis recebidas:
+  const totem1 = req.params.totem1;
+  const totem2 = req.params.totem2;
+  const inicio = req.params.inicio;
+  const fim = req.params.fim;
+
+            // envia para a função `listarAlertaPorTotem` do arquivo `totemModel.js`:
+            totemModel
+              .listarTodosAlertasPorTotem(totem1, totem2, inicio, fim)
+              .then(function (resultado) {
+
+                // retorna a resposta com status 200 (sucesso) em json contendo os totens da filial do usuário autenticado:
+                res.status(200).json(resultado);
+              })
+              // em caso de erro no servidor:
+              .catch(function (erro) {
+                console.log("Erro no servidor:", erro);
+                // retorna o erro com o status 500 (erro de servidor):
+                res.status(500).json({ erro: erro.sqlMessage });
+              }); 
+}
+
+
+
 // declaração da função `listarAlertaPorTotemPorDiaDaSemana` do arquivo `totemController.js`:
 function listarAlertaPorTotemPorDiaDaSemana(req, res) {
 
@@ -286,5 +334,7 @@ module.exports = {
   listarPorFilial,
   listarPorEmpresa,
   listarAlertaPorTotem,
-  listarAlertaPorTotemPorDiaDaSemana
+  listarAlertaPorTotemPorDiaDaSemana,
+  listarTodosAlertas,
+  puxarTodosAlertasPorTotem
 };
