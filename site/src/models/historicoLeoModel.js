@@ -63,9 +63,9 @@ function cadastrarTaxa() {
     SELECT 
     DATE(data_hora) AS dia,
     COUNT(*) AS total_alerta,
-    ROUND((COUNT(*) / (SELECT COUNT(*) FROM alerta WHERE data_hora >= CURDATE() - INTERVAL 7 DAY) * 100), 2) AS taxa_porcentagem
+    ROUND((COUNT(*) / (SELECT COUNT(*) FROM alerta WHERE data_hora <= CURDATE() - INTERVAL 7 DAY) * 100), 2) AS taxa_porcentagem
     FROM alerta
-    WHERE data_hora >= CURDATE() - INTERVAL 7 DAY
+    WHERE data_hora <= CURDATE() - INTERVAL 7 DAY
     GROUP BY dia
     ORDER BY dia limit 7;`
         ;
@@ -78,11 +78,11 @@ function cadastrarHora() {
 
     var instrucaoSql =
         `
-    SELECT 
+     SELECT 
     HOUR(data_hora) AS hora,
     COUNT(*) AS total_alertas
     FROM alerta
-    WHERE DATE(data_hora) = '2024-12-12'
+    WHERE DATE(data_hora) = '2024-11-12'
     GROUP BY hora
     ORDER BY hora limit 8;  `
         ;
