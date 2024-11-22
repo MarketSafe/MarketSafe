@@ -14,6 +14,10 @@ const ambiente_processo = "desenvolvimento";
 
 const caminho_env = ambiente_processo === "producao" ? ".env" : ".env.dev";
 require("dotenv").config({ path: caminho_env });
+
+//   importa o arquivo `util.js`:
+const util = require("./util/util.js");
+
 const PORTA_APP = process.env.APP_PORT;
 const HOST_APP = process.env.APP_HOST;
 
@@ -41,7 +45,7 @@ app.use("/alerta", alertaRouter);
 app.use("/ranking", rankingRouter);
 app.use("/historicoLeo", historicoLeoRouter);
 app.use("/monitoramento", monitoramentoRouterIsaque);
-app.use("/benchmarkGerente", benchmarkGerenteRouter);
+app.use("/benchmarkGerente", util.auth, benchmarkGerenteRouter);
 
 //   configura arquivos estáticos (*.html, *.css, *.js):
 app.use(express.static(path.join(__dirname, "public")));

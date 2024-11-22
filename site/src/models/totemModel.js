@@ -47,7 +47,7 @@ function listarAlertaPorTotem(totem, componente, inicio, fim) {
 
   unions = `SELECT ${dayI} AS dia UNION ALL `
 
-  for (let i = dayI + 1; i <= dayF; i++){
+  for (let i = dayI + 1; i < dayF; i++){
       rangeDias[cont] = i
       cont = cont + 1;
 
@@ -67,10 +67,12 @@ LEFT JOIN
     alerta ON DATE_FORMAT(alerta.data_hora, '%d') = dias_mes.dia
     and ${componente}_porcentagem > 85 
     and fk_totem = ${totem} 
-    and data_hora > '${inicio} 10:00:00' 
+    and data_hora > '${inicio} 00:00:00' 
     AND data_hora < '${fim} 23:59:59'
 GROUP BY 
     dias_mes.dia;`;
+
+    console.log(instrucao);
 
 
   // declaração da variável de resultado da execução:
@@ -99,7 +101,7 @@ LEFT JOIN
     alerta ON DATE_FORMAT(alerta.data_hora, '%w') = dias_semana.dia
     and ${componente}_porcentagem > 85 
     and fk_totem = ${totem} 
-    and data_hora > '${inicio} 10:00:00' 
+    and data_hora > '${inicio} 00:00:00' 
     AND data_hora < '${fim} 23:59:59'
     and TIME(data_hora) > '${hi}:00'
     and TIME(data_hora) < '${hf}:00'
@@ -116,11 +118,73 @@ ORDER BY
 }
 
 
+// declaração da função `listarAlertaPorTotem`:
+function listarTodosAlertas() {
+  // declaração da variável de instrução sql:
+  const instrucao = `SELECT 
+    t.totem AS totem, 
+    COALESCE(COUNT(a.id), 0) AS qtd
+FROM 
+    (SELECT 1 AS totem 
+     UNION ALL 
+     SELECT 2) AS t
+LEFT JOIN 
+    alerta a 
+ON 
+    a.fk_totem = t.totem
+    AND a.ram_porcentagem > 85
+    AND a.data_hora >= DATE(NOW()) - INTERVAL 30 DAY 
+    AND a.data_hora <= DATE(NOW())
+GROUP BY 
+    t.totem
+ORDER BY 
+    t.totem;`;
+  // declaração da variável de resultado da execução:
+  const resultado = database.executar(instrucao);
+
+    resultado
+  // retorna o resultado da execução:
+  return resultado;
+}
+
+function listarTodosAlertasPorTotem(totem1, totem2, inicio, fim) {
+  // declaração da variável de instrução sql:
+  const instrucao = `SELECT 
+    t.totem AS totem, 
+    COALESCE(COUNT(a.id), 0) AS qtd
+FROM 
+    (SELECT ${totem1} AS totem 
+     UNION ALL 
+     SELECT ${totem2}) AS t
+LEFT JOIN 
+    alerta a 
+ON 
+    a.fk_totem = t.totem
+    AND a.data_hora >= '${inicio} 00:00:00'
+    AND a.data_hora <= '${fim} 23:59:59'
+WHERE 
+    t.totem IN (${totem1}, ${totem2})
+GROUP BY 
+    t.totem
+ORDER BY 
+    t.totem;`;
+  // declaração da variável de resultado da execução:
+  const resultado = database.executar(instrucao);
+
+    resultado
+  // retorna o resultado da execução:
+  return resultado;
+}
+
+
+
 // exporta as funções do arquivo `totemModel.js`:
 module.exports = {
   cadastrar,
   listarPorFilial,
   listarPorEmpresa,
   listarAlertaPorTotem,
-  listarAlertaPorTotemPorDiaDaSemana
+  listarAlertaPorTotemPorDiaDaSemana,
+  listarTodosAlertas,
+  listarTodosAlertasPorTotem
 };

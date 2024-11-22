@@ -11,9 +11,7 @@ const benchmarkGerenteController = require("../../controllers/dashboards/benchma
 const router = express.Router();
 
 // envia a requisição do tipo post "/estadoFiliais" para a função `estadoFiliais` do `benchmarkGerenteController.js`:
-router.post("/estadoFiliais", function (req, res) {
-  benchmarkGerenteController.estadoFiliais(req, res);
-});
+router.post("/estadoFiliais", benchmarkGerenteController.estadoFiliais);
 
 // exporta a variável de roteador do arquivo `benchmarkGerenteRouter.js`:
 module.exports = router;

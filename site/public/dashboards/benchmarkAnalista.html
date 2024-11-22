@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="./css/dash_benchmark_analista.css" />
+    <link rel="stylesheet" href="/css/dashboards/dash_benchmark_analista.css" />
     <link rel="icon" href="css/icon.png" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -17,7 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Abel&family=Afacad:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
 
-    <script src="./js/heatmap.js"></script>
+    <script src="/js/heatmap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -25,7 +25,7 @@
     <div class="container">
         <div class="menu">
             <div class="div_logo">
-                <img src="assets/img/Logo Self 2.png" alt="">
+                <img src="/assets/img/Logo Self 2.png" alt="">
                 <div class="MKTS">
                     <h1>MKTS</h1>
                 </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="perfil">
                 <div class="foto_perfil">
-                    <img src="css/foto-anilista.jpg" alt="">
+                    <img src="/css/foto-anilista.jpg" alt="">
                 </div>
                 <div class="nome_perfil">
                     <div class="nome">
@@ -229,12 +229,12 @@
                             <div>
                                 <h3><span class="txt">Relação entre alertas totais</span></h3>
                                 <div style="display: flex; justify-content: space-between;">
-                                    <h3>12</h3>
+                                    <h3 id="alertasT1Total"></h3>
                                     <div class="comparacao">
-                                        <div class="barra1" id="barra1">50%</div>
-                                        <div class="barra2" id="barra2">50%</div>
+                                        <div class="barra1" id="barra1"></div>
+                                        <div class="barra2" id="barra2"></div>
                                     </div>
-                                    <h3>8</h3>
+                                    <h3 id="alertasT2Total"></h3>
                                 </div>
 
                                 <h3><span class="txt">Relação entre alertas de CPU</span></h3>
@@ -277,12 +277,14 @@
     });
 
     var points = [];
-    var max = 20;
+    var max = 3;
     var min = 0;
     var width = 850;
     var height = 490;
 
-    atualizarFeed();
+    var contResultado = 0;
+
+    puxarTodosAlertas();
 
     function atualizarFeed() {
         // =========================================================================
@@ -386,6 +388,9 @@
 
     function alimentarGraficos() {
 
+        totem1 = totem_select1.value;
+        totem2 = totem_select2.value;
+
         atualizarDadosT1()
 
         atualizarDadosT2()
@@ -394,9 +399,10 @@
 
         puxarAlertasPorDia2()
 
-        setInterval(() => {
-            graficoBarrasHorizontal()
-        }, 500)
+        puxarTodosAlertas();
+        puxarTodosAlertasPorTotem();
+
+        setTimeout(() => graficoBarrasHorizontal(), 500);
 
     }
 
@@ -689,17 +695,17 @@
         alertasT1 = alertasT1Cmp.innerHTML
         alertasT2 = alertasT2Cmp.innerHTML
 
-        valor1 = (8 / 20) * 100
-        valor2 = (12 / 20) * 100
+        alertasT3 = alertasT1Total.innerHTML
+        alertasT4 = alertasT2Total.innerHTML
+    
+        valor1 = (parseInt(alertasT3) / (parseInt(alertasT3) + parseInt(alertasT4))) * 100
+        valor2 = (parseInt(alertasT4) / (parseInt(alertasT3) + parseInt(alertasT4))) * 100
         
         barra1.style.width = valor1 + "%"
         barra2.style.width = valor2 + "%"
         
         valor1 = Math.trunc(valor1)
         valor2 = Math.trunc(valor2)
-        
-        barra1.innerHTML = valor1 + "%"
-        barra2.innerHTML = valor2 + "%"
         
         valor3 = (parseInt(alertasT1) / (parseInt(alertasT1) + parseInt(alertasT2))) * 100
         valor4 = (parseInt(alertasT2) / (parseInt(alertasT1) + parseInt(alertasT2))) * 100
@@ -715,6 +721,14 @@
         valor3 = Math.trunc(valor3)
         valor4 = Math.trunc(valor4)
         
+        if (valor1 < 98){
+            barra2.innerHTML = valor2 + "%"
+        }
+
+        if (valor2 < 98 ) {
+            barra1.innerHTML = valor1 + "%"
+        }
+
         if (valor4 < 99){
             barra3.innerHTML = valor3 + "%"
         }
@@ -896,6 +910,77 @@
         });
     }
 
+    function puxarTodosAlertas() {
+        fetch(`/totem/listarTodosAlertas`, {method: "post"}).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                        var escada1 = { x: 38, y: 340, value: resposta[0].qtd, radius: 40, };
+                        var escada2 = { x: 90, y: 340, value: resposta[1].qtd, radius: 40, };
+                        //    var escada3 = { x: 545, y: 345, value: dado, radius: 40, };
+                        //    var passarela1 = { x: 515, y: 370, value: dado * 1.2, radius: 40, };
+                        //    var passarela2 = { x: 620, y: 250, value: dado * 1, radius: 40, };
+                        //    var catraca = { x: 690, y: 172, value: dado * 0.8, radius: 40, };
+    
+                        points = [escada1, escada2];
+    
+                        var data = {
+                            max: max,
+                            min: min,
+                            data: points,
+                        }
+    
+                        heatmapInstance.setData(data);
+
+                        console.log("heat ",resposta);
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+
+    function puxarTodosAlertasPorTotem() {
+        fetch(`/totem/puxarTodosAlertasPorTotem/${totem1}/${totem2}/${prInicio}/${prFim}`, {method: "post"}).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados total alertas: ", JSON.stringify(resposta));
+                        
+                        alertasT1Total.innerHTML = resposta[(totem1 - 1)].qtd
+                        alertasT2Total.innerHTML = resposta[(totem2 - 1)].qtd
+
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
 
 
 
