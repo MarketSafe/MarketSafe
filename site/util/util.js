@@ -19,6 +19,7 @@ function auth(req, res, next) {
         // caso a quantidade de registros encontrados seja igual a 1, o usuário está autenticado:
         if (resultadoAutenticar.length === 1) {
           req.body.funcionarioAutenticado = resultadoAutenticar[0]; // recebe o primeiro (e único) registro do select
+          next();
         } else {
           res.status(401).json({ erro: "Login inválido" }); // retorna a resposta com status 401 (não autorizado) para o cliente da requisição
         }
