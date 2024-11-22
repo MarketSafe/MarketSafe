@@ -113,10 +113,83 @@
         </header>
         <section class="dashboard">
           <div>
-            
+            <div>
+              <canvas id="graficoBubble">
+
+              </canvas>
+              <canvas id="graficoLinha">
+
+              </canvas>
+            </div>
           </div>
         </section>
       </main>
     </div>
   </body>
 </html>
+<script>
+  const dataBubble = {
+    datasets: [{
+      label: 'Atual',
+      data: [{
+        x: 1,
+        y: 5,
+        r: 10
+      }, {
+        x: 3,
+        y: 15,
+        r: 15
+      }, {
+        x: 5,
+        y: 20,
+        r: 20
+      }],
+      backgroundColor: '#FF914D'
+    }, {
+      label: 'Previsto',
+      data: [{
+        x: 7,
+        y: 30,
+        r: 25
+      }],
+      backgroundColor: '#FF3131'
+    }]
+  };
+
+  const configBubble = {
+    type: 'bubble',
+    data: dataBubble,
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            color: "#9A9A9A"
+          }
+        },
+        x: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            color: "#9A9A9A"
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: "white"
+          }
+        }
+      }
+    }
+  };
+
+  let bubbleChart = new Chart(
+    document.getElementById('graficoBubble').getContext('2d'),
+    configBubble
+  );
+</script>
