@@ -28,4 +28,18 @@ router.get("/atualizarRanking_mes", function(req, res){
     historicoLeoController.atualizarRanking_mes(req, res); // Faz a rota dos servidores
 })
 
+router.get("/atualizarMesRanking", function(req, res){
+    const mes = req.query.mes;
+    historicoLeoController.atualizarMesRanking(req, res, mes); // Faz a rota dos servidores
+})
+
+router.get("/atualizarMesTaxa", function(req, res){
+    const mes = req.query.mes;
+    historicoLeoController.atualizarMesTaxa(req, res, mes); // Faz a rota dos servidores
+})
+
+router.get("/atualizarMesEspecifico", function(req, res){
+    const mes = req.query.mes;
+    historicoLeoController.atualizarMesEspecifico(req, res, mes); // Faz a rota dos servidores
+})
 module.exports = router;

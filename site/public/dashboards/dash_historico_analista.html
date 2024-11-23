@@ -76,39 +76,62 @@
                     <h2>Escolha um componente para analisar</h2>
                     <div class="select_periodo">
                         <select name="ano">
-                            <option selected value="">CPU
+                            <option selected value="">CPU</option>
                             <option value="">RAM</option>
-                            </option>
                         </select>
+                    </div>
+                </div>
+            </div>
+            <div class="linha_grafico2">
+                <div class="grafico4">
+                    <div class="media">
+                        <div class="texto">
+                            <p>Horário com maior número de alertas</p>
+                        </div>
+                        <div class="hora">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="texto">
+                            <p>Média de horário com mais movimento</p>
+                        </div>
+                        <div class="hora">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="texto">
+                            <p>Média de horário com mais movimento</p>
+                        </div>
+                        <div class="hora">
+                            <p></p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="graficos_dashes">
                 <div class="linha_grafico1">
-                    <div id="rank" class="grafico1">
-
+                    <h3>Totens com mais alertas da semana</h3>
+                    <div id="rank" class="grafico1"></div>
+                </div>
+                <div class="selecionar_grafico">
+                    <div class="titulo_graficoSelecionar">
+                        <h3>Taxa de totem em alerta por dia</h3>
+                        <select name="ano" id="select_grafico" onchange="alterarGrafico()">
+                            <option selected value="0">TAXA</option>
+                            <option value="1">TOTAL</option>
+                        </select>
                     </div>
-                    <div id="taxa" class="grafico2">
-
+                    <div class="graficos_selecionados">
+                        <div id="taxa" class="grafico2" style="display: block;"></div>
+                        <div id="total" class="grafico3" style="display: none;"></div>
                     </div>
                 </div>
-                <div class="linha_grafico2">
-                    <div id="total" class="grafico3">
 
-                    </div>
-                    <div class="grafico4">
-                        <div class="media">
-                            <div class="texto">
-                                <p>Média de horário com mais movimento</p>
-                            </div>
-                            <div class="hora">
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 </body>
@@ -117,21 +140,39 @@
 
 <script>
 
+    function alterarGrafico() {
+        var selectTaxa = select_grafico.value;
 
-    
-cadastrarMes();
+        const grafico2 = document.getElementsByClassName('grafico2')[0];
+        const grafico3 = document.getElementsByClassName('grafico3')[0];
+
+        grafico2.style.display = "none";
+        grafico3.style.display = "none";
+
+        if (selectTaxa == 0) {
+            grafico2.style.display = "block"
+            cadastrarTaxa()
+        } else if (selectTaxa == 1) {
+            grafico3.style.display = "block"
+            cadastrarHora()
+        }
+    }
+
+    cadastrarMes();
     function cadastrarMes() {
         fetch("/historicoLeo/cadastrarMes", {
             method: "GET",
         })
             .then(function (resposta) {
+                console.log(resposta)
                 return resposta.json();
             })
             .then(function (meses) {
+                console.log(meses)
                 var select_mes = document.getElementById('select_mes');
                 meses.forEach((mes) => {
-                    select_mes.innerHTML += `<option value="${mes.id}">${mes.mes}</option>`;
-                    mudarRankingDia()
+                    select_mes.innerHTML += `<option value="${mes.mes}">${mes.mes}</option>`;
+                    atualizarRankingDia()
                 });
             })
             .catch(function (erro) {
@@ -162,111 +203,103 @@ cadastrarMes();
     cadastrarDia();
 
 
-    cadastrarRanking()
-    function cadastrarRanking() {
-        const atualizarGrafico = (dados) => {
-            console.log(dados)
-            const totem = dados.map(item => item.totem)
-            const idTotem = dados.map(item => item.idTotem)
-            const total_alertas = dados.map(item => item.total_alertas)
-            
-            var options = {
-                series: [{
-                    name: "Total de alertas do totem",
-                    data: total_alertas,
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 230,
-                    toolbar: {
-                        show: false
-                    }
-                },
-                title: {
-                    text: "Totens com mais alertas da semana",
-                    align: "center",
-                    style: {
-                        color: "#ffffff",
-                        fontFamily: "Abel",
-                        fontSize: "20px"
-                    }
-                },
-                plotOptions: {
-                    bar: {
-                        borderRadiusApplication: 'end',
-                        horizontal: true,
-                        colors: {
-                            ranges: [{
-                                from: 0,
-                                to: 100,
-                                color: '#FF8818' // Cor das barras
-                            }]
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                xaxis: {
-                    min: 0,
-                    max: 100,
-                    categories: idTotem,
-                    title: {
-                        text: 'Número de alertas por totem',
-                        fontFamily: 'Abel',
-                        style: {
-                            color: '#ffffff'
-                        }
-                    },
-                    labels: {
-                        style: {
-                            colors: "#FFFFFF",
-                            fontFamily: "Abel"
-                        }
-                    }
-                },
-                yaxis: {
-                    formatter: function (value) {
-                        return value;
-                    },
-                    labels: {
-                        style: {
-                            colors: "#ffffff"
-                        }
-                    }
-                },
-                tooltip: {
-                    theme: 'dark',  // Define o tema escuro para o tooltip
-                    style: {
-                        fontFamily: 'Abel',
-                        fontSize: '14px',
-                        color: '#fff'
-                    },
-                    marker: {
-                        show: false
+
+    function cadastrarRanking(ranking) {
+        console.log(ranking)
+        const totem = ranking.map(item => item.totem)
+        const idTotem = ranking.map(item => item.idTotem)
+        const total_alertas = ranking.map(item => item.total_alertas)
+        console.log(total_alertas)
+        var options = {
+            series: [{
+                name: "Total de alertas do totem",
+                data: total_alertas,
+            }],
+            chart: {
+                type: 'bar',
+                height: 300,
+                width: 600,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadiusApplication: 'end',
+                    horizontal: true,
+                    colors: {
+                        ranges: [{
+                            from: 0,
+                            to: 100,
+                            color: '#FF8818' // Cor das barras
+                        }]
                     }
                 }
-            };
-
-            if (!window.chartGRAFICO) {
-                window.chartGRAFICO = new ApexCharts(document.querySelector("#rank"), options);
-                window.chartGRAFICO.render();
-            } else {
-                window.chartGRAFICO.updateOptions(options);
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                min: 0,
+                max: 100,
+                categories: idTotem,
+                title: {
+                    text: 'Número de alertas por totem',
+                    fontFamily: 'Abel',
+                    style: {
+                        color: '#ffffff'
+                    }
+                },
+                labels: {
+                    style: {
+                        colors: "#FFFFFF",
+                        fontFamily: "Abel"
+                    }
+                }
+            },
+            yaxis: {
+                formatter: function (value) {
+                    return value;
+                },
+                labels: {
+                    style: {
+                        colors: "#ffffff"
+                    }
+                }
+            },
+            tooltip: {
+                theme: 'dark',  // Define o tema escuro para o tooltip
+                style: {
+                    fontFamily: 'Abel',
+                    fontSize: '14px',
+                    color: '#fff'
+                },
+                marker: {
+                    show: false
+                }
             }
-        }
-
-        const buscarDados = () => {
-            fetch("/historicoLeo/cadastrarRanking", {
-                method: "GET"
-            })
-                .then(resposta => resposta.json())
-                .then(atualizarGrafico)
         };
 
-        buscarDados();
-        setInterval(buscarDados, 2000);
+        if (!window.chartGRAFICO) {
+            window.chartGRAFICO = new ApexCharts(document.querySelector("#rank"), options);
+            window.chartGRAFICO.render();
+        } else {
+            window.chartGRAFICO.updateOptions(options);
+        }
     }
+
+    function buscarDadosRanking() {
+        fetch("/historicoLeo/cadastrarRanking", {
+            method: "GET"
+        })
+            .then(resposta => resposta.json())
+            .then(ranking => {
+                console.log(ranking)
+            cadastrarRanking(ranking);
+            }
+        )
+    }
+    buscarDadosRanking()
 
     cadastrarTaxa()
     function cadastrarTaxa() {
@@ -277,99 +310,91 @@ cadastrarMes();
             const taxa_porcentagem = dados2.map(item => item.taxa_porcentagem)
 
             var options = {
-    series: [{
-        name: "Percentual total",  
-        data: taxa_porcentagem
-    }],
-    chart: {
-        height: 250,
-        type: 'line',
-        zoom: {
-            enabled: false
-        },
-        toolbar: {
-            show: false
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'straight',
-        colors: ['#FF8818'] 
-    },
-    title: {
-        text: 'Taxa de totem em alerta por dia',
-        align: 'center',
-        style: {
-            color: '#ffffff',
-            fontSize: "20px",
-            fontFamily: "Abel"
-        }
-    },
-    grid: {
-        row: {
-            colors: ['transparent', 'transparent'],
-            opacity: 0.5
-        },
-    },
-    xaxis: {
-        categories: dia,
-        labels: {
-            style: {
-                colors: "#ffffff",
-                fontFamily: "Abel"
-            },
-            formatter: function(value) {
-                // Supondo que 'dia' esteja em formato de data, formatamos para 'dd/MM'
-                const date = new Date(value);
-                return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
-            }
-        }
-    },
-    yaxis: {
-        title: {
-            text: 'Taxa de alerta do total de totens',
-            align: 'center',
-            style: {
-                color: '#ffffff',
-                fontFamily: 'Abel'
-            }
-        },
-        labels: {
-            style: {
-                colors: "#ffffff",
-                fontFamily: "Abel"
-            },
-            formatter: function (value) {
-                return value + "%";
-            },
-        }
-    },
-    tooltip: {
-        theme: 'dark',
-        style: {
-            fontFamily: 'Abel',
-            fontSize: '14px',
-            color: '#fff'
-        },
-        marker: {
-            show: false
-        },
-        x: {
-            // Formatação do tooltip para exibir apenas 'dd/MM'
-            formatter: function(value) {
-                const date = new Date(value);
-                return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
-            }
-        },
-        y: {
-            formatter: function (value) {
-                return value + '%';  
-            }
-        }
-    }
-};
+                series: [{
+                    name: "Percentual total",
+                    data: taxa_porcentagem
+                }],
+                chart: {
+                    height: 290,
+                    width: 700,
+                    type: 'line',
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: {
+                        show: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'straight',
+                    colors: ['#FF8818']
+                },
+                grid: {
+                    row: {
+                        colors: ['transparent', 'transparent'],
+                        opacity: 0.5
+                    },
+                },
+                xaxis: {
+                    categories: dia,
+                    labels: {
+                        style: {
+                            colors: "#ffffff",
+                            fontFamily: "Abel"
+                        },
+                        formatter: function (value) {
+                            // Supondo que 'dia' esteja em formato de data, formatamos para 'dd/MM'
+                            const date = new Date(value);
+                            return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+                        }
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Taxa de alerta do total de totens',
+                        align: 'center',
+                        style: {
+                            color: '#ffffff',
+                            fontFamily: 'Abel'
+                        }
+                    },
+                    labels: {
+                        style: {
+                            colors: "#ffffff",
+                            fontFamily: "Abel"
+                        },
+                        formatter: function (value) {
+                            return value + "%";
+                        },
+                    }
+                },
+                tooltip: {
+                    theme: 'dark',
+                    style: {
+                        fontFamily: 'Abel',
+                        fontSize: '14px',
+                        color: '#fff'
+                    },
+                    marker: {
+                        show: false
+                    },
+                    x: {
+                        // Formatação do tooltip para exibir apenas 'dd/MM'
+                        formatter: function (value) {
+                            const date = new Date(value);
+                            return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+                        }
+                    },
+                    y: {
+                        formatter: function (value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            };
 
             if (!window.chartTAXA) {
                 window.chartTAXA = new ApexCharts(document.querySelector("#taxa"), options);
@@ -400,91 +425,92 @@ cadastrarMes();
             const total_alertas = dados3.map(item => item.total_alertas)
 
             var options = {
-    series: [{
-        name: 'Total de alertas por hora',
-        data: total_alertas
-    }],
-    title: {
-        text: 'Total de alertas por hora',
-        align: 'center',
-        style: {
-            color: '#ffffff',
-            fontFamily: 'Abel',
-            fontSize: '20px'
-        }
-    },
-    chart: {
-        type: 'bar',
-        height: 250,
-        toolbar: {
-            show: false
-        }
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    xaxis: {
-        labels: {
-            style: {
-                colors: '#ffffff',
-                fontFamily: 'Abel'
-            },
-            formatter: function(value) {
-                // Assume que 'hora' seja um número representando a hora (0-23)
-                var hour = value < 10 ? '0' + value : value;
-                return hour + ':00';
-            }
-        },
-        categories: hora
-    },
-    yaxis: {
-        labels: {
-            style: {
-                colors: '#ffffff',
-                fontFamily: 'Abel'
-            }
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        theme: 'dark',
-        y: {
-            formatter: function(val) {
-                return val;
-            }
-        },
-        x: {
-            formatter: function(value) {
-                var hour = value < 10 ? '0' + value : value;
-                return hour + ':00';
-            }
-        },
-        style: {
-            fontFamily: 'Abel',
-            fontSize: '14px',
-            color: '#fff'
-        },
-        marker: {
-            show: false
-        }
-    }
-};
+                series: [{
+                    name: 'Total de alertas por hora',
+                    data: total_alertas
+                }],
+                title: {
+                    text: 'Total de alertas por hora',
+                    align: 'center',
+                    style: {
+                        color: '#ffffff',
+                        fontFamily: 'Abel',
+                        fontSize: '20px'
+                    }
+                },
+                chart: {
+                    type: 'bar',
+                    height: 290,
+                    width: 700,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    labels: {
+                        style: {
+                            colors: '#ffffff',
+                            fontFamily: 'Abel'
+                        },
+                        formatter: function (value) {
+                            // Assume que 'hora' seja um número representando a hora (0-23)
+                            var hour = value < 10 ? '0' + value : value;
+                            return hour + ':00';
+                        }
+                    },
+                    categories: hora
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: '#ffffff',
+                            fontFamily: 'Abel'
+                        }
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    theme: 'dark',
+                    y: {
+                        formatter: function (val) {
+                            return val;
+                        }
+                    },
+                    x: {
+                        formatter: function (value) {
+                            var hour = value < 10 ? '0' + value : value;
+                            return hour + ':00';
+                        }
+                    },
+                    style: {
+                        fontFamily: 'Abel',
+                        fontSize: '14px',
+                        color: '#fff'
+                    },
+                    marker: {
+                        show: false
+                    }
+                }
+            };
 
-    if (!window.chartHORA) {
+            if (!window.chartHORA) {
                 window.chartHORA = new ApexCharts(document.querySelector("#total"), options);
                 window.chartHORA.render();
             } else {
@@ -502,24 +528,67 @@ cadastrarMes();
 
         buscarDados3();
         setInterval(buscarDados3, 2000);
-}
+    }
+    // var selectMes = document.getElementById("select_mes");
+    // var selectDia = document.getElementById("select_dia");
 
-function mudarRankingDia() {
-    var selectMes = document.getElementById("select_mes");
-    var selectDia = document.getElementById("select_dia");
+    select_mes.addEventListener("change", atualizarRankingDia);
+    select_dia.addEventListener("change", atualizarRankingDia);
 
-    selectMes.addEventListener("change", atualizarRankingDia);
-    selectDia.addEventListener("change", atualizarRankingDia);
-}
+    function atualizarRankingDia() {
+        var selectMes = document.getElementById("select_mes");
+        var selectDia = document.getElementById("select_dia");
 
-function atualizarRankingDia() {
-    var selectMes = document.getElementById("select_mes");
-    var selectDia = document.getElementById("select_dia");
+        var mes = Number(selectMes.value);
+        var dia = Number(selectDia.value);
+        console.log("Mês selecionado: ", mes);
+        console.log("Dia selecionado: ", dia);
 
-    var mes = selectMes.value; 
-    var dia = selectDia.value; 
-    console.log("Mês selecionado: ", mes);
-    console.log("Dia selecionado: ", dia);
+        fetch(`/historicoLeo/atualizarMesRanking?mes=${mes}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (ranking) {
+                console.log(ranking)
+                cadastrarRanking(ranking)
+            })
+            .catch(function (erro) {
+                alert(erro);
+                console.log("Erro ao carregar linhas:", erro);
+            });
 
-}
+        fetch(`/historicoLeo/atualizarMesTaxa?mes=${mes}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (taxa) {
+                console.log(taxa)
+            })
+            .catch(function (erro) {
+                alert(erro);
+                console.log("Erro ao carregar linhas:", erro);
+            });
+
+        fetch(`/historicoLeo/atualizarMesEspecifico?mes=${mes}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (especifico) {
+                console.log(especifico)
+
+            })
+            .catch(function (erro) {
+                alert(erro);
+                console.log("Erro ao carregar linhas:", erro);
+            });
+    }
+
+
+
 </script>
