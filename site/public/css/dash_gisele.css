@@ -206,17 +206,30 @@ body {
     margin-left: 2rem;
 }
 
-.alerta-status-title {
+
+
+/* .alerta-status-title {
     font-size: 1.5em;
     font-weight: bold;
     margin-left: 4.5rem;
     margin-top: 7px;
     font-family: "Abel";
-}
+} */
 
 .fundo-status {
+    display: flex ;
     background-color: #33363f;
-    height: 2.4rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.fundo-status h2{
+    font-size: x-larger;
+    font-family: "Abel";
+    font-weight: bold;
 }
 
 .engloba-status {
@@ -309,12 +322,12 @@ body {
 
 /* Estilo do Ranking */
 .ranking {
-    width: 41%;
-    height: 9.2rem;
+    /* width: 60%; */
+    height: 100%;
     background-color: #33363f;
-    padding: 8px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     color: white;
 }
 
@@ -380,7 +393,7 @@ th {
 .plano-fundo {
     background-color: #33363f;
     width: 91.5%;
-    height: 21rem;
+    height: 19rem;
     margin-left: 2rem;
 }
 
@@ -392,9 +405,12 @@ th {
 }
 
 .engloba-indicador {
+    width: 91.4%;
     display: flex;
-    gap: 5rem;
-    height: 170px;
+    margin-bottom: 10px;
+    background-color: #33363f;
+    margin-left: 2.3%;
+    justify-content: space-between;
 }
 
 .chart-area {
@@ -483,12 +499,38 @@ css .filtros {
 }
 
 #grafico-performance .chart-status {
+    align-items: center;
+    flex-direction: column;
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     margin: auto;
+    position: relative;
 }
 
 #stackedBarChart {
-    width: 70% !important;
     height: auto !important;
+}
+
+/* .fundo-grafico-title-historico{
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-family: "Abel";
+    margin-left: 5.4rem;
+} */
+
+.engloba-grafico-performance {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #33363f;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.engloba-grafico-performance h2{
+    font-size: x-large;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-family: "Abel";
 }
