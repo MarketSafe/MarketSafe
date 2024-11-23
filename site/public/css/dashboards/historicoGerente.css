@@ -18,6 +18,19 @@
   font-size: 1.5dvh;
 }
 
+
+.botao-filtrar {
+  background-color: #3a3b47;
+  border: #8e8c8c solid 2px;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 18px;
+}
+
+
+
 /* defaults: */
 body,
 body *:not(script) {
@@ -226,12 +239,12 @@ body {
               font-size: 2rem;
             }
 
-            & > div {
+            & > * {
               flex-direction: row;
               gap: 1rem;
               align-self: stretch;
 
-              & > select {
+              & > select, & > input {
                 transition: transform 0.2s;
                 flex: 1;
                 border-radius: 5px;
@@ -362,6 +375,12 @@ body {
           text-align: center;
         }
 
+        table{
+          & , & * {
+           display: revert;
+          }
+        }
+
         .table {
           border-collapse: collapse;
           background-color: #575a64;
@@ -468,16 +487,7 @@ body {
           }
         }
 
-        .botao-filtrar {
-          background-color: #3a3b47;
-          border: #8e8c8c solid 2px;
-          color: #fff;
-          border-radius: 5px;
-
-          font-weight: 200;
-          font-style: normal;
-          font-size: 18px;
-        }
+        
 
         #grafico-performance .chart-status {
           /* max- position: relative; importante */

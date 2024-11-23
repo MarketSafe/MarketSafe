@@ -83,33 +83,24 @@
       <main>
         <header>
           <div>
-            <h1>Benchmark</h1>
+            <h1>Histórico de Monitoramento</h1>
           </div>
           <search>
             <div>
-              <span>Filial 1</span>
+              <span>Filial</span>
               <div>
-                <select class="filial">
-                  <option value="" selected disabled>Filial</option>
-                </select>
-                <select class="promocao">
-                  <option value="" selected disabled>Promocao</option>
+                <select id="filial">
+                    <option value="" selected disabled>Filial</option>
                 </select>
               </div>
             </div>
             <div>
-              <span>Filial 2</span>
+              <span>Mês</span>
               <div>
-                <select class="filial">
-                  <option value="" selected disabled>Filial</option>
-                  <option value="a">dwa</option>
-                  <option value="b">dwa</option>
-                </select>
-                <select class="promocao">
-                  <option value="" selected disabled>Promocao</option>
-                </select>
+                <input type="month" id="mes">
               </div>
             </div>
+            <button class="botao-filtrar" id="filtrar">Filtrar</button>
           </search>
         </header>
         <section class="dashboard">
@@ -179,7 +170,7 @@
           <div class="plano-fundo">
             <div class="fundo-grafico">
               <div class="chart-area">
-                <canvas id="barChart" ></canvas>
+                <canvas id="barChart"></canvas>
               </div>
             </div>
             <div class="fundo-grafico">

@@ -400,3 +400,5 @@ async function inicializarPagina() {
   await buscarPorFilial();
   await statusFiliais();
 }
+
+addEventListener("load", inicializarPagina);
