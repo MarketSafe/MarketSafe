@@ -200,12 +200,10 @@
                 console.log("Erro ao carregar linhas:", erro);
             });
     }
+    
     cadastrarDia();
 
-
-
     function cadastrarRanking(ranking) {
-        console.log(ranking)
         const totem = ranking.map(item => item.totem)
         const idTotem = ranking.map(item => item.idTotem)
         const total_alertas = ranking.map(item => item.total_alertas)
@@ -301,120 +299,133 @@
     }
     buscarDadosRanking()
 
-    cadastrarTaxa()
-    function cadastrarTaxa() {
-        console.log("AAAAAAAAAAAAAAA")
-        const atualizarGrafico2 = (dados2) => {
-            const dia = dados2.map(item => item.dia)
-            const total_alerta = dados2.map(item => item.total_alerta)
-            const taxa_porcentagem = dados2.map(item => item.taxa_porcentagem)
+    function cadastrarTaxa(taxa) {
+    if (!Array.isArray(taxa) || taxa.length === 0) {
+        console.error("Dados inválidos ou vazios:", taxa);
+        alert("Nenhum dado encontrado para o mês selecionado.");
+        return;
+    }
 
-            var options = {
-                series: [{
-                    name: "Percentual total",
-                    data: taxa_porcentagem
-                }],
-                chart: {
-                    height: 290,
-                    width: 700,
-                    type: 'line',
-                    zoom: {
-                        enabled: false
-                    },
-                    toolbar: {
-                        show: false
-                    }
+    const dia = taxa.map(item => item.dia);
+    const taxa_porcentagem = taxa.map(item => item.taxa_porcentagem);
+
+    // Configuração do gráfico
+    var options = {
+        series: [{
+            name: "Percentual total",
+            data: taxa_porcentagem
+        }],
+        chart: {
+            height: 290,
+            width: 700,
+            type: 'line',
+            zoom: {
+                enabled: false
+            },
+            toolbar: {
+                show: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight',
+            colors: ['#FF8818']
+        },
+        grid: {
+            row: {
+                colors: ['transparent', 'transparent'],
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: dia,
+            labels: {
+                style: {
+                    colors: "#ffffff",
+                    fontFamily: "Abel"
                 },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'straight',
-                    colors: ['#FF8818']
-                },
-                grid: {
-                    row: {
-                        colors: ['transparent', 'transparent'],
-                        opacity: 0.5
-                    },
-                },
-                xaxis: {
-                    categories: dia,
-                    labels: {
-                        style: {
-                            colors: "#ffffff",
-                            fontFamily: "Abel"
-                        },
-                        formatter: function (value) {
-                            // Supondo que 'dia' esteja em formato de data, formatamos para 'dd/MM'
-                            const date = new Date(value);
-                            return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
-                        }
-                    }
-                },
-                yaxis: {
-                    title: {
-                        text: 'Taxa de alerta do total de totens',
-                        align: 'center',
-                        style: {
-                            color: '#ffffff',
-                            fontFamily: 'Abel'
-                        }
-                    },
-                    labels: {
-                        style: {
-                            colors: "#ffffff",
-                            fontFamily: "Abel"
-                        },
-                        formatter: function (value) {
-                            return value + "%";
-                        },
-                    }
-                },
-                tooltip: {
-                    theme: 'dark',
-                    style: {
-                        fontFamily: 'Abel',
-                        fontSize: '14px',
-                        color: '#fff'
-                    },
-                    marker: {
-                        show: false
-                    },
-                    x: {
-                        // Formatação do tooltip para exibir apenas 'dd/MM'
-                        formatter: function (value) {
-                            const date = new Date(value);
-                            return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
-                        }
-                    },
-                    y: {
-                        formatter: function (value) {
-                            return value + '%';
-                        }
-                    }
+                formatter: function (value) {
+                    const date = new Date(value);
+                    if (isNaN(date.getTime())) return value;
+                    return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
                 }
-            };
-
-            if (!window.chartTAXA) {
-                window.chartTAXA = new ApexCharts(document.querySelector("#taxa"), options);
-                window.chartTAXA.render();
-            } else {
-                window.chartTAXA.updateOptions(options);
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Taxa de alerta do total de totens',
+                align: 'center',
+                style: {
+                    color: '#ffffff',
+                    fontFamily: 'Abel'
+                }
+            },
+            labels: {
+                style: {
+                    colors: "#ffffff",
+                    fontFamily: "Abel"
+                },
+                formatter: function (value) {
+                    return value + "%";
+                },
+            }
+        },
+        tooltip: {
+            theme: 'dark',
+            style: {
+                fontFamily: 'Abel',
+                fontSize: '14px',
+                color: '#fff'
+            },
+            marker: {
+                show: false
+            },
+            x: {
+                formatter: function (value) {
+                    const date = new Date(value);
+                    if (isNaN(date.getTime())) return value;
+                    return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+                }
+            },
+            y: {
+                formatter: function (value) {
+                    return value + '%';
+                }
             }
         }
+    };
 
-        const buscarDados2 = () => {
-            fetch("/historicoLeo/cadastrarTaxa", {
-                method: "GET"
-            })
-                .then(resposta => resposta.json())
-                .then(atualizarGrafico2)
-        };
-
-        buscarDados2();
-        setInterval(buscarDados2, 2000);
+    // Inicializa ou atualiza o gráfico
+    if (!window.chartTAXA) {
+        const chartElement = document.querySelector("#taxa");
+        if (!chartElement) {
+            console.error("Elemento '#taxa' não encontrado no DOM.");
+            return;
+        }
+        window.chartTAXA = new ApexCharts(chartElement, options);
+        window.chartTAXA.render();
+    } else {
+        window.chartTAXA.updateOptions(options).catch(err => {
+            console.error("Erro ao atualizar o gráfico:", err);
+        });
     }
+}
+
+
+    function buscarDadosTaxa() {
+        fetch("/historicoLeo/cadastrarTaxa", {
+            method: "GET"
+        })
+            .then(resposta => resposta.json())
+            .then(taxa => {
+                console.log(taxa)
+            cadastrarTaxa(taxa);
+            }
+        )
+    }
+    buscarDadosTaxa()
 
 
     cadastrarHora()
@@ -567,6 +578,7 @@
             })
             .then(function (taxa) {
                 console.log(taxa)
+                cadastrarTaxa(taxa)
             })
             .catch(function (erro) {
                 alert(erro);
