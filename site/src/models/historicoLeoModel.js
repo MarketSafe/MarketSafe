@@ -118,12 +118,13 @@ function atualizarMesEspecifico(mes) {
     var instrucaoSql =
         `
     SELECT 
-    DATE_FORMAT(data_hora, '%Y-%m-%d %H:00:00') AS hora,
+    data_hora AS hora,
     COUNT(*) AS total_alertas
     FROM alerta
-    WHERE DATE(data_hora) = '2024-12-11' -- Substitua pelo dia desejado
+    WHERE MONTH(data_hora) = ${mes}
     GROUP BY hora
-    ORDER BY hora;
+    ORDER BY hora
+    limit 5;
  `
         ;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
