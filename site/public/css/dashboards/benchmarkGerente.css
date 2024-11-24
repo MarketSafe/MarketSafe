@@ -16,12 +16,14 @@
   --gerente-color: #ff3131ff;
   --analista-color: #e9864aff;
 
+  overflow: hidden;
   font-size: 1.5dvh;
 }
 
 /* defaults: */
 body,
 body *:not(script) {
+  overflow: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -39,6 +41,7 @@ body *:not(script) {
 
 /* css estruturado: */
 body {
+  overflow: auto;
   align-items: stretch;
   height: 100dvh;
   padding: 2rem;
