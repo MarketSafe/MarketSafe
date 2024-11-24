@@ -3,6 +3,17 @@
 const divGraficos = document.querySelectorAll("div.grafico:has(> canvas)");
 
 // funções:
+function handleSelectsNone(selects) {
+  for (const select of selects) {
+    select.addEventListener("change", (e) => {
+      const selectedOptions = Array.from(select.selectedOptions);
+      
+      if (selectedOptions.length === 1 && selectedOptions[0].value === "") {
+        Array.from(select.options).find(option => option.disabled && option.value === "").selected = true
+      }
+    });
+  }
+}
 async function puxarDados(rota, dados, errorCallback) {
   const body = {
     emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
@@ -27,6 +38,8 @@ async function puxarDados(rota, dados, errorCallback) {
 }
 async function gerarGraficos() {
   return Array.from(divGraficos).reduce(async (chartList, divGrafico) => {
+    let config = {};
+
     if (divGrafico.classList.contains("estado-filiais")) {
       // const dados = await puxarDados("/benchmarkGerente/estadoFiliais", {}, (response) => {
       //   if (response.status == 204) {
@@ -34,7 +47,7 @@ async function gerarGraficos() {
       //   }
       // });
 
-      const config = {
+      config = {
         type: "pie",
         data: {
           labels: ["Normal", "Atenção", "Crítico"],
@@ -72,10 +85,10 @@ async function gerarGraficos() {
             },
             datalabels: {
               formatter: (value, context) => {
-                return Math.round((value / context.chart._metasets[context.datasetIndex].total) * 100) + "%" + "\n";
+                return Math.round((value / context.chart._metasets[context.datasetIndex].total) * 100) + "%";
               },
               font: {
-                size: 30,
+                size: 20,
                 family: '"Noto Serif", serif',
               },
               color: "#000000ff",
@@ -84,14 +97,73 @@ async function gerarGraficos() {
         },
         plugins: [ChartDataLabels],
       };
-      
-      chartList["estadoFiliais"] = new Chart(divGrafico.querySelector("canvas"), config);
+    } else if (divGrafico.classList.contains("taxa-alerta")) {
+      // const dados = await puxarDados("/benchmarkGerente/estadoFiliais", {}, (response) => {
+      //   if (response.status == 204) {
+      //     throw new Error(`Sem filiais na empresa`);
+      //   }
+      // });
+
+      config = {
+        type: "bar",
+        data: {
+          labels: ["Água rasa 2", "Paulista 1", "Lapa", "Paulista 2", "Vila Madalena"],
+          datasets: [
+            {
+              label: "Taxa de totens em alerta",
+              data: [100, 100, 75, 60, 50],
+              backgroundColor: "#ff914dff",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          mantainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              align: "top",
+              font: {
+                weight: "normal",
+                size: 30,
+                family: '"Abel", sans-serif',
+              },
+              color: "#ffffffff",
+              text: "5 filiais com maiores taxas de alertas",
+            },
+            legend: {
+              labels: {
+                color: "#ffffffff",
+              },
+            },
+            datalabels: {
+              formatter: (value, context) => {
+                return value + "%";
+              },
+              font: {
+                size: 15,
+                family: '"Noto Serif", serif',
+              },
+              color: "#ffffffff",
+              anchor: "end",
+              align: "end",
+              offset: 5,
+            },
+          },
+        },
+        plugins: [ChartDataLabels],
+      };
     }
+
+    chartList["taxaAlerta"] = new Chart(divGrafico.querySelector("canvas"), config);
+
     return chartList;
   }, {});
 }
 async function carregarBody(event) {
-  await gerarGraficos();
+  handleSelectsNone(document.querySelectorAll("select"));
+  const charts = await gerarGraficos();
+  setInterval(() => Object.values(charts).forEach((chart) => chart.update()), 1000);
 }
 
 // eventos:
