@@ -229,22 +229,20 @@ body {
       }
       & > section.dashboard {
         flex: 1;
-
-        & > div {
-          flex-direction: column;
-
-          & > div  {
-            flex-direction: row;
-
-            & > canvas{
-              /* background-color: #28283A;
-              width: 10%;
-              height: 10%;
-              border-radius: 2%; */
-            }
-          }
-        }
       }
     }
+  }
+}
+
+.separador {
+  flex: 1;
+}
+
+.dashCima {
+  display: flex;
+  flex-direction: row;
+
+  & > canvas {
+    
   }
 }
