@@ -97,10 +97,10 @@
           resposta.json().then((json) => {
             console.log(json);
 
-            sessionStorage.setItem("ID_USUARIO", json.id);
-            sessionStorage.setItem("NOME_USUARIO", json.nome);
-            sessionStorage.setItem("EMAIL_USUARIO", emailVar);
-            sessionStorage.setItem("SENHA_USUARIO", senhaVar);
+            localStorage.setItem("ID_USUARIO", json.id);
+            localStorage.setItem("NOME_USUARIO", json.nome);
+            localStorage.setItem("EMAIL_USUARIO", emailVar);
+            localStorage.setItem("SENHA_USUARIO", senhaVar);
 
             window.location = "./dashboards/dash_individual_Gisele.html";
           });

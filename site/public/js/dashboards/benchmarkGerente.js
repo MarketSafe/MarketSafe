@@ -90,8 +90,8 @@ function handleSelectsNone(selects) {
 }
 async function puxarDados(rota, dados, errorCallback) {
   const body = {
-    emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-    senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+    emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+    senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
   };
 
   for (const k in dados) body[k] = dados[k];
