@@ -118,7 +118,7 @@ function atualizarMesEspecifico(mes) {
     var instrucaoSql =
         `
     SELECT 
-    data_hora AS hora,
+    hour(data_hora) AS hora,
     COUNT(*) AS total_alertas
     FROM alerta
     WHERE MONTH(data_hora) = ${mes}

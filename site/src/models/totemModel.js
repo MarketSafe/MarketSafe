@@ -132,7 +132,6 @@ LEFT JOIN
     alerta a 
 ON 
     a.fk_totem = t.totem
-    AND a.ram_porcentagem > 85
     AND a.data_hora >= DATE(NOW()) - INTERVAL 30 DAY 
     AND a.data_hora <= DATE(NOW())
 GROUP BY 
