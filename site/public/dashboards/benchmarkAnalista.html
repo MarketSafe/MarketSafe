@@ -284,6 +284,8 @@
 
     var contResultado = 0;
 
+    puxarDadosBucket();
+
     puxarTodosAlertas();
 
     function atualizarFeed() {
@@ -403,6 +405,8 @@
         puxarTodosAlertasPorTotem();
 
         setTimeout(() => graficoBarrasHorizontal(), 500);
+
+        puxarDadosBucket()
 
     }
 
@@ -562,34 +566,29 @@
     );
 
     // Grafico de Rosquina 1
-
-    const ctx3 = document.getElementById('donut1');
     labelsRsq = ["Ineficiente", "Ideal", "Crítico"]
 
-    new Chart(ctx3, {
-        type: 'doughnut',
-        data: {
+    const data3 = {
+            labels: labelsRsq,
             datasets: [{
                 data: [50, 300, 100],
                 backgroundColor: [
-                    '#FF3131', // vermelho
+                    'rgb(150, 147, 147)',  // cinza
                     'rgb(48, 170, 48)',  // verde
-                    'rgb(150, 147, 147)'  // cinza
+                    '#FF3131' // vermelho
                 ],
                 hoverOffset: 4,
                 borderWidth: 1
             }]
-        },
+        };
+
+    const config3 = {
+        type: 'doughnut',
+        data: data3,
         options: {
             plugins: {
                 legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: 'white',
-                        padding: 25,
-                        boxWidth: 20,
-                        boxHeight: 20
-                    },
+                    display: false,
                 }, 
                 title: {
                 display: true,
@@ -601,36 +600,36 @@
                 }
             }
         }
-    });
+    };
+
+    const ctx3 = new Chart(
+        document.getElementById('donut1'),
+        config3
+    );
 
     // Grafico de Rosquina 2
 
-    const ctx4 = document.getElementById('donut2');
-
-    new Chart(ctx4, {
-        type: 'doughnut',
-        data: {
+    const data4 = {
+            labels: labelsRsq,
             datasets: [{
                 data: [70, 240, 170],
                 backgroundColor: [
-                    '#FF3131',
+                    'rgb(150, 147, 147)',
                     'rgb(48, 170, 48)',
-                    'rgb(150, 147, 147)'
+                    '#FF3131'
                 ],
                 hoverOffset: 4,
                 borderWidth: 1
             }]
-        },
+        };
+
+    const config4 = {
+        type: 'doughnut',
+        data: data4,
         options: {
             plugins: {
                 legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: 'white',
-                        padding: 25,
-                        boxWidth: 20,
-                        boxHeight: 20
-                    },
+                    display: false,
                 }, 
                 title: {
                 display: true,
@@ -642,7 +641,12 @@
                 }
             }
         }
-    });
+    };
+
+    const ctx4 = new Chart(
+        document.getElementById('donut2'),
+        config4
+    );
 
     let sliderOne = document.getElementById("slider-1");
     let sliderTwo = document.getElementById("slider-2");
@@ -972,6 +976,133 @@
                         alertasT2Total.innerHTML = resposta[(totem2 - 1)].qtd
 
 
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+
+    function puxarDadosBucket() {
+        fetch(`/s3/viewS3`, {method: "get"}).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados do S3: ", JSON.stringify(resposta));
+
+                    var count = Object.keys(resposta.resultado).length;
+                    console.log("Possivel tamanho:", count);
+
+                    // Determinar o macAddress a ser filtrado
+                    const targetMacAddress = "12680cf3b36b";
+
+                    // Filtrar e contar ocorrências onde a CPU > 85
+                    const countRamInef = resposta.resultado.filter(entry => 
+                    entry.macAddress === targetMacAddress && parseFloat(entry.ramPorcentagem) < 20
+                    ).length;
+
+                    const countRamIdeal = resposta.resultado.filter(entry => 
+                    entry.macAddress === targetMacAddress && parseFloat(entry.ramPorcentagem) >= 20 && parseFloat(entry.ramPorcentagem) <= 85
+                    ).length;
+
+                    const countRamCrit = resposta.resultado.filter(entry => 
+                    entry.macAddress === targetMacAddress && parseFloat(entry.ramPorcentagem) > 85
+                    ).length;
+
+                    console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamInef}`);
+                    console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamIdeal}`);
+                    console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamCrit}`);
+                    
+                    simuInef = countRamInef + 20
+                    simuIdeal = countRamIdeal
+                    simuCrit = countRamCrit + 20
+                        
+                    dadosStatusRam = [simuCrit, simuIdeal * 0.7, simuInef]
+                    ctx3.data.datasets[0].data = dadosStatusRam;
+
+                    // let countRamInef2 = 20
+                    // let countRamIdeal2 = 70
+                    // let countRamCrit2 = 10
+
+                    dadosStatusRam2 = [simuInef * 1.1, simuIdeal * 1.3, simuCrit * 1.8]
+                    // dadosStatusRam2 = [countRamInef * 0.8, countRamIdeal * 1.5, countRamCrit * 1.2]
+                    ctx4.data.datasets[0].data = dadosStatusRam2;
+
+                    ctx3.update()
+                    ctx4.update()
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+
+
+    function puxarDadosBucketCPU() {
+        fetch(`/s3/viewS3`, {method: "get"}).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados do S3: ", JSON.stringify(resposta));
+
+                    var count = Object.keys(resposta.resultado).length;
+                    console.log("Possivel tamanho:", count);
+
+                    // Determinar o macAddress a ser filtrado
+                    const targetMacAddress = "12680cf3b36b";
+
+                    // Filtrar e contar ocorrências onde a CPU > 85
+                    const countCpuInef = resposta.resultado.filter(entry => 
+                    entry.macAddress === targetMacAddress && parseFloat(entry.cpuPorcentagem) < 20
+                    ).length;
+
+                    const countCpuIdeal = resposta.resultado.filter(entry => 
+                    entry.macAddress === targetMacAddress && parseFloat(entry.cpuPorcentagem) >= 20 && parseFloat(entry.cpuPorcentagem) <= 85
+                    ).length;
+
+                    const countCpuCrit = resposta.resultado.filter(entry => 
+                    entry.macAddress === targetMacAddress && parseFloat(entry.cpuPorcentagem) > 85
+                    ).length;
+
+                    console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuInef}`);
+                    console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuIdeal}`);
+                    console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuCrit}`);
+                        
+                    simuInef = countCpuInef + 20
+                    simuIdeal = countCpuIdeal
+                    simuCrit = countCpuCrit + 20
+
+                    dadosStatusCpu = [simuCrit, simuIdeal, simuInef]
+                    ctx3.data.datasets[0].data = dadosStatusCpu;
+
+                    // dadosStatusCpu2 = [countCpuInef * 0.8, countCpuIdeal * 1.5, countCpuCrit * 1.2]
+                    dadosStatusCpu2 = [simuCrit * 1.1, simuIdeal * 1.5, simuInef * 0.8]
+                    ctx4.data.datasets[0].data = dadosStatusCpu2;
+
+                    ctx3.update()
+                    ctx4.update()
                 });
             } else {
                 throw ('Houve um erro na API!');
