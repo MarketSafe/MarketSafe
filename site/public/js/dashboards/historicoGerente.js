@@ -22,6 +22,7 @@ async function buscarPorFilial() {
     const filial = document.getElementById("filial").value;
 
     atualizarGrafico();
+    atualizarGraficoStatus();
 
     document.getElementById("card-performance").style.display = "none";
     document.getElementById("grafico-performance").style.display = "block";
@@ -352,6 +353,8 @@ async function atualizarGraficoStatus() {
     return;
   }
 
+  // console.log( await response.text());
+
   const data = await response.json();
 
   const labels = ["Semana 1", "Semana 2", "Semana 3", "Semana 4"];
@@ -416,7 +419,6 @@ async function inicializarPagina() {
   await atualizarTabela();
   await buscarPorFilial();
   await statusFiliais();
-  await atualizarGraficoStatus();
 }
 
 addEventListener("load", inicializarPagina);
