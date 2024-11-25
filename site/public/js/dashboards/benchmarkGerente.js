@@ -3,13 +3,87 @@
 const divGraficos = document.querySelectorAll("div.grafico:has(> canvas)");
 
 // funções:
+String.prototype.splitByIndex = function (index) {
+  return [this.substring(0, index), this.substring(index)];
+};
+Object.prototype.getPropertiesByName = function (propertyName) {
+  if (arguments.length < 1) return this;
+
+  const parents = [];
+
+  function rGetPropertiesByName(obj, propertyName) {
+    if (parents.includes(obj)) return [];
+
+    parents.push(obj);
+
+    const r = [];
+
+    for (const k in obj) {
+      if (k === propertyName) r.push(obj[k]);
+      if (obj[k] !== null && typeof obj[k] === "object") {
+        r.push(...rGetPropertiesByName(obj[k], propertyName));
+      }
+    }
+
+    parents.pop();
+
+    return r;
+  }
+
+  return rGetPropertiesByName(this, propertyName);
+};
+function toPx(value, parent) {
+  if (typeof value !== "string") return NaN;
+
+  const valueParts = value.splitByIndex(value.search(/[A-Za-z]*$/));
+
+  if (valueParts[1] === "px") return valueParts[0];
+
+  const parentWidth = toPx(getComputedStyle(parent).width, parent);
+  const parentHeight = toPx(getComputedStyle(parent).height, parent);
+
+  switch (valueParts[1]) {
+    case "rem":
+      return valueParts[0] * toPx(getComputedStyle(document.documentElement).fontSize, parent);
+    case "pw":
+      return valueParts[0] * (parentWidth / 100);
+    case "ph":
+      return valueParts[0] * (parentHeight / 100);
+    case "ar":
+      if (parentWidth / parentHeight < 1) {
+        return valueParts[0] * (parentWidth / 100);
+      } else {
+        return valueParts[0] * (parentHeight / 100);
+      }
+    default:
+      return NaN;
+  }
+}
+function updateChart(chart) {
+  for (const datalabel of chart.config._config.options.plugins.getPropertiesByName("datalabels")) {
+    const pxSize = toPx(datalabel.relativeOffset, chart.canvas);
+    if (isNaN(pxSize)) {
+      datalabel.offset = 0;
+    } else {
+      datalabel.offset = pxSize;
+    }
+  }
+  for (const font of chart.config._config.options.plugins.getPropertiesByName("font")) {
+    const pxSize = toPx(font.relativeSize, chart.canvas);
+    if (isNaN(pxSize)) {
+      font.size = Chart.defaults.font.size;
+    } else {
+      font.size = pxSize;
+    }
+  }
+}
 function handleSelectsNone(selects) {
   for (const select of selects) {
     select.addEventListener("change", (e) => {
       const selectedOptions = Array.from(select.selectedOptions);
-      
+
       if (selectedOptions.length === 1 && selectedOptions[0].value === "") {
-        Array.from(select.options).find(option => option.disabled && option.value === "").selected = true
+        Array.from(select.options).find((option) => option.disabled && option.value === "").selected = true;
       }
     });
   }
@@ -61,13 +135,15 @@ async function gerarGraficos() {
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
+          onResize: updateChart,
           plugins: {
             title: {
               display: true,
               align: "top",
               font: {
                 weight: "normal",
-                size: 30,
+                relativeSize: "10ar",
                 family: '"Abel", sans-serif',
               },
               color: "#ffffffff",
@@ -77,21 +153,22 @@ async function gerarGraficos() {
               position: "right",
               labels: {
                 font: {
-                  size: 20,
+                  relativeSize: "6ar",
                   family: '"Abel", sans-serif',
                 },
                 color: "#ffffffff",
               },
             },
             datalabels: {
-              formatter: (value, context) => {
-                return Math.round((value / context.chart._metasets[context.datasetIndex].total) * 100) + "%";
-              },
+              formatter: (value, context) => Math.round((value / context.chart._metasets[context.datasetIndex].total) * 100) + "%",
               font: {
-                size: 20,
+                relativeSize: "8ar",
                 family: '"Noto Serif", serif',
               },
               color: "#000000ff",
+              anchor: "end",
+              align: "start",
+              relativeOffset: "1ar",
             },
           },
         },
@@ -118,14 +195,15 @@ async function gerarGraficos() {
         },
         options: {
           responsive: true,
-          mantainAspectRatio: false,
+          maintainAspectRatio: false,
+          onResize: updateChart,
           plugins: {
             title: {
               display: true,
               align: "top",
               font: {
                 weight: "normal",
-                size: 30,
+                relativeSize: "10ar",
                 family: '"Abel", sans-serif',
               },
               color: "#ffffffff",
@@ -133,6 +211,10 @@ async function gerarGraficos() {
             },
             legend: {
               labels: {
+                font: {
+                  relativeSize: "6ar",
+                  family: '"Abel", sans-serif',
+                },
                 color: "#ffffffff",
               },
             },
@@ -141,17 +223,35 @@ async function gerarGraficos() {
                 return value + "%";
               },
               font: {
-                size: 15,
+                relativeSize: "6ar",
                 family: '"Noto Serif", serif',
               },
               color: "#ffffffff",
               anchor: "end",
               align: "end",
-              offset: 5,
+              relativeOffset: "1ar",
+              display: "auto",
             },
+            legendMargin: {
+              margin: "10ph"
+            }
           },
         },
-        plugins: [ChartDataLabels],
+        plugins: [
+          ChartDataLabels,
+          {
+            id: "legendMargin",
+            afterInit(chart, args, plugins) {
+              const originalFit = chart.legend.fit;
+              const margin = toPx(plugins.margin, chart.canvas) || (typeof plugins.margin === "number" ? plugins.margin : 0)
+
+              chart.legend.fit = function fit() {
+                if (originalFit) originalFit.call(this);
+                return (this.height += margin);
+              };
+            },
+          },
+        ],
       };
     }
 
