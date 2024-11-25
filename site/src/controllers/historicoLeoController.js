@@ -45,10 +45,40 @@ function cadastrarHora(req, res) {
         })
 }
 
+function atualizarMesTaxa(req, res, mes) {
+    historicoLeoModel.atualizarMesTaxa(mes)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function atualizarMesEspecifico(req, res, mes) {
+    historicoLeoModel.atualizarMesEspecifico(mes)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function atualizarMesRanking(req, res, mes) {
+    historicoLeoModel.atualizarMesRanking(mes)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
 module.exports = {
     cadastrarMes,
     cadastrarDia,
     cadastrarRanking,
     cadastrarTaxa,
-    cadastrarHora
+    cadastrarHora,
+    atualizarMesTaxa,
+    atualizarMesEspecifico,
+    atualizarMesRanking
   }
