@@ -202,8 +202,8 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-                    senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                    emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+                    senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
                     filial,
                 })
             })
@@ -238,8 +238,8 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-                senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+                senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
             })
         })
         const data = await response.json()
@@ -264,8 +264,8 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-                senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+                senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
             })
         });
         // console.log(response)
@@ -297,8 +297,8 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-                    senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                    emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+                    senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
                 })
             });
             // console.log(await response)
@@ -367,8 +367,8 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-                senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+                emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+                senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
                 filial,
                 mes: document.getElementById('mes').value,
             })

@@ -254,8 +254,8 @@
         senha: senhaVar,
         telefone: telefoneVar,
         filial: filialVar,
-        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
       }),
     });
     if (resposta.ok) {
@@ -294,8 +294,8 @@
         rua: ruaVar,
         numero: numeroVar,
         complemento: complementoVar,
-        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
       }),
     });
     if (resposta.ok) {
@@ -331,8 +331,8 @@
         mac_address: macVar,
         fk_filial: filialVar,
 
-        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
       }),
     });
     if (resposta.ok) {
@@ -353,8 +353,8 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
       }),
     });
     if (resposta.ok) {

@@ -31,8 +31,8 @@ async function buscarPorFilial() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
         filial,
       }),
     });
@@ -67,8 +67,8 @@ async function atualizarTabela() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-      senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+      emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+      senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
     }),
   });
   const data = await response.json();
@@ -92,8 +92,8 @@ async function carregarFiliais(fk_empresa) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-      senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+      emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+      senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
     }),
   });
   // console.log(response)
@@ -123,8 +123,8 @@ async function statusFiliais() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-        senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
       }),
     });
     // console.log(await response)
@@ -195,8 +195,8 @@ async function atualizarGrafico(dados) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-      senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+      emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+      senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
       filial,
       mes: document.getElementById("mes").value,
     }),
@@ -341,8 +341,8 @@ async function atualizarGraficoStatus() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      emailAutenticacao: sessionStorage.getItem("EMAIL_USUARIO"),
-      senhaAutenticacao: sessionStorage.getItem("SENHA_USUARIO"),
+      emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+      senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
       mes: document.getElementById("mes").value,
     }),
   });
