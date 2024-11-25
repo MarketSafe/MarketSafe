@@ -233,3 +233,16 @@ body {
     }
   }
 }
+
+.separador {
+  flex: 1;
+}
+
+.dashCima {
+  display: flex;
+  flex-direction: row;
+
+  & > canvas {
+    
+  }
+}

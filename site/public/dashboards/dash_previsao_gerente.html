@@ -112,14 +112,18 @@
           </search>
         </header>
         <section class="dashboard">
-          <div>
-            <div>
+          <div class="separador">
+            <div class="dashCima">
+              <div>
               <canvas id="graficoBubble">
 
               </canvas>
+            </div>
+            <div>
               <canvas id="graficoLinha">
 
               </canvas>
+            </div>
             </div>
           </div>
         </section>
@@ -134,25 +138,29 @@
       data: [{
         x: 1,
         y: 5,
-        r: 10
+        r: 10,
+        label: 'Carne'
       }, {
         x: 3,
         y: 15,
-        r: 15
+        r: 15,
+        label: 'Carne'
       }, {
         x: 5,
         y: 20,
-        r: 20
+        r: 20,
+        label: 'Carne'
       }],
-      backgroundColor: 'rgb(255, 145, 77, 0.8)'
+      backgroundColor: 'rgba(255, 145, 77, 0.8)'
     }, {
       label: 'Previsto',
       data: [{
         x: 7,
         y: 30,
-        r: 25
+        r: 25,
+        label: 'Carne'
       }],
-      backgroundColor: 'rgb(255, 49, 49, 0.8)'
+      backgroundColor: 'rgba(255, 49, 49, 0.8)'
     }]
   };
 
@@ -175,7 +183,12 @@
           },
           grid: {
             color: "#9A9A9A"
-          } 
+          },
+          title: {
+            display: true,
+            text: "Dias do mês",
+            color: "white"
+          }
         }
       },
       plugins: {
@@ -191,5 +204,74 @@
   let bubbleChart = new Chart(
     document.getElementById('graficoBubble').getContext('2d'),
     configBubble
+  );
+
+  Chart.register({
+    id: 'permanentLabel',
+    afterDatasetsDraw: (chart, args, options) => {
+      const ctx = chart.ctx;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = 'white';
+      
+      chart.data.datasets.forEach((dataset, i) => {
+        const meta = chart.getDatasetMeta(i);
+        if (meta.type !== 'bubble') return;
+        
+        meta.data.forEach((element, index) => {
+          const item = dataset.data[index];
+          const position = element.tooltipPosition();
+          ctx.fillText(item.label.toString(), position.x, position.y);
+        });
+      });
+    }
+  });
+
+  const dataLine = {
+    labels: ['0', '5', '10', '15', '20', '25', '30'],
+    datasets: [{
+      label: 'Atual',
+      data: [20, 15, 23.5, 10],
+      backgroundColor: 'rgba(255, 145, 77, 0.8)'
+    }, {
+      label: 'Previsto',
+      data: [25, 30, 15],
+      backgroundColor: 'rgba(255, 49, 49, 0.8)'
+    }]
+  };
+
+  const configLine = {
+    type: 'line',
+    data: dataLine,
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            color: "#9A9A9A"
+          }
+        },
+        x: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: "Dias do mês",
+            color: "white"
+          }
+        }
+      }
+    }
+  };
+
+  let lineChart = new Chart(
+    document.getElementById('graficoLinha').getContext('2d'),
+    configLine
   );
 </script>
