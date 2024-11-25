@@ -18,7 +18,6 @@
   font-size: 1.5dvh;
 }
 
-
 .botao-filtrar {
   background-color: #3a3b47;
   border: #8e8c8c solid 2px;
@@ -28,8 +27,6 @@
   font-style: normal;
   font-size: 18px;
 }
-
-
 
 /* defaults: */
 body,
@@ -244,7 +241,8 @@ body {
               gap: 1rem;
               align-self: stretch;
 
-              & > select, & > input {
+              & > select,
+              & > input {
                 transition: transform 0.2s;
                 flex: 1;
                 border-radius: 5px;
@@ -267,7 +265,6 @@ body {
         gap: 1rem;
         flex: 1;
 
-
         .status-container {
           gap: 20px;
         }
@@ -286,7 +283,7 @@ body {
           flex: 1;
           background-color: var(--header-color);
           justify-content: space-evenly;
-          gap: 2rem;
+          gap: 3rem;
           flex-direction: row;
         }
 
@@ -295,6 +292,8 @@ body {
           position: relative;
           transition: all 1000ms ease;
           transform-style: preserve-3d;
+          flex-grow: 1;
+          padding: 2rem;
         }
 
         .critico {
@@ -310,17 +309,24 @@ body {
         }
 
         .status-label {
-          font-size: 1.2em;
+          font-size: 1.5em;
           font-weight: bold;
         }
 
         .status-numero {
-          font-size: 2em;
+          font-size: 2.5em;
           font-weight: bold;
         }
 
+
+        
         .face {
+          
           position: absolute;
+          backface-visibility: hidden;
+          border-radius: 10px;
+          transform: scale(1.2);
+          padding: 2em;
         }
 
         .front {
@@ -332,9 +338,12 @@ body {
           min-height: 2em;
           padding: 1em;
           width: 100%;
+          font-size: 15px;
         }
 
         .back {
+          width: 85%;
+          align-self: center;
           background-size: cover;
           background-position: center;
           backface-visibility: hidden;
@@ -356,7 +365,9 @@ body {
         }
 
         .area-fora {
-          height: 1em;
+          height: 8em;
+          flex: 1;
+          align-items: stretch;
         }
         .area-fora:hover .status-box {
           transform: rotateY(180deg);
@@ -365,19 +376,21 @@ body {
         /* Estilo do Ranking */
         .ranking {
           background-color: var(--header-color);
-
           color: white;
+          padding: 2rem;
+          flex: 1 1 40%;
         }
 
         .ranking-title {
-          font-size: 1.5em;
+          font-size: 2em;
           font-weight: bold;
           text-align: center;
         }
 
-        table{
-          & , & * {
-           display: revert;
+        table {
+          &,
+          & * {
+            display: revert;
           }
         }
 
@@ -386,8 +399,19 @@ body {
           background-color: #575a64;
           overflow: hidden;
           color: white;
+          width: 80%;
         }
 
+        .table th {
+          padding: 0.5rem;
+          font-size: 1.6em;
+        }
+
+        .table td {
+          padding: 0.5rem;
+          font-size: 1.4em;
+          color: black;
+        }
         .table tr {
           /* display: grid; */
           grid-template-columns: 1fr 1fr 1fr;
@@ -413,6 +437,7 @@ body {
         .fundo-grafico {
           flex: 1;
           background-color: var(--header-color);
+          padding: 2rem;
         }
 
         .fundo-grafico-title {
@@ -425,17 +450,16 @@ body {
           flex-shrink: 2;
         }
 
-        .engloba-indicador{
+        .engloba-indicador {
           flex: 1;
         }
 
-
         .engloba-indicador,
         .plano-fundo {
-
           flex-direction: row;
           background-color: var(--header-color);
           justify-content: space-between;
+          gap: 2rem;
 
           & > * {
             flex: 1;
@@ -486,8 +510,6 @@ body {
             }
           }
         }
-
-        
 
         #grafico-performance .chart-status {
           /* max- position: relative; importante */
