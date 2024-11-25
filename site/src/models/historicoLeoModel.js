@@ -118,12 +118,13 @@ function atualizarMesEspecifico(mes) {
     var instrucaoSql =
         `
     SELECT 
-    DATE_FORMAT(data_hora, '%Y-%m-%d %H:00:00') AS hora,
+    data_hora AS hora,
     COUNT(*) AS total_alertas
     FROM alerta
-    WHERE DATE(data_hora) = '2024-12-11' -- Substitua pelo dia desejado
+    WHERE MONTH(data_hora) = ${mes}
     GROUP BY hora
-    ORDER BY hora;
+    ORDER BY hora
+    limit 5;
  `
         ;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -135,15 +136,16 @@ function atualizarMesTaxa(mes) {
 
     var instrucaoSql =
         `
-   SELECT 
+    SELECT 
     DATE(data_hora) AS dia,
     (COUNT(*) * 100.0 / (SELECT COUNT(*) 
     FROM alerta 
-    WHERE DATE(data_hora) BETWEEN '2024-12-01' AND '2024-12-07')) AS taxa_alerta_dia
+    WHERE DATE(data_hora) BETWEEN '2024-12-01' AND '2024-12-07')) AS taxa_porcentagem
     FROM alerta
-    WHERE DATE(data_hora) BETWEEN '2024-12-01' AND '2024-12-07'
+    WHERE MONTH(data_hora) = ${mes}
     GROUP BY DATE(data_hora)
-    ORDER BY dia;
+    ORDER BY dia
+    limit 7;
  `
         ;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

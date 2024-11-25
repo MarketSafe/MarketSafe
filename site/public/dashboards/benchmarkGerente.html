@@ -88,9 +88,13 @@
               <div>
                 <select class="filial">
                   <option value="" selected disabled>Filial</option>
+                  <option value="">Nenhuma</option>
+                  <option value="1">Filial 1</option>
+                  <option value="2">Filial 2</option>
                 </select>
                 <select class="promocao">
                   <option value="" selected disabled>Promocao</option>
+                  <option value="">Nenhuma</option>
                 </select>
               </div>
             </div>
@@ -99,11 +103,13 @@
               <div>
                 <select class="filial">
                   <option value="" selected disabled>Filial</option>
-                  <option value="a">dwa</option>
-                  <option value="b">dwa</option>
+                  <option value="">Nenhuma</option>
+                  <option value="1">Filial 1</option>
+                  <option value="2">Filial 2</option>
                 </select>
                 <select class="promocao">
                   <option value="" selected disabled>Promocao</option>
+                  <option value="">Nenhuma</option>
                 </select>
               </div>
             </div>
@@ -111,20 +117,47 @@
         </header>
         <section class="dashboard">
           <section class="indicadores">
-            <section class="filiais"></section>
-            <section class="empresa"></section>
+            <section class="filiais">
+              <section class="taxa-geral">
+                <h2>Taxa geral de alertas</h2>
+                <div>
+                  <span class="numero">35&percnt;</span>
+                </div>
+              </section>
+              <section class="totens-total">
+                <h2>Quantidade total de totens</h2>
+                <div>
+                  <span class="numero">135</span>
+                </div>
+              </section>
+            </section>
+            <section class="empresa">
+              <section class="maior-taxa">
+                <h2>Filial com maior taxa de alertas</h2>
+                <div>
+                  <h3>Água rasa 2</h3>
+                  <span class="numero">100&percnt;</span>
+                </div>
+              </section>
+              <section class="filiais-total">
+                <h2>Quantidade de filiais</h2>
+                <div>
+                  <span class="numero">30</span>
+                </div>
+              </section>
+            </section>
           </section>
           <section class="graficos">
-            <div>
+            <section>
               <div class="grafico estado-filiais">
                 <canvas></canvas>
               </div>
-            </div>
-            <div>
+            </section>
+            <section>
               <div class="grafico taxa-alerta">
                 <canvas></canvas>
               </div>
-            </div>
+            </section>
           </section>
         </section>
       </main>
