@@ -152,6 +152,52 @@ function atualizarMesTaxa(mes) {
     return database.executar(instrucaoSql);
 }
 
+function maisAlerta() {
+    console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function maisAlerta():");
+
+    var instrucaoSql =
+        `
+    SELECT 
+    HOUR(data_hora) AS hora, 
+    COUNT(*) AS total_alertas
+    FROM 
+    alerta
+    WHERE 
+    MONTH(data_hora) = 10
+    GROUP BY 
+    HOUR(data_hora)
+    ORDER BY 
+    total_alertas DESC
+    LIMIT 1;
+ `
+        ;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarMaisAlerta(mes) {
+    console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMaisAlerta():");
+
+    var instrucaoSql =
+        `
+    SELECT 
+    HOUR(data_hora) AS hora, 
+    COUNT(*) AS total_alertas
+    FROM 
+    alerta
+    WHERE 
+    MONTH(data_hora) = ${mes}
+    GROUP BY 
+    HOUR(data_hora)
+    ORDER BY 
+    total_alertas DESC
+    LIMIT 1;
+ `
+        ;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     cadastrarMes,
     cadastrarDia,
@@ -160,5 +206,7 @@ module.exports = {
     cadastrarHora,
     atualizarMesRanking,
     atualizarMesEspecifico,
-    atualizarMesTaxa
+    atualizarMesTaxa,
+    maisAlerta,
+    atualizarMaisAlerta
 };

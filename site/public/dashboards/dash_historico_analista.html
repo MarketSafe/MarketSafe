@@ -89,7 +89,7 @@
                             <p>Horário com maior número de alertas</p>
                         </div>
                         <div class="hora">
-                            <p></p>
+                            <p id="MaisAlerta"></p>
                         </div>
                     </div>
                     <div class="media">
@@ -549,6 +549,36 @@
     };
     buscarDadosHora();
 
+    function maisAlerta(mes) {
+        const MaisAlerta = document.getElementById("MaisAlerta");
+        if (!MaisAlerta) {
+            console.error("Elemento 'MaisAlerta' não encontrado.");
+            return;
+        }
+
+        fetch(`/historicoLeo/maisAlerta`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (dados) {
+                dados.forEach((dado) => {
+                    MaisAlerta.innerHTML = `${dado.hora}:00`;
+                });
+            })
+            .catch(function (erro) {
+                console.error("Erro ao buscar alertas:", erro);
+            });
+    }
+
+
 
 
     select_mes.addEventListener("change", atualizarRankingDia);
@@ -607,7 +637,30 @@
                 alert(erro);
                 console.log("Erro ao carregar linhas:", erro);
             });
+
+        fetch(`/historicoLeo/atualizarMaisAlerta?mes=${mes}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (mesAtualizado) {
+                console.log("Mês atualizado:", mesAtualizado);
+                maisAlerta(mesAtualizado);
+                console.log(mesAtualizado)
+            })
+            .catch(function (erro) {
+                alert("Erro ao buscar alertas");
+                console.error("Erro ao carregar dados:", erro);
+            });
     }
+
+
+
+
     select_mes.addEventListener("change", atualizarRankingDia);
     select_dia.addEventListener("change", atualizarRankingDia);
 </script>
