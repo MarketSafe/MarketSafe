@@ -101,10 +101,10 @@ async function puxarDados(rota, dados, errorCallback) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(dados),
+    body: JSON.stringify(body),
   });
 
-  if (!response.ok) throw new Error(`Erro ao realizar o fetch: ${response.status} ${response.statusText}`);
+  if (!response.ok) throw new Error(`Erro ao realizar o fetch: ${response.status} ${response.statusText}: ${await response.text()}`);
 
   errorCallback(response);
 
@@ -115,11 +115,13 @@ async function gerarGraficos() {
     let config = {};
 
     if (divGrafico.classList.contains("estado-filiais")) {
-      // const dados = await puxarDados("/benchmarkGerente/estadoFiliais", {}, (response) => {
-      //   if (response.status == 204) {
-      //     throw new Error(`Sem filiais na empresa`);
-      //   }
-      // });
+      const dados = await puxarDados("/benchmarkGerente/estadoFiliais", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa`);
+        }
+      });
+
+      console.log(dados);
 
       config = {
         type: "pie",
@@ -197,6 +199,29 @@ async function gerarGraficos() {
           responsive: true,
           maintainAspectRatio: false,
           onResize: updateChart,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Filiais",
+                color: "#ffffffff"
+              },
+              ticks: {
+                color: "#ffffffff",
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Taxa de totens em alerta",
+                color: "#ffffffff"
+              },
+              ticks: {
+                color: "#ffffffff",
+                beginAtZero: true
+              }
+            }
+          },
           plugins: {
             title: {
               display: true,

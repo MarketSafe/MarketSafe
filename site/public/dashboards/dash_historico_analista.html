@@ -154,7 +154,7 @@
             cadastrarTaxa()
         } else if (selectTaxa == 1) {
             grafico3.style.display = "block"
-            cadastrarHora()
+            buscarDadosHora();
         }
     }
 
@@ -420,16 +420,25 @@
     buscarDadosTaxa()
 
     function cadastrarHora(especifico) {
-        especifico.sort((a, b) => new Date(a.hora) - new Date(b.hora));
+        var hora;
+        // Ordena o array com base na propriedade "hora" (numérica)
+        especifico.sort((a, b) => a.hora - b.hora);
+        console.log(especifico);
+        // Mapeia as horas para formato ISO
         const horaMomento = especifico.map(item => {
-            const hora = new Date(item.hora);
-            hora.setHours(hora.getHours());
+            hora = new Date();
+            hora.setHours(item.hora);
+            hora.setMinutes(0);  // Garante que os minutos sejam 0
+            hora.setSeconds(0);  // Garante que os segundos sejam 0
+            hora.setMilliseconds(0); // Garante que os milissegundos sejam 0
             return hora.toISOString();
         });
+        console.log(especifico);
+        console.log(hora);
+        console.log(horaMomento);
 
-        console.log(hora)
-        console.log(horaMomento)
-        const total_alertas = especifico.map(item => item.total_alertas)
+        // Extrai os valores de total_alertas para criar o gráfico
+        const total_alertas = especifico.map(item => item.total_alertas);
 
         var options = {
             series: [{
@@ -530,13 +539,16 @@
         })
             .then(resposta => resposta.json())
             .then(especifico => {
-                console.log(especifico)
-                cadastrarHora(especifico)
-            }
-            )
+                console.log('Resposta recebida:', especifico);
+                cadastrarHora(especifico);
+            })
+            .catch(erro => {
+                console.error('Erro ao buscar dados:', erro);
+            });
+
     };
     buscarDadosHora();
-    setInterval(buscarDadosHora, 2000);
+
 
 
     select_mes.addEventListener("change", atualizarRankingDia);
@@ -589,14 +601,13 @@
             })
             .then(function (especifico) {
                 console.log(especifico)
-
+                cadastrarHora(especifico)
             })
             .catch(function (erro) {
                 alert(erro);
                 console.log("Erro ao carregar linhas:", erro);
             });
     }
-
-
-
+    select_mes.addEventListener("change", atualizarRankingDia);
+    select_dia.addEventListener("change", atualizarRankingDia);
 </script>
