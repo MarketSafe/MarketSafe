@@ -200,7 +200,7 @@
                 console.log("Erro ao carregar linhas:", erro);
             });
     }
-    
+
     cadastrarDia();
 
     function cadastrarRanking(ranking) {
@@ -293,127 +293,119 @@
             .then(resposta => resposta.json())
             .then(ranking => {
                 console.log(ranking)
-            cadastrarRanking(ranking);
+                cadastrarRanking(ranking);
             }
-        )
+            )
     }
     buscarDadosRanking()
 
     function cadastrarTaxa(taxa) {
-    if (!Array.isArray(taxa) || taxa.length === 0) {
-        console.error("Dados inválidos ou vazios:", taxa);
-        alert("Nenhum dado encontrado para o mês selecionado.");
-        return;
-    }
+        const dia = taxa.map(item => item.dia);
+        const taxa_porcentagem = taxa.map(item => item.taxa_porcentagem);
 
-    const dia = taxa.map(item => item.dia);
-    const taxa_porcentagem = taxa.map(item => item.taxa_porcentagem);
-
-    // Configuração do gráfico
-    var options = {
-        series: [{
-            name: "Percentual total",
-            data: taxa_porcentagem
-        }],
-        chart: {
-            height: 290,
-            width: 700,
-            type: 'line',
-            zoom: {
+        // Configuração do gráfico
+        var options = {
+            series: [{
+                name: "Percentual total",
+                data: taxa_porcentagem
+            }],
+            chart: {
+                height: 290,
+                width: 700,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: false
+                }
+            },
+            dataLabels: {
                 enabled: false
             },
-            toolbar: {
-                show: false
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'straight',
-            colors: ['#FF8818']
-        },
-        grid: {
-            row: {
-                colors: ['transparent', 'transparent'],
-                opacity: 0.5
+            stroke: {
+                curve: 'straight',
+                colors: ['#FF8818']
             },
-        },
-        xaxis: {
-            categories: dia,
-            labels: {
-                style: {
-                    colors: "#ffffff",
-                    fontFamily: "Abel"
+            grid: {
+                row: {
+                    colors: ['transparent', 'transparent'],
+                    opacity: 0.5
                 },
-                formatter: function (value) {
-                    const date = new Date(value);
-                    if (isNaN(date.getTime())) return value;
-                    return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
-                }
-            }
-        },
-        yaxis: {
-            title: {
-                text: 'Taxa de alerta do total de totens',
-                align: 'center',
-                style: {
-                    color: '#ffffff',
-                    fontFamily: 'Abel'
+            },
+            xaxis: {
+                categories: dia,
+                labels: {
+                    style: {
+                        colors: "#ffffff",
+                        fontFamily: "Abel"
+                    },
+                    formatter: function (value) {
+                        const date = new Date(value);
+                        if (isNaN(date.getTime())) return value;
+                        return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+                    }
                 }
             },
-            labels: {
-                style: {
-                    colors: "#ffffff",
-                    fontFamily: "Abel"
+            yaxis: {
+                title: {
+                    text: 'Taxa de alerta do total de totens',
+                    align: 'center',
+                    style: {
+                        color: '#ffffff',
+                        fontFamily: 'Abel'
+                    }
                 },
-                formatter: function (value) {
-                    return value + "%";
+                labels: {
+                    style: {
+                        colors: "#ffffff",
+                        fontFamily: "Abel"
+                    },
+                    formatter: function (value) {
+                        return value + "%";
+                    },
+                }
+            },
+            tooltip: {
+                theme: 'dark',
+                style: {
+                    fontFamily: 'Abel',
+                    fontSize: '14px',
+                    color: '#fff'
                 },
-            }
-        },
-        tooltip: {
-            theme: 'dark',
-            style: {
-                fontFamily: 'Abel',
-                fontSize: '14px',
-                color: '#fff'
-            },
-            marker: {
-                show: false
-            },
-            x: {
-                formatter: function (value) {
-                    const date = new Date(value);
-                    if (isNaN(date.getTime())) return value;
-                    return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
-                }
-            },
-            y: {
-                formatter: function (value) {
-                    return value + '%';
+                marker: {
+                    show: false
+                },
+                x: {
+                    formatter: function (value) {
+                        const date = new Date(value);
+                        if (isNaN(date.getTime())) return value;
+                        return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+                    }
+                },
+                y: {
+                    formatter: function (value) {
+                        return value + '%';
+                    }
                 }
             }
-        }
-    };
+        };
 
-    // Inicializa ou atualiza o gráfico
-    if (!window.chartTAXA) {
-        const chartElement = document.querySelector("#taxa");
-        if (!chartElement) {
-            console.error("Elemento '#taxa' não encontrado no DOM.");
-            return;
+        // Inicializa ou atualiza o gráfico
+        if (!window.chartTAXA) {
+            const chartElement = document.querySelector("#taxa");
+            if (!chartElement) {
+                console.error("Elemento '#taxa' não encontrado no DOM.");
+                return;
+            }
+            window.chartTAXA = new ApexCharts(chartElement, options);
+            window.chartTAXA.render();
+        } else {
+            window.chartTAXA.updateOptions(options).catch(err => {
+                console.error("Erro ao atualizar o gráfico:", err);
+            });
         }
-        window.chartTAXA = new ApexCharts(chartElement, options);
-        window.chartTAXA.render();
-    } else {
-        window.chartTAXA.updateOptions(options).catch(err => {
-            console.error("Erro ao atualizar o gráfico:", err);
-        });
     }
-}
-
-
     function buscarDadosTaxa() {
         fetch("/historicoLeo/cadastrarTaxa", {
             method: "GET"
@@ -421,127 +413,131 @@
             .then(resposta => resposta.json())
             .then(taxa => {
                 console.log(taxa)
-            cadastrarTaxa(taxa);
+                cadastrarTaxa(taxa);
             }
-        )
+            )
     }
     buscarDadosTaxa()
 
+    function cadastrarHora(especifico) {
+        especifico.sort((a, b) => new Date(a.hora) - new Date(b.hora));
+        const horaMomento = especifico.map(item => {
+            const hora = new Date(item.hora);
+            hora.setHours(hora.getHours());
+            return hora.toISOString();
+        });
 
-    cadastrarHora()
-    function cadastrarHora() {
-        console.log("AAAAAAAAAAAAAAA")
-        const atualizarGrafico3 = (dados3) => {
-            const hora = dados3.map(item => item.hora)
-            const total_alertas = dados3.map(item => item.total_alertas)
+        console.log(hora)
+        console.log(horaMomento)
+        const total_alertas = especifico.map(item => item.total_alertas)
 
-            var options = {
-                series: [{
-                    name: 'Total de alertas por hora',
-                    data: total_alertas
-                }],
-                title: {
-                    text: 'Total de alertas por hora',
-                    align: 'center',
+        var options = {
+            series: [{
+                name: 'Total de alertas por hora',
+                data: total_alertas
+            }],
+            title: {
+                text: 'Total de alertas por hora',
+                align: 'center',
+                style: {
+                    color: '#ffffff',
+                    fontFamily: 'Abel',
+                    fontSize: '20px'
+                }
+            },
+            chart: {
+                type: 'bar',
+                height: 290,
+                width: 700,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                labels: {
                     style: {
-                        color: '#ffffff',
-                        fontFamily: 'Abel',
-                        fontSize: '20px'
-                    }
-                },
-                chart: {
-                    type: 'bar',
-                    height: 290,
-                    width: 700,
-                    toolbar: {
-                        show: false
-                    }
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '55%',
-                        endingShape: 'rounded'
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    show: true,
-                    width: 2,
-                    colors: ['transparent']
-                },
-                xaxis: {
-                    labels: {
-                        style: {
-                            colors: '#ffffff',
-                            fontFamily: 'Abel'
-                        },
-                        formatter: function (value) {
-                            // Assume que 'hora' seja um número representando a hora (0-23)
-                            var hour = value < 10 ? '0' + value : value;
-                            return hour + ':00';
-                        }
+                        colors: '#ffffff',
+                        fontFamily: 'Abel'
                     },
-                    categories: hora
-                },
-                yaxis: {
-                    labels: {
-                        style: {
-                            colors: '#ffffff',
-                            fontFamily: 'Abel'
-                        }
+                    formatter: function (value) {
+                        var hour = value < 10 ? '0' + value : value;
+                        return hour + ':00';
                     }
                 },
-                fill: {
-                    opacity: 1
-                },
-                tooltip: {
-                    theme: 'dark',
-                    y: {
-                        formatter: function (val) {
-                            return val;
-                        }
-                    },
-                    x: {
-                        formatter: function (value) {
-                            var hour = value < 10 ? '0' + value : value;
-                            return hour + ':00';
-                        }
-                    },
+                categories: horaMomento
+            },
+            yaxis: {
+                labels: {
                     style: {
-                        fontFamily: 'Abel',
-                        fontSize: '14px',
-                        color: '#fff'
-                    },
-                    marker: {
-                        show: false
+                        colors: '#ffffff',
+                        fontFamily: 'Abel'
                     }
                 }
-            };
-
-            if (!window.chartHORA) {
-                window.chartHORA = new ApexCharts(document.querySelector("#total"), options);
-                window.chartHORA.render();
-            } else {
-                window.chartHORA.updateOptions(options);
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                theme: 'dark',
+                y: {
+                    formatter: function (val) {
+                        return val;
+                    }
+                },
+                x: {
+                    formatter: function (value) {
+                        var hour = value < 10 ? '0' + value : value;
+                        return hour + ':00';
+                    }
+                },
+                style: {
+                    fontFamily: 'Abel',
+                    fontSize: '14px',
+                    color: '#fff'
+                },
+                marker: {
+                    show: false
+                }
             }
-        }
-
-        const buscarDados3 = () => {
-            fetch("/historicoLeo/cadastrarHora", {
-                method: "GET"
-            })
-                .then(resposta => resposta.json())
-                .then(atualizarGrafico3)
         };
 
-        buscarDados3();
-        setInterval(buscarDados3, 2000);
+        if (!window.chartHORA) {
+            window.chartHORA = new ApexCharts(document.querySelector("#total"), options);
+            window.chartHORA.render();
+        } else {
+            window.chartHORA.updateOptions(options);
+        }
     }
-    // var selectMes = document.getElementById("select_mes");
-    // var selectDia = document.getElementById("select_dia");
+
+    const buscarDadosHora = () => {
+        fetch("/historicoLeo/cadastrarHora", {
+            method: "GET"
+        })
+            .then(resposta => resposta.json())
+            .then(especifico => {
+                console.log(especifico)
+                cadastrarHora(especifico)
+            }
+            )
+    };
+    buscarDadosHora();
+    setInterval(buscarDadosHora, 2000);
+
 
     select_mes.addEventListener("change", atualizarRankingDia);
     select_dia.addEventListener("change", atualizarRankingDia);
