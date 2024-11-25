@@ -4,7 +4,7 @@ function cadastrarMes() {
     console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarMes():");
 
     var instrucaoSql =
-    `SELECT MONTH(data_hora) AS mes, COUNT(id) FROM alerta GROUP BY MONTH(data_hora);`
+        `SELECT MONTH(data_hora) AS mes, COUNT(id) FROM alerta GROUP BY MONTH(data_hora);`
         ;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -14,7 +14,7 @@ function cadastrarDia() {
     console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarDia():");
 
     var instrucaoSql =
-    `SELECT 
+        `SELECT 
     @rownum := @rownum + 1 AS id,  
     CONCAT(
     'Do dia ', 
@@ -90,10 +90,75 @@ function cadastrarHora() {
     return database.executar(instrucaoSql);
 }
 
+function atualizarMesRanking(mes) {
+    console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMesRanking():");
+    console.log(mes)
+    var instrucaoSql =
+        `
+    SELECT 
+    a.fk_totem as totem, 
+    t.mac_address as idTotem, 
+    COUNT(*) AS total_alertas
+    FROM alerta a
+    JOIN totem t ON a.fk_totem = t.id
+    WHERE MONTH(a.data_hora) = ${mes}
+    GROUP BY a.fk_totem, t.mac_address
+    ORDER BY total_alertas DESC
+    LIMIT 5;
+
+ `
+        ;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarMesEspecifico(mes) {
+    console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMesEspecifico():");
+
+    var instrucaoSql =
+        `
+    SELECT 
+    data_hora AS hora,
+    COUNT(*) AS total_alertas
+    FROM alerta
+    WHERE MONTH(data_hora) = ${mes}
+    GROUP BY hora
+    ORDER BY hora
+    limit 5;
+ `
+        ;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarMesTaxa(mes) {
+    console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMesTaxa():");
+
+    var instrucaoSql =
+        `
+    SELECT 
+    DATE(data_hora) AS dia,
+    (COUNT(*) * 100.0 / (SELECT COUNT(*) 
+    FROM alerta 
+    WHERE DATE(data_hora) BETWEEN '2024-12-01' AND '2024-12-07')) AS taxa_porcentagem
+    FROM alerta
+    WHERE MONTH(data_hora) = ${mes}
+    GROUP BY DATE(data_hora)
+    ORDER BY dia
+    limit 7;
+ `
+        ;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     cadastrarMes,
     cadastrarDia,
     cadastrarRanking,
     cadastrarTaxa,
-    cadastrarHora
+    cadastrarHora,
+    atualizarMesRanking,
+    atualizarMesEspecifico,
+    atualizarMesTaxa
 };

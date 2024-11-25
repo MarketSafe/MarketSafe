@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/dashboards/historicoGerente.css" />
+    <title>MarketSafe | Dashboard - Histórico</title>
+  </head>
+
+  <body>
+    <div>
+      <header>
+        <a class="logo" href="/">
+          <div class="img">
+            <img src="/assets/logo.png" alt="logo" />
+          </div>
+          <h1>MKTS</h1>
+        </a>
+        <nav>
+          <h1>Dashboards</h1>
+          <section class="gerente">
+            <h2>Gerente</h2>
+            <ul>
+              <li>
+                <a href="">
+                  <h2>Previsão</h2>
+                  <img src="/assets/previsao.svg" alt="previsao.svg" />
+                </a>
+              </li>
+              <li>
+                <a href="/dash_individual_Gisele.html">
+                  <h2>Histórico</h2>
+                  <img src="/assets/historico.svg" alt="historico.svg" />
+                </a>
+              </li>
+              <li class="ativo">
+                <a href="/dashboards/dashboardBenchmarkGerente.html">
+                  <h2>Benchmark</h2>
+                  <img src="/assets/benchmark.svg" alt="previsao.svg" />
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section class="analista">
+            <h2>Analista</h2>
+            <ul>
+              <li>
+                <a href="/dash_individual_Isaque_Principal.html">
+                  <h2>Monitoramento</h2>
+                  <img
+                    src="/assets/monitoramento.svg"
+                    alt="monitoramento.svg"
+                  />
+                </a>
+              </li>
+              <li>
+                <a href="/dash_historico_analista.html">
+                  <h2>Histórico</h2>
+                  <img src="/assets/historico.svg" alt="historico.svg" />
+                </a>
+              </li>
+              <li>
+                <a href="/dashboards/dash_individual_benchmark.html">
+                  <h2>Benchmark</h2>
+                  <img src="/assets/benchmark.svg" alt="previsao.svg" />
+                </a>
+              </li>
+            </ul>
+          </section>
+        </nav>
+        <hr />
+        <a class="perfil" href="/perfilGerente.html">
+          <div class="img">
+            <img src="/assets/perfil.svg" alt="perfil.svg" />
+          </div>
+          <div>
+            <span class="nome">Fred</span>
+            <hr />
+            <span>Analista</span>
+          </div>
+        </a>
+      </header>
+      <main>
+        <header>
+          <div>
+            <h1>Histórico de Monitoramento</h1>
+          </div>
+          <search>
+            <div>
+              <span>Filial</span>
+              <div>
+                <select id="filial">
+                    <option value="" selected disabled>Filial</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <span>Mês</span>
+              <div>
+                <input type="month" id="mes">
+              </div>
+            </div>
+            <button class="botao-filtrar" id="filtrar">Filtrar</button>
+          </search>
+        </header>
+        <section class="dashboard">
+          <div class="engloba-indicador">
+            <div
+              id="card-performance"
+              class="fundo-status status-container"
+              style="display: flex"
+            >
+              <h2>Status de Performance da Filial</h2>
+              <div class="engloba-status">
+                <div class="area-fora">
+                  <div class="status-box critico">
+                    <div class="face front"></div>
+                    <div class="face back back1">
+                      <div class="status-label">Crítico</div>
+                      <div class="status-numero"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="area-fora">
+                  <div class="status-box atencao">
+                    <div class="face front"></div>
+                    <div class="face back back2">
+                      <div class="status-label">Atenção</div>
+                      <div class="status-numero"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="area-fora">
+                  <div class="status-box normal">
+                    <div class="face front"></div>
+                    <div class="face back back3">
+                      <div class="status-label">Normal</div>
+                      <div class="status-numero"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              id="grafico-performance"
+              class="engloba-grafico-performance status-historico"
+              style="display: none"
+            >
+              <h2>Histórico do Status da Performance</h2>
+              <div class="chart-status">
+                <canvas id="stackedBarChart"></canvas>
+              </div>
+            </div>
+            <div class="ranking">
+              <div class="ranking-title">3 Promoções com mais Alertas</div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Posição</th>
+                    <th>Promoção</th>
+                    <th>Alertas</th>
+                  </tr>
+                </thead>
+
+                <tbody id="corpoTabela"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="plano-fundo">
+            <div class="fundo-grafico">
+              <div class="chart-area">
+                <canvas id="barChart"  width="550px" height="275px"></canvas>
+              </div>
+            </div>
+            <div class="fundo-grafico">
+              <div class="grafico-pizza">
+                <canvas id="pieChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script type="module" src="/js/dashboards/historicoGerente.js"></script>
+  </body>
+</html>

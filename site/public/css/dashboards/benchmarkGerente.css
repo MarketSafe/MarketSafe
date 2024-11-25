@@ -5,6 +5,7 @@
 /* root: */
 :root {
   --text-color: #ffffffff;
+  --placeholder-color: #c0c0c0ff;
   --shadow-color: #0000007f;
 
   --div-color: #616161ff;
@@ -15,12 +16,14 @@
   --gerente-color: #ff3131ff;
   --analista-color: #e9864aff;
 
+  overflow: hidden;
   font-size: 1.5dvh;
 }
 
 /* defaults: */
 body,
 body *:not(script) {
+  overflow: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -38,6 +41,7 @@ body *:not(script) {
 
 /* css estruturado: */
 body {
+  overflow: auto;
   align-items: stretch;
   height: 100dvh;
   padding: 2rem;
@@ -61,6 +65,9 @@ body {
   }
   & option[selected][disabled] {
     display: none;
+  }
+  & select:has(option:checked[value=""]) {
+    color: var(--placeholder-color);
   }
 
   & > div {
@@ -238,19 +245,52 @@ body {
           width: 100%;
 
           & > * {
+            align-items: stretch;
             flex: 1;
             border-radius: 10px;
-            padding: 2rem;
+            padding: 1rem;
             background-color: var(--header-color);
+          }
+        }
+        & > section.indicadores {
+          flex: none;
 
-            & > div.grafico {
-              flex: 1;
+          & > section {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 1rem;
 
-              & > canvas {
-                width: 100%;
-                height: 100%;
+            & > section {
+              gap: 1rem;
+
+              & > h2 {
+                text-align: center;
+                font-size: 2rem;
+              }
+              & > div {
+                border-radius: 10px;
+                padding: 0.5rem 1rem;
+                background-color: red;
+
+                & > h3 {
+                  text-align: center;
+                  font-size: 2rem;
+                }
+                & > span.numero {
+                  font-size: 3rem;
+                  font-family: "Noto Serif", serif;
+                }
               }
             }
+          }
+        }
+        & > section.graficos > section > div.grafico {
+          position: relative;
+          flex: 1;
+
+          & > canvas {
+            width: 100%;
+            height: 100%;
           }
         }
       }

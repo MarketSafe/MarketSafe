@@ -41,7 +41,7 @@ else:
       try:
           jira.issue_create(
               fields={
-                  "project": {"key": "SUP"},
+                  "project": {"key": "SCRUM"},
                   "summary": "Alerta: Alta utilização de " + " e ".join(componentes),
                   "description": f"O totem com o endereço MAC \"{macAddress}\" está com alto uso de {', '.join(componentes)}. Valores: " + "; ".join(componentesValores),
                   "issuetype": {"name": "Task"}
@@ -117,14 +117,14 @@ else:
           with open("registro.json", "w") as jsonfile:
               json.dump(dados, jsonfile)
 
-          s3 = boto3.client(
-              service_name="s3",
-              region_name="us-east-1",
-              aws_access_key_id=env["AWS_ACCESS_KEY_ID"],
-              aws_secret_access_key=env["AWS_SECRET_ACCESS_KEY"],
-              aws_session_token=env["AWS_SESSION_TOKEN"]
-          )
-          s3.upload_file("registro.json", "s3-raw-mktsf", jsonName)
+        #   s3 = boto3.client(
+        #       service_name="s3",
+        #       region_name="us-east-1",
+        #       aws_access_key_id=env["AWS_ACCESS_KEY_ID"],
+        #       aws_secret_access_key=env["AWS_SECRET_ACCESS_KEY"],
+        #       aws_session_token=env["AWS_SESSION_TOKEN"]
+        #   )
+        #   s3.upload_file("registro.json", "s3-raw-mktsf", jsonName)
 
           if prints == "s": print(f"\"{jsonName}\" enviado!")
 
