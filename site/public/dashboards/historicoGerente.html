@@ -27,13 +27,13 @@
                   <img src="/assets/previsao.svg" alt="previsao.svg" />
                 </a>
               </li>
-              <li>
+              <li class="ativo">
                 <a href="/dash_individual_Gisele.html">
                   <h2>Histórico</h2>
                   <img src="/assets/historico.svg" alt="historico.svg" />
                 </a>
               </li>
-              <li class="ativo">
+              <li>
                 <a href="/dashboards/dashboardBenchmarkGerente.html">
                   <h2>Benchmark</h2>
                   <img src="/assets/benchmark.svg" alt="previsao.svg" />
@@ -74,9 +74,9 @@
             <img src="/assets/perfil.svg" alt="perfil.svg" />
           </div>
           <div>
-            <span class="nome">Fred</span>
+            <span class="nome">Vitor</span>
             <hr />
-            <span>Analista</span>
+            <span>Gerente</span>
           </div>
         </a>
       </header>
@@ -90,14 +90,14 @@
               <span>Filial</span>
               <div>
                 <select id="filial">
-                    <option value="" selected disabled>Filial</option>
+                  <option value="" selected disabled>Filial</option>
                 </select>
               </div>
             </div>
             <div>
               <span>Mês</span>
               <div>
-                <input type="month" id="mes">
+                <input type="month" id="mes" />
               </div>
             </div>
             <button class="botao-filtrar" id="filtrar">Filtrar</button>
@@ -148,7 +148,11 @@
             >
               <h2>Histórico do Status da Performance</h2>
               <div class="chart-status">
-                <canvas id="stackedBarChart"></canvas>
+                <canvas
+                  id="stackedBarChart"
+                  width="430px"
+                  height="150px"
+                ></canvas>
               </div>
             </div>
             <div class="ranking">
@@ -170,12 +174,20 @@
           <div class="plano-fundo">
             <div class="fundo-grafico">
               <div class="chart-area">
-                <canvas id="barChart"  width="550px" height="275px"></canvas>
+                <canvas id="barChart" width="550px" height="275px"></canvas>
               </div>
             </div>
             <div class="fundo-grafico">
-              <div class="grafico-pizza">
-                <canvas id="pieChart"></canvas>
+              <div class="card" id="card" style="display: none">
+                <img
+                  src="/assets/alert.svg"
+                  alt="Imagem do Card"
+                  class="card-img"
+                />
+                <div class="card-content">
+                  <h2 class="card-title">Total de Alertas Mensal</h2>
+                  <p class="card-description"></p>
+                </div>
               </div>
             </div>
           </div>
