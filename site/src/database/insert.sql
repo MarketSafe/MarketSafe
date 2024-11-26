@@ -25,7 +25,8 @@ insert into filial (nome, fk_empresa, fk_endereco) values
 insert into totem (mac_address, fk_filial) values
   ("873c66420d5f", 1),
   ("abc123456789", 2),
-  ("def987654321", 3);
+  ("def987654321", 3),
+  ("123456789012", 4);
 
 insert into promocao (nome, fk_filial) values
   ('Carnes', 1),
