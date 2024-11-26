@@ -42,4 +42,14 @@ router.get("/atualizarMesEspecifico", function(req, res){
     const mes = req.query.mes;
     historicoLeoController.atualizarMesEspecifico(req, res, mes); 
 })
+
+router.get("/maisAlerta", function(req, res){
+    const mes = req.query.mes;
+    historicoLeoController.maisAlerta(req, res); 
+})
+
+router.get("/atualizarMaisAlerta", function(req, res){
+    const mes = req.query.mes;
+    historicoLeoController.atualizarMaisAlerta(req, res, mes); 
+})
 module.exports = router;
