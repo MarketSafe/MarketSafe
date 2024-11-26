@@ -277,8 +277,9 @@ body {
         }
 
         .fundo-status h2 {
-          font-size: x-larger;
+          font-size: 2em;
           font-weight: bold;
+          margin-bottom: 1.3em;
         }
 
         .engloba-status {
@@ -287,6 +288,8 @@ body {
           justify-content: space-evenly;
           gap: 3rem;
           flex-direction: row;
+          margin-left: 2em;
+          margin-bottom: 1em;
         }
 
         .status-box {
@@ -387,6 +390,7 @@ body {
           font-size: 2em;
           font-weight: bold;
           text-align: center;
+          margin-bottom: 2rem;
         }
 
         table {
@@ -513,21 +517,6 @@ body {
           }
         }
 
-        #grafico-performance .chart-status {
-          /* max- position: relative; importante */
-        }
-
-        #stackedBarChart {
-        }
-
-        /* .fundo-grafico-title-historico{
-          font-size: 1.5em;
-          
-          font-weight: bold;
-          
-          
-      } */
-
         .engloba-grafico-performance {
           background-color: var(--header-color);
           justify-content: space-between;
@@ -538,6 +527,50 @@ body {
 
           font-weight: bold;
         }
+
+
+        .card {
+          width: 400px;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.1);
+          background-color:  #575965;
+          display: flex;
+          flex-direction: column;
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+          transform: translateY(-10px); 
+        }
+        
+        .card-img {
+          margin-top: 3px;
+          margin-left: 16.5rem;
+          height: 40px;
+          object-fit: cover;
+        }
+        
+        .card-content {
+          padding: 20px;
+        }
+        
+        .card-title {
+          font-size: 22px;
+          font-weight: bold;
+          margin-bottom: 10px;
+          color: black;
+        }
+        
+        .card-description {
+          font-size: 20px;
+          color: white;
+          margin-bottom: 20px;
+          border: 3px solid white;
+          padding: 4px;
+          margin: 2px;
+        }
+        
       }
     }
   }
