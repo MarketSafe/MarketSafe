@@ -198,6 +198,55 @@ function atualizarMaisAlerta(mes) {
     return database.executar(instrucaoSql);
 }
 
+function alertaSemana() {
+    console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function alertaSemana():");
+
+    var instrucaoSql =
+        `
+    SELECT 
+    DATE_FORMAT(data_hora, '%d/%m') AS dia_mes,
+    COUNT(*) AS total_alertas
+    FROM 
+    alerta
+    WHERE 
+    MONTH(data_hora) = 10
+    AND YEAR(data_hora) = 2024
+    GROUP BY 
+    DATE_FORMAT(data_hora, '%d/%m')
+    ORDER BY 
+    total_alertas DESC
+    LIMIT 1;
+ `
+        ;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarAlertaSemana(mes) {
+    console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarAlertaSemana():");
+
+    var instrucaoSql =
+        `
+    SELECT 
+    DATE_FORMAT(data_hora, '%d/%m') AS dia_mes,
+    COUNT(*) AS total_alertas
+    FROM 
+    alerta
+    WHERE 
+    MONTH(data_hora) = ${mes}
+    AND YEAR(data_hora) = 2024
+    GROUP BY 
+    DATE_FORMAT(data_hora, '%d/%m')
+    ORDER BY 
+    total_alertas DESC
+    LIMIT 1;
+ `
+        ;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
     cadastrarMes,
     cadastrarDia,
@@ -208,5 +257,7 @@ module.exports = {
     atualizarMesEspecifico,
     atualizarMesTaxa,
     maisAlerta,
-    atualizarMaisAlerta
+    atualizarMaisAlerta,
+    alertaSemana,
+    atualizarAlertaSemana
 };

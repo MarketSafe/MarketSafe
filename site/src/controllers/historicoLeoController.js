@@ -90,6 +90,24 @@ function atualizarMaisAlerta(req, res, mes) {
         })
 }
 
+function alertaSemana(req, res) {
+    historicoLeoModel.alertaSemana()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function atualizarAlertaSemana(req, res, mes) {
+    historicoLeoModel.atualizarAlertaSemana(mes)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
 module.exports = {
     cadastrarMes,
     cadastrarDia,
@@ -100,5 +118,7 @@ module.exports = {
     atualizarMesEspecifico,
     atualizarMesRanking,
     maisAlerta,
-    atualizarMaisAlerta
+    atualizarMaisAlerta,
+    alertaSemana,
+    atualizarAlertaSemana
   }

@@ -44,12 +44,20 @@ router.get("/atualizarMesEspecifico", function(req, res){
 })
 
 router.get("/maisAlerta", function(req, res){
-    const mes = req.query.mes;
     historicoLeoController.maisAlerta(req, res); 
 })
 
 router.get("/atualizarMaisAlerta", function(req, res){
     const mes = req.query.mes;
     historicoLeoController.atualizarMaisAlerta(req, res, mes); 
+})
+
+router.get("/alertaSemana", function(req, res){
+    historicoLeoController.alertaSemana(req, res); 
+})
+
+router.get("/atualizarAlertaSemana", function(req, res){
+    const mes = req.query.mes;
+    historicoLeoController.atualizarAlertaSemana(req, res, mes); 
 })
 module.exports = router;

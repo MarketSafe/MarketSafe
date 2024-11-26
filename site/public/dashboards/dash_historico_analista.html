@@ -94,10 +94,10 @@
                     </div>
                     <div class="media">
                         <div class="texto">
-                            <p>Média de horário com mais movimento</p>
+                            <p>Dia da semana com mais alertas</p>
                         </div>
                         <div class="hora">
-                            <p></p>
+                            <p id="AlertaSemana"></p>
                         </div>
                     </div>
                     <div class="media">
@@ -579,6 +579,34 @@
     }
 
 
+    function alertaSemana(mes) {
+        const AlertaSemana = document.getElementById("AlertaSemana");
+        if (!AlertaSemana) {
+            console.error("Elemento 'AlertaSemana' não encontrado.");
+            return;
+        }
+
+    fetch(`/historicoLeo/alertaSemana`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (dados) {
+                dados.forEach((dado) => {
+                    AlertaSemana.innerHTML = `${dado.dia_mes}`;
+                });
+            })
+            .catch(function (erro) {
+                console.error("Erro ao buscar alertas:", erro);
+            });
+}
 
 
     select_mes.addEventListener("change", atualizarRankingDia);
@@ -650,6 +678,25 @@
             .then(function (mesAtualizado) {
                 console.log("Mês atualizado:", mesAtualizado);
                 maisAlerta(mesAtualizado);
+                console.log(mesAtualizado)
+            })
+            .catch(function (erro) {
+                alert("Erro ao buscar alertas");
+                console.error("Erro ao carregar dados:", erro);
+            });
+
+            fetch(`/historicoLeo/atualizarAlertaSemana?mes=${mes}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (mesAtualizado) {
+                console.log("Mês atualizado:", mesAtualizado);
+                alertaSemana(mesAtualizado);
                 console.log(mesAtualizado)
             })
             .catch(function (erro) {
