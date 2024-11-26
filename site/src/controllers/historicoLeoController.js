@@ -4,7 +4,7 @@ function cadastrarMes(req, res) {
     historicoLeoModel.cadastrarMes()
         .then(resultado => {
             if (resultado.length > 0) {
-                res.json(resultado);
+                res.status(200).json(resultado);
             } 
         })
 }
@@ -108,6 +108,25 @@ function atualizarAlertaSemana(req, res, mes) {
         })
 }
 
+function mediaHorario(req, res) {
+    historicoLeoModel.mediaHorario()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function atualizarMediaHorario(req, res, mes) {
+    console.log(req.query)
+    historicoLeoModel.atualizarMediaHorario(mes)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
 module.exports = {
     cadastrarMes,
     cadastrarDia,
@@ -120,5 +139,7 @@ module.exports = {
     maisAlerta,
     atualizarMaisAlerta,
     alertaSemana,
-    atualizarAlertaSemana
+    atualizarAlertaSemana,
+    mediaHorario,
+    atualizarMediaHorario
   }
