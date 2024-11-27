@@ -54,25 +54,86 @@ function alertasMensal(fk_filial, mes) {
     join alerta a on a.fk_totem = t.id
     where f.id = ${fk_filial} and date_format(a.data_hora, '%Y-%m') = '${mes}') as s group by date_format(data_hora, "%w");
     `;
-  //    console.log(instrucaoSql)
+  //    // console.log(instrucaoSql)
 
   return database.executar(instrucaoSql);
 }
 
 function statusFiliaisHistorico(mes) {
   // declara a variável de instrução sql:
-  const instrucao = `select status, sum(semana_1) as semana_1, sum(semana_2) as semana_2, sum(semana_3) as semana_3, sum(semana_4) as semana_4
-  from (select f.id,CASE WHEN COUNT(a.id) > 40 THEN 'critico' WHEN COUNT(a.id) > 0 AND COUNT(a.id) <= 40 THEN 'atencao' ELSE 'normal'
-  END AS status, CASE WHEN sum(CASE WHEN DAY(a.data_hora) <= 7 THEN 1 ELSE 0 END) > 0 THEN 1 ELSE 0 END AS semana_1,
-  CASE WHEN sum(CASE WHEN DAY(a.data_hora) BETWEEN 8 AND 14 THEN 1 ELSE 0 END) > 0 THEN 1 ELSE 0 END AS semana_2,
-  CASE WHEN sum(CASE WHEN DAY(a.data_hora) BETWEEN 15 AND 21 THEN 1 ELSE 0 END) > 0 THEN 1 ELSE 0 END AS semana_3,
- CASE WHEN sum(CASE WHEN DAY(a.data_hora) >= 22 THEN 1 ELSE 0 END) > 0 THEN 1 ELSE 0 END AS semana_4
-    from filial f LEFT JOIN totem t ON f.id = t.fk_filial LEFT JOIN alerta a ON t.id = a.fk_totem 
-    AND DATE_FORMAT(a.data_hora, '%Y-%m') = '${mes}' GROUP BY f.id) AS s GROUP BY status;`;
+  const instrucao = `SELECT
+    filial_id,
+    CASE
+        WHEN semana_1 = 0 THEN 'normal'
+        WHEN semana_1 = 1 THEN 'critico'
+        ELSE 'atencao'
+    END AS semana_1_status,
+    CASE
+        WHEN semana_2 = 0 THEN 'normal'
+        WHEN semana_2 = 1 THEN 'critico'
+        ELSE 'atencao'
+    END AS semana_2_status,
+    CASE
+        WHEN semana_3 = 0 THEN 'normal'
+        WHEN semana_3 = 1 THEN 'critico'
+        ELSE 'atencao'
+    END AS semana_3_status,
+    CASE
+        WHEN semana_4 = 0 THEN 'normal'
+        WHEN semana_4 = 1 THEN 'critico'
+        ELSE 'atencao'
+    END AS semana_4_status
+FROM (
+    SELECT
+        f.id AS filial_id,
+        CASE
+            WHEN SUM(CASE WHEN DAY(ta.data_hora) <= 7 THEN 1 ELSE 0 END) > 0 THEN 1
+            ELSE 0
+        END AS semana_1,
+        CASE
+            WHEN SUM(CASE WHEN DAY(ta.data_hora) BETWEEN 8 AND 14 THEN 1 ELSE 0 END) > 0 THEN 1
+            ELSE 0
+        END AS semana_2,
+        CASE
+            WHEN SUM(CASE WHEN DAY(ta.data_hora) BETWEEN 15 AND 21 THEN 1 ELSE 0 END) > 0 THEN 1
+            ELSE 0
+        END AS semana_3,
+        CASE
+            WHEN SUM(CASE WHEN DAY(ta.data_hora) >= 22 THEN 1 ELSE 0 END) > 0 THEN 1
+            ELSE 0
+        END AS semana_4
+    FROM filial f
+    LEFT JOIN (
+        SELECT
+            t.fk_filial,
+            a.data_hora
+        FROM totem t
+        LEFT JOIN alerta a ON t.id = a.fk_totem
+    ) ta ON f.id = ta.fk_filial
+    AND DATE_FORMAT(ta.data_hora, '%Y-%m') = '${mes}'
+    GROUP BY f.id
+) AS result;`;
   // declara a variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
   return resultado;
+}
+
+function cardQtdAlerta(fk_filial, mes) {
+  const instrucaoSql = `
+   SELECT
+    f.nome AS filial_nome,
+    COUNT(a.id) AS qtd_alertas
+FROM filial f
+LEFT JOIN totem t ON f.id = t.fk_filial
+LEFT JOIN alerta a ON t.id = a.fk_totem
+WHERE DATE_FORMAT(a.data_hora, '%Y-%m') = '${mes}'
+AND f.id = ${fk_filial}  
+GROUP BY f.id;
+    `;
+  //    // console.log(instrucaoSql)
+
+  return database.executar(instrucaoSql);
 }
 
 module.exports = {
@@ -82,4 +143,5 @@ module.exports = {
   statusFiliais,
   alertasMensal,
   statusFiliaisHistorico,
+  cardQtdAlerta,
 };

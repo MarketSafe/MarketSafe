@@ -20,7 +20,7 @@
     <div class="container">
         <div class="menu">
             <div class="div_logo">
-                <img src="../public/assets/img/Logo Self 2.png" alt="">
+                <img src="assets/img/Logo Self 2.png" alt="">
                 <div class="MKTS">
                     <h1>MKTS</h1>
                 </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="perfil">
                 <div class="foto_perfil">
-                    <img src="../public/css/foto-anilista.jpg" alt="">
+                    <img src="css/foto-anilista.jpg" alt="">
                 </div>
                 <div class="nome_perfil">
                     <div class="nome">
@@ -74,25 +74,25 @@
             <div class="bloco_monitoramento">
                 <div class="bloco1">
                     <span class="span_bloco_monitoramento">Status</span>
-                    <div class="status">
-                        Normal
+                    <div id="status" class="status">
+                        Alerta
                     </div>
                 </div>
                 <div class="bloco2">
                     <span class="span_bloco_monitoramento">RAM</span>
-                    <div class="ram">
+                    <div id="ram" class="ram">
                         85%
                     </div>
                 </div>
                 <div class="bloco3">
                     <span class="span_bloco_monitoramento">Atividade</span>
-                    <div class="tempo_ativo">
+                    <div id="tempo_ativo" class="tempo_ativo">
                         03:27:30
                     </div>
                 </div>
                 <div class="bloco4">
                     <span class="span_bloco_monitoramento">Recomendado</span>
-                    <div class="recomendado">
+                    <div id="recomendado" class="recomendado">
                         Reiniciar
                     </div>
                 </div>
@@ -126,23 +126,6 @@
 
 <script>
 
-    let dataSeries = [
-        { x: 0, y: Math.random() * 35 },
-        { x: 1, y: Math.random() * 35 },
-        { x: 2, y: Math.random() * 35 }
-    ];
-    let tempo = 3;
-
-    function TesteGrafico() {
-        var valorAleatorio = Math.random() * 60;
-        var DtAleatorio = parseFloat(valorAleatorio.toFixed(1));
-        dataSeries.push({ x: tempo, y: DtAleatorio });
-        tempo += 1;
-
-        if (dataSeries.length > 60) {
-            dataSeries.shift();
-        }
-    }
 
     // Configurações do gráfico ApexCharts
     var options = {
@@ -163,7 +146,7 @@
                     enabled: true,
                     delay: 5050
                 },
-                dynamicAnimation:{
+                dynamicAnimation: {
                     enabled: true,
                     speed: 350
                 }
@@ -196,7 +179,7 @@
         xaxis: {
             title: {
                 text: 'Captura dos Ultimos 60 segundos',
-                style:{
+                style: {
                     color: '#ffff',
                     fontSize: '15px',
                     fontFamily: 'Abel',
@@ -210,41 +193,36 @@
             }
         },
         yaxis: {
-        min: 0,
-        max: 100,
-        labels: {
-          formatter: function(value) {
-            if (value === 100) return 'Max - 100%';
-            if (value === 0) return 'Min - 0%';
-            return value + '%';
-          },
-          style: {
-            colors: '#ffffff',
-            fontSize: '12px',
-            fontFamily: 'Abel',
-            marginLeft: '15px'
-          },
-          offsetX: +5
-        }
-      },
-      title: {
-          text: '% em Uso',
-          style: {
-            color: '#ffffff',
-            fontSize: '20px',
-            fontFamily: 'Abel',
-          },
-          offsetX: +78
+            min: 0,
+            max: 100,
+            labels: {
+                formatter: function (value) {
+                    if (value === 100) return 'Max - 100%';
+                    if (value === 0) return 'Min - 0%';
+                    return value + '%';
+                },
+                style: {
+                    colors: '#ffffff',
+                    fontSize: '12px',
+                    fontFamily: 'Abel',
+                    marginLeft: '15px'
+                },
+                offsetX: +5
+            }
+        },
+        title: {
+            text: '% em Uso',
+            style: {
+                color: '#ffffff',
+                fontSize: '20px',
+                fontFamily: 'Abel',
+            },
+            offsetX: +78
         }
     };
 
     var chart = new ApexCharts(document.querySelector("#chart-timeline"), options);
     chart.render();
-
-    setInterval(() => {
-        TesteGrafico();
-        chart.updateSeries([{ data: [...dataSeries] }]);
-    }, 1000);
 
 
     //-------------- Alertas -----------------//
@@ -263,18 +241,119 @@
         if (down) {
             box.style.height = '0px';
             box.style.opacity = 0;
-            box.classList.remove('open'); 
+            box.classList.remove('open');
             down = false;
         } else {
             box.style.height = '510px';
             box.style.opacity = 1;
             setTimeout(function () {
-                box.classList.add('open'); 
+                box.classList.add('open');
             }, 300);
             down = true;
         }
 
     }
+
+    // --------- CPU do Totem 3 ------------//
+
+    var dataSeries = [];
+    var dataSeries2 = [];
+    var tempo = 0;
+
+    function Atualizar_ValorT3() {
+        fetch("/monitoramento/AtualizarValorT3",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT3);
+                    dataSeries.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries); 
+
+                    if (dataSeries.length > 35) {
+                        dataSeries.shift();
+                    }
+
+                    chart.updateSeries([
+                        { name: 'T3', data: dataSeries }
+                    ]);
+
+                }
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorT3, 1000);
+
+    // --------- Ram do Totem 3 ------------//
+
+    function Atualizar_ValorRamT3() {
+        fetch("/monitoramento/AtualizarValorRamT3",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT3);
+                    dataSeries2.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries6); 
+
+                    if (dataSeries2.length > 5) {
+                        dataSeries2.shift();
+                    }
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorRamT3, 1000);
+
+    //-------------- Vetores -----------------//
+
+    var VetorRamT3 = [];
+
+    function Atualizar_Vetores() {
+        if (dataSeries2.length > 0) {
+            const ultimoValorRamT3 = Math.round(dataSeries2[dataSeries2.length - 1].y);
+            VetorRamT3 = [ultimoValorRamT3];
+        }
+    }
+
+    function Atualizar_Dough1() {
+
+        Atualizar_Vetores();
+        const valorRAM = VetorRamT3[0] || 0;
+
+        ram.innerHTML = `${valorRAM}%`;
+        console.log(VetorRamT3)
+    }
+    setInterval(Atualizar_Dough1, 1000);
+
+
+    //--------------------------------------------------------//
 
     function notificacao(msg) {
 
@@ -304,6 +383,93 @@
     }
 
 
+    function alterarCorDiv() {
+        const div = document.getElementById('status');
+        const texto = div.textContent.trim();
 
+        let cor;
+        switch (texto) {
+            case 'Normal':
+                cor = 'green';
+                break;
+            case 'Alerta':
+                cor = '#b3b012';
+                div.style.color = 'white';
+                break;
+            case 'Crítico':
+                cor = 'red';
+                break;
+            default:
+                cor = 'gray';
+        }
+
+        div.style.backgroundColor = cor;
+    }
+    setInterval(alterarCorDiv, 1000);
+
+    function alterarCorDiv() {
+        const status = document.getElementById('status');
+        const ram = document.getElementById('ram');
+        const recomendado = document.getElementById('recomendado');
+        const texto = status.textContent.trim();
+
+
+        // Ta mudando a cor da div misera, vambora //
+        if (VetorRamT3[VetorRamT3.length - 1] >= 90) {
+            status.textContent = "Crítico"
+            console.log("chegou aqui")
+        }
+        else if (VetorRamT3[VetorRamT3.length - 1] >= 75 &&
+            VetorRamT3[VetorRamT3.length - 1] < 90) {
+            status.textContent = "Alerta"
+        }
+        else {
+            status.textContent = "Normal"
+        }
+
+
+        if (VetorRamT3[VetorRamT3.length - 1] >= 90) {
+            ram.style.backgroundColor = "#990000"
+        }
+        else if (VetorRamT3[VetorRamT3.length - 1] < 90 &&
+                    VetorRamT3[VetorRamT3.length - 1] >= 80) {
+            ram.style.backgroundColor = "#FF8C00"
+        }
+        else if (VetorRamT3[VetorRamT3.length - 1] < 80 &&
+                    VetorRamT3[VetorRamT3.length - 1] >= 65) {
+            ram.style.backgroundColor = "#FFD700"
+        }
+        else if (VetorRamT3[VetorRamT3.length - 1] < 65 &&
+                    VetorRamT3[VetorRamT3.length - 1] >= 50) {
+            ram.style.backgroundColor = "#bdeb00"
+        }
+        else if (VetorRamT3[VetorRamT3.length - 1] < 50 &&
+                    VetorRamT3[VetorRamT3.length - 1] >= 40) {
+            ram.style.backgroundColor = "#7CFC00"
+        }
+        else if (VetorRamT3[VetorRamT3.length - 1] < 40) {
+            ram.style.backgroundColor = "#27e600"
+        }
+
+
+        let cor;
+        switch (texto) {
+            case 'Normal':
+                cor = '#089900';
+                break;
+            case 'Alerta':
+                cor = '#FFCF00';
+                status.style.color = 'white';
+                break;
+            case 'Crítico':
+                cor = '#990000';
+                break;
+            default:
+                cor = 'gray';
+        }
+
+        status.style.backgroundColor = cor;
+    }
+    setInterval(alterarCorDiv, 1000);
 
 </script>

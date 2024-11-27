@@ -4,27 +4,70 @@
 //   importa o arquivo `benchmarkGerenteModel.js`:
 const benchmarkGerenteModel = require("../../models/dashboards/benchmarkGerenteModel.js");
 
-// declara a função `estadoFiliais` do arquivo `benchmarkGerenteController.js`:
-async function estadoFiliais(req, res) {
-  // define as variáveis populadas:
-  const funcionarioAutenticado = req.body.funcionarioAutenticado;
-  // caso o cargo do funcionário seja "gerente":
-  if (funcionarioAutenticado.cargo === "gerente") {
-    // envia para a função `estadoFiliais` do arquivo `benchmarkGerenteModel.js`:
+async function tryResposta(res, func) {
+  try {
+    // executa a função passada pela variável `func` com os `parametros` recebidos:
+    const resposta = await func();
     try {
-      const resultado = benchmarkGerenteModel.estadoFiliais(funcionarioAutenticado.fk_empresa);
-      // retorna a resposta com status 200 (sucesso) em json contendo as filiais da empresa do usuário autenticado:
-      res.status(200).json(resultado);
-    } 
-    // em caso de erro no servidor:
-    catch(erro) {
-      console.log("Erro no servidor:", erro);
-      // retorna o erro com o status 500 (erro de servidor):
-      res.status(500).json({ erro: erro.sqlMessage });
+      // caso o res não tenha sido enviado:
+      return res.status(200).end();
+    } catch (err) {
+      // caso o res já tenha sido enviado:
+      return resposta;
     }
-  } else {
-    res.status(403).json({ erro: "Acesso negado" }); // retorna a resposta com status 403 (Proibido) para o cliente da requisição
+  } catch (erro) {
+    // em caso de erro na `func`
+    console.log("Erro no servidor:", erro);
+    try {
+      // caso o res não tenha sido enviado:
+      return res.status(500).json({ erro }); // status 500 (Erro de servidor)
+    } catch (err) {
+      // caso o res já tenha sido enviado:
+      return erro;
+    }
   }
+}
+
+// declara a função `authGerente` para autenticar se o usuário é um gerente:
+async function authGerente(req, res, next) {
+  // caso o cargo do funcionário seja "gerente":
+  if (req.body.funcionarioAutenticado.cargo === "gerente") {
+    // executa e retorna a função passada pela variável `next`:
+    return await next();
+  }
+
+  // retorna "Acesso negado." para o para o cliente da requisição:
+  res.status(403).json({ erro: "Acesso negado." }); // status 403 (Proibido)
+  throw new Error("Acesso negado."); // para a execução das demais funções
+}
+
+// declara a função `getFromModel` para retornar um resultado de um model:
+async function getFromModel(res, func, parametros) {
+  try {
+    // executa a função passada pela variável `func` com os `parametros` recebidos:
+    return await func(...parametros);
+  } catch (erro) {
+    // retorna o erro:
+    res.status(500).json({ erro: "Erro ao pegar dados do banco de dados." }); // status 500 (Erro de servidor)
+    throw erro; // para a execução das demais funções
+  }
+}
+
+// declara a função `sendRespostaFromModel` para enviar o resultado para o client:
+async function sendRespostaFromModel(req, res, func, parametros) {
+  tryResposta(res, async () => {
+    return await authGerente(req, res, async () => {
+      // chama a função `getFromModel` com os parâmetros recebidos:
+      const resultado = await getFromModel(res, func, parametros);
+      // retorna o resultado para o para o cliente da requisição:
+      return res.status(200).json(resultado);
+    });
+  });
+}
+
+// declara a função `estadoFiliais`:
+async function estadoFiliais(req, res) {
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.estadoFiliais, [req.body.funcionarioAutenticado.fk_empresa]);
 }
 
 // exporta as funções do arquivo `benchmarkGerenteController.js`:

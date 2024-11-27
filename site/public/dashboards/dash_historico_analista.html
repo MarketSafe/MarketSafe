@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
-<body>
+<body onload="carregarBody()">
     <div class="container">
         <div class="menu">
             <div class="div_logo">
@@ -89,7 +89,15 @@
                             <p>Horário com maior número de alertas</p>
                         </div>
                         <div class="hora">
-                            <p></p>
+                            <p id="MaisAlerta"></p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="texto">
+                            <p>Dia da semana com mais alertas</p>
+                        </div>
+                        <div class="hora">
+                            <p id="AlertaSemana"></p>
                         </div>
                     </div>
                     <div class="media">
@@ -97,15 +105,7 @@
                             <p>Média de horário com mais movimento</p>
                         </div>
                         <div class="hora">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="texto">
-                            <p>Média de horário com mais movimento</p>
-                        </div>
-                        <div class="hora">
-                            <p></p>
+                            <p id="MediaHorario"></p>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
 
 <script>
 
-    function alterarGrafico() {
+function alterarGrafico() {
         var selectTaxa = select_grafico.value;
 
         const grafico2 = document.getElementsByClassName('grafico2')[0];
@@ -158,33 +158,40 @@
         }
     }
 
+    function carregarBody(){
     cadastrarMes();
-    function cadastrarMes() {
-        fetch("/historicoLeo/cadastrarMes", {
+    async function cadastrarMes() {
+        const resposta = await fetch("/historicoLeo/cadastrarMes", {
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
         })
-            .then(function (resposta) {
-                console.log(resposta)
-                return resposta.json();
-            })
-            .then(function (meses) {
-                console.log(meses)
-                var select_mes = document.getElementById('select_mes');
-                meses.forEach((mes) => {
-                    select_mes.innerHTML += `<option value="${mes.mes}">${mes.mes}</option>`;
-                    atualizarRankingDia()
-                });
-            })
-            .catch(function (erro) {
-                alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
+        .then(function (resposta) {
+            // console.log(resposta.headers)
+            return resposta.json();
+        })
+        .then(function (meses) {
+            console.log(meses)
+            var select_mes = document.getElementById('select_mes');
+            meses.forEach((mes) => {
+                select_mes.innerHTML += `<option value="${mes.mes}">${mes.mes}</option>`;
             });
+            // atualizarRankingDia()
+        })
+        .catch(function (erro) {
+            alert(erro);
+            console.log("Erro ao carregar linhas:", erro);
+        });
     }
 
 
     function cadastrarDia() {
         fetch("/historicoLeo/cadastrarDia", {
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
         })
             .then(function (resposta) {
                 return resposta.json();
@@ -197,7 +204,7 @@
             })
             .catch(function (erro) {
                 alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
+                //console.log("Erro ao carregar linhas:", erro);
             });
     }
 
@@ -207,7 +214,7 @@
         const totem = ranking.map(item => item.totem)
         const idTotem = ranking.map(item => item.idTotem)
         const total_alertas = ranking.map(item => item.total_alertas)
-        console.log(total_alertas)
+        //console.log(total_alertas)
         var options = {
             series: [{
                 name: "Total de alertas do totem",
@@ -292,14 +299,19 @@
         })
             .then(resposta => resposta.json())
             .then(ranking => {
-                console.log(ranking)
+                //console.log(ranking)
                 cadastrarRanking(ranking);
             }
             )
+            .catch(function (erro) {
+                alert(erro);
+                //console.log("Erro ao carregar linhas:", erro);
+            });
     }
     buscarDadosRanking()
 
     function cadastrarTaxa(taxa) {
+        console.log(taxa)
         const dia = taxa.map(item => item.dia);
         const taxa_porcentagem = taxa.map(item => item.taxa_porcentagem);
 
@@ -416,6 +428,10 @@
                 cadastrarTaxa(taxa);
             }
             )
+            .catch(function (erro) {
+                alert(erro);
+                //console.log("Erro ao carregar linhas:", erro);
+            });
     }
     buscarDadosTaxa()
 
@@ -423,7 +439,7 @@
         var hora;
         // Ordena o array com base na propriedade "hora" (numérica)
         especifico.sort((a, b) => a.hora - b.hora);
-        console.log(especifico);
+        //console.log(especifico);
         // Mapeia as horas para formato ISO
         const horaMomento = especifico.map(item => {
             hora = new Date();
@@ -433,9 +449,9 @@
             hora.setMilliseconds(0); // Garante que os milissegundos sejam 0
             return hora.toISOString();
         });
-        console.log(especifico);
-        console.log(hora);
-        console.log(horaMomento);
+        //console.log(especifico);
+        //console.log(hora);
+        //console.log(horaMomento);
 
         // Extrai os valores de total_alertas para criar o gráfico
         const total_alertas = especifico.map(item => item.total_alertas);
@@ -539,7 +555,7 @@
         })
             .then(resposta => resposta.json())
             .then(especifico => {
-                console.log('Resposta recebida:', especifico);
+                //console.log('Resposta recebida:', especifico);
                 cadastrarHora(especifico);
             })
             .catch(erro => {
@@ -549,10 +565,94 @@
     };
     buscarDadosHora();
 
+    function maisAlerta(mes) {
+        const MaisAlerta = document.getElementById("MaisAlerta");
+        if (!MaisAlerta) {
+            console.error("Elemento 'MaisAlerta' não encontrado.");
+            return;
+        }
+
+        fetch(`/historicoLeo/maisAlerta`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (dados) {
+                dados.forEach((dado) => {
+                    MaisAlerta.innerHTML = `${dado.hora}:00`;
+                });
+            })
+            .catch(function (erro) {
+                console.error("Erro ao buscar alertas:", erro);
+            });
+    }
 
 
-    select_mes.addEventListener("change", atualizarRankingDia);
-    select_dia.addEventListener("change", atualizarRankingDia);
+    function alertaSemana(mes) {
+        const AlertaSemana = document.getElementById("AlertaSemana");
+        if (!AlertaSemana) {
+            console.error("Elemento 'AlertaSemana' não encontrado.");
+            return;
+        }
+
+        fetch(`/historicoLeo/alertaSemana`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (dados) {
+                dados.forEach((dado) => {
+                    AlertaSemana.innerHTML = `${dado.dia_mes}`;
+                });
+            })
+            .catch(function (erro) {
+                console.error("Erro ao buscar alertas:", erro);
+            });
+    }
+
+    function mediaHorario(mes) {
+        const MediaHorario = document.getElementById("MediaHorario");
+        if (!MediaHorario) {
+            console.error("Elemento 'MediaHorario' não encontrado.");
+            return;
+        }
+
+        MediaHorario.innerHTML = `${mes[0].hora_alerta}:00`;
+        fetch(`/historicoLeo/mediaHorario`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (dados) {
+                dados.forEach((dado) => {
+                    MediaHorario.innerHTML = `${dado.hora_alerta}:00`;
+                });
+            })
+            .catch(function (erro) {
+                console.error("Erro ao buscar alertas:", erro);
+            });
+    }
 
     function atualizarRankingDia() {
         var selectMes = document.getElementById("select_mes");
@@ -560,8 +660,8 @@
 
         var mes = Number(selectMes.value);
         var dia = Number(selectDia.value);
-        console.log("Mês selecionado: ", mes);
-        console.log("Dia selecionado: ", dia);
+        //console.log("Mês selecionado: ", mes);
+        //console.log("Dia selecionado: ", dia);
 
         fetch(`/historicoLeo/atualizarMesRanking?mes=${mes}`, {
             method: "GET",
@@ -570,12 +670,12 @@
                 return resposta.json();
             })
             .then(function (ranking) {
-                console.log(ranking)
+                //console.log(ranking)
                 cadastrarRanking(ranking)
             })
             .catch(function (erro) {
                 alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
+                //console.log("Erro ao carregar linhas:", erro);
             });
 
         fetch(`/historicoLeo/atualizarMesTaxa?mes=${mes}`, {
@@ -590,7 +690,7 @@
             })
             .catch(function (erro) {
                 alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
+                //console.log("Erro ao carregar linhas:", erro);
             });
 
         fetch(`/historicoLeo/atualizarMesEspecifico?mes=${mes}`, {
@@ -600,14 +700,74 @@
                 return resposta.json();
             })
             .then(function (especifico) {
-                console.log(especifico)
+                //console.log(especifico)
                 cadastrarHora(especifico)
             })
             .catch(function (erro) {
                 alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
+                //console.log("Erro ao carregar linhas:", erro);
+            });
+
+        fetch(`/historicoLeo/atualizarMaisAlerta?mes=${mes}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (mesAtualizado) {
+                console.log("Mês atualizado:", mesAtualizado);
+                maisAlerta(mesAtualizado);
+                console.log(mesAtualizado)
+            })
+            .catch(function (erro) {
+                alert(erro);
+                //console.log("Erro ao carregar linhas:", erro);
+            });
+
+        fetch(`/historicoLeo/atualizarAlertaSemana?mes=${mes}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (mesAtualizado) {
+                //console.log("Mês atualizado:", mesAtualizado);
+                alertaSemana(mesAtualizado);
+                //console.log(mesAtualizado)
+            })
+            .catch(function (erro) {
+                alert(erro);
+                //console.log("Erro ao carregar linhas:", erro);
+            });
+
+        fetch(`/historicoLeo/atualizarMediaHorario?mes=${mes}`, {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                console.log(resposta.status)
+                if (!resposta.ok) {
+                    throw new Error(`Erro na resposta: ${resposta.status}`);
+                }
+                return resposta.json();
+            })
+            .then(function (mesAtualizado) {
+                // console.log("Mês atualizado:", mesAtualizado);
+                mediaHorario(mesAtualizado);
+                //console.log(mes)
+            })
+            .catch(function (erro) {
+                alert(erro);
+                //console.log("Erro ao carregar linhas:", erro);
             });
     }
+
     select_mes.addEventListener("change", atualizarRankingDia);
     select_dia.addEventListener("change", atualizarRankingDia);
+}
 </script>

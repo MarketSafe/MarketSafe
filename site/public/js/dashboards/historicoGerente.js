@@ -22,9 +22,12 @@ async function buscarPorFilial() {
     const filial = document.getElementById("filial").value;
 
     atualizarGrafico();
+    atualizarGraficoStatus();
+    cardQtdAlerta();
 
     document.getElementById("card-performance").style.display = "none";
     document.getElementById("grafico-performance").style.display = "block";
+    document.getElementById("card").style.display = "block";
     const response = await fetch(`/ranking/buscarPorFilial`, {
       method: "post",
       headers: {
@@ -168,19 +171,6 @@ async function statusFiliais() {
         card.querySelector(".status-numero").innerHTML = normal.length;
       }
     }
-
-    // [
-    //     "a",
-    //     "b",
-    //     "c",
-    // ]
-    // for (const x of cards) {
-    //     console.log(x);
-    // }
-    // for (let i = 0; i < cards.length; i++) {
-    //     const x = cards[i];
-    //     console.log(x);
-    // }
   } catch (error) {
     console.log("Erro ao carregar filiais:", error);
   }
@@ -288,126 +278,155 @@ async function atualizarGrafico(dados) {
   barChart.update();
 }
 
-const pieData = {
-  labels: ["Processador", "Memória Ram"],
-  datasets: [
-    {
-      data: [0, 0],
-      backgroundColor: ["rgb(155, 17, 30)", "rgb(5, 79, 119)"],
-      hoverOffset: 4,
-    },
-  ],
-};
-
-const pieConfig = {
-  type: "pie",
-  data: pieData,
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "right",
-        labels: {
-          font: {
-            size: 15,
-          },
-          color: "rgba(255, 255, 255, 0.90)",
-        },
-      },
-
-      datalabels: {
-        display: false,
-        formatter: (value, context) => {
-          const total = context.chart._metasets[context.datasetIndex].total;
-          const percentage = ((value / total) * 100).toFixed(2);
-          return `${percentage}%\n${value}`;
-        },
-        color: "#000",
-        font: {
-          size: 18,
-        },
-      },
-    },
-  },
-  plugins: [ChartDataLabels],
-};
-
-const pieChart = new Chart(document.getElementById("pieChart"), pieConfig);
-
 async function atualizarGraficoStatus() {
-  const response = await fetch("/ranking/statusFiliaisHistorico", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
-      senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
-      mes: document.getElementById("mes").value,
-    }),
-  });
+  try {
+    const response = await fetch("/ranking/statusFiliaisHistorico", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
+        mes: document.getElementById("mes").value,
+      }),
+    });
 
-  if (!response.ok) {
-    console.error("Erro na requisição:", response.statusText);
-    return;
-  }
-
-  const data = await response.json();
-
-  const labels = ["Semana 1", "Semana 2", "Semana 3", "Semana 4"];
-
-  const datasets = data.map((item) => {
-    let backgroundColor;
-
-    if (item.status === "critico") {
-      backgroundColor = "#ff4d4d";
-    } else if (item.status === "atencao") {
-      backgroundColor = "#ffcc00";
-    } else {
-      backgroundColor = "#99cc66";
+    if (!response.ok) {
+      console.error(
+        "Erro na requisição:",
+        response.status,
+        await response.text()
+      );
+      return;
     }
 
-    return {
-      label: item.status.charAt(0).toUpperCase() + item.status.slice(1),
-      data: [item.semana_1, item.semana_2, item.semana_3, item.semana_4],
-      backgroundColor: backgroundColor,
+    const data = await response.json();
+
+    const statusPorSemana = {
+      semana_1: { critico: 0, atencao: 0, normal: 0 },
+      semana_2: { critico: 0, atencao: 0, normal: 0 },
+      semana_3: { critico: 0, atencao: 0, normal: 0 },
+      semana_4: { critico: 0, atencao: 0, normal: 0 },
     };
-  });
 
-  const config = {
-    type: "bar",
-    data: {
-      labels: labels,
-      datasets: datasets,
-    },
-    options: {
-      responsive: false,
-      scales: {
-        x: {
-          stacked: true,
-          ticks: {
-            color: "rgba(255, 255, 255, 0.90)",
+    for (const filial of data) {
+      for (let i = 1; i <= 4; i++) {
+        const semanaStatus = filial[`semana_${i}_status`];
+        if (semanaStatus) {
+          statusPorSemana[`semana_${i}`][semanaStatus]++;
+        }
+      }
+    }
+
+    const datasets = [
+      {
+        label: "Crítico",
+        data: [
+          statusPorSemana.semana_1.critico,
+          statusPorSemana.semana_2.critico,
+          statusPorSemana.semana_3.critico,
+          statusPorSemana.semana_4.critico,
+        ],
+        backgroundColor: "#ff4d4d",
+      },
+      {
+        label: "Atenção",
+        data: [
+          statusPorSemana.semana_1.atencao,
+          statusPorSemana.semana_2.atencao,
+          statusPorSemana.semana_3.atencao,
+          statusPorSemana.semana_4.atencao,
+        ],
+        backgroundColor: "#ffcc00",
+      },
+      {
+        label: "Normal",
+        data: [
+          statusPorSemana.semana_1.normal,
+          statusPorSemana.semana_2.normal,
+          statusPorSemana.semana_3.normal,
+          statusPorSemana.semana_4.normal,
+        ],
+        backgroundColor: "#99cc66",
+      },
+    ];
+
+    const config = {
+      type: "bar",
+      data: {
+        labels: ["Semana 1", "Semana 2", "Semana 3", "Semana 4"],
+        datasets: datasets,
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            stacked: true,
+            ticks: {
+              color: "rgba(255, 255, 255, 0.90)",
+            },
+          },
+          y: {
+            stacked: true,
+            ticks: {
+              color: "rgba(255, 255, 255, 0.90)",
+            },
           },
         },
-        y: {
-          stacked: true,
-          ticks: {
-            color: "rgba(255, 255, 255, 0.90)",
+        plugins: {
+          legend: {
+            labels: {
+              color: "white",
+            },
           },
         },
       },
-      plugins: {
-        legend: {
-          labels: {
-            color: "white",
-          },
-        },
-      },
-    },
-  };
+    };
 
-  const ctx = document.getElementById("stackedBarChart").getContext("2d");
-  new Chart(ctx, config);
+    const ctx = document.getElementById("stackedBarChart").getContext("2d");
+    new Chart(ctx, config);
+  } catch (error) {
+    console.error("Erro ao atualizar o gráfico:", error);
+  }
+}
+
+async function cardQtdAlerta() {
+  try {
+    const response = await fetch(`/ranking/cardQtdAlerta`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
+        filial: document.getElementById("filial").value,
+        mes: document.getElementById("mes").value,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao buscar filiais");
+    }
+
+    const data = await response.json();  
+    
+    
+
+    if (data && data.length > 0) {
+      const qtdAlertas = data[0].qtd_alertas;  
+
+      
+      document.querySelector(".card-description").innerText = `${qtdAlertas}`;
+    } else {
+      document.querySelector(".card-description").innerText = "Nenhum alerta encontrado.";
+    }
+
+  } catch (error) {
+    console.log("Erro ao carregar alertas:", error);
+    document.querySelector(".card-description").innerText = "Erro ao carregar dados.";
+  }
 }
 
 
@@ -416,7 +435,7 @@ async function inicializarPagina() {
   await atualizarTabela();
   await buscarPorFilial();
   await statusFiliais();
-  await atualizarGraficoStatus();
+  
 }
 
 addEventListener("load", inicializarPagina);
