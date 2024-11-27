@@ -72,7 +72,7 @@ LEFT JOIN
 GROUP BY 
     dias_mes.dia;`;
 
-    console.log(instrucao);
+    // console.log(instrucao);
 
 
   // declaração da variável de resultado da execução:
