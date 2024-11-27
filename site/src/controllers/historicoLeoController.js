@@ -31,7 +31,7 @@ function cadastrarTaxa(req, res) {
     historicoLeoModel.cadastrarTaxa()
         .then(resultado => {
             if (resultado.length > 0) {
-                res.json(resultado);
+                res.status(200).json(resultado);
             } 
         })
 }
@@ -118,7 +118,7 @@ function mediaHorario(req, res) {
 }
 
 function atualizarMediaHorario(req, res, mes) {
-    console.log(req.query)
+    // console.log(req.query)
     historicoLeoModel.atualizarMediaHorario(mes)
         .then(resultado => {
             if (resultado.length > 0) {

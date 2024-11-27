@@ -3,7 +3,7 @@ var database = require("../database/config");
 // ----------- CPU do Totem 1 ---------------- //
 
 function Atualizar_ValorT1() {
-    console.log("Executando a função Atualizar_ValorT1");
+    // console.log("Executando a função Atualizar_ValorT1");
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT1
@@ -11,7 +11,7 @@ function Atualizar_ValorT1() {
         WHERE id = 1
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -19,7 +19,7 @@ function Atualizar_ValorT1() {
 // ----------- CPU do Totem 2 ---------------- //
 
 function Atualizar_ValorT2() {
-    console.log("Executando a função Atualizar_ValorT2");
+    // console.log("Executando a função Atualizar_ValorT2");
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT2
@@ -27,7 +27,7 @@ function Atualizar_ValorT2() {
         WHERE id = 2
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -35,7 +35,7 @@ function Atualizar_ValorT2() {
 // ----------- CPU do Totem 3 ---------------- //
 
 function Atualizar_ValorT3() {
-    console.log("Executando a função Atualizar_ValorT3");
+    // console.log("Executando a função Atualizar_ValorT3");
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT3
@@ -43,7 +43,7 @@ function Atualizar_ValorT3() {
         WHERE id = 3
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -51,7 +51,7 @@ function Atualizar_ValorT3() {
 // ----------- CPU do Totem 4 ---------------- //
 
 function Atualizar_ValorT4() {
-    console.log("Executando a função Atualizar_ValorT4");
+    // console.log("Executando a função Atualizar_ValorT4");
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT4
@@ -59,7 +59,7 @@ function Atualizar_ValorT4() {
         WHERE id = 4
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -67,7 +67,7 @@ function Atualizar_ValorT4() {
 // ----------- CPU do Totem 5 ---------------- //
 
 function Atualizar_ValorT5() {
-    console.log("Executando a função Atualizar_ValorT5");
+    // console.log("Executando a função Atualizar_ValorT5");
 
     var instrucaoSql = `
         SELECT cpu_porcentagem as CpuT5
@@ -75,7 +75,7 @@ function Atualizar_ValorT5() {
         WHERE id = 5
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -83,7 +83,7 @@ function Atualizar_ValorT5() {
 // ----------- Ram do Totem 1 ---------------- //
 
 function Atualizar_ValorRamT1() {
-    console.log("Executando a função Atualizar_ValorRamT1");
+    // console.log("Executando a função Atualizar_ValorRamT1");
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT1
@@ -91,7 +91,7 @@ function Atualizar_ValorRamT1() {
         WHERE id = 1
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -99,7 +99,7 @@ function Atualizar_ValorRamT1() {
 // ----------- Ram do Totem 2 ---------------- //
 
 function Atualizar_ValorRamT2() {
-    console.log("Executando a função Atualizar_ValorRamT2");
+    // console.log("Executando a função Atualizar_ValorRamT2");
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT2
@@ -107,7 +107,7 @@ function Atualizar_ValorRamT2() {
         WHERE id = 2
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -115,7 +115,7 @@ function Atualizar_ValorRamT2() {
 // ----------- Ram do Totem 3 ---------------- //
 
 function Atualizar_ValorRamT3() {
-    console.log("Executando a função Atualizar_ValorRamT3");
+    // console.log("Executando a função Atualizar_ValorRamT3");
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT3
@@ -123,7 +123,7 @@ function Atualizar_ValorRamT3() {
         WHERE id = 3
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -131,7 +131,7 @@ function Atualizar_ValorRamT3() {
 // ----------- Ram do Totem 4 ---------------- //
 
 function Atualizar_ValorRamT4() {
-    console.log("Executando a função Atualizar_ValorRamT4");
+    // console.log("Executando a função Atualizar_ValorRamT4");
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT4
@@ -139,7 +139,7 @@ function Atualizar_ValorRamT4() {
         WHERE id = 4
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }
@@ -147,7 +147,7 @@ function Atualizar_ValorRamT4() {
 // ----------- Ram do Totem 5 ---------------- //
 
 function Atualizar_ValorRamT5() {
-    console.log("Executando a função Atualizar_ValorRamT5");
+    // console.log("Executando a função Atualizar_ValorRamT5");
 
     var instrucaoSql = `
         SELECT ram_porcentagem as RamT5
@@ -155,7 +155,7 @@ function Atualizar_ValorRamT5() {
         WHERE id = 5
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
 }

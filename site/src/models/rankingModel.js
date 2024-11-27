@@ -54,7 +54,7 @@ function alertasMensal(fk_filial, mes) {
     join alerta a on a.fk_totem = t.id
     where f.id = ${fk_filial} and date_format(a.data_hora, '%Y-%m') = '${mes}') as s group by date_format(data_hora, "%w");
     `;
-  //    console.log(instrucaoSql)
+  //    // console.log(instrucaoSql)
 
   return database.executar(instrucaoSql);
 }
@@ -131,7 +131,7 @@ WHERE DATE_FORMAT(a.data_hora, '%Y-%m') = '${mes}'
 AND f.id = ${fk_filial}  
 GROUP BY f.id;
     `;
-  //    console.log(instrucaoSql)
+  //    // console.log(instrucaoSql)
 
   return database.executar(instrucaoSql);
 }
