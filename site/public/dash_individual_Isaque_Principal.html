@@ -85,13 +85,13 @@
             <div class="Fundo_Select_Totem">
                 <div class="Select_Totem" >
                     Monitorar Totem
-                    <select name="" id="">
+                    <select id="menu">
                         <option selected disabled value="0">Selecionar</option>
-                        <option value="1">Totem 1</option>
-                        <option value="2">Totem 2</option>
-                        <option value="3">Totem 3</option>
-                        <option value="4">Totem 4</option>
-                        <option value="5">Totem 5</option>
+                        <option value="dash_individual_Isaque_T1.html">Totem 1</option>
+                        <option value="dash_individual_Isaque_T2.html">Totem 2</option>
+                        <option value="dash_individual_Isaque_T3.html">Totem 3</option>
+                        <option value="dash_individual_Isaque_T4.html">Totem 4</option>
+                        <option value="dash_individual_Isaque_T5.html">Totem 5</option>
                     </select>
                 </div>
             </div>
@@ -176,11 +176,17 @@
     </div>
 
 </body>
-
 </html>
 
 <script>
 
+    //E num é que essa geringonça funcionou, KK
+    document.getElementById('menu').addEventListener('change', function () {
+        const selectedValue = this.value;
+        if (selectedValue !== "0") {
+            window.location.href = selectedValue; 
+        }
+    });
 
 
     //Gráfico 1
@@ -190,31 +196,6 @@
     var dataSeries3 = [];
     var dataSeries4 = [];
     var dataSeries5 = [];
-
-    // function TesteGrafico() {
-
-    //     var valorAleatorio1 = Math.random() * 75;
-    //     var valorAleatorio2 = Math.random() * 75;
-    //     var valorAleatorio3 = Math.random() * 75;
-    //     var valorAleatorio4 = Math.random() * 75;
-    //     var valorAleatorio5 = Math.random() * 75;
-
-    // //    dataSeries.push({ x: tempo, y: parseFloat(valorAleatorio1.toFixed(1)) });
-    //     dataSeries2.push({ x: tempo, y: parseFloat(valorAleatorio2.toFixed(1)) });
-    //     dataSeries3.push({ x: tempo, y: parseFloat(valorAleatorio3.toFixed(1)) });
-    //     dataSeries4.push({ x: tempo, y: parseFloat(valorAleatorio4.toFixed(1)) });
-    //     dataSeries5.push({ x: tempo, y: parseFloat(valorAleatorio5.toFixed(1)) });
-
-    //     tempo += 1;
-
-    //     if (dataSeries.length > 60) {
-    //         dataSeries.shift();
-    //         dataSeries2.shift();
-    //         dataSeries3.shift();
-    //         dataSeries4.shift();
-    //         dataSeries5.shift();
-    //     }
-    // }
 
 
     // Configurações do gráfico ApexCharts Gráfico 1
@@ -353,39 +334,8 @@
     var dataSeries9 = [];
     var dataSeries10 = [];
 
-    //Gráfico 2
 
-    // function TesteGrafico2() {
-
-    //     var valorAleatorio6 = Math.random() * 60;
-    //     var valorAleatorio7 = Math.random() * 60;
-    //     var valorAleatorio8 = Math.random() * 60;
-    //     var valorAleatorio9 = Math.random() * 60;
-    //     var valorAleatorio10 = Math.random() * 60;
-
-    //     var DtAleatorio6 = parseFloat(valorAleatorio6.toFixed(1));
-    //     var DtAleatorio7 = parseFloat(valorAleatorio7.toFixed(1));
-    //     var DtAleatorio8 = parseFloat(valorAleatorio8.toFixed(1));
-    //     var DtAleatorio9 = parseFloat(valorAleatorio9.toFixed(1));
-    //     var DtAleatorio10 = parseFloat(valorAleatorio10.toFixed(1));
-
-    //     dataSeries6.push({ x: tempo2, y: DtAleatorio6 });
-    //     dataSeries7.push({ x: tempo2, y: DtAleatorio7 });
-    //     dataSeries8.push({ x: tempo2, y: DtAleatorio8 });
-    //     dataSeries9.push({ x: tempo2, y: DtAleatorio9 });
-    //     dataSeries10.push({ x: tempo2, y: DtAleatorio10 });
-    //     tempo2 += 1;
-
-    //     if (dataSeries6.length > 15) {
-    //         dataSeries6.shift();
-    //         dataSeries7.shift();
-    //         dataSeries8.shift();
-    //         dataSeries9.shift();
-    //         dataSeries10.shift();
-    //     }
-    // }
-
-
+    // Gráfico 2
     // Configurações do gráfico ApexCharts Gráfico 2
     var options2 = {
         series: [
@@ -499,18 +449,6 @@
     // Cria o gráfico
     var chart2 = new ApexCharts(document.querySelector("#chart-RealTimeLine2"), options2);
     chart2.render();
-
-    // Atualiza o gráfico a cada segundo com novos valores
-    // setInterval(() => {
-    //     TesteGrafico2();
-    //     chart2.updateSeries([
-    //         { data: [...dataSeries6]},
-    //         { data: [...dataSeries7]},
-    //         { data: [...dataSeries8]},
-    //         { data: [...dataSeries9]},
-    //         { data: [...dataSeries10]}
-    //     ]);
-    // }, 1000);
 
 
     //-------------- Alertas -----------------//
@@ -745,7 +683,7 @@ function Atualizar_ValorT2() {
                 // console.log(dataSeries2); 
 
 
-                if (dataSeries2.length > 35) {
+                if (dataSeries2.length > 20) {
                     dataSeries2.shift();
                 }
 
@@ -1141,8 +1079,8 @@ function Atualizar_Vetores() {
         VetorCpuT1 = [ultimoValorCpuT1]; 
     }
     if (dataSeries6.length > 0) {
-        const ultimoValorRamT2 = Math.round(dataSeries6[dataSeries6.length - 1].y);
-        VetorRamT1 = [ultimoValorRamT2]; 
+        const ultimoValorRamT1 = Math.round(dataSeries6[dataSeries6.length - 1].y);
+        VetorRamT1 = [ultimoValorRamT1]; 
     }
 
     // ------------- T2 ------------- //
@@ -1268,5 +1206,14 @@ function Atualizar_Dough5(){
     // console.log(VetorCpuT5, VetorRamT5)
 }
 setInterval(Atualizar_Dough5, 1000);
+
+
+
+    function redirecionarTotem(totem) {
+        if (totem !== "0") {
+        
+            window.location.href = `dash_individual_Isaque_Principal.html?totem=${totem}`;
+        }
+    }   
 
 </script>
