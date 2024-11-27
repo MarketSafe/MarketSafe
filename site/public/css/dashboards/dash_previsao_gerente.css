@@ -229,12 +229,24 @@ body {
       }
       & > section.dashboard {
         flex: 1;
+
+        & > div {
+
+          display: flex;
+          flex-direction: row;
+
+              & canvas {
+                background-color: #28283A;
+                border-radius: 2%;
+            }
+          }
+        }
       }
     }
   }
-}
 
-.separador {
+
+/* .separador {
   flex: 1;
 }
 
@@ -243,6 +255,6 @@ body {
   flex-direction: row;
 
   & > canvas {
-    
+    backgorund-color: #28283A;
   }
-}
+} */
