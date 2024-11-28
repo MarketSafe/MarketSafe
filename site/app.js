@@ -30,7 +30,8 @@ const rankingRouter = require("./src/routers/rankingRouter.js");
 const historicoLeoRouter = require("./src/routers/historicoLeo.js");
 const monitoramentoRouterIsaque = require("./src/routers/monitoramentoRouterIsaque.js");
 const benchmarkGerenteRouter = require("./src/routers/dashboards/benchmarkGerenteRouter.js");
-const getS3ObjectsRouter = require('./src/routers/objectLister.js')
+const previsaoGerenteRouter = require("./src/routers/dashboards/previsaoGerenteRouter.js");
+const getS3ObjectsRouter = require('./src/routers/objectLister.js');
 // declara a variável de aplicação:
 const app = express();
 
@@ -47,6 +48,7 @@ app.use("/ranking", rankingRouter);
 app.use("/historicoLeo", historicoLeoRouter);
 app.use("/monitoramento", monitoramentoRouterIsaque);
 app.use("/benchmarkGerente", util.auth, benchmarkGerenteRouter);
+app.use("/previsaoGerente", util.auth, previsaoGerenteRouter);
 app.use("/s3", getS3ObjectsRouter);
 
 //   configura arquivos estáticos (*.html, *.css, *.js):
