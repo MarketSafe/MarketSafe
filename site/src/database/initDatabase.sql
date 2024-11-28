@@ -172,9 +172,11 @@ insert into filial (nome, fk_empresa, fk_endereco) values
 
 insert into totem (mac_address, fk_filial) values
   ("873c66420d5f", 1),
-  ("abc123456789", 2),
-  ("def987654321", 3),
-  ("123456789012", 4);
+  ("200000000002", 2),
+  ("300000000003", 3),
+  ("300000000004", 3),
+  ("400000000005", 4),
+  ("500000000006", 4);
 
 insert into promocao (nome, fk_filial) values
   ('Carnes', 1),
@@ -350,6 +352,70 @@ INSERT INTO alerta (data_hora, cpu_porcentagem, ram_porcentagem, fk_totem, fk_pr
 ("2024-11-30 13:50:00", 90.60, 77.50, 2, 3),
 ("2024-11-30 18:20:00", 88.50, 80.00, 3, 4),
 ("2024-11-30 22:40:00", 92.70, 81.90, 4, 5);
+
+-- createView.sql:
+
+-- retorna a quantidade de alertas ativos no momento:
+create or replace view alerta_ativo as
+  select
+    *
+    from alerta
+    where data_hora > date_sub(current_timestamp, interval 5 minute)
+      and data_hora < current_timestamp;
+
+select * from alerta_ativo;
+
+-- retorna os alertas ativos dos totens:
+create or replace view totem_alerta_ativo as 
+  select
+    t.*,
+    count(a.id) quantidade_alerta
+    from totem t
+    left join alerta_ativo a
+      on t.id = a.fk_totem
+    group by t.id;
+
+select * from totem_alerta_ativo;
+
+-- retorna a taxa de alertas das filiais:
+create or replace view filial_taxa_alerta as
+  select
+    f.*,
+    ifnull(
+      sum(
+        if(t.quantidade_alerta, 1, 0)
+      ) / count(t.id),
+      0
+    ) taxa_alerta
+    from filial f
+    left join totem_alerta_ativo t
+      on f.id = t.fk_filial
+    group by f.id;
+
+select * from filial_taxa_alerta;
+
+-- retorna o status das filiais baseado na taxa de alertas:
+create or replace view filial_status as
+  select
+    f.*,
+    case
+      when taxa_alerta = 0 then "normal"
+      when taxa_alerta = 1 then "critico"
+      else "atencao"
+    end `status`
+    from filial_taxa_alerta f;
+
+select * from filial_status;
+
+-- retorna a quantidade de filiais em determinado status:
+create or replace view quantidade_filial_status as
+  select
+    f.status,
+    count(f.id) quantidade
+    from filial_status f
+    group by f.status;
+
+select * from quantidade_filial_status;
 
 -- select.sql:
 
