@@ -8,8 +8,12 @@ router.get("/cadastrarMes", function(req, res){
     historicoLeoController.cadastrarMes(req, res); 
 })
 
-router.get("/cadastrarDia", function(req, res){
-    historicoLeoController.cadastrarDia(req, res); 
+router.get("/cadastrarDiaInicio", function(req, res){
+    historicoLeoController.cadastrarDiaInicio(req, res); 
+})
+
+router.get("/cadastrarDiaFim", function(req, res){
+    historicoLeoController.cadastrarDiaFim(req, res); 
 })
 
 router.get("/cadastrarRanking", function(req, res){

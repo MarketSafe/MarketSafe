@@ -9,9 +9,10 @@
   --shadow-color: #0000007f;
 
   --div-color: #616161ff;
+  --dashboard-color: #3a3b47ff;
   --header-color: #31333cff;
   --background-color: #292935ff;
-  --dashboard-color: #3a3b47ff;
+  --indicador-color: #1e1f27;
 
   --gerente-color: #ff3131ff;
   --analista-color: #e9864aff;
@@ -261,7 +262,9 @@ body {
             gap: 1rem;
 
             & > section {
+              justify-content: space-between;
               gap: 1rem;
+              flex: 1;
 
               & > h2 {
                 text-align: center;
@@ -270,7 +273,9 @@ body {
               & > div {
                 border-radius: 10px;
                 padding: 0.5rem 1rem;
-                background-color: red;
+                background-color: var(--indicador-color);
+                aspect-ratio: 148.52 / 109.31;
+                min-width: 10.868rem;
 
                 & > h3 {
                   text-align: center;
@@ -281,6 +286,13 @@ body {
                   font-family: "Noto Serif", serif;
                 }
               }
+            }
+          }
+          & .alerta {
+            & > div {
+              border-radius: 10px;
+              padding: 0.5rem 1rem;
+              background-color: var(--gerente-color);
             }
           }
         }
