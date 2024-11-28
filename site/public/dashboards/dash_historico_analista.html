@@ -67,8 +67,11 @@
                         <select name="ano" id="select_mes">
                             <option selected value="">MÊS</option>
                         </select>
-                        <select name="ano" id="select_dia">
-                            <option selected value="">DIAS</option>
+                        <select name="ano" id="select_inicio">
+                            <option selected value="">DIA INICIO</option>
+                        </select>
+                        <select name="ano" id="select_fim">
+                            <option selected value="">DIA FIM</option>
                         </select>
                     </div>
                 </div>
@@ -185,9 +188,8 @@ function alterarGrafico() {
         });
     }
 
-
-    function cadastrarDia() {
-        fetch("/historicoLeo/cadastrarDia", {
+    function cadastrarDiaInicio() {
+        fetch("/historicoLeo/cadastrarDiaInicio", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -197,9 +199,9 @@ function alterarGrafico() {
                 return resposta.json();
             })
             .then(function (dias) {
-                var select_dia = document.getElementById('select_dia');
+                var select_inicio = document.getElementById('select_inicio');
                 dias.forEach((dia) => {
-                    select_dia.innerHTML += `<option value="${dia.id}">${dia.intervalo_dias}</option>`;
+                    select_inicio.innerHTML += `<option value="${dia.dia_alerta}">${dia.dia_alerta}</option>`;
                 });
             })
             .catch(function (erro) {
@@ -208,7 +210,31 @@ function alterarGrafico() {
             });
     }
 
-    cadastrarDia();
+    cadastrarDiaFim();
+
+    function cadastrarDiaFim() {
+        fetch("/historicoLeo/cadastrarDiaFim", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (dias) {
+                var select_fim = document.getElementById('select_fim');
+                dias.forEach((dia) => {
+                    select_fim.innerHTML += `<option value="${dia.dia_alerta}">${dia.dia_alerta}</option>`;
+                });
+            })
+            .catch(function (erro) {
+                alert(erro);
+                //console.log("Erro ao carregar linhas:", erro);
+            });
+    }
+
+    cadastrarDiaFim();
 
     function cadastrarRanking(ranking) {
         const totem = ranking.map(item => item.totem)
@@ -586,7 +612,7 @@ function alterarGrafico() {
             })
             .then(function (dados) {
                 dados.forEach((dado) => {
-                    MaisAlerta.innerHTML = `${dado.hora}:00`;
+                    MaisAlerta.innerHTML = `${mes[0].hora}:00`;
                 });
             })
             .catch(function (erro) {
@@ -616,7 +642,7 @@ function alterarGrafico() {
             })
             .then(function (dados) {
                 dados.forEach((dado) => {
-                    AlertaSemana.innerHTML = `${dado.dia_mes}`;
+                    AlertaSemana.innerHTML = `${mes[0].dia_mes}`;
                 });
             })
             .catch(function (erro) {
@@ -631,7 +657,6 @@ function alterarGrafico() {
             return;
         }
 
-        MediaHorario.innerHTML = `${mes[0].hora_alerta}:00`;
         fetch(`/historicoLeo/mediaHorario`, {
             method: "GET",
             headers: {
@@ -646,7 +671,7 @@ function alterarGrafico() {
             })
             .then(function (dados) {
                 dados.forEach((dado) => {
-                    MediaHorario.innerHTML = `${dado.hora_alerta}:00`;
+                    MediaHorario.innerHTML = `${mes[0].hora_alerta}:00`;
                 });
             })
             .catch(function (erro) {
@@ -656,12 +681,12 @@ function alterarGrafico() {
 
     function atualizarRankingDia() {
         var selectMes = document.getElementById("select_mes");
-        var selectDia = document.getElementById("select_dia");
+        var selectInicio = document.getElementById("select_inicio");
+        var selectFim = document.getElementById("select_fim");
 
         var mes = Number(selectMes.value);
-        var dia = Number(selectDia.value);
-        //console.log("Mês selecionado: ", mes);
-        //console.log("Dia selecionado: ", dia);
+        var inicio = Number(selectInicio.value);
+        var fim = Number(selectFim.value);
 
         fetch(`/historicoLeo/atualizarMesRanking?mes=${mes}`, {
             method: "GET",
@@ -768,6 +793,5 @@ function alterarGrafico() {
     }
 
     select_mes.addEventListener("change", atualizarRankingDia);
-    select_dia.addEventListener("change", atualizarRankingDia);
 }
 </script>

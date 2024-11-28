@@ -32,6 +32,16 @@ Object.prototype.getPropertiesByName = function (propertyName) {
 
   return rGetPropertiesByName(this, propertyName);
 };
+Number.prototype.isOrIsBetween = function (min, max) {
+  return this >= min && this <= max;
+};
+String.prototype.isLowerCase = function () {
+  return this.toLowerCase() === String(this);
+};
+String.prototype.capitalize = function () {
+  const trimmed = this.trim();
+  return trimmed.charAt(0).toLocaleUpperCase() + trimmed.substring(1);
+};
 function toPx(value, parent) {
   if (typeof value !== "string") return NaN;
 
@@ -108,7 +118,7 @@ async function puxarDados(rota, dados, errorCallback) {
 
   errorCallback(response);
 
-  return response.text();
+  return response.json();
 }
 async function gerarGraficos() {
   return Array.from(divGraficos).reduce(async (chartList, divGrafico) => {
@@ -121,15 +131,13 @@ async function gerarGraficos() {
         }
       });
 
-      console.log(dados);
-
       config = {
         type: "pie",
         data: {
-          labels: ["Normal", "Atenção", "Crítico"],
+          labels: dados.map((v) => v.status.capitalize()),
           datasets: [
             {
-              data: [15, 8, 3],
+              data: dados.map((v) => v.quantidade),
               backgroundColor: ["#88bb4eff", "#e9ae30ff", "#ff0000ff"],
               borderColor: "#000000ff",
             },
@@ -204,23 +212,23 @@ async function gerarGraficos() {
               title: {
                 display: true,
                 text: "Filiais",
-                color: "#ffffffff"
+                color: "#ffffffff",
               },
               ticks: {
                 color: "#ffffffff",
-              }
+              },
             },
             y: {
               title: {
                 display: true,
                 text: "Taxa de totens em alerta",
-                color: "#ffffffff"
+                color: "#ffffffff",
               },
               ticks: {
                 color: "#ffffffff",
-                beginAtZero: true
-              }
-            }
+                beginAtZero: true,
+              },
+            },
           },
           plugins: {
             title: {
@@ -258,8 +266,8 @@ async function gerarGraficos() {
               display: "auto",
             },
             legendMargin: {
-              margin: "10ph"
-            }
+              margin: "10ph",
+            },
           },
         },
         plugins: [
@@ -268,7 +276,7 @@ async function gerarGraficos() {
             id: "legendMargin",
             afterInit(chart, args, plugins) {
               const originalFit = chart.legend.fit;
-              const margin = toPx(plugins.margin, chart.canvas) || (typeof plugins.margin === "number" ? plugins.margin : 0)
+              const margin = toPx(plugins.margin, chart.canvas) || (typeof plugins.margin === "number" ? plugins.margin : 0);
 
               chart.legend.fit = function fit() {
                 if (originalFit) originalFit.call(this);

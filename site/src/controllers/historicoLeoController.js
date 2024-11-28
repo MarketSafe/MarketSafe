@@ -9,8 +9,17 @@ function cadastrarMes(req, res) {
         })
 }
 
-function cadastrarDia(req, res) {
-    historicoLeoModel.cadastrarDia()
+function cadastrarDiaInicio(req, res) {
+    historicoLeoModel.cadastrarDiaInicio()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function cadastrarDiaFim(req, res) {
+    historicoLeoModel.cadastrarDiaFim()
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
@@ -129,7 +138,8 @@ function atualizarMediaHorario(req, res, mes) {
 
 module.exports = {
     cadastrarMes,
-    cadastrarDia,
+    cadastrarDiaInicio,
+    cadastrarDiaFim,
     cadastrarRanking,
     cadastrarTaxa,
     cadastrarHora,

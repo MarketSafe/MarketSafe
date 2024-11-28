@@ -11,30 +11,27 @@ async function cadastrarMes() {
   return resultado;
 }
 
-function cadastrarDia() {
-  // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarDia():");
+function cadastrarDiaInicio() {
+  // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarDiaInicio():");
 
-  var instrucaoSql = `SELECT 
-    @rownum := @rownum + 1 AS id,  
-    CONCAT(
-    'Do dia ', 
-    intervalo_inicio,  
-    ' até o dia ', 
-    intervalo_fim  
-    ) AS intervalo_dias,
-    qtd AS total_registros
-    FROM (
-    SELECT 
-    (FLOOR((DAY(data_hora) - 1) / 7) * 7) + 1 AS intervalo_inicio,
-    LEAST((FLOOR((DAY(data_hora) - 1) / 7) * 7) + 7, DAY(LAST_DAY(data_hora))) AS intervalo_fim,
-    count(*) as qtd
-    FROM alerta
-    WHERE MONTH(data_hora) = MONTH(CURDATE())  
-    GROUP BY intervalo_fim, intervalo_inicio   
-    ORDER BY intervalo_inicio ASC  
-    ) AS intervalos, (SELECT @rownum := 0) r  
-    GROUP BY intervalo_fim, intervalo_inicio 
-    ORDER BY intervalo_inicio ASC; 
+  var instrucaoSql = `
+  SELECT DAY(data_hora) AS dia_alerta, COUNT(*) AS total_alertas
+  FROM alerta
+  GROUP BY dia_alerta
+  ORDER BY dia_alerta;
+`;
+  // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function cadastrarDiaFim() {
+  // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarDiaFim():");
+
+  var instrucaoSql = `
+  SELECT DAY(data_hora) AS dia_alerta, COUNT(*) AS total_alertas
+  FROM alerta
+  GROUP BY dia_alerta
+  ORDER BY dia_alerta;
 `;
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -271,7 +268,8 @@ function atualizarMediaHorario(mes) {
 
 module.exports = {
   cadastrarMes,
-  cadastrarDia,
+  cadastrarDiaInicio,
+  cadastrarDiaFim,
   cadastrarRanking,
   cadastrarTaxa,
   cadastrarHora,
