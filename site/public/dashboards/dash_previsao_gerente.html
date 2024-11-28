@@ -120,8 +120,9 @@
               </canvas>
             </div>
           </div>
-          <div>
-            <div>
+          <div class="space"></div>
+          <div class="contentDash">
+            <div class="dashMain">
               <canvas id="graficoLinha">
 
               </canvas>
@@ -258,21 +259,22 @@
     }
   });
 
-
-  // Esse data mano eu juro por Deus.
+  // Eu fiz uma solução temporária.. não sei se vou mudar futuramente.
   const dataLine = {
     labels: ['0', '5', '10', '15', '20', '25', '30'],
     datasets: [{
       label: 'Atual',
       data: [20, 15, 23.5, 10],
       borderColor: 'rgba(255, 145, 77)',
-      backgroundColor: 'rgba(255, 145, 77)'
+      backgroundColor: 'rgba(255, 145, 77)',
+      pointRadius: 0
     }, {
       label: 'Previsto',
-      data: [25, 30, 15],
+      data: [20, 15, 23.5, 10, 25, 30, 15],
       borderColor: 'rgba(255, 49, 49)',
       backgroundColor: 'rgba(255, 49, 49)',
-      borderDash: [5, 5]
+      borderDash: [5, 5],
+      pointRadius: 0
     }]
   };
 
