@@ -34,7 +34,7 @@ function taxaGeralDeAlertas(fk_empresa) {
 }
 function totensPorEmpresa(fk_empresa) {
   // declara a variável de instrução sql:
-  const instrucao = `select count(t.id) from filial f left join totem t on f.id = t.fk_filial where f.fk_empresa = 1;`;
+  const instrucao = `select count(t.id) quantidade from filial f left join totem t on f.id = t.fk_filial where f.fk_empresa = 1;`;
   // declara a variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
@@ -50,7 +50,7 @@ function maiorTaxaDeAlertas(fk_empresa) {
 }
 function totalDeFiliais(fk_empresa) {
   // declara a variável de instrução sql:
-  const instrucao = `select count(f.id) from filial f where f.fk_empresa = 1;`;
+  const instrucao = `select count(f.id) quantidade from filial f where f.fk_empresa = 1;`;
   // declara a variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:

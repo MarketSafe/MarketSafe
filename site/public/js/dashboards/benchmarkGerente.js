@@ -130,7 +130,7 @@ async function gerarIndicadores() {
           throw new Error(`Sem filiais na empresa`);
         }
       });
-      div.querySelector("span").textContent = dados[0].taxa_geral * 100;
+      div.querySelector("span").textContent = Math.round(dados[0].taxa_geral * 100) + "%";
     } else if (indicador.classList.contains("totens-total")) {
       const dados = await puxarDados("/benchmarkGerente/totensPorEmpresa", {}, (response) => {
         if (response.status == 204) {
@@ -144,15 +144,15 @@ async function gerarIndicadores() {
           throw new Error(`Sem filiais na empresa`);
         }
       });
-      div.querySelector("h2").textContent = dados[0].nome;
-      div.querySelector("span").textContent = dados[0].taxa_alerta;
+      div.querySelector("h3").textContent = dados[0].nome;
+      div.querySelector("span").textContent = Math.round(dados[0].taxa_alerta * 100) + "%";
     } else if (indicador.classList.contains("filiais-total")) {
       const dados = await puxarDados("/benchmarkGerente/totalDeFiliais", {}, (response) => {
         if (response.status == 204) {
           throw new Error(`Sem filiais na empresa`);
         }
       });
-      div.querySelector("span").textContent = dados[0].taxa_alerta;
+      div.querySelector("span").textContent = dados[0].quantidade;
     }
   });
 }
@@ -351,10 +351,11 @@ async function gerarGraficos() {
 }
 async function carregarBody(event) {
   handleSelectsNone(document.querySelectorAll("select"));
-  const charts = await gerarGraficos();;
+  const charts = await gerarGraficos();
+  gerarIndicadores();
   setInterval(() => {
     Object.values(charts).forEach((chart) => chart.update());
-    gerarIndicadores();
+    // gerarIndicadores();
   }, 1000);
 }
 
