@@ -1,6 +1,7 @@
 // benchmarkGerente.js:
 // elementos globais:
-const divGraficos = document.querySelectorAll("div.grafico:has(> canvas)");
+const graficos = document.querySelectorAll("div.grafico:has(> canvas)");
+const indicadores = document.querySelectorAll("section.indicador");
 
 // funções:
 String.prototype.splitByIndex = function (index) {
@@ -78,7 +79,7 @@ function updateChart(chart) {
       datalabel.offset = pxSize;
     }
   }
-  for (const font of chart.config._config.options.plugins.getPropertiesByName("font")) {
+  for (const font of chart.config._config.options.getPropertiesByName("font")) {
     const pxSize = toPx(font.relativeSize, chart.canvas);
     if (isNaN(pxSize)) {
       font.size = Chart.defaults.font.size;
@@ -120,8 +121,43 @@ async function puxarDados(rota, dados, errorCallback) {
 
   return response.json();
 }
+async function gerarIndicadores() {
+  Array.from(indicadores).forEach(async (indicador) => {
+    const div = indicador.querySelector("div");
+    if (indicador.classList.contains("taxa-geral")) {
+      const dados = await puxarDados("/benchmarkGerente/taxaGeralDeAlertas", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa`);
+        }
+      });
+      div.querySelector("span").textContent = dados[0].taxa_geral * 100;
+    } else if (indicador.classList.contains("totens-total")) {
+      const dados = await puxarDados("/benchmarkGerente/totensPorEmpresa", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa`);
+        }
+      });
+      div.querySelector("span").textContent = dados[0].quantidade;
+    } else if (indicador.classList.contains("maior-taxa")) {
+      const dados = await puxarDados("/benchmarkGerente/maiorTaxaDeAlertas", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa`);
+        }
+      });
+      div.querySelector("h2").textContent = dados[0].nome;
+      div.querySelector("span").textContent = dados[0].taxa_alerta;
+    } else if (indicador.classList.contains("filiais-total")) {
+      const dados = await puxarDados("/benchmarkGerente/totalDeFiliais", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa`);
+        }
+      });
+      div.querySelector("span").textContent = dados[0].taxa_alerta;
+    }
+  });
+}
 async function gerarGraficos() {
-  return Array.from(divGraficos).reduce(async (chartList, divGrafico) => {
+  return Array.from(graficos).reduce(async (chartList, divGrafico) => {
     let config = {};
 
     if (divGrafico.classList.contains("estado-filiais")) {
@@ -134,7 +170,7 @@ async function gerarGraficos() {
       config = {
         type: "pie",
         data: {
-          labels: dados.map((v) => v.status.capitalize()),
+          labels: dados.map((v) => v.status === "normal" ? "Normal" : (v.status === "critico" ? "Crítico" : "Atenção")),
           datasets: [
             {
               data: dados.map((v) => v.quantidade),
@@ -185,20 +221,20 @@ async function gerarGraficos() {
         plugins: [ChartDataLabels],
       };
     } else if (divGrafico.classList.contains("taxa-alerta")) {
-      // const dados = await puxarDados("/benchmarkGerente/estadoFiliais", {}, (response) => {
-      //   if (response.status == 204) {
-      //     throw new Error(`Sem filiais na empresa`);
-      //   }
-      // });
+      const dados = await puxarDados("/benchmarkGerente/maioresTaxasDeAlerta", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa`);
+        }
+      });
 
       config = {
         type: "bar",
         data: {
-          labels: ["Água rasa 2", "Paulista 1", "Lapa", "Paulista 2", "Vila Madalena"],
+          labels: dados.map(v => v.nome),
           datasets: [
             {
               label: "Taxa de totens em alerta",
-              data: [100, 100, 75, 60, 50],
+              data: dados.map(v => Number(v.taxa_alerta) * 100),
               backgroundColor: "#ff914dff",
             },
           ],
@@ -213,9 +249,19 @@ async function gerarGraficos() {
                 display: true,
                 text: "Filiais",
                 color: "#ffffffff",
+                font: {
+                  weight: "bold",
+                  size: "15ar",
+                  family: "\"Abel\", sans-serif"
+                }
               },
               ticks: {
                 color: "#ffffffff",
+                font: {
+                  weight: "normal",
+                  relativeSize: "7ar",
+                  family: '"Abel", sans-serif',
+                },
               },
             },
             y: {
@@ -223,10 +269,20 @@ async function gerarGraficos() {
                 display: true,
                 text: "Taxa de totens em alerta",
                 color: "#ffffffff",
+                font: {
+                  weight: "normal",
+                  relativeSize: "7ar",
+                  family: '"Abel", sans-serif',
+                },
               },
               ticks: {
                 color: "#ffffffff",
                 beginAtZero: true,
+                font: {
+                  weight: "normal",
+                  relativeSize: "7ar",
+                  family: '"Abel", sans-serif',
+                },
               },
             },
           },
@@ -295,8 +351,11 @@ async function gerarGraficos() {
 }
 async function carregarBody(event) {
   handleSelectsNone(document.querySelectorAll("select"));
-  const charts = await gerarGraficos();
-  setInterval(() => Object.values(charts).forEach((chart) => chart.update()), 1000);
+  const charts = await gerarGraficos();;
+  setInterval(() => {
+    Object.values(charts).forEach((chart) => chart.update());
+    gerarIndicadores();
+  }, 1000);
 }
 
 // eventos:

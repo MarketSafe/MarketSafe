@@ -70,7 +70,30 @@ async function estadoFiliais(req, res) {
   return await sendRespostaFromModel(req, res, benchmarkGerenteModel.estadoFiliais, [req.body.funcionarioAutenticado.fk_empresa]);
 }
 
+// declara a função `maioresTaxasDeAlerta`:
+async function maioresTaxasDeAlerta(req, res) {
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.maioresTaxasDeAlerta, [req.body.funcionarioAutenticado.fk_empresa]);
+}
+
+async function taxaGeralDeAlertas(req, res) {
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.taxaGeralDeAlertas, [req.body.funcionarioAutenticado.fk_empresa]);  
+}
+async function totensPorEmpresa(req, res) {
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.totensPorEmpresa, [req.body.funcionarioAutenticado.fk_empresa]);  
+}
+async function maiorTaxaDeAlertas(req, res) {
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.maiorTaxaDeAlertas, [req.body.funcionarioAutenticado.fk_empresa]);  
+}
+async function totalDeFiliais(req, res) {
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.totalDeFiliais, [req.body.funcionarioAutenticado.fk_empresa]);  
+}
+
 // exporta as funções do arquivo `benchmarkGerenteController.js`:
 module.exports = {
   estadoFiliais,
+  maioresTaxasDeAlerta,
+  taxaGeralDeAlertas,
+  totensPorEmpresa,
+  maiorTaxaDeAlertas,
+  totalDeFiliais
 };
