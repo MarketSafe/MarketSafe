@@ -142,6 +142,8 @@ function Atualizar_ValorRamT4() {
     // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql); 
+    
+
 }
 
 // ----------- Ram do Totem 5 ---------------- //
@@ -160,6 +162,38 @@ function Atualizar_ValorRamT5() {
     return database.executar(instrucaoSql); 
 }
 
+// ------- Quantidade de Totens Cadastrados ------ //
+
+function verificarQtdTotens() {
+    // console.log("Executando a função verificarQtdTotens");
+
+    var instrucaoSql = `    
+    SELECT COUNT(*) AS qtd 
+    FROM monitoramento;
+    `;
+
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+    return database.executar(instrucaoSql); 
+}
+
+// ------- Quantidade de Totens com Erro -------- //
+
+function QtdTotensComProblema() {
+    // console.log("Executando a função QtdTotensComProblema");
+
+    var instrucaoSql = `    
+    SELECT COUNT (ram_porcentagem) AS problema 
+    FROM alerta 
+    WHERE ram_porcentagem > 80; 
+    `;
+
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+    return database.executar(instrucaoSql); 
+}
+
+
 module.exports = {
     Atualizar_ValorT1,
     Atualizar_ValorT2,
@@ -170,5 +204,7 @@ module.exports = {
     Atualizar_ValorRamT2,
     Atualizar_ValorRamT3,
     Atualizar_ValorRamT4,
-    Atualizar_ValorRamT5
+    Atualizar_ValorRamT5,
+    verificarQtdTotens,
+    QtdTotensComProblema
 };

@@ -64,5 +64,16 @@ router.post("/AtualizarValorRamT5", function (req, res) {
     IsaqueController.Atualizar_ValorRamT5(req, res);
 });
 
+//------------- Qtd Totens Cadastrados --------//
+
+router.post("/verificarQtdTotens", function (req, res) {
+    IsaqueController.verificarQtdTotens(req, res);
+});
+
+//------------- Qtd Totens com Erro --------//
+
+router.post("/QtdTotensComProblema", function (req, res) {
+    IsaqueController.QtdTotensComProblema(req, res);
+});
 
 module.exports = router;
