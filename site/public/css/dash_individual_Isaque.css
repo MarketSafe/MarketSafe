@@ -243,7 +243,7 @@ body {
     flex-direction: column;
     background-color: transparent;
     border-radius: 10px 10px 10px 10px;
-    width: 18%;
+    width: 100px;
     height: 15px;
     align-items: center;
     font-family: 'Abel';
@@ -506,39 +506,42 @@ th {
     margin-left: 10px;
     font-family: 'Abel';
 }
-.notifi-item {
-	display: flex;
-	border-bottom: 1px solid #3A3B47;
-	padding: 15px 5px;
-	margin-bottom: 15px;
-	cursor: pointer;
-}
-.notifi-item:hover {
-	background-color: #3A3B47;
-}
-.notifi-item img {
-	display: block;
-	width: 50px;
-	margin-right: 10px;
-	border-radius: 50%;
-}
-.notifi-item .text h4 {
-	color: #777;
-	font-size: 16px;
-	margin-top: 10px;
-    font-family: 'Abel';
-}
-.notifi-item .text p {
-	color: #aaa;
-	font-size: 12px;
-    font-family: 'Abel';
+
+
+.classe-notificacao {
+    background-color: #3A3B47;  
+    color: #ffffff;            
+    border-radius: 10px;        
+    padding: 10px;              
+    margin: 5px 0;             
+    font-family: "Abel";  
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+    cursor: pointer;
 }
 
-.notifi-box .notifi-item { 
-    transition: 0.3s ease; 
+.classe-notificacao i {
+    color: tomato;
 }
 
-.notifi-box .open{
+.classe-notificacao span {
+    color: #ec6a1a;
+    font-weight: bold;
+}
+
+.classe-notificacao:hover {
+    transform: scale(1.05);    /* Aumenta ligeiramente ao passar o mouse */
+    opacity: 0.9;              /* Reduz opacidade ao passar o mouse */
+}
+
+.notifi-box .notifi-item {
+    opacity: 0; /* Oculta os itens */
+    transition: opacity 0.3s ease; /* Transição suave */
+}
+
+/* Adiciona uma classe 'open' para tornar os itens visíveis */
+.notifi-box.open .notifi-item {
     opacity: 1;
 }
 
@@ -561,19 +564,18 @@ th {
 .notify{
     width: 400px;
     height: 80px;
-    background-color: #eead74;
+    background-color: #201e1c;
     border-radius: 10px;
     font-weight: 500;
     font-family: 'Abel';
     margin: 15px 0;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     position: relative;
     transform: translateX(100%);
     animation: moveleft 0.5s linear forwards;
 }
-
 @keyframes moveleft{
     100%{
         transform: translateX(0);
