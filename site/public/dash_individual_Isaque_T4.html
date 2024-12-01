@@ -87,13 +87,13 @@
                 <div class="bloco3">
                     <span class="span_bloco_monitoramento">Atividade</span>
                     <div id="tempo_ativo" class="tempo_ativo">
-                        03:27:30
+                        03:00:00
                     </div>
                 </div>
                 <div class="bloco4">
                     <span class="span_bloco_monitoramento">Recomendado</span>
                     <div id="recomendado" class="recomendado">
-                        Reiniciar
+                      
                     </div>
                 </div>
 
@@ -219,6 +219,536 @@
     chart.render();
 
 
+    var dataSeriesCPU = [];
+    var dataSeriesRAM = [];
+    var tempo = 0;
+
+    var dataSeries = [];
+    var dataSeries2 = [];
+    var dataSeries3 = [];
+    var dataSeries4 = [];
+    var dataSeries5 = [];
+    var dataSeries6 = [];
+    var dataSeries7 = [];
+    var dataSeries8 = [];
+    var dataSeries9 = [];
+    var dataSeries10 = [];
+
+
+
+    // --------- CPU do Totem 1 ------------//
+
+    function Atualizar_ValorT1() {
+        fetch("/monitoramento/AtualizarValorT1",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT1);
+                    dataSeries.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries); 
+
+                    if (dataSeries.length > 20) {
+                        dataSeries.shift();
+                    }
+
+                }
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorT1, 1000);
+
+    // --------- CPU do Totem 2 ------------//
+
+    function Atualizar_ValorT2() {
+        fetch("/monitoramento/AtualizarValorT2",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT2);
+                    dataSeriesCPU.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeriesCPU); 
+
+
+                    if (dataSeriesCPU.length > 20) {
+                        dataSeriesCPU.shift();
+                    }
+
+                    chart.updateSeries([
+                        { name: 'T2', data: dataSeries }
+                    ]);
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorT2, 1000);
+
+    // --------- CPU do Totem 3 ------------//
+
+    function Atualizar_ValorT3() {
+        fetch("/monitoramento/AtualizarValorT3",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT3);
+                    dataSeries3.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries3); 
+
+                    if (dataSeries3.length > 20) {
+                        dataSeries3.shift();
+                    }
+
+                }
+
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorT3, 1000);
+
+    // --------- CPU do Totem 4 ------------//
+
+    function Atualizar_ValorT4() {
+        fetch("/monitoramento/AtualizarValorT4",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT4);
+                    dataSeries4.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries4); 
+
+                    if (dataSeries4.length > 20) {
+                        dataSeries4.shift();
+                    }
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorT4, 1000);
+
+    // --------- CPU do Totem 5 ------------//
+
+    function Atualizar_ValorT5() {
+        fetch("/monitoramento/AtualizarValorT5",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT5);
+                    dataSeries5.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries5); 
+
+                    if (dataSeries5.length > 20) {
+                        dataSeries5.shift();
+                    }
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorT5, 1000);
+
+
+    // --------- Ram do Totem 1 ------------//
+
+    function Atualizar_ValorRamT1() {
+        fetch("/monitoramento/AtualizarValorRamT1",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT1);
+                    dataSeries6.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries6); 
+
+                    if (dataSeries6.length > 20) {
+                        dataSeries6.shift();
+                    }
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorRamT1, 1000);
+
+    // --------- Ram do Totem 2 ------------//
+
+    function Atualizar_ValorRamT2() {
+        fetch("/monitoramento/AtualizarValorRamT2",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT2);
+                    dataSeries7.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries7); 
+
+                    if (dataSeries7.length > 20) {
+                        dataSeries7.shift();
+                    }
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorRamT2, 1000);
+
+    // --------- Ram do Totem 3 ------------//
+
+    function Atualizar_ValorRamT3() {
+        fetch("/monitoramento/AtualizarValorRamT3",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT3);
+                    dataSeries8.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries8); 
+
+                    if (dataSeries8.length > 20) {
+                        dataSeries8.shift();
+                    }
+
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorRamT3, 1000);
+
+    // --------- Ram do Totem 4 ------------//
+
+    function Atualizar_ValorRamT4() {
+        fetch("/monitoramento/AtualizarValorRamT4",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT4);
+                    dataSeries9.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries9); 
+
+                    if (dataSeries9.length > 20) {
+                        dataSeries9.shift();
+                    }
+
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorRamT4, 1000);
+
+    // --------- Ram do Totem 5 ------------//
+
+    function Atualizar_ValorRamT5() {
+        fetch("/monitoramento/AtualizarValorRamT5",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT5);
+                    dataSeries10.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries10); 
+
+                    if (dataSeries10.length > 20) {
+                        dataSeries10.shift();
+                    }
+
+
+                }
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(Atualizar_ValorRamT5, 1000);
+
+    var VetorCpuT1 = [];
+    var VetorRamT1 = [];
+
+    var VetorCpuT2 = [];
+    var VetorRamT2 = [];
+
+    var VetorCpuT3 = [];
+    var VetorRamT3 = [];
+
+    var VetorCpuT4 = [];
+    var VetorRamT4 = [];
+
+    var VetorCpuT5 = [];
+    var VetorRamT5 = [];
+
+
+    function Atualizar_Vetores() {
+
+        // ------------- T1 ------------- //
+        if (dataSeries.length > 0) {
+            const ultimoValorCpuT1 = Math.round(dataSeries[dataSeries.length - 1].y);
+            VetorCpuT1 = [ultimoValorCpuT1];
+        }
+        if (dataSeries6.length > 0) {
+            const ultimoValorRamT1 = Math.round(dataSeries6[dataSeries6.length - 1].y);
+            VetorRamT1 = [ultimoValorRamT1];
+        }
+
+        // ------------- T2 ------------- //
+        if (dataSeriesCPU.length > 0) {
+            const ultimoValorCpuT2 = Math.round(dataSeriesCPU[dataSeriesCPU.length - 1].y);
+            VetorCpuT2 = [ultimoValorCpuT2];
+        }
+        if (dataSeries7.length > 0) {
+            const ultimoValorRamT2 = Math.round(dataSeries7[dataSeries7.length - 1].y);
+            VetorRamT2 = [ultimoValorRamT2];
+        }
+
+        // ------------- T3 ------------- //
+        if (dataSeries3.length > 0) {
+            const ultimoValorCpuT3 = Math.round(dataSeries3[dataSeries3.length - 1].y);
+            VetorCpuT3 = [ultimoValorCpuT3];
+        }
+        if (dataSeries8.length > 0) {
+            const ultimoValorRamT3 = Math.round(dataSeries8[dataSeries8.length - 1].y);
+            VetorRamT3 = [ultimoValorRamT3];
+        }
+        // ------------- T4 ------------- //
+        if (dataSeries4.length > 0) {
+            const ultimoValorCpuT4 = Math.round(dataSeries4[dataSeries4.length - 1].y);
+            VetorCpuT4 = [ultimoValorCpuT4];
+        }
+        if (dataSeries9.length > 0) {
+            const ultimoValorRamT4 = Math.round(dataSeries9[dataSeries9.length - 1].y);
+            VetorRamT4 = [ultimoValorRamT4];
+        }
+        // ------------- T5 ------------- //
+        if (dataSeries5.length > 0) {
+            const ultimoValorCpuT5 = Math.round(dataSeries5[dataSeries5.length - 1].y);
+            VetorCpuT5 = [ultimoValorCpuT5];
+        }
+        if (dataSeries10.length > 0) {
+            const ultimoValorRamT5 = Math.round(dataSeries10[dataSeries10.length - 1].y);
+            VetorRamT5 = [ultimoValorRamT5];
+        }
+
+    }
+
+    // ------------ Primeiro Gráfico Dough -------------- //
+
+    function Atualizar_Dough1() {
+
+        Atualizar_Vetores();
+
+        const valorCPU = VetorCpuT1[0] || 0;
+        const valorRAM = VetorRamT1[0] || 0;
+
+        // console.log(VetorCpuT1, VetorRamT1)
+        verificarDash(1, "CPU", valorCPU);
+        verificarDash(1, "RAM", valorRAM);
+    }
+    setInterval(Atualizar_Dough1, 1000);
+
+
+    // ------------ Segundo Gráfico Dough -------------- //
+
+    function Atualizar_Dough2() {
+
+        Atualizar_Vetores();
+
+        const valorCPU = VetorCpuT2[0] || 0;
+        const valorRAM = VetorRamT2[0] || 0;
+
+        // console.log(VetorCpuT2, VetorRamT2)
+        verificarDash(2, "CPU", valorCPU);
+        verificarDash(2, "RAM", valorRAM);
+    }
+    setInterval(Atualizar_Dough2, 1000);
+
+    // ------------ Terceiro Gráfico Dough -------------- //
+
+    function Atualizar_Dough3() {
+
+        Atualizar_Vetores();
+
+        const valorCPU = VetorCpuT3[0] || 0;
+        const valorRAM = VetorRamT3[0] || 0;
+
+        // console.log(VetorCpuT3, VetorRamT3)
+        verificarDash(3, "CPU", valorCPU);
+        verificarDash(3, "RAM", valorRAM);
+    }
+    setInterval(Atualizar_Dough3, 1000);
+
+    // ------------ Quarto Gráfico Dough -------------- //
+
+    function Atualizar_Dough4() {
+
+        Atualizar_Vetores();
+
+        const valorCPU = VetorCpuT4[0] || 0;
+        const valorRAM = VetorRamT4[0] || 0;
+
+        ram.innerHTML = `${valorRAM}%`;
+
+    }
+    setInterval(Atualizar_Dough4, 1000);
+
+    // ------------ Quinto Gráfico Dough -------------- //
+
+    function Atualizar_Dough5() {
+
+        Atualizar_Vetores();
+
+        const valorCPU = VetorCpuT5[0] || 0;
+        const valorRAM = VetorRamT5[0] || 0;
+
+        //chart7.updateSeries([valorRAM, valorCPU]);
+
+        // console.log(VetorCpuT5, VetorRamT5)
+
+        verificarDash(5, "CPU", valorCPU);
+        verificarDash(5, "RAM", valorRAM);
+    }
+    setInterval(Atualizar_Dough5, 1000);
+
+
+
+    function redirecionarTotem(totem) {
+        if (totem !== "0") {
+            window.location.href = `dash_individual_Isaque_Principal.html?totem=${totem}`;
+        }
+    }
+
     //-------------- Alertas -----------------//
 
     let notify_box = document.getElementById('notify_box');
@@ -235,147 +765,104 @@
         if (down) {
             box.style.height = '0px';
             box.style.opacity = 0;
-            box.classList.remove('open'); 
+            box.classList.remove('open');
             down = false;
         } else {
             box.style.height = '510px';
             box.style.opacity = 1;
             setTimeout(function () {
-                box.classList.add('open'); 
+                box.classList.add('open');
             }, 300);
             down = true;
         }
-
     }
-
-        // --------- CPU do Totem 4 ------------//
-        var dataSeries = [];
-        var dataSeries2 = [];
-        var tempo = 0;
-
-        function Atualizar_ValorT4() {
-        fetch("/monitoramento/AtualizarValorT4",
-            { method: "POST" })
-            .then(response => {
-                //console.log(response)
-                //response.text().then(text => console.log(text))
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro ao buscar os dados do servidor.");
-                }
-            })
-            .then(resultado => {
-                if (resultado.length > 0) {
-                    // console.log(resultado)
-                    const valorCpu = parseFloat(resultado[0].CpuT4);
-                    dataSeries.push({ x: tempo, y: valorCpu });
-                    tempo += 1;
-                    // console.log(dataSeries); 
-
-                    if (dataSeries.length > 35) {
-                        dataSeries.shift();
-                    }
-
-                    chart.updateSeries([
-                        { name: 'T4', data: dataSeries }
-                    ]);
-
-                }
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorT4, 1000);
-
-        // --------- Ram do Totem 4 ------------//
-
-    function Atualizar_ValorRamT4() {
-        fetch("/monitoramento/AtualizarValorRamT4",
-            { method: "POST" })
-            .then(response => {
-                //console.log(response)
-                //response.text().then(text => console.log(text))
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro ao buscar os dados do servidor.");
-                }
-            })
-            .then(resultado => {
-                if (resultado.length > 0) {
-                    // console.log(resultado)
-                    const valorRam = parseFloat(resultado[0].RamT4);
-                    dataSeries2.push({ x: tempo, y: valorRam });
-                    tempo += 1;
-                    // console.log(dataSeries6); 
-
-                    if (dataSeries2.length > 5) {
-                        dataSeries2.shift();
-                        //console.log("puxando")
-                    }
-
-                }
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorRamT4, 1000);
-
-    //-------------- Vetores -----------------//
-
-    var VetorRamT4 = [];
-
-    function Atualizar_Vetores() {
-        if (dataSeries2.length > 0) {
-            const ultimoValorRamT4 = Math.round(dataSeries2[dataSeries2.length - 1].y);
-            VetorRamT4 = [ultimoValorRamT4];
-        }
-    }
-
-    function Atualizar_Dough1() {
-
-        Atualizar_Vetores();
-        const valorRAM = VetorRamT4[0] || 0;
-
-        ram.innerHTML = `${valorRAM}%`;
-        console.log(VetorRamT4)
-    }
-    setInterval(Atualizar_Dough1, 1000);
-
-
-    //--------------------------------------------------------//
-
 
     function notificacao(msg) {
 
         let notify = document.createElement('div');
         notify.classList.add('notify');
         notify.innerHTML = msg;
-        notify_box.appendChild(notify);
 
+        notify_box.appendChild(notify);
 
         setTimeout(() => {
             notify.remove();
         }, 5000);
 
-        for (i = 0; i <= contador; i++) {
-            QtdNotify++;
-            QtdNotify2++;
-            document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
-            document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
-            document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+
+        let registro = document.createElement('div');
+        registro.classList.add('registro');
+        registro.innerHTML = msg;
+
+        document.getElementById("box").appendChild(registro);
+
+        QtdNotify++;
+        QtdNotify2++;
+        document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
+        document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
+        document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+    }
+
+    function verificarDash(totem, componente, valor) {
+        if (valor > 80) {
+            notificacao(`<i class="fa-solid fa-triangle-exclamation"></i> Problema no <span> Totem ${totem}</span> - ${componente} (${valor}%)`);
         }
 
     }
 
     function acionarAlertasENotificacao() {
         Alertas();
-        // notificacao();
     }
+
+    const notificacoesRecentes = new Map();
+    const intervaloNotificacao = 300000;
+
+
+    function notificacao(msg, totem, componente) {
+        const chaveNotificacao = `${totem}-${componente}`;
+        const agora = Date.now();
+
+        if (notificacoesRecentes.has(chaveNotificacao)) {
+            const ultimaNotificacao = notificacoesRecentes.get(chaveNotificacao);
+            if (agora - ultimaNotificacao < intervaloNotificacao) {
+                console.log(`Notificação bloqueada: "${msg}" já foi enviada para o Totem ${totem} no componente ${componente} recentemente.`);
+                return;
+            }
+        }
+
+        // Registra a nova notificação
+        notificacoesRecentes.set(chaveNotificacao, agora);
+
+        // Cria e exibe a notificação
+        let notify = document.createElement('div');
+        notify.classList.add('notify', 'classe-notificacao');
+        notify.innerHTML = msg;
+        notify_box.appendChild(notify);
+
+        setTimeout(() => {
+            notify.remove();
+        }, 5000);
+
+        let registro = document.createElement('div');
+        registro.classList.add('registro', 'classe-notificacao');
+        registro.innerHTML = msg;
+        document.getElementById("box").appendChild(registro);
+
+        QtdNotify++;
+        QtdNotify2++;
+        document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
+        document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
+        document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+
+        setTimeout(() => notificacoesRecentes.delete(chaveNotificacao), intervaloNotificacao);
+    }
+
+    function verificarDash(totem, componente, valor) {
+        if (valor > 80) {
+            notificacao(`<i class="fa-solid fa-triangle-exclamation"></i> Problema no <span> Totem ${totem}</span> - ${componente} (${valor}%)`, totem, componente);
+        }
+    }
+
 
 
     function alterarCorDiv() {
@@ -422,6 +909,24 @@
             status.textContent = "Normal"
         }
 
+        let cor;
+        switch (texto) {
+            case 'Normal':
+                cor = '#089900';
+                break;
+            case 'Alerta':
+                cor = '#FFCF00';
+                status.style.color = 'white';
+                break;
+            case 'Crítico':
+                cor = '#990000';
+                break;
+            default:
+                cor = 'gray';
+        }
+
+        status.style.backgroundColor = cor;
+
 
         if (VetorRamT4[VetorRamT4.length - 1] >= 90) {
             ram.style.backgroundColor = "#990000"
@@ -446,25 +951,65 @@
             ram.style.backgroundColor = "#27e600"
         }
 
+                    
+        // --------- Mudando a Cor da div de Recomendação --------- //
 
-        let cor;
-        switch (texto) {
-            case 'Normal':
-                cor = '#089900';
-                break;
-            case 'Alerta':
-                cor = '#FFCF00';
-                status.style.color = 'white';
-                break;
-            case 'Crítico':
-                cor = '#990000';
-                break;
-            default:
-                cor = 'gray';
+        if(status.innerHTML == 'Crítico' && VetorRamT4[VetorRamT4.length - 1] >= 90){
+            recomendado.style.backgroundColor = '#990000';
+            recomendado.textContent = 'Reiniciar';
+        }
+        else if(status.innerHTML == 'Alerta' && (VetorRamT4[VetorRamT4.length - 1] >= 75 && 
+            VetorRamT4[VetorRamT4.length - 1] < 90) ){
+            
+            recomendado.style.backgroundColor = '#ffc400';
+            recomendado.style.fontSize = 'x-large'
+            recomendado.textContent = 'Supervisionar';
+        }
+        else{
+            recomendado.style.backgroundColor = '#089900';
+            recomendado.textContent = 'Manter';
         }
 
-        status.style.backgroundColor = cor;
+
     }
     setInterval(alterarCorDiv, 1000);
+
+    
+//--------------- Função de Horas ativas ---------------//
+
+function Tempo(time) {
+            return time < 10 ? '0' + time : time;
+        }
+
+        // Função do timer
+        function ComecarTempo() {
+            let hours = 3;
+            let minutes = 0;
+            let seconds = 0;
+
+            const timerElement = document.getElementById('tempo_ativo');
+
+            // Atualiza a cada segundo
+            setInterval(function() {
+                seconds++; // Incrementa os segundos
+
+                if (seconds === 60) { // Se os segundos chegarem a 60, incrementa os minutos
+                    seconds = 0;
+                    minutes++;
+                }
+
+                if (minutes === 60) { // Se os minutos chegarem a 60, incrementa as horas
+                    minutes = 0;
+                    hours++;
+                }
+
+                // Atualiza o conteúdo do timer
+                timerElement.textContent =  Tempo(hours) + ":" +  Tempo(minutes) + ":" +  Tempo(seconds);
+            }, 1000);
+        }
+
+        // Chama a função para iniciar o timer assim que a página carregar
+        window.onload = ComecarTempo;
+
 
 </script>

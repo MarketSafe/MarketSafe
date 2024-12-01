@@ -319,19 +319,6 @@
     var chart = new ApexCharts(document.querySelector("#chart-RealTimeLine1"), options);
     chart.render();
 
-    // Atualiza o gráfico a cada segundo com novos valores
-    // setInterval(() => {
-    //     TesteGrafico();
-    //     chart.updateSeries([
-    //         { data: [...dataSeries] },
-    //         { data: [...dataSeries2] },
-    //         { data: [...dataSeries3] },
-    //         { data: [...dataSeries4] },
-    //         { data: [...dataSeries5] }
-    //     ]);
-    // }, 1000);
-
-    //-------------------------------------------------------//
 
     //Gráfico 2
 
@@ -1172,7 +1159,6 @@
 
     function redirecionarTotem(totem) {
         if (totem !== "0") {
-
             window.location.href = `dash_individual_Isaque_Principal.html?totem=${totem}`;
         }
     }

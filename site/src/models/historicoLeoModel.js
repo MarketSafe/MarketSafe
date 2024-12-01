@@ -234,7 +234,7 @@ function mediaHorario() {
     FROM 
     alerta
     WHERE 
-    MONTH(data_hora) = 01
+    MONTH(data_hora) = 08
     GROUP BY 
     HOUR(data_hora)
     ORDER BY 

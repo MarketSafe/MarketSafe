@@ -385,7 +385,7 @@ th {
     flex-direction: column;
     background-color: transparent;
     border-radius: 10px 10px 10px 10px;
-    width: 18%;
+    width: 100px;
     height: 15px;
     align-items: center;
 }
