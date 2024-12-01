@@ -4,16 +4,8 @@ const router = express.Router();
 
 const historicoLeoController = require("../controllers/historicoLeoController");
 
-router.get("/cadastrarMes", function(req, res){
+router.get("/cadastrarMes/:mes/:semana_do_mes", function(req, res){
     historicoLeoController.cadastrarMes(req, res); 
-})
-
-router.get("/cadastrarDiaInicio", function(req, res){
-    historicoLeoController.cadastrarDiaInicio(req, res); 
-})
-
-router.get("/cadastrarDiaFim", function(req, res){
-    historicoLeoController.cadastrarDiaFim(req, res); 
 })
 
 router.get("/cadastrarRanking", function(req, res){
