@@ -1,41 +1,38 @@
 var database = require("../database/config");
 
-async function cadastrarMes() {
-  // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarMes():");
+async function cadastrarMes(mes, semana_do_mes) {
+  // Verificando se a variável semana_do_mes está sendo recebida corretamente
+  console.log("Mes:", mes);
+  console.log("Semana do Mês:", semana_do_mes);
 
-  var instrucaoSql = `SELECT MONTH(data_hora) AS mes, COUNT(id) FROM alerta GROUP BY MONTH(data_hora);`;
-  // console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  // console.log(instrucaoSql);
+  var instrucaoSql = `
+      SELECT 
+          MONTH(data_hora) AS mes,
+          CASE 
+              WHEN DAY(data_hora) BETWEEN 1 AND 7 THEN '1'
+              WHEN DAY(data_hora) BETWEEN 8 AND 14 THEN '2'
+              WHEN DAY(data_hora) BETWEEN 15 AND 21 THEN '3'
+              WHEN DAY(data_hora) BETWEEN 22 AND 31 THEN '4'
+          END AS semana_do_mes,
+          COUNT(id) AS total_alertas,
+          ROUND(AVG(cpu_porcentagem), 2) AS media_cpu,
+          ROUND(AVG(ram_porcentagem), 2) AS media_ram
+      FROM alerta
+      WHERE MONTH(data_hora) = ${mes} 
+      AND CASE 
+          WHEN DAY(data_hora) BETWEEN 1 AND 7 THEN '1'
+          WHEN DAY(data_hora) BETWEEN 8 AND 14 THEN '2'
+          WHEN DAY(data_hora) BETWEEN 15 AND 21 THEN '3'
+          WHEN DAY(data_hora) BETWEEN 22 AND 31 THEN '4'
+      END = '${semana_do_mes}' 
+      GROUP BY mes, semana_do_mes
+      ORDER BY mes, semana_do_mes;
+  `;
+  
   const resultado = await database.executar(instrucaoSql);
-  // console.log(resultado);
   return resultado;
 }
 
-function cadastrarDiaInicio() {
-  // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarDiaInicio():");
-
-  var instrucaoSql = `
-  SELECT DAY(data_hora) AS dia_alerta, COUNT(*) AS total_alertas
-  FROM alerta
-  GROUP BY dia_alerta
-  ORDER BY dia_alerta;
-`;
-  // console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  return database.executar(instrucaoSql);
-}
-
-function cadastrarDiaFim() {
-  // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarDiaFim():");
-
-  var instrucaoSql = `
-  SELECT DAY(data_hora) AS dia_alerta, COUNT(*) AS total_alertas
-  FROM alerta
-  GROUP BY dia_alerta
-  ORDER BY dia_alerta;
-`;
-  // console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  return database.executar(instrucaoSql);
-}
 
 function cadastrarRanking() {
   // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarRanking():");
@@ -268,8 +265,6 @@ function atualizarMediaHorario(mes) {
 
 module.exports = {
   cadastrarMes,
-  cadastrarDiaInicio,
-  cadastrarDiaFim,
   cadastrarRanking,
   cadastrarTaxa,
   cadastrarHora,

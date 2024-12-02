@@ -1,31 +1,23 @@
 var historicoLeoModel = require("../models/historicoLeoModel");
 
 function cadastrarMes(req, res) {
-    historicoLeoModel.cadastrarMes()
+    const { mes, semana_do_mes } = req.params;
+    historicoLeoModel.cadastrarMes(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
+                // Se resultados forem encontrados, envia os dados
                 res.status(200).json(resultado);
-            } 
+            } else {
+                // Se não houver resultados, envia um status 404
+                res.status(404).json({ mensagem: "Nenhum dado encontrado para este período." });
+            }
         })
+        .catch(erro => {
+            console.error("Erro ao buscar dados:", erro);
+            res.status(500).json({ mensagem: "Erro no servidor ao buscar os dados." });
+        });
 }
 
-function cadastrarDiaInicio(req, res) {
-    historicoLeoModel.cadastrarDiaInicio()
-        .then(resultado => {
-            if (resultado.length > 0) {
-                res.json(resultado);
-            } 
-        })
-}
-
-function cadastrarDiaFim(req, res) {
-    historicoLeoModel.cadastrarDiaFim()
-        .then(resultado => {
-            if (resultado.length > 0) {
-                res.json(resultado);
-            } 
-        })
-}
 
 function cadastrarRanking(req, res) {
     historicoLeoModel.cadastrarRanking()
@@ -138,8 +130,6 @@ function atualizarMediaHorario(req, res, mes) {
 
 module.exports = {
     cadastrarMes,
-    cadastrarDiaInicio,
-    cadastrarDiaFim,
     cadastrarRanking,
     cadastrarTaxa,
     cadastrarHora,

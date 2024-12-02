@@ -1,5 +1,17 @@
 // benchmarkGerente.js:
 // elementos globais:
+const filtros = {
+  filial1: {
+    filial: document.querySelector("main > header > search > div.filial1 select.filial"),
+    promocao: document.querySelector("main > header > search > div.filial1 select.promocao"),
+  },
+  filial2: {
+    filial: document.querySelector("main > header > search > div.filial2 select.filial"),
+    promocao: document.querySelector("main > header > search > div.filial2 select.promocao"),
+  },
+};
+
+const telas = document.querySelectorAll("main > section.dashboard");
 const graficos = document.querySelectorAll("div.grafico:has(> canvas)");
 const indicadores = document.querySelectorAll("section.indicador");
 
@@ -99,7 +111,15 @@ function handleSelectsNone(selects) {
     });
   }
 }
-async function puxarDados(rota, dados, errorCallback) {
+async function puxarDados(
+  rota,
+  dados,
+  errorCallback = (response) => {
+    if (response.status == 204) {
+      throw new Error(`Sem dados`);
+    }
+  }
+) {
   const body = {
     emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
     senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
@@ -170,7 +190,7 @@ async function gerarGraficos() {
       config = {
         type: "pie",
         data: {
-          labels: dados.map((v) => v.status === "normal" ? "Normal" : (v.status === "critico" ? "Crítico" : "Atenção")),
+          labels: dados.map((v) => (v.status === "normal" ? "Normal" : v.status === "critico" ? "Crítico" : "Atenção")),
           datasets: [
             {
               data: dados.map((v) => v.quantidade),
@@ -230,11 +250,11 @@ async function gerarGraficos() {
       config = {
         type: "bar",
         data: {
-          labels: dados.map(v => v.nome),
+          labels: dados.map((v) => v.nome),
           datasets: [
             {
               label: "Taxa de totens em alerta",
-              data: dados.map(v => Number(v.taxa_alerta) * 100),
+              data: dados.map((v) => Number(v.taxa_alerta) * 100),
               backgroundColor: "#ff914dff",
             },
           ],
@@ -252,8 +272,8 @@ async function gerarGraficos() {
                 font: {
                   weight: "bold",
                   size: "15ar",
-                  family: "\"Abel\", sans-serif"
-                }
+                  family: '"Abel", sans-serif',
+                },
               },
               ticks: {
                 color: "#ffffffff",
@@ -349,15 +369,33 @@ async function gerarGraficos() {
     return chartList;
   }, {});
 }
-async function carregarBody(event) {
+async function gerarTelaSemFiltro() {
+  for (const tela of telas) {
+    tela.classList.remove("ativa");
+  }
+  Array.from(telas).find((tela) => tela.classList.contains("sem-filtro")).classList.add("ativa");
   handleSelectsNone(document.querySelectorAll("select"));
   const charts = await gerarGraficos();
   gerarIndicadores();
   setInterval(() => {
     Object.values(charts).forEach((chart) => chart.update());
-    // gerarIndicadores();
+    gerarIndicadores();
   }, 1000);
 }
-
+async function gerarTelaFiliais() {}
+async function verificarFiltros() {
+  if (!filtros.filial1.filial.value && !filtros.filial2.filial.value && !filtros.filial1.promocao.value && !filtros.filial2.promocao.value) {
+    await gerarTelaSemFiltro();
+  }
+}
+async function carregarFiltros() {
+  if (filtros.filial1.filial.value || filtros.filial2.filial.value) {
+  } else {
+    await verificarFiltros();
+  }
+}
+async function carregarBody(event) {
+  await carregarFiltros();
+}
 // eventos:
 addEventListener("load", carregarBody);
