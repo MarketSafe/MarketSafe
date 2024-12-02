@@ -175,37 +175,37 @@
     }
 
     function carregarBody() {
-    document.getElementById('select_mes').addEventListener('change', cadastrarMes);
-    document.getElementById('selectSemana').addEventListener('change', cadastrarMes);
+        document.getElementById('select_mes').addEventListener('change', cadastrarMes);
+        document.getElementById('selectSemana').addEventListener('change', cadastrarMes);
 
-async function cadastrarMes() {
-    const selectMes = document.getElementById('select_mes');
-    const selectSemana = document.getElementById('selectSemana');
+        async function cadastrarMes() {
+            const selectMes = document.getElementById('select_mes');
+            const selectSemana = document.getElementById('selectSemana');
 
-    // Obter os valores selecionados
-    const mes = selectMes.value;
-    const semana = selectSemana.value;
+            // Obter os valores selecionados
+            const mes = selectMes.value;
+            const semana = selectSemana.value;
 
-    try {
-        const resposta = await fetch(`/historicoLeo/cadastrarMes/${mes}/${semana}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+            try {
+                const resposta = await fetch(`/historicoLeo/cadastrarMes/${mes}/${semana}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
 
-        if (resposta.ok) {
-            const dados = await resposta.json();
-            console.log(dados);
-            // Aqui você pode exibir os dados, como em uma tabela ou gráfico
-        } else {
-            throw new Error(`Erro: ${resposta.status}`);
+                if (resposta.ok) {
+                    const dados = await resposta.json();
+                    console.log(dados);
+                    // Aqui você pode exibir os dados, como em uma tabela ou gráfico
+                } else {
+                    throw new Error(`Erro: ${resposta.status}`);
+                }
+            } catch (erro) {
+                alert("Erro ao carregar os dados!");
+                console.error("Erro ao carregar os dados:", erro);
+            }
         }
-    } catch (erro) {
-        alert("Erro ao carregar os dados!");
-        console.error("Erro ao carregar os dados:", erro);
-    }
-}
 
         function cadastrarRanking(ranking) {
             const totem = ranking.map(item => item.totem)
@@ -433,20 +433,21 @@ async function cadastrarMes() {
         buscarDadosTaxa()
 
         function cadastrarHora(especifico) {
-            var hora;
             especifico.sort((a, b) => a.hora - b.hora);
+
+            // Formata as horas manualmente no formato HH:mm
             const horaMomento = especifico.map(item => {
-                hora = new Date();
-                hora.setHours(item.hora);
-                hora.setMinutes(0);
-                hora.setSeconds(0);
-                hora.setMilliseconds(0);
-                return hora.toISOString();
+                const hora = new Date();
+                hora.setHours(item.hora, 0, 0, 0);
+                const horas = hora.getHours().toString().padStart(2, '0');
+                const minutos = hora.getMinutes().toString().padStart(2, '0');
+                return `${horas}:${minutos}`;
             });
 
             // Extrai os valores de total_alertas para criar o gráfico
             const total_alertas = especifico.map(item => item.total_alertas);
 
+            // Configuração do gráfico
             var options = {
                 series: [{
                     name: 'Total de alertas por hora',
@@ -490,10 +491,6 @@ async function cadastrarMes() {
                             colors: '#ffffff',
                             fontFamily: 'Abel'
                         },
-                        formatter: function (value) {
-                            var hour = value < 10 ? '0' + value : value;
-                            return hour + ':00';
-                        }
                     },
                     categories: horaMomento
                 },
@@ -517,8 +514,7 @@ async function cadastrarMes() {
                     },
                     x: {
                         formatter: function (value) {
-                            var hour = value < 10 ? '0' + value : value;
-                            return hour + ':00';
+                            return value;
                         }
                     },
                     style: {
@@ -556,205 +552,205 @@ async function cadastrarMes() {
         buscarDadosHora();
 
         function atualizarRankingDia() {
-    var selectMes = document.getElementById("select_mes");
-    var selectSemana = document.getElementById("selectSemana");
+            var selectMes = document.getElementById("select_mes");
+            var selectSemana = document.getElementById("selectSemana");
 
-    var mes = Number(selectMes.value);
-    var semana = Number(selectSemana.value);
+            var mes = Number(selectMes.value);
+            var semana = Number(selectSemana.value);
 
-    // Verificar se mês e semana foram selecionados
-    if (!mes || semana === 0) {
-        alert("Por favor, selecione um mês e uma semana!");
-        return;
+            // Verificar se mês e semana foram selecionados
+            if (!mes || semana === 0) {
+                alert("Por favor, selecione um mês e uma semana!");
+                return;
+            }
+
+            // Atualizar ranking com base no mês e na semana selecionados
+            fetch(`/historicoLeo/atualizarMesRanking?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (ranking) {
+                    cadastrarRanking(ranking);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar taxa com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarMesTaxa?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (taxa) {
+                    console.log(taxa);
+                    cadastrarTaxa(taxa);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar dados específicos com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarMesEspecifico?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (especifico) {
+                    // console.log(especifico);
+                    cadastrarHora(especifico);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar dados do mês com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarMaisAlerta?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    if (!resposta.ok) {
+                        throw new Error(`Erro na resposta: ${resposta.status}`);
+                    }
+                    return resposta.json();
+                })
+                .then(function (mesAtualizado) {
+                    console.log("Mês atualizado:", mesAtualizado);
+                    maisAlerta(mesAtualizado);
+                    console.log(mesAtualizado);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar alertas por semana com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarAlertaSemana?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    if (!resposta.ok) {
+                        throw new Error(`Erro na resposta: ${resposta.status}`);
+                    }
+                    return resposta.json();
+                })
+                .then(function (mesAtualizado) {
+                    alertaSemana(mesAtualizado);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar média de horário com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarMediaHorario?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    console.log(resposta.status);
+                    if (!resposta.ok) {
+                        throw new Error(`Erro na resposta: ${resposta.status}`);
+                    }
+                    return resposta.json();
+                })
+                .then(function (mesAtualizado) {
+                    mediaHorario(mesAtualizado);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            function maisAlerta(mes) {
+                const MaisAlerta = document.getElementById("MaisAlerta");
+                if (!MaisAlerta) {
+                    console.error("Elemento 'MaisAlerta' não encontrado.");
+                    return;
+                }
+
+                fetch(`/historicoLeo/maisAlerta?mes=${mes}&semana_do_mes=${semana}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (resposta) {
+                        if (!resposta.ok) {
+                            throw new Error(`Erro na resposta: ${resposta.status}`);
+                        }
+                        return resposta.json();
+                    })
+                    .then(function (dados) {
+                        dados.forEach((dado) => {
+                            MaisAlerta.innerHTML = `${mes[0].hora}:00`;
+                        });
+                    })
+                    .catch(function (erro) {
+                        console.error("Erro ao buscar alertas:", erro);
+                    });
+            }
+
+            function alertaSemana(mes) {
+                const AlertaSemana = document.getElementById("AlertaSemana");
+                if (!AlertaSemana) {
+                    console.error("Elemento 'AlertaSemana' não encontrado.");
+                    return;
+                }
+
+                fetch(`/historicoLeo/alertaSemana?mes=${mes}&semana_do_mes=${semana}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (resposta) {
+                        if (!resposta.ok) {
+                            throw new Error(`Erro na resposta: ${resposta.status}`);
+                        }
+                        return resposta.json();
+                    })
+                    .then(function (dados) {
+                        dados.forEach((dado) => {
+                            AlertaSemana.innerHTML = `${mes[0].dia_mes}`;
+                        });
+                    })
+                    .catch(function (erro) {
+                        console.error("Erro ao buscar alertas:", erro);
+                    });
+            }
+
+            function mediaHorario(mes) {
+                const MediaHorario = document.getElementById("MediaHorario");
+                if (!MediaHorario) {
+                    console.error("Elemento 'MediaHorario' não encontrado.");
+                    return;
+                }
+
+                fetch(`/historicoLeo/mediaHorario?mes=${mes}&semana_do_mes=${semana}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (resposta) {
+                        if (!resposta.ok) {
+                            throw new Error(`Erro na resposta: ${resposta.status}`);
+                        }
+                        return resposta.json();
+                    })
+                    .then(function (dados) {
+                        dados.forEach((dado) => {
+                            MediaHorario.innerHTML = `${mes[0].hora_alerta}:00`;
+                        });
+                    })
+                    .catch(function (erro) {
+                        console.error("Erro ao buscar alertas:", erro);
+                    });
+            }
+
+        }
+        document.getElementById('select_mes').addEventListener("change", atualizarRankingDia);
+        document.getElementById('selectSemana').addEventListener("change", atualizarRankingDia);
     }
-
-    // Atualizar ranking com base no mês e na semana selecionados
-    fetch(`/historicoLeo/atualizarMesRanking?mes=${mes}&semana_do_mes=${semana}`, {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            return resposta.json();
-        })
-        .then(function (ranking) {
-            cadastrarRanking(ranking);
-        })
-        .catch(function (erro) {
-            alert(erro);
-        });
-
-    // Atualizar taxa com base no mês e semana selecionados
-    fetch(`/historicoLeo/atualizarMesTaxa?mes=${mes}&semana_do_mes=${semana}`, {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            return resposta.json();
-        })
-        .then(function (taxa) {
-            console.log(taxa);
-            cadastrarTaxa(taxa);
-        })
-        .catch(function (erro) {
-            alert(erro);
-        });
-
-    // Atualizar dados específicos com base no mês e semana selecionados
-    fetch(`/historicoLeo/atualizarMesEspecifico?mes=${mes}&semana_do_mes=${semana}`, {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            return resposta.json();
-        })
-        .then(function (especifico) {
-            // console.log(especifico);
-            cadastrarHora(especifico);
-        })
-        .catch(function (erro) {
-            alert(erro);
-        });
-
-    // Atualizar dados do mês com base no mês e semana selecionados
-    fetch(`/historicoLeo/atualizarMaisAlerta?mes=${mes}&semana_do_mes=${semana}`, {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            if (!resposta.ok) {
-                throw new Error(`Erro na resposta: ${resposta.status}`);
-            }
-            return resposta.json();
-        })
-        .then(function (mesAtualizado) {
-            console.log("Mês atualizado:", mesAtualizado);
-            maisAlerta(mesAtualizado);
-            console.log(mesAtualizado);
-        })
-        .catch(function (erro) {
-            alert(erro);
-        });
-
-    // Atualizar alertas por semana com base no mês e semana selecionados
-    fetch(`/historicoLeo/atualizarAlertaSemana?mes=${mes}&semana_do_mes=${semana}`, {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            if (!resposta.ok) {
-                throw new Error(`Erro na resposta: ${resposta.status}`);
-            }
-            return resposta.json();
-        })
-        .then(function (mesAtualizado) {
-            alertaSemana(mesAtualizado);
-        })
-        .catch(function (erro) {
-            alert(erro);
-        });
-
-    // Atualizar média de horário com base no mês e semana selecionados
-    fetch(`/historicoLeo/atualizarMediaHorario?mes=${mes}&semana_do_mes=${semana}`, {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            console.log(resposta.status);
-            if (!resposta.ok) {
-                throw new Error(`Erro na resposta: ${resposta.status}`);
-            }
-            return resposta.json();
-        })
-        .then(function (mesAtualizado) {
-            mediaHorario(mesAtualizado);
-        })
-        .catch(function (erro) {
-            alert(erro);
-        });
-
-        function maisAlerta(mes){
-            const MaisAlerta = document.getElementById("MaisAlerta");
-            if (!MaisAlerta) {
-                console.error("Elemento 'MaisAlerta' não encontrado.");
-                return;
-            }
-
-            fetch(`/historicoLeo/maisAlerta?mes=${mes}&semana_do_mes=${semana}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(function (resposta) {
-                    if (!resposta.ok) {
-                        throw new Error(`Erro na resposta: ${resposta.status}`);
-                    }
-                    return resposta.json();
-                })
-                .then(function (dados) {
-                    dados.forEach((dado) => {
-                        MaisAlerta.innerHTML = `${mes[0].hora}:00`;
-                    });
-                })
-                .catch(function (erro) {
-                    console.error("Erro ao buscar alertas:", erro);
-                });
-        }
-
-        function alertaSemana(mes) {
-            const AlertaSemana = document.getElementById("AlertaSemana");
-            if (!AlertaSemana) {
-                console.error("Elemento 'AlertaSemana' não encontrado.");
-                return;
-            }
-
-            fetch(`/historicoLeo/alertaSemana?mes=${mes}&semana_do_mes=${semana}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(function (resposta) {
-                    if (!resposta.ok) {
-                        throw new Error(`Erro na resposta: ${resposta.status}`);
-                    }
-                    return resposta.json();
-                })
-                .then(function (dados) {
-                    dados.forEach((dado) => {
-                        AlertaSemana.innerHTML = `${mes[0].dia_mes}`;
-                    });
-                })
-                .catch(function (erro) {
-                    console.error("Erro ao buscar alertas:", erro);
-                });
-        }
-
-        function mediaHorario(mes) {
-            const MediaHorario = document.getElementById("MediaHorario");
-            if (!MediaHorario) {
-                console.error("Elemento 'MediaHorario' não encontrado.");
-                return;
-            }
-
-            fetch(`/historicoLeo/mediaHorario?mes=${mes}&semana_do_mes=${semana}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(function (resposta) {
-                    if (!resposta.ok) {
-                        throw new Error(`Erro na resposta: ${resposta.status}`);
-                    }
-                    return resposta.json();
-                })
-                .then(function (dados) {
-                    dados.forEach((dado) => {
-                        MediaHorario.innerHTML = `${mes[0].hora_alerta}:00`;
-                    });
-                })
-                .catch(function (erro) {
-                    console.error("Erro ao buscar alertas:", erro);
-                });
-        }
-
-}
-document.getElementById('select_mes').addEventListener("change", atualizarRankingDia);
-document.getElementById('selectSemana').addEventListener("change", atualizarRankingDia);
-}
 </script>
