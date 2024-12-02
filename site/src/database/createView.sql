@@ -6,7 +6,7 @@ create or replace view alerta_ativo as
     *
     from alerta
     where data_hora > date_sub(current_timestamp, interval 5 minute)
-      and data_hora < current_timestamp;
+      and data_hora <= current_timestamp;
 
 select * from alerta_ativo;
 
@@ -18,6 +18,7 @@ create or replace view totem_alerta_ativo as
     from totem t
     left join alerta_ativo a
       on t.id = a.fk_totem
+    where t.data_hora <= current_timestamp
     group by t.id;
 
 select * from totem_alerta_ativo;
@@ -35,6 +36,7 @@ create or replace view filial_taxa_alerta as
     from filial f
     left join totem_alerta_ativo t
       on f.id = t.fk_filial
+    where f.data_hora <= current_timestamp
     group by f.id;
 
 select * from filial_taxa_alerta;
@@ -53,11 +55,9 @@ create or replace view filial_status as
 select * from filial_status;
 
 -- retorna a quantidade de filiais em determinado status:
-create or replace view quantidade_filial_status as
-  select
-    f.status,
-    count(f.id) quantidade
-    from filial_status f
-    group by f.status;
-
-select * from quantidade_filial_status;
+select
+  f.status,
+  count(f.id) quantidade
+  from filial_status f
+  where fk_empresa = 1
+  group by f.status;

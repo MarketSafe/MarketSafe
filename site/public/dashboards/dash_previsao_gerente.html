@@ -87,8 +87,11 @@
             <label>
               <span>Filial</span>
               <div>
-                <select class="filial">
+                <select class="filial" id="selectFilial">
                   <option value="" selected disabled>Filial</option>
+                  <option value="1">Filial 1</option>
+                  <option value="2">Filial 2</option>
+                  <option value="3">Filial 3</option>
                 </select>
               </div>
             </label>
@@ -112,10 +115,11 @@
           </search>
         </header>
         <section class="dashboard">
+          <button onclick="puxarDados()">Teste function</button>
             <div class="dashCima">
               <div class="contentDash">
                 <div class="dashMain">
-              <canvas id="graficoBubble">
+              <canvas id="graficoBubble" style="height: 100%; width: 100%;">
 
               </canvas>
             </div>
@@ -130,6 +134,15 @@
           </div>
         </div>
           <div class="dashBaixo">
+            <!-- Vai se tornar o chart do webcrawler -->
+            <div class="contentDash">
+              <div class="dashMain">
+                <canvas id="graficoBarra">
+  
+                </canvas>
+              </div>
+            </div>
+            <div class="space"></div>
             <div class="ranking">
               <table>
                   <tr class="tableHeader">
@@ -164,6 +177,30 @@
   </body>
 </html>
 <script>
+  var idFilial = selectFilial.value;
+
+  function puxarDados() {
+    fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}`, {
+      method: "GET",
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO puxarDados()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+        resposta.json.then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+        })
+
+      } else {
+        console.error('Nenhum dado encontrado na API');
+      }
+
+    }).catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+    });
+  };
+
   const dataBubble = {
     datasets: [{
       label: 'Atual',
@@ -207,7 +244,13 @@
           },
           grid: {
             color: "#9A9A9A"
-          }
+          },
+          // TO-DO: conseguir mudar o tamanho dos gráficos antes de implementar esse texto
+          // title: {
+          //   display: true,
+          //   text: "Porcentagem de sobrecarga",
+          //   color: "white"
+          // }
         },
         x: {
           ticks: {
@@ -220,7 +263,7 @@
             display: true,
             text: "Dias do mês",
             color: "white"
-          }
+          },
         }
       },
       plugins: {
@@ -228,8 +271,15 @@
           labels: {
             color: "white"
           }
-        }
-      }
+        },
+        
+        // TO-DO: conseguir mudar o tamanho dos gráficos antes de implementar esse texto
+        //   display: true,
+        //   text: "Previsão de taxa de alertas da Filial 5 em relação a promoções",
+        //   color: "white"
+        // }
+      },
+      responsive: true
     }
   };
 
@@ -289,6 +339,11 @@
           },
           grid: {
             color: "#9A9A9A"
+          },
+          title: {
+            display: true,
+            text: "Quantidade de alertas",
+            color: "white"
           }
         },
         x: {
@@ -310,13 +365,78 @@
           labels: {
             color: "white"
           }
+        },
+        title: {
+          display: true,
+          text: "Previsão de quantidade de alertas da Filial IDAQUI deste mês",
+          color: "white"
         }
-      }
+      },
+      responsive: true
     }
   };
 
   let lineChart = new Chart(
     document.getElementById('graficoLinha').getContext('2d'),
     configLine
+  );
+
+  // Vai se tornar o chart do webcrawler
+  const dataBar = {
+    labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    datasets: [{
+      label: '',
+      data: [5, 10, 15, 20, 25],
+      backgroundColor: [
+        'rgba(255, 145, 77)',
+        'rgba(255, 145, 77)',
+        'rgba(255, 145, 77)',
+        'rgba(255, 145, 77)',
+        'rgba(255, 49, 49)',
+      ]
+    }]
+  };
+
+  const configBar = {
+    type: 'bar',
+    data: dataBar,
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            color: "#9A9A9A"
+          }
+        },
+        x: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: "Meses",
+            color: "white"
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: "white"
+          }
+        }
+      },
+      responsive: true
+    }
+  };
+
+  let barChart = new Chart(
+    document.getElementById('graficoBarra').getContext('2d'),
+    configBar
   );
 </script>
