@@ -1,4 +1,4 @@
 node_modules
 package-lock.json
 python/registro.json
-.env
+site/.env
