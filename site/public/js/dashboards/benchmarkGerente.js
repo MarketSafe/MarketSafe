@@ -423,6 +423,11 @@ async function gerarGraficos() {
       };
     }
 
+    if (
+      Array.from(telas).find((tela) => tela.classList.contains("filtro-filiais")).classList.contains()
+    ) {
+    }
+
     chartList["taxaAlerta"] = new Chart(
       divGrafico.querySelector("canvas"),
       config
@@ -438,7 +443,6 @@ async function gerarTelaSemFiltro() {
   Array.from(telas)
     .find((tela) => tela.classList.contains("sem-filtro"))
     .classList.add("ativa");
-  handleSelectsNone(document.querySelectorAll("select"));
   const charts = await gerarGraficos();
   gerarIndicadores();
   setInterval(() => {
@@ -446,8 +450,25 @@ async function gerarTelaSemFiltro() {
     gerarIndicadores();
   }, 1000);
 }
-async function gerarTelaFiliais() {}
+async function gerarTelaFiliais() {
+  for (const tela of telas) {
+    tela.classList.remove("ativa");
+  }
+  Array.from(telas)
+    .find((tela) => tela.classList.contains("filtro-filiais"))
+    .classList.add("ativa");
+  const charts = await gerarGraficos();
+  gerarIndicadores();
+  setInterval(() => {
+    Object.values(charts).forEach((chart) => chart.update());
+    gerarIndicadores();
+  }, 1000);
+}
 async function verificarFiltros() {
+  filtros.filial1.filial.classList.remove("required");
+  filtros.filial2.filial.classList.remove("required");
+  filtros.filial1.promocao.classList.remove("required");
+  filtros.filial2.promocao.classList.remove("required");
   if (
     !filtros.filial1.filial.value &&
     !filtros.filial2.filial.value &&
@@ -455,21 +476,24 @@ async function verificarFiltros() {
     !filtros.filial2.promocao.value
   ) {
     await gerarTelaSemFiltro();
-  } else if (
-    filtros.filial1.filial.value &&
-    filtros.filial2.filial.value
-  ) {
+  } else if (filtros.filial1.filial.value && filtros.filial2.filial.value) {
     await gerarTelaFiliais();
   } else if (
-    !filtros.filial1.promocao.value &&
-    !filtros.filial2.promocao.value
+    !filtros.filial1.filial.value &&
+    !filtros.filial2.filial.value &&
+    (filtros.filial1.promocao.value || filtros.filial2.promocao.value)
   ) {
-    // required nas 2 filiais
+    filtros.filial1.filial.classList.add("required");
+    filtros.filial2.filial.classList.add("required");
+    filtros.filial1.promocao.classList.add("required");
+    filtros.filial2.promocao.classList.add("required");
   } else {
-    //  required em tudo
+    filtros.filial1.filial.classList.add("required");
+    filtros.filial2.filial.classList.add("required");
   }
 }
 async function carregarBody(event) {
+  handleSelectsNone(document.querySelectorAll("select"));
   await verificarFiltros();
 }
 // eventos:
