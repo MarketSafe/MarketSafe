@@ -276,6 +276,9 @@
     var maiorTotem
     var menorTotem
 
+    var minInd
+    var mxInd
+
     var heatmapInstance = h337.create({
         container: document.querySelector(".heatmap"),
     });
@@ -710,8 +713,8 @@
         periodoInicio.value = "2024-11-17"
         periodoFim.value = "2024-11-23"
         
-        totem_select1.value = String(maiorTotem);
-        totem_select2.value = String(menorTotem);
+        totem_select1.value = mxInd + 1;
+        totem_select2.value = minInd + 1;
 
         selecionarCmp(2)
 
@@ -977,25 +980,34 @@
 
                         console.log(resposta)
 
-                        maiorTotem = resposta[0]
+                        maiorTotem = resposta[0].qtd
+                        mxInd = 0
+
+                        console.log(maiorTotem)
+
 
                         for(i = 0; i < countTT; i++){
-                            if (maiorTotem < resposta[i]) {
-                                maiorTotem = resposta[i]
+                            if (maiorTotem < resposta[i].qtd) {
+                                maiorTotem = resposta[i].qtd
+                                mxInd = i
                             }
                         }
     
-                        menorTotem = resposta[0]
+                        menorTotem = resposta[1].qtd
+                        minInd = 1
 
                         for(i = 0; i < countTT; i++){
-                            if (menorTotem < resposta[i]) {
-                                menorTotem = resposta[i]
+                            console.log(menorTotem, maiorTotem)
+                            if(mxInd == i){}
+                            else if (menorTotem < resposta[i].qtd) {
+                                menorTotem = resposta[i].qtd
+                                minInd = i
                             }
                         }
 
-                        sgtTM.innerHTML = String(maiorTotem.totem)
+                        sgtTM.innerHTML = resposta[mxInd].totem
 
-                        sgtMN.innerHTML = String(menorTotem.totem)
+                        sgtMN.innerHTML = resposta[minInd].totem
 
                         heatmapInstance.setData(data);
 
