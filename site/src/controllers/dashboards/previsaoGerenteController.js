@@ -1,7 +1,7 @@
 var previsaoGerenteModel = require("../../models/dashboards/previsaoGerenteModel");
 
 function puxarDados(req, res) {
-    var idFilial = req.params.nomeDaVariavelDoIDDaFilialXD;
+    var idFilial = req.params.idFilial;
 
     console.log(`Puxando dados da Filial ${idFilial}.`);
 
