@@ -100,7 +100,7 @@
             </div>
             <div class="bloco_monitoramento">
                 <!-- 1º Dash Rosca  -->
-                <div class="Dash_Doughs">
+                <div class="Dash_Doughs1">
                     <div class="totem-label">Totem 1</div>
                     <div class="Direcionando_DashRosca1">
                         <div id="chart_Rosca"></div>
@@ -123,7 +123,7 @@
                     </div>
                 </div>
                 <!-- 2º Dash Rosca  -->
-                <div class="Dash_Doughs">
+                <div class="Dash_Doughs2" style="display: none;">
                     <div class="totem-label">Totem 2</div>
                     <div class="Direcionando_DashRosca1">
                         <div id="chart_Rosca2"></div>
@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <!-- 3º Dash Rosca  -->
-                <div class="Dash_Doughs">
+                <div class="Dash_Doughs3"  style="display: none;">
                     <div class="totem-label">Totem 3</div>
                     <div class="Direcionando_DashRosca1">
                         <div id="chart_Rosca3"></div>
@@ -162,6 +162,52 @@
                                     <div class="legenda-cor-bola2"></div>
                                     <div style="font-family: Abel;">
                                         <div class="Text_Cpu" id="Cpu_T3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4º Dash Rosca  -->
+                <div class="Dash_Doughs4"  style="display: none;">
+                    <div class="totem-label">Totem 4</div>
+                    <div class="Direcionando_DashRosca1">
+                        <div id="chart_Rosca4"></div>
+                        <div class="legenda">
+                            <div class="legenda-item">
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Ram" id="Ram_T4"></div>
+                                    </div>
+                                </div>
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola2"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Cpu" id="Cpu_T4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5º Dash Rosca  -->
+                <div class="Dash_Doughs5"  style="display: none;">
+                    <div class="totem-label">Totem 5</div>
+                    <div class="Direcionando_DashRosca1">
+                        <div id="chart_Rosca5"></div>
+                        <div class="legenda">
+                            <div class="legenda-item">
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Ram" id="Ram_T5"></div>
+                                    </div>
+                                </div>
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola2"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Cpu" id="Cpu_T5"></div>
                                     </div>
                                 </div>
                             </div>
@@ -553,6 +599,81 @@
 
     var chart5 = new ApexCharts(document.querySelector("#chart_Rosca3"), options5);
     chart5.render();
+    var tempo = 0;
+
+        // 4º Gráfico 
+
+        var options6 = {
+        series: [0, 0],
+        chart: {
+            width: 200,
+            height: 200,
+            type: 'radialBar'
+        },
+        plotOptions: {
+            radialBar: {
+                hollow: {
+                    size: '50%'
+                },
+                track: {
+                    background: '#CCCCCC',
+                    strokeWidth: '100%',
+                },
+                dataLabels: {
+                    show: false
+                }
+            }
+        },
+        colors: ['#FF4560', '#FFA500'],
+        labels: ['RAM', 'CPU'],
+        legend: {
+            show: false
+        },
+        stroke: {
+            lineCap: 'round'
+        }
+    };
+
+    var chart6 = new ApexCharts(document.querySelector("#chart_Rosca4"), options6);
+    chart6.render();
+    var tempo = 0;
+
+    
+        // 4º Gráfico 
+
+        var options7 = {
+        series: [0, 0],
+        chart: {
+            width: 200,
+            height: 200,
+            type: 'radialBar'
+        },
+        plotOptions: {
+            radialBar: {
+                hollow: {
+                    size: '50%'
+                },
+                track: {
+                    background: '#CCCCCC',
+                    strokeWidth: '100%',
+                },
+                dataLabels: {
+                    show: false
+                }
+            }
+        },
+        colors: ['#FF4560', '#FFA500'],
+        labels: ['RAM', 'CPU'],
+        legend: {
+            show: false
+        },
+        stroke: {
+            lineCap: 'round'
+        }
+    };
+
+    var chart7 = new ApexCharts(document.querySelector("#chart_Rosca5"), options7);
+    chart7.render();
     var tempo = 0;
 
     // --------- CPU do Totem 1 ------------//
@@ -1129,7 +1250,10 @@
         const valorCPU = VetorCpuT4[0] || 0;
         const valorRAM = VetorRamT4[0] || 0;
 
-        //chart6.updateSeries([valorRAM, valorCPU]);
+        chart6.updateSeries([valorRAM, valorCPU]);
+
+        Ram_T4.innerHTML = `Ram - ${valorRAM}%`;
+        Cpu_T4.innerHTML = `Cpu - ${valorCPU}%`;
 
         // console.log(VetorCpuT4, VetorRamT4)
         verificarDash(4, "CPU", valorCPU);
@@ -1146,7 +1270,10 @@
         const valorCPU = VetorCpuT5[0] || 0;
         const valorRAM = VetorRamT5[0] || 0;
 
-        //chart7.updateSeries([valorRAM, valorCPU]);
+        chart7.updateSeries([valorRAM, valorCPU]);
+
+        Ram_T5.innerHTML = `Ram - ${valorRAM}%`;
+        Cpu_T5.innerHTML = `Cpu - ${valorCPU}%`;
 
         // console.log(VetorCpuT5, VetorRamT5)
 
@@ -1331,5 +1458,37 @@
     }
     setInterval(QtdTotensComProblema, 3000);
 
+    // ------------ Totens Instáveis -------------- //
+
+    function plotarMaioresValores() {
+    const totens = [
+        { id: 'Dash_Doughs1', cpu: Math.round(VetorCpuT1[VetorCpuT1.length - 1]), ram: Math.round(VetorRamT1[VetorRamT1.length - 1]) },
+        { id: 'Dash_Doughs2', cpu: Math.round(VetorCpuT2[VetorCpuT2.length - 1]), ram: Math.round(VetorRamT2[VetorRamT2.length - 1]) },
+        { id: 'Dash_Doughs3', cpu: Math.round(VetorCpuT3[VetorCpuT3.length - 1]), ram: Math.round(VetorRamT3[VetorRamT3.length - 1]) },
+        { id: 'Dash_Doughs4', cpu: Math.round(VetorCpuT4[VetorCpuT4.length - 1]), ram: Math.round(VetorRamT4[VetorRamT4.length - 1]) },
+        { id: 'Dash_Doughs5', cpu: Math.round(VetorCpuT5[VetorCpuT5.length - 1]), ram: Math.round(VetorRamT5[VetorRamT5.length - 1]) }
+    ];
+
+    // Combine CPU e RAM em um único valor para cada totem (opcional)
+    totens.forEach(toten => {
+        toten.combined = toten.cpu + toten.ram; // Soma CPU e RAM como métrica combinada
+    });
+
+    // Ordena os totens pela métrica combinada (ou use toten.cpu para ordenar só por CPU, ou toten.ram para só RAM)
+    const topTotens = totens.sort((a, b) => b.combined - a.combined).slice(0, 3);
+
+    // Itera sobre os totens para exibir ou ocultar
+    totens.forEach(toten => {
+        const element = document.getElementsByClassName(toten.id)[0];
+        if (element) {
+            if (topTotens.some(top => top.id === toten.id)) {
+                element.style.display = 'block'; 
+            } else {
+                element.style.display = 'none';
+            }
+        }
+    });
+}
+setInterval(plotarMaioresValores, 1000);
 
 </script>
