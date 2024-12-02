@@ -48,7 +48,7 @@ app.use("/ranking", rankingRouter);
 app.use("/historicoLeo", historicoLeoRouter);
 app.use("/monitoramento", monitoramentoRouterIsaque);
 app.use("/benchmarkGerente", util.auth, benchmarkGerenteRouter);
-app.use("/previsaoGerente", util.auth, previsaoGerenteRouter);
+app.use("/previsaoGerenteRouter", util.auth, previsaoGerenteRouter);
 app.use("/s3", getS3ObjectsRouter);
 
 //   configura arquivos estáticos (*.html, *.css, *.js):

@@ -180,8 +180,8 @@
   var idFilial = selectFilial.value;
 
   function puxarDados() {
-    fetch(`../../previsaoGerenteRouter/puxarDados/${idFilial}`, {
-      method: "GET"
+    fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}`, {
+      method: "GET",
     }).then(function (resposta) {
       console.log("ESTOU NO THEN DO puxarDados()!")
 
