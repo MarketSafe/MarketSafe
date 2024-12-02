@@ -567,3 +567,27 @@ select * from funcionario;
 select * from totem;
 
 select * from alerta;
+
+create table TotensProblema(
+  id int primary key auto_increment,
+  data_hora timestamp default current_timestamp,
+  cpu_porcentagem decimal(6, 2),
+  ram_porcentagem decimal(6, 2),
+  fk_totem int not null,
+  fk_promocao int,
+  
+  constraint TotensProblema_fk_totem foreign key (fk_totem) references totem(id),
+  constraint TotensProblema_fk_promocao foreign key (fk_promocao) references promocao(id)
+);
+
+create table monitoramento(
+  id int primary key auto_increment,
+  data_hora timestamp default current_timestamp,
+  cpu_porcentagem decimal(6, 2),
+  ram_porcentagem decimal(6, 2),
+  fk_totem int not null,
+  fk_promocao int,
+  
+  constraint monitoramento_fk_totem foreign key (fk_totem) references totem(id),
+  constraint monitoramento_fk_promocao foreign key (fk_promocao) references promocao(id)
+);
