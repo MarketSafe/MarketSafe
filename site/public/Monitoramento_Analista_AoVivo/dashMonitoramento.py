@@ -10,11 +10,9 @@ from requests import HTTPError
 import boto3
 import dotenv
 
-descanso = 1
+descanso = 5 * 60
 
-while descanso != 0:
-
-    time.sleep(descanso)
+while True:
 
     dadoCPU_Totem1 = psutil.cpu_percent()   
     memoriaRam_Totem1 = psutil.virtual_memory().percent
@@ -201,7 +199,8 @@ while descanso != 0:
                     cpu.append(dadoCPU_Totem1)
                     ram.append(memoriaRam_Totem1)
                     totem_id.append(5)
-                    
+                
+                enviarAlertaJira(cpu, ram, totem_id)
                     
                 
         
@@ -211,6 +210,8 @@ while descanso != 0:
 
     cursor.close()
     mydb.close()
+
+    time.sleep(descanso)
 
 #    print ( "{:.2f}GB".format(disco_utilizado))
 
