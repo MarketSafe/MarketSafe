@@ -125,9 +125,12 @@ function listarTodosAlertas() {
     t.totem AS totem, 
     COALESCE(COUNT(a.id), 0) AS qtd
 FROM 
-    (SELECT 1 AS totem 
-     UNION ALL 
-     SELECT 2) AS t
+    (SELECT 1 AS totem UNION ALL
+     SELECT 2 UNION ALL
+     SELECT 3 UNION ALL
+     SELECT 4 UNION ALL
+     SELECT 5 UNION ALL
+     SELECT 6) AS t
 LEFT JOIN 
     alerta a 
 ON 
