@@ -1,22 +1,23 @@
 var historicoLeoModel = require("../models/historicoLeoModel");
 
 function cadastrarMes(req, res) {
-    historicoLeoModel.cadastrarMes()
+    const { mes, semana_do_mes } = req.params;
+    historicoLeoModel.cadastrarMes(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
-                res.json(resultado);
-            } 
+                // Se resultados forem encontrados, envia os dados
+                res.status(200).json(resultado);
+            } else {
+                // Se não houver resultados, envia um status 404
+                res.status(404).json({ mensagem: "Nenhum dado encontrado para este período." });
+            }
         })
+        .catch(erro => {
+            console.error("Erro ao buscar dados:", erro);
+            res.status(500).json({ mensagem: "Erro no servidor ao buscar os dados." });
+        });
 }
 
-function cadastrarDia(req, res) {
-    historicoLeoModel.cadastrarDia()
-        .then(resultado => {
-            if (resultado.length > 0) {
-                res.json(resultado);
-            } 
-        })
-}
 
 function cadastrarRanking(req, res) {
     historicoLeoModel.cadastrarRanking()
@@ -31,7 +32,7 @@ function cadastrarTaxa(req, res) {
     historicoLeoModel.cadastrarTaxa()
         .then(resultado => {
             if (resultado.length > 0) {
-                res.json(resultado);
+                res.status(200).json(resultado);
             } 
         })
 }
@@ -72,13 +73,73 @@ function atualizarMesRanking(req, res, mes) {
         })
 }
 
+function maisAlerta(req, res) {
+    historicoLeoModel.maisAlerta()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function atualizarMaisAlerta(req, res, mes) {
+    historicoLeoModel.atualizarMaisAlerta(mes)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function alertaSemana(req, res) {
+    historicoLeoModel.alertaSemana()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function atualizarAlertaSemana(req, res, mes) {
+    historicoLeoModel.atualizarAlertaSemana(mes)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function mediaHorario(req, res) {
+    historicoLeoModel.mediaHorario()
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
+function atualizarMediaHorario(req, res, mes) {
+    // console.log(req.query)
+    historicoLeoModel.atualizarMediaHorario(mes)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } 
+        })
+}
+
 module.exports = {
     cadastrarMes,
-    cadastrarDia,
     cadastrarRanking,
     cadastrarTaxa,
     cadastrarHora,
     atualizarMesTaxa,
     atualizarMesEspecifico,
-    atualizarMesRanking
+    atualizarMesRanking,
+    maisAlerta,
+    atualizarMaisAlerta,
+    alertaSemana,
+    atualizarAlertaSemana,
+    mediaHorario,
+    atualizarMediaHorario
   }

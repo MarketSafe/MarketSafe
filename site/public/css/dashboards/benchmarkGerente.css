@@ -9,9 +9,10 @@
   --shadow-color: #0000007f;
 
   --div-color: #616161ff;
+  --dashboard-color: #3a3b47ff;
   --header-color: #31333cff;
   --background-color: #292935ff;
-  --dashboard-color: #3a3b47ff;
+  --indicador-color: #1e1f27;
 
   --gerente-color: #ff3131ff;
   --analista-color: #e9864aff;
@@ -236,7 +237,13 @@ body {
       & > section.dashboard {
         gap: 1rem;
         flex: 1;
+        display: none;
 
+        &.ativa {
+          display: flex;
+        }
+      }
+      & > section.dashboard.sem-filtro {
         & > section {
           flex-direction: row;
           align-items: stretch;
@@ -261,7 +268,9 @@ body {
             gap: 1rem;
 
             & > section {
+              justify-content: space-between;
               gap: 1rem;
+              flex: 1;
 
               & > h2 {
                 text-align: center;
@@ -270,7 +279,9 @@ body {
               & > div {
                 border-radius: 10px;
                 padding: 0.5rem 1rem;
-                background-color: red;
+                background-color: var(--indicador-color);
+                aspect-ratio: 148.52 / 109.31;
+                min-width: 10.868rem;
 
                 & > h3 {
                   text-align: center;
@@ -283,6 +294,13 @@ body {
               }
             }
           }
+          & .alerta {
+            & > div {
+              border-radius: 10px;
+              padding: 0.5rem 1rem;
+              background-color: var(--gerente-color);
+            }
+          }
         }
         & > section.graficos > section > div.grafico {
           position: relative;
@@ -291,6 +309,47 @@ body {
           & > canvas {
             width: 100%;
             height: 100%;
+          }
+        }
+      }
+      & > section.dashboard.filtro-filiais {
+        flex-direction: row;
+        align-items: stretch;
+
+        & > * {
+          align-items: stretch;
+          flex: 1;
+          border-radius: 10px;
+          padding: 2rem;
+          background-color: var(--header-color);
+          width: 100%;
+          & > section.indicadores {
+            align-items: stretch;
+            flex: 1;
+
+            & > section {
+              flex-direction: row;
+              align-items: stretch;
+              flex: 1;
+  
+              & > div {
+                flex: 1;
+                padding: 1rem;
+                background-color: var(--indicador-color);
+  
+                & > h2 {
+                  text-align: center;
+                  font-size: 2rem;
+                }
+                & > span.numero {
+                  font-size: 3rem;
+                  font-family: "Noto Serif", serif;
+                }
+              }
+            }
+            & > section:nth-of-type(even) > div {
+              background-color: var(--gerente-color);
+            }
           }
         }
       }

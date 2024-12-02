@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
-<body>
+<body onload="carregarBody()">
     <div class="container">
         <div class="menu">
             <div class="div_logo">
@@ -66,9 +66,25 @@
                     <div class="select_periodo">
                         <select name="ano" id="select_mes">
                             <option selected value="">MÊS</option>
+                            <option value=1>Janeiro</option>
+                            <option value=2>Fevereiro</option>
+                            <option value=3>Março</option>
+                            <option value=4>Abril</option>
+                            <option value=5>Maio</option>
+                            <option value=6>Junho</option>
+                            <option value=7>Julho</option>
+                            <option value=8>Agosto</option>
+                            <option value=9>Setembro</option>
+                            <option value=10>Outubro</option>
+                            <option value=11>Novembro</option>
+                            <option value=12>Dezembro</option>
                         </select>
-                        <select name="ano" id="select_dia">
-                            <option selected value="">DIAS</option>
+                        <select id="selectSemana">
+                            <option disabled selected value=0>Selecione a Semana</option>
+                            <option value=1>Semana 1</option>
+                            <option value=2>Semana 2</option>
+                            <option value=3>Semana 3</option>
+                            <option value=4>Semana 4</option>
                         </select>
                     </div>
                 </div>
@@ -89,7 +105,15 @@
                             <p>Horário com maior número de alertas</p>
                         </div>
                         <div class="hora">
-                            <p></p>
+                            <p id="MaisAlerta"></p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="texto">
+                            <p>Dia da semana com mais alertas</p>
+                        </div>
+                        <div class="hora">
+                            <p id="AlertaSemana"></p>
                         </div>
                     </div>
                     <div class="media">
@@ -97,15 +121,7 @@
                             <p>Média de horário com mais movimento</p>
                         </div>
                         <div class="hora">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="texto">
-                            <p>Média de horário com mais movimento</p>
-                        </div>
-                        <div class="hora">
-                            <p></p>
+                            <p id="MediaHorario"></p>
                         </div>
                     </div>
                 </div>
@@ -154,449 +170,587 @@
             cadastrarTaxa()
         } else if (selectTaxa == 1) {
             grafico3.style.display = "block"
-            cadastrarHora()
+            buscarDadosHora();
         }
     }
 
-    cadastrarMes();
-    function cadastrarMes() {
-        fetch("/historicoLeo/cadastrarMes", {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                console.log(resposta)
-                return resposta.json();
-            })
-            .then(function (meses) {
-                console.log(meses)
-                var select_mes = document.getElementById('select_mes');
-                meses.forEach((mes) => {
-                    select_mes.innerHTML += `<option value="${mes.mes}">${mes.mes}</option>`;
-                    atualizarRankingDia()
+    function carregarBody() {
+        document.getElementById('select_mes').addEventListener('change', cadastrarMes);
+        document.getElementById('selectSemana').addEventListener('change', cadastrarMes);
+
+        async function cadastrarMes() {
+            const selectMes = document.getElementById('select_mes');
+            const selectSemana = document.getElementById('selectSemana');
+
+            // Obter os valores selecionados
+            const mes = selectMes.value;
+            const semana = selectSemana.value;
+
+            try {
+                const resposta = await fetch(`/historicoLeo/cadastrarMes/${mes}/${semana}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 });
-            })
-            .catch(function (erro) {
-                alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
-            });
-    }
 
-
-    function cadastrarDia() {
-        fetch("/historicoLeo/cadastrarDia", {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .then(function (dias) {
-                var select_dia = document.getElementById('select_dia');
-                dias.forEach((dia) => {
-                    select_dia.innerHTML += `<option value="${dia.id}">${dia.intervalo_dias}</option>`;
-                });
-            })
-            .catch(function (erro) {
-                alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
-            });
-    }
-
-    cadastrarDia();
-
-    function cadastrarRanking(ranking) {
-        const totem = ranking.map(item => item.totem)
-        const idTotem = ranking.map(item => item.idTotem)
-        const total_alertas = ranking.map(item => item.total_alertas)
-        console.log(total_alertas)
-        var options = {
-            series: [{
-                name: "Total de alertas do totem",
-                data: total_alertas,
-            }],
-            chart: {
-                type: 'bar',
-                height: 300,
-                width: 600,
-                toolbar: {
-                    show: false
+                if (resposta.ok) {
+                    const dados = await resposta.json();
+                    console.log(dados);
+                    // Aqui você pode exibir os dados, como em uma tabela ou gráfico
+                } else {
+                    throw new Error(`Erro: ${resposta.status}`);
                 }
-            },
-            plotOptions: {
-                bar: {
-                    borderRadiusApplication: 'end',
-                    horizontal: true,
-                    colors: {
-                        ranges: [{
-                            from: 0,
-                            to: 100,
-                            color: '#FF8818' // Cor das barras
-                        }]
-                    }
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            xaxis: {
-                min: 0,
-                max: 100,
-                categories: idTotem,
-                title: {
-                    text: 'Número de alertas por totem',
-                    fontFamily: 'Abel',
-                    style: {
-                        color: '#ffffff'
-                    }
-                },
-                labels: {
-                    style: {
-                        colors: "#FFFFFF",
-                        fontFamily: "Abel"
-                    }
-                }
-            },
-            yaxis: {
-                formatter: function (value) {
-                    return value;
-                },
-                labels: {
-                    style: {
-                        colors: "#ffffff"
-                    }
-                }
-            },
-            tooltip: {
-                theme: 'dark',  // Define o tema escuro para o tooltip
-                style: {
-                    fontFamily: 'Abel',
-                    fontSize: '14px',
-                    color: '#fff'
-                },
-                marker: {
-                    show: false
-                }
+            } catch (erro) {
+                alert("Erro ao carregar os dados!");
+                console.error("Erro ao carregar os dados:", erro);
             }
-        };
-
-        if (!window.chartGRAFICO) {
-            window.chartGRAFICO = new ApexCharts(document.querySelector("#rank"), options);
-            window.chartGRAFICO.render();
-        } else {
-            window.chartGRAFICO.updateOptions(options);
         }
-    }
 
-    function buscarDadosRanking() {
-        fetch("/historicoLeo/cadastrarRanking", {
-            method: "GET"
-        })
-            .then(resposta => resposta.json())
-            .then(ranking => {
-                console.log(ranking)
-                cadastrarRanking(ranking);
-            }
-            )
-    }
-    buscarDadosRanking()
-
-    function cadastrarTaxa(taxa) {
-        const dia = taxa.map(item => item.dia);
-        const taxa_porcentagem = taxa.map(item => item.taxa_porcentagem);
-
-        // Configuração do gráfico
-        var options = {
-            series: [{
-                name: "Percentual total",
-                data: taxa_porcentagem
-            }],
-            chart: {
-                height: 290,
-                width: 700,
-                type: 'line',
-                zoom: {
+        function cadastrarRanking(ranking) {
+            const totem = ranking.map(item => item.totem)
+            const idTotem = ranking.map(item => item.idTotem)
+            const total_alertas = ranking.map(item => item.total_alertas)
+            //console.log(total_alertas)
+            var options = {
+                series: [{
+                    name: "Total de alertas do totem",
+                    data: total_alertas,
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 300,
+                    width: 600,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadiusApplication: 'end',
+                        horizontal: true,
+                        colors: {
+                            ranges: [{
+                                from: 0,
+                                to: 100,
+                                color: '#FF8818' // Cor das barras
+                            }]
+                        }
+                    }
+                },
+                dataLabels: {
                     enabled: false
                 },
-                toolbar: {
-                    show: false
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'straight',
-                colors: ['#FF8818']
-            },
-            grid: {
-                row: {
-                    colors: ['transparent', 'transparent'],
-                    opacity: 0.5
-                },
-            },
-            xaxis: {
-                categories: dia,
-                labels: {
-                    style: {
-                        colors: "#ffffff",
-                        fontFamily: "Abel"
+                xaxis: {
+                    min: 0,
+                    max: 100,
+                    categories: idTotem,
+                    title: {
+                        text: 'Número de alertas por totem',
+                        fontFamily: 'Abel',
+                        style: {
+                            color: '#ffffff'
+                        }
                     },
+                    labels: {
+                        style: {
+                            colors: "#FFFFFF",
+                            fontFamily: "Abel"
+                        }
+                    }
+                },
+                yaxis: {
                     formatter: function (value) {
-                        const date = new Date(value);
-                        if (isNaN(date.getTime())) return value;
-                        return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+                        return value;
+                    },
+                    labels: {
+                        style: {
+                            colors: "#ffffff"
+                        }
+                    }
+                },
+                tooltip: {
+                    theme: 'dark',  // Define o tema escuro para o tooltip
+                    style: {
+                        fontFamily: 'Abel',
+                        fontSize: '14px',
+                        color: '#fff'
+                    },
+                    marker: {
+                        show: false
                     }
                 }
-            },
-            yaxis: {
+            };
+
+            if (!window.chartGRAFICO) {
+                window.chartGRAFICO = new ApexCharts(document.querySelector("#rank"), options);
+                window.chartGRAFICO.render();
+            } else {
+                window.chartGRAFICO.updateOptions(options);
+            }
+        }
+
+        function buscarDadosRanking() {
+            fetch("/historicoLeo/cadastrarRanking", {
+                method: "GET"
+            })
+                .then(resposta => resposta.json())
+                .then(ranking => {
+                    //console.log(ranking)
+                    cadastrarRanking(ranking);
+                }
+                )
+                .catch(function (erro) {
+                    alert(erro);
+                    //console.log("Erro ao carregar linhas:", erro);
+                });
+        }
+        buscarDadosRanking()
+
+        function cadastrarTaxa(taxa) {
+            console.log(taxa)
+            const dia = taxa.map(item => item.dia);
+            const taxa_porcentagem = taxa.map(item => item.taxa_porcentagem);
+
+            // Configuração do gráfico
+            var options = {
+                series: [{
+                    name: "Percentual total",
+                    data: taxa_porcentagem
+                }],
+                chart: {
+                    height: 290,
+                    width: 700,
+                    type: 'line',
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: {
+                        show: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'straight',
+                    colors: ['#FF8818']
+                },
+                grid: {
+                    row: {
+                        colors: ['transparent', 'transparent'],
+                        opacity: 0.5
+                    },
+                },
+                xaxis: {
+                    categories: dia,
+                    labels: {
+                        style: {
+                            colors: "#ffffff",
+                            fontFamily: "Abel"
+                        },
+                        formatter: function (value) {
+                            const date = new Date(value);
+                            if (isNaN(date.getTime())) return value;
+                            return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+                        }
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Taxa de alerta do total de totens',
+                        align: 'center',
+                        style: {
+                            color: '#ffffff',
+                            fontFamily: 'Abel'
+                        }
+                    },
+                    labels: {
+                        style: {
+                            colors: "#ffffff",
+                            fontFamily: "Abel"
+                        },
+                        formatter: function (value) {
+                            return value + "%";
+                        },
+                    }
+                },
+                tooltip: {
+                    theme: 'dark',
+                    style: {
+                        fontFamily: 'Abel',
+                        fontSize: '14px',
+                        color: '#fff'
+                    },
+                    marker: {
+                        show: false
+                    },
+                    x: {
+                        formatter: function (value) {
+                            const date = new Date(value);
+                            if (isNaN(date.getTime())) return value;
+                            return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
+                        }
+                    },
+                    y: {
+                        formatter: function (value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            };
+
+            // Inicializa ou atualiza o gráfico
+            if (!window.chartTAXA) {
+                const chartElement = document.querySelector("#taxa");
+                if (!chartElement) {
+                    console.error("Elemento '#taxa' não encontrado no DOM.");
+                    return;
+                }
+                window.chartTAXA = new ApexCharts(chartElement, options);
+                window.chartTAXA.render();
+            } else {
+                window.chartTAXA.updateOptions(options).catch(err => {
+                    console.error("Erro ao atualizar o gráfico:", err);
+                });
+            }
+        }
+        function buscarDadosTaxa() {
+            fetch("/historicoLeo/cadastrarTaxa", {
+                method: "GET"
+            })
+                .then(resposta => resposta.json())
+                .then(taxa => {
+                    console.log(taxa)
+                    cadastrarTaxa(taxa);
+                }
+                )
+                .catch(function (erro) {
+                    alert(erro);
+                    //console.log("Erro ao carregar linhas:", erro);
+                });
+        }
+        buscarDadosTaxa()
+
+        function cadastrarHora(especifico) {
+            especifico.sort((a, b) => a.hora - b.hora);
+
+            // Formata as horas manualmente no formato HH:mm
+            const horaMomento = especifico.map(item => {
+                const hora = new Date();
+                hora.setHours(item.hora, 0, 0, 0);
+                const horas = hora.getHours().toString().padStart(2, '0');
+                const minutos = hora.getMinutes().toString().padStart(2, '0');
+                return `${horas}:${minutos}`;
+            });
+
+            // Extrai os valores de total_alertas para criar o gráfico
+            const total_alertas = especifico.map(item => item.total_alertas);
+
+            // Configuração do gráfico
+            var options = {
+                series: [{
+                    name: 'Total de alertas por hora',
+                    data: total_alertas
+                }],
                 title: {
-                    text: 'Taxa de alerta do total de totens',
+                    text: 'Total de alertas por hora',
                     align: 'center',
                     style: {
                         color: '#ffffff',
-                        fontFamily: 'Abel'
+                        fontFamily: 'Abel',
+                        fontSize: '20px'
                     }
                 },
-                labels: {
+                chart: {
+                    type: 'bar',
+                    height: 290,
+                    width: 700,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    labels: {
+                        style: {
+                            colors: '#ffffff',
+                            fontFamily: 'Abel'
+                        },
+                    },
+                    categories: horaMomento
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: '#ffffff',
+                            fontFamily: 'Abel'
+                        }
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    theme: 'dark',
+                    y: {
+                        formatter: function (val) {
+                            return val;
+                        }
+                    },
+                    x: {
+                        formatter: function (value) {
+                            return value;
+                        }
+                    },
                     style: {
-                        colors: "#ffffff",
-                        fontFamily: "Abel"
+                        fontFamily: 'Abel',
+                        fontSize: '14px',
+                        color: '#fff'
                     },
-                    formatter: function (value) {
-                        return value + "%";
-                    },
-                }
-            },
-            tooltip: {
-                theme: 'dark',
-                style: {
-                    fontFamily: 'Abel',
-                    fontSize: '14px',
-                    color: '#fff'
-                },
-                marker: {
-                    show: false
-                },
-                x: {
-                    formatter: function (value) {
-                        const date = new Date(value);
-                        if (isNaN(date.getTime())) return value;
-                        return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2);
-                    }
-                },
-                y: {
-                    formatter: function (value) {
-                        return value + '%';
+                    marker: {
+                        show: false
                     }
                 }
-            }
-        };
+            };
 
-        // Inicializa ou atualiza o gráfico
-        if (!window.chartTAXA) {
-            const chartElement = document.querySelector("#taxa");
-            if (!chartElement) {
-                console.error("Elemento '#taxa' não encontrado no DOM.");
+            if (!window.chartHORA) {
+                window.chartHORA = new ApexCharts(document.querySelector("#total"), options);
+                window.chartHORA.render();
+            } else {
+                window.chartHORA.updateOptions(options);
+            }
+        }
+
+        const buscarDadosHora = () => {
+            fetch("/historicoLeo/cadastrarHora", {
+                method: "GET"
+            })
+                .then(resposta => resposta.json())
+                .then(especifico => {
+                    cadastrarHora(especifico);
+                })
+                .catch(erro => {
+                    console.error('Erro ao buscar dados:', erro);
+                });
+
+        };
+        buscarDadosHora();
+
+        function atualizarRankingDia() {
+            var selectMes = document.getElementById("select_mes");
+            var selectSemana = document.getElementById("selectSemana");
+
+            var mes = Number(selectMes.value);
+            var semana = Number(selectSemana.value);
+
+            // Verificar se mês e semana foram selecionados
+            if (!mes || semana === 0) {
+                alert("Por favor, selecione um mês e uma semana!");
                 return;
             }
-            window.chartTAXA = new ApexCharts(chartElement, options);
-            window.chartTAXA.render();
-        } else {
-            window.chartTAXA.updateOptions(options).catch(err => {
-                console.error("Erro ao atualizar o gráfico:", err);
-            });
+
+            // Atualizar ranking com base no mês e na semana selecionados
+            fetch(`/historicoLeo/atualizarMesRanking?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (ranking) {
+                    cadastrarRanking(ranking);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar taxa com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarMesTaxa?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (taxa) {
+                    console.log(taxa);
+                    cadastrarTaxa(taxa);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar dados específicos com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarMesEspecifico?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (especifico) {
+                    // console.log(especifico);
+                    cadastrarHora(especifico);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar dados do mês com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarMaisAlerta?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    if (!resposta.ok) {
+                        throw new Error(`Erro na resposta: ${resposta.status}`);
+                    }
+                    return resposta.json();
+                })
+                .then(function (mesAtualizado) {
+                    console.log("Mês atualizado:", mesAtualizado);
+                    maisAlerta(mesAtualizado);
+                    console.log(mesAtualizado);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar alertas por semana com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarAlertaSemana?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    if (!resposta.ok) {
+                        throw new Error(`Erro na resposta: ${resposta.status}`);
+                    }
+                    return resposta.json();
+                })
+                .then(function (mesAtualizado) {
+                    alertaSemana(mesAtualizado);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            // Atualizar média de horário com base no mês e semana selecionados
+            fetch(`/historicoLeo/atualizarMediaHorario?mes=${mes}&semana_do_mes=${semana}`, {
+                method: "GET",
+            })
+                .then(function (resposta) {
+                    console.log(resposta.status);
+                    if (!resposta.ok) {
+                        throw new Error(`Erro na resposta: ${resposta.status}`);
+                    }
+                    return resposta.json();
+                })
+                .then(function (mesAtualizado) {
+                    mediaHorario(mesAtualizado);
+                })
+                .catch(function (erro) {
+                    alert(erro);
+                });
+
+            function maisAlerta(mes) {
+                const MaisAlerta = document.getElementById("MaisAlerta");
+                if (!MaisAlerta) {
+                    console.error("Elemento 'MaisAlerta' não encontrado.");
+                    return;
+                }
+
+                fetch(`/historicoLeo/maisAlerta?mes=${mes}&semana_do_mes=${semana}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (resposta) {
+                        if (!resposta.ok) {
+                            throw new Error(`Erro na resposta: ${resposta.status}`);
+                        }
+                        return resposta.json();
+                    })
+                    .then(function (dados) {
+                        dados.forEach((dado) => {
+                            MaisAlerta.innerHTML = `${mes[0].hora}:00`;
+                        });
+                    })
+                    .catch(function (erro) {
+                        console.error("Erro ao buscar alertas:", erro);
+                    });
+            }
+
+            function alertaSemana(mes) {
+                const AlertaSemana = document.getElementById("AlertaSemana");
+                if (!AlertaSemana) {
+                    console.error("Elemento 'AlertaSemana' não encontrado.");
+                    return;
+                }
+
+                fetch(`/historicoLeo/alertaSemana?mes=${mes}&semana_do_mes=${semana}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (resposta) {
+                        if (!resposta.ok) {
+                            throw new Error(`Erro na resposta: ${resposta.status}`);
+                        }
+                        return resposta.json();
+                    })
+                    .then(function (dados) {
+                        dados.forEach((dado) => {
+                            AlertaSemana.innerHTML = `${mes[0].dia_mes}`;
+                        });
+                    })
+                    .catch(function (erro) {
+                        console.error("Erro ao buscar alertas:", erro);
+                    });
+            }
+
+            function mediaHorario(mes) {
+                const MediaHorario = document.getElementById("MediaHorario");
+                if (!MediaHorario) {
+                    console.error("Elemento 'MediaHorario' não encontrado.");
+                    return;
+                }
+
+                fetch(`/historicoLeo/mediaHorario?mes=${mes}&semana_do_mes=${semana}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (resposta) {
+                        if (!resposta.ok) {
+                            throw new Error(`Erro na resposta: ${resposta.status}`);
+                        }
+                        return resposta.json();
+                    })
+                    .then(function (dados) {
+                        dados.forEach((dado) => {
+                            MediaHorario.innerHTML = `${mes[0].hora_alerta}:00`;
+                        });
+                    })
+                    .catch(function (erro) {
+                        console.error("Erro ao buscar alertas:", erro);
+                    });
+            }
+
         }
+        document.getElementById('select_mes').addEventListener("change", atualizarRankingDia);
+        document.getElementById('selectSemana').addEventListener("change", atualizarRankingDia);
     }
-    function buscarDadosTaxa() {
-        fetch("/historicoLeo/cadastrarTaxa", {
-            method: "GET"
-        })
-            .then(resposta => resposta.json())
-            .then(taxa => {
-                console.log(taxa)
-                cadastrarTaxa(taxa);
-            }
-            )
-    }
-    buscarDadosTaxa()
-
-    function cadastrarHora(especifico) {
-        especifico.sort((a, b) => new Date(a.hora) - new Date(b.hora));
-        const horaMomento = especifico.map(item => {
-            const hora = new Date(item.hora);
-            hora.setHours(hora.getHours());
-            return hora.toISOString();
-        });
-
-        console.log(hora)
-        console.log(horaMomento)
-        const total_alertas = especifico.map(item => item.total_alertas)
-
-        var options = {
-            series: [{
-                name: 'Total de alertas por hora',
-                data: total_alertas
-            }],
-            title: {
-                text: 'Total de alertas por hora',
-                align: 'center',
-                style: {
-                    color: '#ffffff',
-                    fontFamily: 'Abel',
-                    fontSize: '20px'
-                }
-            },
-            chart: {
-                type: 'bar',
-                height: 290,
-                width: 700,
-                toolbar: {
-                    show: false
-                }
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '55%',
-                    endingShape: 'rounded'
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent']
-            },
-            xaxis: {
-                labels: {
-                    style: {
-                        colors: '#ffffff',
-                        fontFamily: 'Abel'
-                    },
-                    formatter: function (value) {
-                        var hour = value < 10 ? '0' + value : value;
-                        return hour + ':00';
-                    }
-                },
-                categories: horaMomento
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: '#ffffff',
-                        fontFamily: 'Abel'
-                    }
-                }
-            },
-            fill: {
-                opacity: 1
-            },
-            tooltip: {
-                theme: 'dark',
-                y: {
-                    formatter: function (val) {
-                        return val;
-                    }
-                },
-                x: {
-                    formatter: function (value) {
-                        var hour = value < 10 ? '0' + value : value;
-                        return hour + ':00';
-                    }
-                },
-                style: {
-                    fontFamily: 'Abel',
-                    fontSize: '14px',
-                    color: '#fff'
-                },
-                marker: {
-                    show: false
-                }
-            }
-        };
-
-        if (!window.chartHORA) {
-            window.chartHORA = new ApexCharts(document.querySelector("#total"), options);
-            window.chartHORA.render();
-        } else {
-            window.chartHORA.updateOptions(options);
-        }
-    }
-
-    const buscarDadosHora = () => {
-        fetch("/historicoLeo/cadastrarHora", {
-            method: "GET"
-        })
-            .then(resposta => resposta.json())
-            .then(especifico => {
-                console.log(especifico)
-                cadastrarHora(especifico)
-            }
-            )
-    };
-    buscarDadosHora();
-    setInterval(buscarDadosHora, 2000);
-
-
-    select_mes.addEventListener("change", atualizarRankingDia);
-    select_dia.addEventListener("change", atualizarRankingDia);
-
-    function atualizarRankingDia() {
-        var selectMes = document.getElementById("select_mes");
-        var selectDia = document.getElementById("select_dia");
-
-        var mes = Number(selectMes.value);
-        var dia = Number(selectDia.value);
-        console.log("Mês selecionado: ", mes);
-        console.log("Dia selecionado: ", dia);
-
-        fetch(`/historicoLeo/atualizarMesRanking?mes=${mes}`, {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .then(function (ranking) {
-                console.log(ranking)
-                cadastrarRanking(ranking)
-            })
-            .catch(function (erro) {
-                alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
-            });
-
-        fetch(`/historicoLeo/atualizarMesTaxa?mes=${mes}`, {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .then(function (taxa) {
-                console.log(taxa)
-                cadastrarTaxa(taxa)
-            })
-            .catch(function (erro) {
-                alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
-            });
-
-        fetch(`/historicoLeo/atualizarMesEspecifico?mes=${mes}`, {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .then(function (especifico) {
-                console.log(especifico)
-
-            })
-            .catch(function (erro) {
-                alert(erro);
-                console.log("Erro ao carregar linhas:", erro);
-            });
-    }
-
-
-
 </script>

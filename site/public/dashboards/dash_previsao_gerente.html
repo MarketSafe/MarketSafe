@@ -112,16 +112,52 @@
           </search>
         </header>
         <section class="dashboard">
-          <div>
-            <div>
+            <div class="dashCima">
+              <div class="contentDash">
+                <div class="dashMain">
               <canvas id="graficoBubble">
 
               </canvas>
+            </div>
+          </div>
+          <div class="space"></div>
+          <div class="contentDash">
+            <div class="dashMain">
               <canvas id="graficoLinha">
 
               </canvas>
             </div>
           </div>
+        </div>
+          <div class="dashBaixo">
+            <div class="ranking">
+              <table>
+                  <tr class="tableHeader">
+                      <th>Ranking</th>
+                      <th>Filial</th>
+                      <th>Promoções</th>
+                      <th>Taxa de sobrecarga</th>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">1</td>
+                      <td class="tableSelector">Filial 5</td>
+                      <td class="tableSelector">Carnes</td>
+                      <td class="tableSelector">20%</td>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">2</td>
+                      <td class="tableSelector">Filial 1</td>
+                      <td class="tableSelector">Frutas</td>
+                      <td class="tableSelector">13%</td>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">3</td>
+                      <td class="tableSelector">Filial 7</td>
+                      <td class="tableSelector">Vegetais</td>
+                      <td class="tableSelector">7%</td>
+                  </tr>
+              </table>
+        </div>
         </section>
       </main>
     </div>
@@ -134,25 +170,29 @@
       data: [{
         x: 1,
         y: 5,
-        r: 10
+        r: 10,
+        label: 'Carne'
       }, {
         x: 3,
         y: 15,
-        r: 15
+        r: 15,
+        label: 'Carne'
       }, {
         x: 5,
         y: 20,
-        r: 20
+        r: 20,
+        label: 'Carne'
       }],
-      backgroundColor: '#FF914D'
+      backgroundColor: 'rgba(255, 145, 77, 0.8)'
     }, {
       label: 'Previsto',
       data: [{
         x: 7,
         y: 30,
-        r: 25
+        r: 25,
+        label: 'Carne'
       }],
-      backgroundColor: '#FF3131'
+      backgroundColor: 'rgba(255, 49, 49, 0.8)'
     }]
   };
 
@@ -167,7 +207,13 @@
           },
           grid: {
             color: "#9A9A9A"
-          }
+          },
+          // TO-DO: conseguir mudar o tamanho dos gráficos antes de implementar esse texto
+          // title: {
+          //   display: true,
+          //   text: "Porcentagem de sobrecarga",
+          //   color: "white"
+          // }
         },
         x: {
           ticks: {
@@ -175,6 +221,11 @@
           },
           grid: {
             color: "#9A9A9A"
+          },
+          title: {
+            display: true,
+            text: "Dias do mês",
+            color: "white"
           }
         }
       },
@@ -183,7 +234,13 @@
           labels: {
             color: "white"
           }
-        }
+        },
+        
+        // TO-DO: conseguir mudar o tamanho dos gráficos antes de implementar esse texto
+        //   display: true,
+        //   text: "Previsão de taxa de alertas da Filial 5 em relação a promoções",
+        //   color: "white"
+        // }
       }
     }
   };
@@ -191,5 +248,97 @@
   let bubbleChart = new Chart(
     document.getElementById('graficoBubble').getContext('2d'),
     configBubble
+  );
+
+  Chart.register({
+    id: 'permanentLabel',
+    afterDatasetsDraw: (chart, args, options) => {
+      const ctx = chart.ctx;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = 'white';
+      
+      chart.data.datasets.forEach((dataset, i) => {
+        const meta = chart.getDatasetMeta(i);
+        if (meta.type !== 'bubble') return;
+        
+        meta.data.forEach((element, index) => {
+          const item = dataset.data[index];
+          const position = element.tooltipPosition();
+          ctx.fillText(item.label.toString(), position.x, position.y);
+        });
+      });
+    }
+  });
+
+  // Eu fiz uma solução temporária.. não sei se vou mudar futuramente.
+  const dataLine = {
+    labels: ['0', '5', '10', '15', '20', '25', '30'],
+    datasets: [{
+      label: 'Atual',
+      data: [20, 15, 23.5, 10],
+      borderColor: 'rgba(255, 145, 77)',
+      backgroundColor: 'rgba(255, 145, 77)',
+      pointRadius: 0
+    }, {
+      label: 'Previsto',
+      data: [20, 15, 23.5, 10, 25, 30, 15],
+      borderColor: 'rgba(255, 49, 49)',
+      backgroundColor: 'rgba(255, 49, 49)',
+      borderDash: [5, 5],
+      pointRadius: 0
+    }]
+  };
+
+  const configLine = {
+    type: 'line',
+    data: dataLine,
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            color: "#9A9A9A"
+          },
+          title: {
+            display: true,
+            text: "Quantidade de alertas",
+            color: "white"
+          }
+        },
+        x: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: "Dias do mês",
+            color: "white"
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: "white"
+          }
+        },
+        title: {
+          display: true,
+          text: "Previsão de quantidade de alertas da Filial IDAQUI deste mês",
+          color: "white"
+        }
+      }
+    }
+  };
+
+  let lineChart = new Chart(
+    document.getElementById('graficoLinha').getContext('2d'),
+    configLine
   );
 </script>

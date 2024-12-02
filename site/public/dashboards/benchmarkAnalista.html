@@ -740,10 +740,10 @@
         valor3 = (parseInt(alertasT1) / (parseInt(alertasT1) + parseInt(alertasT2))) * 100
         valor4 = (parseInt(alertasT2) / (parseInt(alertasT1) + parseInt(alertasT2))) * 100
         
-        console.log(alertasT1)
-        console.log(alertasT2)
-        console.log(valor3)
-        console.log(valor4)
+        //console.log(alertasT1)
+        //console.log(alertasT2)
+        //console.log(valor3)
+        //console.log(valor4)
         
         barra3.style.width = valor3 + "%"
         barra4.style.width = valor4 + "%"
@@ -793,7 +793,7 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    //console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                     dadosVetor = [resposta[6].qtd, resposta[0].qtd, resposta[1].qtd, resposta[2].qtd, resposta[3].qtd, resposta[4].qtd, resposta[5].qtd]
 
@@ -834,7 +834,7 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    //console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                     dadosVetor2 = [resposta[6].qtd, resposta[0].qtd, resposta[1].qtd, resposta[2].qtd, resposta[3].qtd, resposta[4].qtd, resposta[5].qtd]
 
@@ -864,7 +864,7 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    //console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                     dadosVetor3 = []
 
@@ -909,7 +909,7 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    //console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                     dadosVetor3 = []
 
@@ -952,7 +952,7 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    //console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                         var escada1 = { x: 38, y: 340, value: resposta[0].qtd, radius: 30, };
                         var escada2 = { x: 90, y: 340, value: resposta[1].qtd, radius: 30, };
@@ -971,7 +971,7 @@
     
                         heatmapInstance.setData(data);
 
-                        console.log("heat ",resposta);
+                        //console.log("heat ",resposta);
 
                 });
             } else {
@@ -996,7 +996,7 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados total alertas: ", JSON.stringify(resposta));
+                    //console.log("Dados total alertas: ", JSON.stringify(resposta));
                         
                         alertasT1Total.innerHTML = resposta[(totem1 - 1)].qtd
                         alertasT2Total.innerHTML = resposta[(totem2 - 1)].qtd
@@ -1025,10 +1025,10 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados do S3: ", JSON.stringify(resposta));
+                    //console.log("Dados do S3: ", JSON.stringify(resposta));
 
                     var count = Object.keys(resposta.resultado).length;
-                    console.log("Possivel tamanho:", count);
+                    //console.log("Possivel tamanho:", count);
 
                     // Determinar o macAddress a ser filtrado
                     const targetMacAddress = "12680cf3b36b";
@@ -1046,9 +1046,9 @@
                     entry.macAddress === targetMacAddress && parseFloat(entry.ramPorcentagem) > 85
                     ).length;
 
-                    console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamInef}`);
-                    console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamIdeal}`);
-                    console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamCrit}`);
+                    //console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamInef}`);
+                    //console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamIdeal}`);
+                    //console.log(`Quantidade de vezes que a RAM esteve acima de 85%: ${countRamCrit}`);
                     
                     simuInef = countRamInef + 20
                     simuIdeal = countRamIdeal
@@ -1091,10 +1091,10 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados do S3: ", JSON.stringify(resposta));
+                    //console.log("Dados do S3: ", JSON.stringify(resposta));
 
                     var count = Object.keys(resposta.resultado).length;
-                    console.log("Possivel tamanho:", count);
+                    //console.log("Possivel tamanho:", count);
 
                     // Determinar o macAddress a ser filtrado
                     const targetMacAddress = "12680cf3b36b";
@@ -1112,9 +1112,9 @@
                     entry.macAddress === targetMacAddress && parseFloat(entry.cpuPorcentagem) > 85
                     ).length;
 
-                    console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuInef}`);
-                    console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuIdeal}`);
-                    console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuCrit}`);
+                    //console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuInef}`);
+                    //console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuIdeal}`);
+                    //console.log(`Quantidade de vezes que a Cpu esteve acima de 85%: ${countCpuCrit}`);
                         
                     simuInef = countCpuInef + 20
                     simuIdeal = countCpuIdeal

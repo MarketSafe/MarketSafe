@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="css/dash_individual_Isaque_TelaPrincipal.css" />
+    <link rel="stylesheet" href="css/dash_individual_Isaque.css" />
     <link rel="icon" href="css/icon.png" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -60,120 +60,54 @@
             </div>
         </div>
         <div class="dashes">
-            <div class="Div_Botao_Alerta">
+            <div class="botoes_superiores">
+                <div class="botao_voltar">
+                    <a href="dash_individual_Isaque_Principal.html"><i class="fa-solid fa-chevron-left"></i></a>
+                </div>
                 <div class="icon" onclick="acionarAlertasENotificacao()">
                     <i class="fa-solid fa-triangle-exclamation"><span id="QtdAlertas"></span></i>
                 </div>
             </div>
             <div class="Span_Titulo">
-                <span>Monitoramento Geral</span>
-            </div>
-            <div class="Alinhando_Dashs">
-                <div id="chart-RealTimeLine1"></div>
-                <div id="chart-RealTimeLine2"></div>
-                <div class="totens">
-                    <div class="totens-quantidade">
-                        <h3>Quantidade de Totens</h3>
-                        <span id="QtdTotens_bem">0</span>
-                    </div>
-                    <div class="totens-problema">
-                        <h4>Nº de Totens com Problema</h4>
-                        <span id="QtdTotens_problema">0</span>
-                    </div>
-                </div>
-            </div>
-            <div class="Fundo_Select_Totem">
-                <div class="Select_Totem">
-                    Monitorar Totem
-                    <select id="menu">
-                        <option selected disabled value="0">Selecionar</option>
-                        <option value="dash_individual_Isaque_T1.html">Totem 1</option>
-                        <option value="dash_individual_Isaque_T2.html">Totem 2</option>
-                        <option value="dash_individual_Isaque_T3.html">Totem 3</option>
-                        <option value="dash_individual_Isaque_T4.html">Totem 4</option>
-                        <option value="dash_individual_Isaque_T5.html">Totem 5</option>
-                    </select>
-                </div>
-            </div>
-            <div class="Titulo_Intavel">
-                <span>Totens Instáveis</span>
+                <span>Situação do Totem 5</span>
             </div>
             <div class="bloco_monitoramento">
-                <!-- 1º Dash Rosca  -->
-                <div class="Dash_Doughs">
-                    <div class="totem-label">Totem 1</div>
-                    <div class="Direcionando_DashRosca1">
-                        <div id="chart_Rosca"></div>
-                        <div class="legenda">
-                            <div class="legenda-item">
-                                <div class="Direcionando_Label">
-                                    <div class="legenda-cor-bola"></div>
-                                    <div style="font-family: Abel;">
-                                        <div class="Text_Ram" id="Ram_T1"></div>
-                                    </div>
-                                </div>
-                                <div class="Direcionando_Label">
-                                    <div class="legenda-cor-bola2"></div>
-                                    <div style="font-family: Abel;">
-                                        <div class="Text_Cpu" id="Cpu_T1"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="bloco1">
+                    <span class="span_bloco_monitoramento">Status</span>
+                    <div id="status" class="status">
+                        Alerta
                     </div>
                 </div>
-                <!-- 2º Dash Rosca  -->
-                <div class="Dash_Doughs">
-                    <div class="totem-label">Totem 2</div>
-                    <div class="Direcionando_DashRosca1">
-                        <div id="chart_Rosca2"></div>
-                        <div class="legenda">
-                            <div class="legenda-item">
-                                <div class="Direcionando_Label">
-                                    <div class="legenda-cor-bola"></div>
-                                    <div style="font-family: Abel;">
-                                        <div class="Text_Ram" id="Ram_T2"></div>
-                                    </div>
-                                </div>
-                                <div class="Direcionando_Label">
-                                    <div class="legenda-cor-bola2"></div>
-                                    <div style="font-family: Abel;">
-                                        <div class="Text_Cpu" id="Cpu_T2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="bloco2">
+                    <span class="span_bloco_monitoramento">RAM</span>
+                    <div id="ram" class="ram">
+                        85%
                     </div>
                 </div>
-                <!-- 3º Dash Rosca  -->
-                <div class="Dash_Doughs">
-                    <div class="totem-label">Totem 3</div>
-                    <div class="Direcionando_DashRosca1">
-                        <div id="chart_Rosca3"></div>
-                        <div class="legenda">
-                            <div class="legenda-item">
-                                <div class="Direcionando_Label">
-                                    <div class="legenda-cor-bola"></div>
-                                    <div style="font-family: Abel;">
-                                        <div class="Text_Ram" id="Ram_T3"></div>
-                                    </div>
-                                </div>
-                                <div class="Direcionando_Label">
-                                    <div class="legenda-cor-bola2"></div>
-                                    <div style="font-family: Abel;">
-                                        <div class="Text_Cpu" id="Cpu_T3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="bloco3">
+                    <span class="span_bloco_monitoramento">Atividade</span>
+                    <div id="tempo_ativo" class="tempo_ativo">
+                        03:00:00
                     </div>
                 </div>
-            </div>
+                <div class="bloco4">
+                    <span class="span_bloco_monitoramento">Recomendado</span>
+                    <div id="recomendado" class="recomendado">
+                     
+                    </div>
+                </div>
 
+            </div>
+            <div id="chart-timeline" style="height: 350px;"></div>
+
+            <div class="engloba_rank_qtdTotens">
+
+            </div>
             <!-- <button class="button" onclick="notificacao(ErroMsg)">Teste Notificar</button> -->
 
             <div class="notifi-box" id="box">
                 <h2>Alertas<span id="QtdAlertas2"></span></h2> <!--textinho dentro do alerta-->
+
             </div>
             <div id="notify_box"></div>
 
@@ -187,59 +121,28 @@
 
 <script>
 
-    //E num é que essa geringonça funcionou, KK
-    document.getElementById('menu').addEventListener('change', function () {
-        const selectedValue = this.value;
-        if (selectedValue !== "0") {
-            window.location.href = selectedValue;
-        }
-    });
-
-
-    //Gráfico 1
-
-    var dataSeries = [];
-    var dataSeries2 = [];
-    var dataSeries3 = [];
-    var dataSeries4 = [];
-    var dataSeries5 = [];
-
-
-    // Configurações do gráfico ApexCharts Gráfico 1
+    // Configurações do gráfico ApexCharts
     var options = {
-        series: [
-            {
-                name: 'T1',
-                data: dataSeries,
-                color: "white"
-            },
-            {
-                name: 'T2',
-                data: dataSeries2
-            },
-            {
-                name: 'T3',
-                data: dataSeries3
-            },
-            {
-                name: 'T4',
-                data: dataSeries4
-            },
-            {
-                name: 'T5',
-                data: dataSeries5
-            }
-        ],
+        series: [{
+            name: 'Consumo',
+            data: dataSeries,
+            color: "#FF7000"
+        }],
         chart: {
             id: 'area-datetime',
-            type: 'line',
-            width: '400px',
-            height: 250,
+            type: 'area',
+            width: '95%',
+            height: 345,
             animations: {
-                enabled: false,
-                easing: 'linear',
+                enabled: true,
+                speed: 800,
+                animateGradually: {
+                    enabled: true,
+                    delay: 5050
+                },
                 dynamicAnimation: {
-                    speed: 1000
+                    enabled: true,
+                    speed: 350
                 }
             },
             toolbar: {
@@ -247,8 +150,7 @@
             }
         },
         dataLabels: {
-            enabled: false,
-            colors: "white",
+            enabled: false
         },
         tooltip: {
             theme: 'dark',
@@ -257,7 +159,7 @@
             }
         },
         fill: {
-            type: 'solid',
+            type: 'gradient',
             gradient: {
                 shadeIntensity: 1,
                 opacityFrom: 0.7,
@@ -267,14 +169,10 @@
         },
         legend: {
             show: true,
-            labels: {
-                colors: "#ffff",
-                useSeriesColors: false
-            }
         },
         xaxis: {
             title: {
-                text: '',
+                text: 'Captura dos Ultimos 60 segundos',
                 style: {
                     color: '#ffff',
                     fontSize: '15px',
@@ -307,21 +205,28 @@
             }
         },
         title: {
-            text: 'Uso de CPU (%)',
+            text: '% em Uso',
             style: {
                 color: '#ffffff',
                 fontSize: '20px',
                 fontFamily: 'Abel',
             },
-            offsetX: +150
+            offsetX: +78
         }
     };
-    var chart = new ApexCharts(document.querySelector("#chart-RealTimeLine1"), options);
+
+    var chart = new ApexCharts(document.querySelector("#chart-timeline"), options);
     chart.render();
 
+    var dataSeriesCPU = [];
+    var dataSeriesRAM = [];
+    var tempo = 0;
 
-    //Gráfico 2
-
+    var dataSeries = [];
+    var dataSeries2 = [];
+    var dataSeries3 = [];
+    var dataSeries4 = [];
+    var dataSeries5 = [];
     var dataSeries6 = [];
     var dataSeries7 = [];
     var dataSeries8 = [];
@@ -329,231 +234,6 @@
     var dataSeries10 = [];
 
 
-    // Gráfico 2
-    // Configurações do gráfico ApexCharts Gráfico 2
-    var options2 = {
-        series: [
-            {
-                name: 'T1',
-                data: dataSeries6
-            },
-            {
-                name: 'T2',
-                data: dataSeries7
-            },
-            {
-                name: 'T3',
-                data: dataSeries8
-            },
-            {
-                name: 'T4',
-                data: dataSeries9
-            },
-            {
-                name: 'T5',
-                data: dataSeries10,
-            },
-        ],
-        chart: {
-            id: 'area-datetime',
-            type: 'line',
-            width: '400px',
-            height: 250,
-            animations: {
-                enabled: false,
-                easing: 'linear',
-                dynamicAnimation: {
-                    speed: 1000
-                }
-            },
-            toolbar: {
-                show: false
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        tooltip: {
-            theme: 'dark',
-            x: {
-                show: false
-            }
-        },
-        fill: {
-            type: 'solid',
-            gradient: {
-                shadeIntensity: 1,
-                opacityFrom: 0.7,
-                opacityTo: 0.9,
-                stops: [0, 100]
-            }
-        },
-        legend: {
-            show: true,
-            labels: {
-                colors: "#ffff",
-                useSeriesColors: false
-            },
-        },
-        xaxis: {
-            title: {
-                text: '',
-                style: {
-                    color: '#ffff',
-                    fontSize: '15px',
-                    fontFamily: 'Abel',
-                },
-                offsetX: -330
-            },
-            type: 'numeric',
-            tickAmount: 10,
-            labels: {
-                show: false
-            }
-        },
-        yaxis: {
-            min: 0,
-            max: 100,
-            labels: {
-                formatter: function (value) {
-                    if (value === 100) return '100%';
-                    if (value === 0) return '0%';
-                    return value + '%';
-                },
-                style: {
-                    colors: '#ffffff',
-                    fontSize: '12px',
-                    fontFamily: 'Abel',
-                    marginLeft: '15px'
-                },
-                offsetX: +5
-            }
-        },
-        title: {
-            text: 'Uso de RAM (%)',
-            style: {
-                color: '#ffffff',
-                fontSize: '20px',
-                fontFamily: 'Abel',
-            },
-            offsetX: +150
-        }
-    };
-
-    // Cria o gráfico
-    var chart2 = new ApexCharts(document.querySelector("#chart-RealTimeLine2"), options2);
-    chart2.render();
-
-
-    // Grafico de Rosca O_o
-
-    // 1º Gráfico 
-    var options3 = {
-        series: [0, 0],
-        chart: {
-            width: 200,
-            height: 200,
-            type: 'radialBar'
-        },
-        plotOptions: {
-            radialBar: {
-                hollow: {
-                    size: '50%'
-                },
-                track: {
-                    background: '#CCCCCC',
-                    strokeWidth: '100%',
-                },
-                dataLabels: {
-                    show: false
-                }
-            }
-        },
-        colors: ['#FF4560', '#FFA500'],
-        labels: ['RAM', 'CPU'],
-        legend: {
-            show: false
-        },
-        stroke: {
-            lineCap: 'round'
-        }
-    };
-
-    var chart3 = new ApexCharts(document.querySelector("#chart_Rosca"), options3);
-    chart3.render();
-
-    // 2º Gráfico 
-
-    var options4 = {
-        series: [0, 0],
-        chart: {
-            width: 200,
-            height: 200,
-            type: 'radialBar'
-        },
-        plotOptions: {
-            radialBar: {
-                hollow: {
-                    size: '50%'
-                },
-                track: {
-                    background: '#CCCCCC',
-                    strokeWidth: '100%',
-                },
-                dataLabels: {
-                    show: false
-                }
-            }
-        },
-        colors: ['#FF4560', '#FFA500'],
-        labels: ['RAM', 'CPU'],
-        legend: {
-            show: false
-        },
-        stroke: {
-            lineCap: 'round'
-        }
-    };
-
-    var chart4 = new ApexCharts(document.querySelector("#chart_Rosca2"), options4);
-    chart4.render();
-
-    // 3º Gráfico 
-
-    var options5 = {
-        series: [0, 0],
-        chart: {
-            width: 200,
-            height: 200,
-            type: 'radialBar'
-        },
-        plotOptions: {
-            radialBar: {
-                hollow: {
-                    size: '50%'
-                },
-                track: {
-                    background: '#CCCCCC',
-                    strokeWidth: '100%',
-                },
-                dataLabels: {
-                    show: false
-                }
-            }
-        },
-        colors: ['#FF4560', '#FFA500'],
-        labels: ['RAM', 'CPU'],
-        legend: {
-            show: false
-        },
-        stroke: {
-            lineCap: 'round'
-        }
-    };
-
-    var chart5 = new ApexCharts(document.querySelector("#chart_Rosca3"), options5);
-    chart5.render();
-    var tempo = 0;
 
     // --------- CPU do Totem 1 ------------//
 
@@ -581,14 +261,6 @@
                         dataSeries.shift();
                     }
 
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
-
                 }
             })
             .catch(error => {
@@ -615,21 +287,17 @@
                 if (resultado.length > 0) {
                     // console.log(resultado)
                     const valorCpu = parseFloat(resultado[0].CpuT2);
-                    dataSeries2.push({ x: tempo, y: valorCpu });
+                    dataSeriesCPU.push({ x: tempo, y: valorCpu });
                     tempo += 1;
-                    // console.log(dataSeries2); 
+                    // console.log(dataSeriesCPU); 
 
 
-                    if (dataSeries2.length > 20) {
-                        dataSeries2.shift();
+                    if (dataSeriesCPU.length > 20) {
+                        dataSeriesCPU.shift();
                     }
 
                     chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
+                        { name: 'T2', data: dataSeries }
                     ]);
 
                 }
@@ -667,14 +335,6 @@
                         dataSeries3.shift();
                     }
 
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
-
                 }
 
 
@@ -711,14 +371,6 @@
                         dataSeries4.shift();
                     }
 
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
-
                 }
 
             })
@@ -753,14 +405,6 @@
                     if (dataSeries5.length > 20) {
                         dataSeries5.shift();
                     }
-
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
 
                 }
 
@@ -798,15 +442,6 @@
                         dataSeries6.shift();
                     }
 
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
-
-
                 }
 
             })
@@ -842,15 +477,6 @@
                         dataSeries7.shift();
                     }
 
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
-
-
                 }
 
             })
@@ -885,14 +511,6 @@
                     if (dataSeries8.length > 20) {
                         dataSeries8.shift();
                     }
-
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
 
 
                 }
@@ -930,14 +548,6 @@
                         dataSeries9.shift();
                     }
 
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
-
 
                 }
 
@@ -973,14 +583,6 @@
                     if (dataSeries10.length > 20) {
                         dataSeries10.shift();
                     }
-
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
 
 
                 }
@@ -1021,8 +623,8 @@
         }
 
         // ------------- T2 ------------- //
-        if (dataSeries2.length > 0) {
-            const ultimoValorCpuT2 = Math.round(dataSeries2[dataSeries2.length - 1].y);
+        if (dataSeriesCPU.length > 0) {
+            const ultimoValorCpuT2 = Math.round(dataSeriesCPU[dataSeriesCPU.length - 1].y);
             VetorCpuT2 = [ultimoValorCpuT2];
         }
         if (dataSeries7.length > 0) {
@@ -1069,16 +671,12 @@
         const valorCPU = VetorCpuT1[0] || 0;
         const valorRAM = VetorRamT1[0] || 0;
 
-        chart3.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T1.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T1.innerHTML = `Cpu - ${valorCPU}%`;
-
         // console.log(VetorCpuT1, VetorRamT1)
         verificarDash(1, "CPU", valorCPU);
         verificarDash(1, "RAM", valorRAM);
     }
     setInterval(Atualizar_Dough1, 1000);
+
 
     // ------------ Segundo Gráfico Dough -------------- //
 
@@ -1088,11 +686,6 @@
 
         const valorCPU = VetorCpuT2[0] || 0;
         const valorRAM = VetorRamT2[0] || 0;
-
-        chart4.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T2.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T2.innerHTML = `Cpu - ${valorCPU}%`;
 
         // console.log(VetorCpuT2, VetorRamT2)
         verificarDash(2, "CPU", valorCPU);
@@ -1109,11 +702,6 @@
         const valorCPU = VetorCpuT3[0] || 0;
         const valorRAM = VetorRamT3[0] || 0;
 
-        chart5.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T3.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T3.innerHTML = `Cpu - ${valorCPU}%`;
-
         // console.log(VetorCpuT3, VetorRamT3)
         verificarDash(3, "CPU", valorCPU);
         verificarDash(3, "RAM", valorRAM);
@@ -1129,11 +717,6 @@
         const valorCPU = VetorCpuT4[0] || 0;
         const valorRAM = VetorRamT4[0] || 0;
 
-        //chart6.updateSeries([valorRAM, valorCPU]);
-
-        // console.log(VetorCpuT4, VetorRamT4)
-        verificarDash(4, "CPU", valorCPU);
-        verificarDash(4, "RAM", valorRAM);
     }
     setInterval(Atualizar_Dough4, 1000);
 
@@ -1142,16 +725,11 @@
     function Atualizar_Dough5() {
 
         Atualizar_Vetores();
-
         const valorCPU = VetorCpuT5[0] || 0;
         const valorRAM = VetorRamT5[0] || 0;
 
-        //chart7.updateSeries([valorRAM, valorCPU]);
+        ram.innerHTML = `${valorRAM}%`;
 
-        // console.log(VetorCpuT5, VetorRamT5)
-
-        verificarDash(5, "CPU", valorCPU);
-        verificarDash(5, "RAM", valorRAM);
     }
     setInterval(Atualizar_Dough5, 1000);
 
@@ -1229,7 +807,7 @@
     }
 
     const notificacoesRecentes = new Map();
-    const intervaloNotificacao = 300000; 
+    const intervaloNotificacao = 300000;
 
 
     function notificacao(msg, totem, componente) {
@@ -1277,59 +855,155 @@
         }
     }
 
-    // --------- Totens Cadastrados ---------- //
 
-    function verificarQtdTotens() {
-        fetch("/monitoramento/verificarQtdTotens",
-            { method: "POST" })
-            .then(response => {
-                //console.log(response)
-                //response.text().then(text => console.log(text))
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro ao buscar os dados do servidor.");
-                }
-            })
-            .then(resultado => {
-                // console.log(resultado)
-                const QtdTotens = parseFloat(resultado[0].qtd) || 0;
-                QtdTotens_bem.innerHTML = QtdTotens;
-                // console.log(QtdTotens); 
+    function alterarCorDiv() {
+        const div = document.getElementById('status');
+        const texto = div.textContent.trim();
 
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
+        let cor;
+        switch (texto) {
+            case 'Normal':
+                cor = 'green';
+                break;
+            case 'Alerta':
+                cor = '#b3b012';
+                div.style.color = 'white';
+                break;
+            case 'Crítico':
+                cor = 'red';
+                break;
+            default:
+                cor = 'gray';
+        }
+
+        div.style.backgroundColor = cor;
     }
-    setInterval(verificarQtdTotens, 3000);
+    setInterval(alterarCorDiv, 1000);
 
-    // ----------- Totens com Erro ------------ //
 
-    function QtdTotensComProblema() {
-        fetch("/monitoramento/QtdTotensComProblema",
-            { method: "POST" })
-            .then(response => {
-                //console.log(response)
-                //response.text().then(text => console.log(text))
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro ao buscar os dados do servidor.");
-                }
-            })
-            .then(resultado => {
-                // console.log(resultado)
-                const QtdTotens = parseFloat(resultado[0].problema) || 0;
-                QtdTotens_problema.innerHTML = QtdTotens;
-                // console.log(QtdTotens); 
+    function alterarCorDiv() {
+        const status = document.getElementById('status');
+        const ram = document.getElementById('ram');
+        const recomendado = document.getElementById('recomendado');
+        const texto = status.textContent.trim();
 
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
+
+        // Ta mudando a cor da div misera, vambora //
+        if (VetorRamT5[VetorRamT5.length - 1] >= 90) {
+            status.textContent = "Crítico"
+            console.log("chegou aqui")
+        }
+        else if (VetorRamT5[VetorRamT5.length - 1] >= 75 &&
+            VetorRamT5[VetorRamT5.length - 1] < 90) {
+            status.textContent = "Alerta"
+        }
+        else {
+            status.textContent = "Normal"
+        }
+
+
+        let cor;
+        switch (texto) {
+            case 'Normal':
+                cor = '#089900';
+                break;
+            case 'Alerta':
+                cor = '#FFCF00';
+                status.style.color = 'white';
+                break;
+            case 'Crítico':
+                cor = '#990000';
+                break;
+            default:
+                cor = 'gray';
+        }
+
+        status.style.backgroundColor = cor;
+
+
+        if (VetorRamT5[VetorRamT5.length - 1] >= 90) {
+            ram.style.backgroundColor = "#990000"
+        }
+        else if (VetorRamT5[VetorRamT5.length - 1] < 90 &&
+            VetorRamT5[VetorRamT5.length - 1] >= 80) {
+            ram.style.backgroundColor = "#FF8C00"
+        }
+        else if (VetorRamT5[VetorRamT5.length - 1] < 80 &&
+            VetorRamT5[VetorRamT5.length - 1] >= 65) {
+            ram.style.backgroundColor = "#FFD700"
+        }
+        else if (VetorRamT5[VetorRamT5.length - 1] < 65 &&
+            VetorRamT5[VetorRamT5.length - 1] >= 50) {
+            ram.style.backgroundColor = "#bdeb00"
+        }
+        else if (VetorRamT5[VetorRamT5.length - 1] < 50 &&
+            VetorRamT5[VetorRamT5.length - 1] >= 40) {
+            ram.style.backgroundColor = "#7CFC00"
+        }
+        else if (VetorRamT5[VetorRamT5.length - 1] < 40) {
+            ram.style.backgroundColor = "#27e600"
+        }
+
+
+        // --------- Mudando a Cor da div de Recomendação --------- //
+
+        if (status.innerHTML == 'Crítico' && VetorRamT5[VetorRamT5.length - 1] >= 90) {
+            recomendado.style.backgroundColor = '#990000';
+            recomendado.textContent = 'Reiniciar';
+        }
+        else if (status.innerHTML == 'Alerta' && (VetorRamT5[VetorRamT5.length - 1] >= 75 &&
+            VetorRamT5[VetorRamT5.length - 1] < 90)) {
+
+            recomendado.style.backgroundColor = '#ffc400';
+            recomendado.style.fontSize = 'x-large'
+            recomendado.textContent = 'Supervisionar';
+        }
+        else {
+            recomendado.style.backgroundColor = '#089900';
+            recomendado.textContent = 'Manter';
+        }
+
+
+
     }
-    setInterval(QtdTotensComProblema, 3000);
+    setInterval(alterarCorDiv, 1000);
+
+
+    //--------------- Função de Horas ativas ---------------//
+
+    function Tempo(time) {
+        return time < 10 ? '0' + time : time;
+    }
+
+    // Função do timer
+    function ComecarTempo() {
+        let hours = 3;
+        let minutes = 0;
+        let seconds = 0;
+
+        const timerElement = document.getElementById('tempo_ativo');
+
+        // Atualiza a cada segundo
+        setInterval(function () {
+            seconds++; // Incrementa os segundos
+
+            if (seconds === 60) { // Se os segundos chegarem a 60, incrementa os minutos
+                seconds = 0;
+                minutes++;
+            }
+
+            if (minutes === 60) { // Se os minutos chegarem a 60, incrementa as horas
+                minutes = 0;
+                hours++;
+            }
+
+            // Atualiza o conteúdo do timer
+            timerElement.textContent = Tempo(hours) + ":" + Tempo(minutes) + ":" + Tempo(seconds);
+        }, 1000);
+    }
+
+    // Chama a função para iniciar o timer assim que a página carregar
+    window.onload = ComecarTempo;
 
 
 </script>

@@ -56,6 +56,16 @@ body {
     border: 1px solid var(--text-color);
     width: 100%;
   }
+  & table {
+    &, & * {
+    display: revert;
+    }
+  }
+  & tr {
+    &, & * {
+    display: revert;
+    }
+  }
 
   & > div {
     flex-direction: row;
@@ -229,7 +239,112 @@ body {
       }
       & > section.dashboard {
         flex: 1;
+
+        }
       }
     }
   }
+
+  .dashCima {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    height: 50%;
+    
+        & canvas {
+          background-color: #28283A;
+          border-radius: 2%;
+          height: 100%;
+      }
+    }
+
+    .space {
+      width: 5rem;
+    }
+    
+    .content-dash {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dashMain {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+  .dashBaixo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+/* 
+  .ranking {
+    flex: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+  }
+
+  .rankeados {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .header {
+    background-color: #af744c;
+    color: white;
+  }
+
+
+  tr:hover {
+    background-color: #ddd;
+    color: #292935;
+  } */
+
+  table {
+    width: 45%;
+    border-collapse: collapse;
 }
+
+.tableHeader {
+    background-color: #af744c;
+    color: white;
+    border: 1px solid #ddd;
+}
+
+.tableHeader, .tableSelector {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+
+tr:hover {
+    background-color: #ddd;
+    color: #292935;
+}
+
+.ranking{
+    display: flex;
+    justify-content: space-between;
+}
+  
+/* .separador {
+  flex: 1;
+}
+
+.dashCima {
+  display: flex;
+  flex-direction: row;
+
+  & > canvas {
+    backgorund-color: #28283A;
+  }
+} */

@@ -30,5 +30,9 @@ router.post("/alertasMensal", function (req, res) {
 router.post("/statusFiliaisHistorico", function (req, res) {
     rankingController.statusFiliaisHistorico(req, res);
 });
+
+router.post("/cardQtdAlerta", function (req, res) {
+    rankingController.cardQtdAlerta(req, res);
+});
 // exporta a variável de roteador do arquivo `rankingRouter.js`:
 module.exports = router;
