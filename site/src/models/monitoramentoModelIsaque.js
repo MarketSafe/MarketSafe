@@ -183,9 +183,9 @@ function QtdTotensComProblema() {
     // console.log("Executando a função QtdTotensComProblema");
 
     var instrucaoSql = `    
-    SELECT COUNT (ram_porcentagem) AS problema 
-    FROM alerta 
-    WHERE ram_porcentagem > 80; 
+    SELECT COUNT(distinct id) AS problema 
+    FROM alerta     
+    WHERE ram_porcentagem > 85 or cpu_porcentagem > 80;
     `;
 
     // console.log("Executando a instrução SQL: \n" + instrucaoSql);
