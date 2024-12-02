@@ -237,7 +237,13 @@ body {
       & > section.dashboard {
         gap: 1rem;
         flex: 1;
+        display: none;
 
+        &.ativa {
+          display: flex;
+        }
+      }
+      & > section.dashboard.sem-filtro {
         & > section {
           flex-direction: row;
           align-items: stretch;
@@ -303,6 +309,47 @@ body {
           & > canvas {
             width: 100%;
             height: 100%;
+          }
+        }
+      }
+      & > section.dashboard.filtro-filiais {
+        flex-direction: row;
+        align-items: stretch;
+
+        & > * {
+          align-items: stretch;
+          flex: 1;
+          border-radius: 10px;
+          padding: 2rem;
+          background-color: var(--header-color);
+          width: 100%;
+          & > section.indicadores {
+            align-items: stretch;
+            flex: 1;
+
+            & > section {
+              flex-direction: row;
+              align-items: stretch;
+              flex: 1;
+  
+              & > div {
+                flex: 1;
+                padding: 1rem;
+                background-color: var(--indicador-color);
+  
+                & > h2 {
+                  text-align: center;
+                  font-size: 2rem;
+                }
+                & > span.numero {
+                  font-size: 3rem;
+                  font-family: "Noto Serif", serif;
+                }
+              }
+            }
+            & > section:nth-of-type(even) > div {
+              background-color: var(--gerente-color);
+            }
           }
         }
       }

@@ -83,7 +83,7 @@
             <h1>Benchmark</h1>
           </div>
           <search>
-            <div>
+            <div class="filial1">
               <span>Filial 1</span>
               <div>
                 <select class="filial">
@@ -98,7 +98,7 @@
                 </select>
               </div>
             </div>
-            <div>
+            <div class="filial2">
               <span>Filial 2</span>
               <div>
                 <select class="filial">
@@ -115,7 +115,7 @@
             </div>
           </search>
         </header>
-        <section class="dashboard">
+        <section class="dashboard sem-filtro">
           <section class="indicadores">
             <section class="filiais">
               <section class="indicador taxa-geral alerta">
@@ -159,6 +159,61 @@
               </div>
             </section>
           </section>
+        </section>
+        <section class="dashboard filtro-filiais">
+          <section>
+            <div class="grafico comparacao-filial-taxas">
+              <canvas></canvas>
+            </div>
+          </section>
+          <div>
+            <section class="indicadores">
+              <section class="indicador titulos">
+                <div>
+                  <h2>Indicadores</h2>
+                </div>
+                <div>
+                  <h2 class="filial-1">Filial 1</h2>
+                </div>
+                <div>
+                  <h2 class="filial-2">Filial 2</h2>
+                </div>
+              </section>
+              <section class="indicador taxas">
+                <div>
+                  <h2>Taxas de alerta</h2>
+                </div>
+                <div>
+                  <span class="numero filial-1">0%</span>
+                </div>
+                <div>
+                  <span class="numero filial-2">0%</span>
+                </div>
+              </section>
+              <section class="indicador totens">
+                <div>
+                  <h2>Quantidade de totens</h2>
+                </div>
+                <div>
+                  <span class="numero filial-1">0</span>
+                </div>
+                <div>
+                  <span class="numero filial-2">0</span>
+                </div>
+              </section>
+              <section class="indicador totens-alerta">
+                <div>
+                  <h2>Totens em alerta</h2>
+                </div>
+                <div>
+                  <span class="numero filial-1">0</span>
+                </div>
+                <div>
+                  <span class="numero filial-2">0</span>
+                </div>
+              </section>
+            </section>
+          </div>
         </section>
       </main>
     </div>
