@@ -534,7 +534,7 @@ body {
           border-radius: 10px;
           overflow: hidden;
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.1);
-          background-color:  #575965;
+          background-color:  #575a64;
           display: flex;
           flex-direction: column;
           transition: transform 0.3s ease-in-out;

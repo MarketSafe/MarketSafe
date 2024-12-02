@@ -179,9 +179,18 @@
 <script>
   var idFilial = selectFilial.value;
 
+  const body = {
+    emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
+    senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
+  };
+
   function puxarDados() {
     fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}`, {
-      method: "GET",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     }).then(function (resposta) {
       console.log("ESTOU NO THEN DO puxarDados()!")
 

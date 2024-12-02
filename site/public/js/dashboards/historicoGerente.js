@@ -278,7 +278,7 @@ async function atualizarGrafico(dados) {
   barChart.update();
 }
 
-async function atualizarGraficoStatus() {
+async function atualizarGraficoStatus() { 
   try {
     const response = await fetch("/ranking/statusFiliaisHistorico", {
       method: "POST",
@@ -310,12 +310,12 @@ async function atualizarGraficoStatus() {
       semana_4: { critico: 0, atencao: 0, normal: 0 },
     };
 
-    for (const filial of data) {
-      for (let i = 1; i <= 4; i++) {
-        const semanaStatus = filial[`semana_${i}_status`];
-        if (semanaStatus) {
-          statusPorSemana[`semana_${i}`][semanaStatus]++;
-        }
+
+    for (const item of data) {
+      const semana = `semana_${item.semana}`;
+      const status = item.status;
+      if (statusPorSemana[semana] && statusPorSemana[semana][status] !== undefined) {
+        statusPorSemana[semana][status] += item.quantidade;
       }
     }
 
@@ -351,6 +351,7 @@ async function atualizarGraficoStatus() {
         backgroundColor: "#99cc66",
       },
     ];
+
 
     const config = {
       type: "bar",
@@ -391,6 +392,7 @@ async function atualizarGraficoStatus() {
   }
 }
 
+
 async function cardQtdAlerta() {
   try {
     const response = await fetch(`/ranking/cardQtdAlerta`, {
@@ -412,8 +414,6 @@ async function cardQtdAlerta() {
 
     const data = await response.json();  
     
-    
-
     if (data && data.length > 0) {
       const qtdAlertas = data[0].qtd_alertas;  
 
