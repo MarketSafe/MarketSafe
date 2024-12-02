@@ -124,7 +124,7 @@
                         <div class="sug" style="margin-top: 5%;" onclick="filtrarAuto()">
                             <div>
                                 <h3>Componente: RAM</h3>
-                                <h3>Totens: 1 e 2</h3>
+                                <h3>Totens: <span id="sgtTM"></span> e <span id="sgtMN"></span></h3>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="0.5em" height="1em" viewBox="0 0 12 24">
                                 <defs>
@@ -272,12 +272,19 @@
 </html>
 
 <script>
+
+    var maiorTotem
+    var menorTotem
+
+    var minInd
+    var mxInd
+
     var heatmapInstance = h337.create({
         container: document.querySelector(".heatmap"),
     });
 
     var points = [];
-    var max = 50;
+    var max = 60;
     var min = 0;
     var width = 850;
     var height = 490;
@@ -706,8 +713,8 @@
         periodoInicio.value = "2024-11-17"
         periodoFim.value = "2024-11-23"
         
-        totem_select1.value = "1";
-        totem_select2.value = "2";
+        totem_select1.value = mxInd + 1;
+        totem_select2.value = minInd + 1;
 
         selecionarCmp(2)
 
@@ -954,6 +961,8 @@
                 resposta.json().then(function (resposta) {
                     //console.log("Dados recebidos: ", JSON.stringify(resposta));
 
+                        var countTT = Object.keys(resposta).length;
+
                         var escada1 = { x: 38, y: 340, value: resposta[0].qtd, radius: 30, };
                         var escada2 = { x: 90, y: 340, value: resposta[1].qtd, radius: 30, };
                         var escada3 = { x: 230, y: 310, value: resposta[2].qtd, radius: 30, };
@@ -968,10 +977,44 @@
                             min: min,
                             data: points,
                         }
+
+                        console.log(resposta)
+
+                        maiorTotem = resposta[0].qtd
+                        mxInd = 0
+
+                        console.log(maiorTotem)
+
+
+                        for(i = 0; i < countTT; i++){
+                            if (maiorTotem < resposta[i].qtd) {
+                                maiorTotem = resposta[i].qtd
+                                mxInd = i
+                            }
+                        }
     
+                        menorTotem = resposta[1].qtd
+                        minInd = 1
+
+                        for(i = 0; i < countTT; i++){
+                            console.log(menorTotem, maiorTotem)
+                            if(mxInd == i){}
+                            else if (menorTotem < resposta[i].qtd) {
+                                menorTotem = resposta[i].qtd
+                                minInd = i
+                            }
+                        }
+
+                        sgtTM.innerHTML = resposta[mxInd].totem
+
+                        sgtMN.innerHTML = resposta[minInd].totem
+
                         heatmapInstance.setData(data);
 
                         //console.log("heat ",resposta);
+
+
+
 
                 });
             } else {
