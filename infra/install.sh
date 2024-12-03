@@ -22,14 +22,14 @@ newgrp docker
 # install mysql:
 sudo systemctl start docker
 sudo systemctl enable docker
-docker pull mysql:8.0.37
-docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=urubu100" mysql:8.0.37
+# docker pull mysql:8.0.37
+# docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=urubu100" mysql:8.0.37
 
 # install npm:
-sudo apt install npm -y
+# sudo apt install npm -y
 
 # clonar repositório:
-git clone https://github.com/MarketSafe/MarketSafe.git
+# git clone https://github.com/MarketSafe/MarketSafe.git
 
 # install python:
 sudo apt install python3-pip -y
@@ -48,6 +48,6 @@ deactivate
 # nano .env
 
 # iniciar o servidor node:
-cd ~/MarketSafe/web-data-viz-main
-npm i
-npm start
+# cd ~/MarketSafe/web-data-viz-main
+# npm i
+# npm start
