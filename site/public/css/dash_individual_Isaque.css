@@ -153,6 +153,27 @@ body {
     margin-left: 10px;
 }
 
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.previsao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    border-left: 3px solid#ff0000;
+}
+
+.previsao p{
+    margin: 3%;
+    margin-left: 10px;
+}
+
+
+
 .analista{
     display: flex;
     align-items: center;
@@ -162,7 +183,20 @@ body {
     justify-content: center;
 }
 
+.gerente{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 70%;
+    border-left: 3px solid#ff0000;
+    justify-content: center;
+}
+
 .analista h3{
+    margin: 5px;
+}
+
+.gerente h3{
     margin: 5px;
 }
 
