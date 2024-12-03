@@ -65,7 +65,7 @@
                     <h2>Escolha um periodo para analisar</h2>
                     <div class="select_periodo">
                         <select name="ano" id="select_mes">
-                            <option selected value="">MÊS</option>
+                            <option disabled selected value="">MÊS</option>
                             <option value=1>Janeiro</option>
                             <option value=2>Fevereiro</option>
                             <option value=3>Março</option>
@@ -79,6 +79,11 @@
                             <option value=11>Novembro</option>
                             <option value=12>Dezembro</option>
                         </select>
+                    </div>
+                </div>
+                <div class="semana">
+                    <h2>Escolha um componente para analisar</h2>
+                    <div class="select_periodo">
                         <select id="selectSemana">
                             <option disabled selected value=0>Selecione a Semana</option>
                             <option value=1>Semana 1</option>
@@ -88,18 +93,17 @@
                         </select>
                     </div>
                 </div>
-                <div class="componente">
-                    <h2>Escolha um componente para analisar</h2>
-                    <div class="select_periodo">
-                        <select name="ano">
-                            <option selected value="">CPU</option>
-                            <option value="">RAM</option>
-                        </select>
-                    </div>
-                </div>
             </div>
             <div class="linha_grafico2">
                 <div class="grafico4">
+                    <div class="media">
+                        <div class="texto">
+                            <p>Média de horário com mais movimento</p>
+                        </div>
+                        <div class="hora">
+                            <p id="MediaHorario"></p>
+                        </div>
+                    </div>
                     <div class="media">
                         <div class="texto">
                             <p>Horário com maior número de alertas</p>
@@ -116,14 +120,6 @@
                             <p id="AlertaSemana"></p>
                         </div>
                     </div>
-                    <div class="media">
-                        <div class="texto">
-                            <p>Média de horário com mais movimento</p>
-                        </div>
-                        <div class="hora">
-                            <p id="MediaHorario"></p>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="graficos_dashes">
@@ -133,7 +129,7 @@
                 </div>
                 <div class="selecionar_grafico">
                     <div class="titulo_graficoSelecionar">
-                        <h3>Taxa de totem em alerta por dia</h3>
+                        <h3 id="titulo">Taxa de alerta dos totens por dia</h3>
                         <select name="ano" id="select_grafico" onchange="alterarGrafico()">
                             <option selected value="0">TAXA</option>
                             <option value="1">TOTAL</option>
@@ -166,12 +162,14 @@
         grafico3.style.display = "none";
 
         if (selectTaxa == 0) {
-            grafico2.style.display = "block"
-            cadastrarTaxa()
+        titulo.innerHTML = "Taxa de alerta dos totens por dia";  // Texto para a opção 0
+        grafico2.style.display = "block";
+        cadastrarTaxa();
         } else if (selectTaxa == 1) {
-            grafico3.style.display = "block"
-            buscarDadosHora();
-        }
+        titulo.innerHTML = "Quantidade de alertas por hora do dia com mais alertas";  // Texto para a opção 1
+        grafico3.style.display = "block";
+        buscarDadosHora();
+    }
     }
 
     function carregarBody() {
@@ -449,7 +447,6 @@
                     data: total_alertas
                 }],
                 title: {
-                    text: 'Total de alertas por hora',
                     align: 'center',
                     style: {
                         color: '#ffffff',
