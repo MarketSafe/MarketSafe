@@ -10,7 +10,7 @@ from requests import HTTPError
 import boto3
 import dotenv
 
-descanso = 1
+descanso = 5 * 60
 
 while True:
 
