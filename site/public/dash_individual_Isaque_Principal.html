@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarketSafe | Dashboard</title>
-    <link rel="stylesheet" href="css/dash_individual_Isaque_TelaPrincipal.css" />
+    <link
+      rel="stylesheet"
+      href="css/dash_individual_Isaque_TelaPrincipal.css"
+    />
     <link rel="icon" href="css/icon.png" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/9f7414eb10.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://kit.fontawesome.com/0b71632824.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/0b71632824.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-
-</head>
-
-<body>
+  <body>
     <div class="container">
         <div class="menu">
             <div class="div_logo">
@@ -224,12 +236,13 @@
                 </div>
             </div>
 
-            <!-- <button class="button" onclick="notificacao(ErroMsg)">Teste Notificar</button> -->
+        <!-- <button class="button" onclick="notificacao(ErroMsg)">Teste Notificar</button> -->
 
-            <div class="notifi-box" id="box">
-                <h2>Alertas<span id="QtdAlertas2"></span></h2> <!--textinho dentro do alerta-->
-            </div>
-            <div id="notify_box"></div>
+        <div class="notifi-box" id="box">
+          <h2>Alertas<span id="QtdAlertas2"></span></h2>
+          <!--textinho dentro do alerta-->
+        </div>
+        <div id="notify_box"></div>
 
             <div id="promo" class="promo" onclick="aparecerPromo()">
                 <img src="css/iconPromo.png" alt="">
@@ -257,11 +270,9 @@
             </div>
 
         </div>
-
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
@@ -286,23 +297,21 @@
         laberSld.innerHTML = myRange.value
     }
 
-    //E num é que essa geringonça funcionou, KK
-    document.getElementById('menu').addEventListener('change', function () {
-        const selectedValue = this.value;
-        if (selectedValue !== "0") {
-            window.location.href = selectedValue;
-        }
-    });
+  //E num é que essa geringonça funcionou, KK
+  document.getElementById("menu").addEventListener("change", function () {
+    const selectedValue = this.value;
+    if (selectedValue !== "0") {
+      window.location.href = selectedValue;
+    }
+  });
 
+  //Gráfico 1
 
-    //Gráfico 1
-
-    var dataSeries = [];
-    var dataSeries2 = [];
-    var dataSeries3 = [];
-    var dataSeries4 = [];
-    var dataSeries5 = [];
-
+  var dataSeries = [];
+  var dataSeries2 = [];
+  var dataSeries3 = [];
+  var dataSeries4 = [];
+  var dataSeries5 = [];
 
     // Configurações do gráfico ApexCharts Gráfico 1
     var options = {
@@ -416,14 +425,13 @@
     var chart = new ApexCharts(document.querySelector("#chart-RealTimeLine1"), options);
     chart.render();
 
-    //Gráfico 2
+  //Gráfico 2
 
-    var dataSeries6 = [];
-    var dataSeries7 = [];
-    var dataSeries8 = [];
-    var dataSeries9 = [];
-    var dataSeries10 = [];
-
+  var dataSeries6 = [];
+  var dataSeries7 = [];
+  var dataSeries8 = [];
+  var dataSeries9 = [];
+  var dataSeries10 = [];
 
     // Gráfico 2
     // Configurações do gráfico ApexCharts Gráfico 2
@@ -530,12 +538,14 @@
         }
     };
 
-    // Cria o gráfico
-    var chart2 = new ApexCharts(document.querySelector("#chart-RealTimeLine2"), options2);
-    chart2.render();
+  // Cria o gráfico
+  var chart2 = new ApexCharts(
+    document.querySelector("#chart-RealTimeLine2"),
+    options2
+  );
+  chart2.render();
 
-
-    // Grafico de Rosca O_o
+  // Grafico de Rosca O_o
 
     // 1º Gráfico
     var options3 = {
@@ -559,91 +569,99 @@
                 }
             }
         },
-        colors: ['#FF4560', '#FFA500'],
-        labels: ['RAM', 'CPU'],
-        legend: {
-            show: false
-        },
-        stroke: {
-            lineCap: 'round'
-        }
-    };
+      },
+    },
+    colors: ["#FF4560", "#FFA500"],
+    labels: ["RAM", "CPU"],
+    legend: {
+      show: false,
+    },
+    stroke: {
+      lineCap: "round",
+    },
+  };
 
-    var chart3 = new ApexCharts(document.querySelector("#chart_Rosca"), options3);
-    chart3.render();
+  var chart3 = new ApexCharts(document.querySelector("#chart_Rosca"), options3);
+  chart3.render();
 
     // 2º Gráfico
 
-    var options4 = {
-        series: [0, 0],
-        chart: {
-            width: 200,
-            height: 200,
-            type: 'radialBar'
+  var options4 = {
+    series: [0, 0],
+    chart: {
+      width: 200,
+      height: 200,
+      type: "radialBar",
+    },
+    plotOptions: {
+      radialBar: {
+        hollow: {
+          size: "50%",
         },
-        plotOptions: {
-            radialBar: {
-                hollow: {
-                    size: '50%'
-                },
-                track: {
-                    background: '#CCCCCC',
-                    strokeWidth: '100%',
-                },
-                dataLabels: {
-                    show: false
-                }
-            }
+        track: {
+          background: "#CCCCCC",
+          strokeWidth: "100%",
         },
-        colors: ['#FF4560', '#FFA500'],
-        labels: ['RAM', 'CPU'],
-        legend: {
-            show: false
+        dataLabels: {
+          show: false,
         },
-        stroke: {
-            lineCap: 'round'
-        }
-    };
+      },
+    },
+    colors: ["#FF4560", "#FFA500"],
+    labels: ["RAM", "CPU"],
+    legend: {
+      show: false,
+    },
+    stroke: {
+      lineCap: "round",
+    },
+  };
 
-    var chart4 = new ApexCharts(document.querySelector("#chart_Rosca2"), options4);
-    chart4.render();
+  var chart4 = new ApexCharts(
+    document.querySelector("#chart_Rosca2"),
+    options4
+  );
+  chart4.render();
 
     // 3º Gráfico
 
-    var options5 = {
-        series: [0, 0],
-        chart: {
-            width: 200,
-            height: 200,
-            type: 'radialBar'
+  var options5 = {
+    series: [0, 0],
+    chart: {
+      width: 200,
+      height: 200,
+      type: "radialBar",
+    },
+    plotOptions: {
+      radialBar: {
+        hollow: {
+          size: "50%",
         },
-        plotOptions: {
-            radialBar: {
-                hollow: {
-                    size: '50%'
-                },
-                track: {
-                    background: '#CCCCCC',
-                    strokeWidth: '100%',
-                },
-                dataLabels: {
-                    show: false
-                }
-            }
+        track: {
+          background: "#CCCCCC",
+          strokeWidth: "100%",
         },
-        colors: ['#FF4560', '#FFA500'],
-        labels: ['RAM', 'CPU'],
-        legend: {
-            show: false
+        dataLabels: {
+          show: false,
         },
-        stroke: {
-            lineCap: 'round'
-        }
-    };
+      },
+    },
+    colors: ["#FF4560", "#FFA500"],
+    labels: ["RAM", "CPU"],
+    legend: {
+      show: false,
+    },
+    stroke: {
+      lineCap: "round",
+    },
+  };
 
-    var chart5 = new ApexCharts(document.querySelector("#chart_Rosca3"), options5);
-    chart5.render();
-    var tempo = 0;
+  var chart5 = new ApexCharts(
+    document.querySelector("#chart_Rosca3"),
+    options5
+  );
+  chart5.render();
+  var tempo = 0;
 
     // 4º Gráfico
 
@@ -668,15 +686,17 @@
                 }
             }
         },
-        colors: ['#FF4560', '#FFA500'],
-        labels: ['RAM', 'CPU'],
-        legend: {
-            show: false
-        },
-        stroke: {
-            lineCap: 'round'
-        }
-    };
+      },
+    },
+    colors: ["#FF4560", "#FFA500"],
+    labels: ["RAM", "CPU"],
+    legend: {
+      show: false,
+    },
+    stroke: {
+      lineCap: "round",
+    },
+  };
 
     var chart6 = new ApexCharts(document.querySelector("#chart_Rosca4"), options6);
     chart6.render();
@@ -706,21 +726,26 @@
                 }
             }
         },
-        colors: ['#FF4560', '#FFA500'],
-        labels: ['RAM', 'CPU'],
-        legend: {
-            show: false
-        },
-        stroke: {
-            lineCap: 'round'
-        }
-    };
+      },
+    },
+    colors: ["#FF4560", "#FFA500"],
+    labels: ["RAM", "CPU"],
+    legend: {
+      show: false,
+    },
+    stroke: {
+      lineCap: "round",
+    },
+  };
 
-    var chart7 = new ApexCharts(document.querySelector("#chart_Rosca5"), options7);
-    chart7.render();
-    var tempo = 0;
+  var chart7 = new ApexCharts(
+    document.querySelector("#chart_Rosca5"),
+    options7
+  );
+  chart7.render();
+  var tempo = 0;
 
-    // --------- CPU do Totem 1 ------------//
+  // --------- CPU do Totem 1 ------------//
 
     function Atualizar_ValorT1() {
         fetch("/monitoramento/AtualizarValorT1",
@@ -742,27 +767,26 @@
                     tempo += 1;
                     // console.log(dataSeries);
 
-                    if (dataSeries.length > 20) {
-                        dataSeries.shift();
-                    }
+          if (dataSeries.length > 20) {
+            dataSeries.shift();
+          }
 
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
+          chart.updateSeries([
+            { name: "T1", data: dataSeries },
+            { name: "T2", data: dataSeries2 },
+            { name: "T3", data: dataSeries3 },
+            { name: "T4", data: dataSeries4 },
+            { name: "T5", data: dataSeries5 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorT1, 1000);
 
-                }
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorT1, 1000);
-
-    // --------- CPU do Totem 2 ------------//
+  // --------- CPU do Totem 2 ------------//
 
     function Atualizar_ValorT2() {
         fetch("/monitoramento/AtualizarValorT2",
@@ -785,28 +809,26 @@
                     // console.log(dataSeries2);
 
 
-                    if (dataSeries2.length > 20) {
-                        dataSeries2.shift();
-                    }
+          if (dataSeries2.length > 20) {
+            dataSeries2.shift();
+          }
 
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
+          chart.updateSeries([
+            { name: "T1", data: dataSeries },
+            { name: "T2", data: dataSeries2 },
+            { name: "T3", data: dataSeries3 },
+            { name: "T4", data: dataSeries4 },
+            { name: "T5", data: dataSeries5 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorT2, 1000);
 
-                }
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorT2, 1000);
-
-    // --------- CPU do Totem 3 ------------//
+  // --------- CPU do Totem 3 ------------//
 
     function Atualizar_ValorT3() {
         fetch("/monitoramento/AtualizarValorT3",
@@ -828,29 +850,26 @@
                     tempo += 1;
                     // console.log(dataSeries3);
 
-                    if (dataSeries3.length > 20) {
-                        dataSeries3.shift();
-                    }
+          if (dataSeries3.length > 20) {
+            dataSeries3.shift();
+          }
 
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
+          chart.updateSeries([
+            { name: "T1", data: dataSeries },
+            { name: "T2", data: dataSeries2 },
+            { name: "T3", data: dataSeries3 },
+            { name: "T4", data: dataSeries4 },
+            { name: "T5", data: dataSeries5 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorT3, 1000);
 
-                }
-
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorT3, 1000);
-
-    // --------- CPU do Totem 4 ------------//
+  // --------- CPU do Totem 4 ------------//
 
     function Atualizar_ValorT4() {
         fetch("/monitoramento/AtualizarValorT4",
@@ -872,28 +891,26 @@
                     tempo += 1;
                     // console.log(dataSeries4);
 
-                    if (dataSeries4.length > 20) {
-                        dataSeries4.shift();
-                    }
+          if (dataSeries4.length > 20) {
+            dataSeries4.shift();
+          }
 
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
+          chart.updateSeries([
+            { name: "T1", data: dataSeries },
+            { name: "T2", data: dataSeries2 },
+            { name: "T3", data: dataSeries3 },
+            { name: "T4", data: dataSeries4 },
+            { name: "T5", data: dataSeries5 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorT4, 1000);
 
-                }
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorT4, 1000);
-
-    // --------- CPU do Totem 5 ------------//
+  // --------- CPU do Totem 5 ------------//
 
     function Atualizar_ValorT5() {
         fetch("/monitoramento/AtualizarValorT5",
@@ -915,29 +932,26 @@
                     tempo += 1;
                     // console.log(dataSeries5);
 
-                    if (dataSeries5.length > 20) {
-                        dataSeries5.shift();
-                    }
+          if (dataSeries5.length > 20) {
+            dataSeries5.shift();
+          }
 
-                    chart.updateSeries([
-                        { name: 'T1', data: dataSeries },
-                        { name: 'T2', data: dataSeries2 },
-                        { name: 'T3', data: dataSeries3 },
-                        { name: 'T4', data: dataSeries4 },
-                        { name: 'T5', data: dataSeries5 }
-                    ]);
+          chart.updateSeries([
+            { name: "T1", data: dataSeries },
+            { name: "T2", data: dataSeries2 },
+            { name: "T3", data: dataSeries3 },
+            { name: "T4", data: dataSeries4 },
+            { name: "T5", data: dataSeries5 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorT5, 1000);
 
-                }
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorT5, 1000);
-
-
-    // --------- Ram do Totem 1 ------------//
+  // --------- Ram do Totem 1 ------------//
 
     function Atualizar_ValorRamT1() {
         fetch("/monitoramento/AtualizarValorRamT1",
@@ -959,29 +973,26 @@
                     tempo += 1;
                     // console.log(dataSeries6);
 
-                    if (dataSeries6.length > 20) {
-                        dataSeries6.shift();
-                    }
+          if (dataSeries6.length > 20) {
+            dataSeries6.shift();
+          }
 
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
+          chart2.updateSeries([
+            { name: "T1", data: dataSeries6 },
+            { name: "T2", data: dataSeries7 },
+            { name: "T3", data: dataSeries8 },
+            { name: "T4", data: dataSeries9 },
+            { name: "T5", data: dataSeries10 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorRamT1, 1000);
 
-
-                }
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorRamT1, 1000);
-
-    // --------- Ram do Totem 2 ------------//
+  // --------- Ram do Totem 2 ------------//
 
     function Atualizar_ValorRamT2() {
         fetch("/monitoramento/AtualizarValorRamT2",
@@ -1003,29 +1014,26 @@
                     tempo += 1;
                     // console.log(dataSeries7);
 
-                    if (dataSeries7.length > 20) {
-                        dataSeries7.shift();
-                    }
+          if (dataSeries7.length > 20) {
+            dataSeries7.shift();
+          }
 
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
+          chart2.updateSeries([
+            { name: "T1", data: dataSeries6 },
+            { name: "T2", data: dataSeries7 },
+            { name: "T3", data: dataSeries8 },
+            { name: "T4", data: dataSeries9 },
+            { name: "T5", data: dataSeries10 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorRamT2, 1000);
 
-
-                }
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorRamT2, 1000);
-
-    // --------- Ram do Totem 3 ------------//
+  // --------- Ram do Totem 3 ------------//
 
     function Atualizar_ValorRamT3() {
         fetch("/monitoramento/AtualizarValorRamT3",
@@ -1047,29 +1055,26 @@
                     tempo += 1;
                     // console.log(dataSeries8);
 
-                    if (dataSeries8.length > 20) {
-                        dataSeries8.shift();
-                    }
+          if (dataSeries8.length > 20) {
+            dataSeries8.shift();
+          }
 
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
+          chart2.updateSeries([
+            { name: "T1", data: dataSeries6 },
+            { name: "T2", data: dataSeries7 },
+            { name: "T3", data: dataSeries8 },
+            { name: "T4", data: dataSeries9 },
+            { name: "T5", data: dataSeries10 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorRamT3, 1000);
 
-
-                }
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorRamT3, 1000);
-
-    // --------- Ram do Totem 4 ------------//
+  // --------- Ram do Totem 4 ------------//
 
     function Atualizar_ValorRamT4() {
         fetch("/monitoramento/AtualizarValorRamT4",
@@ -1091,29 +1096,26 @@
                     tempo += 1;
                     // console.log(dataSeries9);
 
-                    if (dataSeries9.length > 20) {
-                        dataSeries9.shift();
-                    }
+          if (dataSeries9.length > 20) {
+            dataSeries9.shift();
+          }
 
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
+          chart2.updateSeries([
+            { name: "T1", data: dataSeries6 },
+            { name: "T2", data: dataSeries7 },
+            { name: "T3", data: dataSeries8 },
+            { name: "T4", data: dataSeries9 },
+            { name: "T5", data: dataSeries10 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorRamT4, 1000);
 
-
-                }
-
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-    setInterval(Atualizar_ValorRamT4, 1000);
-
-    // --------- Ram do Totem 5 ------------//
+  // --------- Ram do Totem 5 ------------//
 
     function Atualizar_ValorRamT5() {
         fetch("/monitoramento/AtualizarValorRamT5",
@@ -1135,320 +1137,333 @@
                     tempo += 1;
                     // console.log(dataSeries10);
 
-                    if (dataSeries10.length > 20) {
-                        dataSeries10.shift();
-                    }
+          if (dataSeries10.length > 20) {
+            dataSeries10.shift();
+          }
 
-                    chart2.updateSeries([
-                        { name: 'T1', data: dataSeries6 },
-                        { name: 'T2', data: dataSeries7 },
-                        { name: 'T3', data: dataSeries8 },
-                        { name: 'T4', data: dataSeries9 },
-                        { name: 'T5', data: dataSeries10 }
-                    ]);
+          chart2.updateSeries([
+            { name: "T1", data: dataSeries6 },
+            { name: "T2", data: dataSeries7 },
+            { name: "T3", data: dataSeries8 },
+            { name: "T4", data: dataSeries9 },
+            { name: "T5", data: dataSeries10 },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+  }
+  setInterval(Atualizar_ValorRamT5, 1000);
 
+  var VetorCpuT1 = [];
+  var VetorRamT1 = [];
 
-                }
+  var VetorCpuT2 = [];
+  var VetorRamT2 = [];
 
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
+  var VetorCpuT3 = [];
+  var VetorRamT3 = [];
+
+  var VetorCpuT4 = [];
+  var VetorRamT4 = [];
+
+  var VetorCpuT5 = [];
+  var VetorRamT5 = [];
+
+  function Atualizar_Vetores() {
+    // ------------- T1 ------------- //
+    if (dataSeries.length > 0) {
+      const ultimoValorCpuT1 = Math.round(dataSeries[dataSeries.length - 1].y);
+      VetorCpuT1 = [ultimoValorCpuT1];
     }
-    setInterval(Atualizar_ValorRamT5, 1000);
-
-    var VetorCpuT1 = [];
-    var VetorRamT1 = [];
-
-    var VetorCpuT2 = [];
-    var VetorRamT2 = [];
-
-    var VetorCpuT3 = [];
-    var VetorRamT3 = [];
-
-    var VetorCpuT4 = [];
-    var VetorRamT4 = [];
-
-    var VetorCpuT5 = [];
-    var VetorRamT5 = [];
-
-
-    function Atualizar_Vetores() {
-
-        // ------------- T1 ------------- //
-        if (dataSeries.length > 0) {
-            const ultimoValorCpuT1 = Math.round(dataSeries[dataSeries.length - 1].y);
-            VetorCpuT1 = [ultimoValorCpuT1];
-        }
-        if (dataSeries6.length > 0) {
-            const ultimoValorRamT1 = Math.round(dataSeries6[dataSeries6.length - 1].y);
-            VetorRamT1 = [ultimoValorRamT1];
-        }
-
-        // ------------- T2 ------------- //
-        if (dataSeries2.length > 0) {
-            const ultimoValorCpuT2 = Math.round(dataSeries2[dataSeries2.length - 1].y);
-            VetorCpuT2 = [ultimoValorCpuT2];
-        }
-        if (dataSeries7.length > 0) {
-            const ultimoValorRamT2 = Math.round(dataSeries7[dataSeries7.length - 1].y);
-            VetorRamT2 = [ultimoValorRamT2];
-        }
-
-        // ------------- T3 ------------- //
-        if (dataSeries3.length > 0) {
-            const ultimoValorCpuT3 = Math.round(dataSeries3[dataSeries3.length - 1].y);
-            VetorCpuT3 = [ultimoValorCpuT3];
-        }
-        if (dataSeries8.length > 0) {
-            const ultimoValorRamT3 = Math.round(dataSeries8[dataSeries8.length - 1].y);
-            VetorRamT3 = [ultimoValorRamT3];
-        }
-        // ------------- T4 ------------- //
-        if (dataSeries4.length > 0) {
-            const ultimoValorCpuT4 = Math.round(dataSeries4[dataSeries4.length - 1].y);
-            VetorCpuT4 = [ultimoValorCpuT4];
-        }
-        if (dataSeries9.length > 0) {
-            const ultimoValorRamT4 = Math.round(dataSeries9[dataSeries9.length - 1].y);
-            VetorRamT4 = [ultimoValorRamT4];
-        }
-        // ------------- T5 ------------- //
-        if (dataSeries5.length > 0) {
-            const ultimoValorCpuT5 = Math.round(dataSeries5[dataSeries5.length - 1].y);
-            VetorCpuT5 = [ultimoValorCpuT5];
-        }
-        if (dataSeries10.length > 0) {
-            const ultimoValorRamT5 = Math.round(dataSeries10[dataSeries10.length - 1].y);
-            VetorRamT5 = [ultimoValorRamT5];
-        }
-
+    if (dataSeries6.length > 0) {
+      const ultimoValorRamT1 = Math.round(
+        dataSeries6[dataSeries6.length - 1].y
+      );
+      VetorRamT1 = [ultimoValorRamT1];
     }
 
-    // ------------ Primeiro Gráfico Dough -------------- //
-
-    function Atualizar_Dough1() {
-
-        Atualizar_Vetores();
-
-        const valorCPU = VetorCpuT1[0] || 0;
-        const valorRAM = VetorRamT1[0] || 0;
-
-        chart3.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T1.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T1.innerHTML = `Cpu - ${valorCPU}%`;
-
-        // console.log(VetorCpuT1, VetorRamT1)
-        verificarDash(1, "CPU", valorCPU);
-        verificarDash(1, "RAM", valorRAM);
+    // ------------- T2 ------------- //
+    if (dataSeries2.length > 0) {
+      const ultimoValorCpuT2 = Math.round(
+        dataSeries2[dataSeries2.length - 1].y
+      );
+      VetorCpuT2 = [ultimoValorCpuT2];
     }
-    setInterval(Atualizar_Dough1, 1000);
-
-    // ------------ Segundo Gráfico Dough -------------- //
-
-    function Atualizar_Dough2() {
-
-        Atualizar_Vetores();
-
-        const valorCPU = VetorCpuT2[0] || 0;
-        const valorRAM = VetorRamT2[0] || 0;
-
-        chart4.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T2.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T2.innerHTML = `Cpu - ${valorCPU}%`;
-
-        // console.log(VetorCpuT2, VetorRamT2)
-        verificarDash(2, "CPU", valorCPU);
-        verificarDash(2, "RAM", valorRAM);
-    }
-    setInterval(Atualizar_Dough2, 1000);
-
-    // ------------ Terceiro Gráfico Dough -------------- //
-
-    function Atualizar_Dough3() {
-
-        Atualizar_Vetores();
-
-        const valorCPU = VetorCpuT3[0] || 0;
-        const valorRAM = VetorRamT3[0] || 0;
-
-        chart5.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T3.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T3.innerHTML = `Cpu - ${valorCPU}%`;
-
-        // console.log(VetorCpuT3, VetorRamT3)
-        verificarDash(3, "CPU", valorCPU);
-        verificarDash(3, "RAM", valorRAM);
-    }
-    setInterval(Atualizar_Dough3, 1000);
-
-    // ------------ Quarto Gráfico Dough -------------- //
-
-    function Atualizar_Dough4() {
-
-        Atualizar_Vetores();
-
-        const valorCPU = VetorCpuT4[0] || 0;
-        const valorRAM = VetorRamT4[0] || 0;
-
-        chart6.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T4.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T4.innerHTML = `Cpu - ${valorCPU}%`;
-
-        // console.log(VetorCpuT4, VetorRamT4)
-        verificarDash(4, "CPU", valorCPU);
-        verificarDash(4, "RAM", valorRAM);
-    }
-    setInterval(Atualizar_Dough4, 1000);
-
-    // ------------ Quinto Gráfico Dough -------------- //
-
-    function Atualizar_Dough5() {
-
-        Atualizar_Vetores();
-
-        const valorCPU = VetorCpuT5[0] || 0;
-        const valorRAM = VetorRamT5[0] || 0;
-
-        chart7.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T5.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T5.innerHTML = `Cpu - ${valorCPU}%`;
-
-        // console.log(VetorCpuT5, VetorRamT5)
-
-        verificarDash(5, "CPU", valorCPU);
-        verificarDash(5, "RAM", valorRAM);
-    }
-    setInterval(Atualizar_Dough5, 1000);
-
-
-
-    function redirecionarTotem(totem) {
-        if (totem !== "0") {
-            window.location.href = `dash_individual_Isaque_Principal.html?totem=${totem}`;
-        }
+    if (dataSeries7.length > 0) {
+      const ultimoValorRamT2 = Math.round(
+        dataSeries7[dataSeries7.length - 1].y
+      );
+      VetorRamT2 = [ultimoValorRamT2];
     }
 
-    //-------------- Alertas -----------------//
-
-    let notify_box = document.getElementById('notify_box');
-    let ErroMsg = '<i class="fa-solid fa-circle-exclamation"></i> Erro no Totem';
-
-    var QtdNotify = 0;
-    var QtdNotify2 = 0;
-    var contador = 0;
-
-    var box = document.getElementById('box');
-    var down = false;
-
-    function Alertas() {
-        if (down) {
-            box.style.height = '0px';
-            box.style.opacity = 0;
-            box.classList.remove('open');
-            down = false;
-        } else {
-            box.style.height = '510px';
-            box.style.opacity = 1;
-            setTimeout(function () {
-                box.classList.add('open');
-            }, 300);
-            down = true;
-        }
+    // ------------- T3 ------------- //
+    if (dataSeries3.length > 0) {
+      const ultimoValorCpuT3 = Math.round(
+        dataSeries3[dataSeries3.length - 1].y
+      );
+      VetorCpuT3 = [ultimoValorCpuT3];
     }
-
-    function notificacao(msg) {
-
-        let notify = document.createElement('div');
-        notify.classList.add('notify');
-        notify.innerHTML = msg;
-
-        notify_box.appendChild(notify);
-
-        setTimeout(() => {
-            notify.remove();
-        }, 5000);
-
-
-        let registro = document.createElement('div');
-        registro.classList.add('registro');
-        registro.innerHTML = msg;
-
-        document.getElementById("box").appendChild(registro);
-
-        QtdNotify++;
-        QtdNotify2++;
-        document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
-        document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
-        document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+    if (dataSeries8.length > 0) {
+      const ultimoValorRamT3 = Math.round(
+        dataSeries8[dataSeries8.length - 1].y
+      );
+      VetorRamT3 = [ultimoValorRamT3];
     }
-
-    function verificarDash(totem, componente, valor) {
-        if (valor > 80) {
-            notificacao(`<i class="fa-solid fa-triangle-exclamation"></i> Problema no <span> Totem ${totem}</span> - ${componente} (${valor}%)`);
-        }
-
+    // ------------- T4 ------------- //
+    if (dataSeries4.length > 0) {
+      const ultimoValorCpuT4 = Math.round(
+        dataSeries4[dataSeries4.length - 1].y
+      );
+      VetorCpuT4 = [ultimoValorCpuT4];
     }
-
-    function acionarAlertasENotificacao() {
-        Alertas();
+    if (dataSeries9.length > 0) {
+      const ultimoValorRamT4 = Math.round(
+        dataSeries9[dataSeries9.length - 1].y
+      );
+      VetorRamT4 = [ultimoValorRamT4];
     }
+    // ------------- T5 ------------- //
+    if (dataSeries5.length > 0) {
+      const ultimoValorCpuT5 = Math.round(
+        dataSeries5[dataSeries5.length - 1].y
+      );
+      VetorCpuT5 = [ultimoValorCpuT5];
+    }
+    if (dataSeries10.length > 0) {
+      const ultimoValorRamT5 = Math.round(
+        dataSeries10[dataSeries10.length - 1].y
+      );
+      VetorRamT5 = [ultimoValorRamT5];
+    }
+  }
+
+  // ------------ Primeiro Gráfico Dough -------------- //
+
+  function Atualizar_Dough1() {
+    Atualizar_Vetores();
+
+    const valorCPU = VetorCpuT1[0] || 0;
+    const valorRAM = VetorRamT1[0] || 0;
+
+    chart3.updateSeries([valorRAM, valorCPU]);
+
+    Ram_T1.innerHTML = `Ram - ${valorRAM}%`;
+    Cpu_T1.innerHTML = `Cpu - ${valorCPU}%`;
+
+    // console.log(VetorCpuT1, VetorRamT1)
+    verificarDash(1, "CPU", valorCPU);
+    verificarDash(1, "RAM", valorRAM);
+  }
+  setInterval(Atualizar_Dough1, 1000);
+
+  // ------------ Segundo Gráfico Dough -------------- //
+
+  function Atualizar_Dough2() {
+    Atualizar_Vetores();
+
+    const valorCPU = VetorCpuT2[0] || 0;
+    const valorRAM = VetorRamT2[0] || 0;
+
+    chart4.updateSeries([valorRAM, valorCPU]);
+
+    Ram_T2.innerHTML = `Ram - ${valorRAM}%`;
+    Cpu_T2.innerHTML = `Cpu - ${valorCPU}%`;
+
+    // console.log(VetorCpuT2, VetorRamT2)
+    verificarDash(2, "CPU", valorCPU);
+    verificarDash(2, "RAM", valorRAM);
+  }
+  setInterval(Atualizar_Dough2, 1000);
+
+  // ------------ Terceiro Gráfico Dough -------------- //
+
+  function Atualizar_Dough3() {
+    Atualizar_Vetores();
+
+    const valorCPU = VetorCpuT3[0] || 0;
+    const valorRAM = VetorRamT3[0] || 0;
+
+    chart5.updateSeries([valorRAM, valorCPU]);
+
+    Ram_T3.innerHTML = `Ram - ${valorRAM}%`;
+    Cpu_T3.innerHTML = `Cpu - ${valorCPU}%`;
+
+    // console.log(VetorCpuT3, VetorRamT3)
+    verificarDash(3, "CPU", valorCPU);
+    verificarDash(3, "RAM", valorRAM);
+  }
+  setInterval(Atualizar_Dough3, 1000);
+
+  // ------------ Quarto Gráfico Dough -------------- //
+
+  function Atualizar_Dough4() {
+    Atualizar_Vetores();
+
+    const valorCPU = VetorCpuT4[0] || 0;
+    const valorRAM = VetorRamT4[0] || 0;
+
+    chart6.updateSeries([valorRAM, valorCPU]);
+
+    Ram_T4.innerHTML = `Ram - ${valorRAM}%`;
+    Cpu_T4.innerHTML = `Cpu - ${valorCPU}%`;
+
+    // console.log(VetorCpuT4, VetorRamT4)
+    verificarDash(4, "CPU", valorCPU);
+    verificarDash(4, "RAM", valorRAM);
+  }
+  setInterval(Atualizar_Dough4, 1000);
+
+  // ------------ Quinto Gráfico Dough -------------- //
+
+  function Atualizar_Dough5() {
+    Atualizar_Vetores();
+
+    const valorCPU = VetorCpuT5[0] || 0;
+    const valorRAM = VetorRamT5[0] || 0;
+
+    chart7.updateSeries([valorRAM, valorCPU]);
+
+    Ram_T5.innerHTML = `Ram - ${valorRAM}%`;
+    Cpu_T5.innerHTML = `Cpu - ${valorCPU}%`;
+
+    // console.log(VetorCpuT5, VetorRamT5)
+
+    verificarDash(5, "CPU", valorCPU);
+    verificarDash(5, "RAM", valorRAM);
+  }
+  setInterval(Atualizar_Dough5, 1000);
+
+  function redirecionarTotem(totem) {
+    if (totem !== "0") {
+      window.location.href = `dash_individual_Isaque_Principal.html?totem=${totem}`;
+    }
+  }
+
+  //-------------- Alertas -----------------//
+
+  let notify_box = document.getElementById("notify_box");
+  let ErroMsg = '<i class="fa-solid fa-circle-exclamation"></i> Erro no Totem';
+
+  var QtdNotify = 0;
+  var QtdNotify2 = 0;
+  var contador = 0;
+
+  var box = document.getElementById("box");
+  var down = false;
+
+  function Alertas() {
+    if (down) {
+      box.style.height = "0px";
+      box.style.opacity = 0;
+      box.classList.remove("open");
+      down = false;
+    } else {
+      box.style.height = "510px";
+      box.style.opacity = 1;
+      setTimeout(function () {
+        box.classList.add("open");
+      }, 300);
+      down = true;
+    }
+  }
+
+  function notificacao(msg) {
+    let notify = document.createElement("div");
+    notify.classList.add("notify");
+    notify.innerHTML = msg;
+
+    notify_box.appendChild(notify);
+
+    setTimeout(() => {
+      notify.remove();
+    }, 5000);
+
+    let registro = document.createElement("div");
+    registro.classList.add("registro");
+    registro.innerHTML = msg;
+
+    document.getElementById("box").appendChild(registro);
+
+    QtdNotify++;
+    QtdNotify2++;
+    document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
+    document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
+    document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+  }
+
+  function verificarDash(totem, componente, valor) {
+    if (valor > 80) {
+      notificacao(
+        `<i class="fa-solid fa-triangle-exclamation"></i> Problema no <span> Totem ${totem}</span> - ${componente} (${valor}%)`
+      );
+    }
+  }
+
+  function acionarAlertasENotificacao() {
+    Alertas();
+  }
 
     const notificacoesRecentes = new Map();
     const intervaloNotificacao = 300000;
 
 
-    function notificacao(msg, totem, componente) {
-        const chaveNotificacao = `${totem}-${componente}`;
-        const agora = Date.now();
+  function notificacao(msg, totem, componente) {
+    const chaveNotificacao = `${totem}-${componente}`;
+    const agora = Date.now();
 
-        if (notificacoesRecentes.has(chaveNotificacao)) {
-            const ultimaNotificacao = notificacoesRecentes.get(chaveNotificacao);
-            if (agora - ultimaNotificacao < intervaloNotificacao) {
-                console.log(`Notificação bloqueada: "${msg}" já foi enviada para o Totem ${totem} no componente ${componente} recentemente.`);
-                return;
-            }
-        }
-
-        // Registra a nova notificação
-        notificacoesRecentes.set(chaveNotificacao, agora);
-
-        // Cria e exibe a notificação
-        let notify = document.createElement('div');
-        notify.classList.add('notify', 'classe-notificacao');
-        notify.innerHTML = msg;
-        notify_box.appendChild(notify);
-
-        setTimeout(() => {
-            notify.remove();
-        }, 5000);
-
-        let registro = document.createElement('div');
-        registro.classList.add('registro', 'classe-notificacao');
-        registro.innerHTML = msg;
-        document.getElementById("box").appendChild(registro);
-
-        QtdNotify++;
-        QtdNotify2++;
-        document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
-        document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
-        document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
-
-        setTimeout(() => notificacoesRecentes.delete(chaveNotificacao), intervaloNotificacao);
+    if (notificacoesRecentes.has(chaveNotificacao)) {
+      const ultimaNotificacao = notificacoesRecentes.get(chaveNotificacao);
+      if (agora - ultimaNotificacao < intervaloNotificacao) {
+        console.log(
+          `Notificação bloqueada: "${msg}" já foi enviada para o Totem ${totem} no componente ${componente} recentemente.`
+        );
+        return;
+      }
     }
 
-    function verificarDash(totem, componente, valor) {
-        if (valor > 80) {
-            notificacao(`<i class="fa-solid fa-triangle-exclamation"></i> Problema no <span> Totem ${totem}</span> - ${componente} (${valor}%)`, totem, componente);
-        }
-    }
+    // Registra a nova notificação
+    notificacoesRecentes.set(chaveNotificacao, agora);
 
-    // --------- Totens Cadastrados ---------- //
+    // Cria e exibe a notificação
+    let notify = document.createElement("div");
+    notify.classList.add("notify", "classe-notificacao");
+    notify.innerHTML = msg;
+    notify_box.appendChild(notify);
+
+    setTimeout(() => {
+      notify.remove();
+    }, 5000);
+
+    let registro = document.createElement("div");
+    registro.classList.add("registro", "classe-notificacao");
+    registro.innerHTML = msg;
+    document.getElementById("box").appendChild(registro);
+
+    QtdNotify++;
+    QtdNotify2++;
+    document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
+    document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
+    document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+
+    setTimeout(
+      () => notificacoesRecentes.delete(chaveNotificacao),
+      intervaloNotificacao
+    );
+  }
+
+  function verificarDash(totem, componente, valor) {
+    if (valor > 80) {
+      notificacao(
+        `<i class="fa-solid fa-triangle-exclamation"></i> Problema no <span> Totem ${totem}</span> - ${componente} (${valor}%)`,
+        totem,
+        componente
+      );
+    }
+  }
+
+  // --------- Totens Cadastrados ---------- //
 
     function verificarQtdTotens() {
         fetch("/monitoramento/verificarQtdTotens",
@@ -1475,7 +1490,7 @@
     }
     setInterval(verificarQtdTotens, 3000);
 
-    // ----------- Totens com Erro ------------ //
+  // ----------- Totens com Erro ------------ //
 
     function QtdTotensComProblema() {
         fetch("/monitoramento/QtdTotensComProblema",
@@ -1502,7 +1517,7 @@
     }
     setInterval(QtdTotensComProblema, 3000);
 
-    // ------------ Totens Instáveis -------------- //
+  // ------------ Totens Instáveis -------------- //
 
     function plotarMaioresValores() {
         const totens = [
