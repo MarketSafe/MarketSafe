@@ -774,6 +774,7 @@ a {
                 margin-top: -9px;
                 pointer-events: auto;
                 border-radius: 50%;
+                z-index: 9999;
               }
               input[type="range"]::-moz-range-thumb {
                 -webkit-appearance: none;
