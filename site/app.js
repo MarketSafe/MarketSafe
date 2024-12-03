@@ -40,6 +40,9 @@ app.use(cors());
 app.use(express.json());
 
 //   define as configurações de rotas:
+const promocaoRouter = require("./src/routers/promocaoRouter.js");
+
+// Define as configurações de rotas:
 app.use("/funcionario", funcionarioRouter);
 app.use("/filial", filialRouter);
 app.use("/totem", totemRouter);
@@ -50,6 +53,7 @@ app.use("/monitoramento", monitoramentoRouterIsaque);
 app.use("/benchmarkGerente", util.auth, benchmarkGerenteRouter);
 app.use("/previsaoGerenteRouter", util.auth, previsaoGerenteRouter);
 app.use("/s3", getS3ObjectsRouter);
+app.use("/promocao", util.auth, promocaoRouter); 
 
 //   configura arquivos estáticos (*.html, *.css, *.js):
 app.use(express.static(path.join(__dirname, "public")));
