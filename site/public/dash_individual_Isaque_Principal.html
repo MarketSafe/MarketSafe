@@ -537,7 +537,7 @@
 
     // Grafico de Rosca O_o
 
-    // 1º Gráfico 
+    // 1º Gráfico
     var options3 = {
         series: [0, 0],
         chart: {
@@ -572,7 +572,7 @@
     var chart3 = new ApexCharts(document.querySelector("#chart_Rosca"), options3);
     chart3.render();
 
-    // 2º Gráfico 
+    // 2º Gráfico
 
     var options4 = {
         series: [0, 0],
@@ -608,7 +608,7 @@
     var chart4 = new ApexCharts(document.querySelector("#chart_Rosca2"), options4);
     chart4.render();
 
-    // 3º Gráfico 
+    // 3º Gráfico
 
     var options5 = {
         series: [0, 0],
@@ -645,7 +645,7 @@
     chart5.render();
     var tempo = 0;
 
-    // 4º Gráfico 
+    // 4º Gráfico
 
     var options6 = {
         series: [0, 0],
@@ -683,7 +683,7 @@
     var tempo = 0;
 
 
-    // 4º Gráfico 
+    // 4º Gráfico
 
     var options7 = {
         series: [0, 0],
@@ -740,7 +740,7 @@
                     const valorCpu = parseFloat(resultado[0].CpuT1);
                     dataSeries.push({ x: tempo, y: valorCpu });
                     tempo += 1;
-                    // console.log(dataSeries); 
+                    // console.log(dataSeries);
 
                     if (dataSeries.length > 20) {
                         dataSeries.shift();
@@ -782,7 +782,7 @@
                     const valorCpu = parseFloat(resultado[0].CpuT2);
                     dataSeries2.push({ x: tempo, y: valorCpu });
                     tempo += 1;
-                    // console.log(dataSeries2); 
+                    // console.log(dataSeries2);
 
 
                     if (dataSeries2.length > 20) {
@@ -826,7 +826,7 @@
                     const valorCpu = parseFloat(resultado[0].CpuT3);
                     dataSeries3.push({ x: tempo, y: valorCpu });
                     tempo += 1;
-                    // console.log(dataSeries3); 
+                    // console.log(dataSeries3);
 
                     if (dataSeries3.length > 20) {
                         dataSeries3.shift();
@@ -870,7 +870,7 @@
                     const valorCpu = parseFloat(resultado[0].CpuT4);
                     dataSeries4.push({ x: tempo, y: valorCpu });
                     tempo += 1;
-                    // console.log(dataSeries4); 
+                    // console.log(dataSeries4);
 
                     if (dataSeries4.length > 20) {
                         dataSeries4.shift();
@@ -913,7 +913,7 @@
                     const valorCpu = parseFloat(resultado[0].CpuT5);
                     dataSeries5.push({ x: tempo, y: valorCpu });
                     tempo += 1;
-                    // console.log(dataSeries5); 
+                    // console.log(dataSeries5);
 
                     if (dataSeries5.length > 20) {
                         dataSeries5.shift();
@@ -957,7 +957,7 @@
                     const valorRam = parseFloat(resultado[0].RamT1);
                     dataSeries6.push({ x: tempo, y: valorRam });
                     tempo += 1;
-                    // console.log(dataSeries6); 
+                    // console.log(dataSeries6);
 
                     if (dataSeries6.length > 20) {
                         dataSeries6.shift();
@@ -1001,7 +1001,7 @@
                     const valorRam = parseFloat(resultado[0].RamT2);
                     dataSeries7.push({ x: tempo, y: valorRam });
                     tempo += 1;
-                    // console.log(dataSeries7); 
+                    // console.log(dataSeries7);
 
                     if (dataSeries7.length > 20) {
                         dataSeries7.shift();
@@ -1045,7 +1045,7 @@
                     const valorRam = parseFloat(resultado[0].RamT3);
                     dataSeries8.push({ x: tempo, y: valorRam });
                     tempo += 1;
-                    // console.log(dataSeries8); 
+                    // console.log(dataSeries8);
 
                     if (dataSeries8.length > 20) {
                         dataSeries8.shift();
@@ -1089,7 +1089,7 @@
                     const valorRam = parseFloat(resultado[0].RamT4);
                     dataSeries9.push({ x: tempo, y: valorRam });
                     tempo += 1;
-                    // console.log(dataSeries9); 
+                    // console.log(dataSeries9);
 
                     if (dataSeries9.length > 20) {
                         dataSeries9.shift();
@@ -1133,7 +1133,7 @@
                     const valorRam = parseFloat(resultado[0].RamT5);
                     dataSeries10.push({ x: tempo, y: valorRam });
                     tempo += 1;
-                    // console.log(dataSeries10); 
+                    // console.log(dataSeries10);
 
                     if (dataSeries10.length > 20) {
                         dataSeries10.shift();
@@ -1466,7 +1466,7 @@
                 // console.log(resultado)
                 const QtdTotens = parseFloat(resultado[0].qtd) || 0;
                 QtdTotens_bem.innerHTML = QtdTotens;
-                // console.log(QtdTotens); 
+                // console.log(QtdTotens);
 
             })
             .catch(error => {
@@ -1493,7 +1493,7 @@
                 // console.log(resultado)
                 const QtdTotens = parseFloat(resultado[0].problema) || 0;
                 QtdTotens_problema.innerHTML = QtdTotens;
-                // console.log(QtdTotens); 
+                // console.log(QtdTotens);
 
             })
             .catch(error => {
@@ -1535,7 +1535,7 @@
 
 
     function expandirGrafico() {
-        
+
         const graficoCPU = document.getElementById('chart-RealTimeLine1');
         const botaoExpand = document.getElementById('expandir_grafico2');
         const expandirIcon = document.querySelector('.fa-expand');
@@ -1566,7 +1566,7 @@
         graficoCPU.classList.remove('expandido');
         expandirIcon.style.display = 'inline-block';
         minimizarIcon.style.display = 'none';
-    
+
         graficoRAM.style.display = 'block';
         totens.style.display = 'block';
         botaoExpand.style.display = 'block';
