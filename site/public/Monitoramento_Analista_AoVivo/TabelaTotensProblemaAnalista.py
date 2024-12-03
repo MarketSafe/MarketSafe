@@ -67,7 +67,7 @@ while True:
                         "issuetype": {"name": "Task"}
                     }
                 )
-                print(f"Alerta enviado para o Totem {id_totem}")
+                print(f"Alerta enviado sobre o Totem {id_totem}")
         except Exception as e:
             print(f"Erro ao enviar alerta: {e}")
 
