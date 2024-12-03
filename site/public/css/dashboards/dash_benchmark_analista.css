@@ -89,7 +89,7 @@ body {
 }
 
 .linha {
-    margin-top: 140%;
+    margin-top: 78%;
     display: flex;
     justify-content: center;
     width: 200px;
@@ -150,10 +150,30 @@ body {
     border-left: 3px solid#E9864A;
 }
 
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.previsao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    border-left: 3px solid#ff0000;
+}
+
 .monitoramento p{
     margin: 3%;
     margin-left: 10px;
 }
+
+.previsao p{
+    margin: 3%;
+    margin-left: 10px;
+}
+
 
 .analista{
     display: flex;
@@ -164,9 +184,23 @@ body {
     justify-content: center;
 }
 
+.gerente{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 70%;
+    border-left: 3px solid#ff0000;
+    justify-content: center;
+}
+
 .analista h3{
     margin: 5px;
 }
+
+.gerente h3{
+    margin: 5px;
+}
+
 
 /* #region benchmark analista*/
 
@@ -185,11 +219,29 @@ body {
         font-style: normal;
         font-size: 44px;
     }
+
     .titulo {
         background-color: #292A32;
         text-align: center;
         width: 80%;
         border-radius: 10px;
+
+        display: flex;
+
+        h1 {
+            width: 90%;
+        }
+
+        img {
+            margin-top: 8px;
+            width: 4%;
+            height: 35px;
+            margin-left: 10px;
+            padding-top: 2px;
+            padding-bottom: 5px;
+
+            cursor: pointer;
+        }
     }
 
     .filtros {
