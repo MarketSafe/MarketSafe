@@ -107,7 +107,7 @@
             <label>
               <span>Promoção</span>
               <div>
-                <select class="promocao">
+                <select class="promocao" id="selectPromocao">
                   <option value="" selected disabled>Promoção</option>
                 </select>
               </div>
@@ -115,7 +115,7 @@
           </search>
         </header>
         <section class="dashboard">
-          <button onclick="puxarDados()">Teste function</button>
+          <button onclick="puxarDadosLine()">Teste function</button>
             <div class="dashCima">
               <div class="contentDash">
                 <div class="dashMain">
@@ -236,19 +236,48 @@
     });
   };
   
-  function puxarDados() {
-    var idFilial = selectFilial.value; 
+  function puxarDadosBubble() {
+    var idFilial = selectFilial.value;
     var anoMes = periodoInicio.value;
-    const rota = `/previsaoGerenteRouter/puxarDados/${idFilial}/${anoMes}`;
-    console.log(rota) 
-    fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}/${anoMes}`, {
+    var idPromocao = selectPromocao.value;
+
+    fetch(`/previsaoGerenteRouter/puxarDadosBubble/${idFilial}/${anoMes}/${idPromocao}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     }).then(function (resposta) {
-      console.log("ESTOU NO THEN DO puxarDados()!")
+      console.log("ESTOU NO THEN DO puxarDadosBubble()!");
+
+      if (resposta.ok) {
+        console.log(resposta);
+        resposta.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+        })
+
+      } else {
+        console.error('Nenhum dado encontrado na API');
+      }
+
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dados p/ gráfico: ${error.message}`)
+    });
+  };
+
+  function puxarDadosLine() {
+    var idFilial = selectFilial.value; 
+    var anoMes = periodoInicio.value;
+
+    fetch(`/previsaoGerenteRouter/puxarDadosLine/${idFilial}/${anoMes}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO puxarDadosLine()!");
 
       if (resposta.ok) {
         console.log(resposta);
@@ -295,7 +324,7 @@
     };
 
     console.log('----------------------------------------------');
-    console.log('Estes dados foram recebidos pela função "puxarDados()" e passados para "plotarLine()":');
+    console.log('Estes dados foram recebidos pela função "puxarDadosLine()" e passados para "plotarLine()":');
     console.log(resposta);
     
     for(i = 0; i < resposta.length; i++) {
