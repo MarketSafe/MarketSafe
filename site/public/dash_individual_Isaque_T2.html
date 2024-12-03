@@ -705,10 +705,6 @@
         const valorCPU = VetorCpuT3[0] || 0;
         const valorRAM = VetorRamT3[0] || 0;
 
-        chart5.updateSeries([valorRAM, valorCPU]);
-
-        Ram_T3.innerHTML = `Ram - ${valorRAM}%`;
-        Cpu_T3.innerHTML = `Cpu - ${valorCPU}%`;
 
         // console.log(VetorCpuT3, VetorRamT3)
         verificarDash(3, "CPU", valorCPU);
