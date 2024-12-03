@@ -137,14 +137,60 @@ async function taxasDaSemanaPorFilial(req, res) {
     });
   }
   if (!("fk_promocao" in req.body)) {
-    return await sendRespostaFromModel(
-      req,
-      res,
-      benchmarkGerenteModel.taxasDaSemanaPorFilial,
-      [req.body.fk_filial, new Date()]
-    );
+    const date = new Date().toISOString().split(".")[0].split("T")[0];
+    return res.status(200).json([
+      (
+        await getFromModel(
+          res,
+          benchmarkGerenteModel.taxasDaSemanaPorFilial,
+          [req.body.fk_filial, date, 7]
+        )
+      )[0],
+      (
+        await getFromModel(
+          res,
+          benchmarkGerenteModel.taxasDaSemanaPorFilial,
+          [req.body.fk_filial, date, 6]
+        )
+      )[0],
+      (
+        await getFromModel(
+          res,
+          benchmarkGerenteModel.taxasDaSemanaPorFilial,
+          [req.body.fk_filial, date, 5]
+        )
+      )[0],
+      (
+        await getFromModel(
+          res,
+          benchmarkGerenteModel.taxasDaSemanaPorFilial,
+          [req.body.fk_filial, date, 4]
+        )
+      )[0],
+      (
+        await getFromModel(
+          res,
+          benchmarkGerenteModel.taxasDaSemanaPorFilial,
+          [req.body.fk_filial, date, 3]
+        )
+      )[0],
+      (
+        await getFromModel(
+          res,
+          benchmarkGerenteModel.taxasDaSemanaPorFilial,
+          [req.body.fk_filial, date, 2]
+        )
+      )[0],
+      (
+        await getFromModel(
+          res,
+          benchmarkGerenteModel.taxasDaSemanaPorFilial,
+          [req.body.fk_filial, date, 1]
+        )
+      )[0],
+    ]);
   }
-  return await sendRespostaFromModel(
+  return await getFromModel(
     req,
     res,
     benchmarkGerenteModel.taxasDaSemanaPorFilialEPromocao,
