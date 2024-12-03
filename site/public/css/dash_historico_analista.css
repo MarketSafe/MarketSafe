@@ -83,6 +83,10 @@ body {
     margin-top: 10%;
 }
 
+.select_dash h2{
+    font-family: "Abel";
+}
+
 .regiao-select{
     padding: 10px;
     width: 90%;
@@ -92,29 +96,52 @@ body {
     align-items: center;
 }
 
-.select_dash h2{
-    font-family: "Abel";
-}
-
 .regiao-select select {
     padding: 6.5px;
     margin-bottom: 10px;
-    background-color: #292A32; 
+    background-color: #292A32;
     border: #fff solid 2px;
     color: #fff;
-    font-size: 16px; 
+    font-size: 16px;
     width: 100%;
     height: 42px;
     border-radius: 10px;
 }
 
-.regiao-select h3{
-    font-family: "Abel";
+.monitoramento{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    border-left: 3px solid#E9864A;
 }
 
-.regiao-select p{
-    font-family: "Abel";
+.monitoramento a{
+    margin: 3%;
+    text-decoration: none;
+    color: #fff;
 }
+
+.monitoramento p{
+    margin: 3%;
+    margin-left: 10px;
+}
+
+.previsao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    border-left: 3px solid#ff0000;
+}
+
+.previsao p{
+    margin: 3%;
+    margin-left: 10px;
+}
+
 
 .linha {
     margin-top: 140%;
@@ -175,20 +202,6 @@ body {
 
 .cargo p{
     margin: 0%;
-}
-
-.monitoramento{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 70%;
-    border-left: 3px solid#E9864A;
-}
-
-.monitoramento p{
-    margin: 3%;
-    margin-left: 10px;
 }
 
 .analista{
