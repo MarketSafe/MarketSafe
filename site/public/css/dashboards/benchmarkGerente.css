@@ -229,7 +229,7 @@ body {
                 &:hover {
                   transform: scale(105%, 105%);
                 }
-                &.required {
+                &.required:has(> option:checked[value=""]) {
                   border: 1px solid var(--gerente-color);
                 }
               }
@@ -334,12 +334,12 @@ body {
               flex-direction: row;
               align-items: stretch;
               flex: 1;
-  
+
               & > div {
                 flex: 1;
                 padding: 1rem;
                 background-color: var(--indicador-color);
-  
+
                 & > h2 {
                   text-align: center;
                   font-size: 2rem;
