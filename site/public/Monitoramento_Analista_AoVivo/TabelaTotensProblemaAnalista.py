@@ -51,10 +51,10 @@ while True:
 
     def enviarAlertaJira(cpu, ram, totem_id):
         jira = Jira(
-            url="",
-            username="",
-            password=""
-    )
+            url="https://mkts3.atlassian.net",
+            username="isaque.santana@sptech.school",
+            password="ATATT3xFfGF0L91gYCS5XFS2cX8CBQeONkNYDPrEJGIbkGVGUf9ALLa0QUwOV0sWDtlVfYVXuErzjRapP3yoUYOUi9RoycYNoAqKXLALuKkjBcSG8fPcIQFe0y2ZJsIT05PoiRt83cPvRt9fRWVK6a-z1c7x4iZbaA2H-cQ4WDp45VWgJByOrcs=0A8CD56B"
+        )
     
         try:
             for i, id_totem in enumerate(totem_id):
@@ -70,6 +70,8 @@ while True:
                 print(f"Alerta enviado sobre o Totem {id_totem}")
         except Exception as e:
             print(f"Erro ao enviar alerta: {e}")
+            import traceback
+            traceback.print_exc()
 
 
     def verificar_valor():
@@ -135,8 +137,8 @@ while True:
                     cursor.executemany(update, valor)
                     print("Valor do Totem 2 atualizado!")
 
-                    cpu.append(dadoCPU_Totem1)
-                    ram.append(memoriaRam_Totem1)
+                    cpu.append(dadoCPU_Totem2)
+                    ram.append(memoriaRam_Totem2)
                     totem_id.append(2)
 
                 if dadoCPU_Totem3 > 2 or memoriaRam_Totem3 > 90:
@@ -146,8 +148,8 @@ while True:
                     cursor.executemany(update, valor)
                     print("Valor do Totem 3 atualizado!")
 
-                    cpu.append(dadoCPU_Totem1)
-                    ram.append(memoriaRam_Totem1)
+                    cpu.append(dadoCPU_Totem3)
+                    ram.append(memoriaRam_Totem3)
                     totem_id.append(3)
 
                 if dadoCPU_Totem4 > 2 or memoriaRam_Totem4 > 90:
@@ -157,8 +159,8 @@ while True:
                     cursor.executemany(update, valor)
                     print("Valor do Totem 4 atualizado!")
 
-                    cpu.append(dadoCPU_Totem1)
-                    ram.append(memoriaRam_Totem1)
+                    cpu.append(dadoCPU_Totem4)
+                    ram.append(memoriaRam_Totem4)
                     totem_id.append(4)
                 
                 if dadoCPU_Totem5 > 2 or memoriaRam_Totem5 > 90:
@@ -168,8 +170,8 @@ while True:
                     cursor.executemany(update, valor)
                     print("Valor do Totem 5 atualizado!")
                     
-                    cpu.append(dadoCPU_Totem1)
-                    ram.append(memoriaRam_Totem1)
+                    cpu.append(dadoCPU_Totem5)
+                    ram.append(memoriaRam_Totem5)
                     totem_id.append(5)
                 
                 enviarAlertaJira(cpu, ram, totem_id)
