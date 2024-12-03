@@ -472,9 +472,11 @@ async function gerarGraficos() {
         .classList.contains("ativa") &&
       divGrafico.classList.contains("comparacao-filial-taxas")
     ) {
-      const dados = await puxarDados(
-        "/benchmarkGerente/maioresTaxasDeAlerta",
-        {},
+      const filial1 = await puxarDados(
+        "/benchmarkGerente/taxasDaSemanaPorFilial",
+        {
+          fk_filial: filtros.filial1.filial.value,
+        },
         (response) => {
           if (response.status == 204) {
             throw new Error(`Sem filiais na empresa.`);
@@ -485,11 +487,11 @@ async function gerarGraficos() {
       const config = {
         type: "bar",
         data: {
-          labels: dados.map((v) => v.nome),
+          labels: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
           datasets: [
             {
               label: "Taxa de totens em alerta",
-              data: dados.map((v) => Number(v.taxa_alerta) * 100),
+              data: filial1.map((v) => Number(v.taxa_alerta) * 100),
               backgroundColor: "#ff914dff",
             },
           ],

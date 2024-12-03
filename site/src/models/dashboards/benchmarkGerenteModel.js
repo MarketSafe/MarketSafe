@@ -65,7 +65,7 @@ function promocoesPorFilial(fk_filial) {
   return resultado;
 }
 
-function taxasDaSemanaPorFilial(fk_filial, data_hora) {
+function taxasDaSemanaPorFilial(fk_filial, data_hora, menos = 0) {
   // declara a variável de instrução sql:
   const instrucao = `select
   f.*,
@@ -85,18 +85,19 @@ function taxasDaSemanaPorFilial(fk_filial, data_hora) {
 		select
 		  *
 		  from alerta a
-		  where a.data_hora > date_sub(${data_hora}, interval 5 minute)
-			and a.data_hora <= timestamp(${data_hora})
+		  where a.data_hora > date_sub(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos + 1} day)
+			and a.data_hora <= timestamp(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day))
 	  ) a
 		on t.id = a.fk_totem
-	  where t.data_hora <= timestamp(${data_hora})
+	  where t.data_hora >= timestamp(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day))
 	  group by t.id
   ) t
 	on f.id = t.fk_filial
-  where f.data_hora <= timestamp(${data_hora})
+  where f.data_hora >= timestamp(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day))
   and f.id = ${fk_filial}
   group by f.id
   order by taxa_alerta desc limit 5;`;
+  console.log(instrucao);
   // declara a variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
