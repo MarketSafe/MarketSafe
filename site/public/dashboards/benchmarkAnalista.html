@@ -91,11 +91,19 @@
                                     <option value="#">Escolha um Totem</option>
                                     <option value="1">Totem 1</option>
                                     <option value="2">Totem 2</option>
+                                    <option value="3">Totem 3</option>
+                                    <option value="4">Totem 4</option>
+                                    <option value="5">Totem 5</option>
+                                    <option value="6">Totem 6</option>
                                 </select>
                                 <select name="" id="totem_select2">
                                     <option value="#">Escolha um Totem</option>
                                     <option value="1">Totem 1</option>
                                     <option value="2">Totem 2</option>
+                                    <option value="3">Totem 3</option>
+                                    <option value="4">Totem 4</option>
+                                    <option value="5">Totem 5</option>
+                                    <option value="6">Totem 6</option>
                                 </select>
 
                             </div>
@@ -121,7 +129,7 @@
                     </div>
                     <div class="ctdDir">
                         <h2>Sugestões de Filtros <br> (Mensal)</h2>
-                        <div class="sug" style="margin-top: 5%;" onclick="filtrarAuto()">
+                        <div class="sug" style="margin-top: 5%;" onclick="filtrarAuto(1)">
                             <div>
                                 <h3>Componente: RAM</h3>
                                 <h3>Totens: <span id="sgtTM"></span> e <span id="sgtMN"></span></h3>
@@ -135,10 +143,10 @@
                                     transform="rotate(-180 5.02 9.505)" />
                             </svg>
                         </div>
-                        <div class="sug">
+                        <div class="sug" onclick="filtrarAuto(2)">
                             <div>
                                 <h3>Componente: RAM</h3>
-                                <h3>Totens: 3 e 6</h3>
+                                <h3>Totens: <span id="sgtTM2"></span> e <span id="sgtMN2"></span></h3>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="0.5em" height="1em" viewBox="0 0 12 24">
                                 <defs>
@@ -149,10 +157,10 @@
                                     transform="rotate(-180 5.02 9.505)" />
                             </svg>
                         </div>
-                        <div class="sug">
+                        <div class="sug" onclick="filtrarAuto(3)">
                             <div>
-                                <h3>Componente: CPU</h3>
-                                <h3>Totens: 3 e 4</h3>
+                                <h3>Componente: RAM</h3>
+                                <h3>Totens: <span id="sgtTM3"></span> e <span id="sgtMN3"></span></h3>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="0.5em" height="1em" viewBox="0 0 12 24">
                                 <defs>
@@ -279,12 +287,15 @@
     var minInd
     var mxInd
 
+    var minIndTM
+    var minIndTM2
+
     var heatmapInstance = h337.create({
         container: document.querySelector(".heatmap"),
     });
 
     var points = [];
-    var max = 60;
+    var max = 70;
     var min = 0;
     var width = 850;
     var height = 490;
@@ -709,12 +720,20 @@
     }
 
 
-    function filtrarAuto(){
+    function filtrarAuto(param){
         periodoInicio.value = "2024-11-17"
         periodoFim.value = "2024-11-23"
         
-        totem_select1.value = mxInd + 1;
-        totem_select2.value = minInd + 1;
+        if (param == 1){
+            totem_select1.value = mxInd + 1;
+            totem_select2.value = minInd + 1;
+        } else if (param == 2){
+            totem_select1.value = minIndTM + 1;
+            totem_select2.value = minIndTM2 + 1;
+        } else if (param == 3){
+            totem_select1.value = mxInd + 1;
+            totem_select2.value = minIndTM + 1;
+        }
 
         selecionarCmp(2)
 
@@ -1007,17 +1026,30 @@
                         }
 
                         // Menor Totem
-                        menorTotem = resposta[1].qtd
+                        menorTotemTM = resposta[1].qtd
                         minIndTM = 1
 
                         for(i = 0; i < countTT; i++){
                             console.log(menorTotem, maiorTotem)
-                            if(mxInd == i){}
-                            else if (menorTotem < resposta[i].qtd) {
-                                menorTotem = resposta[i].qtd
-                                minInd = i
+                            if (menorTotemTM > resposta[i].qtd) {
+                                menorTotemTM = resposta[i].qtd
+                                minIndTM = i
                             }
                         }
+
+                        // Segundo menor totem
+                        menorTotemTM2 = resposta[1].qtd
+                        minIndTM2 = 1
+
+                        for(i = 0; i < countTT; i++){
+                            console.log(menorTotem, maiorTotem)
+                            if(minIndTM == i){}
+                            else if (menorTotemTM2 > resposta[i].qtd) {
+                                menorTotemTM2 = resposta[i].qtd
+                                minIndTM2 = i
+                            }
+                        }
+
 
                     //Sugestao 1 (maiores)
                         // Totem 1 (maior)
@@ -1027,6 +1059,18 @@
                         sgtMN.innerHTML = resposta[minInd].totem
                     
                     // Sugestao 2 (menores)
+                        // Totem 1 (menor)
+                        sgtTM2.innerHTML = resposta[minIndTM].totem
+
+                        // Totem 2 (segundo menor)
+                        sgtMN2.innerHTML = resposta[minIndTM2].totem
+                    
+                    // Sugestao 3 (menor e maior)
+                        // Totem 1 (maior)
+                        sgtTM3.innerHTML = resposta[mxInd].totem
+
+                        // Totem 2 (menor)
+                        sgtMN3.innerHTML = resposta[minIndTM].totem
 
                         heatmapInstance.setData(data);
 

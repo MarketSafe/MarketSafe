@@ -32,11 +32,34 @@ function plotarRanking(idEmpresa) {
 function puxarDadosBubble(idFilial, idEmpresa, anoMes, idPromocao) {
     console.log("ACESSEI O PREVISÃO GERENTE MODEL \n \n\t\t >> Se aqui der erro de 'Error; connect ECONNREFUSED', \n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD esta rodando corretamente. \n\n function puxarDadosBubble()");
 
-    // var instrucaoSql = `
-    // TO-DO: Criar um SELECT que funcione pra isso aqui também :| `;
+    var instrucaoSql = `
+    select
+  f.*,
+  sum(t.quantidade_alerta) quantidade_alerta
+  from filial f
+  left join (
+        select
+        t.*,
+        ifnull(a.quantidade_alerta, 0) quantidade_alerta
+        from totem t
+        left join (
+            select
+            count(a.id) quantidade_alerta,
+            a.fk_totem
+            from alerta a
+            where date(a.data_hora) = date("${anoMes}-15")
+             and a.fk_promocao = ${idPromocao}
+            group by a.fk_totem
+        ) a
+            on t.id = a.fk_totem
+  ) t on f.id = t.fk_filial
+  where f.fk_empresa = ${idEmpresa}
+  and f.id = ${idFilial}
+  group by f.id;
+`;
 
-    // console.log("Execuntando a instrução SQL: \n" + instrucaoSql);
-    // return database.executar(instrucaoSql);
+    console.log("Execuntando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 module.exports = {
