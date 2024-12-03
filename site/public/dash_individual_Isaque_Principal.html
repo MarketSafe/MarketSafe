@@ -80,7 +80,7 @@
             <div class="Span_Titulo">
                 <span>Monitoramento Geral</span>
             </div>
-            <div class="Alinhando_Dashs">
+            <div id="Alinhando_Dashs" class="Alinhando_Dashs">
                 <div class="expandir_dash">
                     <div id="chart-RealTimeLine1"></div>
                     <i id="expandir_grafico1" class="fa-solid fa-expand" onclick="expandirGrafico()"></i>
@@ -569,8 +569,7 @@
                 }
             }
         },
-      },
-    },
+    
     colors: ["#FF4560", "#FFA500"],
     labels: ["RAM", "CPU"],
     legend: {
@@ -686,8 +685,7 @@
                 }
             }
         },
-      },
-    },
+      
     colors: ["#FF4560", "#FFA500"],
     labels: ["RAM", "CPU"],
     legend: {
@@ -726,8 +724,7 @@
                 }
             }
         },
-      },
-    },
+      
     colors: ["#FF4560", "#FFA500"],
     labels: ["RAM", "CPU"],
     legend: {
@@ -1441,11 +1438,11 @@
     registro.innerHTML = msg;
     document.getElementById("box").appendChild(registro);
 
-    QtdNotify++;
-    QtdNotify2++;
-    document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
-    document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
-    document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+        QtdNotify++;
+        QtdNotify2++;
+        document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
+        document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
+        document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
 
     setTimeout(
       () => notificacoesRecentes.delete(chaveNotificacao),
@@ -1555,6 +1552,7 @@
         const botaoExpand = document.getElementById('expandir_grafico2');
         const expandirIcon = document.querySelector('.fa-expand');
         const minimizarIcon = document.querySelector('.fa-compress');
+        const alinhamento = document.getElementById('Alinhando_Dashs');
 
         const graficoRAM = document.getElementById('chart-RealTimeLine2');
         const totens = document.getElementById('totens');
@@ -1566,6 +1564,8 @@
         botaoExpand.style.display = 'none';
         graficoRAM.style.display = 'none';
         totens.style.display = 'none';
+
+        alinhamento.style.justifyContent = 'center';
     }
 
     function minimizarGrafico() {
@@ -1596,6 +1596,7 @@
     const expandirIcon = expandirDash.querySelector('.fa-expand');
     const minimizarIcon = expandirDash.querySelector('.fa-compress');
     const botaoExpand = document.getElementById('expandir_grafico1');
+    const alinhamento = document.getElementById('Alinhando_Dashs');
 
     const graficoCPU = document.getElementById('chart-RealTimeLine1');
     const totens = document.getElementById('totens');
@@ -1607,6 +1608,8 @@
     graficoCPU.style.display = 'none';
     totens.style.display = 'none';
     botaoExpand.style.display = 'none';
+
+    alinhamento.style.justifyContent = 'center';
 }
 
 function minimizarGrafico2() {
