@@ -121,23 +121,33 @@ function atualizarMesTaxa(mes, semana_do_mes) {
   // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMesTaxa():");
 
   var instrucaoSql = `
-SELECT 
+    SELECT 
     DATE(data_hora) AS dia,
     (COUNT(*) * 100.0 / NULLIF(
         (SELECT COUNT(*) 
          FROM alerta 
          WHERE 
             MONTH(data_hora) = ${mes} AND 
-            WEEK(data_hora, 1) - WEEK(DATE_SUB(data_hora, INTERVAL DAYOFMONTH(data_hora) - 1 DAY), 1) + 1 = ${semana_do_mes}
+            CASE
+                WHEN DAY(data_hora) BETWEEN 1 AND 7 THEN 1
+                WHEN DAY(data_hora) BETWEEN 8 AND 14 THEN 2
+                WHEN DAY(data_hora) BETWEEN 15 AND 21 THEN 3
+                ELSE 4
+            END = ${semana_do_mes}
         ), 0
     )) AS taxa_porcentagem
-FROM alerta
-WHERE 
+    FROM alerta
+    WHERE 
     MONTH(data_hora) = ${mes} AND 
-    WEEK(data_hora, 1) - WEEK(DATE_SUB(data_hora, INTERVAL DAYOFMONTH(data_hora) - 1 DAY), 1) + 1 = ${semana_do_mes}
-GROUP BY DATE(data_hora)
-ORDER BY dia
-LIMIT 7;
+    CASE
+        WHEN DAY(data_hora) BETWEEN 1 AND 7 THEN 1
+        WHEN DAY(data_hora) BETWEEN 8 AND 14 THEN 2
+        WHEN DAY(data_hora) BETWEEN 15 AND 21 THEN 3
+        ELSE 4
+    END = ${semana_do_mes}
+    GROUP BY DATE(data_hora)
+    ORDER BY dia
+    LIMIT 7;
  `;
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
