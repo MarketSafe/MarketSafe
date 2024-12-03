@@ -7,4 +7,8 @@ router.post("/puxarDados/:idFilial/:anoMes", function (req, res) {
     previsaoGerenteController.puxarDados(req, res);
 });
 
+router.post("/plotarRanking", function (req, res) {
+    previsaoGerenteController.plotarRanking(req, res);
+});
+
 module.exports = router;

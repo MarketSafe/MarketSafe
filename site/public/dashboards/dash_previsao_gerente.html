@@ -143,7 +143,7 @@
               </div>
             </div>
             <div class="space"></div>
-            <div class="ranking">
+            <div class="ranking" id="ranking">
               <table>
                   <tr class="tableHeader">
                       <th>Ranking</th>
@@ -182,6 +182,59 @@
     emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
     senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
   };
+
+  function plotarRanking() {
+    fetch("/previsaoGerenteRouter/plotarRanking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(function (resposta) {
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        resposta.json()
+        .then(function (resultado) {
+          console.log(resultado)
+
+          for(i = 0; i < resultado.length; i++) {
+            ranking.innerHTML = `<table>
+                  <tr class="tableHeader">
+                      <th>Ranking</th>
+                      <th>Filial</th>
+                      <th>Promoções</th>
+                      <th>Taxa de sobrecarga</th>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">1</td>
+                      <td class="tableSelector">Filial 5</td>
+                      <td class="tableSelector">Carnes</td>
+                      <td class="tableSelector">20%</td>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">2</td>
+                      <td class="tableSelector">Filial 1</td>
+                      <td class="tableSelector">Frutas</td>
+                      <td class="tableSelector">13%</td>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">3</td>
+                      <td class="tableSelector">Filial 7</td>
+                      <td class="tableSelector">Vegetais</td>
+                      <td class="tableSelector">7%</td>
+                  </tr>
+              </table>`;
+          };
+        })
+
+      } else {
+       console.error('Nenhum dado encontrado na API');
+      }
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dado p/ plotagem do ranking: ${error.message}`);
+    });
+  };
   
   function puxarDados() {
     var idFilial = selectFilial.value; 
@@ -211,11 +264,14 @@
       }
 
     }).catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
   };
 
   function plotarLine(resposta, idFilial) {
+    
+    // TO-DO: Adicionar função de checar se o gráfico já existe para destruí-lo e plotar um novo sem necessitar dar refresh na página.
+
     console.log('Iniciando a plotagem do gráfico de linha...');
 
     let labelsLine = [];

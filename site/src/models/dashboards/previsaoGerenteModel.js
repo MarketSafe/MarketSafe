@@ -19,6 +19,17 @@ function puxarDados(idFilial, idEmpresa, anoMes) {
     return database.executar(instrucaoSql);
 }
 
+function plotarRanking(idEmpresa) {
+    console.log("ACESSEI O PREVISÃO GERENTE MODEL \n \n\t\t >> Se aqui der erro de 'Error; connect ECONNREFUSED', \n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD esta rodando corretamente. \n\n function plotarRanking()");
+
+    // var instrucaoSql = `
+    // TO-DO: Criar um SELECT que funcione pra isso XD`;
+
+    // console.log("Execuntando a instrução SQL: \n" + instrucaoSql);
+    // return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    puxarDados
+    puxarDados,
+    plotarRanking
 }
