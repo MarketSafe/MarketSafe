@@ -52,32 +52,46 @@ while True:
 
         if valoresTabela == 0:
 
-            insert = ("INSERT INTO monitoramento (data_hora, cpu_porcentagem, ram_porcentagem, fk_totem) VALUES (DEFAULT, %s, %s, %s);")
+            insert = """
+                INSERT INTO monitoramento (data_hora, cpu_porcentagem, ram_porcentagem, fk_totem) 
+                VALUES 
+                (DEFAULT, %s, %s, 1),
+                (DEFAULT, %s, %s, 2),
+                (DEFAULT, %s, %s, 3),
+                (DEFAULT, %s, %s, 4),
+                (DEFAULT, %s, %s, 5);
+                """
+            valores = (
+                dadoCPU_Totem1, memoriaRam_Totem1,
+                dadoCPU_Totem2, memoriaRam_Totem2,
+                dadoCPU_Totem3, memoriaRam_Totem3,
+                dadoCPU_Totem4, memoriaRam_Totem4,
+                dadoCPU_Totem5, memoriaRam_Totem5
+                )
 
-            valor = ([dadoCPU_Totem1, memoriaRam_Totem1],
-                     [dadoCPU_Totem2, memoriaRam_Totem2],
-                     [dadoCPU_Totem3, memoriaRam_Totem3],
-                     [dadoCPU_Totem4, memoriaRam_Totem4],
-                     [dadoCPU_Totem5, memoriaRam_Totem5])
-
-            cursor.executemany(insert, valor)
+            cursor.execute(insert, valores)
             print("Valor inserido!")
-
-            cursor.execute("select count(*) from TotensProblema;")
-            valoresTabela = cursor.fetchone()[0]
 
         else:
 
-            update = ("update monitoramento set cpu_porcentagem = %s, ram_porcentagem = %s where id = %s;")
+            update = """
+                UPDATE monitoramento 
+                SET cpu_porcentagem = %s, ram_porcentagem = %s
+                WHERE fk_totem = %s;
+                """
 
-            valor = ([dadoCPU_Totem1, memoriaRam_Totem1, 1],
-                     [dadoCPU_Totem2, memoriaRam_Totem2, 2],
-                     [dadoCPU_Totem3, memoriaRam_Totem3, 3],
-                     [dadoCPU_Totem4, memoriaRam_Totem4, 4],
-                     [dadoCPU_Totem5, memoriaRam_Totem5, 5])
+            # Lista com os valores dos totens (cpu, ram, id_totem)
+            valores = [
+                (dadoCPU_Totem1, memoriaRam_Totem1, 1),
+                (dadoCPU_Totem2, memoriaRam_Totem2, 2),
+                (dadoCPU_Totem3, memoriaRam_Totem3, 3),
+                (dadoCPU_Totem4, memoriaRam_Totem4, 4),
+                (dadoCPU_Totem5, memoriaRam_Totem5, 5)
+            ]
 
-            cursor.executemany(update, valor)
-            print("Valor da Tabela Monitoramento atualizado!")
+            # Chamando a função
+            cursor.executemany(update, valores)
+            print("Totens atualizados do 1 ao 5 com sucesso!")
                 
         
         mydb.commit()

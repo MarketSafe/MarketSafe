@@ -30,207 +30,211 @@
 
   <body>
     <div class="container">
-      <div class="menu">
-        <div class="div_logo">
-          <img src="assets/img/Logo Self 2.png" alt="" />
-          <div class="MKTS">
-            <h1>MKTS</h1>
-          </div>
-        </div>
-        <div class="select_dash">
-          <h2>Dashboards</h2>
-        </div>
-        <div class="regiao-select">
-          <div class="analista">
-            <h3>Analista</h3>
-          </div>
-          <div class="monitoramento">
-            <p>Monitoramento</p>
-            <i class="bx bx-show"></i>
-          </div>
-          <div class="monitoramento">
-            <p>Histórico</p>
-            <i class="bx bx-file-blank"></i>
-          </div>
-          <div class="monitoramento">
-            <p>BenchMark</p>
-            <i class="fa-solid fa-scale-balanced"></i>
-          </div>
-        </div>
-        <div class="linha"></div>
-        <div class="perfil">
-          <div class="foto_perfil">
-            <img src="css/foto-anilista.jpg" alt="" />
-          </div>
-          <div class="nome_perfil">
-            <div class="nome">
-              <h2>Fred</h2>
-            </div>
-            <hr />
-            <div class="cargo">
-              <p>Analista</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="dashes">
-        <div class="Div_Botao_Alerta">
-          <div class="icon" onclick="acionarAlertasENotificacao()">
-            <i class="fa-solid fa-triangle-exclamation"
-              ><span id="QtdAlertas"></span
-            ></i>
-          </div>
-        </div>
-        <div class="Span_Titulo">
-          <span>Monitoramento Geral</span>
-        </div>
-        <div class="Alinhando_Dashs">
-          <div id="chart-RealTimeLine1"></div>
-          <div id="chart-RealTimeLine2"></div>
-          <div class="totens">
-            <div class="totens-quantidade">
-              <h3>Quantidade de Totens</h3>
-              <span id="QtdTotens_bem">0</span>
-            </div>
-            <div class="totens-problema">
-              <h4>Nº de Totens com Problema</h4>
-              <span id="QtdTotens_problema">0</span>
-            </div>
-          </div>
-        </div>
-        <div class="Fundo_Select_Totem">
-          <div class="Select_Totem">
-            Monitorar Totem
-            <select id="menu">
-              <option selected disabled value="0">Selecionar</option>
-              <option value="dash_individual_Isaque_T1.html">Totem 1</option>
-              <option value="dash_individual_Isaque_T2.html">Totem 2</option>
-              <option value="dash_individual_Isaque_T3.html">Totem 3</option>
-              <option value="dash_individual_Isaque_T4.html">Totem 4</option>
-              <option value="dash_individual_Isaque_T5.html">Totem 5</option>
-            </select>
-          </div>
-        </div>
-        <div class="Titulo_Intavel">
-          <span>Totens Instáveis</span>
-        </div>
-        <div class="bloco_monitoramento">
-          <!-- 1º Dash Rosca  -->
-          <div class="Dash_Doughs1">
-            <div class="totem-label">Totem 1</div>
-            <div class="Direcionando_DashRosca1">
-              <div id="chart_Rosca"></div>
-              <div class="legenda">
-                <div class="legenda-item">
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Ram" id="Ram_T1"></div>
-                    </div>
-                  </div>
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola2"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Cpu" id="Cpu_T1"></div>
-                    </div>
-                  </div>
+        <div class="menu">
+            <div class="div_logo">
+                <img src="assets/img/Logo Self 2.png" alt="">
+                <div class="MKTS">
+                    <h1>MKTS</h1>
                 </div>
-              </div>
             </div>
-          </div>
-          <!-- 2º Dash Rosca  -->
-          <div class="Dash_Doughs2" style="display: none">
-            <div class="totem-label">Totem 2</div>
-            <div class="Direcionando_DashRosca1">
-              <div id="chart_Rosca2"></div>
-              <div class="legenda">
-                <div class="legenda-item">
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Ram" id="Ram_T2"></div>
-                    </div>
-                  </div>
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola2"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Cpu" id="Cpu_T2"></div>
-                    </div>
-                  </div>
+            <div class="select_dash">
+                <h2>Dashboards</h2>
+            </div>
+            <div class="regiao-select">
+                <div class="analista">
+                    <h3>Analista</h3>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- 3º Dash Rosca  -->
-          <div class="Dash_Doughs3" style="display: none">
-            <div class="totem-label">Totem 3</div>
-            <div class="Direcionando_DashRosca1">
-              <div id="chart_Rosca3"></div>
-              <div class="legenda">
-                <div class="legenda-item">
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Ram" id="Ram_T3"></div>
-                    </div>
-                  </div>
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola2"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Cpu" id="Cpu_T3"></div>
-                    </div>
-                  </div>
+                <div class="monitoramento">
+                    <p>Monitoramento</p> <i class='bx bx-show'></i>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- 4º Dash Rosca  -->
-          <div class="Dash_Doughs4" style="display: none">
-            <div class="totem-label">Totem 4</div>
-            <div class="Direcionando_DashRosca1">
-              <div id="chart_Rosca4"></div>
-              <div class="legenda">
-                <div class="legenda-item">
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Ram" id="Ram_T4"></div>
-                    </div>
-                  </div>
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola2"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Cpu" id="Cpu_T4"></div>
-                    </div>
-                  </div>
+                <div class="monitoramento">
+                    <p>Histórico</p> <i class='bx bx-file-blank'></i>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- 5º Dash Rosca  -->
-          <div class="Dash_Doughs5" style="display: none">
-            <div class="totem-label">Totem 5</div>
-            <div class="Direcionando_DashRosca1">
-              <div id="chart_Rosca5"></div>
-              <div class="legenda">
-                <div class="legenda-item">
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Ram" id="Ram_T5"></div>
-                    </div>
-                  </div>
-                  <div class="Direcionando_Label">
-                    <div class="legenda-cor-bola2"></div>
-                    <div style="font-family: Abel">
-                      <div class="Text_Cpu" id="Cpu_T5"></div>
-                    </div>
-                  </div>
+                <div class="monitoramento">
+                    <p>BenchMark</p> <i class="fa-solid fa-scale-balanced"></i>
                 </div>
-              </div>
             </div>
-          </div>
+            <div class="linha">
+            </div>
+            <div class="perfil">
+                <div class="foto_perfil">
+                    <img src="css/foto-anilista.jpg" alt="">
+                </div>
+                <div class="nome_perfil">
+                    <div class="nome">
+                        <h2>Fred</h2>
+                    </div>
+                    <hr>
+                    <div class="cargo">
+                        <p>Analista</p>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="dashes">
+            <div class="Div_Botao_Alerta">
+                <div class="icon" onclick="acionarAlertasENotificacao()">
+                    <i class="fa-solid fa-triangle-exclamation"><span id="QtdAlertas"></span></i>
+                </div>
+            </div>
+            <div class="Span_Titulo">
+                <span>Monitoramento Geral</span>
+            </div>
+            <div class="Alinhando_Dashs">
+                <div class="expandir_dash">
+                    <div id="chart-RealTimeLine1"></div>
+                    <i id="expandir_grafico1" class="fa-solid fa-expand" onclick="expandirGrafico()"></i>
+                    <i id="minimizar_grafico1" class="fa-solid fa-compress" onclick="minimizarGrafico()" style="display: none;"></i>
+                </div>
+                <div class="expandir_dash2">
+                    <div id="chart-RealTimeLine2"></div>
+                    <i id="expandir_grafico2" class="fa-solid fa-expand" onclick="expandirGrafico2()"></i>
+                    <i id="minimizar_grafico2" class="fa-solid fa-compress" onclick="minimizarGrafico2()" style="display: none;"></i>
+                </div>
+                <div id="totens" class="totens">
+                    <div class="totens-quantidade">
+                        <h3>Quantidade de Totens</h3>
+                        <span id="QtdTotens_bem">0</span>
+                    </div>
+                    <div class="totens-problema">
+                        <h4>Nº de Totens com Problema</h4>
+                        <span id="QtdTotens_problema">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="Fundo_Select_Totem">
+                <div class="Select_Totem">
+                    Monitorar Totem
+                    <select id="menu">
+                        <option selected disabled value="0">Selecionar</option>
+                        <option value="dash_individual_Isaque_T1.html">Totem 1</option>
+                        <option value="dash_individual_Isaque_T2.html">Totem 2</option>
+                        <option value="dash_individual_Isaque_T3.html">Totem 3</option>
+                        <option value="dash_individual_Isaque_T4.html">Totem 4</option>
+                        <option value="dash_individual_Isaque_T5.html">Totem 5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="Titulo_Intavel">
+                <span>Totens Instáveis</span>
+            </div>
+            <div class="bloco_monitoramento">
+                <!-- 1º Dash Rosca  -->
+                <div class="Dash_Doughs1">
+                    <div class="totem-label">Totem 1</div>
+                    <div class="Direcionando_DashRosca1">
+                        <div id="chart_Rosca"></div>
+                        <div class="legenda">
+                            <div class="legenda-item">
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Ram" id="Ram_T1"></div>
+                                    </div>
+                                </div>
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola2"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Cpu" id="Cpu_T1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2º Dash Rosca  -->
+                <div class="Dash_Doughs2" style="display: none;">
+                    <div class="totem-label">Totem 2</div>
+                    <div class="Direcionando_DashRosca1">
+                        <div id="chart_Rosca2"></div>
+                        <div class="legenda">
+                            <div class="legenda-item">
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Ram" id="Ram_T2"></div>
+                                    </div>
+                                </div>
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola2"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Cpu" id="Cpu_T2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3º Dash Rosca  -->
+                <div class="Dash_Doughs3" style="display: none;">
+                    <div class="totem-label">Totem 3</div>
+                    <div class="Direcionando_DashRosca1">
+                        <div id="chart_Rosca3"></div>
+                        <div class="legenda">
+                            <div class="legenda-item">
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Ram" id="Ram_T3"></div>
+                                    </div>
+                                </div>
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola2"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Cpu" id="Cpu_T3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4º Dash Rosca  -->
+                <div class="Dash_Doughs4" style="display: none;">
+                    <div class="totem-label">Totem 4</div>
+                    <div class="Direcionando_DashRosca1">
+                        <div id="chart_Rosca4"></div>
+                        <div class="legenda">
+                            <div class="legenda-item">
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Ram" id="Ram_T4"></div>
+                                    </div>
+                                </div>
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola2"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Cpu" id="Cpu_T4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5º Dash Rosca  -->
+                <div class="Dash_Doughs5" style="display: none;">
+                    <div class="totem-label">Totem 5</div>
+                    <div class="Direcionando_DashRosca1">
+                        <div id="chart_Rosca5"></div>
+                        <div class="legenda">
+                            <div class="legenda-item">
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Ram" id="Ram_T5"></div>
+                                    </div>
+                                </div>
+                                <div class="Direcionando_Label">
+                                    <div class="legenda-cor-bola2"></div>
+                                    <div style="font-family: Abel;">
+                                        <div class="Text_Cpu" id="Cpu_T5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         <!-- <button class="button" onclick="notificacao(ErroMsg)">Teste Notificar</button> -->
 
@@ -240,31 +244,31 @@
         </div>
         <div id="notify_box"></div>
 
-        <div id="promo" class="promo" onclick="aparecerPromo()">
-          <img src="css/iconPromo.png" alt="" />
-        </div>
-
-        <div class="promoDiv" id="promoDiv">
-          <h2>Promoção</h2>
-
-          <div class="iptNomePromo">
-            <label for="nomePromo">Nome:</label>
-            <input type="text" name="nomePromo" id="nomePromo" />
-          </div>
-
-          <div class="botoes">
-            <div>
-              <button class="iniciar" onclick="IniciarPromo()">
-                Iniciar Promoção
-              </button>
+            <div id="promo" class="promo" onclick="aparecerPromo()">
+                <img src="css/iconPromo.png" alt="">
             </div>
 
-            <div>
-              <button class="encerrar" onclick="EncerrarPromo()">
-                Encerrar Promoção
-              </button>
+            <div class="promoDiv" id="promoDiv">
+                <h2>Promoção</h2>
+
+                <div class="iptNomePromo">
+                    <label for="nomePromo">Nome:</label>
+                    <input type="text" name="" id="nomePromo">
+                </div>
+
+                <div class="sldNomePromo">
+                    <label for="myRange">Duração:</label>
+                    <input type="range" min="1" max="30" value="5" class="slider" id="myRange"
+                        onchange="atualizarSlider()">
+                    <span> <span id="laberSld"></span> <span>Dias</span></span>
+                </div>
+
+                <div>
+                    <button onclick="salvarPromo()">Iniciar Promoção</button>
+                </div>
+
             </div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -272,43 +276,26 @@
 </html>
 
 <script>
-  promoDiv.style.display = "none";
 
-  function aparecerPromo() {
-    promo.style.display = "none";
-    promoDiv.style.display = "flex";
-  }
-
-  async function cadastrarPromocao() {
-    const nomePromocao = nomePromo.value;
-    const fk_filial = req.body.fk_filial;
+    promoDiv.style.display = 'none'
+    laberSld.innerHTML = myRange.value
 
 
-    const resposta = await fetch("/promocao/cadastrarPromocao", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        nome: nomePromocao,
-        fk_filial: fk_filial,
+    function aparecerPromo() {
+        promo.style.display = 'none'
+        promoDiv.style.display = 'flex'
 
-        emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
-        senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
-      }),
-    });
-
-    return false; // Previne que o formulário recarregue a página
-  }
-
-  async function IniciarPromo() {
-    try {
-      await cadastrarPromocao(); 
-      console.log("Promoção iniciada com sucesso!");
-    } catch (erro) {
-      console.error("Erro ao iniciar a promoção:", erro);
     }
-  }
+
+    function salvarPromo() {
+        promoDiv.style.display = 'none'
+        promo.style.display = 'flex'
+
+    }
+
+    function atualizarSlider() {
+        laberSld.innerHTML = myRange.value
+    }
 
   //E num é que essa geringonça funcionou, KK
   document.getElementById("menu").addEventListener("change", function () {
@@ -326,122 +313,117 @@
   var dataSeries4 = [];
   var dataSeries5 = [];
 
-  // Configurações do gráfico ApexCharts Gráfico 1
-  var options = {
-    series: [
-      {
-        name: "T1",
-        data: dataSeries,
-        color: "white",
-      },
-      {
-        name: "T2",
-        data: dataSeries2,
-      },
-      {
-        name: "T3",
-        data: dataSeries3,
-      },
-      {
-        name: "T4",
-        data: dataSeries4,
-      },
-      {
-        name: "T5",
-        data: dataSeries5,
-      },
-    ],
-    chart: {
-      id: "area-datetime",
-      type: "line",
-      width: "400px",
-      height: 250,
-      animations: {
-        enabled: false,
-        easing: "linear",
-        dynamicAnimation: {
-          speed: 1000,
+    // Configurações do gráfico ApexCharts Gráfico 1
+    var options = {
+        series: [
+            {
+                name: 'T1',
+                data: dataSeries,
+                color: "white"
+            },
+            {
+                name: 'T2',
+                data: dataSeries2
+            },
+            {
+                name: 'T3',
+                data: dataSeries3
+            },
+            {
+                name: 'T4',
+                data: dataSeries4
+            },
+            {
+                name: 'T5',
+                data: dataSeries5
+            }
+        ],
+        chart: {
+            id: 'area-datetime',
+            type: 'line',
+            animations: {
+                enabled: false,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 1000
+                }
+            },
+            toolbar: {
+                show: false
+            }
         },
-      },
-      toolbar: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-      colors: "white",
-    },
-    tooltip: {
-      theme: "dark",
-      x: {
-        show: false,
-      },
-    },
-    fill: {
-      type: "solid",
-      gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.7,
-        opacityTo: 0.9,
-        stops: [0, 100],
-      },
-    },
-    legend: {
-      show: true,
-      labels: {
-        colors: "#ffff",
-        useSeriesColors: false,
-      },
-    },
-    xaxis: {
-      title: {
-        text: "",
-        style: {
-          color: "#ffff",
-          fontSize: "15px",
-          fontFamily: "Abel",
+        dataLabels: {
+            enabled: false,
+            colors: "white",
         },
-        offsetX: -330,
-      },
-      type: "numeric",
-      tickAmount: 10,
-      labels: {
-        show: false,
-      },
-    },
-    yaxis: {
-      min: 0,
-      max: 100,
-      labels: {
-        formatter: function (value) {
-          if (value === 100) return "Max - 100%";
-          if (value === 0) return "Min - 0%";
-          return value + "%";
+        tooltip: {
+            theme: 'dark',
+            x: {
+                show: false
+            }
         },
-        style: {
-          colors: "#ffffff",
-          fontSize: "12px",
-          fontFamily: "Abel",
-          marginLeft: "15px",
+        fill: {
+            type: 'solid',
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.9,
+                stops: [0, 100]
+            }
         },
-        offsetX: +5,
-      },
-    },
-    title: {
-      text: "Uso de CPU (%)",
-      style: {
-        color: "#ffffff",
-        fontSize: "20px",
-        fontFamily: "Abel",
-      },
-      offsetX: +150,
-    },
-  };
-  var chart = new ApexCharts(
-    document.querySelector("#chart-RealTimeLine1"),
-    options
-  );
-  chart.render();
+        legend: {
+            show: true,
+            labels: {
+                colors: "#ffff",
+                useSeriesColors: false
+            }
+        },
+        xaxis: {
+            title: {
+                text: '',
+                style: {
+                    color: '#ffff',
+                    fontSize: '15px',
+                    fontFamily: 'Abel',
+                },
+                offsetX: -330
+            },
+            type: 'numeric',
+            tickAmount: 10,
+            labels: {
+                show: false
+            }
+        },
+        yaxis: {
+            min: 0,
+            max: 100,
+            labels: {
+                formatter: function (value) {
+                    if (value === 100) return 'Max - 100%';
+                    if (value === 0) return 'Min - 0%';
+                    return value + '%';
+                },
+                style: {
+                    colors: '#ffffff',
+                    fontSize: '12px',
+                    fontFamily: 'Abel',
+                    marginLeft: '15px'
+                },
+                offsetX: +5
+            }
+        },
+        title: {
+            text: 'Uso de CPU (%)',
+            style: {
+                color: '#ffffff',
+                fontSize: '20px',
+                fontFamily: 'Abel',
+            },
+            offsetX: +150
+        }
+    };
+    var chart = new ApexCharts(document.querySelector("#chart-RealTimeLine1"), options);
+    chart.render();
 
   //Gráfico 2
 
@@ -451,116 +433,110 @@
   var dataSeries9 = [];
   var dataSeries10 = [];
 
-  // Gráfico 2
-  // Configurações do gráfico ApexCharts Gráfico 2
-  var options2 = {
-    series: [
-      {
-        name: "T1",
-        data: dataSeries6,
-      },
-      {
-        name: "T2",
-        data: dataSeries7,
-      },
-      {
-        name: "T3",
-        data: dataSeries8,
-      },
-      {
-        name: "T4",
-        data: dataSeries9,
-      },
-      {
-        name: "T5",
-        data: dataSeries10,
-      },
-    ],
-    chart: {
-      id: "area-datetime",
-      type: "line",
-      width: "400px",
-      height: 250,
-      animations: {
-        enabled: false,
-        easing: "linear",
-        dynamicAnimation: {
-          speed: 1000,
+    // Gráfico 2
+    // Configurações do gráfico ApexCharts Gráfico 2
+    var options2 = {
+        series: [
+            {
+                name: 'T1',
+                data: dataSeries6
+            },
+            {
+                name: 'T2',
+                data: dataSeries7
+            },
+            {
+                name: 'T3',
+                data: dataSeries8
+            },
+            {
+                name: 'T4',
+                data: dataSeries9
+            },
+            {
+                name: 'T5',
+                data: dataSeries10,
+            },
+        ],
+        chart: {
+            id: 'area-datetime',
+            type: 'line',
+            animations: {
+                enabled: false,
+            },
+            toolbar: {
+                show: false
+            }
         },
-      },
-      toolbar: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    tooltip: {
-      theme: "dark",
-      x: {
-        show: false,
-      },
-    },
-    fill: {
-      type: "solid",
-      gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.7,
-        opacityTo: 0.9,
-        stops: [0, 100],
-      },
-    },
-    legend: {
-      show: true,
-      labels: {
-        colors: "#ffff",
-        useSeriesColors: false,
-      },
-    },
-    xaxis: {
-      title: {
-        text: "",
-        style: {
-          color: "#ffff",
-          fontSize: "15px",
-          fontFamily: "Abel",
+        dataLabels: {
+            enabled: false
         },
-        offsetX: -330,
-      },
-      type: "numeric",
-      tickAmount: 10,
-      labels: {
-        show: false,
-      },
-    },
-    yaxis: {
-      min: 0,
-      max: 100,
-      labels: {
-        formatter: function (value) {
-          if (value === 100) return "100%";
-          if (value === 0) return "0%";
-          return value + "%";
+        tooltip: {
+            theme: 'dark',
+            x: {
+                show: false
+            }
         },
-        style: {
-          colors: "#ffffff",
-          fontSize: "12px",
-          fontFamily: "Abel",
-          marginLeft: "15px",
+        fill: {
+            type: 'solid',
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.9,
+                stops: [0, 100]
+            }
         },
-        offsetX: +5,
-      },
-    },
-    title: {
-      text: "Uso de RAM (%)",
-      style: {
-        color: "#ffffff",
-        fontSize: "20px",
-        fontFamily: "Abel",
-      },
-      offsetX: +150,
-    },
-  };
+        legend: {
+            show: true,
+            labels: {
+                colors: "#ffff",
+                useSeriesColors: false
+            },
+        },
+        xaxis: {
+            title: {
+                text: '',
+                style: {
+                    color: '#ffff',
+                    fontSize: '15px',
+                    fontFamily: 'Abel',
+                },
+                offsetX: -330
+            },
+            type: 'numeric',
+            tickAmount: 10,
+            labels: {
+                show: false
+            }
+        },
+        yaxis: {
+            min: 0,
+            max: 100,
+            labels: {
+                formatter: function (value) {
+                    if (value === 100) return '100%';
+                    if (value === 0) return '0%';
+                    return value + '%';
+                },
+                style: {
+                    colors: '#ffffff',
+                    fontSize: '12px',
+                    fontFamily: 'Abel',
+                    marginLeft: '15px'
+                },
+                offsetX: +5
+            }
+        },
+        title: {
+            text: 'Uso de RAM (%)',
+            style: {
+                color: '#ffffff',
+                fontSize: '20px',
+                fontFamily: 'Abel',
+            },
+            offsetX: +150
+        }
+    };
 
   // Cria o gráfico
   var chart2 = new ApexCharts(
@@ -571,25 +547,27 @@
 
   // Grafico de Rosca O_o
 
-  // 1º Gráfico
-  var options3 = {
-    series: [0, 0],
-    chart: {
-      width: 200,
-      height: 200,
-      type: "radialBar",
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          size: "50%",
+    // 1º Gráfico
+    var options3 = {
+        series: [0, 0],
+        chart: {
+            width: 200,
+            height: 200,
+            type: 'radialBar'
         },
-        track: {
-          background: "#CCCCCC",
-          strokeWidth: "100%",
-        },
-        dataLabels: {
-          show: false,
+        plotOptions: {
+            radialBar: {
+                hollow: {
+                    size: '50%'
+                },
+                track: {
+                    background: '#CCCCCC',
+                    strokeWidth: '100%',
+                },
+                dataLabels: {
+                    show: false
+                }
+            }
         },
       },
     },
@@ -606,7 +584,7 @@
   var chart3 = new ApexCharts(document.querySelector("#chart_Rosca"), options3);
   chart3.render();
 
-  // 2º Gráfico
+    // 2º Gráfico
 
   var options4 = {
     series: [0, 0],
@@ -645,7 +623,7 @@
   );
   chart4.render();
 
-  // 3º Gráfico
+    // 3º Gráfico
 
   var options5 = {
     series: [0, 0],
@@ -685,26 +663,28 @@
   chart5.render();
   var tempo = 0;
 
-  // 4º Gráfico
+    // 4º Gráfico
 
-  var options6 = {
-    series: [0, 0],
-    chart: {
-      width: 200,
-      height: 200,
-      type: "radialBar",
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          size: "50%",
+    var options6 = {
+        series: [0, 0],
+        chart: {
+            width: 200,
+            height: 200,
+            type: 'radialBar'
         },
-        track: {
-          background: "#CCCCCC",
-          strokeWidth: "100%",
-        },
-        dataLabels: {
-          show: false,
+        plotOptions: {
+            radialBar: {
+                hollow: {
+                    size: '50%'
+                },
+                track: {
+                    background: '#CCCCCC',
+                    strokeWidth: '100%',
+                },
+                dataLabels: {
+                    show: false
+                }
+            }
         },
       },
     },
@@ -718,33 +698,33 @@
     },
   };
 
-  var chart6 = new ApexCharts(
-    document.querySelector("#chart_Rosca4"),
-    options6
-  );
-  chart6.render();
-  var tempo = 0;
+    var chart6 = new ApexCharts(document.querySelector("#chart_Rosca4"), options6);
+    chart6.render();
+    var tempo = 0;
 
-  // 4º Gráfico
 
-  var options7 = {
-    series: [0, 0],
-    chart: {
-      width: 200,
-      height: 200,
-      type: "radialBar",
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          size: "50%",
+    // 4º Gráfico
+
+    var options7 = {
+        series: [0, 0],
+        chart: {
+            width: 200,
+            height: 200,
+            type: 'radialBar'
         },
-        track: {
-          background: "#CCCCCC",
-          strokeWidth: "100%",
-        },
-        dataLabels: {
-          show: false,
+        plotOptions: {
+            radialBar: {
+                hollow: {
+                    size: '50%'
+                },
+                track: {
+                    background: '#CCCCCC',
+                    strokeWidth: '100%',
+                },
+                dataLabels: {
+                    show: false
+                }
+            }
         },
       },
     },
@@ -767,24 +747,25 @@
 
   // --------- CPU do Totem 1 ------------//
 
-  function Atualizar_ValorT1() {
-    fetch("/monitoramento/AtualizarValorT1", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorCpu = parseFloat(resultado[0].CpuT1);
-          dataSeries.push({ x: tempo, y: valorCpu });
-          tempo += 1;
-          // console.log(dataSeries);
+    function Atualizar_ValorT1() {
+        fetch("/monitoramento/AtualizarValorT1",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT1);
+                    dataSeries.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries);
 
           if (dataSeries.length > 20) {
             dataSeries.shift();
@@ -807,24 +788,26 @@
 
   // --------- CPU do Totem 2 ------------//
 
-  function Atualizar_ValorT2() {
-    fetch("/monitoramento/AtualizarValorT2", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorCpu = parseFloat(resultado[0].CpuT2);
-          dataSeries2.push({ x: tempo, y: valorCpu });
-          tempo += 1;
-          // console.log(dataSeries2);
+    function Atualizar_ValorT2() {
+        fetch("/monitoramento/AtualizarValorT2",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT2);
+                    dataSeries2.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries2);
+
 
           if (dataSeries2.length > 20) {
             dataSeries2.shift();
@@ -847,24 +830,25 @@
 
   // --------- CPU do Totem 3 ------------//
 
-  function Atualizar_ValorT3() {
-    fetch("/monitoramento/AtualizarValorT3", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorCpu = parseFloat(resultado[0].CpuT3);
-          dataSeries3.push({ x: tempo, y: valorCpu });
-          tempo += 1;
-          // console.log(dataSeries3);
+    function Atualizar_ValorT3() {
+        fetch("/monitoramento/AtualizarValorT3",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT3);
+                    dataSeries3.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries3);
 
           if (dataSeries3.length > 20) {
             dataSeries3.shift();
@@ -887,24 +871,25 @@
 
   // --------- CPU do Totem 4 ------------//
 
-  function Atualizar_ValorT4() {
-    fetch("/monitoramento/AtualizarValorT4", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorCpu = parseFloat(resultado[0].CpuT4);
-          dataSeries4.push({ x: tempo, y: valorCpu });
-          tempo += 1;
-          // console.log(dataSeries4);
+    function Atualizar_ValorT4() {
+        fetch("/monitoramento/AtualizarValorT4",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT4);
+                    dataSeries4.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries4);
 
           if (dataSeries4.length > 20) {
             dataSeries4.shift();
@@ -927,24 +912,25 @@
 
   // --------- CPU do Totem 5 ------------//
 
-  function Atualizar_ValorT5() {
-    fetch("/monitoramento/AtualizarValorT5", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorCpu = parseFloat(resultado[0].CpuT5);
-          dataSeries5.push({ x: tempo, y: valorCpu });
-          tempo += 1;
-          // console.log(dataSeries5);
+    function Atualizar_ValorT5() {
+        fetch("/monitoramento/AtualizarValorT5",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorCpu = parseFloat(resultado[0].CpuT5);
+                    dataSeries5.push({ x: tempo, y: valorCpu });
+                    tempo += 1;
+                    // console.log(dataSeries5);
 
           if (dataSeries5.length > 20) {
             dataSeries5.shift();
@@ -967,24 +953,25 @@
 
   // --------- Ram do Totem 1 ------------//
 
-  function Atualizar_ValorRamT1() {
-    fetch("/monitoramento/AtualizarValorRamT1", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorRam = parseFloat(resultado[0].RamT1);
-          dataSeries6.push({ x: tempo, y: valorRam });
-          tempo += 1;
-          // console.log(dataSeries6);
+    function Atualizar_ValorRamT1() {
+        fetch("/monitoramento/AtualizarValorRamT1",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT1);
+                    dataSeries6.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries6);
 
           if (dataSeries6.length > 20) {
             dataSeries6.shift();
@@ -1007,24 +994,25 @@
 
   // --------- Ram do Totem 2 ------------//
 
-  function Atualizar_ValorRamT2() {
-    fetch("/monitoramento/AtualizarValorRamT2", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorRam = parseFloat(resultado[0].RamT2);
-          dataSeries7.push({ x: tempo, y: valorRam });
-          tempo += 1;
-          // console.log(dataSeries7);
+    function Atualizar_ValorRamT2() {
+        fetch("/monitoramento/AtualizarValorRamT2",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT2);
+                    dataSeries7.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries7);
 
           if (dataSeries7.length > 20) {
             dataSeries7.shift();
@@ -1047,24 +1035,25 @@
 
   // --------- Ram do Totem 3 ------------//
 
-  function Atualizar_ValorRamT3() {
-    fetch("/monitoramento/AtualizarValorRamT3", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorRam = parseFloat(resultado[0].RamT3);
-          dataSeries8.push({ x: tempo, y: valorRam });
-          tempo += 1;
-          // console.log(dataSeries8);
+    function Atualizar_ValorRamT3() {
+        fetch("/monitoramento/AtualizarValorRamT3",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT3);
+                    dataSeries8.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries8);
 
           if (dataSeries8.length > 20) {
             dataSeries8.shift();
@@ -1087,24 +1076,25 @@
 
   // --------- Ram do Totem 4 ------------//
 
-  function Atualizar_ValorRamT4() {
-    fetch("/monitoramento/AtualizarValorRamT4", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          console.log(resultado);
-          const valorRam = parseFloat(resultado[0].RamT4);
-          dataSeries9.push({ x: tempo, y: valorRam });
-          tempo += 1;
-          // console.log(dataSeries9);
+    function Atualizar_ValorRamT4() {
+        fetch("/monitoramento/AtualizarValorRamT4",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT4);
+                    dataSeries9.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries9);
 
           if (dataSeries9.length > 20) {
             dataSeries9.shift();
@@ -1127,24 +1117,25 @@
 
   // --------- Ram do Totem 5 ------------//
 
-  function Atualizar_ValorRamT5() {
-    fetch("/monitoramento/AtualizarValorRamT5", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        if (resultado.length > 0) {
-          // console.log(resultado)
-          const valorRam = parseFloat(resultado[0].RamT5);
-          dataSeries10.push({ x: tempo, y: valorRam });
-          tempo += 1;
-          // console.log(dataSeries10);
+    function Atualizar_ValorRamT5() {
+        fetch("/monitoramento/AtualizarValorRamT5",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                if (resultado.length > 0) {
+                    // console.log(resultado)
+                    const valorRam = parseFloat(resultado[0].RamT5);
+                    dataSeries10.push({ x: tempo, y: valorRam });
+                    tempo += 1;
+                    // console.log(dataSeries10);
 
           if (dataSeries10.length > 20) {
             dataSeries10.shift();
@@ -1414,8 +1405,9 @@
     Alertas();
   }
 
-  const notificacoesRecentes = new Map();
-  const intervaloNotificacao = 300000;
+    const notificacoesRecentes = new Map();
+    const intervaloNotificacao = 300000;
+
 
   function notificacao(msg, totem, componente) {
     const chaveNotificacao = `${totem}-${componente}`;
@@ -1473,106 +1465,168 @@
 
   // --------- Totens Cadastrados ---------- //
 
-  function verificarQtdTotens() {
-    fetch("/monitoramento/verificarQtdTotens", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        // console.log(resultado)
-        const QtdTotens = parseFloat(resultado[0].qtd) || 0;
-        QtdTotens_bem.innerHTML = QtdTotens;
-        // console.log(QtdTotens);
-      })
-      .catch((error) => {
-        console.error("Erro na requisição:", error);
-      });
-  }
-  setInterval(verificarQtdTotens, 3000);
+    function verificarQtdTotens() {
+        fetch("/monitoramento/verificarQtdTotens",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                // console.log(resultado)
+                const QtdTotens = parseFloat(resultado[0].qtd) || 0;
+                QtdTotens_bem.innerHTML = QtdTotens;
+                // console.log(QtdTotens);
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(verificarQtdTotens, 3000);
 
   // ----------- Totens com Erro ------------ //
 
-  function QtdTotensComProblema() {
-    fetch("/monitoramento/QtdTotensComProblema", { method: "POST" })
-      .then((response) => {
-        //console.log(response)
-        //response.text().then(text => console.log(text))
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao buscar os dados do servidor.");
-        }
-      })
-      .then((resultado) => {
-        // console.log(resultado)
-        const QtdTotens = parseFloat(resultado[0].problema) || 0;
-        QtdTotens_problema.innerHTML = QtdTotens;
-        // console.log(QtdTotens);
-      })
-      .catch((error) => {
-        console.error("Erro na requisição:", error);
-      });
-  }
-  setInterval(QtdTotensComProblema, 3000);
+    function QtdTotensComProblema() {
+        fetch("/monitoramento/QtdTotensComProblema",
+            { method: "POST" })
+            .then(response => {
+                //console.log(response)
+                //response.text().then(text => console.log(text))
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar os dados do servidor.");
+                }
+            })
+            .then(resultado => {
+                // console.log(resultado)
+                const QtdTotens = parseFloat(resultado[0].problema) || 0;
+                QtdTotens_problema.innerHTML = QtdTotens;
+                // console.log(QtdTotens);
+
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+    }
+    setInterval(QtdTotensComProblema, 3000);
 
   // ------------ Totens Instáveis -------------- //
 
-  function plotarMaioresValores() {
-    const totens = [
-      {
-        id: "Dash_Doughs1",
-        cpu: Math.round(VetorCpuT1[VetorCpuT1.length - 1]),
-        ram: Math.round(VetorRamT1[VetorRamT1.length - 1]),
-      },
-      {
-        id: "Dash_Doughs2",
-        cpu: Math.round(VetorCpuT2[VetorCpuT2.length - 1]),
-        ram: Math.round(VetorRamT2[VetorRamT2.length - 1]),
-      },
-      {
-        id: "Dash_Doughs3",
-        cpu: Math.round(VetorCpuT3[VetorCpuT3.length - 1]),
-        ram: Math.round(VetorRamT3[VetorRamT3.length - 1]),
-      },
-      {
-        id: "Dash_Doughs4",
-        cpu: Math.round(VetorCpuT4[VetorCpuT4.length - 1]),
-        ram: Math.round(VetorRamT4[VetorRamT4.length - 1]),
-      },
-      {
-        id: "Dash_Doughs5",
-        cpu: Math.round(VetorCpuT5[VetorCpuT5.length - 1]),
-        ram: Math.round(VetorRamT5[VetorRamT5.length - 1]),
-      },
-    ];
+    function plotarMaioresValores() {
+        const totens = [
+            { id: 'Dash_Doughs1', cpu: Math.round(VetorCpuT1[VetorCpuT1.length - 1]), ram: Math.round(VetorRamT1[VetorRamT1.length - 1]) },
+            { id: 'Dash_Doughs2', cpu: Math.round(VetorCpuT2[VetorCpuT2.length - 1]), ram: Math.round(VetorRamT2[VetorRamT2.length - 1]) },
+            { id: 'Dash_Doughs3', cpu: Math.round(VetorCpuT3[VetorCpuT3.length - 1]), ram: Math.round(VetorRamT3[VetorRamT3.length - 1]) },
+            { id: 'Dash_Doughs4', cpu: Math.round(VetorCpuT4[VetorCpuT4.length - 1]), ram: Math.round(VetorRamT4[VetorRamT4.length - 1]) },
+            { id: 'Dash_Doughs5', cpu: Math.round(VetorCpuT5[VetorCpuT5.length - 1]), ram: Math.round(VetorRamT5[VetorRamT5.length - 1]) }
+        ];
 
-    // Combine CPU e RAM em um único valor para cada totem (opcional)
-    totens.forEach((toten) => {
-      toten.combined = toten.cpu + toten.ram; // Soma CPU e RAM como métrica combinada
-    });
+        totens.forEach(toten => {
+            toten.combined = toten.cpu + toten.ram;
+        });
 
-    // Ordena os totens pela métrica combinada (ou use toten.cpu para ordenar só por CPU, ou toten.ram para só RAM)
-    const topTotens = totens
-      .sort((a, b) => b.combined - a.combined)
-      .slice(0, 3);
 
-    // Itera sobre os totens para exibir ou ocultar
-    totens.forEach((toten) => {
-      const element = document.getElementsByClassName(toten.id)[0];
-      if (element) {
-        if (topTotens.some((top) => top.id === toten.id)) {
-          element.style.display = "block";
-        } else {
-          element.style.display = "none";
-        }
-      }
-    });
-  }
-  setInterval(plotarMaioresValores, 1000);
+        const topTotens = totens.sort((a, b) => b.combined - a.combined).slice(0, 3);
+
+        totens.forEach(toten => {
+            const element = document.getElementsByClassName(toten.id)[0];
+            if (element) {
+                if (topTotens.some(top => top.id === toten.id)) {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                }
+            }
+        });
+    }
+    setInterval(plotarMaioresValores, 1000);
+
+
+    function expandirGrafico() {
+
+        const graficoCPU = document.getElementById('chart-RealTimeLine1');
+        const botaoExpand = document.getElementById('expandir_grafico2');
+        const expandirIcon = document.querySelector('.fa-expand');
+        const minimizarIcon = document.querySelector('.fa-compress');
+
+        const graficoRAM = document.getElementById('chart-RealTimeLine2');
+        const totens = document.getElementById('totens');
+
+        graficoCPU.classList.add('expandido');
+        expandirIcon.style.display = 'none';
+        minimizarIcon.style.display = 'inline-block';
+
+        botaoExpand.style.display = 'none';
+        graficoRAM.style.display = 'none';
+        totens.style.display = 'none';
+    }
+
+    function minimizarGrafico() {
+        const graficoCPU = document.getElementById('chart-RealTimeLine1');
+        const expandirIcon = document.querySelector('.fa-expand');
+        const minimizarIcon = document.querySelector('.fa-compress');
+        const botaoExpand = document.getElementById('expandir_grafico2');
+
+
+        const graficoRAM = document.getElementById('chart-RealTimeLine2');
+        const totens = document.getElementById('totens');
+
+        graficoCPU.classList.remove('expandido');
+        expandirIcon.style.display = 'inline-block';
+        minimizarIcon.style.display = 'none';
+
+        graficoRAM.style.display = 'block';
+        totens.style.display = 'block';
+        botaoExpand.style.display = 'block';
+
+    }
+
+
+    function expandirGrafico2() {
+
+    const expandirDash = document.querySelector('.expandir_dash2');
+    const graficoRAM = expandirDash.querySelector('#chart-RealTimeLine2');
+    const expandirIcon = expandirDash.querySelector('.fa-expand');
+    const minimizarIcon = expandirDash.querySelector('.fa-compress');
+    const botaoExpand = document.getElementById('expandir_grafico1');
+
+    const graficoCPU = document.getElementById('chart-RealTimeLine1');
+    const totens = document.getElementById('totens');
+
+    graficoRAM.classList.add('expandido');
+    expandirIcon.style.display = 'none';
+    minimizarIcon.style.display = 'inline-block';
+
+    graficoCPU.style.display = 'none';
+    totens.style.display = 'none';
+    botaoExpand.style.display = 'none';
+}
+
+function minimizarGrafico2() {
+
+    const expandirDash = document.querySelector('.expandir_dash2');
+    const graficoRAM = expandirDash.querySelector('#chart-RealTimeLine2');
+    const expandirIcon = expandirDash.querySelector('.fa-expand');
+    const minimizarIcon = expandirDash.querySelector('.fa-compress');
+    const botaoExpand = document.getElementById('expandir_grafico1');
+
+    const graficoCPU = document.getElementById('chart-RealTimeLine1');
+    const totens = document.getElementById('totens');
+
+    graficoRAM.classList.remove('expandido');
+    expandirIcon.style.display = 'inline-block';
+    minimizarIcon.style.display = 'none';
+
+    graficoCPU.style.display = 'block';
+    totens.style.display = 'block';
+    botaoExpand.style.display = 'block';
+
+}
 </script>

@@ -185,7 +185,7 @@ function QtdTotensComProblema() {
     var instrucaoSql = `    
     SELECT COUNT(distinct id) AS problema 
     FROM TotensProblema     
-    WHERE ram_porcentagem > 85 or cpu_porcentagem > 80;
+    WHERE ram_porcentagem > 80 or cpu_porcentagem > 70;
     `;
 
     // console.log("Executando a instrução SQL: \n" + instrucaoSql);

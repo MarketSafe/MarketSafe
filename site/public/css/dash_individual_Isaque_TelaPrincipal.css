@@ -695,3 +695,57 @@ th {
     padding: 5px;
   }
 }
+
+.expandir_dash{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.expandir_dash2{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+#chart-RealTimeLine1 {
+    width: 400px;  
+    height: 250px; 
+    transition: all 0.5s ease;
+}
+
+#chart-RealTimeLine1.expandido {
+    width: 700px; 
+    max-height: 300px; 
+}
+
+#chart-RealTimeLine2 {
+    width: 400px;  
+    height: 250px; 
+    transition: all 0.5s ease;
+}
+
+#chart-RealTimeLine2.expandido {
+    width: 700px; 
+    height: 300px; 
+}
+
+.expandir_dash i {
+    cursor: pointer;
+    bottom: 10px;
+    right: 5px;
+
+    color: white;
+    padding: 3px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.expandir_dash2 i {
+    cursor: pointer;
+    bottom: 10px;
+    right: 5px;
+
+    color: white;
+    border-radius: 50%;
+    margin-left: 5px;
+}
