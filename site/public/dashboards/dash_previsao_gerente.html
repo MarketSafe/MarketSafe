@@ -107,7 +107,7 @@
             <label>
               <span>Promoção</span>
               <div>
-                <select class="promocao">
+                <select class="promocao" id="selectPromocao">
                   <option value="" selected disabled>Promoção</option>
                 </select>
               </div>
@@ -115,7 +115,7 @@
           </search>
         </header>
         <section class="dashboard">
-          <button onclick="puxarDados()">Teste function</button>
+          <button onclick="puxarDadosLine()">Teste function</button>
             <div class="dashCima">
               <div class="contentDash">
                 <div class="dashMain">
@@ -143,7 +143,7 @@
               </div>
             </div>
             <div class="space"></div>
-            <div class="ranking">
+            <div class="ranking" id="ranking">
               <table>
                   <tr class="tableHeader">
                       <th>Ranking</th>
@@ -182,20 +182,102 @@
     emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
     senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
   };
-  
-  function puxarDados() {
-    var idFilial = selectFilial.value; 
-    var anoMes = periodoInicio.value;
-    const rota = `/previsaoGerenteRouter/puxarDados/${idFilial}/${anoMes}`;
-    console.log(rota) 
-    fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}/${anoMes}`, {
+
+  function plotarRanking() {
+    fetch("/previsaoGerenteRouter/plotarRanking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     }).then(function (resposta) {
-      console.log("ESTOU NO THEN DO puxarDados()!")
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        resposta.json()
+        .then(function (resultado) {
+          console.log(resultado)
+
+          for(i = 0; i < resultado.length; i++) {
+            ranking.innerHTML = `<table>
+                  <tr class="tableHeader">
+                      <th>Ranking</th>
+                      <th>Filial</th>
+                      <th>Promoções</th>
+                      <th>Taxa de sobrecarga</th>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">1</td>
+                      <td class="tableSelector">Filial 5</td>
+                      <td class="tableSelector">Carnes</td>
+                      <td class="tableSelector">20%</td>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">2</td>
+                      <td class="tableSelector">Filial 1</td>
+                      <td class="tableSelector">Frutas</td>
+                      <td class="tableSelector">13%</td>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">3</td>
+                      <td class="tableSelector">Filial 7</td>
+                      <td class="tableSelector">Vegetais</td>
+                      <td class="tableSelector">7%</td>
+                  </tr>
+              </table>`;
+          };
+        })
+
+      } else {
+       console.error('Nenhum dado encontrado na API');
+      }
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dado p/ plotagem do ranking: ${error.message}`);
+    });
+  };
+  
+  function puxarDadosBubble() {
+    var idFilial = selectFilial.value;
+    var anoMes = periodoInicio.value;
+    var idPromocao = selectPromocao.value;
+
+    fetch(`/previsaoGerenteRouter/puxarDadosBubble/${idFilial}/${anoMes}/${idPromocao}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO puxarDadosBubble()!");
+
+      if (resposta.ok) {
+        console.log(resposta);
+        resposta.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+        })
+
+      } else {
+        console.error('Nenhum dado encontrado na API');
+      }
+
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dados p/ gráfico: ${error.message}`)
+    });
+  };
+
+  function puxarDadosLine() {
+    var idFilial = selectFilial.value; 
+    var anoMes = periodoInicio.value;
+
+    fetch(`/previsaoGerenteRouter/puxarDadosLine/${idFilial}/${anoMes}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO puxarDadosLine()!");
 
       if (resposta.ok) {
         console.log(resposta);
@@ -211,11 +293,14 @@
       }
 
     }).catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
   };
 
   function plotarLine(resposta, idFilial) {
+    
+    // TO-DO: Adicionar função de checar se o gráfico já existe para destruí-lo e plotar um novo sem necessitar dar refresh na página.
+
     console.log('Iniciando a plotagem do gráfico de linha...');
 
     let labelsLine = [];
@@ -239,7 +324,7 @@
     };
 
     console.log('----------------------------------------------');
-    console.log('Estes dados foram recebidos pela função "puxarDados()" e passados para "plotarLine()":');
+    console.log('Estes dados foram recebidos pela função "puxarDadosLine()" e passados para "plotarLine()":');
     console.log(resposta);
     
     for(i = 0; i < resposta.length; i++) {
@@ -248,6 +333,38 @@
       dataLine.datasets[0].data.push(registro.qtd_alertas);
       dataLine.datasets[1].data.push(registro.qtd_alertas);
     };
+
+    for(i = 0; i < resposta.length; i++) {
+     var registro = resposta[i];
+     labelsLine.push(registro.dia);
+     dataLine.datasets[0].data.push(registro.qtd_alertas);
+     dataLine.datasets[1].data.push(registro.qtd_alertas);
+   };
+
+    let somaX = 0, somaY = 0, somaXY = 0, somaX2 = 0;
+
+    for (let i = 0; i < resposta.length; i++) {
+         somaX += i;
+         somaY += resposta[i].qtd_alertas;
+         somaXY += i * resposta[i].qtd_alertas;
+         somaX2 += i * i;
+       }
+
+       /*
+           Inclinação: Mede como os dados mudam ao longo do tempo.
+           Intercepto: O ponto inicial do gráfico.
+       */
+
+       const inclinacao = (resposta.length * somaXY - somaX * somaY) / (resposta.length * somaX2 - somaX * somaX);
+       const intercepto = (somaY - inclinacao * somaX) / resposta.length;
+
+       const proximaData = inclinacao * resposta.length + intercepto;
+
+       const previsao = {
+           proximaData: Math.round(proximaData),
+       };
+
+       dataLine.datasets[1].data.push(previsao);
     
     console.log('----------------------------------------------');
     console.log('O gráfico será plotado com os respectivos valores:')

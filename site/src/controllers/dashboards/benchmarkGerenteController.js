@@ -67,25 +67,89 @@ async function sendRespostaFromModel(req, res, func, parametros) {
 
 // declara a função `estadoFiliais`:
 async function estadoFiliais(req, res) {
-  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.estadoFiliais, [req.body.funcionarioAutenticado.fk_empresa]);
+  return await sendRespostaFromModel(
+    req,
+    res,
+    benchmarkGerenteModel.estadoFiliais,
+    [req.body.funcionarioAutenticado.fk_empresa]
+  );
 }
 
 // declara a função `maioresTaxasDeAlerta`:
 async function maioresTaxasDeAlerta(req, res) {
-  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.maioresTaxasDeAlerta, [req.body.funcionarioAutenticado.fk_empresa]);
+  return await sendRespostaFromModel(
+    req,
+    res,
+    benchmarkGerenteModel.maioresTaxasDeAlerta,
+    [req.body.funcionarioAutenticado.fk_empresa]
+  );
 }
 
 async function taxaGeralDeAlertas(req, res) {
-  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.taxaGeralDeAlertas, [req.body.funcionarioAutenticado.fk_empresa]);  
+  return await sendRespostaFromModel(
+    req,
+    res,
+    benchmarkGerenteModel.taxaGeralDeAlertas,
+    [req.body.funcionarioAutenticado.fk_empresa]
+  );
 }
 async function totensPorEmpresa(req, res) {
-  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.totensPorEmpresa, [req.body.funcionarioAutenticado.fk_empresa]);  
+  return await sendRespostaFromModel(
+    req,
+    res,
+    benchmarkGerenteModel.totensPorEmpresa,
+    [req.body.funcionarioAutenticado.fk_empresa]
+  );
 }
 async function maiorTaxaDeAlertas(req, res) {
-  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.maiorTaxaDeAlertas, [req.body.funcionarioAutenticado.fk_empresa]);  
+  return await sendRespostaFromModel(
+    req,
+    res,
+    benchmarkGerenteModel.maiorTaxaDeAlertas,
+    [req.body.funcionarioAutenticado.fk_empresa]
+  );
 }
 async function totalDeFiliais(req, res) {
-  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.totalDeFiliais, [req.body.funcionarioAutenticado.fk_empresa]);  
+  return await sendRespostaFromModel(
+    req,
+    res,
+    benchmarkGerenteModel.totalDeFiliais,
+    [req.body.funcionarioAutenticado.fk_empresa]
+  );
+}
+async function promocoesPorFilial(req, res) {
+  if (!("fk_filial" in req.body)) {
+    return res.status(400).json({
+      erro: "`fk_filial` undefined.",
+    });
+  }
+  return await sendRespostaFromModel(
+    req,
+    res,
+    benchmarkGerenteModel.promocoesPorFilial,
+    [req.body.fk_filial]
+  );
+}
+async function taxasDaSemanaPorFilial(req, res) {
+  if (!("fk_filial" in req.body)) {
+    return res.status(400).json({
+      erro: "`fk_filial` undefined.",
+    });
+  }
+  if (!("fk_promocao" in req.body)) {
+    return await sendRespostaFromModel(
+      req,
+      res,
+      benchmarkGerenteModel.taxasDaSemanaPorFilial,
+      [req.body.fk_filial, new Date()]
+    );
+  }
+  return await sendRespostaFromModel(
+    req,
+    res,
+    benchmarkGerenteModel.taxasDaSemanaPorFilialEPromocao,
+    [req.body.fk_filial]
+  );
 }
 
 // exporta as funções do arquivo `benchmarkGerenteController.js`:
@@ -95,5 +159,7 @@ module.exports = {
   taxaGeralDeAlertas,
   totensPorEmpresa,
   maiorTaxaDeAlertas,
-  totalDeFiliais
+  totalDeFiliais,
+  promocoesPorFilial,
+  taxasDaSemanaPorFilial,
 };

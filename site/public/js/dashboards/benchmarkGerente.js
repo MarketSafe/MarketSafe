@@ -23,6 +23,9 @@ const telas = document.querySelectorAll("main > section.dashboard");
 const graficos = document.querySelectorAll("div.grafico:has(> canvas)");
 const indicadores = document.querySelectorAll("section.indicador");
 
+let charts = [];
+let updateMetricasInterval;
+
 // funções:
 String.prototype.splitByIndex = function (index) {
   return [this.substring(0, index), this.substring(index)];
@@ -63,6 +66,38 @@ String.prototype.capitalize = function () {
   const trimmed = this.trim();
   return trimmed.charAt(0).toLocaleUpperCase() + trimmed.substring(1);
 };
+
+// createDOMElement():
+function createDOMElement(element, parent) {
+  if (arguments.length < 2) throw "Too few arguments";
+  if (!("tagName" in element)) throw "No `tagName` specified";
+  if (typeof element.tagName != "string") throw "`tagName` is not a string";
+
+  const htmlElement = document.createElement(element.tagName);
+  if ("style" in element) {
+    if (element.style === null || typeof element.style != "object")
+      throw "`style` is not an object";
+    for (const [k, v] of Object.entries(element.style))
+      htmlElement.style[k] = v;
+  }
+  if (element.children) {
+    if (!Array.isArray(element.children)) throw "`children` is not an array";
+    for (const child of element.children) createDOMElement(child, htmlElement);
+  }
+
+  for (const [k, v] of Object.entries(element)) {
+    switch (k) {
+      case "tagName":
+      case "style":
+      case "children":
+        continue;
+      default:
+        if (k.startsWith("on")) htmlElement.addEventListener(k.substring(2), v);
+        else htmlElement[k] = v;
+    }
+  }
+  return parent.appendChild(htmlElement);
+}
 function toPx(value, parent) {
   if (typeof value !== "string") return NaN;
 
@@ -170,7 +205,7 @@ async function gerarIndicadores() {
         {},
         (response) => {
           if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa`);
+            throw new Error(`Sem filiais na empresa.`);
           }
         }
       );
@@ -182,7 +217,7 @@ async function gerarIndicadores() {
         {},
         (response) => {
           if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa`);
+            throw new Error(`Sem filiais na empresa.`);
           }
         }
       );
@@ -193,7 +228,7 @@ async function gerarIndicadores() {
         {},
         (response) => {
           if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa`);
+            throw new Error(`Sem filiais na empresa.`);
           }
         }
       );
@@ -206,7 +241,7 @@ async function gerarIndicadores() {
         {},
         (response) => {
           if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa`);
+            throw new Error(`Sem filiais na empresa.`);
           }
         }
       );
@@ -216,20 +251,18 @@ async function gerarIndicadores() {
 }
 async function gerarGraficos() {
   return Array.from(graficos).reduce(async (chartList, divGrafico) => {
-    let config = {};
-
     if (divGrafico.classList.contains("estado-filiais")) {
       const dados = await puxarDados(
         "/benchmarkGerente/estadoFiliais",
         {},
         (response) => {
           if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa`);
+            throw new Error(`Sem filiais na empresa.`);
           }
         }
       );
 
-      config = {
+      const config = {
         type: "pie",
         data: {
           labels: dados.map((v) =>
@@ -293,18 +326,23 @@ async function gerarGraficos() {
         },
         plugins: [ChartDataLabels],
       };
+
+      (await chartList)["estadoFiliais"] = new Chart(
+        divGrafico.querySelector("canvas"),
+        config
+      );
     } else if (divGrafico.classList.contains("taxa-alerta")) {
       const dados = await puxarDados(
         "/benchmarkGerente/maioresTaxasDeAlerta",
         {},
         (response) => {
           if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa`);
+            throw new Error(`Sem filiais na empresa.`);
           }
         }
       );
 
-      config = {
+      const config = {
         type: "bar",
         data: {
           labels: dados.map((v) => v.nome),
@@ -421,45 +459,175 @@ async function gerarGraficos() {
           },
         ],
       };
+
+      (await chartList)["taxaAlerta"] = new Chart(
+        divGrafico.querySelector("canvas"),
+        config
+      );
     }
 
     if (
-      Array.from(telas).find((tela) => tela.classList.contains("filtro-filiais")).classList.contains()
+      Array.from(telas)
+        .find((tela) => tela.classList.contains("filtro-filiais"))
+        .classList.contains("ativa") &&
+      divGrafico.classList.contains("comparacao-filial-taxas")
     ) {
+      const dados = await puxarDados(
+        "/benchmarkGerente/maioresTaxasDeAlerta",
+        {},
+        (response) => {
+          if (response.status == 204) {
+            throw new Error(`Sem filiais na empresa.`);
+          }
+        }
+      );
+
+      const config = {
+        type: "bar",
+        data: {
+          labels: dados.map((v) => v.nome),
+          datasets: [
+            {
+              label: "Taxa de totens em alerta",
+              data: dados.map((v) => Number(v.taxa_alerta) * 100),
+              backgroundColor: "#ff914dff",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          onResize: updateChart,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Filiais",
+                color: "#ffffffff",
+                font: {
+                  weight: "bold",
+                  size: "15ar",
+                  family: '"Abel", sans-serif',
+                },
+              },
+              ticks: {
+                color: "#ffffffff",
+                font: {
+                  weight: "normal",
+                  relativeSize: "7ar",
+                  family: '"Abel", sans-serif',
+                },
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Taxa de totens em alerta",
+                color: "#ffffffff",
+                font: {
+                  weight: "normal",
+                  relativeSize: "7ar",
+                  family: '"Abel", sans-serif',
+                },
+              },
+              ticks: {
+                color: "#ffffffff",
+                beginAtZero: true,
+                font: {
+                  weight: "normal",
+                  relativeSize: "7ar",
+                  family: '"Abel", sans-serif',
+                },
+              },
+            },
+          },
+          plugins: {
+            title: {
+              display: true,
+              align: "top",
+              font: {
+                weight: "normal",
+                relativeSize: "10ar",
+                family: '"Abel", sans-serif',
+              },
+              color: "#ffffffff",
+              text: "5 filiais com maiores taxas de alertas",
+            },
+            legend: {
+              labels: {
+                font: {
+                  relativeSize: "6ar",
+                  family: '"Abel", sans-serif',
+                },
+                color: "#ffffffff",
+              },
+            },
+            datalabels: {
+              formatter: (value, context) => {
+                return value + "%";
+              },
+              font: {
+                relativeSize: "6ar",
+                family: '"Noto Serif", serif',
+              },
+              color: "#ffffffff",
+              anchor: "end",
+              align: "end",
+              relativeOffset: "1ar",
+              display: "auto",
+            },
+            legendMargin: {
+              margin: "10ph",
+            },
+          },
+        },
+        plugins: [
+          ChartDataLabels,
+          {
+            id: "legendMargin",
+            afterInit(chart, args, plugins) {
+              const originalFit = chart.legend.fit;
+              const margin =
+                toPx(plugins.margin, chart.canvas) ||
+                (typeof plugins.margin === "number" ? plugins.margin : 0);
+
+              chart.legend.fit = function fit() {
+                if (originalFit) originalFit.call(this);
+                return (this.height += margin);
+              };
+            },
+          },
+        ],
+      };
+
+      (await chartList)["comparacaoFilialTaxas"] = new Chart(
+        divGrafico.querySelector("canvas"),
+        config
+      );
     }
 
-    chartList["taxaAlerta"] = new Chart(
-      divGrafico.querySelector("canvas"),
-      config
-    );
-
-    return chartList;
+    return await chartList;
   }, {});
 }
-async function gerarTelaSemFiltro() {
+async function gerarTela(classeTela) {
+  if (arguments.length === 0) return;
+
+  clearInterval(updateMetricasInterval);
+  Object.values(charts).forEach((chart) => {
+    chart.destroy();
+  });
+
   for (const tela of telas) {
     tela.classList.remove("ativa");
   }
   Array.from(telas)
-    .find((tela) => tela.classList.contains("sem-filtro"))
+    .find((tela) => tela.classList.contains(classeTela))
     .classList.add("ativa");
-  const charts = await gerarGraficos();
+
+  charts = await gerarGraficos();
   gerarIndicadores();
-  setInterval(() => {
-    Object.values(charts).forEach((chart) => chart.update());
-    gerarIndicadores();
-  }, 1000);
-}
-async function gerarTelaFiliais() {
-  for (const tela of telas) {
-    tela.classList.remove("ativa");
-  }
-  Array.from(telas)
-    .find((tela) => tela.classList.contains("filtro-filiais"))
-    .classList.add("ativa");
-  const charts = await gerarGraficos();
-  gerarIndicadores();
-  setInterval(() => {
+
+  updateMetricasInterval = setInterval(() => {
     Object.values(charts).forEach((chart) => chart.update());
     gerarIndicadores();
   }, 1000);
@@ -475,25 +643,98 @@ async function verificarFiltros() {
     !filtros.filial1.promocao.value &&
     !filtros.filial2.promocao.value
   ) {
-    await gerarTelaSemFiltro();
+    console.log("Sem filtros selecionados.");
+    await gerarTela("sem-filtro");
   } else if (filtros.filial1.filial.value && filtros.filial2.filial.value) {
-    await gerarTelaFiliais();
+    console.log("Filtros das filiais selecionados.");
+    await gerarTela("filtro-filiais");
   } else if (
     !filtros.filial1.filial.value &&
     !filtros.filial2.filial.value &&
     (filtros.filial1.promocao.value || filtros.filial2.promocao.value)
   ) {
+    console.log("Filtros para promoções não selecionados.");
     filtros.filial1.filial.classList.add("required");
     filtros.filial2.filial.classList.add("required");
-    filtros.filial1.promocao.classList.add("required");
-    filtros.filial2.promocao.classList.add("required");
   } else {
+    console.log("Filtros das filiais não selecionados.");
     filtros.filial1.filial.classList.add("required");
     filtros.filial2.filial.classList.add("required");
   }
 }
 async function carregarBody(event) {
   handleSelectsNone(document.querySelectorAll("select"));
+  document
+    .querySelectorAll("main > header > search select")
+    .forEach(async (select) => {
+      if (select.classList.contains("filial")) {
+        const filiais = await puxarDados("/filial/listar", {}, (resposta) => {
+          if (resposta.status == 204) {
+            throw new Error(`Sem filiais na empresa.`);
+          }
+        });
+
+        for (const filial of filiais) {
+          const newOption = document.createElement("option");
+          newOption.value = filial.filialId;
+          newOption.textContent = filial.nome;
+
+          select.appendChild(newOption);
+        }
+        select.addEventListener("change", async (event) => {
+          if (select.value !== "") {
+            const promocoes = await puxarDados(
+              "/benchmarkGerente/promocoesPorFilial",
+              {
+                fk_filial: select.value,
+              },
+              (resposta) => {
+                if (resposta.status == 204) {
+                  throw new Error(`Sem promoções na filial.`);
+                }
+              }
+            );
+
+            const filtroPromocao = Object.entries(filtros).find(
+              ([k, v]) => v.filial === select
+            )[1].promocao;
+
+            filtroPromocao.innerHTML = "";
+            createDOMElement(
+              {
+                tagName: "option",
+                value: "",
+                selected: true,
+                disabled: true,
+                textContent: "Promoção",
+              },
+              filtroPromocao
+            );
+            createDOMElement(
+              {
+                tagName: "option",
+                value: "",
+                textContent: "Nenhuma",
+              },
+              filtroPromocao
+            );
+
+            for (const promocao of promocoes) {
+              const newOption = document.createElement("option");
+              newOption.value = promocao.id;
+              newOption.textContent = promocao.nome;
+
+              filtroPromocao.appendChild(newOption);
+            }
+          }
+          await verificarFiltros();
+        });
+      } else {
+        select.addEventListener("change", async (event) => {
+          await verificarFiltros();
+        });
+      }
+    });
   await verificarFiltros();
 }
 // eventos:
