@@ -99,7 +99,7 @@
               <span>Período</span>
               <div>
                 <span>de:</span>
-                <input type="date" id="periodoInicio">
+                <input type="month" id="periodoInicio">
                 <span>até:</span>
                 <input type="date" id="periodoFim">
               </div>
@@ -177,15 +177,18 @@
   </body>
 </html>
 <script>
-  var idFilial = selectFilial.value;
-
+  
   const body = {
     emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
     senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
   };
-
+  
   function puxarDados() {
-    fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}`, {
+    var idFilial = selectFilial.value; 
+    var mes = periodoInicio.value;
+    const rota = `/previsaoGerenteRouter/puxarDados/${idFilial}/${mes}`;
+    console.log(rota) 
+    fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}/${mes}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -196,7 +199,7 @@
 
       if (resposta.ok) {
         console.log(resposta);
-        resposta.json.then(function (resposta) {
+        resposta.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           resposta.reverse();
         })
