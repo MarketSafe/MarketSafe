@@ -38,8 +38,8 @@ while True:
 
     mydb = mysql.connector.connect(
         host="localhost",
-        user="root",
-        password="Rosquinha1",
+        user="mktsAdm",
+        password="sptech",
         database="market_safe"
     )
 
