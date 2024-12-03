@@ -333,6 +333,38 @@
       dataLine.datasets[0].data.push(registro.qtd_alertas);
       dataLine.datasets[1].data.push(registro.qtd_alertas);
     };
+
+    for(i = 0; i < resposta.length; i++) {
+     var registro = resposta[i];
+     labelsLine.push(registro.dia);
+     dataLine.datasets[0].data.push(registro.qtd_alertas);
+     dataLine.datasets[1].data.push(registro.qtd_alertas);
+   };
+
+    let somaX = 0, somaY = 0, somaXY = 0, somaX2 = 0;
+
+    for (let i = 0; i < resposta.length; i++) {
+         somaX += i;
+         somaY += resposta[i].qtd_alertas;
+         somaXY += i * resposta[i].qtd_alertas;
+         somaX2 += i * i;
+       }
+
+       /*
+           Inclinação: Mede como os dados mudam ao longo do tempo.
+           Intercepto: O ponto inicial do gráfico.
+       */
+
+       const inclinacao = (resposta.length * somaXY - somaX * somaY) / (resposta.length * somaX2 - somaX * somaX);
+       const intercepto = (somaY - inclinacao * somaX) / resposta.length;
+
+       const proximaData = inclinacao * resposta.length + intercepto;
+
+       const previsao = {
+           proximaData: Math.round(proximaData),
+       };
+
+       dataLine.datasets[1].data.push(previsao);
     
     console.log('----------------------------------------------');
     console.log('O gráfico será plotado com os respectivos valores:')
