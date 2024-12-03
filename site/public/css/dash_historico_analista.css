@@ -142,6 +142,11 @@ body {
     margin-left: 10px;
 }
 
+.previsao a{
+    margin: 3%;
+    text-decoration: none;
+    color: #fff;
+}
 
 .linha {
     margin-top: 140%;
