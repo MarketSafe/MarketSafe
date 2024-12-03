@@ -367,20 +367,22 @@ th {
   justify-content: center;
   font-size: 30px;
 }
-.icon span {
-  font-size: 12px;
-  font-family: "Abel";
-  position: relative;
-  right: +7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: transparent;
-  border-radius: 10px 10px 10px 10px;
-  width: 100px;
-  height: 15px;
-  align-items: center;
+
+.icon span{
+    font-size: 22px;
+    font-family: 'Abel';
+    position: relative;
+    right: -3px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 10px 10px 10px 10px;
+    width: 100px;
+    height: 15px;
+    align-items: center;
 }
 
 .notifi-box {
