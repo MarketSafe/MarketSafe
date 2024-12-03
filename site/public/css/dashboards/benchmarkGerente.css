@@ -229,6 +229,9 @@ body {
                 &:hover {
                   transform: scale(105%, 105%);
                 }
+                &.required {
+                  border: 1px solid var(--gerente-color);
+                }
               }
             }
           }

@@ -34,7 +34,7 @@ function taxaGeralDeAlertas(fk_empresa) {
 }
 function totensPorEmpresa(fk_empresa) {
   // declara a variável de instrução sql:
-  const instrucao = `select count(t.id) quantidade from filial f left join totem t on f.id = t.fk_filial where f.fk_empresa = 1;`;
+  const instrucao = `select count(t.id) quantidade from filial f left join totem t on f.id = t.fk_filial where f.fk_empresa = ${fk_empresa};`;
   // declara a variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
@@ -50,7 +50,24 @@ function maiorTaxaDeAlertas(fk_empresa) {
 }
 function totalDeFiliais(fk_empresa) {
   // declara a variável de instrução sql:
-  const instrucao = `select count(f.id) quantidade from filial f where f.fk_empresa = 1;`;
+  const instrucao = `select count(f.id) quantidade from filial f where f.fk_empresa = ${fk_empresa};`;
+  // declara a variável de resultado da execução:
+  const resultado = database.executar(instrucao);
+  // retorna o resultado da execução:
+  return resultado;
+}
+function promocoesPorFilial(fk_filial) {
+  // declara a variável de instrução sql:
+  const instrucao = `select * from promocao p where p.fk_filial = ${fk_filial};`;
+  // declara a variável de resultado da execução:
+  const resultado = database.executar(instrucao);
+  // retorna o resultado da execução:
+  return resultado;
+}
+
+function taxasDaSemanaPorFilial(fk_filial) {
+  // declara a variável de instrução sql:
+  const instrucao = `select * from filial f left join totem t on f.id = t.fk_filial left join alerta a on t.id = a.fk_totem and a.data_hora > timestamp(date_sub(current_timestamp, interval weekday(current_timestamp)) where f.fk_filial = ${fk_filial};`;
   // declara a variável de resultado da execução:
   const resultado = database.executar(instrucao);
   // retorna o resultado da execução:
@@ -64,5 +81,7 @@ module.exports = {
   taxaGeralDeAlertas,
   totensPorEmpresa,
   maiorTaxaDeAlertas,
-  totalDeFiliais
+  totalDeFiliais,
+  promocoesPorFilial,
+  taxasDaSemanaPorFilial,
 };
