@@ -285,6 +285,11 @@ body {
         border-radius: 2%;
         height: 100%;
       }
+
+      & table {
+        height: 100%;
+        border-collapse: collapse;
+      }
     }
 
     .space {
@@ -301,12 +306,6 @@ body {
       flex-direction: column;
       align-items: center;
     }
-
-  .dashBaixo {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-  }
 
 /* 
   .ranking {
@@ -335,10 +334,10 @@ body {
     color: #292935;
   } */
 
-  table {
-    width: 45%;
+  /* table {
+    width: 50%;
     border-collapse: collapse;
-}
+} */
 
 .tableHeader {
     background-color: #af744c;
@@ -353,9 +352,12 @@ body {
 }
 
 
-tr:hover {
+tr:not(:nth-of-type(1)):hover {
     background-color: #ddd;
-    color: #292935;
+    
+    & > td {
+      color: #292935;
+    }
 }
 
 .ranking{
