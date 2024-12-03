@@ -3,7 +3,7 @@ var router = express.Router();
 
 var previsaoGerenteController = require("../../controllers/dashboards/previsaoGerenteController");
 
-router.post("/puxarDados/:idFilial/:mes", function (req, res) {
+router.post("/puxarDados/:idFilial/:anoMes", function (req, res) {
     previsaoGerenteController.puxarDados(req, res);
 });
 
