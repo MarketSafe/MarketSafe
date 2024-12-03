@@ -143,7 +143,7 @@
               </div>
             </div>
             <div class="space"></div>
-            <div class="ranking">
+            <div class="ranking" id="ranking">
               <table>
                   <tr class="tableHeader">
                       <th>Ranking</th>
@@ -182,13 +182,66 @@
     emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
     senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
   };
+
+  function plotarRanking() {
+    fetch("/previsaoGerenteRouter/plotarRanking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(function (resposta) {
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        resposta.json()
+        .then(function (resultado) {
+          console.log(resultado)
+
+          for(i = 0; i < resultado.length; i++) {
+            ranking.innerHTML = `<table>
+                  <tr class="tableHeader">
+                      <th>Ranking</th>
+                      <th>Filial</th>
+                      <th>Promoções</th>
+                      <th>Taxa de sobrecarga</th>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">1</td>
+                      <td class="tableSelector">Filial 5</td>
+                      <td class="tableSelector">Carnes</td>
+                      <td class="tableSelector">20%</td>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">2</td>
+                      <td class="tableSelector">Filial 1</td>
+                      <td class="tableSelector">Frutas</td>
+                      <td class="tableSelector">13%</td>
+                  </tr>
+                  <tr>
+                      <td class="tableSelector">3</td>
+                      <td class="tableSelector">Filial 7</td>
+                      <td class="tableSelector">Vegetais</td>
+                      <td class="tableSelector">7%</td>
+                  </tr>
+              </table>`;
+          };
+        })
+
+      } else {
+       console.error('Nenhum dado encontrado na API');
+      }
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dado p/ plotagem do ranking: ${error.message}`);
+    });
+  };
   
   function puxarDados() {
     var idFilial = selectFilial.value; 
-    var mes = periodoInicio.value;
-    const rota = `/previsaoGerenteRouter/puxarDados/${idFilial}/${mes}`;
+    var anoMes = periodoInicio.value;
+    const rota = `/previsaoGerenteRouter/puxarDados/${idFilial}/${anoMes}`;
     console.log(rota) 
-    fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}/${mes}`, {
+    fetch(`/previsaoGerenteRouter/puxarDados/${idFilial}/${anoMes}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -202,6 +255,8 @@
         resposta.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           resposta.reverse();
+
+          plotarLine(resposta, idFilial);
         })
 
       } else {
@@ -209,9 +264,108 @@
       }
 
     }).catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`)
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
   };
+
+  function plotarLine(resposta, idFilial) {
+    
+    // TO-DO: Adicionar função de checar se o gráfico já existe para destruí-lo e plotar um novo sem necessitar dar refresh na página.
+
+    console.log('Iniciando a plotagem do gráfico de linha...');
+
+    let labelsLine = [];
+
+    const dataLine = {
+    labels: labelsLine,
+    datasets: [{
+      label: 'Atual',
+      data: [],
+      borderColor: 'rgba(255, 145, 77)',
+      backgroundColor: 'rgba(255, 145, 77)',
+      pointRadius: 0
+    }, {
+      label: 'Previsto',
+      data: [],
+      borderColor: 'rgba(255, 49, 49)',
+      backgroundColor: 'rgba(255, 49, 49)',
+      borderDash: [5, 5],
+      pointRadius: 0
+    }]
+    };
+
+    console.log('----------------------------------------------');
+    console.log('Estes dados foram recebidos pela função "puxarDados()" e passados para "plotarLine()":');
+    console.log(resposta);
+    
+    for(i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labelsLine.push(registro.dia);
+      dataLine.datasets[0].data.push(registro.qtd_alertas);
+      dataLine.datasets[1].data.push(registro.qtd_alertas);
+    };
+    
+    console.log('----------------------------------------------');
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labelsLine)
+    console.log('Dados:')
+    console.log(dataLine.datasets)
+    console.log('----------------------------------------------');
+
+    const configLine = {
+    type: 'line',
+    data: dataLine,
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            color: "#9A9A9A"
+          },
+          title: {
+            display: true,
+            text: "Quantidade de alertas",
+            color: "white"
+          }
+        },
+        x: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: "Dias do mês",
+            color: "white"
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: "white"
+          }
+        },
+        title: {
+          display: true,
+          text: `Previsão de quantidade de alertas da Filial ${idFilial} deste mês`,
+          color: "white"
+        }
+      },
+      responsive: true
+    }
+  };
+
+  let lineChart = new Chart(
+    document.getElementById('graficoLinha').getContext('2d'),
+    configLine
+  );
+  }
 
   const dataBubble = {
     datasets: [{
@@ -322,76 +476,76 @@
   });
 
   // Eu fiz uma solução temporária.. não sei se vou mudar futuramente.
-  const dataLine = {
-    labels: ['0', '5', '10', '15', '20', '25', '30'],
-    datasets: [{
-      label: 'Atual',
-      data: [20, 15, 23.5, 10],
-      borderColor: 'rgba(255, 145, 77)',
-      backgroundColor: 'rgba(255, 145, 77)',
-      pointRadius: 0
-    }, {
-      label: 'Previsto',
-      data: [20, 15, 23.5, 10, 25, 30, 15],
-      borderColor: 'rgba(255, 49, 49)',
-      backgroundColor: 'rgba(255, 49, 49)',
-      borderDash: [5, 5],
-      pointRadius: 0
-    }]
-  };
+  // const dataLine = {
+  //   labels: ['0', '5', '10', '15', '20', '25', '30'],
+  //   datasets: [{
+  //     label: 'Atual',
+  //     data: [20, 15, 23.5, 10],
+  //     borderColor: 'rgba(255, 145, 77)',
+  //     backgroundColor: 'rgba(255, 145, 77)',
+  //     pointRadius: 0
+  //   }, {
+  //     label: 'Previsto',
+  //     data: [20, 15, 23.5, 10, 25, 30, 15],
+  //     borderColor: 'rgba(255, 49, 49)',
+  //     backgroundColor: 'rgba(255, 49, 49)',
+  //     borderDash: [5, 5],
+  //     pointRadius: 0
+  //   }]
+  // };
 
-  const configLine = {
-    type: 'line',
-    data: dataLine,
-    options: {
-      scales: {
-        y: {
-          ticks: {
-            color: "white"
-          },
-          grid: {
-            color: "#9A9A9A"
-          },
-          title: {
-            display: true,
-            text: "Quantidade de alertas",
-            color: "white"
-          }
-        },
-        x: {
-          ticks: {
-            color: "white"
-          },
-          grid: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: "Dias do mês",
-            color: "white"
-          }
-        }
-      },
-      plugins: {
-        legend: {
-          labels: {
-            color: "white"
-          }
-        },
-        title: {
-          display: true,
-          text: "Previsão de quantidade de alertas da Filial IDAQUI deste mês",
-          color: "white"
-        }
-      },
-      responsive: true
-    }
-  };
+  // const configLine = {
+  //   type: 'line',
+  //   data: dataLine,
+  //   options: {
+  //     scales: {
+  //       y: {
+  //         ticks: {
+  //           color: "white"
+  //         },
+  //         grid: {
+  //           color: "#9A9A9A"
+  //         },
+  //         title: {
+  //           display: true,
+  //           text: "Quantidade de alertas",
+  //           color: "white"
+  //         }
+  //       },
+  //       x: {
+  //         ticks: {
+  //           color: "white"
+  //         },
+  //         grid: {
+  //           display: false
+  //         },
+  //         title: {
+  //           display: true,
+  //           text: "Dias do mês",
+  //           color: "white"
+  //         }
+  //       }
+  //     },
+  //     plugins: {
+  //       legend: {
+  //         labels: {
+  //           color: "white"
+  //         }
+  //       },
+  //       title: {
+  //         display: true,
+  //         text: "Previsão de quantidade de alertas da Filial IDAQUI deste mês",
+  //         color: "white"
+  //       }
+  //     },
+  //     responsive: true
+  //   }
+  // };
 
-  let lineChart = new Chart(
-    document.getElementById('graficoLinha').getContext('2d'),
-    configLine
-  );
+  // let lineChart = new Chart(
+  //   document.getElementById('graficoLinha').getContext('2d'),
+  //   configLine
+  // );
 
   // Vai se tornar o chart do webcrawler
   const dataBar = {

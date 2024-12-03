@@ -69,9 +69,17 @@
                 <span>Monitoramento Geral</span>
             </div>
             <div class="Alinhando_Dashs">
-                <div id="chart-RealTimeLine1"></div>
-                <div id="chart-RealTimeLine2"></div>
-                <div class="totens">
+                <div class="expandir_dash">
+                    <div id="chart-RealTimeLine1"></div>
+                    <i id="expandir_grafico1" class="fa-solid fa-expand" onclick="expandirGrafico()"></i>
+                    <i id="minimizar_grafico1" class="fa-solid fa-compress" onclick="minimizarGrafico()" style="display: none;"></i>
+                </div>
+                <div class="expandir_dash2">
+                    <div id="chart-RealTimeLine2"></div>
+                    <i id="expandir_grafico2" class="fa-solid fa-expand" onclick="expandirGrafico2()"></i>
+                    <i id="minimizar_grafico2" class="fa-solid fa-compress" onclick="minimizarGrafico2()" style="display: none;"></i>
+                </div>
+                <div id="totens" class="totens">
                     <div class="totens-quantidade">
                         <h3>Quantidade de Totens</h3>
                         <span id="QtdTotens_bem">0</span>
@@ -146,7 +154,7 @@
                     </div>
                 </div>
                 <!-- 3º Dash Rosca  -->
-                <div class="Dash_Doughs3"  style="display: none;">
+                <div class="Dash_Doughs3" style="display: none;">
                     <div class="totem-label">Totem 3</div>
                     <div class="Direcionando_DashRosca1">
                         <div id="chart_Rosca3"></div>
@@ -169,7 +177,7 @@
                     </div>
                 </div>
                 <!-- 4º Dash Rosca  -->
-                <div class="Dash_Doughs4"  style="display: none;">
+                <div class="Dash_Doughs4" style="display: none;">
                     <div class="totem-label">Totem 4</div>
                     <div class="Direcionando_DashRosca1">
                         <div id="chart_Rosca4"></div>
@@ -192,7 +200,7 @@
                     </div>
                 </div>
                 <!-- 5º Dash Rosca  -->
-                <div class="Dash_Doughs5"  style="display: none;">
+                <div class="Dash_Doughs5" style="display: none;">
                     <div class="totem-label">Totem 5</div>
                     <div class="Direcionando_DashRosca1">
                         <div id="chart_Rosca5"></div>
@@ -224,12 +232,12 @@
             <div id="notify_box"></div>
 
             <div id="promo" class="promo" onclick="aparecerPromo()">
-               <img src="css/iconPromo.png" alt="">
+                <img src="css/iconPromo.png" alt="">
             </div>
 
             <div class="promoDiv" id="promoDiv">
                 <h2>Promoção</h2>
-                
+
                 <div class="iptNomePromo">
                     <label for="nomePromo">Nome:</label>
                     <input type="text" name="" id="nomePromo">
@@ -237,14 +245,15 @@
 
                 <div class="sldNomePromo">
                     <label for="myRange">Duração:</label>
-                    <input type="range" min="1" max="30" value="5" class="slider" id="myRange" onchange="atualizarSlider()">
+                    <input type="range" min="1" max="30" value="5" class="slider" id="myRange"
+                        onchange="atualizarSlider()">
                     <span> <span id="laberSld"></span> <span>Dias</span></span>
                 </div>
 
                 <div>
                     <button onclick="salvarPromo()">Iniciar Promoção</button>
                 </div>
-                
+
             </div>
 
         </div>
@@ -261,13 +270,13 @@
     laberSld.innerHTML = myRange.value
 
 
-    function aparecerPromo(){
+    function aparecerPromo() {
         promo.style.display = 'none'
         promoDiv.style.display = 'flex'
 
     }
 
-    function salvarPromo(){
+    function salvarPromo() {
         promoDiv.style.display = 'none'
         promo.style.display = 'flex'
 
@@ -323,8 +332,6 @@
         chart: {
             id: 'area-datetime',
             type: 'line',
-            width: '400px',
-            height: 250,
             animations: {
                 enabled: false,
                 easing: 'linear',
@@ -409,7 +416,6 @@
     var chart = new ApexCharts(document.querySelector("#chart-RealTimeLine1"), options);
     chart.render();
 
-
     //Gráfico 2
 
     var dataSeries6 = [];
@@ -447,14 +453,8 @@
         chart: {
             id: 'area-datetime',
             type: 'line',
-            width: '400px',
-            height: 250,
             animations: {
                 enabled: false,
-                easing: 'linear',
-                dynamicAnimation: {
-                    speed: 1000
-                }
             },
             toolbar: {
                 show: false
@@ -645,9 +645,9 @@
     chart5.render();
     var tempo = 0;
 
-        // 4º Gráfico 
+    // 4º Gráfico 
 
-        var options6 = {
+    var options6 = {
         series: [0, 0],
         chart: {
             width: 200,
@@ -682,10 +682,10 @@
     chart6.render();
     var tempo = 0;
 
-    
-        // 4º Gráfico 
 
-        var options7 = {
+    // 4º Gráfico 
+
+    var options7 = {
         series: [0, 0],
         chart: {
             width: 200,
@@ -1400,7 +1400,7 @@
     }
 
     const notificacoesRecentes = new Map();
-    const intervaloNotificacao = 300000; 
+    const intervaloNotificacao = 300000;
 
 
     function notificacao(msg, totem, componente) {
@@ -1505,34 +1505,113 @@
     // ------------ Totens Instáveis -------------- //
 
     function plotarMaioresValores() {
-    const totens = [
-        { id: 'Dash_Doughs1', cpu: Math.round(VetorCpuT1[VetorCpuT1.length - 1]), ram: Math.round(VetorRamT1[VetorRamT1.length - 1]) },
-        { id: 'Dash_Doughs2', cpu: Math.round(VetorCpuT2[VetorCpuT2.length - 1]), ram: Math.round(VetorRamT2[VetorRamT2.length - 1]) },
-        { id: 'Dash_Doughs3', cpu: Math.round(VetorCpuT3[VetorCpuT3.length - 1]), ram: Math.round(VetorRamT3[VetorRamT3.length - 1]) },
-        { id: 'Dash_Doughs4', cpu: Math.round(VetorCpuT4[VetorCpuT4.length - 1]), ram: Math.round(VetorRamT4[VetorRamT4.length - 1]) },
-        { id: 'Dash_Doughs5', cpu: Math.round(VetorCpuT5[VetorCpuT5.length - 1]), ram: Math.round(VetorRamT5[VetorRamT5.length - 1]) }
-    ];
+        const totens = [
+            { id: 'Dash_Doughs1', cpu: Math.round(VetorCpuT1[VetorCpuT1.length - 1]), ram: Math.round(VetorRamT1[VetorRamT1.length - 1]) },
+            { id: 'Dash_Doughs2', cpu: Math.round(VetorCpuT2[VetorCpuT2.length - 1]), ram: Math.round(VetorRamT2[VetorRamT2.length - 1]) },
+            { id: 'Dash_Doughs3', cpu: Math.round(VetorCpuT3[VetorCpuT3.length - 1]), ram: Math.round(VetorRamT3[VetorRamT3.length - 1]) },
+            { id: 'Dash_Doughs4', cpu: Math.round(VetorCpuT4[VetorCpuT4.length - 1]), ram: Math.round(VetorRamT4[VetorRamT4.length - 1]) },
+            { id: 'Dash_Doughs5', cpu: Math.round(VetorCpuT5[VetorCpuT5.length - 1]), ram: Math.round(VetorRamT5[VetorRamT5.length - 1]) }
+        ];
 
-    // Combine CPU e RAM em um único valor para cada totem (opcional)
-    totens.forEach(toten => {
-        toten.combined = toten.cpu + toten.ram; // Soma CPU e RAM como métrica combinada
-    });
+        totens.forEach(toten => {
+            toten.combined = toten.cpu + toten.ram;
+        });
 
-    // Ordena os totens pela métrica combinada (ou use toten.cpu para ordenar só por CPU, ou toten.ram para só RAM)
-    const topTotens = totens.sort((a, b) => b.combined - a.combined).slice(0, 3);
 
-    // Itera sobre os totens para exibir ou ocultar
-    totens.forEach(toten => {
-        const element = document.getElementsByClassName(toten.id)[0];
-        if (element) {
-            if (topTotens.some(top => top.id === toten.id)) {
-                element.style.display = 'block'; 
-            } else {
-                element.style.display = 'none';
+        const topTotens = totens.sort((a, b) => b.combined - a.combined).slice(0, 3);
+
+        totens.forEach(toten => {
+            const element = document.getElementsByClassName(toten.id)[0];
+            if (element) {
+                if (topTotens.some(top => top.id === toten.id)) {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                }
             }
-        }
-    });
-}
-setInterval(plotarMaioresValores, 1000);
+        });
+    }
+    setInterval(plotarMaioresValores, 1000);
 
+
+    function expandirGrafico() {
+        
+        const graficoCPU = document.getElementById('chart-RealTimeLine1');
+        const botaoExpand = document.getElementById('expandir_grafico2');
+        const expandirIcon = document.querySelector('.fa-expand');
+        const minimizarIcon = document.querySelector('.fa-compress');
+
+        const graficoRAM = document.getElementById('chart-RealTimeLine2');
+        const totens = document.getElementById('totens');
+
+        graficoCPU.classList.add('expandido');
+        expandirIcon.style.display = 'none';
+        minimizarIcon.style.display = 'inline-block';
+
+        botaoExpand.style.display = 'none';
+        graficoRAM.style.display = 'none';
+        totens.style.display = 'none';
+    }
+
+    function minimizarGrafico() {
+        const graficoCPU = document.getElementById('chart-RealTimeLine1');
+        const expandirIcon = document.querySelector('.fa-expand');
+        const minimizarIcon = document.querySelector('.fa-compress');
+        const botaoExpand = document.getElementById('expandir_grafico2');
+
+
+        const graficoRAM = document.getElementById('chart-RealTimeLine2');
+        const totens = document.getElementById('totens');
+
+        graficoCPU.classList.remove('expandido');
+        expandirIcon.style.display = 'inline-block';
+        minimizarIcon.style.display = 'none';
+    
+        graficoRAM.style.display = 'block';
+        totens.style.display = 'block';
+        botaoExpand.style.display = 'block';
+
+    }
+
+
+    function expandirGrafico2() {
+
+    const expandirDash = document.querySelector('.expandir_dash2');
+    const graficoRAM = expandirDash.querySelector('#chart-RealTimeLine2');
+    const expandirIcon = expandirDash.querySelector('.fa-expand');
+    const minimizarIcon = expandirDash.querySelector('.fa-compress');
+    const botaoExpand = document.getElementById('expandir_grafico1');
+
+    const graficoCPU = document.getElementById('chart-RealTimeLine1');
+    const totens = document.getElementById('totens');
+
+    graficoRAM.classList.add('expandido');
+    expandirIcon.style.display = 'none';
+    minimizarIcon.style.display = 'inline-block';
+
+    graficoCPU.style.display = 'none';
+    totens.style.display = 'none';
+    botaoExpand.style.display = 'none';
+}
+
+function minimizarGrafico2() {
+
+    const expandirDash = document.querySelector('.expandir_dash2');
+    const graficoRAM = expandirDash.querySelector('#chart-RealTimeLine2');
+    const expandirIcon = expandirDash.querySelector('.fa-expand');
+    const minimizarIcon = expandirDash.querySelector('.fa-compress');
+    const botaoExpand = document.getElementById('expandir_grafico1');
+
+    const graficoCPU = document.getElementById('chart-RealTimeLine1');
+    const totens = document.getElementById('totens');
+
+    graficoRAM.classList.remove('expandido');
+    expandirIcon.style.display = 'inline-block';
+    minimizarIcon.style.display = 'none';
+
+    graficoCPU.style.display = 'block';
+    totens.style.display = 'block';
+    botaoExpand.style.display = 'block';
+
+}
 </script>
