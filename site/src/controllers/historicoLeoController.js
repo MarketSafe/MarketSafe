@@ -46,8 +46,8 @@ function cadastrarHora(req, res) {
         })
 }
 
-function atualizarMesTaxa(req, res, mes) {
-    historicoLeoModel.atualizarMesTaxa(mes)
+function atualizarMesTaxa(req, res, mes, semana_do_mes) {
+    historicoLeoModel.atualizarMesTaxa(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
@@ -55,8 +55,8 @@ function atualizarMesTaxa(req, res, mes) {
         })
 }
 
-function atualizarMesEspecifico(req, res, mes) {
-    historicoLeoModel.atualizarMesEspecifico(mes)
+function atualizarMesEspecifico(req, res, mes, semana_do_mes) {
+    historicoLeoModel.atualizarMesEspecifico(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
@@ -64,8 +64,8 @@ function atualizarMesEspecifico(req, res, mes) {
         })
 }
 
-function atualizarMesRanking(req, res, mes) {
-    historicoLeoModel.atualizarMesRanking(mes)
+function atualizarMesRanking(req, res, mes, semana_do_mes) {
+    historicoLeoModel.atualizarMesRanking(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
@@ -82,8 +82,8 @@ function maisAlerta(req, res) {
         })
 }
 
-function atualizarMaisAlerta(req, res, mes) {
-    historicoLeoModel.atualizarMaisAlerta(mes)
+function atualizarMaisAlerta(req, res, mes, semana_do_mes) {
+    historicoLeoModel.atualizarMaisAlerta(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
@@ -100,8 +100,8 @@ function alertaSemana(req, res) {
         })
 }
 
-function atualizarAlertaSemana(req, res, mes) {
-    historicoLeoModel.atualizarAlertaSemana(mes)
+function atualizarAlertaSemana(req, res, mes, semana_do_mes) {
+    historicoLeoModel.atualizarAlertaSemana(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);

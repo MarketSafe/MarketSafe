@@ -186,8 +186,7 @@
             const mes = selectMes.value;
             const semana = selectSemana.value;
 
-            try {
-                const resposta = await fetch(`/historicoLeo/cadastrarMes/${mes}/${semana}`, {
+                const resposta = await fetch(`/historicoLeo/cadastrarMes?mes=${mes}&semana_do_mes=${semana}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -201,10 +200,6 @@
                 } else {
                     throw new Error(`Erro: ${resposta.status}`);
                 }
-            } catch (erro) {
-                alert("Erro ao carregar os dados!");
-                console.error("Erro ao carregar os dados:", erro);
-            }
         }
 
         function cadastrarRanking(ranking) {
@@ -557,12 +552,6 @@
 
             var mes = Number(selectMes.value);
             var semana = Number(selectSemana.value);
-
-            // Verificar se mês e semana foram selecionados
-            if (!mes || semana === 0) {
-                alert("Por favor, selecione um mês e uma semana!");
-                return;
-            }
 
             // Atualizar ranking com base no mês e na semana selecionados
             fetch(`/historicoLeo/atualizarMesRanking?mes=${mes}&semana_do_mes=${semana}`, {

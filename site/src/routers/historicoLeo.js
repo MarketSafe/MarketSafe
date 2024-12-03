@@ -26,17 +26,20 @@ router.get("/atualizarRanking_mes", function(req, res){
 
 router.get("/atualizarMesRanking", function(req, res){
     const mes = req.query.mes;
-    historicoLeoController.atualizarMesRanking(req, res, mes); 
+    const semana_do_mes = req.query.semana_do_mes;
+    historicoLeoController.atualizarMesRanking(req, res, mes, semana_do_mes); 
 })
 
 router.get("/atualizarMesTaxa", function(req, res){
     const mes = req.query.mes;
-    historicoLeoController.atualizarMesTaxa(req, res, mes); 
+    const semana_do_mes = req.query.semana_do_mes;
+    historicoLeoController.atualizarMesTaxa(req, res, mes, semana_do_mes); 
 })
 
 router.get("/atualizarMesEspecifico", function(req, res){
     const mes = req.query.mes;
-    historicoLeoController.atualizarMesEspecifico(req, res, mes); 
+    const semana_do_mes = req.query.semana_do_mes;
+    historicoLeoController.atualizarMesEspecifico(req, res, mes, semana_do_mes); 
 })
 
 router.get("/maisAlerta", function(req, res){
@@ -45,7 +48,8 @@ router.get("/maisAlerta", function(req, res){
 
 router.get("/atualizarMaisAlerta", function(req, res){
     const mes = req.query.mes;
-    historicoLeoController.atualizarMaisAlerta(req, res, mes); 
+    const semana_do_mes = req.query.semana_do_mes;
+    historicoLeoController.atualizarMaisAlerta(req, res, mes, semana_do_mes); 
 })
 
 router.get("/alertaSemana", function(req, res){
@@ -54,7 +58,8 @@ router.get("/alertaSemana", function(req, res){
 
 router.get("/atualizarAlertaSemana", function(req, res){
     const mes = req.query.mes;
-    historicoLeoController.atualizarAlertaSemana(req, res, mes); 
+    const semana_do_mes = req.query.semana_do_mes;
+    historicoLeoController.atualizarAlertaSemana(req, res, mes, semana_do_mes); 
 })
 
 router.get("/mediaHorario", function(req, res){
