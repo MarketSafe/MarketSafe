@@ -2,20 +2,10 @@
 // elementos globais:
 const filtros = {
   filial1: {
-    filial: document.querySelector(
-      "main > header > search > div.filial1 select.filial"
-    ),
-    promocao: document.querySelector(
-      "main > header > search > div.filial1 select.promocao"
-    ),
+    filial: document.querySelector("main > header > search > div.filial1 select.filial"),
   },
   filial2: {
-    filial: document.querySelector(
-      "main > header > search > div.filial2 select.filial"
-    ),
-    promocao: document.querySelector(
-      "main > header > search > div.filial2 select.promocao"
-    ),
+    filial: document.querySelector("main > header > search > div.filial2 select.filial"),
   },
 };
 
@@ -75,10 +65,8 @@ function createDOMElement(element, parent) {
 
   const htmlElement = document.createElement(element.tagName);
   if ("style" in element) {
-    if (element.style === null || typeof element.style != "object")
-      throw "`style` is not an object";
-    for (const [k, v] of Object.entries(element.style))
-      htmlElement.style[k] = v;
+    if (element.style === null || typeof element.style != "object") throw "`style` is not an object";
+    for (const [k, v] of Object.entries(element.style)) htmlElement.style[k] = v;
   }
   if (element.children) {
     if (!Array.isArray(element.children)) throw "`children` is not an array";
@@ -110,10 +98,7 @@ function toPx(value, parent) {
 
   switch (valueParts[1]) {
     case "rem":
-      return (
-        valueParts[0] *
-        toPx(getComputedStyle(document.documentElement).fontSize, parent)
-      );
+      return valueParts[0] * toPx(getComputedStyle(document.documentElement).fontSize, parent);
     case "pw":
       return valueParts[0] * (parentWidth / 100);
     case "ph":
@@ -129,9 +114,7 @@ function toPx(value, parent) {
   }
 }
 function updateChart(chart) {
-  for (const datalabel of chart.config._config.options.plugins.getPropertiesByName(
-    "datalabels"
-  )) {
+  for (const datalabel of chart.config._config.options.plugins.getPropertiesByName("datalabels")) {
     const pxSize = toPx(datalabel.relativeOffset, chart.canvas);
     if (isNaN(pxSize)) {
       datalabel.offset = 0;
@@ -154,9 +137,7 @@ function handleSelectsNone(selects) {
       const selectedOptions = Array.from(select.selectedOptions);
 
       if (selectedOptions.length === 1 && selectedOptions[0].value === "") {
-        Array.from(select.options).find(
-          (option) => option.disabled && option.value === ""
-        ).selected = true;
+        Array.from(select.options).find((option) => option.disabled && option.value === "").selected = true;
       }
     });
   }
@@ -185,12 +166,7 @@ async function puxarDados(
     body: JSON.stringify(body),
   });
 
-  if (!response.ok)
-    throw new Error(
-      `Erro ao realizar o fetch: ${response.status} ${
-        response.statusText
-      }: ${await response.text()}`
-    );
+  if (!response.ok) throw new Error(`Erro ao realizar o fetch: ${response.status} ${response.statusText}: ${await response.text()}`);
 
   errorCallback(response);
 
@@ -200,51 +176,33 @@ async function gerarIndicadores() {
   Array.from(indicadores).forEach(async (indicador) => {
     const div = indicador.querySelector("div");
     if (indicador.classList.contains("taxa-geral")) {
-      const dados = await puxarDados(
-        "/benchmarkGerente/taxaGeralDeAlertas",
-        {},
-        (response) => {
-          if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa.`);
-          }
+      const dados = await puxarDados("/benchmarkGerente/taxaGeralDeAlertas", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa.`);
         }
-      );
-      div.querySelector("span").textContent =
-        Math.round(dados[0].taxa_geral * 100) + "%";
+      });
+      div.querySelector("span").textContent = Math.round(dados[0].taxa_geral * 100) + "%";
     } else if (indicador.classList.contains("totens-total")) {
-      const dados = await puxarDados(
-        "/benchmarkGerente/totensPorEmpresa",
-        {},
-        (response) => {
-          if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa.`);
-          }
+      const dados = await puxarDados("/benchmarkGerente/totensPorEmpresa", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa.`);
         }
-      );
+      });
       div.querySelector("span").textContent = dados[0].quantidade;
     } else if (indicador.classList.contains("maior-taxa")) {
-      const dados = await puxarDados(
-        "/benchmarkGerente/maiorTaxaDeAlertas",
-        {},
-        (response) => {
-          if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa.`);
-          }
+      const dados = await puxarDados("/benchmarkGerente/maiorTaxaDeAlertas", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa.`);
         }
-      );
+      });
       div.querySelector("h3").textContent = dados[0].nome;
-      div.querySelector("span").textContent =
-        Math.round(dados[0].taxa_alerta * 100) + "%";
+      div.querySelector("span").textContent = Math.round(dados[0].taxa_alerta * 100) + "%";
     } else if (indicador.classList.contains("filiais-total")) {
-      const dados = await puxarDados(
-        "/benchmarkGerente/totalDeFiliais",
-        {},
-        (response) => {
-          if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa.`);
-          }
+      const dados = await puxarDados("/benchmarkGerente/totalDeFiliais", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa.`);
         }
-      );
+      });
       div.querySelector("span").textContent = dados[0].quantidade;
     }
   });
@@ -252,26 +210,16 @@ async function gerarIndicadores() {
 async function gerarGraficos() {
   return Array.from(graficos).reduce(async (chartList, divGrafico) => {
     if (divGrafico.classList.contains("estado-filiais")) {
-      const dados = await puxarDados(
-        "/benchmarkGerente/estadoFiliais",
-        {},
-        (response) => {
-          if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa.`);
-          }
+      const dados = await puxarDados("/benchmarkGerente/estadoFiliais", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa.`);
         }
-      );
+      });
 
       const config = {
         type: "pie",
         data: {
-          labels: dados.map((v) =>
-            v.status === "normal"
-              ? "Normal"
-              : v.status === "critico"
-              ? "Crítico"
-              : "Atenção"
-          ),
+          labels: dados.map((v) => (v.status === "normal" ? "Normal" : v.status === "critico" ? "Crítico" : "Atenção")),
           datasets: [
             {
               data: dados.map((v) => v.quantidade),
@@ -307,12 +255,7 @@ async function gerarGraficos() {
               },
             },
             datalabels: {
-              formatter: (value, context) =>
-                Math.round(
-                  (value /
-                    context.chart._metasets[context.datasetIndex].total) *
-                    100
-                ) + "%",
+              formatter: (value, context) => Math.round((value / context.chart._metasets[context.datasetIndex].total) * 100) + "%",
               font: {
                 relativeSize: "8ar",
                 family: '"Noto Serif", serif',
@@ -327,20 +270,13 @@ async function gerarGraficos() {
         plugins: [ChartDataLabels],
       };
 
-      (await chartList)["estadoFiliais"] = new Chart(
-        divGrafico.querySelector("canvas"),
-        config
-      );
+      (await chartList)["estadoFiliais"] = new Chart(divGrafico.querySelector("canvas"), config);
     } else if (divGrafico.classList.contains("taxa-alerta")) {
-      const dados = await puxarDados(
-        "/benchmarkGerente/maioresTaxasDeAlerta",
-        {},
-        (response) => {
-          if (response.status == 204) {
-            throw new Error(`Sem filiais na empresa.`);
-          }
+      const dados = await puxarDados("/benchmarkGerente/maioresTaxasDeAlerta", {}, (response) => {
+        if (response.status == 204) {
+          throw new Error(`Sem filiais na empresa.`);
         }
-      );
+      });
 
       const config = {
         type: "bar",
@@ -447,9 +383,7 @@ async function gerarGraficos() {
             id: "legendMargin",
             afterInit(chart, args, plugins) {
               const originalFit = chart.legend.fit;
-              const margin =
-                toPx(plugins.margin, chart.canvas) ||
-                (typeof plugins.margin === "number" ? plugins.margin : 0);
+              const margin = toPx(plugins.margin, chart.canvas) || (typeof plugins.margin === "number" ? plugins.margin : 0);
 
               chart.legend.fit = function fit() {
                 if (originalFit) originalFit.call(this);
@@ -460,10 +394,7 @@ async function gerarGraficos() {
         ],
       };
 
-      (await chartList)["taxaAlerta"] = new Chart(
-        divGrafico.querySelector("canvas"),
-        config
-      );
+      (await chartList)["taxaAlerta"] = new Chart(divGrafico.querySelector("canvas"), config);
     }
 
     if (
@@ -589,9 +520,7 @@ async function gerarGraficos() {
             id: "legendMargin",
             afterInit(chart, args, plugins) {
               const originalFit = chart.legend.fit;
-              const margin =
-                toPx(plugins.margin, chart.canvas) ||
-                (typeof plugins.margin === "number" ? plugins.margin : 0);
+              const margin = toPx(plugins.margin, chart.canvas) || (typeof plugins.margin === "number" ? plugins.margin : 0);
 
               chart.legend.fit = function fit() {
                 if (originalFit) originalFit.call(this);
@@ -602,10 +531,7 @@ async function gerarGraficos() {
         ],
       };
 
-      (await chartList)["comparacaoFilialTaxas"] = new Chart(
-        divGrafico.querySelector("canvas"),
-        config
-      );
+      (await chartList)["comparacaoFilialTaxas"] = new Chart(divGrafico.querySelector("canvas"), config);
     }
 
     return await chartList;
@@ -637,27 +563,12 @@ async function gerarTela(classeTela) {
 async function verificarFiltros() {
   filtros.filial1.filial.classList.remove("required");
   filtros.filial2.filial.classList.remove("required");
-  filtros.filial1.promocao.classList.remove("required");
-  filtros.filial2.promocao.classList.remove("required");
-  if (
-    !filtros.filial1.filial.value &&
-    !filtros.filial2.filial.value &&
-    !filtros.filial1.promocao.value &&
-    !filtros.filial2.promocao.value
-  ) {
+  if (!filtros.filial1.filial.value && !filtros.filial2.filial.value) {
     console.log("Sem filtros selecionados.");
     await gerarTela("sem-filtro");
   } else if (filtros.filial1.filial.value && filtros.filial2.filial.value) {
     console.log("Filtros das filiais selecionados.");
     await gerarTela("filtro-filiais");
-  } else if (
-    !filtros.filial1.filial.value &&
-    !filtros.filial2.filial.value &&
-    (filtros.filial1.promocao.value || filtros.filial2.promocao.value)
-  ) {
-    console.log("Filtros para promoções não selecionados.");
-    filtros.filial1.filial.classList.add("required");
-    filtros.filial2.filial.classList.add("required");
   } else {
     console.log("Filtros das filiais não selecionados.");
     filtros.filial1.filial.classList.add("required");
@@ -666,77 +577,24 @@ async function verificarFiltros() {
 }
 async function carregarBody(event) {
   handleSelectsNone(document.querySelectorAll("select"));
-  document
-    .querySelectorAll("main > header > search select")
-    .forEach(async (select) => {
-      if (select.classList.contains("filial")) {
-        const filiais = await puxarDados("/filial/listar", {}, (resposta) => {
-          if (resposta.status == 204) {
-            throw new Error(`Sem filiais na empresa.`);
-          }
-        });
-
-        for (const filial of filiais) {
-          const newOption = document.createElement("option");
-          newOption.value = filial.filialId;
-          newOption.textContent = filial.nome;
-
-          select.appendChild(newOption);
-        }
-        select.addEventListener("change", async (event) => {
-          if (select.value !== "") {
-            const promocoes = await puxarDados(
-              "/benchmarkGerente/promocoesPorFilial",
-              {
-                fk_filial: select.value,
-              },
-              (resposta) => {
-                if (resposta.status == 204) {
-                  throw new Error(`Sem promoções na filial.`);
-                }
-              }
-            );
-
-            const filtroPromocao = Object.entries(filtros).find(
-              ([k, v]) => v.filial === select
-            )[1].promocao;
-
-            filtroPromocao.innerHTML = "";
-            createDOMElement(
-              {
-                tagName: "option",
-                value: "",
-                selected: true,
-                disabled: true,
-                textContent: "Promoção",
-              },
-              filtroPromocao
-            );
-            createDOMElement(
-              {
-                tagName: "option",
-                value: "",
-                textContent: "Nenhuma",
-              },
-              filtroPromocao
-            );
-
-            for (const promocao of promocoes) {
-              const newOption = document.createElement("option");
-              newOption.value = promocao.id;
-              newOption.textContent = promocao.nome;
-
-              filtroPromocao.appendChild(newOption);
-            }
-          }
-          await verificarFiltros();
-        });
-      } else {
-        select.addEventListener("change", async (event) => {
-          await verificarFiltros();
-        });
+  document.querySelectorAll("main > header > search select").forEach(async (select) => {
+    const filiais = await puxarDados("/filial/listar", {}, (resposta) => {
+      if (resposta.status == 204) {
+        throw new Error(`Sem filiais na empresa.`);
       }
     });
+
+    for (const filial of filiais) {
+      const newOption = document.createElement("option");
+      newOption.value = filial.filialId;
+      newOption.textContent = filial.nome;
+
+      select.appendChild(newOption);
+    }
+    select.addEventListener("change", async (event) => {
+      await verificarFiltros();
+    });
+  });
   await verificarFiltros();
 }
 // eventos:
