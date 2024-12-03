@@ -65,7 +65,7 @@
                     <a href="dash_individual_Isaque_Principal.html"><i class="fa-solid fa-chevron-left"></i></a>
                 </div>
                 <div class="icon" onclick="acionarAlertasENotificacao()">
-                    <i class="fa-solid fa-triangle-exclamation"><span id="QtdAlertas" style="background-color: transparent;"></span></i>
+                    <i class="fa-solid fa-triangle-exclamation"><span id="QtdAlertas"></span></i>
                 </div>
             </div>
             <div class="Span_Titulo">
@@ -864,7 +864,7 @@
         QtdNotify2++;
         document.getElementById("QtdAlertas").innerHTML = `${QtdNotify}`;
         document.getElementById("QtdAlertas2").innerHTML = `${QtdNotify2}`;
-        document.getElementById("QtdAlertas").style.backgroundColor = "#ffffff";
+        document.getElementById("QtdAlertas").style.backgroundColor = "#transparent";
 
         setTimeout(() => notificacoesRecentes.delete(chaveNotificacao), intervaloNotificacao);
     }

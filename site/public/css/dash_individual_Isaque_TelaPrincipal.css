@@ -375,10 +375,11 @@ th {
     font-size: 30px;
 }
 .icon span{
-    font-size: 12px;
+    font-size: 22px;
     font-family: 'Abel';
     position: relative;
-    right: +7px;
+    right: -3px;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
