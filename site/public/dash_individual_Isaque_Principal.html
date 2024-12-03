@@ -223,6 +223,30 @@
             </div>
             <div id="notify_box"></div>
 
+            <div id="promo" class="promo" onclick="aparecerPromo()">
+               <img src="css/iconPromo.png" alt="">
+            </div>
+
+            <div class="promoDiv" id="promoDiv">
+                <h2>Promoção</h2>
+                
+                <div class="iptNomePromo">
+                    <label for="nomePromo">Nome:</label>
+                    <input type="text" name="" id="nomePromo">
+                </div>
+
+                <div class="sldNomePromo">
+                    <label for="myRange">Duração:</label>
+                    <input type="range" min="1" max="30" value="5" class="slider" id="myRange" onchange="atualizarSlider()">
+                    <span> <span id="laberSld"></span> <span>Dias</span></span>
+                </div>
+
+                <div>
+                    <button onclick="salvarPromo()">Iniciar Promoção</button>
+                </div>
+                
+            </div>
+
         </div>
 
     </div>
@@ -232,6 +256,26 @@
 </html>
 
 <script>
+
+    promoDiv.style.display = 'none'
+    laberSld.innerHTML = myRange.value
+
+
+    function aparecerPromo(){
+        promo.style.display = 'none'
+        promoDiv.style.display = 'flex'
+
+    }
+
+    function salvarPromo(){
+        promoDiv.style.display = 'none'
+        promo.style.display = 'flex'
+
+    }
+
+    function atualizarSlider() {
+        laberSld.innerHTML = myRange.value
+    }
 
     //E num é que essa geringonça funcionou, KK
     document.getElementById('menu').addEventListener('change', function () {

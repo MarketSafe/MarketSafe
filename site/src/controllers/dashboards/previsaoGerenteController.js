@@ -2,10 +2,12 @@ var previsaoGerenteModel = require("../../models/dashboards/previsaoGerenteModel
 
 function puxarDados(req, res) {
     var idFilial = req.params.idFilial;
+    var idEmpresa = req.body.funcionarioAutenticado.empresa;
+    var mes = req.params.mes;
 
-    console.log(`Puxando dados da Filial ${idFilial}.`);
+    console.log(`Puxando dados da Filial ${idFilial} da empresa ${idEmpresa} do mês ${mes}.`);
 
-    previsaoGerenteModel.puxarDados(idFilial
+    previsaoGerenteModel.puxarDados(idFilial, idEmpresa, mes
     )
         .then(function (resultado) {
             if (resultado.length > 0) {
