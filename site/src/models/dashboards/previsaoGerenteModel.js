@@ -1,7 +1,7 @@
 var database = require("../../database/config");
 
-function puxarDados(idFilial, idEmpresa, anoMes) {
-    console.log("ACESSEI O PREVISÃO GERENTE MODEL \n \n\t\t >> Se aqui der erro de 'Error; connect ECONNREFUSED', \n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD esta rodando corretamente. \n\n function puxarDados()");
+function puxarDadosLine(idFilial, idEmpresa, anoMes) {
+    console.log("ACESSEI O PREVISÃO GERENTE MODEL \n \n\t\t >> Se aqui der erro de 'Error; connect ECONNREFUSED', \n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD esta rodando corretamente. \n\n function puxarDadosLine()");
 
     var instrucaoSql = `
     SELECT f.nome AS filial_nome, DAY(a.data_hora) AS dia, COUNT(a.id) AS qtd_alertas FROM filial f 
@@ -29,7 +29,18 @@ function plotarRanking(idEmpresa) {
     // return database.executar(instrucaoSql);
 }
 
+function puxarDadosBubble(idFilial, idEmpresa, anoMes, idPromocao) {
+    console.log("ACESSEI O PREVISÃO GERENTE MODEL \n \n\t\t >> Se aqui der erro de 'Error; connect ECONNREFUSED', \n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD esta rodando corretamente. \n\n function puxarDadosBubble()");
+
+    // var instrucaoSql = `
+    // TO-DO: Criar um SELECT que funcione pra isso aqui também :| `;
+
+    // console.log("Execuntando a instrução SQL: \n" + instrucaoSql);
+    // return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    puxarDados,
+    puxarDadosLine,
+    puxarDadosBubble,
     plotarRanking
 }

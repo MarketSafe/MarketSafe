@@ -980,11 +980,11 @@
 
                         console.log(resposta)
 
+                        // Maior totem
                         maiorTotem = resposta[0].qtd
                         mxInd = 0
 
                         console.log(maiorTotem)
-
 
                         for(i = 0; i < countTT; i++){
                             if (maiorTotem < resposta[i].qtd) {
@@ -993,6 +993,7 @@
                             }
                         }
     
+                        // Segundo maior totem
                         menorTotem = resposta[1].qtd
                         minInd = 1
 
@@ -1005,9 +1006,27 @@
                             }
                         }
 
+                        // Menor Totem
+                        menorTotem = resposta[1].qtd
+                        minIndTM = 1
+
+                        for(i = 0; i < countTT; i++){
+                            console.log(menorTotem, maiorTotem)
+                            if(mxInd == i){}
+                            else if (menorTotem < resposta[i].qtd) {
+                                menorTotem = resposta[i].qtd
+                                minInd = i
+                            }
+                        }
+
+                    //Sugestao 1 (maiores)
+                        // Totem 1 (maior)
                         sgtTM.innerHTML = resposta[mxInd].totem
 
+                        // Totem 2 (segundo maior)
                         sgtMN.innerHTML = resposta[minInd].totem
+                    
+                    // Sugestao 2 (menores)
 
                         heatmapInstance.setData(data);
 
