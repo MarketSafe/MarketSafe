@@ -698,8 +698,6 @@ async function carregarBody(event) {
             const filtroPromocao = Object.entries(filtros).find(
               ([k, v]) => v.filial === select
             )[1].promocao;
-            // <option value="" selected disabled>Promocao</option>
-            // <option value="">Nenhuma</option>
 
             filtroPromocao.innerHTML = "";
             createDOMElement(

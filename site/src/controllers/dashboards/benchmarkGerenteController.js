@@ -136,10 +136,18 @@ async function taxasDaSemanaPorFilial(req, res) {
       erro: "`fk_filial` undefined.",
     });
   }
+  if (!("fk_promocao" in req.body)) {
+    return await sendRespostaFromModel(
+      req,
+      res,
+      benchmarkGerenteModel.taxasDaSemanaPorFilial,
+      [req.body.fk_filial, new Date()]
+    );
+  }
   return await sendRespostaFromModel(
     req,
     res,
-    benchmarkGerenteModel.taxasDaSemanaPorFilial,
+    benchmarkGerenteModel.taxasDaSemanaPorFilialEPromocao,
     [req.body.fk_filial]
   );
 }
