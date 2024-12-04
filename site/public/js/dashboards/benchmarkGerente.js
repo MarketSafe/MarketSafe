@@ -256,19 +256,15 @@ async function gerarIndicadores() {
       );
 
       if (indicador.classList.contains("titulos")) {
-        console.log(indicador);
         indicador.querySelector("div > .filial1").textContent = totens1[0].nome;
         indicador.querySelector("div > .filial2").textContent = totens2[0].nome;
       } else if (indicador.classList.contains("taxas")) {
-        console.log(indicador);
-        indicador.querySelector("div > .filial1").textContent = totensEmAlerta1[0].totens_alerta / totens1[0].quantidade_totens + "%";
-        indicador.querySelector("div > .filial2").textContent = totensEmAlerta2[0].totens_alerta / totens2[0].quantidade_totens + "%";
+        indicador.querySelector("div > .filial1").textContent = (totensEmAlerta1[0].totens_alerta / totens1[0].quantidade_totens) || 0 + "%";
+        indicador.querySelector("div > .filial2").textContent = (totensEmAlerta2[0].totens_alerta / totens2[0].quantidade_totens) || 0 + "%";
       } else if (indicador.classList.contains("totens")) {
-        console.log(indicador);
         indicador.querySelector("div > .filial1").textContent = totens1[0].quantidade_totens;
         indicador.querySelector("div > .filial2").textContent = totens2[0].quantidade_totens;
       } else if (indicador.classList.contains("totens-alerta")) {
-        console.log(indicador);
         indicador.querySelector("div > .filial1").textContent = totensEmAlerta1[0].totens_alerta;
         indicador.querySelector("div > .filial2").textContent = totensEmAlerta2[0].totens_alerta;
       }
