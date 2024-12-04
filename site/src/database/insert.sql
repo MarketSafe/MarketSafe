@@ -11,9 +11,10 @@ insert into empresa (razao_social, nome_fantasia, cnpj, email, telefone, fk_ende
   ("Empresa Alfa Ltda", "Alfa Tech", "12.345.678/9012-34", "contato@alfa.com", "+12 (34) 56789-1234", 1),
   ("Empresa Beta Ltda", "Beta Soluções", "98.765.432/1098-76", "contato@beta.com", "+12 (34) 56789-5678", 2);
 
-insert into funcionario (nome, cpf, cargo, email, senha, telefone, fk_empresa) values
-  ("Gisele", "123.456.789-01", "gerente", "gisele@gmail.com", "123456789", "+12 (34) 56789-0123", 1),
-  ("Nagasse", "123.456.789-02", "analista", "nagasse@gmail.com", "123456789", "+12 (34) 56789-0456", 1);
+insert into funcionario (data_hora, nome, cpf, cargo, email, senha, telefone, fk_empresa) values
+  ("2024-10-02 00:00:00","Gisele", "123.456.789-01", "gerente", "gisele@gmail.com", "123456789", "+12 (34) 56789-0123", 1),
+  ("2024-10-02 00:00:00","Nagasse", "123.456.789-02", "analista", "nagasse@gmail.com", "123456789", "+12 (34) 56789-0456", 1),
+  ("2024-10-02 00:00:00","Vitor", "153.456.789-01", "gerente", "vitor@gmail.com", "123456789", "+12 (34) 55789-0123", 1);
 
 insert into filial (nome, fk_empresa, fk_endereco) values
   ("Filial 1", 1, 3),

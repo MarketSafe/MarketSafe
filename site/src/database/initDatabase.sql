@@ -163,7 +163,8 @@ insert into empresa (data_hora, razao_social, nome_fantasia, cnpj, email, telefo
 
 insert into funcionario (data_hora, nome, cpf, cargo, email, senha, telefone, fk_empresa) values
   ("2024-10-02 00:00:00","Gisele", "123.456.789-01", "gerente", "gisele@gmail.com", "123456789", "+12 (34) 56789-0123", 1),
-  ("2024-10-02 00:00:00","Nagasse", "123.456.789-02", "analista", "nagasse@gmail.com", "123456789", "+12 (34) 56789-0456", 1);
+  ("2024-10-02 00:00:00","Nagasse", "123.456.789-02", "analista", "nagasse@gmail.com", "123456789", "+12 (34) 56789-0456", 1),
+  ("2024-10-02 00:00:00","Vitor", "153.456.789-01", "gerente", "vitor@gmail.com", "123456789", "+12 (34) 55789-0123", 1);
   
 
 INSERT INTO filial (data_hora, nome, fk_empresa, fk_endereco) VALUES
