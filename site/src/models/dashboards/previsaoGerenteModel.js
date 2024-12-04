@@ -52,7 +52,7 @@ function puxarDadosBubble(idFilial, idEmpresa, idPromocao) {
     AND e.id = ${idEmpresa}
     AND p.id = ${idPromocao}
     GROUP BY mes
-    ORDER BY mes;
+    ORDER BY mes DESC;
 `;
 
     console.log("Execuntando a instrução SQL: \n" + instrucaoSql);

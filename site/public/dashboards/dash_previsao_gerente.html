@@ -148,6 +148,7 @@
 
   puxarFiliais();
   plotarRanking();
+  // puxarDadosCrawler();
 
   function puxarFiliais() {
     fetch("/previsaoGerenteRouter/puxarFiliais", {
@@ -317,7 +318,7 @@
   console.log('Estes dados foram recebidos pela função "puxarDadosBubble()" e passados para "plotarBubble()":');
   console.log(resposta);
 
-    for(i = 0; i < resposta.length; i++) {
+    for(i = 0; i < resposta.length - 1; i++) {
      var registro = resposta[i];
 
      labelsBubble.push(registro.dia);
@@ -332,7 +333,7 @@
    let somaX = 0, somaY = 0, somaXY = 0, somaX2 = 0;
 
    var nomePromo = "";
-   var dias = 0;
+   var mesPrevisao = 0;
    
     for (i = 0; i < resposta.length; i++) {
          somaX += i;
@@ -341,7 +342,7 @@
          somaX2 += i * i;
 
          nomePromo = resposta[i].promocao_nome
-         dias = resposta[i].mes + 1;
+         mesPrevisao = resposta[i].mes;
        }
 
        const inclinacao = (resposta.length * somaXY - somaX * somaY) / (resposta.length * somaX2 - somaX * somaX);
@@ -354,7 +355,7 @@
 
     dataBubble.datasets[1].data.push({
       y: previsao,
-      x: dias,
+      x: mesPrevisao,
       r: previsao + 15,
       label: nomePromo
      });
@@ -476,8 +477,6 @@
   };
 
   function plotarLine(resposta, idFilial) {
-    
-    // TO-DO: Adicionar função de checar se o gráfico já existe para destruí-lo e plotar um novo sem necessitar dar refresh na página.
 
     console.log('Iniciando a plotagem do gráfico de linha...');
 
@@ -505,16 +504,20 @@
     console.log('Estes dados foram recebidos pela função "puxarDadosLine()" e passados para "plotarLine()":');
     console.log(resposta);
 
-    for(i = 0; i < resposta.length; i++) {
+    var mesPrevisao = 0
+
+    for(i = 0; i < resposta.length - 1; i++) {
      var registro = resposta[i];
      labelsLine.push(registro.mes);
      dataLine.datasets[0].data.push(registro.qtd_alertas);
      dataLine.datasets[1].data.push(registro.qtd_alertas);
+
+     mesPrevisao = registro.mes
    };
 
     let somaX = 0, somaY = 0, somaXY = 0, somaX2 = 0;
 
-    for (i = 0; i < resposta.length; i++) {
+    for (i = 0; i < resposta.length - 1; i++) {
          somaX += i;
          somaY += resposta[i].qtd_alertas;
          somaXY += i * resposta[i].qtd_alertas;
@@ -534,8 +537,9 @@
                   Inclinação: Mede como os dados mudam ao longo do tempo.
                   Intercepto: O ponto inicial do gráfico.
               */
-       
-       dataLine.datasets[1].data.push(previsao);
+       labelsLine.push(mesPrevisao + 1)
+       console.log(previsao.proximoRegistro)
+       dataLine.datasets[1].data.push(previsao.proximoRegistro);
     
     console.log('----------------------------------------------');
     console.log('O gráfico será plotado com os respectivos valores:')
