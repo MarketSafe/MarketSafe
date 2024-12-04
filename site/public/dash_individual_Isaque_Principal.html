@@ -267,20 +267,18 @@
                 <h2>Promoção</h2>
 
                 <div class="iptNomePromo">
-                    <label for="nomePromo">Nome:</label>
-                    <input type="text" name="" id="nomePromo">
-                </div>
+                  <label for="nomePromo">Nome:</label>
+                  <input type="text" name="" id="nomePromo" class="nomePromo">
+              </div>
 
-                <div class="sldNomePromo">
-                    <label for="myRange">Duração:</label>
-                    <input type="range" min="1" max="30" value="5" class="slider" id="myRange"
-                        onchange="atualizarSlider()">
-                    <span> <span id="laberSld"></span> <span>Dias</span></span>
-                </div>
-
+              <div class="AlinhandoBotaoPromo">
                 <div>
-                    <button onclick="salvarPromo()">Iniciar Promoção</button>
+                    <button class="inicio_promo" onclick="salvarPromo()">Iniciar</button>
                 </div>
+                <div>
+                  <button class="fim_promo" onclick="EncerrarPromo()">Encerrar</button>
+                </div>
+              </div>
 
             </div>
 
@@ -293,8 +291,6 @@
 <script>
 
     promoDiv.style.display = 'none'
-    laberSld.innerHTML = myRange.value
-
 
     function aparecerPromo() {
         promo.style.display = 'none'
@@ -306,10 +302,6 @@
         promoDiv.style.display = 'none'
         promo.style.display = 'flex'
 
-    }
-
-    function atualizarSlider() {
-        laberSld.innerHTML = myRange.value
     }
 
   //E num é que essa geringonça funcionou, KK
