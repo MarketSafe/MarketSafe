@@ -229,7 +229,7 @@ body {
                 &:hover {
                   transform: scale(105%, 105%);
                 }
-                &.required:has(> option:checked[value=""]) {
+                &.required:has(> option:checked[value=""]), &.force-required {
                   border: 1px solid var(--gerente-color);
                 }
               }
@@ -326,6 +326,10 @@ body {
           padding: 2rem;
           background-color: var(--header-color);
           width: 100%;
+
+          & > div.grafico {
+            flex: 1;
+          }
           & > section.indicadores {
             align-items: stretch;
             flex: 1;

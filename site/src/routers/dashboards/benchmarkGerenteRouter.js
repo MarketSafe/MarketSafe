@@ -49,5 +49,17 @@ router.post(
   benchmarkGerenteController.taxasDaSemanaPorFilial
 );
 
+// envia a requisição do tipo post "/totensPorFilial" para a função `totensPorFilial` do `benchmarkGerenteController.js`:
+router.post(
+  "/totensPorFilial",
+  benchmarkGerenteController.totensPorFilial
+);
+
+// envia a requisição do tipo post "/totensEmAlertaPorFilial" para a função `totensEmAlertaPorFilial` do `benchmarkGerenteController.js`:
+router.post(
+  "/totensEmAlertaPorFilial",
+  benchmarkGerenteController.totensEmAlertaPorFilial
+);
+
 // exporta a variável de roteador do arquivo `benchmarkGerenteRouter.js`:
 module.exports = router;

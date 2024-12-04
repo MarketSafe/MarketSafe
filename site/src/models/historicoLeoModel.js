@@ -1,9 +1,9 @@
 var database = require("../database/config");
 
 async function cadastrarMes(mes, semana_do_mes) {
-  // Verificando se a variável semana_do_mes está sendo recebida corretamente
-  console.log("Mes:", mes);
-  console.log("Semana do Mês:", semana_do_mes);
+  // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarMes():");
+  // console.log("Mes:", mes);
+  // console.log("Semana do Mês:", semana_do_mes);
 
   var instrucaoSql = `
       SELECT 
@@ -37,11 +37,24 @@ async function cadastrarMes(mes, semana_do_mes) {
 function cadastrarRanking() {
   // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarRanking():");
 
-  var instrucaoSql = `SELECT a.fk_totem as totem, t.mac_address as idTotem, COUNT(*) AS total_alertas
-        FROM alerta a
-        JOIN totem t ON a.fk_totem = t.id
-        GROUP BY a.fk_totem, t.mac_address 
-        order by total_alertas desc limit 5;`;
+  var instrucaoSql = `    
+    SELECT 
+    a.fk_totem AS totem, 
+    t.mac_address AS idTotem, 
+    COUNT(*) AS total_alertas
+    FROM 
+    alerta a
+    JOIN 
+    totem t ON a.fk_totem = t.id
+    WHERE 
+    MONTH(a.data_hora) = 11 
+    AND WEEK(a.data_hora, 1) - WEEK(DATE_SUB(a.data_hora, INTERVAL DAYOFMONTH(a.data_hora) - 1 DAY), 1) + 1 = 3
+    GROUP BY 
+    a.fk_totem, t.mac_address
+    ORDER BY 
+    total_alertas DESC
+    LIMIT 5;
+`;
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -70,7 +83,7 @@ function cadastrarHora() {
     HOUR(data_hora) AS hora,
     COUNT(*) AS total_alertas
     FROM alerta
-    WHERE DATE(data_hora) = '2024-12-12'
+    WHERE DATE(data_hora) = '2024-11-09'
     GROUP BY hora
     ORDER BY hora limit 8;  `;
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -157,18 +170,19 @@ function maisAlerta() {
   // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function maisAlerta():");
 
   var instrucaoSql = `
-    SELECT 
-    HOUR(data_hora) AS hora, 
+   SELECT 
+    HOUR(data_hora) AS hora,
     COUNT(*) AS total_alertas
-    FROM 
+FROM 
     alerta
-    WHERE 
-    MONTH(data_hora) = 10
-    GROUP BY 
-    HOUR(data_hora)
-    ORDER BY 
+WHERE 
+    MONTH(data_hora) = 11 
+    AND WEEK(data_hora, 1) - WEEK(DATE_SUB(data_hora, INTERVAL DAYOFMONTH(data_hora) - 1 DAY), 1) + 1 = 4
+GROUP BY 
+    hora
+ORDER BY 
     total_alertas DESC
-    LIMIT 1;
+LIMIT 1;
  `;
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -181,13 +195,16 @@ function atualizarMaisAlerta(mes, semana_do_mes) {
     SELECT 
     HOUR(data_hora) AS hora,
     COUNT(*) AS total_alertas
-    FROM alerta
+    FROM 
+    alerta
     WHERE 
-    MONTH(data_hora) = ${mes} AND 
-    WEEK(data_hora, 1) - WEEK(DATE_SUB(data_hora, INTERVAL DAYOFMONTH(data_hora) - 1 DAY), 1) + 1 = ${semana_do_mes}
-    GROUP BY hora
-    ORDER BY hora
-    LIMIT 5;
+    MONTH(data_hora) = ${mes}
+    AND WEEK(data_hora, 1) - WEEK(DATE_SUB(data_hora, INTERVAL DAYOFMONTH(data_hora) - 1 DAY), 1) + 1 = ${semana_do_mes}
+    GROUP BY 
+    hora
+    ORDER BY 
+    total_alertas DESC
+    LIMIT 1;
  `;
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -203,8 +220,9 @@ function alertaSemana() {
     FROM 
     alerta
     WHERE 
-    MONTH(data_hora) = 10
-    AND YEAR(data_hora) = 2024
+    MONTH(data_hora) = 11 AND 
+    YEAR(data_hora) = 2024 AND 
+    WEEK(data_hora, 1) - WEEK(DATE_SUB(data_hora, INTERVAL DAYOFMONTH(data_hora) - 1 DAY), 1) + 1 = 1
     GROUP BY 
     DATE_FORMAT(data_hora, '%d/%m')
     ORDER BY 
@@ -248,18 +266,18 @@ function mediaHorario() {
     FROM 
     alerta
     WHERE 
-    MONTH(data_hora) = 08
+    MONTH(data_hora) = 11
     GROUP BY 
     HOUR(data_hora)
     ORDER BY 
     total_alertas DESC
     LIMIT 1;
  `;
-  // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
 
-function atualizarMediaHorario(mes) {
+function atualizarMediaHorario(mes, semana_do_mes) {
   // console.log("ACESSEI O ESTAÇÂO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarMediaHorario():");
 
   var instrucaoSql = `
@@ -270,6 +288,7 @@ function atualizarMediaHorario(mes) {
     alerta
     WHERE 
     MONTH(data_hora) = ${mes}
+    AND WEEK(data_hora, 1) - WEEK(DATE_SUB(data_hora, INTERVAL DAYOFMONTH(data_hora) - 1 DAY), 1) + 1 = ${semana_do_mes}
     GROUP BY 
     HOUR(data_hora)
     ORDER BY 
