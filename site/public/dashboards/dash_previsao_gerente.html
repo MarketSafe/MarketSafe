@@ -103,8 +103,7 @@
             </label>
             <label>
               <div>
-              <button onclick="limparCharts(); puxarDadosLine(); puxarDadosBubble()"
-              >Prever</button>
+              <button onclick="limparCharts(); puxarDadosLine(); puxarDadosBubble(); puxarDadosCrawler()">Prever</button>
               </div>
             </label>
           </search>
@@ -478,8 +477,6 @@
   };
 
   function plotarLine(resposta, idFilial) {
-    
-    // TO-DO: Adicionar função de checar se o gráfico já existe para destruí-lo e plotar um novo sem necessitar dar refresh na página.
 
     console.log('Iniciando a plotagem do gráfico de linha...');
 
@@ -606,181 +603,181 @@
   );
   }
 
-  // function puxarDadosCrawler() {
-  //     fetch(`/crawler/viewCrawler`, {
-  //     method: "GET"
-  //   }).then(function (resposta) {
-  //     console.log("ESTOU NO THEN DO puxarDadosCrawler()!");
+  function puxarDadosCrawler() {
+      fetch(`/crawler/viewCrawler`, {
+      method: "GET"
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO puxarDadosCrawler()!");
 
-  //     if(resposta.ok) {
-  //       console.log(resposta);
-  //       resposta.json().then(function (resposta) {
-  //         console.log(`Dados recebidos do crawler: ${JSON.stringify(resposta)}`);
+      if(resposta.ok) {
+        console.log(resposta);
+        resposta.json().then(function (resposta) {
+          console.log(`Dados recebidos do crawler: ${JSON.stringify(resposta)}`);
 
-  //         let retorno = resposta.resultado
+          let retorno = resposta.resultado
           
-  //         retorno.reverse();
+          retorno.reverse();
 
-  //         plotarBar(retorno);
-  //       })
+          plotarBar(retorno);
+        })
 
-  //     } else {
-  //       console.error("Nenhum dado encontrado no crawler");
-  //     }
+      } else {
+        console.error("Nenhum dado encontrado no crawler");
+      }
 
-  //   }).catch(function (error) {
-  //     console.error(`Erro na obtenção de dados p/ gráfico: ${error.message}`)
-  //   });
-  // };
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dados p/ gráfico: ${error.message}`)
+    });
+  };
 
-  // function plotarBar(retorno) {
-  //     console.log('Iniciando tratamento dos dados do crawler...');
+  function plotarBar(retorno) {
+      console.log('Iniciando tratamento dos dados do crawler...');
 
-  //     let count = 0;
-  //     let count2 = 0;
+      let count = 0;
+      let count2 = 0;
       
-  //     console.log(retorno.length)
+      console.log(retorno.length)
 
-  //     for (i = 0; i <= 225; i++) {
-  //       var registro = retorno[i];
+      for (i = 0; i <= 225; i++) {
+        var registro = retorno[i];
 
-  //       if (registro != undefined && registro.pagRegiao == "SUDESTE") {
-  //         count++;
-  //       }
-  //     }
+        if (registro != undefined && registro.pagRegiao == "SUDESTE") {
+          count++;
+        }
+      }
 
-  //     console.log("qtd sudeste 1st half: " + count);
+      console.log("qtd sudeste 1st half: " + count);
 
 
-  //     for (i = 225; i <= 500; i++) {
-  //       var registro = retorno[i];
+      for (i = 225; i <= 500; i++) {
+        var registro = retorno[i];
 
-  //       if (registro != undefined && registro.pagRegiao == "SUDESTE") {
-  //         count2++;
-  //       }
-  //     }
+        if (registro != undefined && registro.pagRegiao == "SUDESTE") {
+          count2++;
+        }
+      }
 
-  //     console.log("qtd sudeste 2nd half: " + count2);
+      console.log("qtd sudeste 2nd half: " + count2);
 
-  //     console.log("soma both halfs: " + (count + count2));
+      console.log("soma both halfs: " + (count + count2));
 
-  //     let labelsBar = [];
+      let labelsBar = [];
 
-  //     const dataBar = {
-  //     labels: labelsBar,
-  //     datasets: [{
-  //       label: 'Atual',
-  //       data: [],
-  //       backgroundColor: 'rgba(255, 145, 77)'
-  //     }, {
-  //       label: 'Previsto',
-  //       data: [],
-  //       backgroundColor: 'rgba(255, 49, 49)'
-  //     }]
-  //   };
+      const dataBar = {
+      labels: labelsBar,
+      datasets: [{
+        label: 'Atual',
+        data: [],
+        backgroundColor: 'rgba(255, 145, 77)'
+      }, {
+        label: 'Previsto',
+        data: [],
+        backgroundColor: 'rgba(255, 49, 49)'
+      }]
+    };
 
-  //   console.log('----------------------------------------------');
-  //   console.log('Estes dados foram recebidos pela função "puxarDadosCrawler()" e passados para "plotarBar()":');
-  //   console.log(retorno);
+    console.log('----------------------------------------------');
+    console.log('Estes dados foram recebidos pela função "puxarDadosCrawler()" e passados para "plotarBar()":');
+    console.log(retorno);
     
-  //   var qtd1st = 0
-  //   var qtd2nd = 0
-  //   var total = 0;
+    var qtd1st = 0
+    var qtd2nd = 0
+    var total = 0;
 
-  //   for(i = 0; i <= (retorno.length / 2); i++) {
-  //     var registro = retorno[i];
+    for(i = 0; i <= (retorno.length / 2); i++) {
+      var registro = retorno[i];
 
-  //     if (registro != undefined && registro.pagRegiao == "SUDESTE") {
-  //       console.log(registro.quantidade)
-  //       qtd1st += Number(registro.quantidade);
-  //       total += 1;
-  //       console.log(total)
-  //     }
+      if (registro != undefined && registro.pagRegiao == "SUDESTE") {
+        console.log(registro.quantidade)
+        qtd1st += Number(registro.quantidade);
+        total += 1;
+        console.log(total)
+      }
 
-  //   }
-  //   console.log(retorno.length / 2)
-  //   console.log(qtd1st)
+    }
+    console.log(retorno.length / 2)
+    console.log(qtd1st)
 
-  //   labelsBar.push("Outubro");
-  //   dataBar.datasets[0].data.push(qtd1st);
-  //   dataBar.datasets[1].data.push(null);
+    labelsBar.push("Outubro");
+    dataBar.datasets[0].data.push(qtd1st);
+    dataBar.datasets[1].data.push(null);
 
-  //   for(i = (retorno.length / 2); i < retorno.length; i++) {
-  //     var registro = retorno[i];
+    for(i = (retorno.length / 2); i < retorno.length; i++) {
+      var registro = retorno[i];
 
-  //     if (registro != undefined && registro.pagRegiao == "SUDESTE") {
-  //       qtd2nd += Number(registro.quantidade);
-  //       total += 1;
-  //     }
-  //   }
+      if (registro != undefined && registro.pagRegiao == "SUDESTE") {
+        qtd2nd += Number(registro.quantidade);
+        total += 1;
+      }
+    }
 
-  //   console.log(qtd2nd)
+    console.log(qtd2nd)
 
-  //   labelsBar.push("Novembro");
-  //   dataBar.datasets[0].data.push(qtd2nd);
-  //   dataBar.datasets[1].data.push(null);
+    labelsBar.push("Novembro");
+    dataBar.datasets[0].data.push(qtd2nd);
+    dataBar.datasets[1].data.push(null);
 
-  //   const inclinacao = (qtd2nd - qtd1st);
+    const inclinacao = (qtd2nd - qtd1st);
 
-  //   const previsao = Math.round(inclinacao + qtd2nd);
+    const previsao = Math.round(inclinacao + qtd2nd);
 
-  //   console.log(previsao)
+    console.log(previsao)
 
-  //   labelsBar.push("Dezembro");
-  //   dataBar.datasets[1].data.push(previsao);
+    labelsBar.push("Dezembro");
+    dataBar.datasets[1].data.push(previsao);
 
-  //   console.log('----------------------------------------------');
-  //   console.log('O gráfico será plotado com os respectivos valores:')
-  //   console.log('Labels:')
-  //   console.log(labelsBar)
-  //   console.log('Dados:')
-  //   console.log(dataBar.datasets)
-  //   console.log('----------------------------------------------');
+    console.log('----------------------------------------------');
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labelsBar)
+    console.log('Dados:')
+    console.log(dataBar.datasets)
+    console.log('----------------------------------------------');
 
-  //   const configBar = {
-  //   type: 'bar',
-  //   data: dataBar,
-  //   options: {
-  //     scales: {
-  //       y: {
-  //         ticks: {
-  //           color: "white"
-  //         },
-  //         grid: {
-  //           color: "#9A9A9A"
-  //         }
-  //       },
-  //       x: {
-  //         ticks: {
-  //           color: "white"
-  //         },
-  //         grid: {
-  //           display: false
-  //         },
-  //         title: {
-  //           display: true,
-  //           text: "Meses",
-  //           color: "white"
-  //         }
-  //       }
-  //     },
-  //     plugins: {
-  //       legend: {
-  //         labels: {
-  //           color: "white"
-  //         }
-  //       }
-  //     },
-  //     responsive: true
-  //   }
-  // };
+    const configBar = {
+    type: 'bar',
+    data: dataBar,
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            color: "#9A9A9A"
+          }
+        },
+        x: {
+          ticks: {
+            color: "white"
+          },
+          grid: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: "Meses",
+            color: "white"
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: "white"
+          }
+        }
+      },
+      responsive: true
+    }
+  };
 
-  // let barChart = new Chart(
-  //   document.getElementById('graficoBarra').getContext('2d'),
-  //   configBar
-  // );
+  let barChart = new Chart(
+    document.getElementById('graficoBarra').getContext('2d'),
+    configBar
+  );
 
-  // };
+  };
 
   function limparCharts() {
     console.log(Chart.instances)
