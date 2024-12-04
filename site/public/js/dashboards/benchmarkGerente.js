@@ -490,6 +490,9 @@ async function gerarGraficos() {
         }
       );
 
+      console.log(filial1)
+      console.log(filial2)
+
       const config = {
         type: "bar",
         data: {
