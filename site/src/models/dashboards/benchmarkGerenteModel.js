@@ -97,7 +97,7 @@ async function taxasDaSemanaPorFilial(fk_filial, data_hora, menos = 0) {
   and f.id = ${fk_filial}
   group by f.id
   order by taxa_alerta desc limit 5;`;
-  console.log(instrucao);
+  // console.log(instrucao);
   // declara a variável de resultado da execução:
   const resultado = await database.executar(instrucao);
   // retorna o resultado da execução:
