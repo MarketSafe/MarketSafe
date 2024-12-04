@@ -118,6 +118,7 @@
         <section class="dashboard">
           <button onclick="puxarDadosLine()">Teste function</button>
           <button onclick="puxarDadosBubble()">Teste function 2</button>
+          <button onclick="puxarDadosCrawler()">Teste function 3</button>
             <div class="dashCima">
               <div class="contentDash">
                 <div class="dashMain">
@@ -729,6 +730,28 @@
   //   document.getElementById('graficoLinha').getContext('2d'),
   //   configLine
   // );
+
+  function puxarDadosCrawler() {
+    fetch(`/crawler/viewCrawler`, {
+      method: "GET"
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO puxarDadosCrawler()!");
+
+      if(resposta.ok) {
+        console.log(resposta);
+        resposta.json().then(function (resposta) {
+          console.log(`Dados recebidos do crawler: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+        })
+
+      } else {
+        console.error("Nenhum dado encontrado no crawler");
+      }
+
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dados p/ gráfico: ${error.message}`)
+    });
+  };
 
   // Vai se tornar o chart do webcrawler
   const dataBar = {
