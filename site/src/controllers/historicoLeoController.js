@@ -1,21 +1,14 @@
 var historicoLeoModel = require("../models/historicoLeoModel");
 
-function cadastrarMes(req, res) {
-    const { mes, semana_do_mes } = req.params;
+function cadastrarMes(req, res, mes, semana_do_mes) {
     historicoLeoModel.cadastrarMes(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
-                // Se resultados forem encontrados, envia os dados
-                res.status(200).json(resultado);
+                res.json(resultado);
             } else {
-                // Se não houver resultados, envia um status 404
-                res.status(404).json({ mensagem: "Nenhum dado encontrado para este período." });
+                res.status(201).json(resultado);
             }
         })
-        .catch(erro => {
-            console.error("Erro ao buscar dados:", erro);
-            res.status(500).json({ mensagem: "Erro no servidor ao buscar os dados." });
-        });
 }
 
 
@@ -24,7 +17,9 @@ function cadastrarRanking(req, res) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -33,7 +28,9 @@ function cadastrarTaxa(req, res) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -42,7 +39,9 @@ function cadastrarHora(req, res) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -51,7 +50,9 @@ function atualizarMesTaxa(req, res, mes, semana_do_mes) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -60,7 +61,9 @@ function atualizarMesEspecifico(req, res, mes, semana_do_mes) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -68,8 +71,10 @@ function atualizarMesRanking(req, res, mes, semana_do_mes) {
     historicoLeoModel.atualizarMesRanking(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
-                res.json(resultado);
-            } 
+                res.status(200).json(resultado);
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -78,7 +83,9 @@ function maisAlerta(req, res) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -87,7 +94,9 @@ function atualizarMaisAlerta(req, res, mes, semana_do_mes) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -96,7 +105,9 @@ function alertaSemana(req, res) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -105,7 +116,9 @@ function atualizarAlertaSemana(req, res, mes, semana_do_mes) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -114,17 +127,21 @@ function mediaHorario(req, res) {
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
-function atualizarMediaHorario(req, res, mes) {
+function atualizarMediaHorario(req, res, mes, semana_do_mes) {
     // console.log(req.query)
-    historicoLeoModel.atualizarMediaHorario(mes)
+    historicoLeoModel.atualizarMediaHorario(mes, semana_do_mes)
         .then(resultado => {
             if (resultado.length > 0) {
                 res.json(resultado);
-            } 
+            } else {
+                res.status(201).json(resultado);
+            }
         })
 }
 
@@ -142,4 +159,4 @@ module.exports = {
     atualizarAlertaSemana,
     mediaHorario,
     atualizarMediaHorario
-  }
+}

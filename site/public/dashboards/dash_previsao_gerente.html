@@ -23,15 +23,15 @@
             <h2>Gerente</h2>
             <ul>
               <li>
-                <a href="dash_previsao_gerente.html"> 
-                  <h2>Previsão</h2>
-                  <img src="../assets/previsao.svg" alt="previsao.svg" />
-                </a>
-              </li>
-              <li>
                 <a href="/dashboards/historicoGerente.html">
                   <h2>Histórico</h2>
                   <img src="../assets/historico.svg" alt="historico.svg" />
+                </a>
+              </li>
+              <li>
+                <a href="dash_previsao_gerente.html"> 
+                  <h2>Previsão</h2>
+                  <img src="../assets/previsao.svg" alt="previsao.svg" />
                 </a>
               </li>
               <li>
@@ -58,7 +58,7 @@
                 </a>
               </li>
               <li>
-                <a href="/dashboards/benchmarkGerente.html">
+                <a href="/dashboards/benchmarkAnalista.html">
                   <h2>Benchmark</h2>
                   <img src="../assets/benchmark.svg" alt="previsao.svg" />
                 </a>
@@ -118,6 +118,7 @@
         <section class="dashboard">
           <button onclick="puxarDadosLine()">Teste function</button>
           <button onclick="puxarDadosBubble()">Teste function 2</button>
+          <button onclick="puxarDadosCrawler()">Teste function 3</button>
             <div class="dashCima">
               <div class="contentDash">
                 <div class="dashMain">
@@ -729,6 +730,28 @@
   //   document.getElementById('graficoLinha').getContext('2d'),
   //   configLine
   // );
+
+  function puxarDadosCrawler() {
+    fetch(`/crawler/viewCrawler`, {
+      method: "GET"
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO puxarDadosCrawler()!");
+
+      if(resposta.ok) {
+        console.log(resposta);
+        resposta.json().then(function (resposta) {
+          console.log(`Dados recebidos do crawler: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+        })
+
+      } else {
+        console.error("Nenhum dado encontrado no crawler");
+      }
+
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dados p/ gráfico: ${error.message}`)
+    });
+  };
 
   // Vai se tornar o chart do webcrawler
   const dataBar = {
