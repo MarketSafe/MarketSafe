@@ -229,7 +229,7 @@ body {
                 &:hover {
                   transform: scale(105%, 105%);
                 }
-                &.required {
+                &.required:has(> option:checked[value=""]), &.force-required {
                   border: 1px solid var(--gerente-color);
                 }
               }
@@ -326,6 +326,10 @@ body {
           padding: 2rem;
           background-color: var(--header-color);
           width: 100%;
+
+          & > div.grafico {
+            flex: 1;
+          }
           & > section.indicadores {
             align-items: stretch;
             flex: 1;
@@ -334,12 +338,12 @@ body {
               flex-direction: row;
               align-items: stretch;
               flex: 1;
-  
+
               & > div {
                 flex: 1;
                 padding: 1rem;
                 background-color: var(--indicador-color);
-  
+
                 & > h2 {
                   text-align: center;
                   font-size: 2rem;

@@ -23,15 +23,15 @@
             <h2>Gerente</h2>
             <ul>
               <li>
-                <a href="dash_previsao_gerente.html"> 
-                  <h2>Previsão</h2>
-                  <img src="../assets/previsao.svg" alt="previsao.svg" />
-                </a>
-              </li>
-              <li>
                 <a href="/dashboards/historicoGerente.html">
                   <h2>Histórico</h2>
                   <img src="../assets/historico.svg" alt="historico.svg" />
+                </a>
+              </li>
+              <li>
+                <a href="dash_previsao_gerente.html"> 
+                  <h2>Previsão</h2>
+                  <img src="../assets/previsao.svg" alt="previsao.svg" />
                 </a>
               </li>
               <li>
@@ -58,7 +58,7 @@
                 </a>
               </li>
               <li>
-                <a href="/dashboards/benchmarkGerente.html">
+                <a href="/dashboards/benchmarkAnalista.html">
                   <h2>Benchmark</h2>
                   <img src="../assets/benchmark.svg" alt="previsao.svg" />
                 </a>
@@ -87,21 +87,9 @@
             <label>
               <span>Filial</span>
               <div>
-                <select class="filial" id="selectFilial">
+                <select onchange="puxarPromocoes()" class="filial" id="selectFilial">
                   <option value="" selected disabled>Filial</option>
-                  <option value="1">Filial 1</option>
-                  <option value="2">Filial 2</option>
-                  <option value="3">Filial 3</option>
                 </select>
-              </div>
-            </label>
-            <label>
-              <span>Período</span>
-              <div>
-                <span>de:</span>
-                <input type="month" id="periodoInicio">
-                <span>até:</span>
-                <input type="date" id="periodoFim">
               </div>
             </label>
             <label>
@@ -109,15 +97,18 @@
               <div>
                 <select class="promocao" id="selectPromocao">
                   <option value="" selected disabled>Promoção</option>
-                  <option value="1">Teste</option>
+                  <option value="#" disabled>Selecione uma filial primeiro</option>
                 </select>
+              </div>
+            </label>
+            <label>
+              <div>
+              <button onclick="limparCharts(); puxarDadosLine(); puxarDadosBubble(); puxarDadosCrawler()">Prever</button>
               </div>
             </label>
           </search>
         </header>
         <section class="dashboard">
-          <button onclick="puxarDadosLine()">Teste function</button>
-          <button onclick="puxarDadosBubble()">Teste function 2</button>
             <div class="dashCima">
               <div class="contentDash">
                 <div class="dashMain">
@@ -135,7 +126,6 @@
           </div>
         </div>
           <div class="dashBaixo">
-            <!-- Vai se tornar o chart do webcrawler -->
             <div class="contentDash">
               <div class="dashMain">
                 <canvas id="graficoBarra">
@@ -143,34 +133,7 @@
                 </canvas>
               </div>
             </div>
-            <div class="ranking" id="ranking">
-              <table>
-                  <tr class="tableHeader">
-                      <th>Ranking</th>
-                      <th>Filial</th>
-                      <th>Promoções</th>
-                      <th>Taxa de sobrecarga</th>
-                  </tr>
-                  <tr>
-                      <td class="tableSelector">1</td>
-                      <td class="tableSelector">Filial 5</td>
-                      <td class="tableSelector">Carnes</td>
-                      <td class="tableSelector">20%</td>
-                  </tr>
-                  <tr>
-                      <td class="tableSelector">2</td>
-                      <td class="tableSelector">Filial 1</td>
-                      <td class="tableSelector">Frutas</td>
-                      <td class="tableSelector">13%</td>
-                  </tr>
-                  <tr>
-                      <td class="tableSelector">3</td>
-                      <td class="tableSelector">Filial 7</td>
-                      <td class="tableSelector">Vegetais</td>
-                      <td class="tableSelector">7%</td>
-                  </tr>
-              </table>
-        </div>
+            <div class="ranking" id="ranking"></div>
         </section>
       </main>
     </div>
@@ -182,6 +145,71 @@
     emailAutenticacao: localStorage.getItem("EMAIL_USUARIO"),
     senhaAutenticacao: localStorage.getItem("SENHA_USUARIO"),
   };
+
+  puxarFiliais();
+  plotarRanking();
+
+  function puxarFiliais() {
+    fetch("/previsaoGerenteRouter/puxarFiliais", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(function (resposta) {
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        resposta.json()
+        .then(function (resultado) {
+          console.log(resultado)
+
+          selectFilial.innerHTML = `<option value="" selected disabled>Filial</option>`;
+
+          for (i = 0; i < resultado.length; i++) {
+            selectFilial.innerHTML += `<option value="${resultado[i].id}">${resultado[i].nome}</option>`;
+          }
+        })
+
+      } else {
+        console.error('Nenhum dado encontrado na API');
+      }
+    }).catch(function (error) {
+      console.error(`Erro na obtenção das filiais: ${error.message}`)
+    });
+  };
+
+  function puxarPromocoes() {
+    var idFilial = selectFilial.value;
+
+    fetch(`/previsaoGerenteRouter/puxarPromocoes/${idFilial}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(function (resposta) {
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        resposta.json()
+        .then(function (resultado) {
+          console.log(resultado)
+
+          selectPromocao.innerHTML = `<option value="" selected disabled>Promoção</option>`;
+
+          for (i = 0; i < resultado.length; i++) {
+            selectPromocao.innerHTML += `<option value="${resultado[i].id}">${resultado[i].nome}</option>`;
+          }
+        })
+
+      } else {
+        console.error('Nenhum dado encontrado na API');
+      }
+    }).catch(function (error) {
+      console.error(`Erro na obtenção das Promoções: ${error.message}`)
+    });
+    };
 
   function plotarRanking() {
     fetch("/previsaoGerenteRouter/plotarRanking", {
@@ -198,34 +226,33 @@
         .then(function (resultado) {
           console.log(resultado)
 
-          for(i = 0; i < resultado.length; i++) {
             ranking.innerHTML = `<table>
                   <tr class="tableHeader">
                       <th>Ranking</th>
                       <th>Filial</th>
                       <th>Promoções</th>
-                      <th>Taxa de sobrecarga</th>
+                      <th>Quantidade de alertas</th>
                   </tr>
                   <tr>
                       <td class="tableSelector">1</td>
-                      <td class="tableSelector">Filial 5</td>
-                      <td class="tableSelector">Carnes</td>
-                      <td class="tableSelector">20%</td>
+                      <td class="tableSelector">${resultado[0].filial}</td>
+                      <td class="tableSelector">${resultado[0].promocao}</td>
+                      <td class="tableSelector">${resultado[0].quantidade_alertas}</td>
                   </tr>
                   <tr>
                       <td class="tableSelector">2</td>
-                      <td class="tableSelector">Filial 1</td>
-                      <td class="tableSelector">Frutas</td>
-                      <td class="tableSelector">13%</td>
+                      <td class="tableSelector">${resultado[1].filial}</td>
+                      <td class="tableSelector">${resultado[1].promocao}</td>
+                      <td class="tableSelector">${resultado[1].quantidade_alertas}</td>
                   </tr>
                   <tr>
                       <td class="tableSelector">3</td>
-                      <td class="tableSelector">Filial 7</td>
-                      <td class="tableSelector">Vegetais</td>
-                      <td class="tableSelector">7%</td>
+                      <td class="tableSelector">${resultado[2].filial}</td>
+                      <td class="tableSelector">${resultado[2].promocao}</td>
+                      <td class="tableSelector">${resultado[2].quantidade_alertas}</td>
                   </tr>
               </table>`;
-          };
+
         })
 
       } else {
@@ -238,10 +265,9 @@
   
   function puxarDadosBubble() {
     var idFilial = selectFilial.value;
-    var anoMes = periodoInicio.value;
     var idPromocao = selectPromocao.value;
 
-    fetch(`/previsaoGerenteRouter/puxarDadosBubble/${idFilial}/${anoMes}/${idPromocao}`, {
+    fetch(`/previsaoGerenteRouter/puxarDadosBubble/${idFilial}/${idPromocao}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -293,10 +319,11 @@
 
     for(i = 0; i < resposta.length; i++) {
      var registro = resposta[i];
+
      labelsBubble.push(registro.dia);
      dataBubble.datasets[0].data.push({
       y: registro.qtd_alertas,
-      x: registro.dia,
+      x: registro.mes,
       r: registro.qtd_alertas + 15,
       label: registro.promocao_nome
      });
@@ -314,7 +341,7 @@
          somaX2 += i * i;
 
          nomePromo = resposta[i].promocao_nome
-         dias = resposta[i].dia + 1;
+         dias = resposta[i].mes + 1;
        }
 
        const inclinacao = (resposta.length * somaXY - somaX * somaY) / (resposta.length * somaX2 - somaX * somaX);
@@ -354,7 +381,7 @@
           },
           title: {
             display: true,
-            text: "Quantidade de sobrecarga",
+            text: "Quantidade de alertas",
             color: "white"
           }
         },
@@ -367,7 +394,7 @@
           },
           title: {
             display: true,
-            text: "Dias do mês",
+            text: "Mêses",
             color: "white"
           },
         }
@@ -393,13 +420,35 @@
     configBubble
   );
 
+  
+  
+  
+  Chart.register({
+      id: 'permanentLabel',
+      afterDatasetsDraw: (chart, args, options) => {
+        const ctx = chart.ctx;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'white';
+        
+        chart.data.datasets.forEach((dataset, i) => {
+          const meta = chart.getDatasetMeta(i);
+          if (meta.type !== 'bubble') return;
+          
+          meta.data.forEach((element, index) => {
+            const item = dataset.data[index];
+            const position = element.tooltipPosition();
+            ctx.fillText(item.label.toString(), position.x, position.y);
+          });
+        });
+      }
+    });
   }
-
+  
   function puxarDadosLine() {
-    var idFilial = selectFilial.value; 
-    var anoMes = periodoInicio.value;
+    var idFilial = selectFilial.value;
 
-    fetch(`/previsaoGerenteRouter/puxarDadosLine/${idFilial}/${anoMes}`, {
+    fetch(`/previsaoGerenteRouter/puxarDadosLine/${idFilial}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -458,7 +507,7 @@
 
     for(i = 0; i < resposta.length; i++) {
      var registro = resposta[i];
-     labelsLine.push(registro.dia);
+     labelsLine.push(registro.mes);
      dataLine.datasets[0].data.push(registro.qtd_alertas);
      dataLine.datasets[1].data.push(registro.qtd_alertas);
    };
@@ -471,21 +520,21 @@
          somaXY += i * resposta[i].qtd_alertas;
          somaX2 += i * i;
        }
-
-       /*
-           Inclinação: Mede como os dados mudam ao longo do tempo.
-           Intercepto: O ponto inicial do gráfico.
-       */
-
+       
        const inclinacao = (resposta.length * somaXY - somaX * somaY) / (resposta.length * somaX2 - somaX * somaX);
        const intercepto = (somaY - inclinacao * somaX) / resposta.length;
 
        const proximoRegistro = inclinacao * resposta.length + intercepto;
-
+       
        const previsao = {
-           proximoRegistro: Math.round(proximoRegistro),
+         proximoRegistro: Math.round(proximoRegistro),
        };
-
+       
+              /*
+                  Inclinação: Mede como os dados mudam ao longo do tempo.
+                  Intercepto: O ponto inicial do gráfico.
+              */
+       
        dataLine.datasets[1].data.push(previsao);
     
     console.log('----------------------------------------------');
@@ -523,7 +572,7 @@
           },
           title: {
             display: true,
-            text: "Dias do mês",
+            text: "Mêses",
             color: "white"
           }
         }
@@ -536,7 +585,7 @@
         },
         title: {
           display: true,
-          text: `Previsão de quantidade de alertas da Filial ${idFilial} deste mês`,
+          text: `Previsão de quantidade de alertas da Filial ${idFilial} deste ano`,
           color: "white"
         }
       },
@@ -550,203 +599,138 @@
   );
   }
 
-  // const dataBubble = {
-  //   datasets: [{
-  //     label: 'Atual',
-  //     data: [{
-  //       x: 1,
-  //       y: 5,
-  //       r: 10,
-  //       label: 'Carne'
-  //     }, {
-  //       x: 3,
-  //       y: 15,
-  //       r: 15,
-  //       label: 'Carne'
-  //     }, {
-  //       x: 5,
-  //       y: 20,
-  //       r: 20,
-  //       label: 'Carne'
-  //     }],
-  //     backgroundColor: 'rgba(255, 145, 77, 0.8)'
-  //   }, {
-  //     label: 'Previsto',
-  //     data: [{
-  //       x: 7,
-  //       y: 30,
-  //       r: 25,
-  //       label: 'Carne'
-  //     }],
-  //     backgroundColor: 'rgba(255, 49, 49, 0.8)'
-  //   }]
-  // };
+  function puxarDadosCrawler() {
+      fetch(`/crawler/viewCrawler`, {
+      method: "GET"
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO puxarDadosCrawler()!");
 
-  // const configBubble = {
-  //   type: 'bubble',
-  //   data: dataBubble,
-  //   options: {
-  //     scales: {
-  //       y: {
-  //         ticks: {
-  //           color: "white"
-  //         },
-  //         grid: {
-  //           color: "#9A9A9A"
-  //         },
-  //         // TO-DO: conseguir mudar o tamanho dos gráficos antes de implementar esse texto
-  //         // title: {
-  //         //   display: true,
-  //         //   text: "Porcentagem de sobrecarga",
-  //         //   color: "white"
-  //         // }
-  //       },
-  //       x: {
-  //         ticks: {
-  //           color: "white"
-  //         },
-  //         grid: {
-  //           color: "#9A9A9A"
-  //         },
-  //         title: {
-  //           display: true,
-  //           text: "Dias do mês",
-  //           color: "white"
-  //         },
-  //       }
-  //     },
-  //     plugins: {
-  //       legend: {
-  //         labels: {
-  //           color: "white"
-  //         }
-  //       },
-        
-        // TO-DO: conseguir mudar o tamanho dos gráficos antes de implementar esse texto
-        //   display: true,
-        //   text: "Previsão de taxa de alertas da Filial 5 em relação a promoções",
-        //   color: "white"
-        // }
-  //     },
-  //     responsive: true
-  //   }
-  // };
+      if(resposta.ok) {
+        console.log(resposta);
+        resposta.json().then(function (resposta) {
+          console.log(`Dados recebidos do crawler: ${JSON.stringify(resposta)}`);
 
-  // let bubbleChart = new Chart(
-  //   document.getElementById('graficoBubble').getContext('2d'),
-  //   configBubble
-  // );
+          let retorno = resposta.resultado
+          
+          retorno.reverse();
 
-  Chart.register({
-    id: 'permanentLabel',
-    afterDatasetsDraw: (chart, args, options) => {
-      const ctx = chart.ctx;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = 'white';
-      
-      chart.data.datasets.forEach((dataset, i) => {
-        const meta = chart.getDatasetMeta(i);
-        if (meta.type !== 'bubble') return;
-        
-        meta.data.forEach((element, index) => {
-          const item = dataset.data[index];
-          const position = element.tooltipPosition();
-          ctx.fillText(item.label.toString(), position.x, position.y);
-        });
-      });
-    }
-  });
+          plotarBar(retorno);
+        })
 
-  // Eu fiz uma solução temporária.. não sei se vou mudar futuramente.
-  // const dataLine = {
-  //   labels: ['0', '5', '10', '15', '20', '25', '30'],
-  //   datasets: [{
-  //     label: 'Atual',
-  //     data: [20, 15, 23.5, 10],
-  //     borderColor: 'rgba(255, 145, 77)',
-  //     backgroundColor: 'rgba(255, 145, 77)',
-  //     pointRadius: 0
-  //   }, {
-  //     label: 'Previsto',
-  //     data: [20, 15, 23.5, 10, 25, 30, 15],
-  //     borderColor: 'rgba(255, 49, 49)',
-  //     backgroundColor: 'rgba(255, 49, 49)',
-  //     borderDash: [5, 5],
-  //     pointRadius: 0
-  //   }]
-  // };
+      } else {
+        console.error("Nenhum dado encontrado no crawler");
+      }
 
-  // const configLine = {
-  //   type: 'line',
-  //   data: dataLine,
-  //   options: {
-  //     scales: {
-  //       y: {
-  //         ticks: {
-  //           color: "white"
-  //         },
-  //         grid: {
-  //           color: "#9A9A9A"
-  //         },
-  //         title: {
-  //           display: true,
-  //           text: "Quantidade de alertas",
-  //           color: "white"
-  //         }
-  //       },
-  //       x: {
-  //         ticks: {
-  //           color: "white"
-  //         },
-  //         grid: {
-  //           display: false
-  //         },
-  //         title: {
-  //           display: true,
-  //           text: "Dias do mês",
-  //           color: "white"
-  //         }
-  //       }
-  //     },
-  //     plugins: {
-  //       legend: {
-  //         labels: {
-  //           color: "white"
-  //         }
-  //       },
-  //       title: {
-  //         display: true,
-  //         text: "Previsão de quantidade de alertas da Filial IDAQUI deste mês",
-  //         color: "white"
-  //       }
-  //     },
-  //     responsive: true
-  //   }
-  // };
-
-  // let lineChart = new Chart(
-  //   document.getElementById('graficoLinha').getContext('2d'),
-  //   configLine
-  // );
-
-  // Vai se tornar o chart do webcrawler
-  const dataBar = {
-    labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    datasets: [{
-      label: '',
-      data: [5, 10, 15, 20, 25],
-      backgroundColor: [
-        'rgba(255, 145, 77)',
-        'rgba(255, 145, 77)',
-        'rgba(255, 145, 77)',
-        'rgba(255, 145, 77)',
-        'rgba(255, 49, 49)',
-      ]
-    }]
+    }).catch(function (error) {
+      console.error(`Erro na obtenção de dados p/ gráfico: ${error.message}`)
+    });
   };
 
-  const configBar = {
+  function plotarBar(retorno) {
+      console.log('Iniciando tratamento dos dados do crawler...');
+
+      let count = 0;
+      let count2 = 0;
+      
+      console.log(retorno.length)
+
+      for (i = 0; i <= 225; i++) {
+        var registro = retorno[i];
+
+        if (registro != undefined && registro.pagRegiao == "SUDESTE") {
+          count++;
+        }
+      }
+
+      console.log("qtd sudeste 1st half: " + count);
+
+
+      for (i = 225; i <= 500; i++) {
+        var registro = retorno[i];
+
+        if (registro != undefined && registro.pagRegiao == "SUDESTE") {
+          count2++;
+        }
+      }
+
+      console.log("qtd sudeste 2nd half: " + count2);
+
+      console.log("soma both halfs: " + (count + count2));
+
+      let labelsBar = [];
+
+      const dataBar = {
+      labels: labelsBar,
+      datasets: [{
+        label: 'Atual',
+        data: [],
+        backgroundColor: 'rgba(255, 145, 77)'
+      }, {
+        label: 'Previsto',
+        data: [],
+        backgroundColor: 'rgba(255, 49, 49)'
+      }]
+    };
+
+    console.log('----------------------------------------------');
+    console.log('Estes dados foram recebidos pela função "puxarDadosCrawler()" e passados para "plotarBar()":');
+    console.log(retorno);
+    
+    var qtd1st = 0
+    var qtd2nd = 0
+    var total = 0;
+
+    for(i = 0; i <= (retorno.length / 2); i++) {
+      var registro = retorno[i];
+
+      if (registro != undefined && registro.pagRegiao == "SUDESTE") {
+        console.log(registro.quantidade)
+        qtd1st += Number(registro.quantidade);
+        total += 1;
+        console.log(total)
+      }
+
+    }
+    console.log(retorno.length / 2)
+    console.log(qtd1st)
+
+    labelsBar.push("Outubro");
+    dataBar.datasets[0].data.push(qtd1st);
+    dataBar.datasets[1].data.push(null);
+
+    for(i = (retorno.length / 2); i < retorno.length; i++) {
+      var registro = retorno[i];
+
+      if (registro != undefined && registro.pagRegiao == "SUDESTE") {
+        qtd2nd += Number(registro.quantidade);
+        total += 1;
+      }
+    }
+
+    console.log(qtd2nd)
+
+    labelsBar.push("Novembro");
+    dataBar.datasets[0].data.push(qtd2nd);
+    dataBar.datasets[1].data.push(null);
+
+    const inclinacao = (qtd2nd - qtd1st);
+
+    const previsao = Math.round(inclinacao + qtd2nd);
+
+    console.log(previsao)
+
+    labelsBar.push("Dezembro");
+    dataBar.datasets[1].data.push(previsao);
+
+    console.log('----------------------------------------------');
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labelsBar)
+    console.log('Dados:')
+    console.log(dataBar.datasets)
+    console.log('----------------------------------------------');
+
+    const configBar = {
     type: 'bar',
     data: dataBar,
     options: {
@@ -788,4 +772,13 @@
     document.getElementById('graficoBarra').getContext('2d'),
     configBar
   );
+
+  };
+
+  function limparCharts() {
+    console.log(Chart.instances)
+    for (const chart in Chart.instances) {
+      Chart.instances[chart].destroy();
+    }
+  }
 </script>

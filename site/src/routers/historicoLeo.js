@@ -4,8 +4,10 @@ const router = express.Router();
 
 const historicoLeoController = require("../controllers/historicoLeoController");
 
-router.get("/cadastrarMes/:mes/:semana_do_mes", function(req, res){
-    historicoLeoController.cadastrarMes(req, res); 
+router.get("/cadastrarMes", function(req, res){
+    const mes = req.query.mes;
+    const semana_do_mes = req.query.semana_do_mes;
+    historicoLeoController.cadastrarMes(req, res, mes, semana_do_mes); 
 })
 
 router.get("/cadastrarRanking", function(req, res){
@@ -68,6 +70,7 @@ router.get("/mediaHorario", function(req, res){
 
 router.get("/atualizarMediaHorario", function(req, res){
     const mes = req.query.mes;
-    historicoLeoController.atualizarMediaHorario(req, res, mes); 
+    const semana_do_mes = req.query.semana_do_mes;
+    historicoLeoController.atualizarMediaHorario(req, res, mes, semana_do_mes); 
 })
 module.exports = router;

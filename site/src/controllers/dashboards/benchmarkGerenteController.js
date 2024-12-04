@@ -67,55 +67,25 @@ async function sendRespostaFromModel(req, res, func, parametros) {
 
 // declara a função `estadoFiliais`:
 async function estadoFiliais(req, res) {
-  return await sendRespostaFromModel(
-    req,
-    res,
-    benchmarkGerenteModel.estadoFiliais,
-    [req.body.funcionarioAutenticado.fk_empresa]
-  );
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.estadoFiliais, [req.body.funcionarioAutenticado.fk_empresa]);
 }
 
 // declara a função `maioresTaxasDeAlerta`:
 async function maioresTaxasDeAlerta(req, res) {
-  return await sendRespostaFromModel(
-    req,
-    res,
-    benchmarkGerenteModel.maioresTaxasDeAlerta,
-    [req.body.funcionarioAutenticado.fk_empresa]
-  );
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.maioresTaxasDeAlerta, [req.body.funcionarioAutenticado.fk_empresa]);
 }
 
 async function taxaGeralDeAlertas(req, res) {
-  return await sendRespostaFromModel(
-    req,
-    res,
-    benchmarkGerenteModel.taxaGeralDeAlertas,
-    [req.body.funcionarioAutenticado.fk_empresa]
-  );
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.taxaGeralDeAlertas, [req.body.funcionarioAutenticado.fk_empresa]);
 }
 async function totensPorEmpresa(req, res) {
-  return await sendRespostaFromModel(
-    req,
-    res,
-    benchmarkGerenteModel.totensPorEmpresa,
-    [req.body.funcionarioAutenticado.fk_empresa]
-  );
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.totensPorEmpresa, [req.body.funcionarioAutenticado.fk_empresa]);
 }
 async function maiorTaxaDeAlertas(req, res) {
-  return await sendRespostaFromModel(
-    req,
-    res,
-    benchmarkGerenteModel.maiorTaxaDeAlertas,
-    [req.body.funcionarioAutenticado.fk_empresa]
-  );
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.maiorTaxaDeAlertas, [req.body.funcionarioAutenticado.fk_empresa]);
 }
 async function totalDeFiliais(req, res) {
-  return await sendRespostaFromModel(
-    req,
-    res,
-    benchmarkGerenteModel.totalDeFiliais,
-    [req.body.funcionarioAutenticado.fk_empresa]
-  );
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.totalDeFiliais, [req.body.funcionarioAutenticado.fk_empresa]);
 }
 async function promocoesPorFilial(req, res) {
   if (!("fk_filial" in req.body)) {
@@ -123,12 +93,7 @@ async function promocoesPorFilial(req, res) {
       erro: "`fk_filial` undefined.",
     });
   }
-  return await sendRespostaFromModel(
-    req,
-    res,
-    benchmarkGerenteModel.promocoesPorFilial,
-    [req.body.fk_filial]
-  );
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.promocoesPorFilial, [req.body.fk_filial]);
 }
 async function taxasDaSemanaPorFilial(req, res) {
   if (!("fk_filial" in req.body)) {
@@ -136,66 +101,25 @@ async function taxasDaSemanaPorFilial(req, res) {
       erro: "`fk_filial` undefined.",
     });
   }
-  if (!("fk_promocao" in req.body)) {
-    const date = new Date().toISOString().split(".")[0].split("T")[0];
-    return res.status(200).json([
-      (
-        await getFromModel(
-          res,
-          benchmarkGerenteModel.taxasDaSemanaPorFilial,
-          [req.body.fk_filial, date, 7]
-        )
-      )[0],
-      (
-        await getFromModel(
-          res,
-          benchmarkGerenteModel.taxasDaSemanaPorFilial,
-          [req.body.fk_filial, date, 6]
-        )
-      )[0],
-      (
-        await getFromModel(
-          res,
-          benchmarkGerenteModel.taxasDaSemanaPorFilial,
-          [req.body.fk_filial, date, 5]
-        )
-      )[0],
-      (
-        await getFromModel(
-          res,
-          benchmarkGerenteModel.taxasDaSemanaPorFilial,
-          [req.body.fk_filial, date, 4]
-        )
-      )[0],
-      (
-        await getFromModel(
-          res,
-          benchmarkGerenteModel.taxasDaSemanaPorFilial,
-          [req.body.fk_filial, date, 3]
-        )
-      )[0],
-      (
-        await getFromModel(
-          res,
-          benchmarkGerenteModel.taxasDaSemanaPorFilial,
-          [req.body.fk_filial, date, 2]
-        )
-      )[0],
-      (
-        await getFromModel(
-          res,
-          benchmarkGerenteModel.taxasDaSemanaPorFilial,
-          [req.body.fk_filial, date, 1]
-        )
-      )[0],
-    ]);
+  const date = new Date().toISOString().split(".")[0].split("T")[0];
+  return res.status(200).json([(await getFromModel(res, benchmarkGerenteModel.taxasDaSemanaPorFilial, [req.body.fk_filial, date, 7]))[0], (await getFromModel(res, benchmarkGerenteModel.taxasDaSemanaPorFilial, [req.body.fk_filial, date, 6]))[0], (await getFromModel(res, benchmarkGerenteModel.taxasDaSemanaPorFilial, [req.body.fk_filial, date, 5]))[0], (await getFromModel(res, benchmarkGerenteModel.taxasDaSemanaPorFilial, [req.body.fk_filial, date, 4]))[0], (await getFromModel(res, benchmarkGerenteModel.taxasDaSemanaPorFilial, [req.body.fk_filial, date, 3]))[0], (await getFromModel(res, benchmarkGerenteModel.taxasDaSemanaPorFilial, [req.body.fk_filial, date, 2]))[0], (await getFromModel(res, benchmarkGerenteModel.taxasDaSemanaPorFilial, [req.body.fk_filial, date, 1]))[0]]);
+}
+async function totensPorFilial(req, res) {
+  if (!("fk_filial" in req.body)) {
+    return res.status(400).json({
+      erro: "`fk_filial` undefined.",
+    });
   }
-  return await getFromModel(
-    req,
-    res,
-    benchmarkGerenteModel.taxasDaSemanaPorFilialEPromocao,
-    [req.body.fk_filial]
-  );
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.totensPorFilial, [req.body.fk_filial]);
+}
+async function totensEmAlertaPorFilial(req, res) {
+  if (!("fk_filial" in req.body)) {
+    return res.status(400).json({
+      erro: "`fk_filial` undefined.",
+    });
+  }
+  const date = new Date().toISOString().split(".")[0].split("T")[0];
+  return await sendRespostaFromModel(req, res, benchmarkGerenteModel.totensEmAlertaPorFilial, [req.body.fk_filial, date]);
 }
 
 // exporta as funções do arquivo `benchmarkGerenteController.js`:
@@ -208,4 +132,6 @@ module.exports = {
   totalDeFiliais,
   promocoesPorFilial,
   taxasDaSemanaPorFilial,
+  totensPorFilial,
+  totensEmAlertaPorFilial,
 };

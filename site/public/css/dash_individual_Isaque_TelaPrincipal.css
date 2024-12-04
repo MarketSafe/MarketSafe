@@ -156,9 +156,28 @@ body {
   border-left: 3px solid#E9864A;
 }
 
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.previsao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    border-left: 3px solid#ff0000;
+}
+
 .monitoramento p {
   margin: 3%;
   margin-left: 10px;
+}
+
+.previsao p{
+    margin: 3%;
+    margin-left: 10px;
 }
 
 .analista {
@@ -170,8 +189,21 @@ body {
   justify-content: center;
 }
 
+.gerente{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 70%;
+    border-left: 3px solid#ff0000;
+    justify-content: center;
+}
+
 .analista h3 {
   margin: 5px;
+}
+
+.gerente h3{
+    margin: 5px;
 }
 
 /* Config da Minha tela */
@@ -673,6 +705,7 @@ th {
     display: flex;
     flex-direction: column;
     text-align: left;
+    border-radius: 5px;
     margin-bottom: 30px;
 
     label {
@@ -680,10 +713,34 @@ th {
     }
   }
 
+  .nomePromo{
+    border-radius: 5px;
+    height: 20px;
+    background-color: #6A6A6A;
+  }
+
   .botoes {
     display: flex;
     gap: 5px;
   }
+
+  .inicio_promo{
+    background-color: #66F436;
+    border-radius: 4px;
+    font-size: x-large;
+  }
+
+  .fim_promo{
+    background-color: #CE1717;
+    border-radius: 4px;
+    font-size: x-large;
+  }
+
+  .AlinhandoBotaoPromo{
+    display: flex;
+    justify-content: space-around;
+  }
+
   .iniciar {
     background-color: #51e103;
     border: 1px solid #000;
