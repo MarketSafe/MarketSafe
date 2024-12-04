@@ -499,12 +499,12 @@ async function gerarGraficos() {
           labels: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
           datasets: [
             {
-              label: filial1[0].nome,
+              label: filtros.filial1.filial.selectedOptions[0].text,
               data: filial1.map((v) => Number(v === null ? 0 : v.taxa_alerta) * 100),
               backgroundColor: "#ff914dff",
             },
             {
-              label: filial2[0].nome,
+              label: filtros.filial2.filial.selectedOptions[0].text,
               data: filial2.map((v) => Number(v === null ? 0 : v.taxa_alerta) * 100),
               backgroundColor: "#ff3131ff",
             },
