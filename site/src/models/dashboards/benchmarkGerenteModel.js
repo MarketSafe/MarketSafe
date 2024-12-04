@@ -65,7 +65,7 @@ function promocoesPorFilial(fk_filial) {
   return resultado;
 }
 
-function taxasDaSemanaPorFilial(fk_filial, data_hora, menos = 0) {
+async function taxasDaSemanaPorFilial(fk_filial, data_hora, menos = 0) {
   // declara a variável de instrução sql:
   const instrucao = `select
   f.*,
@@ -86,29 +86,68 @@ function taxasDaSemanaPorFilial(fk_filial, data_hora, menos = 0) {
 		  *
 		  from alerta a
 		  where a.data_hora > date_sub(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos + 1} day)
-			and a.data_hora <= timestamp(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day))
+			and a.data_hora <= date_sub(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day)
 	  ) a
 		on t.id = a.fk_totem
-	  where t.data_hora >= timestamp(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day))
+	  where t.data_hora >= date_sub(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day)
 	  group by t.id
   ) t
 	on f.id = t.fk_filial
-  where f.data_hora >= timestamp(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day))
+  where f.data_hora >= date_sub(date_sub("${data_hora}", interval weekday("${data_hora}") + 1 day), interval ${menos} day)
   and f.id = ${fk_filial}
   group by f.id
   order by taxa_alerta desc limit 5;`;
-  console.log(instrucao);
+  // console.log(instrucao);
   // declara a variável de resultado da execução:
-  const resultado = database.executar(instrucao);
+  const resultado = await database.executar(instrucao);
   // retorna o resultado da execução:
   return resultado;
 }
 
-function taxasDaSemanaPorFilialEPromocao(fk_filial) {
+async function totensPorFilial(fk_filial) {
   // declara a variável de instrução sql:
-  const instrucao = `select * from filial f left join totem t on f.id = t.fk_filial left join alerta a on t.id = a.fk_totem and a.data_hora > timestamp(date_sub(current_timestamp, interval weekday(current_timestamp)) where f.fk_filial = ${fk_filial};`;
+  const instrucao = `select
+  f.*,
+  count(t.id) quantidade_totens
+  from filial f
+  left join totem t
+	on f.id = t.fk_filial
+  where f.id = ${fk_filial}
+  group by f.id;`;
+  // console.log(instrucao);
   // declara a variável de resultado da execução:
-  const resultado = database.executar(instrucao);
+  const resultado = await database.executar(instrucao);
+  // retorna o resultado da execução:
+  return resultado;
+}
+
+async function totensEmAlertaPorFilial(fk_filial, data_hora) {
+  // declara a variável de instrução sql:
+  const instrucao = `select
+  f.*,
+  count(t.id) totens_alerta
+  from filial f
+  left join (
+	select
+	  t.*,
+	  count(a.id) quantidade_alerta
+	  from totem t
+	  join (
+		select
+		  *
+		  from alerta a
+		  where a.data_hora > date_sub("${data_hora}", interval 1 day)
+			and a.data_hora <= "${data_hora}"
+	  ) a
+		on t.id = a.fk_totem
+	  group by t.id
+  ) t
+	on f.id = t.fk_filial
+  where f.id = ${fk_filial}
+  group by f.id;`;
+  // console.log(instrucao);
+  // declara a variável de resultado da execução:
+  const resultado = await database.executar(instrucao);
   // retorna o resultado da execução:
   return resultado;
 }
@@ -123,5 +162,6 @@ module.exports = {
   totalDeFiliais,
   promocoesPorFilial,
   taxasDaSemanaPorFilial,
-  taxasDaSemanaPorFilialEPromocao,
+  totensPorFilial,
+  totensEmAlertaPorFilial,
 };

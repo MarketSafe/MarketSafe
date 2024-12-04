@@ -205,6 +205,74 @@ async function gerarIndicadores() {
       });
       div.querySelector("span").textContent = dados[0].quantidade;
     }
+    if (
+      Array.from(telas)
+        .find((tela) => tela.classList.contains("filtro-filiais"))
+        .classList.contains("ativa")
+    ) {
+      const totens1 = await puxarDados(
+        "/benchmarkGerente/totensPorFilial",
+        {
+          fk_filial: filtros.filial1.filial.value,
+        },
+        (response) => {
+          if (response.status == 204) {
+            throw new Error(`Sem filiais na empresa.`);
+          }
+        }
+      );
+      const totens2 = await puxarDados(
+        "/benchmarkGerente/totensPorFilial",
+        {
+          fk_filial: filtros.filial2.filial.value,
+        },
+        (response) => {
+          if (response.status == 204) {
+            throw new Error(`Sem filiais na empresa.`);
+          }
+        }
+      );
+      const totensEmAlerta1 = await puxarDados(
+        "/benchmarkGerente/totensEmAlertaPorFilial",
+        {
+          fk_filial: filtros.filial1.filial.value,
+        },
+        (response) => {
+          if (response.status == 204) {
+            throw new Error(`Sem filiais na empresa.`);
+          }
+        }
+      );
+      const totensEmAlerta2 = await puxarDados(
+        "/benchmarkGerente/totensEmAlertaPorFilial",
+        {
+          fk_filial: filtros.filial2.filial.value,
+        },
+        (response) => {
+          if (response.status == 204) {
+            throw new Error(`Sem filiais na empresa.`);
+          }
+        }
+      );
+
+      if (indicador.classList.contains("titulos")) {
+        console.log(indicador);
+        indicador.querySelector("div > .filial1").textContent = totens1[0].nome;
+        indicador.querySelector("div > .filial2").textContent = totens2[0].nome;
+      } else if (indicador.classList.contains("taxas")) {
+        console.log(indicador);
+        indicador.querySelector("div > .filial1").textContent = totensEmAlerta1[0].totens_alerta / totens1[0].quantidade_totens + "%";
+        indicador.querySelector("div > .filial2").textContent = totensEmAlerta2[0].totens_alerta / totens2[0].quantidade_totens + "%";
+      } else if (indicador.classList.contains("totens")) {
+        console.log(indicador);
+        indicador.querySelector("div > .filial1").textContent = totens1[0].quantidade_totens;
+        indicador.querySelector("div > .filial2").textContent = totens2[0].quantidade_totens;
+      } else if (indicador.classList.contains("totens-alerta")) {
+        console.log(indicador);
+        indicador.querySelector("div > .filial1").textContent = totensEmAlerta1[0].totens_alerta;
+        indicador.querySelector("div > .filial2").textContent = totensEmAlerta2[0].totens_alerta;
+      }
+    }
   });
 }
 async function gerarGraficos() {
@@ -302,7 +370,7 @@ async function gerarGraficos() {
                 color: "#ffffffff",
                 font: {
                   weight: "bold",
-                  size: "15ar",
+                  relativeSize: "7ar",
                   family: '"Abel", sans-serif',
                 },
               },
@@ -414,6 +482,17 @@ async function gerarGraficos() {
           }
         }
       );
+      const filial2 = await puxarDados(
+        "/benchmarkGerente/taxasDaSemanaPorFilial",
+        {
+          fk_filial: filtros.filial2.filial.value,
+        },
+        (response) => {
+          if (response.status == 204) {
+            throw new Error(`Sem filiais na empresa.`);
+          }
+        }
+      );
 
       const config = {
         type: "bar",
@@ -421,9 +500,14 @@ async function gerarGraficos() {
           labels: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
           datasets: [
             {
-              label: "Taxa de totens em alerta",
-              data: filial1.map((v) => Number(v.taxa_alerta) * 100),
+              label: filial1[0].nome,
+              data: filial1.map((v) => Number(v === null ? 0 : v.taxa_alerta) * 100),
               backgroundColor: "#ff914dff",
+            },
+            {
+              label: filial2[0].nome,
+              data: filial2.map((v) => Number(v === null ? 0 : v.taxa_alerta) * 100),
+              backgroundColor: "#ff3131ff",
             },
           ],
         },
@@ -435,11 +519,11 @@ async function gerarGraficos() {
             x: {
               title: {
                 display: true,
-                text: "Filiais",
+                text: "Dia",
                 color: "#ffffffff",
                 font: {
                   weight: "bold",
-                  size: "15ar",
+                  relativeSize: "4ph",
                   family: '"Abel", sans-serif',
                 },
               },
@@ -447,7 +531,7 @@ async function gerarGraficos() {
                 color: "#ffffffff",
                 font: {
                   weight: "normal",
-                  relativeSize: "7ar",
+                  relativeSize: "4ph",
                   family: '"Abel", sans-serif',
                 },
               },
@@ -459,7 +543,7 @@ async function gerarGraficos() {
                 color: "#ffffffff",
                 font: {
                   weight: "normal",
-                  relativeSize: "7ar",
+                  relativeSize: "4ph",
                   family: '"Abel", sans-serif',
                 },
               },
@@ -468,7 +552,7 @@ async function gerarGraficos() {
                 beginAtZero: true,
                 font: {
                   weight: "normal",
-                  relativeSize: "7ar",
+                  relativeSize: "4ph",
                   family: '"Abel", sans-serif',
                 },
               },
@@ -480,55 +564,23 @@ async function gerarGraficos() {
               align: "top",
               font: {
                 weight: "normal",
-                relativeSize: "10ar",
+                relativeSize: "7ph",
                 family: '"Abel", sans-serif',
               },
               color: "#ffffffff",
-              text: "5 filiais com maiores taxas de alertas",
+              text: "Taxas de alerta da última semana",
             },
             legend: {
               labels: {
                 font: {
-                  relativeSize: "6ar",
+                  relativeSize: "5ph",
                   family: '"Abel", sans-serif',
                 },
                 color: "#ffffffff",
               },
             },
-            datalabels: {
-              formatter: (value, context) => {
-                return value + "%";
-              },
-              font: {
-                relativeSize: "6ar",
-                family: '"Noto Serif", serif',
-              },
-              color: "#ffffffff",
-              anchor: "end",
-              align: "end",
-              relativeOffset: "1ar",
-              display: "auto",
-            },
-            legendMargin: {
-              margin: "10ph",
-            },
           },
         },
-        plugins: [
-          ChartDataLabels,
-          {
-            id: "legendMargin",
-            afterInit(chart, args, plugins) {
-              const originalFit = chart.legend.fit;
-              const margin = toPx(plugins.margin, chart.canvas) || (typeof plugins.margin === "number" ? plugins.margin : 0);
-
-              chart.legend.fit = function fit() {
-                if (originalFit) originalFit.call(this);
-                return (this.height += margin);
-              };
-            },
-          },
-        ],
       };
 
       (await chartList)["comparacaoFilialTaxas"] = new Chart(divGrafico.querySelector("canvas"), config);
@@ -563,14 +615,16 @@ async function gerarTela(classeTela) {
 async function verificarFiltros() {
   filtros.filial1.filial.classList.remove("required");
   filtros.filial2.filial.classList.remove("required");
+  filtros.filial1.filial.classList.remove("force-required");
+  filtros.filial2.filial.classList.remove("force-required");
   if (!filtros.filial1.filial.value && !filtros.filial2.filial.value) {
-    console.log("Sem filtros selecionados.");
     await gerarTela("sem-filtro");
+  } else if (filtros.filial1.filial.value === filtros.filial2.filial.value) {
+    filtros.filial1.filial.classList.add("force-required");
+    filtros.filial2.filial.classList.add("force-required");
   } else if (filtros.filial1.filial.value && filtros.filial2.filial.value) {
-    console.log("Filtros das filiais selecionados.");
     await gerarTela("filtro-filiais");
   } else {
-    console.log("Filtros das filiais não selecionados.");
     filtros.filial1.filial.classList.add("required");
     filtros.filial2.filial.classList.add("required");
   }
