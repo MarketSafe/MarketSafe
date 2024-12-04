@@ -3,11 +3,10 @@ var previsaoGerenteModel = require("../../models/dashboards/previsaoGerenteModel
 function puxarDadosLine(req, res) {
     var idFilial = req.params.idFilial;
     var idEmpresa = req.body.funcionarioAutenticado.fk_empresa;
-    var anoMes = req.params.anoMes;
 
-    console.log(`Puxando dados da Filial ${idFilial} da empresa ${idEmpresa} do mês ${anoMes}.`);
+    console.log(`Puxando dados da Filial ${idFilial} da empresa ${idEmpresa}.`);
 
-    previsaoGerenteModel.puxarDadosLine(idFilial, idEmpresa, anoMes
+    previsaoGerenteModel.puxarDadosLine(idFilial, idEmpresa
     )
         .then(function (resultado) {
             if (resultado.length > 0) {
@@ -25,12 +24,11 @@ function puxarDadosLine(req, res) {
 function puxarDadosBubble(req, res) {
     var idFilial = req.params.idFilial;
     var idEmpresa = req.body.funcionarioAutenticado.fk_empresa;
-    var anoMes = req.params.anoMes;
     var idPromocao = req.params.idPromocao;
 
-    console.log(`Puxando dados da Filial ${idFilial} da empresa ${idEmpresa} do mês ${anoMes} da promoção ${idPromocao}.`)
+    console.log(`Puxando dados da Filial ${idFilial} da empresa ${idEmpresa} da promoção ${idPromocao}.`)
 
-    previsaoGerenteModel.puxarDadosBubble(idFilial, idEmpresa, anoMes, idPromocao
+    previsaoGerenteModel.puxarDadosBubble(idFilial, idEmpresa, idPromocao
     )
         .then(function (resultado) {
             if (resultado.length > 0) {
@@ -46,11 +44,50 @@ function puxarDadosBubble(req, res) {
 }
 
 function plotarRanking(req, res) {
+
+    console.log(`Puxando o ranking das 3 maiores taxas de sobrecarga em relação à promoções.`);
+
+    previsaoGerenteModel.plotarRanking(
+    )
+        .then(function (resposta) {
+            if(resposta.length >= 1) {
+                res.status(200).json(resposta)
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os resultados.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function puxarFiliais(req, res) {
     var idEmpresa = req.body.funcionarioAutenticado.fk_empresa;
 
-    console.log(`Puxando o ranking das 3 maiores taxas de sobrecarga em relação à promoções da empresa ${idEmpresa}.`);
+    console.log(`Puxando as filiais da empresa ${idEmpresa}.`)
 
-    previsaoGerenteModel.plotarRanking(idEmpresa
+    previsaoGerenteModel.puxarFiliais(idEmpresa
+    )
+        .then(function (resposta) {
+            if(resposta.length >= 1) {
+                res.status(200).json(resposta)
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os resultados.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function puxarPromocoes(req, res) {
+    var idFilial = req.params.idFilial;
+
+    console.log(`Puxando as promoções da filial ${idFilial}.`)
+
+    previsaoGerenteModel.puxarPromocoes(idFilial
     )
         .then(function (resposta) {
             if(resposta.length >= 1) {
@@ -68,5 +105,7 @@ function plotarRanking(req, res) {
 module.exports = {
     puxarDadosLine,
     puxarDadosBubble,
-    plotarRanking
+    plotarRanking,
+    puxarFiliais,
+    puxarPromocoes
 }
